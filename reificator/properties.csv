@@ -1,0 +1,2969 @@
+Type	Predicate	Enabled
+class clang::SourceLocation	clang::CXXThisExpr::getLocation	1
+class clang::SourceLocation	clang::CXXThisExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXThisExpr::getEndLoc	1
+_Bool	clang::CXXThisExpr::isImplicit	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXThisExpr::children	1
+class clang::SourceLocation	clang::MSDependentExistsStmt::getKeywordLoc	1
+_Bool	clang::MSDependentExistsStmt::isIfExists	1
+_Bool	clang::MSDependentExistsStmt::isIfNotExists	1
+class clang::NestedNameSpecifierLoc	clang::MSDependentExistsStmt::getQualifierLoc	1
+struct clang::DeclarationNameInfo	clang::MSDependentExistsStmt::getNameInfo	0
+class clang::CompoundStmt *	clang::MSDependentExistsStmt::getSubStmt	1
+class clang::SourceLocation	clang::MSDependentExistsStmt::getBeginLoc	1
+class clang::SourceLocation	clang::MSDependentExistsStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::MSDependentExistsStmt::children	1
+class clang::QualType	clang::Expr::getType	1
+enum clang::ExprDependenceScope::ExprDependence	clang::Expr::getDependence	0
+_Bool	clang::Expr::isValueDependent	1
+_Bool	clang::Expr::isTypeDependent	1
+_Bool	clang::Expr::isInstantiationDependent	1
+_Bool	clang::Expr::containsUnexpandedParameterPack	1
+_Bool	clang::Expr::containsErrors	1
+class clang::SourceLocation	clang::Expr::getExprLoc	1
+_Bool	clang::Expr::isReadIfDiscardedInCPlusPlus11	1
+_Bool	clang::Expr::isLValue	1
+_Bool	clang::Expr::isPRValue	1
+_Bool	clang::Expr::isXValue	1
+_Bool	clang::Expr::isGLValue	1
+enum clang::ExprValueKind	clang::Expr::getValueKind	1
+enum clang::ExprObjectKind	clang::Expr::getObjectKind	1
+_Bool	clang::Expr::isOrdinaryOrBitFieldObject	1
+_Bool	clang::Expr::refersToBitField	1
+const class clang::FieldDecl *	clang::Expr::getSourceBitField	1
+const class clang::Decl *	clang::Expr::getReferencedDeclOfCallee	1
+const class clang::ObjCPropertyRefExpr *	clang::Expr::getObjCProperty	1
+_Bool	clang::Expr::isObjCSelfExpr	1
+_Bool	clang::Expr::refersToVectorElement	1
+_Bool	clang::Expr::refersToMatrixElement	1
+_Bool	clang::Expr::refersToGlobalRegisterVar	1
+_Bool	clang::Expr::hasPlaceholderType	1
+const class clang::Expr *	clang::Expr::IgnoreUnlessSpelledInSource	1
+const class clang::Expr *	clang::Expr::IgnoreImpCasts	1
+const class clang::Expr *	clang::Expr::IgnoreCasts	1
+const class clang::Expr *	clang::Expr::IgnoreImplicit	1
+const class clang::Expr *	clang::Expr::IgnoreImplicitAsWritten	1
+const class clang::Expr *	clang::Expr::IgnoreParens	1
+const class clang::Expr *	clang::Expr::IgnoreParenImpCasts	1
+const class clang::Expr *	clang::Expr::IgnoreParenCasts	1
+const class clang::Expr *	clang::Expr::IgnoreConversionOperatorSingleStep	1
+const class clang::Expr *	clang::Expr::IgnoreParenLValueCasts	1
+const class clang::Expr *	clang::Expr::IgnoreParenBaseCasts	1
+_Bool	clang::Expr::isDefaultArgument	1
+_Bool	clang::Expr::isImplicitCXXThis	1
+const class clang::CXXRecordDecl *	clang::Expr::getBestDynamicClassType	1
+const class clang::Expr *	clang::Expr::getBestDynamicClassTypeExpr	1
+const class clang::Expr *	clang::Expr::skipRValueSubobjectAdjustments	1
+const class clang::Expr *	clang::DoStmt::getCond	1
+const class clang::Stmt *	clang::DoStmt::getBody	1
+class clang::SourceLocation	clang::DoStmt::getDoLoc	1
+class clang::SourceLocation	clang::DoStmt::getWhileLoc	1
+class clang::SourceLocation	clang::DoStmt::getRParenLoc	1
+class clang::SourceLocation	clang::DoStmt::getBeginLoc	1
+class clang::SourceLocation	clang::DoStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::DoStmt::children	1
+class clang::VarDecl *	clang::ForStmt::getConditionVariable	1
+const class clang::DeclStmt *	clang::ForStmt::getConditionVariableDeclStmt	1
+const class clang::Stmt *	clang::ForStmt::getInit	1
+const class clang::Expr *	clang::ForStmt::getCond	1
+const class clang::Expr *	clang::ForStmt::getInc	1
+const class clang::Stmt *	clang::ForStmt::getBody	1
+class clang::SourceLocation	clang::ForStmt::getForLoc	1
+class clang::SourceLocation	clang::ForStmt::getLParenLoc	1
+class clang::SourceLocation	clang::ForStmt::getRParenLoc	1
+class clang::SourceLocation	clang::ForStmt::getBeginLoc	1
+class clang::SourceLocation	clang::ForStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ForStmt::children	1
+enum clang::UserDefinedLiteral::LiteralOperatorKind	clang::UserDefinedLiteral::getLiteralOperatorKind	1
+const class clang::Expr *	clang::UserDefinedLiteral::getCookedLiteral	1
+class clang::SourceLocation	clang::UserDefinedLiteral::getBeginLoc	1
+class clang::SourceLocation	clang::UserDefinedLiteral::getEndLoc	1
+class clang::SourceLocation	clang::UserDefinedLiteral::getUDSuffixLoc	1
+const class clang::IdentifierInfo *	clang::UserDefinedLiteral::getUDSuffix	1
+class clang::SourceLocation	clang::MSAsmStmt::getLBraceLoc	1
+class clang::SourceLocation	clang::MSAsmStmt::getEndLoc	1
+_Bool	clang::MSAsmStmt::hasBraces	1
+class llvm::StringRef	clang::MSAsmStmt::getAsmString	1
+class llvm::ArrayRef<class llvm::StringRef>	clang::MSAsmStmt::getAllConstraints	1
+class llvm::ArrayRef<class llvm::StringRef>	clang::MSAsmStmt::getClobbers	1
+class llvm::ArrayRef<class clang::Expr *>	clang::MSAsmStmt::getAllExprs	1
+class clang::SourceLocation	clang::MSAsmStmt::getBeginLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::MSAsmStmt::children	1
+class clang::SourceLocation	clang::SEHExceptStmt::getBeginLoc	1
+class clang::SourceLocation	clang::SEHExceptStmt::getExceptLoc	1
+class clang::SourceLocation	clang::SEHExceptStmt::getEndLoc	1
+class clang::Expr *	clang::SEHExceptStmt::getFilterExpr	1
+class clang::CompoundStmt *	clang::SEHExceptStmt::getBlock	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::SEHExceptStmt::children	1
+class clang::UnresolvedLookupExpr *	clang::CXXFoldExpr::getCallee	1
+class clang::Expr *	clang::CXXFoldExpr::getLHS	1
+class clang::Expr *	clang::CXXFoldExpr::getRHS	1
+_Bool	clang::CXXFoldExpr::isRightFold	1
+_Bool	clang::CXXFoldExpr::isLeftFold	1
+class clang::Expr *	clang::CXXFoldExpr::getPattern	1
+class clang::Expr *	clang::CXXFoldExpr::getInit	1
+class clang::SourceLocation	clang::CXXFoldExpr::getLParenLoc	1
+class clang::SourceLocation	clang::CXXFoldExpr::getRParenLoc	1
+class clang::SourceLocation	clang::CXXFoldExpr::getEllipsisLoc	1
+enum clang::BinaryOperatorKind	clang::CXXFoldExpr::getOperator	1
+class std::optional<unsigned int>	clang::CXXFoldExpr::getNumExpansions	1
+class clang::SourceLocation	clang::CXXFoldExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXFoldExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXFoldExpr::children	1
+const class clang::CXXRecordDecl *	clang::OverloadExpr::getNamingClass	1
+class clang::UnresolvedSetIterator	clang::OverloadExpr::decls_begin	0
+class clang::UnresolvedSetIterator	clang::OverloadExpr::decls_end	0
+class llvm::iterator_range<class clang::UnresolvedSetIterator>	clang::OverloadExpr::decls	1
+unsigned int	clang::OverloadExpr::getNumDecls	1
+const struct clang::DeclarationNameInfo &	clang::OverloadExpr::getNameInfo	1
+class clang::DeclarationName	clang::OverloadExpr::getName	1
+class clang::SourceLocation	clang::OverloadExpr::getNameLoc	1
+class clang::NestedNameSpecifier *	clang::OverloadExpr::getQualifier	1
+class clang::NestedNameSpecifierLoc	clang::OverloadExpr::getQualifierLoc	1
+class clang::SourceLocation	clang::OverloadExpr::getTemplateKeywordLoc	1
+class clang::SourceLocation	clang::OverloadExpr::getLAngleLoc	1
+class clang::SourceLocation	clang::OverloadExpr::getRAngleLoc	1
+_Bool	clang::OverloadExpr::hasTemplateKeyword	1
+_Bool	clang::OverloadExpr::hasExplicitTemplateArgs	1
+const class clang::TemplateArgumentLoc *	clang::OverloadExpr::getTemplateArgs	1
+unsigned int	clang::OverloadExpr::getNumTemplateArgs	1
+class llvm::ArrayRef<class clang::TemplateArgumentLoc>	clang::OverloadExpr::template_arguments	1
+const class clang::Stmt *	clang::CapturedStmt::getCapturedStmt	1
+const class clang::CapturedDecl *	clang::CapturedStmt::getCapturedDecl	1
+enum clang::CapturedRegionKind	clang::CapturedStmt::getCapturedRegionKind	1
+const class clang::RecordDecl *	clang::CapturedStmt::getCapturedRecordDecl	1
+class llvm::iterator_range<const class clang::CapturedStmt::Capture *>	clang::CapturedStmt::captures	1
+const class clang::CapturedStmt::Capture *	clang::CapturedStmt::capture_begin	0
+class clang::CapturedStmt::Capture *	clang::CapturedStmt::capture_end	0
+unsigned int	clang::CapturedStmt::capture_size	1
+class llvm::iterator_range<class clang::Expr *const *>	clang::CapturedStmt::capture_inits	1
+class clang::Expr *const *	clang::CapturedStmt::capture_init_begin	0
+class clang::Expr *const *	clang::CapturedStmt::capture_init_end	0
+class clang::SourceLocation	clang::CapturedStmt::getBeginLoc	1
+class clang::SourceLocation	clang::CapturedStmt::getEndLoc	1
+class clang::SourceRange	clang::CapturedStmt::getSourceRange	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CapturedStmt::children	1
+_Bool	clang::CoroutineBodyStmt::hasDependentPromiseType	1
+class clang::CompoundStmt *	clang::CoroutineBodyStmt::getBody	1
+class clang::Stmt *	clang::CoroutineBodyStmt::getPromiseDeclStmt	1
+class clang::VarDecl *	clang::CoroutineBodyStmt::getPromiseDecl	1
+class clang::Stmt *	clang::CoroutineBodyStmt::getInitSuspendStmt	1
+class clang::Stmt *	clang::CoroutineBodyStmt::getFinalSuspendStmt	1
+class clang::Stmt *	clang::CoroutineBodyStmt::getExceptionHandler	1
+class clang::Stmt *	clang::CoroutineBodyStmt::getFallthroughHandler	1
+class clang::Expr *	clang::CoroutineBodyStmt::getAllocate	1
+class clang::Expr *	clang::CoroutineBodyStmt::getDeallocate	1
+class clang::Stmt *	clang::CoroutineBodyStmt::getResultDecl	1
+class clang::Expr *	clang::CoroutineBodyStmt::getReturnValueInit	1
+class clang::Expr *	clang::CoroutineBodyStmt::getReturnValue	1
+class clang::Stmt *	clang::CoroutineBodyStmt::getReturnStmt	1
+class clang::Stmt *	clang::CoroutineBodyStmt::getReturnStmtOnAllocFailure	1
+class llvm::ArrayRef<const class clang::Stmt *>	clang::CoroutineBodyStmt::getParamMoves	1
+class clang::SourceLocation	clang::CoroutineBodyStmt::getBeginLoc	1
+class clang::SourceLocation	clang::CoroutineBodyStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CoroutineBodyStmt::children	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CoroutineBodyStmt::childrenExclBody	1
+_Bool	clang::WhileStmt::hasVarStorage	1
+const class clang::Expr *	clang::WhileStmt::getCond	1
+const class clang::Stmt *	clang::WhileStmt::getBody	1
+const class clang::VarDecl *	clang::WhileStmt::getConditionVariable	1
+const class clang::DeclStmt *	clang::WhileStmt::getConditionVariableDeclStmt	1
+class clang::SourceLocation	clang::WhileStmt::getWhileLoc	1
+class clang::SourceLocation	clang::WhileStmt::getLParenLoc	1
+class clang::SourceLocation	clang::WhileStmt::getRParenLoc	1
+class clang::SourceLocation	clang::WhileStmt::getBeginLoc	1
+class clang::SourceLocation	clang::WhileStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::WhileStmt::children	1
+class clang::SourceLocation	clang::NoInitExpr::getBeginLoc	1
+class clang::SourceLocation	clang::NoInitExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::NoInitExpr::children	1
+const class clang::Expr *	clang::ImaginaryLiteral::getSubExpr	1
+class clang::SourceLocation	clang::ImaginaryLiteral::getBeginLoc	1
+class clang::SourceLocation	clang::ImaginaryLiteral::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ImaginaryLiteral::children	1
+unsigned int	clang::InitListExpr::getNumInits	1
+class clang::Expr *const *	clang::InitListExpr::getInits	1
+class llvm::ArrayRef<class clang::Expr *>	clang::InitListExpr::inits	1
+const class clang::Expr *	clang::InitListExpr::getArrayFiller	1
+_Bool	clang::InitListExpr::hasArrayFiller	1
+_Bool	clang::InitListExpr::hasDesignatedInit	1
+const class clang::FieldDecl *	clang::InitListExpr::getInitializedFieldInUnion	1
+_Bool	clang::InitListExpr::isExplicit	1
+_Bool	clang::InitListExpr::isStringLiteralInit	1
+_Bool	clang::InitListExpr::isTransparent	1
+class clang::SourceLocation	clang::InitListExpr::getLBraceLoc	1
+class clang::SourceLocation	clang::InitListExpr::getRBraceLoc	1
+_Bool	clang::InitListExpr::isSemanticForm	1
+class clang::InitListExpr *	clang::InitListExpr::getSemanticForm	1
+_Bool	clang::InitListExpr::isSyntacticForm	1
+class clang::InitListExpr *	clang::InitListExpr::getSyntacticForm	1
+_Bool	clang::InitListExpr::hadArrayRangeDesignator	1
+class clang::SourceLocation	clang::InitListExpr::getBeginLoc	1
+class clang::SourceLocation	clang::InitListExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::InitListExpr::children	1
+class clang::Stmt *const *	clang::InitListExpr::begin	0
+class clang::Stmt *const *	clang::InitListExpr::end	0
+class std::reverse_iterator<class clang::Stmt *const *>	clang::InitListExpr::rbegin	0
+class std::reverse_iterator<class clang::Stmt *const *>	clang::InitListExpr::rend	0
+const char *	clang::CXXNamedCastExpr::getCastName	1
+class clang::SourceLocation	clang::CXXNamedCastExpr::getOperatorLoc	1
+class clang::SourceLocation	clang::CXXNamedCastExpr::getRParenLoc	1
+class clang::SourceLocation	clang::CXXNamedCastExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXNamedCastExpr::getEndLoc	1
+class clang::SourceRange	clang::CXXNamedCastExpr::getAngleBrackets	1
+_Bool	clang::IfStmt::hasInitStorage	1
+_Bool	clang::IfStmt::hasVarStorage	1
+_Bool	clang::IfStmt::hasElseStorage	1
+const class clang::Expr *	clang::IfStmt::getCond	1
+const class clang::Stmt *	clang::IfStmt::getThen	1
+const class clang::Stmt *	clang::IfStmt::getElse	1
+const class clang::VarDecl *	clang::IfStmt::getConditionVariable	1
+const class clang::DeclStmt *	clang::IfStmt::getConditionVariableDeclStmt	1
+const class clang::Stmt *	clang::IfStmt::getInit	1
+class clang::SourceLocation	clang::IfStmt::getIfLoc	1
+class clang::SourceLocation	clang::IfStmt::getElseLoc	1
+_Bool	clang::IfStmt::isConsteval	1
+_Bool	clang::IfStmt::isNonNegatedConsteval	1
+_Bool	clang::IfStmt::isNegatedConsteval	1
+_Bool	clang::IfStmt::isConstexpr	1
+enum clang::IfStatementKind	clang::IfStmt::getStatementKind	1
+_Bool	clang::IfStmt::isObjCAvailabilityCheck	1
+class clang::SourceLocation	clang::IfStmt::getBeginLoc	1
+class clang::SourceLocation	clang::IfStmt::getEndLoc	1
+class clang::SourceLocation	clang::IfStmt::getLParenLoc	1
+class clang::SourceLocation	clang::IfStmt::getRParenLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::IfStmt::children	1
+const class clang::Expr *	clang::PseudoObjectExpr::getSyntacticForm	1
+unsigned int	clang::PseudoObjectExpr::getResultExprIndex	1
+const class clang::Expr *	clang::PseudoObjectExpr::getResultExpr	1
+unsigned int	clang::PseudoObjectExpr::getNumSemanticExprs	1
+const class clang::Expr *const *	clang::PseudoObjectExpr::semantics_begin	0
+const class clang::Expr *const *	clang::PseudoObjectExpr::semantics_end	0
+class llvm::ArrayRef<const class clang::Expr *>	clang::PseudoObjectExpr::semantics	1
+class clang::SourceLocation	clang::PseudoObjectExpr::getExprLoc	1
+class clang::SourceLocation	clang::PseudoObjectExpr::getBeginLoc	1
+class clang::SourceLocation	clang::PseudoObjectExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::PseudoObjectExpr::children	1
+class clang::SourceLocation	clang::DesignatedInitUpdateExpr::getBeginLoc	1
+class clang::SourceLocation	clang::DesignatedInitUpdateExpr::getEndLoc	1
+class clang::Expr *	clang::DesignatedInitUpdateExpr::getBase	1
+class clang::InitListExpr *	clang::DesignatedInitUpdateExpr::getUpdater	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::DesignatedInitUpdateExpr::children	1
+const class clang::Expr *	clang::VAArgExpr::getSubExpr	1
+_Bool	clang::VAArgExpr::isMicrosoftABI	1
+class clang::TypeSourceInfo *	clang::VAArgExpr::getWrittenTypeInfo	1
+class clang::SourceLocation	clang::VAArgExpr::getBuiltinLoc	1
+class clang::SourceLocation	clang::VAArgExpr::getRParenLoc	1
+class clang::SourceLocation	clang::VAArgExpr::getBeginLoc	1
+class clang::SourceLocation	clang::VAArgExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::VAArgExpr::children	1
+const class clang::Expr *	clang::ValueStmt::getExprStmt	1
+const class clang::CompoundStmt *	clang::StmtExpr::getSubStmt	1
+class clang::SourceLocation	clang::StmtExpr::getBeginLoc	1
+class clang::SourceLocation	clang::StmtExpr::getEndLoc	1
+class clang::SourceLocation	clang::StmtExpr::getLParenLoc	1
+class clang::SourceLocation	clang::StmtExpr::getRParenLoc	1
+unsigned int	clang::StmtExpr::getTemplateDepth	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::StmtExpr::children	1
+class llvm::StringRef	clang::SourceLocExpr::getBuiltinStr	1
+enum clang::SourceLocExpr::IdentKind	clang::SourceLocExpr::getIdentKind	1
+_Bool	clang::SourceLocExpr::isIntType	1
+const class clang::DeclContext *	clang::SourceLocExpr::getParentContext	1
+class clang::SourceLocation	clang::SourceLocExpr::getLocation	1
+class clang::SourceLocation	clang::SourceLocExpr::getBeginLoc	1
+class clang::SourceLocation	clang::SourceLocExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::SourceLocExpr::children	1
+const class clang::Stmt *	clang::CXXForRangeStmt::getInit	1
+const class clang::VarDecl *	clang::CXXForRangeStmt::getLoopVariable	1
+const class clang::Expr *	clang::CXXForRangeStmt::getRangeInit	1
+const class clang::DeclStmt *	clang::CXXForRangeStmt::getRangeStmt	1
+const class clang::DeclStmt *	clang::CXXForRangeStmt::getBeginStmt	1
+const class clang::DeclStmt *	clang::CXXForRangeStmt::getEndStmt	1
+const class clang::Expr *	clang::CXXForRangeStmt::getCond	1
+const class clang::Expr *	clang::CXXForRangeStmt::getInc	1
+const class clang::DeclStmt *	clang::CXXForRangeStmt::getLoopVarStmt	1
+const class clang::Stmt *	clang::CXXForRangeStmt::getBody	1
+class clang::SourceLocation	clang::CXXForRangeStmt::getForLoc	1
+class clang::SourceLocation	clang::CXXForRangeStmt::getCoawaitLoc	1
+class clang::SourceLocation	clang::CXXForRangeStmt::getColonLoc	1
+class clang::SourceLocation	clang::CXXForRangeStmt::getRParenLoc	1
+class clang::SourceLocation	clang::CXXForRangeStmt::getBeginLoc	1
+class clang::SourceLocation	clang::CXXForRangeStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXForRangeStmt::children	1
+enum clang::Stmt::StmtClass	clang::Stmt::getStmtClass	1
+const char *	clang::Stmt::getStmtClassName	1
+class clang::SourceRange	clang::Stmt::getSourceRange	1
+class clang::SourceLocation	clang::Stmt::getBeginLoc	1
+class clang::SourceLocation	clang::Stmt::getEndLoc	1
+const class clang::Stmt *	clang::Stmt::stripLabelLikeStatements	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::Stmt::children	1
+struct clang::ConstStmtIterator	clang::Stmt::child_begin	0
+struct clang::ConstStmtIterator	clang::Stmt::child_end	0
+const class clang::Expr *	clang::CXXRewrittenBinaryOperator::getSemanticForm	1
+struct clang::CXXRewrittenBinaryOperator::DecomposedForm	clang::CXXRewrittenBinaryOperator::getDecomposedForm	0
+_Bool	clang::CXXRewrittenBinaryOperator::isReversed	1
+enum clang::BinaryOperatorKind	clang::CXXRewrittenBinaryOperator::getOperator	1
+enum clang::BinaryOperatorKind	clang::CXXRewrittenBinaryOperator::getOpcode	1
+class llvm::StringRef	clang::CXXRewrittenBinaryOperator::getOpcodeStr	1
+_Bool	clang::CXXRewrittenBinaryOperator::isComparisonOp	1
+_Bool	clang::CXXRewrittenBinaryOperator::isAssignmentOp	1
+const class clang::Expr *	clang::CXXRewrittenBinaryOperator::getLHS	1
+const class clang::Expr *	clang::CXXRewrittenBinaryOperator::getRHS	1
+class clang::SourceLocation	clang::CXXRewrittenBinaryOperator::getOperatorLoc	1
+class clang::SourceLocation	clang::CXXRewrittenBinaryOperator::getExprLoc	1
+class clang::SourceLocation	clang::CXXRewrittenBinaryOperator::getBeginLoc	1
+class clang::SourceLocation	clang::CXXRewrittenBinaryOperator::getEndLoc	1
+class clang::SourceRange	clang::CXXRewrittenBinaryOperator::getSourceRange	1
+class clang::SourceLocation	clang::IntegerLiteral::getBeginLoc	1
+class clang::SourceLocation	clang::IntegerLiteral::getEndLoc	1
+class clang::SourceLocation	clang::IntegerLiteral::getLocation	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::IntegerLiteral::children	1
+class clang::SourceLocation	clang::CXXFunctionalCastExpr::getLParenLoc	1
+class clang::SourceLocation	clang::CXXFunctionalCastExpr::getRParenLoc	1
+_Bool	clang::CXXFunctionalCastExpr::isListInitialization	1
+class clang::SourceLocation	clang::CXXFunctionalCastExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXFunctionalCastExpr::getEndLoc	1
+_Bool	clang::CXXTypeidExpr::isPotentiallyEvaluated	1
+_Bool	clang::CXXTypeidExpr::isTypeOperand	1
+class clang::TypeSourceInfo *	clang::CXXTypeidExpr::getTypeOperandSourceInfo	1
+class clang::Expr *	clang::CXXTypeidExpr::getExprOperand	1
+class clang::SourceLocation	clang::CXXTypeidExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXTypeidExpr::getEndLoc	1
+class clang::SourceRange	clang::CXXTypeidExpr::getSourceRange	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXTypeidExpr::children	1
+enum clang::OverloadedOperatorKind	clang::CXXOperatorCallExpr::getOperator	1
+_Bool	clang::CXXOperatorCallExpr::isAssignmentOp	1
+_Bool	clang::CXXOperatorCallExpr::isComparisonOp	1
+_Bool	clang::CXXOperatorCallExpr::isInfixBinaryOp	1
+class clang::SourceLocation	clang::CXXOperatorCallExpr::getOperatorLoc	1
+class clang::SourceLocation	clang::CXXOperatorCallExpr::getExprLoc	1
+class clang::SourceLocation	clang::CXXOperatorCallExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXOperatorCallExpr::getEndLoc	1
+class clang::SourceRange	clang::CXXOperatorCallExpr::getSourceRange	1
+const class clang::Expr *	clang::ReturnStmt::getRetValue	1
+const class clang::VarDecl *	clang::ReturnStmt::getNRVOCandidate	1
+class clang::SourceLocation	clang::ReturnStmt::getReturnLoc	1
+class clang::SourceLocation	clang::ReturnStmt::getBeginLoc	1
+class clang::SourceLocation	clang::ReturnStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ReturnStmt::children	1
+class clang::SourceLocation	clang::ContinueStmt::getContinueLoc	1
+class clang::SourceLocation	clang::ContinueStmt::getBeginLoc	1
+class clang::SourceLocation	clang::ContinueStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ContinueStmt::children	1
+enum clang::TypeTrait	clang::TypeTraitExpr::getTrait	1
+_Bool	clang::TypeTraitExpr::getValue	1
+unsigned int	clang::TypeTraitExpr::getNumArgs	1
+class llvm::ArrayRef<class clang::TypeSourceInfo *>	clang::TypeTraitExpr::getArgs	1
+class clang::SourceLocation	clang::TypeTraitExpr::getBeginLoc	1
+class clang::SourceLocation	clang::TypeTraitExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::TypeTraitExpr::children	1
+const class clang::BlockDecl *	clang::BlockExpr::getBlockDecl	1
+class clang::SourceLocation	clang::BlockExpr::getCaretLocation	1
+const class clang::Stmt *	clang::BlockExpr::getBody	1
+class clang::SourceLocation	clang::BlockExpr::getBeginLoc	1
+class clang::SourceLocation	clang::BlockExpr::getEndLoc	1
+const class clang::FunctionProtoType *	clang::BlockExpr::getFunctionType	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::BlockExpr::children	1
+const class clang::Expr *	clang::ExtVectorElementExpr::getBase	1
+class clang::IdentifierInfo &	clang::ExtVectorElementExpr::getAccessor	1
+class clang::SourceLocation	clang::ExtVectorElementExpr::getAccessorLoc	1
+unsigned int	clang::ExtVectorElementExpr::getNumElements	1
+_Bool	clang::ExtVectorElementExpr::containsDuplicateElements	1
+class clang::SourceLocation	clang::ExtVectorElementExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ExtVectorElementExpr::getEndLoc	1
+_Bool	clang::ExtVectorElementExpr::isArrow	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ExtVectorElementExpr::children	1
+_Bool	clang::UnresolvedLookupExpr::requiresADL	1
+_Bool	clang::UnresolvedLookupExpr::isOverloaded	1
+const class clang::CXXRecordDecl *	clang::UnresolvedLookupExpr::getNamingClass	1
+class clang::SourceLocation	clang::UnresolvedLookupExpr::getBeginLoc	1
+class clang::SourceLocation	clang::UnresolvedLookupExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::UnresolvedLookupExpr::children	1
+const class clang::Expr *	clang::PackExpansionExpr::getPattern	1
+class clang::SourceLocation	clang::PackExpansionExpr::getEllipsisLoc	1
+class std::optional<unsigned int>	clang::PackExpansionExpr::getNumExpansions	1
+class clang::SourceLocation	clang::PackExpansionExpr::getBeginLoc	1
+class clang::SourceLocation	clang::PackExpansionExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::PackExpansionExpr::children	1
+const class clang::ParmVarDecl *	clang::CXXDefaultArgExpr::getParam	1
+_Bool	clang::CXXDefaultArgExpr::hasRewrittenInit	1
+const class clang::Expr *	clang::CXXDefaultArgExpr::getExpr	1
+const class clang::Expr *	clang::CXXDefaultArgExpr::getRewrittenExpr	1
+const class clang::Expr *	clang::CXXDefaultArgExpr::getAdjustedRewrittenExpr	1
+const class clang::DeclContext *	clang::CXXDefaultArgExpr::getUsedContext	1
+class clang::SourceLocation	clang::CXXDefaultArgExpr::getUsedLocation	1
+class clang::SourceLocation	clang::CXXDefaultArgExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXDefaultArgExpr::getEndLoc	1
+class clang::SourceLocation	clang::CXXDefaultArgExpr::getExprLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXDefaultArgExpr::children	1
+class clang::Expr *	clang::CXXPseudoDestructorExpr::getBase	1
+_Bool	clang::CXXPseudoDestructorExpr::hasQualifier	1
+class clang::NestedNameSpecifierLoc	clang::CXXPseudoDestructorExpr::getQualifierLoc	1
+class clang::NestedNameSpecifier *	clang::CXXPseudoDestructorExpr::getQualifier	1
+_Bool	clang::CXXPseudoDestructorExpr::isArrow	1
+class clang::SourceLocation	clang::CXXPseudoDestructorExpr::getOperatorLoc	1
+class clang::TypeSourceInfo *	clang::CXXPseudoDestructorExpr::getScopeTypeInfo	1
+class clang::SourceLocation	clang::CXXPseudoDestructorExpr::getColonColonLoc	1
+class clang::SourceLocation	clang::CXXPseudoDestructorExpr::getTildeLoc	1
+class clang::TypeSourceInfo *	clang::CXXPseudoDestructorExpr::getDestroyedTypeInfo	1
+class clang::IdentifierInfo *	clang::CXXPseudoDestructorExpr::getDestroyedTypeIdentifier	1
+class clang::QualType	clang::CXXPseudoDestructorExpr::getDestroyedType	1
+class clang::SourceLocation	clang::CXXPseudoDestructorExpr::getDestroyedTypeLoc	1
+class clang::SourceLocation	clang::CXXPseudoDestructorExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXPseudoDestructorExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXPseudoDestructorExpr::children	1
+class clang::SourceLocation	clang::ShuffleVectorExpr::getBuiltinLoc	1
+class clang::SourceLocation	clang::ShuffleVectorExpr::getRParenLoc	1
+class clang::SourceLocation	clang::ShuffleVectorExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ShuffleVectorExpr::getEndLoc	1
+unsigned int	clang::ShuffleVectorExpr::getNumSubExprs	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ShuffleVectorExpr::children	1
+class clang::SourceLocation	clang::ArrayInitIndexExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ArrayInitIndexExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ArrayInitIndexExpr::children	1
+const class clang::Expr *	clang::CallExpr::getCallee	1
+enum clang::CallExpr::ADLCallKind	clang::CallExpr::getADLCallKind	1
+_Bool	clang::CallExpr::usesADL	1
+_Bool	clang::CallExpr::hasStoredFPFeatures	1
+const class clang::Decl *	clang::CallExpr::getCalleeDecl	1
+const class clang::FunctionDecl *	clang::CallExpr::getDirectCallee	1
+unsigned int	clang::CallExpr::getNumArgs	1
+const class clang::Expr *const *	clang::CallExpr::getArgs	1
+class llvm::iterator_range<struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const> >	clang::CallExpr::arguments	1
+struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const>	clang::CallExpr::arg_begin	0
+struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const>	clang::CallExpr::arg_end	0
+class clang::FPOptionsOverride	clang::CallExpr::getStoredFPFeatures	1
+class clang::FPOptionsOverride	clang::CallExpr::getFPFeatures	1
+unsigned int	clang::CallExpr::getBuiltinCallee	1
+class clang::SourceLocation	clang::CallExpr::getRParenLoc	1
+class clang::SourceLocation	clang::CallExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CallExpr::getEndLoc	1
+_Bool	clang::CallExpr::isCallToStdMove	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CallExpr::children	1
+class clang::Decl *	clang::SubstNonTypeTemplateParmPackExpr::getAssociatedDecl	1
+unsigned int	clang::SubstNonTypeTemplateParmPackExpr::getIndex	1
+class clang::NonTypeTemplateParmDecl *	clang::SubstNonTypeTemplateParmPackExpr::getParameterPack	1
+class clang::SourceLocation	clang::SubstNonTypeTemplateParmPackExpr::getParameterPackLocation	1
+class clang::TemplateArgument	clang::SubstNonTypeTemplateParmPackExpr::getArgumentPack	1
+class clang::SourceLocation	clang::SubstNonTypeTemplateParmPackExpr::getBeginLoc	1
+class clang::SourceLocation	clang::SubstNonTypeTemplateParmPackExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::SubstNonTypeTemplateParmPackExpr::children	1
+enum clang::LambdaCaptureDefault	clang::LambdaExpr::getCaptureDefault	1
+class clang::SourceLocation	clang::LambdaExpr::getCaptureDefaultLoc	1
+class llvm::iterator_range<const class clang::LambdaCapture *>	clang::LambdaExpr::captures	1
+const class clang::LambdaCapture *	clang::LambdaExpr::capture_begin	0
+const class clang::LambdaCapture *	clang::LambdaExpr::capture_end	0
+unsigned int	clang::LambdaExpr::capture_size	1
+class llvm::iterator_range<const class clang::LambdaCapture *>	clang::LambdaExpr::explicit_captures	1
+const class clang::LambdaCapture *	clang::LambdaExpr::explicit_capture_begin	0
+const class clang::LambdaCapture *	clang::LambdaExpr::explicit_capture_end	0
+class llvm::iterator_range<const class clang::LambdaCapture *>	clang::LambdaExpr::implicit_captures	1
+const class clang::LambdaCapture *	clang::LambdaExpr::implicit_capture_begin	0
+const class clang::LambdaCapture *	clang::LambdaExpr::implicit_capture_end	0
+class llvm::iterator_range<class clang::Expr *const *>	clang::LambdaExpr::capture_inits	1
+class clang::Expr *const *	clang::LambdaExpr::capture_init_begin	0
+class clang::Expr *const *	clang::LambdaExpr::capture_init_end	0
+class clang::SourceRange	clang::LambdaExpr::getIntroducerRange	1
+class clang::CXXRecordDecl *	clang::LambdaExpr::getLambdaClass	1
+class clang::CXXMethodDecl *	clang::LambdaExpr::getCallOperator	1
+class clang::FunctionTemplateDecl *	clang::LambdaExpr::getDependentCallOperator	1
+class clang::TemplateParameterList *	clang::LambdaExpr::getTemplateParameterList	1
+class llvm::ArrayRef<class clang::NamedDecl *>	clang::LambdaExpr::getExplicitTemplateParameters	1
+class clang::Expr *	clang::LambdaExpr::getTrailingRequiresClause	1
+_Bool	clang::LambdaExpr::isGenericLambda	1
+class clang::Stmt *	clang::LambdaExpr::getBody	1
+const class clang::CompoundStmt *	clang::LambdaExpr::getCompoundStmtBody	1
+_Bool	clang::LambdaExpr::isMutable	1
+_Bool	clang::LambdaExpr::hasExplicitParameters	1
+_Bool	clang::LambdaExpr::hasExplicitResultType	1
+class clang::SourceLocation	clang::LambdaExpr::getBeginLoc	1
+class clang::SourceLocation	clang::LambdaExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::LambdaExpr::children	1
+class clang::SourceLocation	clang::SubstNonTypeTemplateParmExpr::getNameLoc	1
+class clang::SourceLocation	clang::SubstNonTypeTemplateParmExpr::getBeginLoc	1
+class clang::SourceLocation	clang::SubstNonTypeTemplateParmExpr::getEndLoc	1
+class clang::Expr *	clang::SubstNonTypeTemplateParmExpr::getReplacement	1
+class clang::Decl *	clang::SubstNonTypeTemplateParmExpr::getAssociatedDecl	1
+unsigned int	clang::SubstNonTypeTemplateParmExpr::getIndex	1
+class std::optional<unsigned int>	clang::SubstNonTypeTemplateParmExpr::getPackIndex	1
+class clang::NonTypeTemplateParmDecl *	clang::SubstNonTypeTemplateParmExpr::getParameter	1
+_Bool	clang::SubstNonTypeTemplateParmExpr::isReferenceParameter	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::SubstNonTypeTemplateParmExpr::children	1
+class clang::SourceLocation	clang::SizeOfPackExpr::getOperatorLoc	1
+class clang::SourceLocation	clang::SizeOfPackExpr::getPackLoc	1
+class clang::SourceLocation	clang::SizeOfPackExpr::getRParenLoc	1
+class clang::NamedDecl *	clang::SizeOfPackExpr::getPack	1
+unsigned int	clang::SizeOfPackExpr::getPackLength	1
+_Bool	clang::SizeOfPackExpr::isPartiallySubstituted	1
+class llvm::ArrayRef<class clang::TemplateArgument>	clang::SizeOfPackExpr::getPartialArguments	1
+class clang::SourceLocation	clang::SizeOfPackExpr::getBeginLoc	1
+class clang::SourceLocation	clang::SizeOfPackExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::SizeOfPackExpr::children	1
+class clang::SourceLocation	clang::OpaqueValueExpr::getLocation	1
+class clang::SourceLocation	clang::OpaqueValueExpr::getBeginLoc	1
+class clang::SourceLocation	clang::OpaqueValueExpr::getEndLoc	1
+class clang::SourceLocation	clang::OpaqueValueExpr::getExprLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::OpaqueValueExpr::children	1
+class clang::Expr *	clang::OpaqueValueExpr::getSourceExpr	1
+_Bool	clang::OpaqueValueExpr::isUnique	1
+class clang::QualType	clang::CXXUnresolvedConstructExpr::getTypeAsWritten	1
+class clang::TypeSourceInfo *	clang::CXXUnresolvedConstructExpr::getTypeSourceInfo	1
+class clang::SourceLocation	clang::CXXUnresolvedConstructExpr::getLParenLoc	1
+class clang::SourceLocation	clang::CXXUnresolvedConstructExpr::getRParenLoc	1
+_Bool	clang::CXXUnresolvedConstructExpr::isListInitialization	1
+unsigned int	clang::CXXUnresolvedConstructExpr::getNumArgs	1
+const class clang::Expr *const *	clang::CXXUnresolvedConstructExpr::arg_begin	0
+const class clang::Expr *const *	clang::CXXUnresolvedConstructExpr::arg_end	0
+class llvm::iterator_range<const class clang::Expr *const *>	clang::CXXUnresolvedConstructExpr::arguments	1
+class clang::SourceLocation	clang::CXXUnresolvedConstructExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXUnresolvedConstructExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXUnresolvedConstructExpr::children	1
+_Bool	clang::UnresolvedMemberExpr::isImplicitAccess	1
+const class clang::Expr *	clang::UnresolvedMemberExpr::getBase	1
+class clang::QualType	clang::UnresolvedMemberExpr::getBaseType	1
+_Bool	clang::UnresolvedMemberExpr::hasUnresolvedUsing	1
+_Bool	clang::UnresolvedMemberExpr::isArrow	1
+class clang::SourceLocation	clang::UnresolvedMemberExpr::getOperatorLoc	1
+const class clang::CXXRecordDecl *	clang::UnresolvedMemberExpr::getNamingClass	1
+const struct clang::DeclarationNameInfo &	clang::UnresolvedMemberExpr::getMemberNameInfo	1
+class clang::DeclarationName	clang::UnresolvedMemberExpr::getMemberName	1
+class clang::SourceLocation	clang::UnresolvedMemberExpr::getMemberLoc	1
+class clang::SourceLocation	clang::UnresolvedMemberExpr::getExprLoc	1
+class clang::SourceLocation	clang::UnresolvedMemberExpr::getBeginLoc	1
+class clang::SourceLocation	clang::UnresolvedMemberExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::UnresolvedMemberExpr::children	1
+class clang::SourceLocation	clang::ExpressionTraitExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ExpressionTraitExpr::getEndLoc	1
+enum clang::ExpressionTrait	clang::ExpressionTraitExpr::getTrait	1
+class clang::Expr *	clang::ExpressionTraitExpr::getQueriedExpression	1
+_Bool	clang::ExpressionTraitExpr::getValue	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ExpressionTraitExpr::children	1
+_Bool	clang::CXXDeleteExpr::isGlobalDelete	1
+_Bool	clang::CXXDeleteExpr::isArrayForm	1
+_Bool	clang::CXXDeleteExpr::isArrayFormAsWritten	1
+_Bool	clang::CXXDeleteExpr::doesUsualArrayDeleteWantSize	1
+class clang::FunctionDecl *	clang::CXXDeleteExpr::getOperatorDelete	1
+const class clang::Expr *	clang::CXXDeleteExpr::getArgument	1
+class clang::QualType	clang::CXXDeleteExpr::getDestroyedType	1
+class clang::SourceLocation	clang::CXXDeleteExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXDeleteExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXDeleteExpr::children	1
+class clang::QualType	clang::CXXNewExpr::getAllocatedType	1
+class clang::TypeSourceInfo *	clang::CXXNewExpr::getAllocatedTypeSourceInfo	1
+_Bool	clang::CXXNewExpr::shouldNullCheckAllocation	1
+class clang::FunctionDecl *	clang::CXXNewExpr::getOperatorNew	1
+class clang::FunctionDecl *	clang::CXXNewExpr::getOperatorDelete	1
+_Bool	clang::CXXNewExpr::isArray	1
+class std::optional<const class clang::Expr *>	clang::CXXNewExpr::getArraySize	1
+unsigned int	clang::CXXNewExpr::getNumPlacementArgs	1
+_Bool	clang::CXXNewExpr::isParenTypeId	1
+class clang::SourceRange	clang::CXXNewExpr::getTypeIdParens	1
+_Bool	clang::CXXNewExpr::isGlobalNew	1
+_Bool	clang::CXXNewExpr::hasInitializer	1
+enum clang::CXXNewExpr::InitializationStyle	clang::CXXNewExpr::getInitializationStyle	1
+const class clang::Expr *	clang::CXXNewExpr::getInitializer	1
+const class clang::CXXConstructExpr *	clang::CXXNewExpr::getConstructExpr	1
+_Bool	clang::CXXNewExpr::passAlignment	1
+_Bool	clang::CXXNewExpr::doesUsualArrayDeleteWantSize	1
+class llvm::iterator_range<struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const> >	clang::CXXNewExpr::placement_arguments	1
+struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const>	clang::CXXNewExpr::placement_arg_begin	0
+struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const>	clang::CXXNewExpr::placement_arg_end	0
+struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const>	clang::CXXNewExpr::raw_arg_begin	0
+struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const>	clang::CXXNewExpr::raw_arg_end	0
+class clang::SourceLocation	clang::CXXNewExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXNewExpr::getEndLoc	1
+class clang::SourceRange	clang::CXXNewExpr::getDirectInitRange	1
+class clang::SourceRange	clang::CXXNewExpr::getSourceRange	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXNewExpr::children	1
+class clang::SourceLocation	clang::ArrayTypeTraitExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ArrayTypeTraitExpr::getEndLoc	1
+enum clang::ArrayTypeTrait	clang::ArrayTypeTraitExpr::getTrait	1
+class clang::QualType	clang::ArrayTypeTraitExpr::getQueriedType	1
+class clang::TypeSourceInfo *	clang::ArrayTypeTraitExpr::getQueriedTypeSourceInfo	1
+unsigned long	clang::ArrayTypeTraitExpr::getValue	1
+class clang::Expr *	clang::ArrayTypeTraitExpr::getDimensionExpression	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ArrayTypeTraitExpr::children	1
+class clang::CXXConstructorDecl *	clang::CXXConstructExpr::getConstructor	1
+class clang::SourceLocation	clang::CXXConstructExpr::getLocation	1
+_Bool	clang::CXXConstructExpr::isElidable	1
+_Bool	clang::CXXConstructExpr::hadMultipleCandidates	1
+_Bool	clang::CXXConstructExpr::isListInitialization	1
+_Bool	clang::CXXConstructExpr::isStdInitListInitialization	1
+_Bool	clang::CXXConstructExpr::requiresZeroInitialization	1
+enum clang::CXXConstructExpr::ConstructionKind	clang::CXXConstructExpr::getConstructionKind	1
+class llvm::iterator_range<struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const> >	clang::CXXConstructExpr::arguments	1
+struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const>	clang::CXXConstructExpr::arg_begin	0
+struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const>	clang::CXXConstructExpr::arg_end	0
+const class clang::Expr *const *	clang::CXXConstructExpr::getArgs	1
+unsigned int	clang::CXXConstructExpr::getNumArgs	1
+_Bool	clang::CXXConstructExpr::isImmediateEscalating	1
+class clang::SourceLocation	clang::CXXConstructExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXConstructExpr::getEndLoc	1
+class clang::SourceRange	clang::CXXConstructExpr::getParenOrBraceRange	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXConstructExpr::children	1
+const class clang::Expr *	clang::MSPropertySubscriptExpr::getBase	1
+const class clang::Expr *	clang::MSPropertySubscriptExpr::getIdx	1
+class clang::SourceLocation	clang::MSPropertySubscriptExpr::getBeginLoc	1
+class clang::SourceLocation	clang::MSPropertySubscriptExpr::getEndLoc	1
+class clang::SourceLocation	clang::MSPropertySubscriptExpr::getRBracketLoc	1
+class clang::SourceLocation	clang::MSPropertySubscriptExpr::getExprLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::MSPropertySubscriptExpr::children	1
+class clang::OpaqueValueExpr *	clang::ArrayInitLoopExpr::getCommonExpr	1
+class clang::Expr *	clang::ArrayInitLoopExpr::getSubExpr	1
+class llvm::APInt	clang::ArrayInitLoopExpr::getArraySize	1
+class clang::SourceLocation	clang::ArrayInitLoopExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ArrayInitLoopExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ArrayInitLoopExpr::children	1
+class clang::TypeSourceInfo *	clang::CXXTemporaryObjectExpr::getTypeSourceInfo	1
+class clang::SourceLocation	clang::CXXTemporaryObjectExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXTemporaryObjectExpr::getEndLoc	1
+class clang::SourceLocation	clang::FixedPointLiteral::getBeginLoc	1
+class clang::SourceLocation	clang::FixedPointLiteral::getEndLoc	1
+class clang::SourceLocation	clang::FixedPointLiteral::getLocation	1
+unsigned int	clang::FixedPointLiteral::getScale	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::FixedPointLiteral::children	1
+const class clang::CXXTemporary *	clang::CXXBindTemporaryExpr::getTemporary	1
+const class clang::Expr *	clang::CXXBindTemporaryExpr::getSubExpr	1
+class clang::SourceLocation	clang::CXXBindTemporaryExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXBindTemporaryExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXBindTemporaryExpr::children	1
+_Bool	clang::CXXDefaultInitExpr::hasRewrittenInit	1
+const class clang::FieldDecl *	clang::CXXDefaultInitExpr::getField	1
+const class clang::Expr *	clang::CXXDefaultInitExpr::getExpr	1
+const class clang::Expr *	clang::CXXDefaultInitExpr::getRewrittenExpr	1
+const class clang::DeclContext *	clang::CXXDefaultInitExpr::getUsedContext	1
+class clang::SourceLocation	clang::CXXDefaultInitExpr::getUsedLocation	1
+class clang::SourceLocation	clang::CXXDefaultInitExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXDefaultInitExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXDefaultInitExpr::children	1
+const class clang::Expr *	clang::CXXThrowExpr::getSubExpr	1
+class clang::SourceLocation	clang::CXXThrowExpr::getThrowLoc	1
+_Bool	clang::CXXThrowExpr::isThrownVariableInScope	1
+class clang::SourceLocation	clang::CXXThrowExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXThrowExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXThrowExpr::children	1
+class clang::SourceRange	clang::MSPropertyRefExpr::getSourceRange	1
+_Bool	clang::MSPropertyRefExpr::isImplicitAccess	1
+class clang::SourceLocation	clang::MSPropertyRefExpr::getBeginLoc	1
+class clang::SourceLocation	clang::MSPropertyRefExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::MSPropertyRefExpr::children	1
+class clang::Expr *	clang::MSPropertyRefExpr::getBaseExpr	1
+class clang::MSPropertyDecl *	clang::MSPropertyRefExpr::getPropertyDecl	1
+_Bool	clang::MSPropertyRefExpr::isArrow	1
+class clang::SourceLocation	clang::MSPropertyRefExpr::getMemberLoc	1
+class clang::NestedNameSpecifierLoc	clang::MSPropertyRefExpr::getQualifierLoc	1
+class clang::SourceLocation	clang::CXXNullPtrLiteralExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXNullPtrLiteralExpr::getEndLoc	1
+class clang::SourceLocation	clang::CXXNullPtrLiteralExpr::getLocation	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXNullPtrLiteralExpr::children	1
+class clang::Expr *	clang::AtomicExpr::getPtr	1
+class clang::Expr *	clang::AtomicExpr::getOrder	1
+class clang::Expr *	clang::AtomicExpr::getScope	1
+class clang::Expr *	clang::AtomicExpr::getVal1	1
+class clang::Expr *	clang::AtomicExpr::getOrderFail	1
+class clang::Expr *	clang::AtomicExpr::getVal2	1
+class clang::Expr *	clang::AtomicExpr::getWeak	1
+class clang::QualType	clang::AtomicExpr::getValueType	1
+enum clang::AtomicExpr::AtomicOp	clang::AtomicExpr::getOp	1
+unsigned int	clang::AtomicExpr::getNumSubExprs	1
+const class clang::Expr *const *	clang::AtomicExpr::getSubExprs	1
+_Bool	clang::AtomicExpr::isVolatile	1
+_Bool	clang::AtomicExpr::isCmpXChg	1
+_Bool	clang::AtomicExpr::isOpenCL	1
+class clang::SourceLocation	clang::AtomicExpr::getBuiltinLoc	1
+class clang::SourceLocation	clang::AtomicExpr::getRParenLoc	1
+class clang::SourceLocation	clang::AtomicExpr::getBeginLoc	1
+class clang::SourceLocation	clang::AtomicExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::AtomicExpr::children	1
+class std::unique_ptr<class clang::AtomicScopeModel>	clang::AtomicExpr::getScopeModel	1
+unsigned int	clang::GenericSelectionExpr::getNumAssocs	1
+unsigned int	clang::GenericSelectionExpr::getResultIndex	1
+_Bool	clang::GenericSelectionExpr::isResultDependent	1
+_Bool	clang::GenericSelectionExpr::isExprPredicate	1
+_Bool	clang::GenericSelectionExpr::isTypePredicate	1
+const class clang::Expr *	clang::GenericSelectionExpr::getControllingExpr	1
+const class clang::TypeSourceInfo *	clang::GenericSelectionExpr::getControllingType	1
+const class clang::Expr *	clang::GenericSelectionExpr::getResultExpr	1
+class llvm::ArrayRef<class clang::Expr *>	clang::GenericSelectionExpr::getAssocExprs	1
+class llvm::ArrayRef<class clang::TypeSourceInfo *>	clang::GenericSelectionExpr::getAssocTypeSourceInfos	1
+class llvm::iterator_range<class clang::GenericSelectionExpr::AssociationIteratorTy<true> >	clang::GenericSelectionExpr::associations	1
+class clang::SourceLocation	clang::GenericSelectionExpr::getGenericLoc	1
+class clang::SourceLocation	clang::GenericSelectionExpr::getDefaultLoc	1
+class clang::SourceLocation	clang::GenericSelectionExpr::getRParenLoc	1
+class clang::SourceLocation	clang::GenericSelectionExpr::getBeginLoc	1
+class clang::SourceLocation	clang::GenericSelectionExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::GenericSelectionExpr::children	1
+unsigned int	clang::ParenListExpr::getNumExprs	1
+class clang::SourceLocation	clang::ParenListExpr::getLParenLoc	1
+class clang::SourceLocation	clang::ParenListExpr::getRParenLoc	1
+class clang::SourceLocation	clang::ParenListExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ParenListExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ParenListExpr::children	1
+_Bool	clang::ChooseExpr::isConditionTrue	1
+_Bool	clang::ChooseExpr::isConditionDependent	1
+class clang::Expr *	clang::ChooseExpr::getChosenSubExpr	1
+class clang::Expr *	clang::ChooseExpr::getCond	1
+class clang::Expr *	clang::ChooseExpr::getLHS	1
+class clang::Expr *	clang::ChooseExpr::getRHS	1
+class clang::SourceLocation	clang::ChooseExpr::getBuiltinLoc	1
+class clang::SourceLocation	clang::ChooseExpr::getRParenLoc	1
+class clang::SourceLocation	clang::ChooseExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ChooseExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ChooseExpr::children	1
+class clang::Expr *	clang::AbstractConditionalOperator::getCond	1
+class clang::Expr *	clang::AbstractConditionalOperator::getTrueExpr	1
+class clang::Expr *	clang::AbstractConditionalOperator::getFalseExpr	1
+class clang::SourceLocation	clang::AbstractConditionalOperator::getQuestionLoc	1
+class clang::SourceLocation	clang::AbstractConditionalOperator::getColonLoc	1
+class clang::SourceLocation	clang::IndirectGotoStmt::getGotoLoc	1
+class clang::SourceLocation	clang::IndirectGotoStmt::getStarLoc	1
+const class clang::Expr *	clang::IndirectGotoStmt::getTarget	1
+const class clang::LabelDecl *	clang::IndirectGotoStmt::getConstantTarget	1
+class clang::SourceLocation	clang::IndirectGotoStmt::getBeginLoc	1
+class clang::SourceLocation	clang::IndirectGotoStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::IndirectGotoStmt::children	1
+class clang::SourceLocation	clang::CoreturnStmt::getKeywordLoc	1
+class clang::Expr *	clang::CoreturnStmt::getOperand	1
+class clang::Expr *	clang::CoreturnStmt::getPromiseCall	1
+_Bool	clang::CoreturnStmt::isImplicit	1
+class clang::SourceLocation	clang::CoreturnStmt::getBeginLoc	1
+class clang::SourceLocation	clang::CoreturnStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CoreturnStmt::children	1
+class clang::Expr *	clang::BinaryConditionalOperator::getCommon	1
+class clang::OpaqueValueExpr *	clang::BinaryConditionalOperator::getOpaqueValue	1
+class clang::Expr *	clang::BinaryConditionalOperator::getCond	1
+class clang::Expr *	clang::BinaryConditionalOperator::getTrueExpr	1
+class clang::Expr *	clang::BinaryConditionalOperator::getFalseExpr	1
+class clang::SourceLocation	clang::BinaryConditionalOperator::getBeginLoc	1
+class clang::SourceLocation	clang::BinaryConditionalOperator::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::BinaryConditionalOperator::children	1
+class clang::Expr *	clang::ConditionalOperator::getCond	1
+class clang::Expr *	clang::ConditionalOperator::getTrueExpr	1
+class clang::Expr *	clang::ConditionalOperator::getFalseExpr	1
+class clang::Expr *	clang::ConditionalOperator::getLHS	1
+class clang::Expr *	clang::ConditionalOperator::getRHS	1
+class clang::SourceLocation	clang::ConditionalOperator::getBeginLoc	1
+class clang::SourceLocation	clang::ConditionalOperator::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ConditionalOperator::children	1
+class clang::QualType	clang::CompoundAssignOperator::getComputationLHSType	1
+class clang::QualType	clang::CompoundAssignOperator::getComputationResultType	1
+_Bool	clang::CXXDynamicCastExpr::isAlwaysNull	1
+class clang::SourceLocation	clang::CStyleCastExpr::getLParenLoc	1
+class clang::SourceLocation	clang::CStyleCastExpr::getRParenLoc	1
+class clang::SourceLocation	clang::CStyleCastExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CStyleCastExpr::getEndLoc	1
+_Bool	clang::ImplicitCastExpr::isPartOfExplicitCast	1
+class clang::SourceLocation	clang::ImplicitCastExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ImplicitCastExpr::getEndLoc	1
+const class clang::Expr *	clang::CompoundLiteralExpr::getInitializer	1
+_Bool	clang::CompoundLiteralExpr::isFileScope	1
+class clang::SourceLocation	clang::CompoundLiteralExpr::getLParenLoc	1
+class clang::TypeSourceInfo *	clang::CompoundLiteralExpr::getTypeSourceInfo	1
+class clang::SourceLocation	clang::CompoundLiteralExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CompoundLiteralExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CompoundLiteralExpr::children	1
+const class clang::CallExpr *	clang::CUDAKernelCallExpr::getConfig	1
+const class clang::Expr *	clang::ArraySubscriptExpr::getLHS	1
+const class clang::Expr *	clang::ArraySubscriptExpr::getRHS	1
+const class clang::Expr *	clang::ArraySubscriptExpr::getBase	1
+const class clang::Expr *	clang::ArraySubscriptExpr::getIdx	1
+class clang::SourceLocation	clang::ArraySubscriptExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ArraySubscriptExpr::getEndLoc	1
+class clang::SourceLocation	clang::ArraySubscriptExpr::getRBracketLoc	1
+class clang::SourceLocation	clang::ArraySubscriptExpr::getExprLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ArraySubscriptExpr::children	1
+class clang::SourceLocation	clang::OffsetOfExpr::getOperatorLoc	1
+class clang::SourceLocation	clang::OffsetOfExpr::getRParenLoc	1
+class clang::TypeSourceInfo *	clang::OffsetOfExpr::getTypeSourceInfo	1
+unsigned int	clang::OffsetOfExpr::getNumComponents	1
+unsigned int	clang::OffsetOfExpr::getNumExpressions	1
+class clang::SourceLocation	clang::OffsetOfExpr::getBeginLoc	1
+class clang::SourceLocation	clang::OffsetOfExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::OffsetOfExpr::children	1
+const class clang::TypeSourceInfo *	clang::SYCLUniqueStableNameExpr::getTypeSourceInfo	1
+class clang::SourceLocation	clang::SYCLUniqueStableNameExpr::getBeginLoc	1
+class clang::SourceLocation	clang::SYCLUniqueStableNameExpr::getEndLoc	1
+class clang::SourceLocation	clang::SYCLUniqueStableNameExpr::getLocation	1
+class clang::SourceLocation	clang::SYCLUniqueStableNameExpr::getLParenLocation	1
+class clang::SourceLocation	clang::SYCLUniqueStableNameExpr::getRParenLocation	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::SYCLUniqueStableNameExpr::children	1
+class llvm::StringRef	clang::StringLiteral::getString	1
+class llvm::StringRef	clang::StringLiteral::getBytes	1
+unsigned int	clang::StringLiteral::getByteLength	1
+unsigned int	clang::StringLiteral::getLength	1
+unsigned int	clang::StringLiteral::getCharByteWidth	1
+enum clang::StringLiteral::StringKind	clang::StringLiteral::getKind	1
+_Bool	clang::StringLiteral::isOrdinary	1
+_Bool	clang::StringLiteral::isWide	1
+_Bool	clang::StringLiteral::isUTF8	1
+_Bool	clang::StringLiteral::isUTF16	1
+_Bool	clang::StringLiteral::isUTF32	1
+_Bool	clang::StringLiteral::isUnevaluated	1
+_Bool	clang::StringLiteral::isPascal	1
+_Bool	clang::StringLiteral::containsNonAscii	1
+_Bool	clang::StringLiteral::containsNonAsciiOrNull	1
+unsigned int	clang::StringLiteral::getNumConcatenated	1
+const class clang::SourceLocation *	clang::StringLiteral::tokloc_begin	0
+const class clang::SourceLocation *	clang::StringLiteral::tokloc_end	0
+class clang::SourceLocation	clang::StringLiteral::getBeginLoc	1
+class clang::SourceLocation	clang::StringLiteral::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::StringLiteral::children	1
+class clang::Expr *	clang::CoroutineSuspendExpr::getCommonExpr	1
+class clang::OpaqueValueExpr *	clang::CoroutineSuspendExpr::getOpaqueValue	1
+class clang::Expr *	clang::CoroutineSuspendExpr::getReadyExpr	1
+class clang::Expr *	clang::CoroutineSuspendExpr::getSuspendExpr	1
+class clang::Expr *	clang::CoroutineSuspendExpr::getResumeExpr	1
+class clang::Expr *	clang::CoroutineSuspendExpr::getOperand	1
+class clang::SourceLocation	clang::CoroutineSuspendExpr::getKeywordLoc	1
+class clang::SourceLocation	clang::CoroutineSuspendExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CoroutineSuspendExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CoroutineSuspendExpr::children	1
+class llvm::APFloat	clang::FloatingLiteral::getValue	1
+enum llvm::APFloatBase::Semantics	clang::FloatingLiteral::getRawSemantics	1
+const struct llvm::fltSemantics &	clang::FloatingLiteral::getSemantics	1
+_Bool	clang::FloatingLiteral::isExact	1
+double	clang::FloatingLiteral::getValueAsApproximateDouble	1
+class clang::SourceLocation	clang::FloatingLiteral::getLocation	1
+class clang::SourceLocation	clang::FloatingLiteral::getBeginLoc	1
+class clang::SourceLocation	clang::FloatingLiteral::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::FloatingLiteral::children	1
+class clang::SourceLocation	clang::ConstantExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ConstantExpr::getEndLoc	1
+enum clang::APValue::ValueKind	clang::ConstantExpr::getResultAPValueKind	1
+enum clang::ConstantExpr::ResultStorageKind	clang::ConstantExpr::getResultStorageKind	1
+_Bool	clang::ConstantExpr::isImmediateInvocation	1
+_Bool	clang::ConstantExpr::hasAPValueResult	1
+class clang::APValue	clang::ConstantExpr::getAPValueResult	1
+class clang::APValue &	clang::ConstantExpr::getResultAsAPValue	1
+class llvm::APSInt	clang::ConstantExpr::getResultAsAPSInt	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ConstantExpr::children	1
+_Bool	clang::CaseStmt::caseStmtIsGNURange	1
+class clang::SourceLocation	clang::CaseStmt::getCaseLoc	1
+class clang::SourceLocation	clang::CaseStmt::getEllipsisLoc	1
+const class clang::Expr *	clang::CaseStmt::getLHS	1
+const class clang::Expr *	clang::CaseStmt::getRHS	1
+const class clang::Stmt *	clang::CaseStmt::getSubStmt	1
+class clang::SourceLocation	clang::CaseStmt::getBeginLoc	1
+class clang::SourceLocation	clang::CaseStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CaseStmt::children	1
+_Bool	clang::DeclStmt::isSingleDecl	1
+const class clang::Decl *	clang::DeclStmt::getSingleDecl	1
+const class clang::DeclGroupRef	clang::DeclStmt::getDeclGroup	1
+class clang::SourceLocation	clang::DeclStmt::getEndLoc	1
+class clang::SourceLocation	clang::DeclStmt::getBeginLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::DeclStmt::children	1
+class llvm::iterator_range<class clang::Decl *const *>	clang::DeclStmt::decls	1
+class clang::Decl *const *	clang::DeclStmt::decl_begin	0
+class clang::Decl *const *	clang::DeclStmt::decl_end	0
+class clang::VarDecl *	clang::VarTemplateDecl::getTemplatedDecl	1
+_Bool	clang::VarTemplateDecl::isThisDeclarationADefinition	1
+const class clang::VarTemplateDecl *	clang::VarTemplateDecl::getCanonicalDecl	1
+const class clang::VarTemplateDecl *	clang::VarTemplateDecl::getPreviousDecl	1
+const class clang::VarTemplateDecl *	clang::VarTemplateDecl::getMostRecentDecl	1
+class clang::VarTemplateDecl *	clang::VarTemplateDecl::getInstantiatedFromMemberTemplate	1
+class llvm::iterator_range<struct clang::RedeclarableTemplateDecl::SpecIterator<class clang::VarTemplateSpecializationDecl> >	clang::VarTemplateDecl::specializations	1
+struct clang::RedeclarableTemplateDecl::SpecIterator<class clang::VarTemplateSpecializationDecl>	clang::VarTemplateDecl::spec_begin	0
+struct clang::RedeclarableTemplateDecl::SpecIterator<class clang::VarTemplateSpecializationDecl>	clang::VarTemplateDecl::spec_end	0
+const class clang::Type *	clang::TypeDecl::getTypeForDecl	1
+class clang::SourceLocation	clang::TypeDecl::getBeginLoc	1
+class clang::SourceRange	clang::TypeDecl::getSourceRange	1
+class clang::CXXRecordDecl *	clang::ClassTemplateDecl::getTemplatedDecl	1
+_Bool	clang::ClassTemplateDecl::isThisDeclarationADefinition	1
+const class clang::ClassTemplateDecl *	clang::ClassTemplateDecl::getCanonicalDecl	1
+const class clang::ClassTemplateDecl *	clang::ClassTemplateDecl::getPreviousDecl	1
+const class clang::ClassTemplateDecl *	clang::ClassTemplateDecl::getMostRecentDecl	1
+class clang::ClassTemplateDecl *	clang::ClassTemplateDecl::getInstantiatedFromMemberTemplate	1
+class llvm::iterator_range<struct clang::RedeclarableTemplateDecl::SpecIterator<class clang::ClassTemplateSpecializationDecl> >	clang::ClassTemplateDecl::specializations	1
+struct clang::RedeclarableTemplateDecl::SpecIterator<class clang::ClassTemplateSpecializationDecl>	clang::ClassTemplateDecl::spec_begin	0
+struct clang::RedeclarableTemplateDecl::SpecIterator<class clang::ClassTemplateSpecializationDecl>	clang::ClassTemplateDecl::spec_end	0
+class clang::SourceRange	clang::NonTypeTemplateParmDecl::getSourceRange	1
+const class clang::DefaultArgStorage<class clang::NonTypeTemplateParmDecl, class clang::Expr *> &	clang::NonTypeTemplateParmDecl::getDefaultArgStorage	1
+_Bool	clang::NonTypeTemplateParmDecl::hasDefaultArgument	1
+class clang::Expr *	clang::NonTypeTemplateParmDecl::getDefaultArgument	1
+class clang::SourceLocation	clang::NonTypeTemplateParmDecl::getDefaultArgumentLoc	1
+_Bool	clang::NonTypeTemplateParmDecl::defaultArgumentWasInherited	1
+_Bool	clang::NonTypeTemplateParmDecl::isParameterPack	1
+_Bool	clang::NonTypeTemplateParmDecl::isPackExpansion	1
+_Bool	clang::NonTypeTemplateParmDecl::isExpandedParameterPack	1
+unsigned int	clang::NonTypeTemplateParmDecl::getNumExpansionTypes	1
+class clang::Expr *	clang::NonTypeTemplateParmDecl::getPlaceholderTypeConstraint	1
+_Bool	clang::NonTypeTemplateParmDecl::hasPlaceholderTypeConstraint	1
+class clang::TypeSourceInfo *	clang::ExplicitCastExpr::getTypeInfoAsWritten	1
+class clang::QualType	clang::ExplicitCastExpr::getTypeAsWritten	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::TypoExpr::children	1
+class clang::SourceLocation	clang::TypoExpr::getBeginLoc	1
+class clang::SourceLocation	clang::TypoExpr::getEndLoc	1
+class clang::NestedNameSpecifierLoc	clang::UsingDirectiveDecl::getQualifierLoc	1
+class clang::NestedNameSpecifier *	clang::UsingDirectiveDecl::getQualifier	1
+const class clang::NamedDecl *	clang::UsingDirectiveDecl::getNominatedNamespaceAsWritten	1
+const class clang::NamespaceDecl *	clang::UsingDirectiveDecl::getNominatedNamespace	1
+const class clang::DeclContext *	clang::UsingDirectiveDecl::getCommonAncestor	1
+class clang::SourceLocation	clang::UsingDirectiveDecl::getUsingLoc	1
+class clang::SourceLocation	clang::UsingDirectiveDecl::getNamespaceKeyLocation	1
+class clang::SourceLocation	clang::UsingDirectiveDecl::getIdentLocation	1
+class clang::SourceRange	clang::UsingDirectiveDecl::getSourceRange	1
+class clang::UsingDecl *	clang::ConstructorUsingShadowDecl::getIntroducer	1
+const class clang::CXXRecordDecl *	clang::ConstructorUsingShadowDecl::getParent	1
+class clang::ConstructorUsingShadowDecl *	clang::ConstructorUsingShadowDecl::getNominatedBaseClassShadowDecl	1
+class clang::ConstructorUsingShadowDecl *	clang::ConstructorUsingShadowDecl::getConstructedBaseClassShadowDecl	1
+class clang::CXXRecordDecl *	clang::ConstructorUsingShadowDecl::getNominatedBaseClass	1
+class clang::CXXRecordDecl *	clang::ConstructorUsingShadowDecl::getConstructedBaseClass	1
+_Bool	clang::ConstructorUsingShadowDecl::constructsVirtualBase	1
+class clang::SourceLocation	clang::UsingEnumDecl::getUsingLoc	1
+class clang::SourceLocation	clang::UsingEnumDecl::getEnumLoc	1
+class clang::NestedNameSpecifier *	clang::UsingEnumDecl::getQualifier	1
+class clang::NestedNameSpecifierLoc	clang::UsingEnumDecl::getQualifierLoc	1
+class clang::TypeLoc	clang::UsingEnumDecl::getEnumTypeLoc	1
+class clang::TypeSourceInfo *	clang::UsingEnumDecl::getEnumType	1
+class clang::EnumDecl *	clang::UsingEnumDecl::getEnumDecl	1
+class clang::SourceRange	clang::UsingEnumDecl::getSourceRange	1
+const class clang::UsingEnumDecl *	clang::UsingEnumDecl::getCanonicalDecl	1
+class clang::QualType	clang::ValueDecl::getType	1
+_Bool	clang::ValueDecl::isWeak	1
+_Bool	clang::ValueDecl::isInitCapture	1
+const class clang::VarDecl *	clang::ValueDecl::getPotentiallyDecomposedVarDecl	1
+class clang::Expr *	clang::AsTypeExpr::getSrcExpr	1
+class clang::SourceLocation	clang::AsTypeExpr::getBuiltinLoc	1
+class clang::SourceLocation	clang::AsTypeExpr::getRParenLoc	1
+class clang::SourceLocation	clang::AsTypeExpr::getBeginLoc	1
+class clang::SourceLocation	clang::AsTypeExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::AsTypeExpr::children	1
+class clang::NamedDecl *	clang::UsingPackDecl::getInstantiatedFromUsingDecl	1
+class llvm::ArrayRef<class clang::NamedDecl *>	clang::UsingPackDecl::expansions	1
+class clang::SourceRange	clang::UsingPackDecl::getSourceRange	1
+const class clang::UsingPackDecl *	clang::UsingPackDecl::getCanonicalDecl	1
+class clang::Expr *	clang::ConceptDecl::getConstraintExpr	1
+class clang::SourceRange	clang::ConceptDecl::getSourceRange	1
+_Bool	clang::ConceptDecl::isTypeConcept	1
+const class clang::ConceptDecl *	clang::ConceptDecl::getCanonicalDecl	1
+const class clang::NamespaceAliasDecl *	clang::NamespaceAliasDecl::getCanonicalDecl	1
+class clang::NestedNameSpecifierLoc	clang::NamespaceAliasDecl::getQualifierLoc	1
+class clang::NestedNameSpecifier *	clang::NamespaceAliasDecl::getQualifier	1
+const class clang::NamespaceDecl *	clang::NamespaceAliasDecl::getNamespace	1
+class clang::SourceLocation	clang::NamespaceAliasDecl::getAliasLoc	1
+class clang::SourceLocation	clang::NamespaceAliasDecl::getNamespaceLoc	1
+class clang::SourceLocation	clang::NamespaceAliasDecl::getTargetNameLoc	1
+class clang::NamedDecl *	clang::NamespaceAliasDecl::getAliasedNamespace	1
+class clang::SourceRange	clang::NamespaceAliasDecl::getSourceRange	1
+enum clang::LinkageSpecDecl::LanguageIDs	clang::LinkageSpecDecl::getLanguage	1
+_Bool	clang::LinkageSpecDecl::hasBraces	1
+class clang::SourceLocation	clang::LinkageSpecDecl::getExternLoc	1
+class clang::SourceLocation	clang::LinkageSpecDecl::getRBraceLoc	1
+class clang::SourceLocation	clang::LinkageSpecDecl::getEndLoc	1
+class clang::SourceRange	clang::LinkageSpecDecl::getSourceRange	1
+class clang::SourceLocation	clang::AccessSpecDecl::getAccessSpecifierLoc	1
+class clang::SourceLocation	clang::AccessSpecDecl::getColonLoc	1
+class clang::SourceRange	clang::AccessSpecDecl::getSourceRange	1
+class clang::SourceRange	clang::TopLevelStmtDecl::getSourceRange	1
+const class clang::Stmt *	clang::TopLevelStmtDecl::getStmt	1
+_Bool	clang::TopLevelStmtDecl::isSemiMissing	1
+const class clang::ValueDecl *	clang::LifetimeExtendedTemporaryDecl::getExtendingDecl	1
+enum clang::StorageDuration	clang::LifetimeExtendedTemporaryDecl::getStorageDuration	1
+const class clang::Expr *	clang::LifetimeExtendedTemporaryDecl::getTemporaryExpr	1
+unsigned int	clang::LifetimeExtendedTemporaryDecl::getManglingNumber	1
+class clang::APValue *	clang::LifetimeExtendedTemporaryDecl::getValue	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::LifetimeExtendedTemporaryDecl::childrenExpr	1
+class clang::Stmt *	clang::CapturedDecl::getBody	1
+_Bool	clang::CapturedDecl::isNothrow	1
+unsigned int	clang::CapturedDecl::getNumParams	1
+class llvm::ArrayRef<class clang::ImplicitParamDecl *>	clang::CapturedDecl::parameters	1
+class clang::ImplicitParamDecl *	clang::CapturedDecl::getContextParam	1
+unsigned int	clang::CapturedDecl::getContextParamPosition	1
+class clang::ImplicitParamDecl *const *	clang::CapturedDecl::param_begin	0
+class clang::ImplicitParamDecl *const *	clang::CapturedDecl::param_end	0
+class clang::TypeSourceInfo *	clang::FriendTemplateDecl::getFriendType	1
+class clang::NamedDecl *	clang::FriendTemplateDecl::getFriendDecl	1
+class clang::SourceLocation	clang::FriendTemplateDecl::getFriendLoc	1
+unsigned int	clang::FriendTemplateDecl::getNumTemplateParameters	1
+const class clang::FunctionDecl *	clang::CXXDestructorDecl::getOperatorDelete	1
+class clang::Expr *	clang::CXXDestructorDecl::getOperatorDeleteThisArg	1
+const class clang::CXXDestructorDecl *	clang::CXXDestructorDecl::getCanonicalDecl	1
+class clang::FunctionDecl *	clang::FunctionTemplateDecl::getTemplatedDecl	1
+_Bool	clang::FunctionTemplateDecl::isThisDeclarationADefinition	1
+const class clang::FunctionTemplateDecl *	clang::FunctionTemplateDecl::getCanonicalDecl	1
+const class clang::FunctionTemplateDecl *	clang::FunctionTemplateDecl::getPreviousDecl	1
+const class clang::FunctionTemplateDecl *	clang::FunctionTemplateDecl::getMostRecentDecl	1
+class clang::FunctionTemplateDecl *	clang::FunctionTemplateDecl::getInstantiatedFromMemberTemplate	1
+class llvm::iterator_range<struct clang::RedeclarableTemplateDecl::SpecIterator<class clang::FunctionTemplateSpecializationInfo> >	clang::FunctionTemplateDecl::specializations	1
+struct clang::RedeclarableTemplateDecl::SpecIterator<class clang::FunctionTemplateSpecializationInfo>	clang::FunctionTemplateDecl::spec_begin	0
+struct clang::RedeclarableTemplateDecl::SpecIterator<class clang::FunctionTemplateSpecializationInfo>	clang::FunctionTemplateDecl::spec_end	0
+_Bool	clang::FunctionTemplateDecl::isAbbreviated	1
+class clang::SourceLocation	clang::NullStmt::getSemiLoc	1
+_Bool	clang::NullStmt::hasLeadingEmptyMacro	1
+class clang::SourceLocation	clang::NullStmt::getBeginLoc	1
+class clang::SourceLocation	clang::NullStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::NullStmt::children	1
+class clang::SourceLocation	clang::ExportDecl::getExportLoc	1
+class clang::SourceLocation	clang::ExportDecl::getRBraceLoc	1
+_Bool	clang::ExportDecl::hasBraces	1
+class clang::SourceLocation	clang::ExportDecl::getEndLoc	1
+class clang::SourceRange	clang::ExportDecl::getSourceRange	1
+unsigned int	clang::FieldDecl::getFieldIndex	1
+_Bool	clang::FieldDecl::isMutable	1
+_Bool	clang::FieldDecl::isBitField	1
+_Bool	clang::FieldDecl::isUnnamedBitfield	1
+_Bool	clang::FieldDecl::isAnonymousStructOrUnion	1
+class clang::Expr *	clang::FieldDecl::getBitWidth	1
+_Bool	clang::FieldDecl::isPotentiallyOverlapping	1
+enum clang::InClassInitStyle	clang::FieldDecl::getInClassInitStyle	1
+_Bool	clang::FieldDecl::hasInClassInitializer	1
+_Bool	clang::FieldDecl::hasNonNullInClassInitializer	1
+class clang::Expr *	clang::FieldDecl::getInClassInitializer	1
+_Bool	clang::FieldDecl::hasCapturedVLAType	1
+const class clang::VariableArrayType *	clang::FieldDecl::getCapturedVLAType	1
+const class clang::RecordDecl *	clang::FieldDecl::getParent	1
+class clang::SourceRange	clang::FieldDecl::getSourceRange	1
+const class clang::FieldDecl *	clang::FieldDecl::getCanonicalDecl	1
+const class clang::Expr *	clang::StaticAssertDecl::getAssertExpr	1
+const class clang::Expr *	clang::StaticAssertDecl::getMessage	1
+_Bool	clang::StaticAssertDecl::isFailed	1
+class clang::SourceLocation	clang::StaticAssertDecl::getRParenLoc	1
+class clang::SourceRange	clang::StaticAssertDecl::getSourceRange	1
+const class clang::ExplicitSpecifier	clang::CXXDeductionGuideDecl::getExplicitSpecifier	1
+_Bool	clang::CXXDeductionGuideDecl::isExplicit	1
+class clang::TemplateDecl *	clang::CXXDeductionGuideDecl::getDeducedTemplate	1
+class clang::CXXConstructorDecl *	clang::CXXDeductionGuideDecl::getCorrespondingConstructor	1
+enum clang::DeductionCandidate	clang::CXXDeductionGuideDecl::getDeductionCandidateKind	1
+class clang::SourceLocation	clang::FileScopeAsmDecl::getAsmLoc	1
+class clang::SourceLocation	clang::FileScopeAsmDecl::getRParenLoc	1
+class clang::SourceRange	clang::FileScopeAsmDecl::getSourceRange	1
+const class clang::StringLiteral *	clang::FileScopeAsmDecl::getAsmString	1
+class clang::IdentifierInfo *	clang::NamedDecl::getIdentifier	1
+class llvm::StringRef	clang::NamedDecl::getName	1
+class std::basic_string<char>	clang::NamedDecl::getNameAsString	1
+class clang::DeclarationName	clang::NamedDecl::getDeclName	1
+class std::basic_string<char>	clang::NamedDecl::getQualifiedNameAsString	1
+_Bool	clang::NamedDecl::hasLinkage	1
+_Bool	clang::NamedDecl::isCXXClassMember	1
+_Bool	clang::NamedDecl::isCXXInstanceMember	1
+enum clang::Linkage	clang::NamedDecl::getLinkageInternal	1
+enum clang::Linkage	clang::NamedDecl::getFormalLinkage	1
+_Bool	clang::NamedDecl::hasExternalFormalLinkage	1
+_Bool	clang::NamedDecl::isExternallyVisible	1
+_Bool	clang::NamedDecl::isExternallyDeclarable	1
+enum clang::Visibility	clang::NamedDecl::getVisibility	0
+class clang::LinkageInfo	clang::NamedDecl::getLinkageAndVisibility	0
+_Bool	clang::NamedDecl::isLinkageValid	1
+_Bool	clang::NamedDecl::hasLinkageBeenComputed	1
+const class clang::NamedDecl *	clang::NamedDecl::getUnderlyingDecl	1
+const class clang::NamedDecl *	clang::NamedDecl::getMostRecentDecl	1
+enum clang::ObjCStringFormatFamily	clang::NamedDecl::getObjCFStringFormattingFamily	1
+struct clang::DeclarationNameInfo	clang::FunctionDecl::getNameInfo	0
+class clang::SourceLocation	clang::FunctionDecl::getEllipsisLoc	1
+class clang::SourceRange	clang::FunctionDecl::getSourceRange	1
+_Bool	clang::FunctionDecl::hasBody	1
+_Bool	clang::FunctionDecl::hasTrivialBody	1
+_Bool	clang::FunctionDecl::isDefined	1
+const class clang::FunctionDecl *	clang::FunctionDecl::getDefinition	1
+class clang::Stmt *	clang::FunctionDecl::getBody	1
+_Bool	clang::FunctionDecl::isThisDeclarationADefinition	1
+_Bool	clang::FunctionDecl::isThisDeclarationInstantiatedFromAFriendDefinition	1
+_Bool	clang::FunctionDecl::doesThisDeclarationHaveABody	1
+class clang::FunctionDecl::DefaultedFunctionInfo *	clang::FunctionDecl::getDefaultedFunctionInfo	1
+_Bool	clang::FunctionDecl::isVariadic	1
+_Bool	clang::FunctionDecl::isVirtualAsWritten	1
+_Bool	clang::FunctionDecl::isPure	1
+_Bool	clang::FunctionDecl::isLateTemplateParsed	1
+_Bool	clang::FunctionDecl::isTrivial	1
+_Bool	clang::FunctionDecl::isTrivialForCall	1
+_Bool	clang::FunctionDecl::isDefaulted	1
+_Bool	clang::FunctionDecl::isExplicitlyDefaulted	1
+class clang::SourceLocation	clang::FunctionDecl::getDefaultLoc	1
+_Bool	clang::FunctionDecl::isUserProvided	1
+_Bool	clang::FunctionDecl::isIneligibleOrNotSelected	1
+_Bool	clang::FunctionDecl::hasImplicitReturnZero	1
+_Bool	clang::FunctionDecl::hasPrototype	1
+_Bool	clang::FunctionDecl::hasWrittenPrototype	1
+_Bool	clang::FunctionDecl::hasInheritedPrototype	1
+_Bool	clang::FunctionDecl::isConstexpr	1
+enum clang::ConstexprSpecKind	clang::FunctionDecl::getConstexprKind	1
+_Bool	clang::FunctionDecl::isConstexprSpecified	1
+_Bool	clang::FunctionDecl::isConsteval	1
+_Bool	clang::FunctionDecl::BodyContainsImmediateEscalatingExpressions	1
+_Bool	clang::FunctionDecl::isImmediateEscalating	1
+_Bool	clang::FunctionDecl::isImmediateFunction	1
+_Bool	clang::FunctionDecl::instantiationIsPending	1
+_Bool	clang::FunctionDecl::usesSEHTry	1
+_Bool	clang::FunctionDecl::isDeleted	1
+_Bool	clang::FunctionDecl::isDeletedAsWritten	1
+_Bool	clang::FunctionDecl::isMain	1
+_Bool	clang::FunctionDecl::isMSVCRTEntryPoint	1
+_Bool	clang::FunctionDecl::isReservedGlobalPlacementOperator	1
+_Bool	clang::FunctionDecl::isInlineBuiltinDeclaration	1
+_Bool	clang::FunctionDecl::isDestroyingOperatorDelete	1
+enum clang::LanguageLinkage	clang::FunctionDecl::getLanguageLinkage	1
+_Bool	clang::FunctionDecl::isExternC	1
+_Bool	clang::FunctionDecl::isInExternCContext	1
+_Bool	clang::FunctionDecl::isInExternCXXContext	1
+_Bool	clang::FunctionDecl::isGlobal	1
+_Bool	clang::FunctionDecl::isNoReturn	1
+_Bool	clang::FunctionDecl::hasSkippedBody	1
+_Bool	clang::FunctionDecl::willHaveBody	1
+_Bool	clang::FunctionDecl::isMultiVersion	1
+_Bool	clang::FunctionDecl::FriendConstraintRefersToEnclosingTemplate	1
+_Bool	clang::FunctionDecl::isMemberLikeConstrainedFriend	1
+enum clang::MultiVersionKind	clang::FunctionDecl::getMultiVersionKind	1
+_Bool	clang::FunctionDecl::isCPUDispatchMultiVersion	1
+_Bool	clang::FunctionDecl::isCPUSpecificMultiVersion	1
+_Bool	clang::FunctionDecl::isTargetMultiVersion	1
+_Bool	clang::FunctionDecl::isTargetClonesMultiVersion	1
+const class clang::FunctionDecl *	clang::FunctionDecl::getCanonicalDecl	1
+class llvm::ArrayRef<class clang::ParmVarDecl *>	clang::FunctionDecl::parameters	1
+_Bool	clang::FunctionDecl::param_empty	1
+class clang::ParmVarDecl *const *	clang::FunctionDecl::param_begin	0
+class clang::ParmVarDecl *const *	clang::FunctionDecl::param_end	0
+unsigned long	clang::FunctionDecl::param_size	1
+unsigned int	clang::FunctionDecl::getNumParams	1
+unsigned int	clang::FunctionDecl::getMinRequiredArguments	1
+_Bool	clang::FunctionDecl::hasOneParamOrDefaultArgs	1
+class clang::FunctionTypeLoc	clang::FunctionDecl::getFunctionTypeLoc	1
+class clang::QualType	clang::FunctionDecl::getReturnType	1
+class clang::SourceRange	clang::FunctionDecl::getReturnTypeSourceRange	1
+class clang::SourceRange	clang::FunctionDecl::getParametersSourceRange	1
+class clang::QualType	clang::FunctionDecl::getDeclaredReturnType	1
+enum clang::ExceptionSpecificationType	clang::FunctionDecl::getExceptionSpecType	1
+class clang::SourceRange	clang::FunctionDecl::getExceptionSpecSourceRange	1
+class clang::QualType	clang::FunctionDecl::getCallResultType	1
+enum clang::StorageClass	clang::FunctionDecl::getStorageClass	1
+_Bool	clang::FunctionDecl::isInlineSpecified	1
+_Bool	clang::FunctionDecl::UsesFPIntrin	1
+_Bool	clang::FunctionDecl::isInlined	1
+_Bool	clang::FunctionDecl::isInlineDefinitionExternallyVisible	1
+_Bool	clang::FunctionDecl::isMSExternInline	1
+_Bool	clang::FunctionDecl::doesDeclarationForceExternallyVisibleDefinition	1
+_Bool	clang::FunctionDecl::isStatic	1
+_Bool	clang::FunctionDecl::isOverloadedOperator	1
+enum clang::OverloadedOperatorKind	clang::FunctionDecl::getOverloadedOperator	1
+const class clang::IdentifierInfo *	clang::FunctionDecl::getLiteralIdentifier	1
+class clang::FunctionDecl *	clang::FunctionDecl::getInstantiatedFromMemberFunction	1
+enum clang::FunctionDecl::TemplatedKind	clang::FunctionDecl::getTemplatedKind	1
+class clang::MemberSpecializationInfo *	clang::FunctionDecl::getMemberSpecializationInfo	1
+class clang::FunctionDecl *	clang::FunctionDecl::getInstantiatedFromDecl	1
+class clang::FunctionTemplateDecl *	clang::FunctionDecl::getDescribedFunctionTemplate	1
+_Bool	clang::FunctionDecl::isFunctionTemplateSpecialization	1
+class clang::FunctionTemplateSpecializationInfo *	clang::FunctionDecl::getTemplateSpecializationInfo	1
+_Bool	clang::FunctionDecl::isImplicitlyInstantiable	1
+_Bool	clang::FunctionDecl::isTemplateInstantiation	1
+class clang::FunctionTemplateDecl *	clang::FunctionDecl::getPrimaryTemplate	1
+const class clang::TemplateArgumentList *	clang::FunctionDecl::getTemplateSpecializationArgs	1
+const struct clang::ASTTemplateArgumentListInfo *	clang::FunctionDecl::getTemplateSpecializationArgsAsWritten	1
+class clang::DependentFunctionTemplateSpecializationInfo *	clang::FunctionDecl::getDependentSpecializationInfo	1
+enum clang::TemplateSpecializationKind	clang::FunctionDecl::getTemplateSpecializationKind	1
+enum clang::TemplateSpecializationKind	clang::FunctionDecl::getTemplateSpecializationKindForInstantiation	1
+class clang::SourceLocation	clang::FunctionDecl::getPointOfInstantiation	1
+_Bool	clang::FunctionDecl::isOutOfLine	1
+unsigned int	clang::FunctionDecl::getMemoryFunctionKind	1
+unsigned int	clang::FunctionDecl::getODRHash	1
+class clang::CXXMethodDecl *	clang::ClassScopeFunctionSpecializationDecl::getSpecialization	1
+_Bool	clang::ClassScopeFunctionSpecializationDecl::hasExplicitTemplateArgs	1
+const struct clang::ASTTemplateArgumentListInfo *	clang::ClassScopeFunctionSpecializationDecl::getTemplateArgsAsWritten	1
+class clang::SourceLocation	clang::SEHLeaveStmt::getLeaveLoc	1
+class clang::SourceLocation	clang::SEHLeaveStmt::getBeginLoc	1
+class clang::SourceLocation	clang::SEHLeaveStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::SEHLeaveStmt::children	1
+const class clang::RedeclarableTemplateDecl *	clang::RedeclarableTemplateDecl::getCanonicalDecl	1
+_Bool	clang::RedeclarableTemplateDecl::isMemberSpecialization	1
+class clang::RedeclarableTemplateDecl *	clang::RedeclarableTemplateDecl::getInstantiatedFromMemberTemplate	1
+class clang::Expr *	clang::TypeOfExprTypeLoc::getUnderlyingExpr	1
+class clang::SourceRange	clang::TypeOfExprTypeLoc::getLocalSourceRange	1
+_Bool	clang::DependentBitIntType::isUnsigned	1
+_Bool	clang::DependentBitIntType::isSigned	1
+class clang::Expr *	clang::DependentBitIntType::getNumBitsExpr	1
+_Bool	clang::DependentBitIntType::isSugared	1
+class clang::QualType	clang::DependentBitIntType::desugar	1
+enum clang::CastKind	clang::CastExpr::getCastKind	1
+const char *	clang::CastExpr::getCastKindName	1
+const class clang::Expr *	clang::CastExpr::getSubExpr	1
+const class clang::Expr *	clang::CastExpr::getSubExprAsWritten	1
+class clang::NamedDecl *	clang::CastExpr::getConversionFunction	1
+_Bool	clang::CastExpr::path_empty	1
+unsigned int	clang::CastExpr::path_size	1
+const class clang::CXXBaseSpecifier *const *	clang::CastExpr::path_begin	0
+const class clang::CXXBaseSpecifier *const *	clang::CastExpr::path_end	0
+class llvm::iterator_range<const class clang::CXXBaseSpecifier *const *>	clang::CastExpr::path	1
+const class clang::FieldDecl *	clang::CastExpr::getTargetUnionField	1
+_Bool	clang::CastExpr::hasStoredFPFeatures	1
+class clang::FPOptionsOverride	clang::CastExpr::getStoredFPFeatures	1
+class clang::FPOptionsOverride	clang::CastExpr::getFPFeatures	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CastExpr::children	1
+class clang::SourceLocation	clang::BinaryOperator::getExprLoc	1
+class clang::SourceLocation	clang::BinaryOperator::getOperatorLoc	1
+enum clang::BinaryOperatorKind	clang::BinaryOperator::getOpcode	1
+class clang::Expr *	clang::BinaryOperator::getLHS	1
+class clang::Expr *	clang::BinaryOperator::getRHS	1
+class clang::SourceLocation	clang::BinaryOperator::getBeginLoc	1
+class clang::SourceLocation	clang::BinaryOperator::getEndLoc	1
+class llvm::StringRef	clang::BinaryOperator::getOpcodeStr	1
+_Bool	clang::BinaryOperator::isPtrMemOp	1
+_Bool	clang::BinaryOperator::isMultiplicativeOp	1
+_Bool	clang::BinaryOperator::isAdditiveOp	1
+_Bool	clang::BinaryOperator::isShiftOp	1
+_Bool	clang::BinaryOperator::isBitwiseOp	1
+_Bool	clang::BinaryOperator::isRelationalOp	1
+_Bool	clang::BinaryOperator::isEqualityOp	1
+_Bool	clang::BinaryOperator::isComparisonOp	1
+_Bool	clang::BinaryOperator::isCommaOp	1
+_Bool	clang::BinaryOperator::isLogicalOp	1
+_Bool	clang::BinaryOperator::isAssignmentOp	1
+_Bool	clang::BinaryOperator::isCompoundAssignmentOp	1
+_Bool	clang::BinaryOperator::isShiftAssignOp	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::BinaryOperator::children	1
+_Bool	clang::BinaryOperator::hasStoredFPFeatures	1
+class clang::FPOptionsOverride	clang::BinaryOperator::getStoredFPFeatures	1
+class clang::FPOptionsOverride	clang::BinaryOperator::getFPFeatures	1
+unsigned int	clang::ConstantMatrixType::getNumRows	1
+unsigned int	clang::ConstantMatrixType::getNumColumns	1
+unsigned int	clang::ConstantMatrixType::getNumElementsFlattened	1
+enum clang::UnaryExprOrTypeTrait	clang::UnaryExprOrTypeTraitExpr::getKind	1
+_Bool	clang::UnaryExprOrTypeTraitExpr::isArgumentType	1
+class clang::QualType	clang::UnaryExprOrTypeTraitExpr::getArgumentType	1
+class clang::TypeSourceInfo *	clang::UnaryExprOrTypeTraitExpr::getArgumentTypeInfo	1
+const class clang::Expr *	clang::UnaryExprOrTypeTraitExpr::getArgumentExpr	1
+class clang::QualType	clang::UnaryExprOrTypeTraitExpr::getTypeOfArgument	1
+class clang::SourceLocation	clang::UnaryExprOrTypeTraitExpr::getOperatorLoc	1
+class clang::SourceLocation	clang::UnaryExprOrTypeTraitExpr::getRParenLoc	1
+class clang::SourceLocation	clang::UnaryExprOrTypeTraitExpr::getBeginLoc	1
+class clang::SourceLocation	clang::UnaryExprOrTypeTraitExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::UnaryExprOrTypeTraitExpr::children	1
+_Bool	clang::TemplateTypeParmDecl::wasDeclaredWithTypename	1
+const class clang::DefaultArgStorage<class clang::TemplateTypeParmDecl, class clang::TypeSourceInfo *> &	clang::TemplateTypeParmDecl::getDefaultArgStorage	1
+_Bool	clang::TemplateTypeParmDecl::hasDefaultArgument	1
+class clang::QualType	clang::TemplateTypeParmDecl::getDefaultArgument	1
+class clang::TypeSourceInfo *	clang::TemplateTypeParmDecl::getDefaultArgumentInfo	1
+class clang::SourceLocation	clang::TemplateTypeParmDecl::getDefaultArgumentLoc	1
+_Bool	clang::TemplateTypeParmDecl::defaultArgumentWasInherited	1
+unsigned int	clang::TemplateTypeParmDecl::getDepth	1
+unsigned int	clang::TemplateTypeParmDecl::getIndex	1
+_Bool	clang::TemplateTypeParmDecl::isParameterPack	1
+_Bool	clang::TemplateTypeParmDecl::isPackExpansion	1
+_Bool	clang::TemplateTypeParmDecl::isExpandedParameterPack	1
+unsigned int	clang::TemplateTypeParmDecl::getNumExpansionParameters	1
+const class clang::TypeConstraint *	clang::TemplateTypeParmDecl::getTypeConstraint	1
+_Bool	clang::TemplateTypeParmDecl::hasTypeConstraint	1
+class clang::SourceRange	clang::TemplateTypeParmDecl::getSourceRange	1
+class clang::TypeLoc	clang::AtomicTypeLoc::getValueLoc	1
+class clang::SourceRange	clang::AtomicTypeLoc::getLocalSourceRange	1
+class clang::SourceLocation	clang::AtomicTypeLoc::getKWLoc	1
+class clang::SourceLocation	clang::AtomicTypeLoc::getLParenLoc	1
+class clang::SourceLocation	clang::AtomicTypeLoc::getRParenLoc	1
+class clang::SourceRange	clang::AtomicTypeLoc::getParensRange	1
+class clang::QualType	clang::AtomicTypeLoc::getInnerType	1
+class llvm::ArrayRef<class clang::TemplateArgument>	clang::ImplicitConceptSpecializationDecl::getTemplateArguments	1
+unsigned int	clang::TemplateTypeParmType::getDepth	1
+unsigned int	clang::TemplateTypeParmType::getIndex	1
+_Bool	clang::TemplateTypeParmType::isParameterPack	1
+class clang::TemplateTypeParmDecl *	clang::TemplateTypeParmType::getDecl	1
+class clang::IdentifierInfo *	clang::TemplateTypeParmType::getIdentifier	1
+_Bool	clang::TemplateTypeParmType::isSugared	1
+class clang::QualType	clang::TemplateTypeParmType::desugar	1
+class llvm::iterator_range<class clang::BaseUsingDecl::shadow_iterator>	clang::BaseUsingDecl::shadows	1
+class clang::BaseUsingDecl::shadow_iterator	clang::BaseUsingDecl::shadow_begin	0
+class clang::BaseUsingDecl::shadow_iterator	clang::BaseUsingDecl::shadow_end	0
+unsigned int	clang::BaseUsingDecl::shadow_size	1
+class clang::SourceRange	clang::VarDecl::getSourceRange	1
+enum clang::StorageClass	clang::VarDecl::getStorageClass	1
+enum clang::ThreadStorageClassSpecifier	clang::VarDecl::getTSCSpec	1
+enum clang::VarDecl::TLSKind	clang::VarDecl::getTLSKind	1
+_Bool	clang::VarDecl::hasLocalStorage	1
+_Bool	clang::VarDecl::isStaticLocal	1
+_Bool	clang::VarDecl::hasExternalStorage	1
+_Bool	clang::VarDecl::hasGlobalStorage	1
+enum clang::StorageDuration	clang::VarDecl::getStorageDuration	1
+enum clang::LanguageLinkage	clang::VarDecl::getLanguageLinkage	1
+_Bool	clang::VarDecl::isExternC	1
+_Bool	clang::VarDecl::isInExternCContext	1
+_Bool	clang::VarDecl::isInExternCXXContext	1
+_Bool	clang::VarDecl::isLocalVarDecl	1
+_Bool	clang::VarDecl::isLocalVarDeclOrParm	1
+_Bool	clang::VarDecl::isFunctionOrMethodVarDecl	1
+_Bool	clang::VarDecl::isStaticDataMember	1
+const class clang::VarDecl *	clang::VarDecl::getCanonicalDecl	1
+enum clang::VarDecl::DefinitionKind	clang::VarDecl::isThisDeclarationADefinition	1
+enum clang::VarDecl::DefinitionKind	clang::VarDecl::hasDefinition	1
+const class clang::VarDecl *	clang::VarDecl::getActingDefinition	1
+const class clang::VarDecl *	clang::VarDecl::getDefinition	1
+_Bool	clang::VarDecl::isOutOfLine	1
+_Bool	clang::VarDecl::isFileVarDecl	1
+const class clang::Expr *	clang::VarDecl::getAnyInitializer	1
+_Bool	clang::VarDecl::hasInit	1
+const class clang::Expr *	clang::VarDecl::getInit	1
+const class clang::VarDecl *	clang::VarDecl::getInitializingDeclaration	1
+struct clang::EvaluatedStmt *	clang::VarDecl::ensureEvaluatedStmt	1
+struct clang::EvaluatedStmt *	clang::VarDecl::getEvaluatedStmt	1
+class clang::APValue *	clang::VarDecl::evaluateValue	1
+class clang::APValue *	clang::VarDecl::getEvaluatedValue	1
+_Bool	clang::VarDecl::hasConstantInitialization	1
+enum clang::VarDecl::InitializationStyle	clang::VarDecl::getInitStyle	1
+_Bool	clang::VarDecl::isDirectInit	1
+_Bool	clang::VarDecl::isThisDeclarationADemotedDefinition	1
+_Bool	clang::VarDecl::isExceptionVariable	1
+_Bool	clang::VarDecl::isNRVOVariable	1
+_Bool	clang::VarDecl::isCXXForRangeDecl	1
+_Bool	clang::VarDecl::isObjCForDecl	1
+_Bool	clang::VarDecl::isARCPseudoStrong	1
+_Bool	clang::VarDecl::isInline	1
+_Bool	clang::VarDecl::isInlineSpecified	1
+_Bool	clang::VarDecl::isConstexpr	1
+_Bool	clang::VarDecl::isInitCapture	1
+_Bool	clang::VarDecl::isParameterPack	1
+_Bool	clang::VarDecl::isPreviousDeclInSameBlockScope	1
+_Bool	clang::VarDecl::isEscapingByref	1
+_Bool	clang::VarDecl::isNonEscapingByref	1
+_Bool	clang::VarDecl::hasDependentAlignment	1
+class clang::VarDecl *	clang::VarDecl::getTemplateInstantiationPattern	1
+class clang::VarDecl *	clang::VarDecl::getInstantiatedFromStaticDataMember	1
+enum clang::TemplateSpecializationKind	clang::VarDecl::getTemplateSpecializationKind	1
+enum clang::TemplateSpecializationKind	clang::VarDecl::getTemplateSpecializationKindForInstantiation	1
+class clang::SourceLocation	clang::VarDecl::getPointOfInstantiation	1
+class clang::MemberSpecializationInfo *	clang::VarDecl::getMemberSpecializationInfo	1
+class clang::VarTemplateDecl *	clang::VarDecl::getDescribedVarTemplate	1
+_Bool	clang::VarDecl::isKnownToBeDefined	1
+class clang::SourceRange	clang::BuiltinTemplateDecl::getSourceRange	1
+enum clang::BuiltinTemplateKind	clang::BuiltinTemplateDecl::getBuiltinTemplateKind	1
+class clang::SourceLocation	clang::AsmStmt::getAsmLoc	1
+_Bool	clang::AsmStmt::isSimple	1
+_Bool	clang::AsmStmt::isVolatile	1
+class clang::SourceLocation	clang::AsmStmt::getBeginLoc	1
+class clang::SourceLocation	clang::AsmStmt::getEndLoc	1
+unsigned int	clang::AsmStmt::getNumOutputs	1
+unsigned int	clang::AsmStmt::getNumPlusOperands	1
+unsigned int	clang::AsmStmt::getNumInputs	1
+unsigned int	clang::AsmStmt::getNumClobbers	1
+struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const>	clang::AsmStmt::begin_inputs	0
+struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const>	clang::AsmStmt::end_inputs	0
+class llvm::iterator_range<struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const> >	clang::AsmStmt::inputs	1
+struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const>	clang::AsmStmt::begin_outputs	0
+struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const>	clang::AsmStmt::end_outputs	0
+class llvm::iterator_range<struct clang::Stmt::CastIterator<class clang::Expr, const class clang::Expr *const, const class clang::Stmt *const> >	clang::AsmStmt::outputs	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::AsmStmt::children	1
+class clang::Expr *	clang::DependentAddressSpaceType::getAddrSpaceExpr	1
+class clang::QualType	clang::DependentAddressSpaceType::getPointeeType	1
+class clang::SourceLocation	clang::DependentAddressSpaceType::getAttributeLoc	1
+_Bool	clang::DependentAddressSpaceType::isSugared	1
+class clang::QualType	clang::DependentAddressSpaceType::desugar	1
+class clang::SourceLocation	clang::BuiltinBitCastExpr::getBeginLoc	1
+class clang::SourceLocation	clang::BuiltinBitCastExpr::getEndLoc	1
+class clang::TypeSourceInfo *	clang::DeclaratorDecl::getTypeSourceInfo	1
+class clang::SourceLocation	clang::DeclaratorDecl::getInnerLocStart	1
+class clang::SourceLocation	clang::DeclaratorDecl::getOuterLocStart	1
+class clang::SourceRange	clang::DeclaratorDecl::getSourceRange	1
+class clang::SourceLocation	clang::DeclaratorDecl::getBeginLoc	1
+class clang::NestedNameSpecifier *	clang::DeclaratorDecl::getQualifier	1
+class clang::NestedNameSpecifierLoc	clang::DeclaratorDecl::getQualifierLoc	1
+const class clang::Expr *	clang::DeclaratorDecl::getTrailingRequiresClause	1
+unsigned int	clang::DeclaratorDecl::getNumTemplateParameterLists	1
+class clang::SourceLocation	clang::DeclaratorDecl::getTypeSpecStartLoc	1
+class clang::SourceLocation	clang::DeclaratorDecl::getTypeSpecEndLoc	1
+class clang::Expr *	clang::MemberExpr::getBase	1
+class clang::ValueDecl *	clang::MemberExpr::getMemberDecl	1
+class clang::DeclAccessPair	clang::MemberExpr::getFoundDecl	1
+_Bool	clang::MemberExpr::hasQualifier	1
+class clang::NestedNameSpecifierLoc	clang::MemberExpr::getQualifierLoc	1
+class clang::NestedNameSpecifier *	clang::MemberExpr::getQualifier	1
+class clang::SourceLocation	clang::MemberExpr::getTemplateKeywordLoc	1
+class clang::SourceLocation	clang::MemberExpr::getLAngleLoc	1
+class clang::SourceLocation	clang::MemberExpr::getRAngleLoc	1
+_Bool	clang::MemberExpr::hasTemplateKeyword	1
+_Bool	clang::MemberExpr::hasExplicitTemplateArgs	1
+const class clang::TemplateArgumentLoc *	clang::MemberExpr::getTemplateArgs	1
+unsigned int	clang::MemberExpr::getNumTemplateArgs	1
+class llvm::ArrayRef<class clang::TemplateArgumentLoc>	clang::MemberExpr::template_arguments	1
+struct clang::DeclarationNameInfo	clang::MemberExpr::getMemberNameInfo	0
+class clang::SourceLocation	clang::MemberExpr::getOperatorLoc	1
+_Bool	clang::MemberExpr::isArrow	1
+class clang::SourceLocation	clang::MemberExpr::getMemberLoc	1
+class clang::SourceLocation	clang::MemberExpr::getBeginLoc	1
+class clang::SourceLocation	clang::MemberExpr::getEndLoc	1
+class clang::SourceLocation	clang::MemberExpr::getExprLoc	1
+_Bool	clang::MemberExpr::isImplicitAccess	1
+_Bool	clang::MemberExpr::hadMultipleCandidates	1
+enum clang::NonOdrUseReason	clang::MemberExpr::isNonOdrUse	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::MemberExpr::children	1
+class clang::SourceLocation	clang::GCCAsmStmt::getRParenLoc	1
+const class clang::StringLiteral *	clang::GCCAsmStmt::getAsmString	1
+_Bool	clang::GCCAsmStmt::isAsmGoto	1
+unsigned int	clang::GCCAsmStmt::getNumLabels	1
+struct clang::Stmt::CastIterator<class clang::AddrLabelExpr, const class clang::AddrLabelExpr *const, const class clang::Stmt *const>	clang::GCCAsmStmt::begin_labels	0
+struct clang::Stmt::CastIterator<class clang::AddrLabelExpr, const class clang::AddrLabelExpr *const, const class clang::Stmt *const>	clang::GCCAsmStmt::end_labels	0
+class llvm::iterator_range<struct clang::Stmt::CastIterator<class clang::AddrLabelExpr, const class clang::AddrLabelExpr *const, const class clang::Stmt *const> >	clang::GCCAsmStmt::labels	1
+class clang::SourceLocation	clang::GCCAsmStmt::getBeginLoc	1
+class clang::SourceLocation	clang::GCCAsmStmt::getEndLoc	1
+_Bool	clang::TypedefNameDecl::isModed	1
+class clang::TypeSourceInfo *	clang::TypedefNameDecl::getTypeSourceInfo	1
+class clang::QualType	clang::TypedefNameDecl::getUnderlyingType	1
+const class clang::TypedefNameDecl *	clang::TypedefNameDecl::getCanonicalDecl	1
+_Bool	clang::TypedefNameDecl::isTransparentTag	1
+class clang::SourceLocation	clang::UsingDecl::getUsingLoc	1
+class clang::NestedNameSpecifierLoc	clang::UsingDecl::getQualifierLoc	1
+class clang::NestedNameSpecifier *	clang::UsingDecl::getQualifier	1
+struct clang::DeclarationNameInfo	clang::UsingDecl::getNameInfo	0
+_Bool	clang::UsingDecl::isAccessDeclaration	1
+_Bool	clang::UsingDecl::hasTypename	1
+class clang::SourceRange	clang::UsingDecl::getSourceRange	1
+const class clang::UsingDecl *	clang::UsingDecl::getCanonicalDecl	1
+class clang::UnresolvedUsingTypenameDecl *	clang::UnresolvedUsingTypeLoc::getDecl	1
+const class clang::UsingShadowDecl *	clang::UsingShadowDecl::getCanonicalDecl	1
+class clang::NamedDecl *	clang::UsingShadowDecl::getTargetDecl	1
+class clang::BaseUsingDecl *	clang::UsingShadowDecl::getIntroducer	1
+class clang::UsingShadowDecl *	clang::UsingShadowDecl::getNextUsingShadowDecl	1
+class clang::TypeSourceInfo *	clang::FriendDecl::getFriendType	1
+unsigned int	clang::FriendDecl::getFriendTypeNumTemplateParameterLists	1
+class clang::NamedDecl *	clang::FriendDecl::getFriendDecl	1
+class clang::SourceLocation	clang::FriendDecl::getFriendLoc	1
+class clang::SourceRange	clang::FriendDecl::getSourceRange	1
+_Bool	clang::FriendDecl::isUnsupportedFriend	1
+_Bool	clang::SwitchStmt::hasInitStorage	1
+_Bool	clang::SwitchStmt::hasVarStorage	1
+const class clang::Expr *	clang::SwitchStmt::getCond	1
+const class clang::Stmt *	clang::SwitchStmt::getBody	1
+const class clang::Stmt *	clang::SwitchStmt::getInit	1
+const class clang::VarDecl *	clang::SwitchStmt::getConditionVariable	1
+const class clang::DeclStmt *	clang::SwitchStmt::getConditionVariableDeclStmt	1
+const class clang::SwitchCase *	clang::SwitchStmt::getSwitchCaseList	1
+class clang::SourceLocation	clang::SwitchStmt::getSwitchLoc	1
+class clang::SourceLocation	clang::SwitchStmt::getLParenLoc	1
+class clang::SourceLocation	clang::SwitchStmt::getRParenLoc	1
+_Bool	clang::SwitchStmt::isAllEnumCasesCovered	1
+class clang::SourceLocation	clang::SwitchStmt::getBeginLoc	1
+class clang::SourceLocation	clang::SwitchStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::SwitchStmt::children	1
+class clang::SourceLocation	clang::AddrLabelExpr::getAmpAmpLoc	1
+class clang::SourceLocation	clang::AddrLabelExpr::getLabelLoc	1
+class clang::SourceLocation	clang::AddrLabelExpr::getBeginLoc	1
+class clang::SourceLocation	clang::AddrLabelExpr::getEndLoc	1
+class clang::LabelDecl *	clang::AddrLabelExpr::getLabel	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::AddrLabelExpr::children	1
+const class clang::SwitchCase *	clang::SwitchCase::getNextSwitchCase	1
+class clang::SourceLocation	clang::SwitchCase::getKeywordLoc	1
+class clang::SourceLocation	clang::SwitchCase::getColonLoc	1
+const class clang::Stmt *	clang::SwitchCase::getSubStmt	1
+class clang::SourceLocation	clang::SwitchCase::getBeginLoc	1
+class clang::SourceLocation	clang::SwitchCase::getEndLoc	1
+class clang::QualType	clang::PipeType::getElementType	1
+_Bool	clang::PipeType::isSugared	1
+class clang::QualType	clang::PipeType::desugar	1
+_Bool	clang::PipeType::isReadOnly	1
+class clang::LabelDecl *	clang::GotoStmt::getLabel	1
+class clang::SourceLocation	clang::GotoStmt::getGotoLoc	1
+class clang::SourceLocation	clang::GotoStmt::getLabelLoc	1
+class clang::SourceLocation	clang::GotoStmt::getBeginLoc	1
+class clang::SourceLocation	clang::GotoStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::GotoStmt::children	1
+class clang::VarDecl *	clang::FunctionParmPackExpr::getParameterPack	1
+class clang::SourceLocation	clang::FunctionParmPackExpr::getParameterPackLocation	1
+class clang::VarDecl *const *	clang::FunctionParmPackExpr::begin	0
+class clang::VarDecl *const *	clang::FunctionParmPackExpr::end	0
+unsigned int	clang::FunctionParmPackExpr::getNumExpansions	1
+class clang::SourceLocation	clang::FunctionParmPackExpr::getBeginLoc	1
+class clang::SourceLocation	clang::FunctionParmPackExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::FunctionParmPackExpr::children	1
+class clang::RecordDecl *	clang::RecordType::getDecl	1
+_Bool	clang::RecordType::hasConstFields	1
+_Bool	clang::RecordType::isSugared	1
+class clang::QualType	clang::RecordType::desugar	1
+_Bool	clang::FunctionNoProtoType::isSugared	1
+class clang::QualType	clang::FunctionNoProtoType::desugar	1
+enum clang::ElaboratedTypeKeyword	clang::TypeWithKeyword::getKeyword	1
+class llvm::ArrayRef<class clang::TemplateArgument>	clang::AutoType::getTypeConstraintArguments	1
+class clang::ConceptDecl *	clang::AutoType::getTypeConstraintConcept	1
+_Bool	clang::AutoType::isConstrained	1
+_Bool	clang::AutoType::isDecltypeAuto	1
+_Bool	clang::AutoType::isGNUAutoType	1
+enum clang::AutoTypeKeyword	clang::AutoType::getKeyword	1
+class clang::Expr *	clang::DependentSizedArrayType::getSizeExpr	1
+class clang::SourceRange	clang::DependentSizedArrayType::getBracketsRange	1
+class clang::SourceLocation	clang::DependentSizedArrayType::getLBracketLoc	1
+class clang::SourceLocation	clang::DependentSizedArrayType::getRBracketLoc	1
+_Bool	clang::DependentSizedArrayType::isSugared	1
+class clang::QualType	clang::DependentSizedArrayType::desugar	1
+class clang::Module *	clang::ImportDecl::getImportedModule	0
+class llvm::ArrayRef<class clang::SourceLocation>	clang::ImportDecl::getIdentifierLocs	1
+class clang::SourceRange	clang::ImportDecl::getSourceRange	1
+class clang::SourceLocation	clang::CXXTryStmt::getBeginLoc	1
+class clang::SourceLocation	clang::CXXTryStmt::getTryLoc	1
+class clang::SourceLocation	clang::CXXTryStmt::getEndLoc	1
+const class clang::CompoundStmt *	clang::CXXTryStmt::getTryBlock	1
+unsigned int	clang::CXXTryStmt::getNumHandlers	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXTryStmt::children	1
+class clang::QualType	clang::AdjustedType::getOriginalType	1
+class clang::QualType	clang::AdjustedType::getAdjustedType	1
+_Bool	clang::AdjustedType::isSugared	1
+class clang::QualType	clang::AdjustedType::desugar	1
+class clang::TypeLoc	clang::MacroQualifiedTypeLoc::getInnerLoc	1
+const class clang::IdentifierInfo *	clang::MacroQualifiedTypeLoc::getMacroIdentifier	1
+class clang::SourceLocation	clang::MacroQualifiedTypeLoc::getExpansionLoc	1
+class clang::QualType	clang::MacroQualifiedTypeLoc::getInnerType	1
+class clang::SourceRange	clang::MacroQualifiedTypeLoc::getLocalSourceRange	1
+class clang::RecordDecl *	clang::RecordTypeLoc::getDecl	1
+class clang::SourceLocation	clang::UnresolvedUsingTypenameDecl::getUsingLoc	1
+class clang::SourceLocation	clang::UnresolvedUsingTypenameDecl::getTypenameLoc	1
+class clang::NestedNameSpecifierLoc	clang::UnresolvedUsingTypenameDecl::getQualifierLoc	1
+class clang::NestedNameSpecifier *	clang::UnresolvedUsingTypenameDecl::getQualifier	1
+struct clang::DeclarationNameInfo	clang::UnresolvedUsingTypenameDecl::getNameInfo	0
+_Bool	clang::UnresolvedUsingTypenameDecl::isPackExpansion	1
+class clang::SourceLocation	clang::UnresolvedUsingTypenameDecl::getEllipsisLoc	1
+const class clang::UnresolvedUsingTypenameDecl *	clang::UnresolvedUsingTypenameDecl::getCanonicalDecl	1
+class clang::VarTemplateDecl *	clang::VarTemplateSpecializationDecl::getSpecializedTemplate	1
+const class clang::TemplateArgumentList &	clang::VarTemplateSpecializationDecl::getTemplateArgs	1
+const struct clang::ASTTemplateArgumentListInfo *	clang::VarTemplateSpecializationDecl::getTemplateArgsInfo	1
+enum clang::TemplateSpecializationKind	clang::VarTemplateSpecializationDecl::getSpecializationKind	1
+_Bool	clang::VarTemplateSpecializationDecl::isExplicitSpecialization	1
+_Bool	clang::VarTemplateSpecializationDecl::isClassScopeExplicitSpecialization	1
+_Bool	clang::VarTemplateSpecializationDecl::isExplicitInstantiationOrSpecialization	1
+class clang::SourceLocation	clang::VarTemplateSpecializationDecl::getPointOfInstantiation	1
+class llvm::PointerUnion<class clang::VarTemplateDecl *, class clang::VarTemplatePartialSpecializationDecl *>	clang::VarTemplateSpecializationDecl::getInstantiatedFrom	1
+class llvm::PointerUnion<class clang::VarTemplateDecl *, class clang::VarTemplatePartialSpecializationDecl *>	clang::VarTemplateSpecializationDecl::getSpecializedTemplateOrPartial	1
+const class clang::TemplateArgumentList &	clang::VarTemplateSpecializationDecl::getTemplateInstantiationArgs	1
+class clang::TypeSourceInfo *	clang::VarTemplateSpecializationDecl::getTypeAsWritten	1
+class clang::SourceLocation	clang::VarTemplateSpecializationDecl::getExternLoc	1
+class clang::SourceLocation	clang::VarTemplateSpecializationDecl::getTemplateKeywordLoc	1
+class clang::SourceRange	clang::VarTemplateSpecializationDecl::getSourceRange	1
+class clang::QualType	clang::TypeOfType::getUnmodifiedType	1
+class clang::QualType	clang::TypeOfType::desugar	1
+_Bool	clang::TypeOfType::isSugared	1
+enum clang::TypeOfKind	clang::TypeOfType::getKind	1
+class llvm::ArrayRef<class clang::TemplateArgument>	clang::ConceptSpecializationExpr::getTemplateArguments	1
+const class clang::ImplicitConceptSpecializationDecl *	clang::ConceptSpecializationExpr::getSpecializationDecl	1
+_Bool	clang::ConceptSpecializationExpr::isSatisfied	1
+const struct clang::ASTConstraintSatisfaction &	clang::ConceptSpecializationExpr::getSatisfaction	1
+class clang::SourceLocation	clang::ConceptSpecializationExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ConceptSpecializationExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ConceptSpecializationExpr::children	1
+class clang::TemplateParameterList *	clang::TemplateDecl::getTemplateParameters	1
+_Bool	clang::TemplateDecl::hasAssociatedConstraints	1
+class clang::NamedDecl *	clang::TemplateDecl::getTemplatedDecl	1
+_Bool	clang::TemplateDecl::isTypeAlias	1
+class clang::SourceRange	clang::TemplateDecl::getSourceRange	1
+class clang::QualType	clang::PackExpansionType::getPattern	1
+class std::optional<unsigned int>	clang::PackExpansionType::getNumExpansions	1
+_Bool	clang::PackExpansionType::isSugared	1
+class clang::QualType	clang::PackExpansionType::desugar	1
+class clang::ASTContext &	clang::TranslationUnitDecl::getASTContext	0
+class clang::NamespaceDecl *	clang::TranslationUnitDecl::getAnonymousNamespace	1
+class clang::TypeLoc	clang::PipeTypeLoc::getValueLoc	1
+class clang::SourceRange	clang::PipeTypeLoc::getLocalSourceRange	1
+class clang::SourceLocation	clang::PipeTypeLoc::getKWLoc	1
+class clang::QualType	clang::PipeTypeLoc::getInnerType	1
+enum clang::UnaryOperatorKind	clang::UnaryOperator::getOpcode	1
+class clang::Expr *	clang::UnaryOperator::getSubExpr	1
+class clang::SourceLocation	clang::UnaryOperator::getOperatorLoc	1
+_Bool	clang::UnaryOperator::canOverflow	1
+_Bool	clang::UnaryOperator::isPrefix	1
+_Bool	clang::UnaryOperator::isPostfix	1
+_Bool	clang::UnaryOperator::isIncrementOp	1
+_Bool	clang::UnaryOperator::isDecrementOp	1
+_Bool	clang::UnaryOperator::isIncrementDecrementOp	1
+_Bool	clang::UnaryOperator::isArithmeticOp	1
+class clang::SourceLocation	clang::UnaryOperator::getBeginLoc	1
+class clang::SourceLocation	clang::UnaryOperator::getEndLoc	1
+class clang::SourceLocation	clang::UnaryOperator::getExprLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::UnaryOperator::children	1
+_Bool	clang::UnaryOperator::hasStoredFPFeatures	1
+class clang::FPOptionsOverride	clang::UnaryOperator::getStoredFPFeatures	1
+class clang::FPOptionsOverride	clang::UnaryOperator::getFPOptionsOverride	1
+class clang::QualType	clang::BlockPointerType::getPointeeType	1
+_Bool	clang::BlockPointerType::isSugared	1
+class clang::QualType	clang::BlockPointerType::desugar	1
+const class clang::ExplicitSpecifier	clang::CXXConstructorDecl::getExplicitSpecifier	1
+_Bool	clang::CXXConstructorDecl::isExplicit	1
+class llvm::iterator_range<class clang::CXXCtorInitializer *const *>	clang::CXXConstructorDecl::inits	1
+class clang::CXXCtorInitializer *const *	clang::CXXConstructorDecl::init_begin	0
+class clang::CXXCtorInitializer *const *	clang::CXXConstructorDecl::init_end	0
+class std::reverse_iterator<class clang::CXXCtorInitializer *const *>	clang::CXXConstructorDecl::init_rbegin	0
+class std::reverse_iterator<class clang::CXXCtorInitializer *const *>	clang::CXXConstructorDecl::init_rend	0
+unsigned int	clang::CXXConstructorDecl::getNumCtorInitializers	1
+_Bool	clang::CXXConstructorDecl::isDelegatingConstructor	1
+class clang::CXXConstructorDecl *	clang::CXXConstructorDecl::getTargetConstructor	1
+_Bool	clang::CXXConstructorDecl::isDefaultConstructor	1
+_Bool	clang::CXXConstructorDecl::isCopyConstructor	1
+_Bool	clang::CXXConstructorDecl::isMoveConstructor	1
+_Bool	clang::CXXConstructorDecl::isCopyOrMoveConstructor	1
+_Bool	clang::CXXConstructorDecl::isSpecializationCopyingObject	1
+_Bool	clang::CXXConstructorDecl::isInheritingConstructor	1
+class clang::InheritedConstructor	clang::CXXConstructorDecl::getInheritedConstructor	1
+const class clang::CXXConstructorDecl *	clang::CXXConstructorDecl::getCanonicalDecl	1
+_Bool	clang::ReferenceType::isSpelledAsLValue	1
+_Bool	clang::ReferenceType::isInnerRef	1
+class clang::QualType	clang::ReferenceType::getPointeeTypeAsWritten	1
+class clang::QualType	clang::ReferenceType::getPointeeType	1
+class clang::SourceLocation	clang::PointerTypeLoc::getStarLoc	1
+class clang::TypeSourceInfo *	clang::CXXScalarValueInitExpr::getTypeSourceInfo	1
+class clang::SourceLocation	clang::CXXScalarValueInitExpr::getRParenLoc	1
+class clang::SourceLocation	clang::CXXScalarValueInitExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXScalarValueInitExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXScalarValueInitExpr::children	1
+class clang::SourceRange	clang::HLSLBufferDecl::getSourceRange	1
+class clang::SourceLocation	clang::HLSLBufferDecl::getLocStart	1
+class clang::SourceLocation	clang::HLSLBufferDecl::getLBraceLoc	1
+class clang::SourceLocation	clang::HLSLBufferDecl::getRBraceLoc	1
+_Bool	clang::HLSLBufferDecl::isCBuffer	1
+enum clang::TypeLoc::TypeLocClass	clang::TypeLoc::getTypeLocClass	1
+_Bool	clang::TypeLoc::isNull	1
+class clang::QualType	clang::TypeLoc::getType	1
+const class clang::Type *	clang::TypeLoc::getTypePtr	1
+void *	clang::TypeLoc::getOpaqueData	0
+class clang::SourceLocation	clang::TypeLoc::getBeginLoc	1
+class clang::SourceLocation	clang::TypeLoc::getEndLoc	1
+class clang::SourceRange	clang::TypeLoc::getSourceRange	1
+class clang::SourceRange	clang::TypeLoc::getLocalSourceRange	1
+unsigned int	clang::TypeLoc::getFullDataSize	1
+class clang::TypeLoc	clang::TypeLoc::getNextTypeLoc	1
+class clang::UnqualTypeLoc	clang::TypeLoc::getUnqualifiedLoc	1
+class clang::TypeLoc	clang::TypeLoc::IgnoreParens	1
+class clang::TypeLoc	clang::TypeLoc::findExplicitQualifierLoc	1
+class clang::AutoTypeLoc	clang::TypeLoc::getContainedAutoTypeLoc	1
+class clang::SourceLocation	clang::TypeLoc::findNullabilityLoc	1
+class llvm::ArrayRef<const class clang::Expr *>	clang::RecoveryExpr::subExpressions	1
+class clang::SourceLocation	clang::RecoveryExpr::getBeginLoc	1
+class clang::SourceLocation	clang::RecoveryExpr::getEndLoc	1
+const class clang::Expr *	clang::ParenExpr::getSubExpr	1
+class clang::SourceLocation	clang::ParenExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ParenExpr::getEndLoc	1
+class clang::SourceLocation	clang::ParenExpr::getLParen	1
+class clang::SourceLocation	clang::ParenExpr::getRParen	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ParenExpr::children	1
+class clang::SourceLocation	clang::LabelStmt::getIdentLoc	1
+class clang::LabelDecl *	clang::LabelStmt::getDecl	1
+const char *	clang::LabelStmt::getName	1
+const class clang::Stmt *	clang::LabelStmt::getSubStmt	1
+class clang::SourceLocation	clang::LabelStmt::getBeginLoc	1
+class clang::SourceLocation	clang::LabelStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::LabelStmt::children	1
+_Bool	clang::LabelStmt::isSideEntry	1
+class clang::SourceLocation	clang::TypeSpecTypeLoc::getNameLoc	1
+class clang::SourceRange	clang::TypeSpecTypeLoc::getLocalSourceRange	1
+class clang::SourceLocation	clang::RValueReferenceTypeLoc::getAmpAmpLoc	1
+const struct clang::DeclarationNameInfo &	clang::DependentScopeDeclRefExpr::getNameInfo	1
+class clang::DeclarationName	clang::DependentScopeDeclRefExpr::getDeclName	1
+class clang::SourceLocation	clang::DependentScopeDeclRefExpr::getLocation	1
+class clang::NestedNameSpecifierLoc	clang::DependentScopeDeclRefExpr::getQualifierLoc	1
+class clang::NestedNameSpecifier *	clang::DependentScopeDeclRefExpr::getQualifier	1
+class clang::SourceLocation	clang::DependentScopeDeclRefExpr::getTemplateKeywordLoc	1
+class clang::SourceLocation	clang::DependentScopeDeclRefExpr::getLAngleLoc	1
+class clang::SourceLocation	clang::DependentScopeDeclRefExpr::getRAngleLoc	1
+_Bool	clang::DependentScopeDeclRefExpr::hasTemplateKeyword	1
+_Bool	clang::DependentScopeDeclRefExpr::hasExplicitTemplateArgs	1
+const class clang::TemplateArgumentLoc *	clang::DependentScopeDeclRefExpr::getTemplateArgs	1
+unsigned int	clang::DependentScopeDeclRefExpr::getNumTemplateArgs	1
+class llvm::ArrayRef<class clang::TemplateArgumentLoc>	clang::DependentScopeDeclRefExpr::template_arguments	1
+class clang::SourceLocation	clang::DependentScopeDeclRefExpr::getBeginLoc	1
+class clang::SourceLocation	clang::DependentScopeDeclRefExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::DependentScopeDeclRefExpr::children	1
+const class clang::CXXRecordDecl *	clang::CXXRecordDecl::getCanonicalDecl	1
+const class clang::CXXRecordDecl *	clang::CXXRecordDecl::getPreviousDecl	1
+const class clang::CXXRecordDecl *	clang::CXXRecordDecl::getMostRecentDecl	1
+const class clang::CXXRecordDecl *	clang::CXXRecordDecl::getMostRecentNonInjectedDecl	1
+class clang::CXXRecordDecl *	clang::CXXRecordDecl::getDefinition	1
+_Bool	clang::CXXRecordDecl::hasDefinition	1
+_Bool	clang::CXXRecordDecl::isDynamicClass	1
+_Bool	clang::CXXRecordDecl::mayBeDynamicClass	1
+_Bool	clang::CXXRecordDecl::mayBeNonDynamicClass	1
+_Bool	clang::CXXRecordDecl::isParsingBaseSpecifiers	1
+unsigned int	clang::CXXRecordDecl::getODRHash	1
+unsigned int	clang::CXXRecordDecl::getNumBases	1
+class llvm::iterator_range<const class clang::CXXBaseSpecifier *>	clang::CXXRecordDecl::bases	1
+const class clang::CXXBaseSpecifier *	clang::CXXRecordDecl::bases_begin	0
+const class clang::CXXBaseSpecifier *	clang::CXXRecordDecl::bases_end	0
+unsigned int	clang::CXXRecordDecl::getNumVBases	1
+class llvm::iterator_range<const class clang::CXXBaseSpecifier *>	clang::CXXRecordDecl::vbases	1
+const class clang::CXXBaseSpecifier *	clang::CXXRecordDecl::vbases_begin	0
+const class clang::CXXBaseSpecifier *	clang::CXXRecordDecl::vbases_end	0
+_Bool	clang::CXXRecordDecl::hasAnyDependentBases	1
+class llvm::iterator_range<class clang::DeclContext::specific_decl_iterator<class clang::CXXMethodDecl> >	clang::CXXRecordDecl::methods	1
+class clang::DeclContext::specific_decl_iterator<class clang::CXXMethodDecl>	clang::CXXRecordDecl::method_begin	0
+class clang::DeclContext::specific_decl_iterator<class clang::CXXMethodDecl>	clang::CXXRecordDecl::method_end	0
+class llvm::iterator_range<class clang::DeclContext::specific_decl_iterator<class clang::CXXConstructorDecl> >	clang::CXXRecordDecl::ctors	1
+class clang::DeclContext::specific_decl_iterator<class clang::CXXConstructorDecl>	clang::CXXRecordDecl::ctor_begin	0
+class clang::DeclContext::specific_decl_iterator<class clang::CXXConstructorDecl>	clang::CXXRecordDecl::ctor_end	0
+class llvm::iterator_range<class clang::CXXRecordDecl::friend_iterator>	clang::CXXRecordDecl::friends	1
+class clang::CXXRecordDecl::friend_iterator	clang::CXXRecordDecl::friend_begin	0
+class clang::CXXRecordDecl::friend_iterator	clang::CXXRecordDecl::friend_end	0
+_Bool	clang::CXXRecordDecl::hasFriends	1
+_Bool	clang::CXXRecordDecl::defaultedCopyConstructorIsDeleted	1
+_Bool	clang::CXXRecordDecl::defaultedMoveConstructorIsDeleted	1
+_Bool	clang::CXXRecordDecl::defaultedDestructorIsDeleted	1
+_Bool	clang::CXXRecordDecl::hasSimpleCopyConstructor	1
+_Bool	clang::CXXRecordDecl::hasSimpleMoveConstructor	1
+_Bool	clang::CXXRecordDecl::hasSimpleCopyAssignment	1
+_Bool	clang::CXXRecordDecl::hasSimpleMoveAssignment	1
+_Bool	clang::CXXRecordDecl::hasSimpleDestructor	1
+_Bool	clang::CXXRecordDecl::hasDefaultConstructor	1
+_Bool	clang::CXXRecordDecl::needsImplicitDefaultConstructor	1
+_Bool	clang::CXXRecordDecl::hasUserDeclaredConstructor	1
+_Bool	clang::CXXRecordDecl::hasUserProvidedDefaultConstructor	1
+_Bool	clang::CXXRecordDecl::hasUserDeclaredCopyConstructor	1
+_Bool	clang::CXXRecordDecl::needsImplicitCopyConstructor	1
+_Bool	clang::CXXRecordDecl::needsOverloadResolutionForCopyConstructor	1
+_Bool	clang::CXXRecordDecl::implicitCopyConstructorHasConstParam	1
+_Bool	clang::CXXRecordDecl::hasCopyConstructorWithConstParam	1
+_Bool	clang::CXXRecordDecl::hasUserDeclaredMoveOperation	1
+_Bool	clang::CXXRecordDecl::hasUserDeclaredMoveConstructor	1
+_Bool	clang::CXXRecordDecl::hasMoveConstructor	1
+_Bool	clang::CXXRecordDecl::needsImplicitMoveConstructor	1
+_Bool	clang::CXXRecordDecl::needsOverloadResolutionForMoveConstructor	1
+_Bool	clang::CXXRecordDecl::hasUserDeclaredCopyAssignment	1
+_Bool	clang::CXXRecordDecl::needsImplicitCopyAssignment	1
+_Bool	clang::CXXRecordDecl::needsOverloadResolutionForCopyAssignment	1
+_Bool	clang::CXXRecordDecl::implicitCopyAssignmentHasConstParam	1
+_Bool	clang::CXXRecordDecl::hasCopyAssignmentWithConstParam	1
+_Bool	clang::CXXRecordDecl::hasUserDeclaredMoveAssignment	1
+_Bool	clang::CXXRecordDecl::hasMoveAssignment	1
+_Bool	clang::CXXRecordDecl::needsImplicitMoveAssignment	1
+_Bool	clang::CXXRecordDecl::needsOverloadResolutionForMoveAssignment	1
+_Bool	clang::CXXRecordDecl::hasUserDeclaredDestructor	1
+_Bool	clang::CXXRecordDecl::needsImplicitDestructor	1
+_Bool	clang::CXXRecordDecl::needsOverloadResolutionForDestructor	1
+_Bool	clang::CXXRecordDecl::isLambda	1
+_Bool	clang::CXXRecordDecl::isGenericLambda	1
+_Bool	clang::CXXRecordDecl::lambdaIsDefaultConstructibleAndAssignable	1
+class clang::CXXMethodDecl *	clang::CXXRecordDecl::getLambdaCallOperator	1
+class clang::FunctionTemplateDecl *	clang::CXXRecordDecl::getDependentLambdaCallOperator	1
+class clang::CXXMethodDecl *	clang::CXXRecordDecl::getLambdaStaticInvoker	1
+class clang::TemplateParameterList *	clang::CXXRecordDecl::getGenericLambdaTemplateParameterList	1
+class llvm::ArrayRef<class clang::NamedDecl *>	clang::CXXRecordDecl::getLambdaExplicitTemplateParameters	1
+enum clang::LambdaCaptureDefault	clang::CXXRecordDecl::getLambdaCaptureDefault	0
+class llvm::iterator_range<const class clang::LambdaCapture *>	clang::CXXRecordDecl::captures	1
+const class clang::LambdaCapture *	clang::CXXRecordDecl::captures_begin	0
+const class clang::LambdaCapture *	clang::CXXRecordDecl::captures_end	0
+unsigned int	clang::CXXRecordDecl::capture_size	1
+class clang::UnresolvedSetIterator	clang::CXXRecordDecl::conversion_begin	0
+class clang::UnresolvedSetIterator	clang::CXXRecordDecl::conversion_end	0
+class llvm::iterator_range<class clang::UnresolvedSetIterator>	clang::CXXRecordDecl::getVisibleConversionFunctions	1
+_Bool	clang::CXXRecordDecl::isAggregate	1
+_Bool	clang::CXXRecordDecl::hasInClassInitializer	1
+_Bool	clang::CXXRecordDecl::hasUninitializedReferenceMember	1
+_Bool	clang::CXXRecordDecl::isPOD	1
+_Bool	clang::CXXRecordDecl::isCLike	1
+_Bool	clang::CXXRecordDecl::isEmpty	1
+_Bool	clang::CXXRecordDecl::hasInitMethod	1
+_Bool	clang::CXXRecordDecl::hasPrivateFields	1
+_Bool	clang::CXXRecordDecl::hasProtectedFields	1
+_Bool	clang::CXXRecordDecl::hasDirectFields	1
+_Bool	clang::CXXRecordDecl::isPolymorphic	1
+_Bool	clang::CXXRecordDecl::isAbstract	1
+_Bool	clang::CXXRecordDecl::isStandardLayout	1
+_Bool	clang::CXXRecordDecl::isCXX11StandardLayout	1
+_Bool	clang::CXXRecordDecl::hasMutableFields	1
+_Bool	clang::CXXRecordDecl::hasVariantMembers	1
+_Bool	clang::CXXRecordDecl::hasTrivialDefaultConstructor	1
+_Bool	clang::CXXRecordDecl::hasNonTrivialDefaultConstructor	1
+_Bool	clang::CXXRecordDecl::hasConstexprNonCopyMoveConstructor	1
+_Bool	clang::CXXRecordDecl::defaultedDefaultConstructorIsConstexpr	1
+_Bool	clang::CXXRecordDecl::hasConstexprDefaultConstructor	1
+_Bool	clang::CXXRecordDecl::hasTrivialCopyConstructor	1
+_Bool	clang::CXXRecordDecl::hasTrivialCopyConstructorForCall	1
+_Bool	clang::CXXRecordDecl::hasNonTrivialCopyConstructor	1
+_Bool	clang::CXXRecordDecl::hasNonTrivialCopyConstructorForCall	1
+_Bool	clang::CXXRecordDecl::hasTrivialMoveConstructor	1
+_Bool	clang::CXXRecordDecl::hasTrivialMoveConstructorForCall	1
+_Bool	clang::CXXRecordDecl::hasNonTrivialMoveConstructor	1
+_Bool	clang::CXXRecordDecl::hasNonTrivialMoveConstructorForCall	1
+_Bool	clang::CXXRecordDecl::hasTrivialCopyAssignment	1
+_Bool	clang::CXXRecordDecl::hasNonTrivialCopyAssignment	1
+_Bool	clang::CXXRecordDecl::hasTrivialMoveAssignment	1
+_Bool	clang::CXXRecordDecl::hasNonTrivialMoveAssignment	1
+_Bool	clang::CXXRecordDecl::defaultedDestructorIsConstexpr	1
+_Bool	clang::CXXRecordDecl::hasConstexprDestructor	1
+_Bool	clang::CXXRecordDecl::hasTrivialDestructor	1
+_Bool	clang::CXXRecordDecl::hasTrivialDestructorForCall	1
+_Bool	clang::CXXRecordDecl::hasNonTrivialDestructor	1
+_Bool	clang::CXXRecordDecl::hasNonTrivialDestructorForCall	1
+_Bool	clang::CXXRecordDecl::allowConstDefaultInit	1
+_Bool	clang::CXXRecordDecl::hasIrrelevantDestructor	1
+_Bool	clang::CXXRecordDecl::hasNonLiteralTypeFieldsOrBases	1
+_Bool	clang::CXXRecordDecl::hasInheritedConstructor	1
+_Bool	clang::CXXRecordDecl::hasInheritedAssignment	1
+_Bool	clang::CXXRecordDecl::isTriviallyCopyable	1
+_Bool	clang::CXXRecordDecl::isTrivial	1
+_Bool	clang::CXXRecordDecl::isLiteral	1
+_Bool	clang::CXXRecordDecl::isStructural	1
+class clang::CXXRecordDecl *	clang::CXXRecordDecl::getInstantiatedFromMemberClass	1
+class clang::MemberSpecializationInfo *	clang::CXXRecordDecl::getMemberSpecializationInfo	1
+class clang::ClassTemplateDecl *	clang::CXXRecordDecl::getDescribedClassTemplate	1
+enum clang::TemplateSpecializationKind	clang::CXXRecordDecl::getTemplateSpecializationKind	1
+const class clang::CXXRecordDecl *	clang::CXXRecordDecl::getTemplateInstantiationPattern	1
+class clang::CXXDestructorDecl *	clang::CXXRecordDecl::getDestructor	1
+_Bool	clang::CXXRecordDecl::isAnyDestructorNoReturn	1
+const class clang::FunctionDecl *	clang::CXXRecordDecl::isLocalClass	1
+_Bool	clang::CXXRecordDecl::mayBeAbstract	1
+_Bool	clang::CXXRecordDecl::isEffectivelyFinal	1
+unsigned int	clang::CXXRecordDecl::getLambdaManglingNumber	1
+_Bool	clang::CXXRecordDecl::hasKnownLambdaInternalLinkage	1
+class clang::Decl *	clang::CXXRecordDecl::getLambdaContextDecl	1
+unsigned int	clang::CXXRecordDecl::getLambdaIndexInContext	1
+struct clang::CXXRecordDecl::LambdaNumbering	clang::CXXRecordDecl::getLambdaNumbering	1
+unsigned int	clang::CXXRecordDecl::getDeviceLambdaManglingNumber	1
+enum clang::MSInheritanceModel	clang::CXXRecordDecl::getMSInheritanceModel	0
+enum clang::MSInheritanceModel	clang::CXXRecordDecl::calculateInheritanceModel	0
+_Bool	clang::CXXRecordDecl::nullFieldOffsetIsZero	1
+enum clang::MSVtorDispMode	clang::CXXRecordDecl::getMSVtorDispMode	1
+_Bool	clang::CXXRecordDecl::isDependentLambda	1
+_Bool	clang::CXXRecordDecl::isNeverDependentLambda	1
+unsigned int	clang::CXXRecordDecl::getLambdaDependencyKind	1
+class clang::TypeSourceInfo *	clang::CXXRecordDecl::getLambdaTypeInfo	1
+_Bool	clang::CXXRecordDecl::isInterfaceLike	1
+class clang::NestedNameSpecifier *	clang::DependentNameType::getQualifier	1
+const class clang::IdentifierInfo *	clang::DependentNameType::getIdentifier	1
+_Bool	clang::DependentNameType::isSugared	1
+class clang::QualType	clang::DependentNameType::desugar	1
+enum clang::attr::Kind	clang::AttributedType::getAttrKind	1
+class clang::QualType	clang::AttributedType::getModifiedType	1
+class clang::QualType	clang::AttributedType::getEquivalentType	1
+_Bool	clang::AttributedType::isSugared	1
+class clang::QualType	clang::AttributedType::desugar	1
+_Bool	clang::AttributedType::isQualifier	1
+_Bool	clang::AttributedType::isMSTypeSpec	1
+_Bool	clang::AttributedType::isWebAssemblyFuncrefSpec	1
+_Bool	clang::AttributedType::isCallingConv	1
+class std::optional<enum clang::NullabilityKind>	clang::AttributedType::getImmediateNullability	1
+class clang::SourceLocation	clang::SEHFinallyStmt::getBeginLoc	1
+class clang::SourceLocation	clang::SEHFinallyStmt::getFinallyLoc	1
+class clang::SourceLocation	clang::SEHFinallyStmt::getEndLoc	1
+class clang::CompoundStmt *	clang::SEHFinallyStmt::getBlock	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::SEHFinallyStmt::children	1
+_Bool	clang::MatrixSubscriptExpr::isIncomplete	1
+const class clang::Expr *	clang::MatrixSubscriptExpr::getBase	1
+const class clang::Expr *	clang::MatrixSubscriptExpr::getRowIdx	1
+const class clang::Expr *	clang::MatrixSubscriptExpr::getColumnIdx	1
+class clang::SourceLocation	clang::MatrixSubscriptExpr::getBeginLoc	1
+class clang::SourceLocation	clang::MatrixSubscriptExpr::getEndLoc	1
+class clang::SourceLocation	clang::MatrixSubscriptExpr::getExprLoc	1
+class clang::SourceLocation	clang::MatrixSubscriptExpr::getRBracketLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::MatrixSubscriptExpr::children	1
+class clang::SourceLocation	clang::UnaryTransformTypeLoc::getKWLoc	1
+class clang::SourceLocation	clang::UnaryTransformTypeLoc::getLParenLoc	1
+class clang::SourceLocation	clang::UnaryTransformTypeLoc::getRParenLoc	1
+class clang::TypeSourceInfo *	clang::UnaryTransformTypeLoc::getUnderlyingTInfo	1
+class clang::SourceRange	clang::UnaryTransformTypeLoc::getLocalSourceRange	1
+class clang::SourceRange	clang::UnaryTransformTypeLoc::getParensRange	1
+_Bool	clang::IncompleteArrayType::isSugared	1
+class clang::QualType	clang::IncompleteArrayType::desugar	1
+class clang::SourceLocation	clang::AttributedStmt::getAttrLoc	1
+class llvm::ArrayRef<const class clang::Attr *>	clang::AttributedStmt::getAttrs	1
+const class clang::Stmt *	clang::AttributedStmt::getSubStmt	1
+class clang::SourceLocation	clang::AttributedStmt::getBeginLoc	1
+class clang::SourceLocation	clang::AttributedStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::AttributedStmt::children	1
+const class clang::Expr *	clang::FullExpr::getSubExpr	1
+class clang::SourceRange	clang::TypedefDecl::getSourceRange	1
+const class clang::IdentifierInfo *	clang::MacroQualifiedType::getMacroIdentifier	1
+class clang::QualType	clang::MacroQualifiedType::getUnderlyingType	1
+class clang::QualType	clang::MacroQualifiedType::getModifiedType	1
+_Bool	clang::MacroQualifiedType::isSugared	1
+class clang::QualType	clang::MacroQualifiedType::desugar	1
+_Bool	clang::CoawaitExpr::isImplicit	1
+class clang::QualType	clang::UsingTypeLoc::getUnderlyingType	1
+class clang::UsingShadowDecl *	clang::UsingTypeLoc::getFoundDecl	1
+const class clang::EnumDecl *	clang::EnumDecl::getCanonicalDecl	1
+const class clang::EnumDecl *	clang::EnumDecl::getPreviousDecl	1
+const class clang::EnumDecl *	clang::EnumDecl::getMostRecentDecl	1
+class clang::EnumDecl *	clang::EnumDecl::getDefinition	1
+class clang::SourceRange	clang::EnumDecl::getSourceRange	1
+class llvm::iterator_range<class clang::DeclContext::specific_decl_iterator<class clang::EnumConstantDecl> >	clang::EnumDecl::enumerators	1
+class clang::DeclContext::specific_decl_iterator<class clang::EnumConstantDecl>	clang::EnumDecl::enumerator_begin	0
+class clang::DeclContext::specific_decl_iterator<class clang::EnumConstantDecl>	clang::EnumDecl::enumerator_end	0
+class clang::QualType	clang::EnumDecl::getPromotionType	1
+class clang::QualType	clang::EnumDecl::getIntegerType	1
+class clang::TypeSourceInfo *	clang::EnumDecl::getIntegerTypeSourceInfo	1
+class clang::SourceRange	clang::EnumDecl::getIntegerTypeRange	1
+unsigned int	clang::EnumDecl::getNumPositiveBits	1
+unsigned int	clang::EnumDecl::getNumNegativeBits	1
+_Bool	clang::EnumDecl::isScoped	1
+_Bool	clang::EnumDecl::isScopedUsingClassTag	1
+_Bool	clang::EnumDecl::isFixed	1
+_Bool	clang::EnumDecl::isComplete	1
+_Bool	clang::EnumDecl::isClosed	1
+_Bool	clang::EnumDecl::isClosedFlag	1
+_Bool	clang::EnumDecl::isClosedNonFlag	1
+class clang::EnumDecl *	clang::EnumDecl::getTemplateInstantiationPattern	1
+class clang::EnumDecl *	clang::EnumDecl::getInstantiatedFromMemberEnum	1
+enum clang::TemplateSpecializationKind	clang::EnumDecl::getTemplateSpecializationKind	1
+class clang::MemberSpecializationInfo *	clang::EnumDecl::getMemberSpecializationInfo	1
+const class clang::Type *	clang::UnqualTypeLoc::getTypePtr	1
+enum clang::TypeLoc::TypeLocClass	clang::UnqualTypeLoc::getTypeLocClass	1
+class llvm::ArrayRef<class clang::NamedDecl *>	clang::IndirectFieldDecl::chain	1
+class clang::NamedDecl *const *	clang::IndirectFieldDecl::chain_begin	0
+class clang::NamedDecl *const *	clang::IndirectFieldDecl::chain_end	0
+unsigned int	clang::IndirectFieldDecl::getChainingSize	1
+class clang::FieldDecl *	clang::IndirectFieldDecl::getAnonField	1
+class clang::VarDecl *	clang::IndirectFieldDecl::getVarDecl	1
+const class clang::IndirectFieldDecl *	clang::IndirectFieldDecl::getCanonicalDecl	1
+class clang::SourceLocation	clang::GNUNullExpr::getTokenLocation	1
+class clang::SourceLocation	clang::GNUNullExpr::getBeginLoc	1
+class clang::SourceLocation	clang::GNUNullExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::GNUNullExpr::children	1
+class clang::Expr *	clang::MaterializeTemporaryExpr::getSubExpr	1
+enum clang::StorageDuration	clang::MaterializeTemporaryExpr::getStorageDuration	1
+const class clang::LifetimeExtendedTemporaryDecl *	clang::MaterializeTemporaryExpr::getLifetimeExtendedTemporaryDecl	1
+const class clang::ValueDecl *	clang::MaterializeTemporaryExpr::getExtendingDecl	1
+unsigned int	clang::MaterializeTemporaryExpr::getManglingNumber	1
+_Bool	clang::MaterializeTemporaryExpr::isBoundToLvalueReference	1
+class clang::SourceLocation	clang::MaterializeTemporaryExpr::getBeginLoc	1
+class clang::SourceLocation	clang::MaterializeTemporaryExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::MaterializeTemporaryExpr::children	1
+_Bool	clang::LValueReferenceType::isSugared	1
+class clang::QualType	clang::LValueReferenceType::desugar	1
+class clang::SourceLocation	clang::CXXCatchStmt::getBeginLoc	1
+class clang::SourceLocation	clang::CXXCatchStmt::getEndLoc	1
+class clang::SourceLocation	clang::CXXCatchStmt::getCatchLoc	1
+class clang::VarDecl *	clang::CXXCatchStmt::getExceptionDecl	1
+class clang::QualType	clang::CXXCatchStmt::getCaughtType	1
+class clang::Stmt *	clang::CXXCatchStmt::getHandlerBlock	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXCatchStmt::children	1
+class clang::Expr *	clang::TypeOfExprType::getUnderlyingExpr	1
+enum clang::TypeOfKind	clang::TypeOfExprType::getKind	1
+class clang::QualType	clang::TypeOfExprType::desugar	1
+_Bool	clang::TypeOfExprType::isSugared	1
+_Bool	clang::CXXMethodDecl::isStatic	1
+_Bool	clang::CXXMethodDecl::isInstance	1
+_Bool	clang::CXXMethodDecl::isConst	1
+_Bool	clang::CXXMethodDecl::isVolatile	1
+_Bool	clang::CXXMethodDecl::isVirtual	1
+_Bool	clang::CXXMethodDecl::isCopyAssignmentOperator	1
+_Bool	clang::CXXMethodDecl::isMoveAssignmentOperator	1
+const class clang::CXXMethodDecl *	clang::CXXMethodDecl::getCanonicalDecl	1
+const class clang::CXXMethodDecl *	clang::CXXMethodDecl::getMostRecentDecl	1
+const class clang::CXXMethodDecl *const *	clang::CXXMethodDecl::begin_overridden_methods	0
+const class clang::CXXMethodDecl *const *	clang::CXXMethodDecl::end_overridden_methods	0
+unsigned int	clang::CXXMethodDecl::size_overridden_methods	1
+class llvm::iterator_range<const class clang::CXXMethodDecl *const *>	clang::CXXMethodDecl::overridden_methods	1
+const class clang::CXXRecordDecl *	clang::CXXMethodDecl::getParent	1
+class clang::QualType	clang::CXXMethodDecl::getThisType	1
+class clang::QualType	clang::CXXMethodDecl::getThisObjectType	1
+class clang::Qualifiers	clang::CXXMethodDecl::getMethodQualifiers	1
+enum clang::RefQualifierKind	clang::CXXMethodDecl::getRefQualifier	1
+_Bool	clang::CXXMethodDecl::hasInlineBody	1
+_Bool	clang::CXXMethodDecl::isLambdaStaticInvoker	1
+class clang::SourceLocation	clang::CharacterLiteral::getLocation	1
+enum clang::CharacterLiteral::CharacterKind	clang::CharacterLiteral::getKind	1
+class clang::SourceLocation	clang::CharacterLiteral::getBeginLoc	1
+class clang::SourceLocation	clang::CharacterLiteral::getEndLoc	1
+unsigned int	clang::CharacterLiteral::getValue	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CharacterLiteral::children	1
+_Bool	clang::CXXDependentScopeMemberExpr::isImplicitAccess	1
+class clang::Expr *	clang::CXXDependentScopeMemberExpr::getBase	1
+class clang::QualType	clang::CXXDependentScopeMemberExpr::getBaseType	1
+_Bool	clang::CXXDependentScopeMemberExpr::isArrow	1
+class clang::SourceLocation	clang::CXXDependentScopeMemberExpr::getOperatorLoc	1
+class clang::NestedNameSpecifier *	clang::CXXDependentScopeMemberExpr::getQualifier	1
+class clang::NestedNameSpecifierLoc	clang::CXXDependentScopeMemberExpr::getQualifierLoc	1
+class clang::NamedDecl *	clang::CXXDependentScopeMemberExpr::getFirstQualifierFoundInScope	1
+const struct clang::DeclarationNameInfo &	clang::CXXDependentScopeMemberExpr::getMemberNameInfo	1
+class clang::DeclarationName	clang::CXXDependentScopeMemberExpr::getMember	1
+class clang::SourceLocation	clang::CXXDependentScopeMemberExpr::getMemberLoc	1
+class clang::SourceLocation	clang::CXXDependentScopeMemberExpr::getTemplateKeywordLoc	1
+class clang::SourceLocation	clang::CXXDependentScopeMemberExpr::getLAngleLoc	1
+class clang::SourceLocation	clang::CXXDependentScopeMemberExpr::getRAngleLoc	1
+_Bool	clang::CXXDependentScopeMemberExpr::hasTemplateKeyword	1
+_Bool	clang::CXXDependentScopeMemberExpr::hasExplicitTemplateArgs	1
+const class clang::TemplateArgumentLoc *	clang::CXXDependentScopeMemberExpr::getTemplateArgs	1
+unsigned int	clang::CXXDependentScopeMemberExpr::getNumTemplateArgs	1
+class llvm::ArrayRef<class clang::TemplateArgumentLoc>	clang::CXXDependentScopeMemberExpr::template_arguments	1
+class clang::SourceLocation	clang::CXXDependentScopeMemberExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXDependentScopeMemberExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXDependentScopeMemberExpr::children	1
+class clang::SourceLocation	clang::DependentVectorTypeLoc::getNameLoc	1
+class clang::SourceRange	clang::DependentVectorTypeLoc::getLocalSourceRange	1
+class clang::TypeLoc	clang::DependentVectorTypeLoc::getElementLoc	1
+class clang::QualType	clang::DependentVectorTypeLoc::getInnerType	1
+const class clang::APValue &	clang::TemplateParamObjectDecl::getValue	1
+const class clang::TemplateParamObjectDecl *	clang::TemplateParamObjectDecl::getCanonicalDecl	1
+class llvm::ArrayRef<class llvm::PointerUnion<class clang::BlockDecl *, class clang::CompoundLiteralExpr *> >	clang::ExprWithCleanups::getObjects	1
+unsigned int	clang::ExprWithCleanups::getNumObjects	1
+_Bool	clang::ExprWithCleanups::cleanupsHaveSideEffects	1
+class clang::SourceLocation	clang::ExprWithCleanups::getBeginLoc	1
+class clang::SourceLocation	clang::ExprWithCleanups::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ExprWithCleanups::children	1
+class clang::TypeAliasDecl *	clang::TypeAliasTemplateDecl::getTemplatedDecl	1
+const class clang::TypeAliasTemplateDecl *	clang::TypeAliasTemplateDecl::getCanonicalDecl	1
+const class clang::TypeAliasTemplateDecl *	clang::TypeAliasTemplateDecl::getPreviousDecl	1
+class clang::TypeAliasTemplateDecl *	clang::TypeAliasTemplateDecl::getInstantiatedFromMemberTemplate	1
+class clang::UsingShadowDecl *	clang::UsingType::getFoundDecl	1
+class clang::QualType	clang::UsingType::getUnderlyingType	1
+_Bool	clang::UsingType::isSugared	1
+class clang::QualType	clang::UsingType::desugar	1
+_Bool	clang::UsingType::typeMatchesDecl	1
+class llvm::ArrayRef<class clang::BindingDecl *>	clang::DecompositionDecl::bindings	1
+class clang::TemplateName	clang::DeducedTemplateSpecializationType::getTemplateName	1
+const class clang::Stmt *	clang::DefaultStmt::getSubStmt	1
+class clang::SourceLocation	clang::DefaultStmt::getDefaultLoc	1
+class clang::SourceLocation	clang::DefaultStmt::getBeginLoc	1
+class clang::SourceLocation	clang::DefaultStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::DefaultStmt::children	1
+_Bool	clang::MSPropertyDecl::hasGetter	1
+class clang::IdentifierInfo *	clang::MSPropertyDecl::getGetterId	1
+_Bool	clang::MSPropertyDecl::hasSetter	1
+class clang::IdentifierInfo *	clang::MSPropertyDecl::getSetterId	1
+const class clang::RecordDecl *	clang::RecordDecl::getPreviousDecl	1
+const class clang::RecordDecl *	clang::RecordDecl::getMostRecentDecl	1
+_Bool	clang::RecordDecl::hasFlexibleArrayMember	1
+_Bool	clang::RecordDecl::isAnonymousStructOrUnion	1
+_Bool	clang::RecordDecl::hasObjectMember	1
+_Bool	clang::RecordDecl::hasVolatileMember	1
+_Bool	clang::RecordDecl::hasLoadedFieldsFromExternalStorage	1
+_Bool	clang::RecordDecl::isNonTrivialToPrimitiveDefaultInitialize	1
+_Bool	clang::RecordDecl::isNonTrivialToPrimitiveCopy	1
+_Bool	clang::RecordDecl::isNonTrivialToPrimitiveDestroy	1
+_Bool	clang::RecordDecl::hasNonTrivialToPrimitiveDefaultInitializeCUnion	1
+_Bool	clang::RecordDecl::hasNonTrivialToPrimitiveDestructCUnion	1
+_Bool	clang::RecordDecl::hasNonTrivialToPrimitiveCopyCUnion	1
+_Bool	clang::RecordDecl::canPassInRegisters	1
+enum clang::RecordDecl::ArgPassingKind	clang::RecordDecl::getArgPassingRestrictions	1
+_Bool	clang::RecordDecl::isParamDestroyedInCallee	1
+_Bool	clang::RecordDecl::isRandomized	1
+_Bool	clang::RecordDecl::isInjectedClassName	1
+_Bool	clang::RecordDecl::isLambda	1
+_Bool	clang::RecordDecl::isCapturedRecord	1
+class clang::RecordDecl *	clang::RecordDecl::getDefinition	1
+_Bool	clang::RecordDecl::isOrContainsUnion	1
+class llvm::iterator_range<class clang::DeclContext::specific_decl_iterator<class clang::FieldDecl> >	clang::RecordDecl::fields	1
+class clang::DeclContext::specific_decl_iterator<class clang::FieldDecl>	clang::RecordDecl::field_begin	0
+class clang::DeclContext::specific_decl_iterator<class clang::FieldDecl>	clang::RecordDecl::field_end	0
+_Bool	clang::RecordDecl::field_empty	1
+const class clang::FieldDecl *	clang::RecordDecl::findFirstNamedDataMember	1
+class clang::SourceLocation	clang::ImplicitValueInitExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ImplicitValueInitExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ImplicitValueInitExpr::children	1
+class clang::SourceLocation	clang::DependentAddressSpaceTypeLoc::getAttrNameLoc	1
+class clang::Expr *	clang::DependentAddressSpaceTypeLoc::getAttrExprOperand	1
+class clang::SourceRange	clang::DependentAddressSpaceTypeLoc::getAttrOperandParensRange	1
+class clang::SourceRange	clang::DependentAddressSpaceTypeLoc::getLocalSourceRange	1
+class clang::QualType	clang::DependentAddressSpaceTypeLoc::getInnerType	1
+class clang::TypeLoc	clang::DependentAddressSpaceTypeLoc::getPointeeTypeLoc	1
+_Bool	clang::CXXBoolLiteralExpr::getValue	1
+class clang::SourceLocation	clang::CXXBoolLiteralExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXBoolLiteralExpr::getEndLoc	1
+class clang::SourceLocation	clang::CXXBoolLiteralExpr::getLocation	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXBoolLiteralExpr::children	1
+class clang::TypeLoc	clang::BTFTagAttributedTypeLoc::getWrappedLoc	1
+const class clang::BTFTypeTagAttr *	clang::BTFTagAttributedTypeLoc::getAttr	1
+class clang::SourceRange	clang::BTFTagAttributedTypeLoc::getLocalSourceRange	1
+class clang::QualType	clang::BTFTagAttributedTypeLoc::getInnerType	1
+class clang::Expr *	clang::VariableArrayType::getSizeExpr	1
+class clang::SourceRange	clang::VariableArrayType::getBracketsRange	1
+class clang::SourceLocation	clang::VariableArrayType::getLBracketLoc	1
+class clang::SourceLocation	clang::VariableArrayType::getRBracketLoc	1
+_Bool	clang::VariableArrayType::isSugared	1
+class clang::QualType	clang::VariableArrayType::desugar	1
+class clang::QualType	clang::TypeOfTypeLoc::getUnmodifiedType	1
+class clang::TypeSourceInfo *	clang::TypeOfTypeLoc::getUnmodifiedTInfo	1
+class clang::QualType	clang::InjectedClassNameType::getInjectedSpecializationType	1
+const class clang::TemplateSpecializationType *	clang::InjectedClassNameType::getInjectedTST	1
+class clang::TemplateName	clang::InjectedClassNameType::getTemplateName	1
+class clang::CXXRecordDecl *	clang::InjectedClassNameType::getDecl	1
+_Bool	clang::InjectedClassNameType::isSugared	1
+class clang::QualType	clang::InjectedClassNameType::desugar	1
+class clang::Expr *	clang::ConvertVectorExpr::getSrcExpr	1
+class clang::TypeSourceInfo *	clang::ConvertVectorExpr::getTypeSourceInfo	1
+class clang::SourceLocation	clang::ConvertVectorExpr::getBuiltinLoc	1
+class clang::SourceLocation	clang::ConvertVectorExpr::getRParenLoc	1
+class clang::SourceLocation	clang::ConvertVectorExpr::getBeginLoc	1
+class clang::SourceLocation	clang::ConvertVectorExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::ConvertVectorExpr::children	1
+class clang::ClassTemplateDecl *	clang::ClassTemplateSpecializationDecl::getSpecializedTemplate	1
+const class clang::TemplateArgumentList &	clang::ClassTemplateSpecializationDecl::getTemplateArgs	1
+enum clang::TemplateSpecializationKind	clang::ClassTemplateSpecializationDecl::getSpecializationKind	1
+_Bool	clang::ClassTemplateSpecializationDecl::isExplicitSpecialization	1
+_Bool	clang::ClassTemplateSpecializationDecl::isClassScopeExplicitSpecialization	1
+_Bool	clang::ClassTemplateSpecializationDecl::isExplicitInstantiationOrSpecialization	1
+class clang::SourceLocation	clang::ClassTemplateSpecializationDecl::getPointOfInstantiation	1
+class llvm::PointerUnion<class clang::ClassTemplateDecl *, class clang::ClassTemplatePartialSpecializationDecl *>	clang::ClassTemplateSpecializationDecl::getInstantiatedFrom	1
+class llvm::PointerUnion<class clang::ClassTemplateDecl *, class clang::ClassTemplatePartialSpecializationDecl *>	clang::ClassTemplateSpecializationDecl::getSpecializedTemplateOrPartial	1
+const class clang::TemplateArgumentList &	clang::ClassTemplateSpecializationDecl::getTemplateInstantiationArgs	1
+class clang::TypeSourceInfo *	clang::ClassTemplateSpecializationDecl::getTypeAsWritten	1
+class clang::SourceLocation	clang::ClassTemplateSpecializationDecl::getExternLoc	1
+class clang::SourceLocation	clang::ClassTemplateSpecializationDecl::getTemplateKeywordLoc	1
+class clang::SourceRange	clang::ClassTemplateSpecializationDecl::getSourceRange	1
+_Bool	clang::BitIntType::isUnsigned	1
+_Bool	clang::BitIntType::isSigned	1
+unsigned int	clang::BitIntType::getNumBits	1
+_Bool	clang::BitIntType::isSugared	1
+class clang::QualType	clang::BitIntType::desugar	1
+class clang::QualType	clang::ReferenceTypeLoc::getInnerType	1
+_Bool	clang::NamespaceDecl::isAnonymousNamespace	1
+_Bool	clang::NamespaceDecl::isInline	1
+_Bool	clang::NamespaceDecl::isNested	1
+const class clang::NamespaceDecl *	clang::NamespaceDecl::getOriginalNamespace	1
+_Bool	clang::NamespaceDecl::isOriginalNamespace	1
+class clang::NamespaceDecl *	clang::NamespaceDecl::getAnonymousNamespace	1
+const class clang::NamespaceDecl *	clang::NamespaceDecl::getCanonicalDecl	1
+class clang::SourceRange	clang::NamespaceDecl::getSourceRange	1
+class clang::SourceLocation	clang::NamespaceDecl::getBeginLoc	1
+class clang::SourceLocation	clang::NamespaceDecl::getRBraceLoc	1
+class clang::SourceRange	clang::TagDecl::getBraceRange	1
+class clang::SourceLocation	clang::TagDecl::getInnerLocStart	1
+class clang::SourceLocation	clang::TagDecl::getOuterLocStart	1
+class clang::SourceRange	clang::TagDecl::getSourceRange	1
+const class clang::TagDecl *	clang::TagDecl::getCanonicalDecl	1
+_Bool	clang::TagDecl::isThisDeclarationADefinition	1
+_Bool	clang::TagDecl::isCompleteDefinition	1
+_Bool	clang::TagDecl::isCompleteDefinitionRequired	1
+_Bool	clang::TagDecl::isBeingDefined	1
+_Bool	clang::TagDecl::isEmbeddedInDeclarator	1
+_Bool	clang::TagDecl::isFreeStanding	1
+_Bool	clang::TagDecl::mayHaveOutOfDateDef	1
+_Bool	clang::TagDecl::isDependentType	1
+_Bool	clang::TagDecl::isThisDeclarationADemotedDefinition	1
+class clang::TagDecl *	clang::TagDecl::getDefinition	1
+class llvm::StringRef	clang::TagDecl::getKindName	1
+enum clang::TagTypeKind	clang::TagDecl::getTagKind	1
+_Bool	clang::TagDecl::isStruct	1
+_Bool	clang::TagDecl::isInterface	1
+_Bool	clang::TagDecl::isClass	1
+_Bool	clang::TagDecl::isUnion	1
+_Bool	clang::TagDecl::isEnum	1
+_Bool	clang::TagDecl::hasNameForLinkage	1
+class clang::TypedefNameDecl *	clang::TagDecl::getTypedefNameForAnonDecl	1
+class clang::NestedNameSpecifier *	clang::TagDecl::getQualifier	1
+class clang::NestedNameSpecifierLoc	clang::TagDecl::getQualifierLoc	1
+unsigned int	clang::TagDecl::getNumTemplateParameterLists	1
+class clang::QualType	clang::MatrixType::getElementType	1
+_Bool	clang::MatrixType::isSugared	1
+class clang::QualType	clang::MatrixType::desugar	1
+struct clang::MSGuidDeclParts	clang::MSGuidDecl::getParts	0
+class clang::APValue &	clang::MSGuidDecl::getAsAPValue	1
+class clang::SourceLocation	clang::MemberPointerTypeLoc::getStarLoc	1
+const class clang::Type *	clang::MemberPointerTypeLoc::getClass	1
+class clang::TypeSourceInfo *	clang::MemberPointerTypeLoc::getClassTInfo	1
+class clang::SourceRange	clang::MemberPointerTypeLoc::getLocalSourceRange	1
+const class llvm::ArrayRef<class clang::Expr *>	clang::CXXParenListInitExpr::getInitExprs	1
+const class llvm::ArrayRef<class clang::Expr *>	clang::CXXParenListInitExpr::getUserSpecifiedInitExprs	1
+class clang::SourceLocation	clang::CXXParenListInitExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXParenListInitExpr::getEndLoc	1
+class clang::SourceLocation	clang::CXXParenListInitExpr::getInitLoc	1
+class clang::SourceRange	clang::CXXParenListInitExpr::getSourceRange	1
+const class clang::Expr *	clang::CXXParenListInitExpr::getArrayFiller	1
+const class clang::FieldDecl *	clang::CXXParenListInitExpr::getInitializedFieldInUnion	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXParenListInitExpr::children	1
+enum clang::BuiltinType::Kind	clang::BuiltinType::getKind	1
+_Bool	clang::BuiltinType::isSugared	1
+class clang::QualType	clang::BuiltinType::desugar	1
+_Bool	clang::BuiltinType::isInteger	1
+_Bool	clang::BuiltinType::isSignedInteger	1
+_Bool	clang::BuiltinType::isUnsignedInteger	1
+_Bool	clang::BuiltinType::isFloatingPoint	1
+_Bool	clang::BuiltinType::isSVEBool	1
+_Bool	clang::BuiltinType::isSVECount	1
+_Bool	clang::BuiltinType::isPlaceholderType	1
+_Bool	clang::BuiltinType::isNonOverloadPlaceholderType	1
+class clang::LabelStmt *	clang::LabelDecl::getStmt	1
+_Bool	clang::LabelDecl::isGnuLocal	1
+class clang::SourceRange	clang::LabelDecl::getSourceRange	1
+_Bool	clang::LabelDecl::isMSAsmLabel	1
+_Bool	clang::LabelDecl::isResolvedMSAsmLabel	1
+class llvm::StringRef	clang::LabelDecl::getMSAsmLabel	1
+class clang::Expr *	clang::DependentCoawaitExpr::getOperand	1
+class clang::UnresolvedLookupExpr *	clang::DependentCoawaitExpr::getOperatorCoawaitLookup	1
+class clang::SourceLocation	clang::DependentCoawaitExpr::getKeywordLoc	1
+class clang::SourceLocation	clang::DependentCoawaitExpr::getBeginLoc	1
+class clang::SourceLocation	clang::DependentCoawaitExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::DependentCoawaitExpr::children	1
+class clang::Expr *	clang::CXXNoexceptExpr::getOperand	1
+class clang::SourceLocation	clang::CXXNoexceptExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXNoexceptExpr::getEndLoc	1
+class clang::SourceRange	clang::CXXNoexceptExpr::getSourceRange	1
+_Bool	clang::CXXNoexceptExpr::getValue	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXNoexceptExpr::children	1
+class clang::SourceLocation	clang::BreakStmt::getBreakLoc	1
+class clang::SourceLocation	clang::BreakStmt::getBeginLoc	1
+class clang::SourceLocation	clang::BreakStmt::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::BreakStmt::children	1
+const class clang::Expr *	clang::CXXStdInitializerListExpr::getSubExpr	1
+class clang::SourceLocation	clang::CXXStdInitializerListExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXStdInitializerListExpr::getEndLoc	1
+class clang::SourceRange	clang::CXXStdInitializerListExpr::getSourceRange	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXStdInitializerListExpr::children	1
+_Bool	clang::ExtVectorType::isSugared	1
+class clang::QualType	clang::ExtVectorType::desugar	1
+class clang::QualType	clang::SubstTemplateTypeParmType::getReplacementType	1
+class clang::Decl *	clang::SubstTemplateTypeParmType::getAssociatedDecl	1
+const class clang::TemplateTypeParmDecl *	clang::SubstTemplateTypeParmType::getReplacedParameter	1
+unsigned int	clang::SubstTemplateTypeParmType::getIndex	1
+class std::optional<unsigned int>	clang::SubstTemplateTypeParmType::getPackIndex	1
+_Bool	clang::SubstTemplateTypeParmType::isSugared	1
+class clang::QualType	clang::SubstTemplateTypeParmType::desugar	1
+enum clang::PredefinedExpr::IdentKind	clang::PredefinedExpr::getIdentKind	1
+_Bool	clang::PredefinedExpr::isTransparent	1
+class clang::SourceLocation	clang::PredefinedExpr::getLocation	1
+const class clang::StringLiteral *	clang::PredefinedExpr::getFunctionName	1
+class llvm::StringRef	clang::PredefinedExpr::getIdentKindName	1
+class clang::SourceLocation	clang::PredefinedExpr::getBeginLoc	1
+class clang::SourceLocation	clang::PredefinedExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::PredefinedExpr::children	1
+class clang::SourceRange	clang::Decl::getSourceRange	1
+class clang::SourceLocation	clang::Decl::getBeginLoc	1
+class clang::SourceLocation	clang::Decl::getEndLoc	1
+class clang::SourceLocation	clang::Decl::getLocation	1
+enum clang::Decl::Kind	clang::Decl::getKind	1
+const char *	clang::Decl::getDeclKindName	1
+const class clang::Decl *	clang::Decl::getNextDeclInContext	1
+const class clang::DeclContext *	clang::Decl::getDeclContext	1
+const class clang::DeclContext *	clang::Decl::getNonTransparentDeclContext	1
+const class clang::Decl *	clang::Decl::getNonClosureContext	1
+const class clang::TranslationUnitDecl *	clang::Decl::getTranslationUnitDecl	1
+_Bool	clang::Decl::isInAnonymousNamespace	1
+_Bool	clang::Decl::isInStdNamespace	1
+_Bool	clang::Decl::isFileContextDecl	1
+class clang::ASTContext &	clang::Decl::getASTContext	0
+const class clang::LangOptions &	clang::Decl::getLangOpts	0
+enum clang::AccessSpecifier	clang::Decl::getAccess	1
+enum clang::AccessSpecifier	clang::Decl::getAccessUnsafe	1
+_Bool	clang::Decl::hasAttrs	1
+const class llvm::SmallVector<class clang::Attr *, 4> &	clang::Decl::getAttrs	1
+class llvm::iterator_range<class clang::Attr *const *>	clang::Decl::attrs	1
+class clang::Attr *const *	clang::Decl::attr_begin	0
+class clang::Attr *const *	clang::Decl::attr_end	0
+unsigned int	clang::Decl::getMaxAlignment	1
+_Bool	clang::Decl::isInvalidDecl	1
+_Bool	clang::Decl::isImplicit	1
+_Bool	clang::Decl::isReferenced	1
+_Bool	clang::Decl::isThisDeclarationReferenced	1
+_Bool	clang::Decl::isTopLevelDeclInObjCContainer	1
+class clang::ExternalSourceSymbolAttr *	clang::Decl::getExternalSourceSymbolAttr	1
+_Bool	clang::Decl::isModulePrivate	1
+_Bool	clang::Decl::isInExportDeclContext	1
+_Bool	clang::Decl::isInvisibleOutsideTheOwningModule	1
+_Bool	clang::Decl::isInAnotherModuleUnit	1
+_Bool	clang::Decl::isDiscardedInGlobalModuleFragment	1
+_Bool	clang::Decl::hasDefiningAttr	1
+const class clang::Attr *	clang::Decl::getDefiningAttr	1
+class llvm::VersionTuple	clang::Decl::getVersionIntroduced	1
+_Bool	clang::Decl::isWeakImported	1
+_Bool	clang::Decl::isFromASTFile	1
+unsigned int	clang::Decl::getGlobalID	1
+unsigned int	clang::Decl::getOwningModuleID	1
+class clang::Module *	clang::Decl::getImportedOwningModule	0
+class clang::Module *	clang::Decl::getLocalOwningModule	0
+_Bool	clang::Decl::hasOwningModule	1
+class clang::Module *	clang::Decl::getOwningModule	0
+_Bool	clang::Decl::isUnconditionallyVisible	1
+_Bool	clang::Decl::isReachable	1
+enum clang::Decl::ModuleOwnershipKind	clang::Decl::getModuleOwnershipKind	1
+unsigned int	clang::Decl::getIdentifierNamespace	1
+_Bool	clang::Decl::hasTagIdentifierNamespace	1
+const class clang::DeclContext *	clang::Decl::getLexicalDeclContext	1
+_Bool	clang::Decl::isOutOfLine	1
+_Bool	clang::Decl::isTemplated	1
+unsigned int	clang::Decl::getTemplateDepth	1
+_Bool	clang::Decl::isDefinedOutsideFunctionOrMethod	1
+_Bool	clang::Decl::isInLocalScopeForInstantiation	1
+const class clang::Decl *	clang::Decl::getCanonicalDecl	1
+_Bool	clang::Decl::isCanonicalDecl	1
+class llvm::iterator_range<class clang::Decl::redecl_iterator>	clang::Decl::redecls	1
+class clang::Decl::redecl_iterator	clang::Decl::redecls_begin	0
+class clang::Decl::redecl_iterator	clang::Decl::redecls_end	0
+const class clang::Decl *	clang::Decl::getPreviousDecl	1
+_Bool	clang::Decl::isFirstDecl	1
+const class clang::Decl *	clang::Decl::getMostRecentDecl	1
+class clang::Stmt *	clang::Decl::getBody	1
+_Bool	clang::Decl::hasBody	1
+class clang::SourceLocation	clang::Decl::getBodyRBrace	1
+_Bool	clang::Decl::isTemplateParameter	1
+_Bool	clang::Decl::isTemplateParameterPack	1
+_Bool	clang::Decl::isParameterPack	1
+_Bool	clang::Decl::isTemplateDecl	1
+_Bool	clang::Decl::isFunctionOrFunctionTemplate	1
+class clang::TemplateDecl *	clang::Decl::getDescribedTemplate	1
+const class clang::TemplateParameterList *	clang::Decl::getDescribedTemplateParams	1
+const class clang::FunctionDecl *	clang::Decl::getAsFunction	1
+_Bool	clang::Decl::isLocalExternDecl	1
+enum clang::Decl::FriendObjectKind	clang::Decl::getFriendObjectKind	1
+long	clang::Decl::getID	0
+_Bool	clang::Decl::isFunctionPointerType	1
+class clang::SourceLocation	clang::ElaboratedTypeLoc::getElaboratedKeywordLoc	1
+class clang::NestedNameSpecifierLoc	clang::ElaboratedTypeLoc::getQualifierLoc	1
+class clang::SourceRange	clang::ElaboratedTypeLoc::getLocalSourceRange	1
+class clang::TypeLoc	clang::ElaboratedTypeLoc::getNamedTypeLoc	1
+class clang::QualType	clang::ElaboratedTypeLoc::getInnerType	1
+_Bool	clang::ElaboratedTypeLoc::isEmpty	1
+unsigned int	clang::ElaboratedTypeLoc::getLocalDataAlignment	1
+unsigned int	clang::ElaboratedTypeLoc::getLocalDataSize	1
+class clang::SourceLocation	clang::LValueReferenceTypeLoc::getAmpLoc	1
+class clang::SourceRange	clang::QualifiedTypeLoc::getLocalSourceRange	1
+class clang::UnqualTypeLoc	clang::QualifiedTypeLoc::getUnqualifiedLoc	1
+class clang::TypeLoc	clang::QualifiedTypeLoc::getNextTypeLoc	1
+unsigned int	clang::QualifiedTypeLoc::getLocalDataSize	1
+unsigned int	clang::QualifiedTypeLoc::getLocalDataAlignment	1
+_Bool	clang::TemplateTemplateParmDecl::isParameterPack	1
+_Bool	clang::TemplateTemplateParmDecl::isPackExpansion	1
+_Bool	clang::TemplateTemplateParmDecl::isExpandedParameterPack	1
+unsigned int	clang::TemplateTemplateParmDecl::getNumExpansionTemplateParameters	1
+const class clang::DefaultArgStorage<class clang::TemplateTemplateParmDecl, class clang::TemplateArgumentLoc *> &	clang::TemplateTemplateParmDecl::getDefaultArgStorage	1
+_Bool	clang::TemplateTemplateParmDecl::hasDefaultArgument	1
+const class clang::TemplateArgumentLoc &	clang::TemplateTemplateParmDecl::getDefaultArgument	1
+class clang::SourceLocation	clang::TemplateTemplateParmDecl::getDefaultArgumentLoc	1
+_Bool	clang::TemplateTemplateParmDecl::defaultArgumentWasInherited	1
+class clang::SourceRange	clang::TemplateTemplateParmDecl::getSourceRange	1
+class clang::Expr *	clang::CXXMemberCallExpr::getImplicitObjectArgument	1
+class clang::QualType	clang::CXXMemberCallExpr::getObjectType	1
+class clang::CXXMethodDecl *	clang::CXXMemberCallExpr::getMethodDecl	1
+class clang::CXXRecordDecl *	clang::CXXMemberCallExpr::getRecordDecl	1
+class clang::SourceLocation	clang::CXXMemberCallExpr::getExprLoc	1
+class clang::CXXConstructorDecl *	clang::CXXInheritedCtorInitExpr::getConstructor	1
+_Bool	clang::CXXInheritedCtorInitExpr::constructsVBase	1
+enum clang::CXXConstructExpr::ConstructionKind	clang::CXXInheritedCtorInitExpr::getConstructionKind	1
+_Bool	clang::CXXInheritedCtorInitExpr::inheritedFromVBase	1
+class clang::SourceLocation	clang::CXXInheritedCtorInitExpr::getLocation	1
+class clang::SourceLocation	clang::CXXInheritedCtorInitExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXInheritedCtorInitExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXInheritedCtorInitExpr::children	1
+class clang::SourceLocation	clang::DependentSizedExtVectorTypeLoc::getNameLoc	1
+class clang::SourceRange	clang::DependentSizedExtVectorTypeLoc::getLocalSourceRange	1
+class clang::TypeLoc	clang::DependentSizedExtVectorTypeLoc::getElementLoc	1
+class clang::QualType	clang::DependentSizedExtVectorTypeLoc::getInnerType	1
+class clang::QualType	clang::ComplexType::getElementType	1
+_Bool	clang::ComplexType::isSugared	1
+class clang::QualType	clang::ComplexType::desugar	1
+class clang::TemplateTypeParmDecl *	clang::TemplateTypeParmTypeLoc::getDecl	1
+class clang::QualType	clang::ParenType::getInnerType	1
+_Bool	clang::ParenType::isSugared	1
+class clang::QualType	clang::ParenType::desugar	1
+class clang::SourceLocation	clang::BlockDecl::getCaretLocation	1
+_Bool	clang::BlockDecl::isVariadic	1
+class clang::CompoundStmt *	clang::BlockDecl::getCompoundBody	1
+class clang::Stmt *	clang::BlockDecl::getBody	1
+class clang::TypeSourceInfo *	clang::BlockDecl::getSignatureAsWritten	1
+class llvm::ArrayRef<class clang::ParmVarDecl *>	clang::BlockDecl::parameters	1
+_Bool	clang::BlockDecl::param_empty	1
+class clang::ParmVarDecl *const *	clang::BlockDecl::param_begin	0
+class clang::ParmVarDecl *const *	clang::BlockDecl::param_end	0
+unsigned long	clang::BlockDecl::param_size	1
+unsigned int	clang::BlockDecl::getNumParams	1
+_Bool	clang::BlockDecl::hasCaptures	1
+unsigned int	clang::BlockDecl::getNumCaptures	1
+class llvm::ArrayRef<class clang::BlockDecl::Capture>	clang::BlockDecl::captures	1
+const class clang::BlockDecl::Capture *	clang::BlockDecl::capture_begin	0
+const class clang::BlockDecl::Capture *	clang::BlockDecl::capture_end	0
+_Bool	clang::BlockDecl::capturesCXXThis	1
+_Bool	clang::BlockDecl::blockMissingReturnType	1
+_Bool	clang::BlockDecl::isConversionFromLambda	1
+_Bool	clang::BlockDecl::doesNotEscape	1
+_Bool	clang::BlockDecl::canAvoidCopyToHeap	1
+unsigned int	clang::BlockDecl::getBlockManglingNumber	1
+class clang::Decl *	clang::BlockDecl::getBlockManglingContextDecl	1
+class clang::SourceRange	clang::BlockDecl::getSourceRange	1
+enum clang::PragmaMSCommentKind	clang::PragmaCommentDecl::getCommentKind	1
+class llvm::StringRef	clang::PragmaCommentDecl::getArg	1
+class clang::QualType	clang::DecayedType::getDecayedType	1
+class clang::QualType	clang::DecayedType::getPointeeType	1
+_Bool	clang::TemplateSpecializationType::isCurrentInstantiation	1
+_Bool	clang::TemplateSpecializationType::isTypeAlias	1
+class clang::QualType	clang::TemplateSpecializationType::getAliasedType	1
+class clang::TemplateName	clang::TemplateSpecializationType::getTemplateName	1
+class llvm::ArrayRef<class clang::TemplateArgument>	clang::TemplateSpecializationType::template_arguments	1
+_Bool	clang::TemplateSpecializationType::isSugared	1
+class clang::QualType	clang::TemplateSpecializationType::desugar	1
+_Bool	clang::DeducedType::isSugared	1
+class clang::QualType	clang::DeducedType::desugar	1
+class clang::QualType	clang::DeducedType::getDeducedType	1
+_Bool	clang::DeducedType::isDeduced	1
+class clang::Expr *	clang::DependentVectorType::getSizeExpr	1
+class clang::QualType	clang::DependentVectorType::getElementType	1
+class clang::SourceLocation	clang::DependentVectorType::getAttributeLoc	1
+enum clang::VectorType::VectorKind	clang::DependentVectorType::getVectorKind	1
+_Bool	clang::DependentVectorType::isSugared	1
+class clang::QualType	clang::DependentVectorType::desugar	1
+class clang::NestedNameSpecifier *	clang::ElaboratedType::getQualifier	1
+class clang::QualType	clang::ElaboratedType::getNamedType	1
+class clang::QualType	clang::ElaboratedType::desugar	1
+_Bool	clang::ElaboratedType::isSugared	1
+class clang::TagDecl *	clang::ElaboratedType::getOwnedTagDecl	1
+class clang::NestedNameSpecifier *	clang::DependentTemplateSpecializationType::getQualifier	1
+const class clang::IdentifierInfo *	clang::DependentTemplateSpecializationType::getIdentifier	1
+class llvm::ArrayRef<class clang::TemplateArgument>	clang::DependentTemplateSpecializationType::template_arguments	1
+_Bool	clang::DependentTemplateSpecializationType::isSugared	1
+class clang::QualType	clang::DependentTemplateSpecializationType::desugar	1
+class clang::QualType	clang::PointerType::getPointeeType	1
+_Bool	clang::PointerType::isSugared	1
+class clang::QualType	clang::PointerType::desugar	1
+class clang::QualType	clang::AtomicType::getValueType	1
+_Bool	clang::AtomicType::isSugared	1
+class clang::QualType	clang::AtomicType::desugar	1
+class clang::QualType	clang::FunctionType::getReturnType	1
+_Bool	clang::FunctionType::getHasRegParm	1
+unsigned int	clang::FunctionType::getRegParmType	1
+_Bool	clang::FunctionType::getNoReturnAttr	1
+_Bool	clang::FunctionType::getCmseNSCallAttr	1
+enum clang::CallingConv	clang::FunctionType::getCallConv	1
+class clang::FunctionType::ExtInfo	clang::FunctionType::getExtInfo	1
+_Bool	clang::FunctionType::isConst	1
+_Bool	clang::FunctionType::isVolatile	1
+_Bool	clang::FunctionType::isRestrict	1
+class clang::CXXRecordDecl *	clang::InjectedClassNameTypeLoc::getDecl	1
+class clang::IdentifierInfo *	clang::SubstTemplateTypeParmPackType::getIdentifier	1
+class clang::Decl *	clang::SubstTemplateTypeParmPackType::getAssociatedDecl	1
+const class clang::TemplateTypeParmDecl *	clang::SubstTemplateTypeParmPackType::getReplacedParameter	1
+unsigned int	clang::SubstTemplateTypeParmPackType::getIndex	1
+_Bool	clang::SubstTemplateTypeParmPackType::getFinal	1
+unsigned int	clang::SubstTemplateTypeParmPackType::getNumArgs	1
+_Bool	clang::SubstTemplateTypeParmPackType::isSugared	1
+class clang::QualType	clang::SubstTemplateTypeParmPackType::desugar	1
+class clang::TemplateArgument	clang::SubstTemplateTypeParmPackType::getArgumentPack	1
+class clang::Expr *	clang::DecltypeType::getUnderlyingExpr	1
+class clang::QualType	clang::DecltypeType::getUnderlyingType	1
+class clang::QualType	clang::DecltypeType::desugar	1
+_Bool	clang::DecltypeType::isSugared	1
+_Bool	clang::CXXUuidofExpr::isTypeOperand	1
+class clang::TypeSourceInfo *	clang::CXXUuidofExpr::getTypeOperandSourceInfo	1
+class clang::Expr *	clang::CXXUuidofExpr::getExprOperand	1
+class clang::MSGuidDecl *	clang::CXXUuidofExpr::getGuidDecl	1
+class clang::SourceLocation	clang::CXXUuidofExpr::getBeginLoc	1
+class clang::SourceLocation	clang::CXXUuidofExpr::getEndLoc	1
+class clang::SourceRange	clang::CXXUuidofExpr::getSourceRange	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CXXUuidofExpr::children	1
+const class llvm::APInt &	clang::ConstantArrayType::getSize	1
+const class clang::Expr *	clang::ConstantArrayType::getSizeExpr	1
+_Bool	clang::ConstantArrayType::isSugared	1
+class clang::QualType	clang::ConstantArrayType::desugar	1
+class clang::SourceLocation	clang::SEHTryStmt::getBeginLoc	1
+class clang::SourceLocation	clang::SEHTryStmt::getTryLoc	1
+class clang::SourceLocation	clang::SEHTryStmt::getEndLoc	1
+_Bool	clang::SEHTryStmt::getIsCXXTry	1
+class clang::CompoundStmt *	clang::SEHTryStmt::getTryBlock	1
+class clang::Stmt *	clang::SEHTryStmt::getHandler	1
+class clang::SEHExceptStmt *	clang::SEHTryStmt::getExceptHandler	1
+class clang::SEHFinallyStmt *	clang::SEHTryStmt::getFinallyHandler	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::SEHTryStmt::children	1
+enum clang::AutoTypeKeyword	clang::AutoTypeLoc::getAutoKeyword	1
+_Bool	clang::AutoTypeLoc::isDecltypeAuto	1
+class clang::SourceLocation	clang::AutoTypeLoc::getRParenLoc	1
+_Bool	clang::AutoTypeLoc::isConstrained	1
+const class clang::NestedNameSpecifierLoc &	clang::AutoTypeLoc::getNestedNameSpecifierLoc	0
+class clang::SourceLocation	clang::AutoTypeLoc::getTemplateKWLoc	1
+class clang::SourceLocation	clang::AutoTypeLoc::getConceptNameLoc	1
+class clang::NamedDecl *	clang::AutoTypeLoc::getFoundDecl	1
+class clang::ConceptDecl *	clang::AutoTypeLoc::getNamedConcept	1
+struct clang::DeclarationNameInfo	clang::AutoTypeLoc::getConceptNameInfo	0
+_Bool	clang::AutoTypeLoc::hasExplicitTemplateArgs	1
+class clang::SourceLocation	clang::AutoTypeLoc::getLAngleLoc	1
+class clang::SourceLocation	clang::AutoTypeLoc::getRAngleLoc	1
+unsigned int	clang::AutoTypeLoc::getNumArgs	1
+class clang::SourceRange	clang::AutoTypeLoc::getLocalSourceRange	1
+unsigned int	clang::AutoTypeLoc::getExtraLocalDataSize	1
+unsigned int	clang::AutoTypeLoc::getExtraLocalDataAlignment	1
+class clang::EnumDecl *	clang::EnumType::getDecl	1
+_Bool	clang::EnumType::isSugared	1
+class clang::QualType	clang::EnumType::desugar	1
+_Bool	clang::CompoundStmt::body_empty	1
+unsigned int	clang::CompoundStmt::size	1
+_Bool	clang::CompoundStmt::hasStoredFPFeatures	1
+class clang::FPOptionsOverride	clang::CompoundStmt::getStoredFPFeatures	1
+class llvm::iterator_range<class clang::Stmt *const *>	clang::CompoundStmt::body	1
+class clang::Stmt *const *	clang::CompoundStmt::body_begin	0
+class clang::Stmt *const *	clang::CompoundStmt::body_end	0
+const class clang::Stmt *	clang::CompoundStmt::body_front	1
+const class clang::Stmt *	clang::CompoundStmt::body_back	1
+class std::reverse_iterator<class clang::Stmt *const *>	clang::CompoundStmt::body_rbegin	0
+class std::reverse_iterator<class clang::Stmt *const *>	clang::CompoundStmt::body_rend	0
+const class clang::Stmt *	clang::CompoundStmt::getStmtExprResult	1
+class clang::SourceLocation	clang::CompoundStmt::getBeginLoc	1
+class clang::SourceLocation	clang::CompoundStmt::getEndLoc	1
+class clang::SourceLocation	clang::CompoundStmt::getLBracLoc	1
+class clang::SourceLocation	clang::CompoundStmt::getRBracLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::CompoundStmt::children	1
+class clang::Expr *	clang::DependentSizedMatrixType::getRowExpr	1
+class clang::Expr *	clang::DependentSizedMatrixType::getColumnExpr	1
+class clang::SourceLocation	clang::DependentSizedMatrixType::getAttributeLoc	1
+class clang::TypedefNameDecl *	clang::TypedefType::getDecl	1
+_Bool	clang::TypedefType::isSugared	1
+class clang::QualType	clang::TypedefType::desugar	1
+_Bool	clang::TypedefType::typeMatchesDecl	1
+class clang::UnresolvedUsingTypenameDecl *	clang::UnresolvedUsingType::getDecl	1
+_Bool	clang::UnresolvedUsingType::isSugared	1
+class clang::QualType	clang::UnresolvedUsingType::desugar	1
+unsigned int	clang::FunctionProtoType::getNumParams	1
+class llvm::ArrayRef<class clang::QualType>	clang::FunctionProtoType::getParamTypes	1
+struct clang::FunctionProtoType::ExtProtoInfo	clang::FunctionProtoType::getExtProtoInfo	0
+enum clang::ExceptionSpecificationType	clang::FunctionProtoType::getExceptionSpecType	1
+_Bool	clang::FunctionProtoType::hasExceptionSpec	1
+_Bool	clang::FunctionProtoType::hasDynamicExceptionSpec	1
+_Bool	clang::FunctionProtoType::hasNoexceptExceptionSpec	1
+_Bool	clang::FunctionProtoType::hasDependentExceptionSpec	1
+_Bool	clang::FunctionProtoType::hasInstantiationDependentExceptionSpec	1
+struct clang::FunctionProtoType::ExceptionSpecInfo	clang::FunctionProtoType::getExceptionSpecInfo	0
+unsigned int	clang::FunctionProtoType::getNumExceptions	1
+class clang::Expr *	clang::FunctionProtoType::getNoexceptExpr	1
+class clang::FunctionDecl *	clang::FunctionProtoType::getExceptionSpecDecl	1
+class clang::FunctionDecl *	clang::FunctionProtoType::getExceptionSpecTemplate	1
+enum clang::CanThrowResult	clang::FunctionProtoType::canThrow	1
+_Bool	clang::FunctionProtoType::isVariadic	1
+class clang::SourceLocation	clang::FunctionProtoType::getEllipsisLoc	1
+_Bool	clang::FunctionProtoType::isTemplateVariadic	1
+_Bool	clang::FunctionProtoType::hasTrailingReturn	1
+class clang::Qualifiers	clang::FunctionProtoType::getMethodQuals	1
+enum clang::RefQualifierKind	clang::FunctionProtoType::getRefQualifier	1
+class llvm::ArrayRef<class clang::QualType>	clang::FunctionProtoType::param_types	1
+const class clang::QualType *	clang::FunctionProtoType::param_type_begin	0
+const class clang::QualType *	clang::FunctionProtoType::param_type_end	0
+class llvm::ArrayRef<class clang::QualType>	clang::FunctionProtoType::exceptions	1
+const class clang::QualType *	clang::FunctionProtoType::exception_begin	0
+const class clang::QualType *	clang::FunctionProtoType::exception_end	0
+_Bool	clang::FunctionProtoType::hasExtParameterInfos	1
+class llvm::ArrayRef<class clang::FunctionType::ExtParameterInfo>	clang::FunctionProtoType::getExtParameterInfos	1
+const class clang::FunctionType::ExtParameterInfo *	clang::FunctionProtoType::getExtParameterInfosOrNull	1
+_Bool	clang::FunctionProtoType::isSugared	1
+class clang::QualType	clang::FunctionProtoType::desugar	1
+class clang::QualType	clang::VectorType::getElementType	1
+unsigned int	clang::VectorType::getNumElements	1
+_Bool	clang::VectorType::isSugared	1
+class clang::QualType	clang::VectorType::desugar	1
+enum clang::VectorType::VectorKind	clang::VectorType::getVectorKind	1
+class llvm::ArrayRef<class clang::ParmVarDecl *>	clang::RequiresExpr::getLocalParameters	1
+class clang::RequiresExprBodyDecl *	clang::RequiresExpr::getBody	1
+class llvm::ArrayRef<class clang::concepts::Requirement *>	clang::RequiresExpr::getRequirements	1
+_Bool	clang::RequiresExpr::isSatisfied	1
+class clang::SourceLocation	clang::RequiresExpr::getRequiresKWLoc	1
+class clang::SourceLocation	clang::RequiresExpr::getRBraceLoc	1
+class clang::SourceLocation	clang::RequiresExpr::getBeginLoc	1
+class clang::SourceLocation	clang::RequiresExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::RequiresExpr::children	1
+class clang::SourceRange	clang::ParmVarDecl::getSourceRange	1
+_Bool	clang::ParmVarDecl::isObjCMethodParameter	1
+_Bool	clang::ParmVarDecl::isDestroyedInCallee	1
+unsigned int	clang::ParmVarDecl::getFunctionScopeDepth	1
+unsigned int	clang::ParmVarDecl::getFunctionScopeIndex	1
+enum clang::Decl::ObjCDeclQualifier	clang::ParmVarDecl::getObjCDeclQualifier	1
+_Bool	clang::ParmVarDecl::isKNRPromoted	1
+const class clang::Expr *	clang::ParmVarDecl::getDefaultArg	1
+class clang::SourceRange	clang::ParmVarDecl::getDefaultArgRange	1
+const class clang::Expr *	clang::ParmVarDecl::getUninstantiatedDefaultArg	1
+_Bool	clang::ParmVarDecl::hasDefaultArg	1
+_Bool	clang::ParmVarDecl::hasUnparsedDefaultArg	1
+_Bool	clang::ParmVarDecl::hasUninstantiatedDefaultArg	1
+_Bool	clang::ParmVarDecl::hasInheritedDefaultArg	1
+class clang::QualType	clang::ParmVarDecl::getOriginalType	1
+class clang::TagDecl *	clang::TagType::getDecl	1
+_Bool	clang::TagType::isBeingDefined	1
+class clang::Expr *	clang::DependentSizedExtVectorType::getSizeExpr	1
+class clang::QualType	clang::DependentSizedExtVectorType::getElementType	1
+class clang::SourceLocation	clang::DependentSizedExtVectorType::getAttributeLoc	1
+_Bool	clang::DependentSizedExtVectorType::isSugared	1
+class clang::QualType	clang::DependentSizedExtVectorType::desugar	1
+class clang::QualType	clang::BTFTagAttributedType::getWrappedType	1
+const class clang::BTFTypeTagAttr *	clang::BTFTagAttributedType::getAttr	1
+_Bool	clang::BTFTagAttributedType::isSugared	1
+class clang::QualType	clang::BTFTagAttributedType::desugar	1
+class clang::QualType	clang::ArrayType::getElementType	1
+enum clang::ArrayType::ArraySizeModifier	clang::ArrayType::getSizeModifier	1
+class clang::Qualifiers	clang::ArrayType::getIndexTypeQualifiers	1
+unsigned int	clang::ArrayType::getIndexTypeCVRQualifiers	1
+class clang::TemplateParameterList *	clang::ClassTemplatePartialSpecializationDecl::getTemplateParameters	1
+_Bool	clang::ClassTemplatePartialSpecializationDecl::hasAssociatedConstraints	1
+const struct clang::ASTTemplateArgumentListInfo *	clang::ClassTemplatePartialSpecializationDecl::getTemplateArgsAsWritten	1
+class clang::ClassTemplatePartialSpecializationDecl *	clang::ClassTemplatePartialSpecializationDecl::getInstantiatedFromMember	1
+class clang::ClassTemplatePartialSpecializationDecl *	clang::ClassTemplatePartialSpecializationDecl::getInstantiatedFromMemberTemplate	1
+class clang::QualType	clang::ClassTemplatePartialSpecializationDecl::getInjectedSpecializationType	1
+class clang::QualType	clang::MemberPointerType::getPointeeType	1
+_Bool	clang::MemberPointerType::isMemberFunctionPointer	1
+_Bool	clang::MemberPointerType::isMemberDataPointer	1
+const class clang::Type *	clang::MemberPointerType::getClass	1
+class clang::CXXRecordDecl *	clang::MemberPointerType::getMostRecentCXXRecordDecl	1
+_Bool	clang::MemberPointerType::isSugared	1
+class clang::QualType	clang::MemberPointerType::desugar	1
+_Bool	clang::RValueReferenceType::isSugared	1
+class clang::QualType	clang::RValueReferenceType::desugar	1
+class clang::SourceLocation	clang::ArrayTypeLoc::getLBracketLoc	1
+class clang::SourceLocation	clang::ArrayTypeLoc::getRBracketLoc	1
+class clang::SourceRange	clang::ArrayTypeLoc::getBracketsRange	1
+class clang::Expr *	clang::ArrayTypeLoc::getSizeExpr	1
+class clang::TypeLoc	clang::ArrayTypeLoc::getElementLoc	1
+class clang::SourceRange	clang::ArrayTypeLoc::getLocalSourceRange	1
+class clang::QualType	clang::ArrayTypeLoc::getInnerType	1
+class llvm::StringRef	clang::PragmaDetectMismatchDecl::getName	1
+class llvm::StringRef	clang::PragmaDetectMismatchDecl::getValue	1
+class clang::SourceLocation	clang::VectorTypeLoc::getNameLoc	1
+class clang::SourceRange	clang::VectorTypeLoc::getLocalSourceRange	1
+class clang::TypeLoc	clang::VectorTypeLoc::getElementLoc	1
+class clang::QualType	clang::VectorTypeLoc::getInnerType	1
+class clang::SourceLocation	clang::FunctionTypeLoc::getLocalRangeBegin	1
+class clang::SourceLocation	clang::FunctionTypeLoc::getLocalRangeEnd	1
+class clang::SourceLocation	clang::FunctionTypeLoc::getLParenLoc	1
+class clang::SourceLocation	clang::FunctionTypeLoc::getRParenLoc	1
+class clang::SourceRange	clang::FunctionTypeLoc::getParensRange	1
+class clang::SourceRange	clang::FunctionTypeLoc::getExceptionSpecRange	1
+class llvm::ArrayRef<class clang::ParmVarDecl *>	clang::FunctionTypeLoc::getParams	1
+class clang::ParmVarDecl **	clang::FunctionTypeLoc::getParmArray	0
+unsigned int	clang::FunctionTypeLoc::getNumParams	1
+class clang::TypeLoc	clang::FunctionTypeLoc::getReturnLoc	1
+class clang::SourceRange	clang::FunctionTypeLoc::getLocalSourceRange	1
+unsigned int	clang::FunctionTypeLoc::getExtraLocalDataSize	1
+unsigned int	clang::FunctionTypeLoc::getExtraLocalDataAlignment	1
+class clang::QualType	clang::FunctionTypeLoc::getInnerType	1
+class clang::SourceLocation	clang::PackExpansionTypeLoc::getEllipsisLoc	1
+class clang::SourceRange	clang::PackExpansionTypeLoc::getLocalSourceRange	1
+class clang::TypeLoc	clang::PackExpansionTypeLoc::getPatternLoc	1
+class clang::QualType	clang::PackExpansionTypeLoc::getInnerType	1
+unsigned int	clang::DesignatedInitExpr::size	1
+class llvm::ArrayRef<class clang::DesignatedInitExpr::Designator>	clang::DesignatedInitExpr::designators	1
+class clang::SourceLocation	clang::DesignatedInitExpr::getEqualOrColonLoc	1
+_Bool	clang::DesignatedInitExpr::isDirectInit	1
+_Bool	clang::DesignatedInitExpr::usesGNUSyntax	1
+class clang::Expr *	clang::DesignatedInitExpr::getInit	1
+unsigned int	clang::DesignatedInitExpr::getNumSubExprs	1
+class clang::SourceRange	clang::DesignatedInitExpr::getDesignatorsSourceRange	1
+class clang::SourceLocation	clang::DesignatedInitExpr::getBeginLoc	1
+class clang::SourceLocation	clang::DesignatedInitExpr::getEndLoc	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::DesignatedInitExpr::children	1
+class clang::SourceLocation	clang::TemplateSpecializationTypeLoc::getTemplateKeywordLoc	1
+class clang::SourceLocation	clang::TemplateSpecializationTypeLoc::getLAngleLoc	1
+class clang::SourceLocation	clang::TemplateSpecializationTypeLoc::getRAngleLoc	1
+unsigned int	clang::TemplateSpecializationTypeLoc::getNumArgs	1
+class clang::SourceLocation	clang::TemplateSpecializationTypeLoc::getTemplateNameLoc	1
+class clang::SourceRange	clang::TemplateSpecializationTypeLoc::getLocalSourceRange	1
+unsigned int	clang::TemplateSpecializationTypeLoc::getExtraLocalDataSize	1
+unsigned int	clang::TemplateSpecializationTypeLoc::getExtraLocalDataAlignment	1
+class clang::Expr *	clang::DecltypeTypeLoc::getUnderlyingExpr	1
+class clang::SourceLocation	clang::DecltypeTypeLoc::getDecltypeLoc	1
+class clang::SourceLocation	clang::DecltypeTypeLoc::getRParenLoc	1
+class clang::SourceRange	clang::DecltypeTypeLoc::getLocalSourceRange	1
+class clang::SourceLocation	clang::DependentNameTypeLoc::getElaboratedKeywordLoc	1
+class clang::NestedNameSpecifierLoc	clang::DependentNameTypeLoc::getQualifierLoc	1
+class clang::SourceLocation	clang::DependentNameTypeLoc::getNameLoc	1
+class clang::SourceRange	clang::DependentNameTypeLoc::getLocalSourceRange	1
+class clang::SourceLocation	clang::DependentTemplateSpecializationTypeLoc::getElaboratedKeywordLoc	1
+class clang::NestedNameSpecifierLoc	clang::DependentTemplateSpecializationTypeLoc::getQualifierLoc	1
+class clang::SourceLocation	clang::DependentTemplateSpecializationTypeLoc::getTemplateKeywordLoc	1
+class clang::SourceLocation	clang::DependentTemplateSpecializationTypeLoc::getTemplateNameLoc	1
+class clang::SourceLocation	clang::DependentTemplateSpecializationTypeLoc::getLAngleLoc	1
+class clang::SourceLocation	clang::DependentTemplateSpecializationTypeLoc::getRAngleLoc	1
+unsigned int	clang::DependentTemplateSpecializationTypeLoc::getNumArgs	1
+class clang::SourceRange	clang::DependentTemplateSpecializationTypeLoc::getLocalSourceRange	1
+unsigned int	clang::DependentTemplateSpecializationTypeLoc::getExtraLocalDataSize	1
+unsigned int	clang::DependentTemplateSpecializationTypeLoc::getExtraLocalDataAlignment	1
+class clang::SourceLocation	clang::BuiltinTypeLoc::getBuiltinLoc	1
+class clang::SourceLocation	clang::BuiltinTypeLoc::getNameLoc	1
+const struct clang::WrittenBuiltinSpecs &	clang::BuiltinTypeLoc::getWrittenBuiltinSpecs	1
+_Bool	clang::BuiltinTypeLoc::needsExtraLocalData	1
+unsigned int	clang::BuiltinTypeLoc::getExtraLocalDataSize	1
+unsigned int	clang::BuiltinTypeLoc::getExtraLocalDataAlignment	1
+class clang::SourceRange	clang::BuiltinTypeLoc::getLocalSourceRange	1
+enum clang::TypeSpecifierSign	clang::BuiltinTypeLoc::getWrittenSignSpec	1
+_Bool	clang::BuiltinTypeLoc::hasWrittenSignSpec	1
+enum clang::TypeSpecifierWidth	clang::BuiltinTypeLoc::getWrittenWidthSpec	1
+_Bool	clang::BuiltinTypeLoc::hasWrittenWidthSpec	1
+enum clang::TypeSpecifierType	clang::BuiltinTypeLoc::getWrittenTypeSpec	1
+_Bool	clang::BuiltinTypeLoc::hasWrittenTypeSpec	1
+_Bool	clang::BuiltinTypeLoc::hasModeAttr	1
+class clang::SourceLocation	clang::MatrixTypeLoc::getAttrNameLoc	1
+class clang::Expr *	clang::MatrixTypeLoc::getAttrRowOperand	1
+class clang::Expr *	clang::MatrixTypeLoc::getAttrColumnOperand	1
+class clang::SourceRange	clang::MatrixTypeLoc::getAttrOperandParensRange	1
+class clang::SourceRange	clang::MatrixTypeLoc::getLocalSourceRange	1
+class clang::SourceLocation	clang::BlockPointerTypeLoc::getCaretLoc	1
+const class clang::ValueDecl *	clang::DeclRefExpr::getDecl	1
+struct clang::DeclarationNameInfo	clang::DeclRefExpr::getNameInfo	0
+class clang::SourceLocation	clang::DeclRefExpr::getLocation	1
+class clang::SourceLocation	clang::DeclRefExpr::getBeginLoc	1
+class clang::SourceLocation	clang::DeclRefExpr::getEndLoc	1
+_Bool	clang::DeclRefExpr::hasQualifier	1
+class clang::NestedNameSpecifierLoc	clang::DeclRefExpr::getQualifierLoc	1
+class clang::NestedNameSpecifier *	clang::DeclRefExpr::getQualifier	1
+const class clang::NamedDecl *	clang::DeclRefExpr::getFoundDecl	1
+_Bool	clang::DeclRefExpr::hasTemplateKWAndArgsInfo	1
+class clang::SourceLocation	clang::DeclRefExpr::getTemplateKeywordLoc	1
+class clang::SourceLocation	clang::DeclRefExpr::getLAngleLoc	1
+class clang::SourceLocation	clang::DeclRefExpr::getRAngleLoc	1
+_Bool	clang::DeclRefExpr::hasTemplateKeyword	1
+_Bool	clang::DeclRefExpr::hasExplicitTemplateArgs	1
+const class clang::TemplateArgumentLoc *	clang::DeclRefExpr::getTemplateArgs	1
+unsigned int	clang::DeclRefExpr::getNumTemplateArgs	1
+class llvm::ArrayRef<class clang::TemplateArgumentLoc>	clang::DeclRefExpr::template_arguments	1
+_Bool	clang::DeclRefExpr::hadMultipleCandidates	1
+enum clang::NonOdrUseReason	clang::DeclRefExpr::isNonOdrUse	1
+_Bool	clang::DeclRefExpr::refersToEnclosingVariableOrCapture	1
+_Bool	clang::DeclRefExpr::isImmediateEscalating	1
+class llvm::iterator_range<struct clang::ConstStmtIterator>	clang::DeclRefExpr::children	1
+enum clang::Type::TypeClass	clang::Type::getTypeClass	1
+_Bool	clang::Type::isFromAST	1
+_Bool	clang::Type::containsUnexpandedParameterPack	1
+_Bool	clang::Type::isCanonicalUnqualified	1
+class clang::QualType	clang::Type::getLocallyUnqualifiedSingleStepDesugaredType	1
+_Bool	clang::Type::isSizelessType	1
+_Bool	clang::Type::isSizelessBuiltinType	1
+_Bool	clang::Type::isSVESizelessBuiltinType	1
+_Bool	clang::Type::isRVVSizelessBuiltinType	1
+_Bool	clang::Type::isWebAssemblyExternrefType	1
+_Bool	clang::Type::isWebAssemblyTableType	1
+_Bool	clang::Type::isVLSTBuiltinType	1
+_Bool	clang::Type::isRVVVLSBuiltinType	1
+_Bool	clang::Type::isIncompleteOrObjectType	1
+_Bool	clang::Type::isObjectType	1
+_Bool	clang::Type::isStructuralType	1
+_Bool	clang::Type::isStandardLayoutType	1
+_Bool	clang::Type::isBuiltinType	1
+_Bool	clang::Type::isPlaceholderType	1
+const class clang::BuiltinType *	clang::Type::getAsPlaceholderType	1
+_Bool	clang::Type::isNonOverloadPlaceholderType	1
+_Bool	clang::Type::isIntegerType	1
+_Bool	clang::Type::isEnumeralType	1
+_Bool	clang::Type::isScopedEnumeralType	1
+_Bool	clang::Type::isBooleanType	1
+_Bool	clang::Type::isCharType	1
+_Bool	clang::Type::isWideCharType	1
+_Bool	clang::Type::isChar8Type	1
+_Bool	clang::Type::isChar16Type	1
+_Bool	clang::Type::isChar32Type	1
+_Bool	clang::Type::isAnyCharacterType	1
+_Bool	clang::Type::isIntegralOrEnumerationType	1
+_Bool	clang::Type::isIntegralOrUnscopedEnumerationType	1
+_Bool	clang::Type::isUnscopedEnumerationType	1
+_Bool	clang::Type::isRealFloatingType	1
+_Bool	clang::Type::isComplexType	1
+_Bool	clang::Type::isAnyComplexType	1
+_Bool	clang::Type::isFloatingType	1
+_Bool	clang::Type::isHalfType	1
+_Bool	clang::Type::isFloat16Type	1
+_Bool	clang::Type::isBFloat16Type	1
+_Bool	clang::Type::isFloat128Type	1
+_Bool	clang::Type::isIbm128Type	1
+_Bool	clang::Type::isRealType	1
+_Bool	clang::Type::isArithmeticType	1
+_Bool	clang::Type::isVoidType	1
+_Bool	clang::Type::isScalarType	1
+_Bool	clang::Type::isAggregateType	1
+_Bool	clang::Type::isFundamentalType	1
+_Bool	clang::Type::isCompoundType	1
+_Bool	clang::Type::isFunctionType	1
+_Bool	clang::Type::isFunctionNoProtoType	1
+_Bool	clang::Type::isFunctionProtoType	1
+_Bool	clang::Type::isPointerType	1
+_Bool	clang::Type::isAnyPointerType	1
+_Bool	clang::Type::isBlockPointerType	1
+_Bool	clang::Type::isVoidPointerType	1
+_Bool	clang::Type::isReferenceType	1
+_Bool	clang::Type::isLValueReferenceType	1
+_Bool	clang::Type::isRValueReferenceType	1
+_Bool	clang::Type::isObjectPointerType	1
+_Bool	clang::Type::isFunctionPointerType	1
+_Bool	clang::Type::isFunctionReferenceType	1
+_Bool	clang::Type::isMemberPointerType	1
+_Bool	clang::Type::isMemberFunctionPointerType	1
+_Bool	clang::Type::isMemberDataPointerType	1
+_Bool	clang::Type::isArrayType	1
+_Bool	clang::Type::isConstantArrayType	1
+_Bool	clang::Type::isIncompleteArrayType	1
+_Bool	clang::Type::isVariableArrayType	1
+_Bool	clang::Type::isDependentSizedArrayType	1
+_Bool	clang::Type::isRecordType	1
+_Bool	clang::Type::isClassType	1
+_Bool	clang::Type::isStructureType	1
+_Bool	clang::Type::isObjCBoxableRecordType	1
+_Bool	clang::Type::isInterfaceType	1
+_Bool	clang::Type::isStructureOrClassType	1
+_Bool	clang::Type::isUnionType	1
+_Bool	clang::Type::isComplexIntegerType	1
+_Bool	clang::Type::isVectorType	1
+_Bool	clang::Type::isExtVectorType	1
+_Bool	clang::Type::isExtVectorBoolType	1
+_Bool	clang::Type::isMatrixType	1
+_Bool	clang::Type::isConstantMatrixType	1
+_Bool	clang::Type::isDependentAddressSpaceType	1
+_Bool	clang::Type::isObjCObjectPointerType	1
+_Bool	clang::Type::isObjCRetainableType	1
+_Bool	clang::Type::isObjCLifetimeType	1
+_Bool	clang::Type::isObjCIndirectLifetimeType	1
+_Bool	clang::Type::isObjCNSObjectType	1
+_Bool	clang::Type::isObjCIndependentClassType	1
+_Bool	clang::Type::isObjCObjectType	1
+_Bool	clang::Type::isObjCQualifiedInterfaceType	1
+_Bool	clang::Type::isObjCQualifiedIdType	1
+_Bool	clang::Type::isObjCQualifiedClassType	1
+_Bool	clang::Type::isObjCObjectOrInterfaceType	1
+_Bool	clang::Type::isObjCIdType	1
+_Bool	clang::Type::isDecltypeType	1
+_Bool	clang::Type::isObjCInertUnsafeUnretainedType	1
+_Bool	clang::Type::isObjCClassType	1
+_Bool	clang::Type::isObjCClassOrClassKindOfType	1
+_Bool	clang::Type::isObjCSelType	1
+_Bool	clang::Type::isObjCBuiltinType	1
+_Bool	clang::Type::isObjCARCBridgableType	1
+_Bool	clang::Type::isCARCBridgableType	1
+_Bool	clang::Type::isTemplateTypeParmType	1
+_Bool	clang::Type::isNullPtrType	1
+_Bool	clang::Type::isNothrowT	1
+_Bool	clang::Type::isAlignValT	1
+_Bool	clang::Type::isStdByteType	1
+_Bool	clang::Type::isAtomicType	1
+_Bool	clang::Type::isUndeducedAutoType	1
+_Bool	clang::Type::isTypedefNameType	1
+_Bool	clang::Type::isOCLImage1dROType	1
+_Bool	clang::Type::isOCLImage1dArrayROType	1
+_Bool	clang::Type::isOCLImage1dBufferROType	1
+_Bool	clang::Type::isOCLImage2dROType	1
+_Bool	clang::Type::isOCLImage2dArrayROType	1
+_Bool	clang::Type::isOCLImage2dDepthROType	1
+_Bool	clang::Type::isOCLImage2dArrayDepthROType	1
+_Bool	clang::Type::isOCLImage2dMSAAROType	1
+_Bool	clang::Type::isOCLImage2dArrayMSAAROType	1
+_Bool	clang::Type::isOCLImage2dMSAADepthROType	1
+_Bool	clang::Type::isOCLImage2dArrayMSAADepthROType	1
+_Bool	clang::Type::isOCLImage3dROType	1
+_Bool	clang::Type::isOCLImage1dWOType	1
+_Bool	clang::Type::isOCLImage1dArrayWOType	1
+_Bool	clang::Type::isOCLImage1dBufferWOType	1
+_Bool	clang::Type::isOCLImage2dWOType	1
+_Bool	clang::Type::isOCLImage2dArrayWOType	1
+_Bool	clang::Type::isOCLImage2dDepthWOType	1
+_Bool	clang::Type::isOCLImage2dArrayDepthWOType	1
+_Bool	clang::Type::isOCLImage2dMSAAWOType	1
+_Bool	clang::Type::isOCLImage2dArrayMSAAWOType	1
+_Bool	clang::Type::isOCLImage2dMSAADepthWOType	1
+_Bool	clang::Type::isOCLImage2dArrayMSAADepthWOType	1
+_Bool	clang::Type::isOCLImage3dWOType	1
+_Bool	clang::Type::isOCLImage1dRWType	1
+_Bool	clang::Type::isOCLImage1dArrayRWType	1
+_Bool	clang::Type::isOCLImage1dBufferRWType	1
+_Bool	clang::Type::isOCLImage2dRWType	1
+_Bool	clang::Type::isOCLImage2dArrayRWType	1
+_Bool	clang::Type::isOCLImage2dDepthRWType	1
+_Bool	clang::Type::isOCLImage2dArrayDepthRWType	1
+_Bool	clang::Type::isOCLImage2dMSAARWType	1
+_Bool	clang::Type::isOCLImage2dArrayMSAARWType	1
+_Bool	clang::Type::isOCLImage2dMSAADepthRWType	1
+_Bool	clang::Type::isOCLImage2dArrayMSAADepthRWType	1
+_Bool	clang::Type::isOCLImage3dRWType	1
+_Bool	clang::Type::isImageType	1
+_Bool	clang::Type::isSamplerT	1
+_Bool	clang::Type::isEventT	1
+_Bool	clang::Type::isClkEventT	1
+_Bool	clang::Type::isQueueT	1
+_Bool	clang::Type::isReserveIDT	1
+_Bool	clang::Type::isOCLIntelSubgroupAVCMcePayloadType	1
+_Bool	clang::Type::isOCLIntelSubgroupAVCImePayloadType	1
+_Bool	clang::Type::isOCLIntelSubgroupAVCRefPayloadType	1
+_Bool	clang::Type::isOCLIntelSubgroupAVCSicPayloadType	1
+_Bool	clang::Type::isOCLIntelSubgroupAVCMceResultType	1
+_Bool	clang::Type::isOCLIntelSubgroupAVCImeResultType	1
+_Bool	clang::Type::isOCLIntelSubgroupAVCRefResultType	1
+_Bool	clang::Type::isOCLIntelSubgroupAVCSicResultType	1
+_Bool	clang::Type::isOCLIntelSubgroupAVCImeResultSingleReferenceStreamoutType	1
+_Bool	clang::Type::isOCLIntelSubgroupAVCImeResultDualReferenceStreamoutType	1
+_Bool	clang::Type::isOCLIntelSubgroupAVCImeSingleReferenceStreaminType	1
+_Bool	clang::Type::isOCLIntelSubgroupAVCImeDualReferenceStreaminType	1
+_Bool	clang::Type::isOCLIntelSubgroupAVCType	1
+_Bool	clang::Type::isOCLExtOpaqueType	1
+_Bool	clang::Type::isPipeType	1
+_Bool	clang::Type::isBitIntType	1
+_Bool	clang::Type::isOpenCLSpecificType	1
+_Bool	clang::Type::isObjCARCImplicitlyUnretainedType	1
+_Bool	clang::Type::isCUDADeviceBuiltinSurfaceType	1
+_Bool	clang::Type::isCUDADeviceBuiltinTextureType	1
+_Bool	clang::Type::isRVVType	1
+enum clang::Qualifiers::ObjCLifetime	clang::Type::getObjCARCImplicitLifetime	1
+enum clang::Type::ScalarTypeKind	clang::Type::getScalarTypeKind	1
+enum clang::TypeDependenceScope::TypeDependence	clang::Type::getDependence	0
+_Bool	clang::Type::containsErrors	1
+_Bool	clang::Type::isDependentType	1
+_Bool	clang::Type::isInstantiationDependentType	1
+_Bool	clang::Type::isUndeducedType	1
+_Bool	clang::Type::isVariablyModifiedType	1
+_Bool	clang::Type::hasSizedVLAType	1
+_Bool	clang::Type::hasUnnamedOrLocalType	1
+_Bool	clang::Type::isOverloadableType	1
+_Bool	clang::Type::isElaboratedTypeSpecifier	1
+_Bool	clang::Type::canDecayToPointerType	1
+_Bool	clang::Type::hasPointerRepresentation	1
+_Bool	clang::Type::hasObjCPointerRepresentation	1
+_Bool	clang::Type::hasIntegerRepresentation	1
+_Bool	clang::Type::hasSignedIntegerRepresentation	1
+_Bool	clang::Type::hasUnsignedIntegerRepresentation	1
+_Bool	clang::Type::hasFloatingRepresentation	1
+const class clang::RecordType *	clang::Type::getAsStructureType	1
+const class clang::RecordType *	clang::Type::getAsUnionType	1
+const class clang::ComplexType *	clang::Type::getAsComplexIntegerType	1
+const class clang::ObjCObjectType *	clang::Type::getAsObjCInterfaceType	1
+const class clang::ObjCObjectPointerType *	clang::Type::getAsObjCInterfacePointerType	1
+const class clang::ObjCObjectPointerType *	clang::Type::getAsObjCQualifiedIdType	1
+const class clang::ObjCObjectPointerType *	clang::Type::getAsObjCQualifiedClassType	1
+const class clang::ObjCObjectType *	clang::Type::getAsObjCQualifiedInterfaceType	1
+class clang::CXXRecordDecl *	clang::Type::getAsCXXRecordDecl	1
+class clang::RecordDecl *	clang::Type::getAsRecordDecl	1
+class clang::TagDecl *	clang::Type::getAsTagDecl	1
+const class clang::CXXRecordDecl *	clang::Type::getPointeeCXXRecordDecl	1
+class clang::DeducedType *	clang::Type::getContainedDeducedType	1
+class clang::AutoType *	clang::Type::getContainedAutoType	1
+_Bool	clang::Type::hasAutoForTrailingReturnType	1
+const class clang::ArrayType *	clang::Type::getAsArrayTypeUnsafe	1
+const class clang::ArrayType *	clang::Type::castAsArrayTypeUnsafe	1
+const class clang::Type *	clang::Type::getBaseElementTypeUnsafe	1
+const class clang::Type *	clang::Type::getArrayElementTypeNoTypeQual	1
+const class clang::Type *	clang::Type::getPointeeOrArrayElementType	1
+class clang::QualType	clang::Type::getPointeeType	1
+const class clang::Type *	clang::Type::getUnqualifiedDesugaredType	1
+_Bool	clang::Type::isSignedIntegerType	1
+_Bool	clang::Type::isUnsignedIntegerType	1
+_Bool	clang::Type::isSignedIntegerOrEnumerationType	1
+_Bool	clang::Type::isUnsignedIntegerOrEnumerationType	1
+_Bool	clang::Type::isFixedPointType	1
+_Bool	clang::Type::isFixedPointOrIntegerType	1
+_Bool	clang::Type::isSaturatedFixedPointType	1
+_Bool	clang::Type::isUnsaturatedFixedPointType	1
+_Bool	clang::Type::isSignedFixedPointType	1
+_Bool	clang::Type::isUnsignedFixedPointType	1
+_Bool	clang::Type::isConstantSizeType	1
+_Bool	clang::Type::isSpecifierType	1
+enum clang::Linkage	clang::Type::getLinkage	1
+enum clang::Visibility	clang::Type::getVisibility	0
+_Bool	clang::Type::isVisibilityExplicit	1
+class clang::LinkageInfo	clang::Type::getLinkageAndVisibility	1
+_Bool	clang::Type::isLinkageValid	1
+class std::optional<enum clang::NullabilityKind>	clang::Type::getNullability	1
+_Bool	clang::Type::acceptsObjCTypeParams	1
+const char *	clang::Type::getTypeClassName	1
+class clang::QualType	clang::Type::getCanonicalTypeInternal	1
+class clang::CanQual<class clang::Type>	clang::Type::getCanonicalTypeUnqualified	1
+class clang::TypedefNameDecl *	clang::TypedefTypeLoc::getTypedefNameDecl	1
+class clang::TypeLoc	clang::AdjustedTypeLoc::getOriginalLoc	1
+class clang::QualType	clang::AdjustedTypeLoc::getInnerType	1
+class clang::SourceRange	clang::AdjustedTypeLoc::getLocalSourceRange	1
+unsigned int	clang::AdjustedTypeLoc::getLocalDataSize	1
+class clang::SourceLocation	clang::ParenTypeLoc::getLParenLoc	1
+class clang::SourceLocation	clang::ParenTypeLoc::getRParenLoc	1
+class clang::SourceRange	clang::ParenTypeLoc::getLocalSourceRange	1
+class clang::TypeLoc	clang::ParenTypeLoc::getInnerLoc	1
+class clang::QualType	clang::ParenTypeLoc::getInnerType	1
+enum clang::attr::Kind	clang::AttributedTypeLoc::getAttrKind	1
+_Bool	clang::AttributedTypeLoc::isQualifier	1
+class clang::TypeLoc	clang::AttributedTypeLoc::getModifiedLoc	1
+const class clang::Attr *	clang::AttributedTypeLoc::getAttr	1
+class clang::SourceRange	clang::AttributedTypeLoc::getLocalSourceRange	1
+class clang::QualType	clang::AttributedTypeLoc::getInnerType	1
+class clang::SourceLocation	clang::DeducedTemplateSpecializationTypeLoc::getTemplateNameLoc	1
+class clang::EnumDecl *	clang::EnumTypeLoc::getDecl	1
+class clang::TagDecl *	clang::TagTypeLoc::getDecl	1
+_Bool	clang::TagTypeLoc::isDefinition	1
+enum clang::ImplicitParamDecl::ImplicitParamKind	clang::ImplicitParamDecl::getParameterKind	1
+class clang::TemplateParameterList *	clang::VarTemplatePartialSpecializationDecl::getTemplateParameters	1
+const struct clang::ASTTemplateArgumentListInfo *	clang::VarTemplatePartialSpecializationDecl::getTemplateArgsAsWritten	1
+_Bool	clang::VarTemplatePartialSpecializationDecl::hasAssociatedConstraints	1
+class clang::VarTemplatePartialSpecializationDecl *	clang::VarTemplatePartialSpecializationDecl::getInstantiatedFromMember	1
+class clang::SourceRange	clang::VarTemplatePartialSpecializationDecl::getSourceRange	1
+const class clang::ExplicitSpecifier	clang::CXXConversionDecl::getExplicitSpecifier	1
+_Bool	clang::CXXConversionDecl::isExplicit	1
+class clang::QualType	clang::CXXConversionDecl::getConversionType	1
+_Bool	clang::CXXConversionDecl::isLambdaToBlockPointerConversion	1
+const class clang::CXXConversionDecl *	clang::CXXConversionDecl::getCanonicalDecl	1
+class clang::SourceLocation	clang::UnresolvedUsingValueDecl::getUsingLoc	1
+_Bool	clang::UnresolvedUsingValueDecl::isAccessDeclaration	1
+class clang::NestedNameSpecifierLoc	clang::UnresolvedUsingValueDecl::getQualifierLoc	1
+class clang::NestedNameSpecifier *	clang::UnresolvedUsingValueDecl::getQualifier	1
+struct clang::DeclarationNameInfo	clang::UnresolvedUsingValueDecl::getNameInfo	0
+_Bool	clang::UnresolvedUsingValueDecl::isPackExpansion	1
+class clang::SourceLocation	clang::UnresolvedUsingValueDecl::getEllipsisLoc	1
+class clang::SourceRange	clang::UnresolvedUsingValueDecl::getSourceRange	1
+const class clang::UnresolvedUsingValueDecl *	clang::UnresolvedUsingValueDecl::getCanonicalDecl	1
+const class clang::APValue &	clang::UnnamedGlobalConstantDecl::getValue	1
+const class clang::Expr *	clang::EnumConstantDecl::getInitExpr	1
+const class llvm::APSInt &	clang::EnumConstantDecl::getInitVal	1
+class clang::SourceRange	clang::EnumConstantDecl::getSourceRange	1
+const class clang::EnumConstantDecl *	clang::EnumConstantDecl::getCanonicalDecl	1
+class clang::SourceRange	clang::TypeAliasDecl::getSourceRange	1
+class clang::TypeAliasTemplateDecl *	clang::TypeAliasDecl::getDescribedAliasTemplate	1
+_Bool	clang::UnaryTransformType::isSugared	1
+class clang::QualType	clang::UnaryTransformType::desugar	1
+class clang::QualType	clang::UnaryTransformType::getUnderlyingType	1
+class clang::QualType	clang::UnaryTransformType::getBaseType	1
+enum clang::UnaryTransformType::UTTKind	clang::UnaryTransformType::getUTTKind	1
+class clang::Expr *	clang::BindingDecl::getBinding	1
+class clang::ValueDecl *	clang::BindingDecl::getDecomposedDecl	1
+class clang::VarDecl *	clang::BindingDecl::getHoldingVar	1

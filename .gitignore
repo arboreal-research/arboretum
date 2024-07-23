@@ -1,0 +1,6 @@
+/build
+/dist
+/llvm
+/llvm-project
+/target
+Cargo.lock
