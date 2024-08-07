@@ -1,0 +1,21 @@
+{
+  "configurations": [
+      {
+          "name": "Linux",
+          "includePath": [
+              "${workspaceFolder}/llvm/include/",
+              "${workspaceFolder}/arboretum-ffi/src/",
+              "${workspaceFolder}/reificator/include/",
+              "${workspaceFolder}/reify-cpp/include/"
+          ],
+          "defines": [],
+          "cStandard": "c17",
+          "cppStandard": "c++20",
+          "intelliSenseMode": "linux-clang-x64",
+          "compilerArgs": [
+              "-Wall"
+          ]
+      }
+  ],
+  "version": 4
+}

@@ -6,15 +6,15 @@
 
 namespace arboretum {
 namespace {
-std::unordered_set<const clang::CXXRecordDecl*> TransitiveClosure(
-    InheritanceHierarchy& ih, const clang::CXXRecordDecl* D) {
-  std::unordered_set<const clang::CXXRecordDecl*> result;
+std::unordered_set<const clang::CXXRecordDecl *>
+TransitiveClosure(InheritanceHierarchy &ih, const clang::CXXRecordDecl *D) {
+  std::unordered_set<const clang::CXXRecordDecl *> result;
 
-  std::stack<const clang::CXXRecordDecl*> decls;
+  std::stack<const clang::CXXRecordDecl *> decls;
   decls.push(D);
   while (!decls.empty()) {
     // Get the current top of the stack for processing.
-    const clang::CXXRecordDecl* cur = decls.top();
+    const clang::CXXRecordDecl *cur = decls.top();
     decls.pop();
 
     // Save it in the output since it was discovered during traversal.
@@ -23,7 +23,7 @@ std::unordered_set<const clang::CXXRecordDecl*> TransitiveClosure(
     // Push any subclasses of this into the stack for processing.
     auto find_itr = ih.subs.find(cur);
     if (find_itr != ih.subs.end()) {
-      for (const clang::CXXRecordDecl* child : find_itr->second) {
+      for (const clang::CXXRecordDecl *child : find_itr->second) {
         decls.push(child);
       }
     }
@@ -32,13 +32,13 @@ std::unordered_set<const clang::CXXRecordDecl*> TransitiveClosure(
   return result;
 }
 
-void PopulateDerivedIndexFields(IndexBuilder::TempData& tmp, Index& data) {
-  for (auto* A : TransitiveClosure(data.inheritance, data.clang.attr_decl)) {
+void PopulateDerivedIndexFields(IndexBuilder::TempData &tmp, Index &data) {
+  for (auto *A : TransitiveClosure(data.inheritance, data.clang.attr_decl)) {
     data.clang.attr_decls.insert(A);
     data.clang.all_decls.insert(A);
   }
 
-  for (auto* T : TransitiveClosure(data.inheritance, data.clang.type_decl)) {
+  for (auto *T : TransitiveClosure(data.inheritance, data.clang.type_decl)) {
     {
       llvm::StringRef name = T->getName();
       llvm::StringRef base_name = name;
@@ -57,13 +57,17 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData& tmp, Index& data) {
     data.clang.all_decls.insert(T);
   }
 
-  for (auto* TL :
+  for (auto *TL :
        TransitiveClosure(data.inheritance, data.clang.typeloc_decl)) {
     llvm::StringRef name = TL->getName();
-    if (name == "ConcreteTypeLoc") continue;
-    if (name == "InheritingConcreteTypeLoc") continue;
-    if (name == "PointerLikeTypeLoc") continue;
-    if (name == "TypeofLikeTypeLoc") continue;
+    if (name == "ConcreteTypeLoc")
+      continue;
+    if (name == "InheritingConcreteTypeLoc")
+      continue;
+    if (name == "PointerLikeTypeLoc")
+      continue;
+    if (name == "TypeofLikeTypeLoc")
+      continue;
 
     {
       llvm::StringRef name = TL->getName();
@@ -83,9 +87,10 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData& tmp, Index& data) {
     data.clang.all_decls.insert(TL);
   }
 
-  for (auto* D : TransitiveClosure(data.inheritance, data.clang.decl_decl)) {
+  for (auto *D : TransitiveClosure(data.inheritance, data.clang.decl_decl)) {
     llvm::StringRef name = D->getName();
-    if (name == "OMPDeclarativeDirective") continue;
+    if (name == "OMPDeclarativeDirective")
+      continue;
 
     {
       llvm::StringRef name = D->getName();
@@ -105,7 +110,7 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData& tmp, Index& data) {
     data.clang.all_decls.insert(D);
   }
 
-  for (auto* S : TransitiveClosure(data.inheritance, data.clang.stmt_decl)) {
+  for (auto *S : TransitiveClosure(data.inheritance, data.clang.stmt_decl)) {
     {
       llvm::StringRef name = S->getName();
 
@@ -120,11 +125,11 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData& tmp, Index& data) {
     data.clang.all_decls.insert(S);
   }
 }
-}  // namespace
+} // namespace
 
 bool IndexBuilder::shouldVisitTemplateInstantiations() const { return true; }
 
-bool IndexBuilder::VisitTypedefNameDecl(clang::TypedefNameDecl* D) {
+bool IndexBuilder::VisitTypedefNameDecl(clang::TypedefNameDecl *D) {
   std::string name = D->getQualifiedNameAsString();
 
   if (name == "uint8_t") {
@@ -141,58 +146,59 @@ bool IndexBuilder::VisitTypedefNameDecl(clang::TypedefNameDecl* D) {
   return true;
 }
 
-bool IndexBuilder::VisitEnumDecl(clang::EnumDecl* D) {
-  if (D->getDefinition() != D) return true;
+bool IndexBuilder::VisitEnumDecl(clang::EnumDecl *D) {
+  if (D->getDefinition() != D)
+    return true;
 
   std::string name = D->getQualifiedNameAsString();
   if (name == "clang::attr::Kind") {
-    for (auto* tag : D->enumerators()) {
+    for (auto *tag : D->enumerators()) {
       tmp.attrkind_enum_by_name[tag->getNameAsString()] = tag;
     }
   } else if (name == "clang::Type::TypeClass") {
-    for (auto* tag : D->enumerators()) {
+    for (auto *tag : D->enumerators()) {
       tmp.typeclass_enum_by_name[tag->getNameAsString()] = tag;
     }
   } else if (name == "clang::TypeLoc::TypeLocClass") {
-    for (auto* tag : D->enumerators()) {
+    for (auto *tag : D->enumerators()) {
       tmp.typelocclass_enum_by_name[tag->getNameAsString()] = tag;
     }
   } else if (name == "clang::Decl::Kind") {
-    for (auto* tag : D->enumerators()) {
+    for (auto *tag : D->enumerators()) {
       tmp.declkind_enum_by_name[tag->getNameAsString()] = tag;
     }
   } else if (name == "clang::Stmt::StmtClass") {
-    for (auto* tag : D->enumerators()) {
+    for (auto *tag : D->enumerators()) {
       tmp.stmtclass_enum_by_name[tag->getNameAsString()] = tag;
     }
   }
   return true;
 }
 
-bool IndexBuilder::VisitClassTemplateDecl(clang::ClassTemplateDecl* TD) {
+bool IndexBuilder::VisitClassTemplateDecl(clang::ClassTemplateDecl *TD) {
   std::string name = TD->getQualifiedNameAsString();
   if (name == "std::vector") {
-    for (const auto* CTS : TD->specializations()) {
+    for (const auto *CTS : TD->specializations()) {
       data.std.vector_decls.insert(CTS);
     }
   } else if (name == "std::pair") {
-    for (const auto* CTS : TD->specializations()) {
+    for (const auto *CTS : TD->specializations()) {
       data.std.pair_decls.insert(CTS);
     }
   } else if (name == "llvm::ArrayRef") {
-    for (const auto* CTS : TD->specializations()) {
+    for (const auto *CTS : TD->specializations()) {
       data.llvm.arrayref_decls.insert(CTS);
     }
   } else if (name == "llvm::PointerUnion") {
-    for (const auto* CTS : TD->specializations()) {
+    for (const auto *CTS : TD->specializations()) {
       data.llvm.pointer_union_decls.insert(CTS);
     }
   } else if (name == "llvm::iterator_range") {
-    for (const auto* CTS : TD->specializations()) {
+    for (const auto *CTS : TD->specializations()) {
       data.llvm.iterator_range_decls.insert(CTS);
     }
   } else if (name == "llvm::SmallVector") {
-    for (const auto* CTS : TD->specializations()) {
+    for (const auto *CTS : TD->specializations()) {
       data.llvm.small_vector_decls.insert(CTS);
     }
   }
@@ -200,21 +206,25 @@ bool IndexBuilder::VisitClassTemplateDecl(clang::ClassTemplateDecl* TD) {
   return true;
 }
 
-bool IndexBuilder::VisitCXXRecordDecl(clang::CXXRecordDecl* D) {
-  if (D->getDefinition() != D) return true;
+bool IndexBuilder::VisitCXXRecordDecl(clang::CXXRecordDecl *D) {
+  if (D->getDefinition() != D)
+    return true;
 
   std::string name = D->getQualifiedNameAsString();
 
   if (name == "clang::RecursiveASTVisitor") {
     data.clang.recursive_ast_visitor = D;
-    for (auto* method : D->methods()) {
+    for (auto *method : D->methods()) {
       std::string name = method->getNameAsString();
-      if (name.find("Visit") != 0) continue;
-      if (method->getNumParams() != 1) continue;
+      if (name.find("Visit") != 0)
+        continue;
+      if (method->getNumParams() != 1)
+        continue;
 
       clang::QualType arg_type = method->getParamDecl(0)->getType();
-      auto* record_decl = arg_type->getAsCXXRecordDecl();
-      if (record_decl == nullptr) continue;
+      auto *record_decl = arg_type->getAsCXXRecordDecl();
+      if (record_decl == nullptr)
+        continue;
       data.clang.visitable_decls.insert(record_decl);
     }
   } else if (name == "clang::ASTContext") {
@@ -239,10 +249,24 @@ bool IndexBuilder::VisitCXXRecordDecl(clang::CXXRecordDecl* D) {
     data.clang.stmt_decl = D;
   } else if (name == "clang::Attr") {
     data.clang.attr_decl = D;
+  } else if (name == "clang::CXXRecordDecl") {
+    data.clang.cxx_record_decl = D;
+  } else if (name == "clang::CXXMethodDecl") {
+    data.clang.cxx_method_decl = D;
+  } else if (name == "clang::EnumDecl") {
+    data.clang.enum_decl = D;
+    for (auto method : D->methods()) {
+      if (method->getNameAsString() == "enumerators") {
+        data.clang.enum_decl_enumerators = method;
+        break;
+      }
+    }
+  } else if (name == "clang::EnumConstantDecl") {
+    data.clang.enum_constant_decl = D;
   }
 
-  for (auto& base_specifier : D->bases()) {
-    if (clang::CXXRecordDecl* base = base_specifier.getType()
+  for (auto &base_specifier : D->bases()) {
+    if (clang::CXXRecordDecl *base = base_specifier.getType()
                                          ->getCanonicalTypeInternal()
                                          ->getAsCXXRecordDecl()) {
       data.inheritance.subs[base].push_back(D);
@@ -277,4 +301,4 @@ Index IndexBuilder::Build() && {
   return std::move(data);
 }
 
-}  // namespace arboretum
+} // namespace arboretum

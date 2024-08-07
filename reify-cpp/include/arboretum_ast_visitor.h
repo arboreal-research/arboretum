@@ -8,7 +8,7 @@ namespace arboretum {
 
 struct ArboretumASTVisitor
     : public clang::RecursiveASTVisitor<ArboretumASTVisitor> {
-  ArboretumASTVisitor(ArboretumContext& context) : context_(context) {}
+  ArboretumASTVisitor(ArboretumContext &context) : context_(context) {}
 
   bool shouldVisitTemplateInstantiations() const { return true; }
 
@@ -162,7 +162,6 @@ struct ArboretumASTVisitor
   bool VisitCXXMethodDecl(clang::CXXMethodDecl* D);
   bool VisitCXXRecordDecl(clang::CXXRecordDecl* D);
   bool VisitCapturedDecl(clang::CapturedDecl* D);
-  bool VisitClassScopeFunctionSpecializationDecl(clang::ClassScopeFunctionSpecializationDecl* D);
   bool VisitClassTemplateDecl(clang::ClassTemplateDecl* D);
   bool VisitClassTemplatePartialSpecializationDecl(clang::ClassTemplatePartialSpecializationDecl* D);
   bool VisitClassTemplateSpecializationDecl(clang::ClassTemplateSpecializationDecl* D);
@@ -407,6 +406,7 @@ struct ArboretumASTVisitor
   bool VisitOMPParallelMasterTaskLoopSimdDirective(clang::OMPParallelMasterTaskLoopSimdDirective* S);
   bool VisitOMPParallelSectionsDirective(clang::OMPParallelSectionsDirective* S);
   bool VisitOMPScanDirective(clang::OMPScanDirective* S);
+  bool VisitOMPScopeDirective(clang::OMPScopeDirective* S);
   bool VisitOMPSectionDirective(clang::OMPSectionDirective* S);
   bool VisitOMPSectionsDirective(clang::OMPSectionsDirective* S);
   bool VisitOMPSimdDirective(clang::OMPSimdDirective* S);
@@ -502,7 +502,7 @@ struct ArboretumASTVisitor
   bool VisitWhileStmt(clang::WhileStmt* S);
   ////   END ARBORETUM GENERATED CODE ////
 
-  ArboretumContext& context_;
+  ArboretumContext &context_;
 };
 
-}  // namespace arboretum
+} // namespace arboretum

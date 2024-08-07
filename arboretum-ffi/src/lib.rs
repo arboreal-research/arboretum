@@ -1,220 +1,258 @@
 use once_cell::sync::Lazy;
-use serde::Deserialize;
-use std::ffi::{c_char, CStr};
-use surrealdb::{
-    engine::remote::ws::{Client, Ws},
-    sql::{
-        statements::{RelateStatement, UpdateStatement},
-        Id, Object, Table, Thing, Values,
-    },
-    Error, Surreal,
+
+use simple_triplestore::{
+    mem::MemHashIndex,
+    prelude::*,
+    rdf::{Entity, RdfTripleStore, RdfTripleStoreError},
+    MemTripleStore, Triple, UlidIdGenerator,
 };
-use tracing::error;
+use std::{
+    ffi::{c_char, CStr},
+    sync::{Arc, RwLock},
+};
+use ulid::Ulid;
 
-mod object_builder;
-use object_builder::ObjectBuilder;
+// static RUNTIME: Lazy<tokio::runtime::Runtime> = Lazy::new(|| {
+//     tokio::runtime::Builder::new_multi_thread()
+//         .worker_threads(2)
+//         .enable_all()
+//         .build()
+//         .unwrap()
+// });
 
-static RUNTIME: Lazy<tokio::runtime::Runtime> = Lazy::new(|| {
-    tokio::runtime::Builder::new_multi_thread()
-        .worker_threads(2)
-        .enable_all()
-        .build()
-        .unwrap()
+type NodeProps = ();
+type EdgeProps = ();
+
+type MemRdfNameIndex = MemHashIndex<String, Ulid>;
+type MemRdfTripleStoreImpl = MemTripleStore<Ulid, NodeProps, EdgeProps>;
+
+type MemRdfTripleStore =
+    RdfTripleStore<NodeProps, EdgeProps, MemRdfNameIndex, MemRdfTripleStoreImpl>;
+
+static GRAPH: Lazy<Arc<RwLock<MemRdfTripleStore>>> = Lazy::new(|| {
+    Arc::new(RwLock::new(RdfTripleStore::new(
+        MemHashIndex::new(),
+        MemTripleStore::new(UlidIdGenerator::new()),
+    )))
 });
 
-pub static DB: Lazy<Surreal<Client>> = Lazy::new(Surreal::init);
-
-#[derive(Debug, Deserialize)]
-struct Record {
-    id: Thing,
-}
-
 #[tracing::instrument]
 #[no_mangle]
-pub extern "C" fn arboretum_connect_surreal(addr: *const c_char) -> u8 {
+pub extern "C" fn arboretum_connect(addr: *const c_char) -> u8 {
     let subscriber = tracing_subscriber::FmtSubscriber::new();
     tracing::subscriber::set_global_default(subscriber).expect("set successfully");
+    1
+}
 
-    let result: Result<(), Error> = RUNTIME.block_on(async {
-        DB.connect::<Ws>(
-            unsafe { CStr::from_ptr(addr) }
-                .to_string_lossy()
-                .to_string(),
-        )
-        .await?;
+/*
+  _   _           _
+ | \ | |         | |
+ |  \| | ___   __| | ___
+ | . ` |/ _ \ / _` |/ _ \
+ | |\  | (_) | (_| |  __/
+ \_| \_/\___/ \__,_|\___|
+*/
 
-        DB.use_ns("test").use_db("test").await
-    });
+#[tracing::instrument]
+#[no_mangle]
+pub extern "C" fn arboretum_create_named_node(name: *const c_char) -> *mut Entity {
+    fn inner(name: String) -> Result<*mut Entity, <MemRdfTripleStore as TripleStoreError>::Error> {
+        let entity;
+        {
+            let mut lock = GRAPH.write().unwrap();
 
-    if result.is_err() {
-        error!(?result);
-        0
-    } else {
-        1
+            let maybe_id = lock
+                .get_name_index()
+                .left_to_right(&name)
+                .map_err(|e| RdfTripleStoreError::NameIndexStorageError(e))?;
+
+            match maybe_id {
+                Some(id) => {
+                    entity = Entity::Ulid(id);
+                }
+                None => {
+                    let id = Ulid::new();
+
+                    entity = Entity::Ulid(id);
+
+                    lock.get_name_index_mut()
+                        .set(name, id)
+                        .map_err(|e| RdfTripleStoreError::NameIndexStorageError(e))?;
+
+                    lock.insert_node(entity.clone(), ())?;
+                }
+            }
+        }
+        Ok(Box::into_raw(Box::new(entity)))
     }
-}
 
-#[tracing::instrument]
-#[no_mangle]
-pub extern "C" fn arboretum_thing_destroy(thing: *mut Thing) {
-    let _ = unsafe { Box::from_raw(thing) };
-}
-
-#[tracing::instrument]
-#[no_mangle]
-pub extern "C" fn arboretum_node_new(
-    table: *const c_char,
-    fields: *mut ObjectBuilder,
-) -> *mut Thing {
-    let tb = unsafe { CStr::from_ptr(table) }
+    let name = unsafe { CStr::from_ptr(name) }
         .to_string_lossy()
         .to_string();
 
-    let fields = if fields.is_null() {
-        None
-    } else {
-        Some(*unsafe { Box::from_raw(fields) })
-    };
-
-    let node: Result<Option<Thing>, Error> = RUNTIME.block_on(async {
-        let create = DB.create((tb, Id::ulid()));
-
-        let result: Option<Record> = match fields {
-            Some(fields) => create.content(Object(fields.into())).await?,
-            None => create.await?,
-        };
-
-        match result {
-            Some(Record { id }) => Ok(Some(id)),
-            None => Ok(None),
-        }
-    });
-
-    match node {
-        Ok(Some(node)) => Box::into_raw(node.into()),
-        Ok(None) => {
-            error!("Failed to retrieve id after creating node.");
-            std::ptr::null_mut()
-        }
+    match inner(name) {
         Err(e) => {
-            error!(?e);
+            tracing::error!(?e);
             std::ptr::null_mut()
         }
+        Ok(ptr) => ptr,
     }
 }
 
 #[tracing::instrument]
 #[no_mangle]
-pub extern "C" fn arboretum_node_new_with_id(
-    table: *const c_char,
-    id: *const c_char,
-    fields: *mut ObjectBuilder,
-) -> *mut Thing {
-    let tb = unsafe { CStr::from_ptr(table) }
+pub extern "C" fn arboretum_create_named_node_with_id(
+    name: *const c_char,
+    id_hi: u64,
+    id_lo: u64,
+) -> *mut Entity {
+    fn inner(
+        name: String,
+        id: u128,
+    ) -> Result<*mut Entity, <MemRdfTripleStore as TripleStoreError>::Error> {
+        let id = Ulid(id);
+        let entity = Entity::Ulid(id);
+
+        {
+            let mut lock = GRAPH.write().unwrap();
+
+            lock.get_name_index_mut()
+                .set(name, id)
+                .map_err(|e| RdfTripleStoreError::NameIndexStorageError(e))?;
+
+            lock.insert_node(entity.clone(), ())?;
+        }
+        Ok(Box::into_raw(Box::new(entity)))
+    }
+
+    let name = unsafe { CStr::from_ptr(name) }
         .to_string_lossy()
         .to_string();
-    let id = Id::String(unsafe { CStr::from_ptr(id) }.to_string_lossy().to_string());
 
-    let fields = if fields.is_null() {
-        None
-    } else {
-        Some(*unsafe { Box::from_raw(fields) })
-    };
+    let id = ((id_hi as u128) << 64) + (id_lo as u128);
 
-    let node: Result<Option<Thing>, Error> = RUNTIME.block_on(async {
-        let create = DB.insert((tb, id));
-
-        let result: Option<Record> = match fields {
-            Some(fields) => create.content(Object(fields.into())).await?,
-            None => create.await?,
-        };
-
-        match result {
-            Some(Record { id }) => Ok(Some(id)),
-            None => Ok(None),
-        }
-    });
-
-    match node {
-        Ok(Some(node)) => Box::into_raw(node.into()),
-        Ok(None) => {
-            error!("Failed to retrieve id after creating node.");
-            std::ptr::null_mut()
-        }
+    match inner(name, id) {
         Err(e) => {
-            error!(?e);
+            tracing::error!(?e);
             std::ptr::null_mut()
         }
+        Ok(ptr) => ptr,
     }
 }
 
 #[tracing::instrument]
 #[no_mangle]
-pub extern "C" fn arboretum_create_relation(
-    left: *const Thing,
-    relation: *const c_char,
-    right: *const Thing,
-    fields: *mut ObjectBuilder,
+pub extern "C" fn arboretum_create_nameless_node() -> *mut Entity {
+    fn inner() -> Result<*mut Entity, <MemRdfTripleStore as TripleStoreError>::Error> {
+        let entity = Entity::Ulid(Ulid::new());
+
+        {
+            let mut lock = GRAPH.write().unwrap();
+            lock.insert_node(entity.clone(), ())?;
+        }
+
+        Ok(Box::into_raw(Box::new(entity)))
+    }
+
+    match inner() {
+        Err(e) => {
+            tracing::error!(?e);
+            std::ptr::null_mut()
+        }
+        Ok(ptr) => ptr,
+    }
+}
+
+#[tracing::instrument]
+#[no_mangle]
+pub extern "C" fn arboretum_get_named_node(name: *const c_char) -> *mut Entity {
+    let name = unsafe { CStr::from_ptr(name) }
+        .to_string_lossy()
+        .to_string();
+    Box::into_raw(Box::new(Entity::String(name)))
+}
+
+#[tracing::instrument]
+#[no_mangle]
+pub extern "C" fn arboretum_get_ulid_node(id_hi: u64, id_lo: u64) -> *mut Entity {
+    let id = ((id_hi as u128) << 64) + (id_lo as u128);
+    Box::into_raw(Box::new(Entity::Ulid(Ulid(id))))
+}
+
+/*
+
+  _____    _
+ |  ___|  | |
+ | |__  __| | __ _  ___
+ |  __|/ _` |/ _` |/ _ \
+ | |__| (_| | (_| |  __/
+ \____/\__,_|\__, |\___|
+              __/ |
+             |___/
+*/
+
+#[tracing::instrument]
+#[no_mangle]
+pub extern "C" fn arboretum_create_edge(
+    sub_ptr: *const Entity,
+    pred_ptr: *const Entity,
+    obj_ptr: *const Entity,
 ) {
-    let left = unsafe { &*left }.clone();
-    let relation = Table(
-        unsafe { CStr::from_ptr(relation) }
-            .to_string_lossy()
-            .to_string(),
-    );
-    let right = unsafe { &*right }.clone();
-
-    let data = if fields.is_null() {
-        None
-    } else {
-        let fields = *unsafe { Box::from_raw(fields) };
-        Some(surrealdb::sql::Data::ContentExpression(
-            Object(fields.into()).into(),
-        ))
-    };
-
-    let result: Result<(), Error> = RUNTIME.block_on(async {
-        DB.query(RelateStatement {
-            from: left.into(),
-            kind: relation.into(),
-            with: right.into(),
-            data,
-            output: Some(surrealdb::sql::Output::None),
-            ..RelateStatement::default()
-        })
-        .await
-        .map(|_| ())
-    });
-
-    if let Err(e) = result {
-        error!(?e);
-    }
-}
-
-#[tracing::instrument]
-#[no_mangle]
-pub extern "C" fn aboretum_merge_fields(obj: *const Thing, fields: *mut ObjectBuilder) {
-    let obj = unsafe { &*obj }.clone();
-    let fields = *unsafe { Box::from_raw(fields) };
-
-    if fields.fields.len() == 0 {
+    if sub_ptr.is_null() || pred_ptr.is_null() || obj_ptr.is_null() {
         return;
     }
 
-    let result: Result<(), Error> = RUNTIME.block_on(async {
-        DB.query(UpdateStatement {
-            what: Values([obj.into()].into()),
-            data: Some(surrealdb::sql::Data::MergeExpression(
-                Object(fields.into()).into(),
-            )),
-            output: Some(surrealdb::sql::Output::None),
-            ..UpdateStatement::default()
-        })
-        .await
-        .map(|_| ())
-    });
+    fn inner(
+        sub: Entity,
+        pred: Entity,
+        obj: Entity,
+    ) -> Result<(), <MemRdfTripleStore as TripleStoreError>::Error> {
+        let mut lock = GRAPH.write().unwrap();
+        lock.insert_edge(Triple { sub, pred, obj }, ())?;
+        Ok(())
+    }
 
-    if let Err(e) = result {
-        error!(?e);
+    let sub;
+    let pred;
+    let obj;
+    unsafe {
+        sub = (&*sub_ptr).clone();
+        pred = (&*pred_ptr).clone();
+        obj = (&*obj_ptr).clone();
+    }
+
+    if let Err(e) = inner(sub, pred, obj) {
+        tracing::error!(?e);
+    }
+}
+
+/**
+  _____      _                        _
+ |_   _|    | |                      | |
+   | | _ __ | |_ ___ _ __ _ __   __ _| |
+   | || '_ \| __/ _ \ '__| '_ \ / _` | |
+  _| || | | | ||  __/ |  | | | | (_| | |
+  \___/_| |_|\__\___|_|  |_| |_|\__,_|_|
+*/
+
+#[tracing::instrument]
+#[no_mangle]
+pub extern "C" fn arboretum_dump() {
+    fn inner() -> Result<(), <MemRdfTripleStore as TripleStoreError>::Error> {
+        let lock = GRAPH.read().unwrap();
+
+        let edges = lock
+            .iter_edges(simple_triplestore::EdgeOrder::SPO)
+            .collect::<Result<Vec<_>, _>>()?;
+
+        for (Triple { sub, pred, obj }, _) in edges {
+            tracing::info!(?sub, ?pred, ?obj);
+        }
+
+        Ok(())
+    }
+
+    if let Err(e) = inner() {
+        tracing::error!(?e);
     }
 }

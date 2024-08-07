@@ -5,12 +5,12 @@ LLVM_STAMP := llvm-project/build/llvm-stamp
 
 REIFICATOR_SRCS := $(wildcard reificator/src/*.cc)
 REIFY_CPP_SRCS := $(wildcard reify-cpp/src/*.cc)
-ARBORETUM_SRCS := $(wildcard arboretum/src/*.cc)
+ARBORETUM_SRCS := $(wildcard arboretum-plugin/src/*.cc)
 ARBORETUM_FFI_SRCS := $(wildcard arboretum-ffi/src/*.rs)
 
 REIFICATOR_OBJS := $(patsubst %.cc,$(BUILD_DIR)/reificator/%.o,$(notdir $(REIFICATOR_SRCS)))
 REIFY_CPP_OBJS := $(patsubst %.cc,$(BUILD_DIR)/reify_cpp/%.o,$(notdir $(REIFY_CPP_SRCS)))
-ARBORETUM_OBJS := $(patsubst %.cc,$(BUILD_DIR)/arboretum/%.o,$(notdir $(ARBORETUM_SRCS)))
+ARBORETUM_OBJS := $(patsubst %.cc,$(BUILD_DIR)/arboretum-plugin/%.o,$(notdir $(ARBORETUM_SRCS)))
 
 arboretum: $(BUILD_DIR)/libarboretum.so
 
@@ -21,7 +21,7 @@ $(LLVM_STAMP):
 			-DLLVM_ENABLE_PROJECTS=clang \
 			-DCMAKE_BUILD_TYPE=Release \
 			-DLLVM_PARALLEL_LINK_JOBS=1 \
-		&& cmake --build build -j15 \
+		&& cmake --build build -j12 \
 		&& cmake --install build --prefix ${LLVM_DIR} \
 		&& touch build/llvm-stamp
 
@@ -55,14 +55,14 @@ target/debug/libarboretum_ffi.a: arboretum-ffi/src/lib.rs
 $(BUILD_DIR)/libarboretum.so: target/debug/libarboretum_ffi.a $(BUILD_DIR)/reify_cpp.a $(ARBORETUM_OBJS)
 	./llvm/bin/clang++ -shared -fPIC $(CXXFLAGS) -o $@ $(ARBORETUM_OBJS) $(BUILD_DIR)/reify_cpp.a target/debug/libarboretum_ffi.a
 
-$(BUILD_DIR)/arboretum/%.o: arboretum/src/%.cc | $(BUILD_DIR) $(LLVM_STAMP) reificator
-	./llvm/bin/clang++ -g -c $(CXXFLAGS) -fPIC -Iarboretum-ffi/src/ -Ireify-cpp/include/ -MMD -MF $(BUILD_DIR)/arboretum/$*.d -o $@ $< 
+$(BUILD_DIR)/arboretum-plugin/%.o: arboretum-plugin/src/%.cc | $(BUILD_DIR) $(LLVM_STAMP) reificator
+	./llvm/bin/clang++ -g -c $(CXXFLAGS) -fPIC -Iarboretum-ffi/src/ -Ireify-cpp/include/ -MMD -MF $(BUILD_DIR)/arboretum-plugin/$*.d -o $@ $< 
 
 $(BUILD_DIR):
 	@mkdir -p $(BUILD_DIR)
 	@mkdir -p $(BUILD_DIR)/reificator
 	@mkdir -p $(BUILD_DIR)/reify_cpp
-	@mkdir -p $(BUILD_DIR)/arboretum
+	@mkdir -p $(BUILD_DIR)/arboretum-plugin
 
 # Include dependency files
 -include $(REIFICATOR_OBJS:.o=.d)

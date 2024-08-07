@@ -73,6 +73,26 @@
     "regex": "cpp",
     "__tree": "cpp",
     "any": "cpp",
-    "forward_list": "cpp"
-  }
+    "forward_list": "cpp",
+    "__locale": "cpp",
+    "list": "cpp",
+    "set": "cpp",
+    "span": "cpp",
+    "unordered_set": "cpp",
+    "valarray": "cpp",
+    "hash_map": "cpp",
+    "hash_set": "cpp",
+    "complex": "cpp",
+    "execution": "cpp",
+    "fstream": "cpp",
+    "print": "cpp",
+    "stack": "cpp",
+    "source_location": "cpp",
+    "__debug": "cpp",
+    "format": "cpp",
+    "ranges": "cpp",
+    "typeindex": "cpp"
+  },
+  "cmake.configureOnOpen": false,
+  "C_Cpp.default.compilerPath": "/usr/bin/clang++"
 }

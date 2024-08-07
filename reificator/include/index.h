@@ -50,6 +50,12 @@ struct Clang {
   const clang::CXXRecordDecl *ast_context_decl = nullptr;
   const clang::CXXRecordDecl *recursive_ast_visitor = nullptr;
 
+  const clang::CXXRecordDecl *cxx_record_decl;
+  const clang::CXXRecordDecl *cxx_method_decl;
+  const clang::CXXRecordDecl *enum_decl;
+  const clang::CXXMethodDecl *enum_decl_enumerators;
+  const clang::CXXRecordDecl *enum_constant_decl;
+
   std::unordered_set<const clang::CXXRecordDecl *> all_decls;
   std::unordered_set<const clang::CXXRecordDecl *> visitable_decls;
 
@@ -89,4 +95,4 @@ struct Index {
   Clang clang;
 };
 
-}  // namespace arboretum
+} // namespace arboretum
