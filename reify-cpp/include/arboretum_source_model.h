@@ -17,16 +17,15 @@ struct SourceModel {
   clang::ASTContext &ctx_;
   DataModel &data_model_;
 
-  // FileId.getHashValue() -> Entity
-  std::unordered_map<unsigned int, Entity *> file_lookup_;
-  const Entity *resolve(clang::FileID fid);
+  // FileId.getHashValue() -> Id
+  std::unordered_map<unsigned int, Id *> file_lookup_;
+  const Id *resolve(clang::FileID fid);
 
-  std::unordered_map<void *, Entity *> source_location_lookup_;
-  const Entity *resolve(clang::SourceLocation source_location);
+  std::unordered_map<void *, Id *> source_location_lookup_;
+  const Id *resolve(clang::SourceLocation source_location);
 
-  std::map<std::pair<const Entity *, const Entity *>, Entity *>
-      source_range_lookup_;
-  const Entity *resolve(clang::SourceRange source_range);
+  std::map<std::pair<const Id *, const Id *>, Id *> source_range_lookup_;
+  const Id *resolve(clang::SourceRange source_range);
 };
 
 SourceModel EmitSourceModel(clang::ASTContext &ctx, DataModel &data_model);

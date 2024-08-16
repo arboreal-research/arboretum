@@ -18,10 +18,86 @@ bool AlphabetizeCXXRecordDecl(const clang::CXXRecordDecl *a,
 }
 
 void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
-                  const std::string &reify_cpp_dir) {
+                  const std::string &reify_cpp_dir,
+                  const std::string &reify_rs_dir) {
   std::filesystem::path reify_cpp_dir_path(reify_cpp_dir);
+  std::filesystem::path reify_rs_dir_path(reify_rs_dir);
 
   std::map<std::string, const clang::EnumDecl *> enums_to_emit;
+
+  std::unordered_map<std::string, uint64_t> id_by_name;
+  uint64_t next_id = 1UL << 32;
+
+  auto fqn_to_id = [&](const std::string &s) {
+    auto find_itr = id_by_name.find(s);
+    if (find_itr == id_by_name.end()) {
+      uint64_t id = next_id++;
+      id_by_name[s] = id;
+      return id;
+    }
+    return find_itr->second;
+  };
+
+  std::vector<std::pair<std::string, std::string>> meta_data_model;
+  meta_data_model.push_back(std::pair("true_", "true"));
+  meta_data_model.push_back(std::pair("false_", "false"));
+  meta_data_model.push_back(std::pair("meta_class_", "/meta/class"));
+  meta_data_model.push_back(std::pair("meta_subclass_", "/meta/subclass"));
+  meta_data_model.push_back(std::pair("meta_method_", "/meta/method"));
+  meta_data_model.push_back(std::pair("meta_domain_", "/meta/domain"));
+  meta_data_model.push_back(std::pair("meta_range_", "/meta/range"));
+  meta_data_model.push_back(
+      std::pair("builtin_string_class_", "/builtin/string"));
+  meta_data_model.push_back(std::pair("builtin_u64_class_", "/builtin/u64"));
+  meta_data_model.push_back(std::pair("builtin_i64_class_", "/builtin/i64"));
+  meta_data_model.push_back(std::pair("builtin_double_class_", "/builtin/dbl"));
+  meta_data_model.push_back(std::pair("builtin_list_class_", "/builtin/list"));
+  meta_data_model.push_back(
+      std::pair("builtin_list_size_", "/builtin/list/size"));
+  meta_data_model.push_back(
+      std::pair("builtin_list_item_class_", "/builtin/list/item_class"));
+  meta_data_model.push_back(std::pair("builtin_set_class_", "/builtin/set"));
+  meta_data_model.push_back(
+      std::pair("builtin_set_size_", "/builtin/set/size"));
+  meta_data_model.push_back(
+      std::pair("builtin_set_item_", "/builtin/set/item"));
+  meta_data_model.push_back(
+      std::pair("builtin_set_item_class_", "/builtin/set/item_class"));
+  meta_data_model.push_back(std::pair("invalid_file_", "/invalid/file"));
+  meta_data_model.push_back(
+      std::pair("invalid_source_location_", "/invalid/clang/SourceLocation"));
+  meta_data_model.push_back(std::pair("file_class_", "/file"));
+  meta_data_model.push_back(std::pair("file_name_", "/file/name"));
+  meta_data_model.push_back(std::pair("file_content_", "/file/content"));
+  meta_data_model.push_back(
+      std::pair("source_location_class_", "/clang/SourceLocation"));
+  meta_data_model.push_back(
+      std::pair("source_location_is_file", "/clang/SourceLocation/is_file"));
+  meta_data_model.push_back(
+      std::pair("source_location_file_", "/clang/SourceLocation/file"));
+  meta_data_model.push_back(
+      std::pair("source_location_line_", "/clang/SourceLocation/line"));
+  meta_data_model.push_back(
+      std::pair("source_location_column_", "/clang/SourceLocation/column"));
+  meta_data_model.push_back(std::pair("source_location_expansion_loc_",
+                                      "/clang/SourceLocation/expansion_loc"));
+  meta_data_model.push_back(std::pair("source_location_spelling_loc_",
+                                      "/clang/SourceLocation/spelling_loc"));
+  meta_data_model.push_back(
+      std::pair("source_range_class_", "/clang/SourceRange"));
+  meta_data_model.push_back(
+      std::pair("source_range_begin_", "/clang/SourceRange/begin"));
+  meta_data_model.push_back(
+      std::pair("source_range_end_", "/clang/SourceLocation/end"));
+  meta_data_model.push_back(std::pair("qualtype_class_", "/clang/QualType"));
+  meta_data_model.push_back(
+      std::pair("qualtype_is_const_", "/clang/QualType/is_const"));
+  meta_data_model.push_back(
+      std::pair("qualtype_is_volatile_", "/clang/QualType/is_volatile"));
+  meta_data_model.push_back(
+      std::pair("qualtype_is_restrict_", "/clang/QualType/is_restrict"));
+  meta_data_model.push_back(
+      std::pair("qualtype_type_", "/clang/Qualtype/type"));
 
   /////////////////////////////////////////////////////////////////////////////
 
@@ -82,7 +158,7 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
             continue;
         }
 
-        std::string method_decl_entity = model.assign_entity_name(method_decl);
+        std::string method_decl_Id = model.entity_name(method_decl);
 
         auto return_type = method_decl->getReturnType();
         out << "  //" << method_name << "\n";
@@ -107,13 +183,13 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
               std::make_pair(decl->getQualifiedNameAsString(), decl));
 
           out << "  {\n";
-          out << "    const Entity* enum_value = "
+          out << "    const Id* enum_value = "
                  "context_.data_model_.resolve(D->"
               << method_name << "());\n";
           out << "    if (enum_value != nullptr) {\n";
           out << "      arboretum_create_edge(obj, "
                  "context_.data_model_."
-              << method_decl_entity << ", enum_value);\n";
+              << method_decl_Id << ", enum_value);\n";
           out << "    }\n";
           out << "  }\n";
         } else if (return_type->isPointerType()) {
@@ -125,11 +201,11 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
                 llvm::dyn_cast<clang::CXXRecordDecl>(record_type->getDecl());
             if (model.index.clang.all_decls.contains(record_decl)) {
               out << "  {\n";
-              out << "    const Entity* other = context_.resolve(D->"
-                  << method_name << "());\n";
+              out << "    const Id* other = context_.resolve(D->" << method_name
+                  << "());\n";
               out << "    arboretum_create_edge(obj, "
                      "context_.data_model_."
-                  << method_decl_entity << ", other);\n";
+                  << method_decl_Id << ", other);\n";
               out << "  }\n";
             }
           }
@@ -139,7 +215,7 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
           case clang::BuiltinType::Bool: {
             out << "  arboretum_create_edge(obj, "
                    "context_.data_model_."
-                << method_decl_entity
+                << method_decl_Id
                 << ", context_.data_model_.arboretum_node_for(D->"
                 << method_name << "()));\n";
           } break;
@@ -154,29 +230,29 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
           auto fqn = record_decl->getQualifiedNameAsString();
           if (fqn == "clang::QualType") {
             out << "  {\n";
-            out << "    const Entity* other = context_.resolve(D->"
-                << method_name << "());\n";
+            out << "    const Id* other = context_.resolve(D->" << method_name
+                << "());\n";
             out << "    arboretum_create_edge(obj, "
                    "context_.data_model_."
-                << method_decl_entity << ", other);\n";
+                << method_decl_Id << ", other);\n";
             out << "  }\n";
           } else if (fqn == "clang::SourceLocation") {
             out << "  {\n";
-            out << "    const Entity* other = "
+            out << "    const Id* other = "
                    "context_.source_model_.resolve(D->"
                 << method_name << "());\n";
             out << "    arboretum_create_edge(obj, "
                    "context_.data_model_."
-                << method_decl_entity << ", other);\n";
+                << method_decl_Id << ", other);\n";
             out << "  }\n";
           } else if (fqn == "clang::SourceRange") {
             out << "  {\n";
-            out << "    const Entity* other = "
+            out << "    const Id* other = "
                    "context_.source_model_.resolve(D->"
                 << method_name << "());\n";
             out << "    arboretum_create_edge(obj, "
                    "context_.data_model_."
-                << method_decl_entity << ", other);\n";
+                << method_decl_Id << ", other);\n";
             out << "  }\n";
           } else {
             out << "  // " << return_type.getAsString() << "\n";
@@ -194,21 +270,20 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
       out << "bool ArboretumASTVisitor::Visit" << decl_name
           << "(clang::" << decl_name << "* D) {\n";
 
-      out << "  const Entity* obj = context_.resolve(D);\n";
+      out << "  const Id* obj = context_.resolve(D);\n";
 
       if (type_decl == model.index.clang.stmt_decl) {
         out << "  switch(D->getTypeClass()) {\n";
         for (auto [decl, enum_decl] :
              model.index.clang.typeclass_enum_by_decl) {
-          std::string decl_entity = model.assign_entity_name(decl);
+          std::string decl_Id = model.entity_name(decl);
 
           out << "    case " << enum_decl->getQualifiedNameAsString()
               << ": {\n";
-          out << "assert(context_.data_model_." << decl_entity
-              << " != nullptr);\n";
+          out << "assert(context_.data_model_." << decl_Id << " != nullptr);\n";
           out << "     arboretum_create_edge(obj, "
                  "context_.data_model_.meta_class_, context_.data_model_."
-              << decl_entity << "); \n";
+              << decl_Id << "); \n";
           out << "    } break;\n";
         }
         out << "    default: break;\n";
@@ -247,20 +322,19 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
         out << "  if (!D->isThisDeclarationADefinition()) return true;\n\n";
       }
 
-      out << "  const Entity* obj = context_.resolve(D);\n";
+      out << "  const Id* obj = context_.resolve(D);\n";
 
       if (decl_decl == model.index.clang.decl_decl) {
         out << "  switch(D->getKind()) {\n";
         for (auto [decl, enum_decl] : model.index.clang.declkind_enum_by_decl) {
-          std::string decl_entity = model.assign_entity_name(decl);
+          std::string decl_Id = model.entity_name(decl);
 
           out << "    case " << enum_decl->getQualifiedNameAsString()
               << ": {\n";
-          out << "assert(context_.data_model_." << decl_entity
-              << " != nullptr);\n";
+          out << "assert(context_.data_model_." << decl_Id << " != nullptr);\n";
           out << "     arboretum_create_edge(obj, "
                  "context_.data_model_.meta_class_, context_.data_model_."
-              << decl_entity << "); \n";
+              << decl_Id << "); \n";
           out << "    } break;\n";
         }
         out << "    default: break;\n";
@@ -278,21 +352,20 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
       out << "bool ArboretumASTVisitor::Visit" << decl_name
           << "(clang::" << decl_name << "* D) {\n";
 
-      out << "  const Entity* obj = context_.resolve(D);\n";
+      out << "  const Id* obj = context_.resolve(D);\n";
 
       if (stmt_decl == model.index.clang.stmt_decl) {
         out << "  switch(D->getStmtClass()) {\n";
         for (auto [decl, enum_decl] :
              model.index.clang.stmtclass_enum_by_decl) {
-          std::string decl_entity = model.assign_entity_name(decl);
+          std::string decl_Id = model.entity_name(decl);
 
           out << "    case " << enum_decl->getQualifiedNameAsString()
               << ": {\n";
-          out << "assert(context_.data_model_." << decl_entity
-              << " != nullptr);\n";
+          out << "assert(context_.data_model_." << decl_Id << " != nullptr);\n";
           out << "     arboretum_create_edge(obj, "
                  "context_.data_model_.meta_class_, context_.data_model_."
-              << decl_entity << "); \n";
+              << decl_Id << "); \n";
           out << "    } break;\n";
         }
         out << "    default: break;\n";
@@ -311,9 +384,12 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
   auto data_model_h = PartiallyGeneratedFile::Read(
       reify_cpp_dir_path / "include" / "arboretum_data_model.h");
   assert(data_model_h.Write([&](std::ostream &out) -> bool {
+    for (const auto &[var, name] : meta_data_model) {
+      out << "  Id* " << var << " = nullptr;\n";
+    }
+
     for (auto &decl_decl : model.index.clang.all_decls) {
-      out << "  Entity* " << model.assign_entity_name(decl_decl)
-          << " = nullptr;\n";
+      out << "  Id* " << model.entity_name(decl_decl) << " = nullptr;\n";
       for (auto method_decl : decl_decl->methods()) {
         std::optional<std::string> method_decl_usr =
             getUSR(model.ast_ctx, method_decl);
@@ -322,17 +398,15 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
           continue;
         }
 
-        out << "  Entity* " << model.assign_entity_name(method_decl)
-            << " = nullptr;\n";
+        out << "  Id* " << model.entity_name(method_decl) << " = nullptr;\n";
       }
     }
 
     for (auto &[enum_name, enum_decl] : enums_to_emit) {
-      out << "  Entity* resolve(" << enum_name << " e);\n";
-      out << "  Entity* " << model.assign_entity_name(enum_decl)
-          << " = nullptr;\n";
+      out << "  Id* resolve(" << enum_name << " e);\n";
+      out << "  Id* " << model.entity_name(enum_decl) << " = nullptr;\n";
       for (const auto &enum_value_decl : enum_decl->enumerators()) {
-        out << "  Entity* " << model.assign_entity_name(enum_value_decl)
+        out << "  Id* " << model.entity_name(enum_value_decl)
             << " = nullptr;\n";
       }
     }
@@ -345,24 +419,40 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
   auto data_model_cc = PartiallyGeneratedFile::Read(reify_cpp_dir_path / "src" /
                                                     "arboretum_data_model.cc");
   assert(data_model_cc.Write([&](std::ostream &out) -> bool {
+    out << "DataModel::DataModel() {\n";
+    for (const auto &[var, name] : meta_data_model) {
+      out << "  " << var << " = arboretum_create_nameless_node_with_id("
+          << fqn_to_id(name) << ");\n";
+    }
+    out << "}\n\n";
+
     out << "DataModel EmitDataModel() {\n";
     out << "  DataModel data_model;\n\n";
 
-    // Assign a named entity to the appropriate data model field for that decl.
+    // Assign a named Id to the appropriate data model field for that decl.
     for (auto &decl_decl : model.index.clang.all_decls) {
-      std::string decl_decl_entity = model.assign_entity_name(decl_decl);
+      std::string decl_decl_Id = model.entity_name(decl_decl);
 
-      out << "  data_model." << decl_decl_entity
-          << " = arboretum_create_named_node(\""
-          << fqn_to_name(decl_decl->getQualifiedNameAsString()) << "\");\n";
-      out << "  arboretum_create_edge(data_model." << decl_decl_entity
+      out << "  data_model." << decl_decl_Id
+          << " = arboretum_create_nameless_node_with_id("
+          << fqn_to_id(decl_decl->getQualifiedNameAsString()) << ");\n";
+      out << "  arboretum_create_edge(data_model." << decl_decl_Id
           << ", data_model.meta_class_, data_model."
-          << model.assign_entity_name(model.index.clang.cxx_record_decl)
-          << ");\n";
+          << model.entity_name(model.index.clang.cxx_record_decl) << ");\n";
+
+      // Emit the subclass edges
+      for (auto super : model.index.inheritance.supers[decl_decl]) {
+        if (!model.index.clang.all_decls.contains(super))
+          continue;
+
+        std::string super_Id = model.entity_name(super);
+        out << "  arboretum_create_edge(data_model." << decl_decl_Id
+            << ", data_model.meta_subclass_, data_model." << super_Id << ");\n";
+      }
 
       // Emit the methods
       out << "  {\n";
-      out << "    std::vector<Entity*> methods;\n";
+      out << "    std::vector<Id*> methods;\n";
 
       for (auto method_decl : decl_decl->methods()) {
         std::optional<std::string> method_decl_usr =
@@ -373,19 +463,19 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
         }
 
         std::string method_decl_fqn = method_decl->getQualifiedNameAsString();
-        std::string method_decl_entity = model.assign_entity_name(method_decl);
+        std::string method_decl_Id = model.entity_name(method_decl);
 
-        out << "      data_model." << method_decl_entity
-            << " = arboretum_create_named_node(\""
-            << fqn_to_name(method_decl_fqn) << "\");\n";
-        out << "      methods.push_back(data_model." << method_decl_entity
+        out << "      data_model." << method_decl_Id
+            << " = arboretum_create_nameless_node_with_id("
+            << fqn_to_id(method_decl_fqn) << ");\n";
+        out << "      methods.push_back(data_model." << method_decl_Id
             << ");\n";
       }
 
-      out << "    arboretum_create_edge(data_model." << decl_decl_entity
+      out << "    arboretum_create_edge(data_model." << decl_decl_Id
           << ", data_model.meta_method_, "
              "data_model.arboretum_node_for(data_model."
-          << model.assign_entity_name(model.index.clang.cxx_method_decl)
+          << model.entity_name(model.index.clang.cxx_method_decl)
           << ", methods));\n";
 
       out << "  }\n";
@@ -393,40 +483,38 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
 
     for (auto &[enum_name, enum_decl] : enums_to_emit) {
       std::string enum_decl_fqn = enum_decl->getQualifiedNameAsString();
-      std::string enum_decl_entity = model.assign_entity_name(enum_decl);
+      std::string enum_decl_Id = model.entity_name(enum_decl);
 
       out << "  {\n";
-      out << "    data_model." << enum_decl_entity
-          << " = arboretum_create_named_node(\"" << fqn_to_name(enum_decl_fqn)
-          << "\");\n";
-      out << "    arboretum_create_edge(data_model." << enum_decl_entity
+      out << "    data_model." << enum_decl_Id
+          << " = arboretum_create_nameless_node_with_id("
+          << fqn_to_id(enum_decl_fqn) << ");\n";
+      out << "    arboretum_create_edge(data_model." << enum_decl_Id
           << ", data_model.meta_class_, data_model."
-          << model.assign_entity_name(model.index.clang.enum_decl) << ");\n ";
+          << model.entity_name(model.index.clang.enum_decl) << ");\n ";
 
-      out << "    std::vector<Entity*> enumerators;\n";
+      out << "    std::vector<Id*> enumerators;\n";
       for (const auto &enum_value_decl : enum_decl->enumerators()) {
         std::string enum_value_decl_fqn =
             enum_value_decl->getQualifiedNameAsString();
-        std::string enum_value_decl_entity =
-            model.assign_entity_name(enum_value_decl);
+        std::string enum_value_decl_Id = model.entity_name(enum_value_decl);
 
         out << "    {\n";
-        out << "      data_model." << enum_value_decl_entity
-            << " = arboretum_create_named_node(\""
-            << fqn_to_name(enum_value_decl_fqn) << "\");\n";
-        out << "      arboretum_create_edge(data_model."
-            << enum_value_decl_entity
+        out << "      data_model." << enum_value_decl_Id
+            << " = arboretum_create_nameless_node_with_id("
+            << fqn_to_id(enum_value_decl_fqn) << ");\n";
+        out << "      arboretum_create_edge(data_model." << enum_value_decl_Id
             << ", data_model.meta_class_, "
                "data_model."
-            << model.assign_entity_name(model.index.clang.enum_constant_decl)
+            << model.entity_name(model.index.clang.enum_constant_decl)
             << ");\n";
-        out << "      enumerators.push_back(data_model."
-            << enum_value_decl_entity << ");\n";
+        out << "      enumerators.push_back(data_model." << enum_value_decl_Id
+            << ");\n";
 
         out << "    }\n";
       }
       out << "    data_model.arboretum_node_for(data_model."
-          << model.assign_entity_name(model.index.clang.enum_constant_decl)
+          << model.entity_name(model.index.clang.enum_constant_decl)
           << ", enumerators);\n";
       out << "  }\n";
     }
@@ -434,7 +522,7 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
     out << "}\n\n";
 
     for (auto &[enum_name, enum_decl] : enums_to_emit) {
-      out << "Entity* DataModel::resolve(" << enum_name << " e) {\n";
+      out << "Id* DataModel::resolve(" << enum_name << " e) {\n";
       out << "  switch(e) {\n";
 
       std::set<llvm::APSInt> seen_values;
@@ -450,7 +538,7 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
         seen_values.insert(enum_value);
 
         out << "    case " << enum_value_name << ": return "
-            << model.assign_entity_name(enum_value_decl) << ";\n";
+            << model.entity_name(enum_value_decl) << ";\n";
       }
 
       std::string enum_type = enum_decl->getIntegerType().getAsString();
@@ -458,13 +546,32 @@ void EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
         enum_type = "bool";
       if (enum_type == "uint8_t")
         enum_type = "uint32_t";
-      out << "    default: llvm::errs() << \"" << enum_name
-          << ": Unexpected enum value: \" << static_cast<" << enum_type
-          << ">(e) << \"\\n\";\n";
+      // out << "    default: llvm::errs() << \"" << enum_name
+      //     << ": Unexpected enum value: \" << static_cast<" << enum_type
+      //     << ">(e) << \"\\n\";\n";
+      out << "    default: break;\n";
       out << "  }\n";
       out << "  return nullptr;\n";
       out << "}\n\n";
     }
+
+    return true;
+  }));
+
+  /////////////////////////////////////////////////////////////////////////////
+
+  auto reify_rs =
+      PartiallyGeneratedFile::Read(reify_rs_dir_path / "src" / "lib.rs");
+  assert(reify_rs.Write([&](std::ostream &out) -> bool {
+    out << "use arboretum_graph::GraphBuffer;\n\n";
+
+    out << "pub fn build_data_model() -> GraphBuffer {\n";
+    out << "  let mut g = GraphBuffer::new();\n";
+    for (const auto &[s, id] : id_by_name) {
+      out << "  g.add_named_node(" << id << ", \"" << s << "\");\n";
+    }
+    out << "  g\n";
+    out << "}\n\n";
 
     return true;
   }));

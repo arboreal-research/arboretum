@@ -7,39 +7,39 @@ namespace arboretum {
 //// BEGIN ARBORETUM GENERATED CODE ////
 // Types
 bool ArboretumASTVisitor::VisitAdjustedType(clang::AdjustedType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getOriginalType
   {
-    const Entity* other = context_.resolve(D->getOriginalType());
-    arboretum_create_edge(obj, context_.data_model_.getOriginalType, other);
+    const Id* other = context_.resolve(D->getOriginalType());
+    arboretum_create_edge(obj, context_.data_model_.method_getOriginalType, other);
   }
   //getAdjustedType
   {
-    const Entity* other = context_.resolve(D->getAdjustedType());
-    arboretum_create_edge(obj, context_.data_model_.getAdjustedType, other);
+    const Id* other = context_.resolve(D->getAdjustedType());
+    arboretum_create_edge(obj, context_.data_model_.method_getAdjustedType, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared38, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar38, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitArrayType(clang::ArrayType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getElementType
   {
-    const Entity* other = context_.resolve(D->getElementType());
-    arboretum_create_edge(obj, context_.data_model_.getElementType2, other);
+    const Id* other = context_.resolve(D->getElementType());
+    arboretum_create_edge(obj, context_.data_model_.method_getElementType, other);
   }
   //getSizeModifier
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getSizeModifier());
+    const Id* enum_value = context_.data_model_.resolve(D->getSizeModifier());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getSizeModifier, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getSizeModifier, enum_value);
     }
   }
   //getIndexTypeQualifiers
@@ -50,216 +50,216 @@ bool ArboretumASTVisitor::VisitArrayType(clang::ArrayType* D) {
 }
 
 bool ArboretumASTVisitor::VisitAtomicType(clang::AtomicType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getValueType
   {
-    const Entity* other = context_.resolve(D->getValueType());
-    arboretum_create_edge(obj, context_.data_model_.getValueType1, other);
+    const Id* other = context_.resolve(D->getValueType());
+    arboretum_create_edge(obj, context_.data_model_.method_getValueType, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared19, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_1, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar19, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_1, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitAttributedType(clang::AttributedType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getAttrKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getAttrKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getAttrKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getAttrKind1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getAttrKind, enum_value);
     }
   }
   //getModifiedType
   {
-    const Entity* other = context_.resolve(D->getModifiedType());
-    arboretum_create_edge(obj, context_.data_model_.getModifiedType1, other);
+    const Id* other = context_.resolve(D->getModifiedType());
+    arboretum_create_edge(obj, context_.data_model_.method_getModifiedType, other);
   }
   //getEquivalentType
   {
-    const Entity* other = context_.resolve(D->getEquivalentType());
-    arboretum_create_edge(obj, context_.data_model_.getEquivalentType, other);
+    const Id* other = context_.resolve(D->getEquivalentType());
+    arboretum_create_edge(obj, context_.data_model_.method_getEquivalentType, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared21, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_2, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar21, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_2, other);
   }
   //isQualifier
-  arboretum_create_edge(obj, context_.data_model_.isQualifier1, context_.data_model_.arboretum_node_for(D->isQualifier()));
+  arboretum_create_edge(obj, context_.data_model_.method_isQualifier, context_.data_model_.arboretum_node_for(D->isQualifier()));
   //isMSTypeSpec
-  arboretum_create_edge(obj, context_.data_model_.isMSTypeSpec, context_.data_model_.arboretum_node_for(D->isMSTypeSpec()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMSTypeSpec, context_.data_model_.arboretum_node_for(D->isMSTypeSpec()));
   //isWebAssemblyFuncrefSpec
-  arboretum_create_edge(obj, context_.data_model_.isWebAssemblyFuncrefSpec, context_.data_model_.arboretum_node_for(D->isWebAssemblyFuncrefSpec()));
+  arboretum_create_edge(obj, context_.data_model_.method_isWebAssemblyFuncrefSpec, context_.data_model_.arboretum_node_for(D->isWebAssemblyFuncrefSpec()));
   //isCallingConv
-  arboretum_create_edge(obj, context_.data_model_.isCallingConv, context_.data_model_.arboretum_node_for(D->isCallingConv()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCallingConv, context_.data_model_.arboretum_node_for(D->isCallingConv()));
   //getImmediateNullability
   // std::optional<NullabilityKind>
   return true;
 }
 
 bool ArboretumASTVisitor::VisitAutoType(clang::AutoType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTypeConstraintArguments
   // ArrayRef<TemplateArgument>
   //getTypeConstraintConcept
   {
-    const Entity* other = context_.resolve(D->getTypeConstraintConcept());
-    arboretum_create_edge(obj, context_.data_model_.getTypeConstraintConcept, other);
+    const Id* other = context_.resolve(D->getTypeConstraintConcept());
+    arboretum_create_edge(obj, context_.data_model_.method_getTypeConstraintConcept, other);
   }
   //isConstrained
-  arboretum_create_edge(obj, context_.data_model_.isConstrained, context_.data_model_.arboretum_node_for(D->isConstrained()));
+  arboretum_create_edge(obj, context_.data_model_.method_isConstrained, context_.data_model_.arboretum_node_for(D->isConstrained()));
   //isDecltypeAuto
-  arboretum_create_edge(obj, context_.data_model_.isDecltypeAuto, context_.data_model_.arboretum_node_for(D->isDecltypeAuto()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDecltypeAuto, context_.data_model_.arboretum_node_for(D->isDecltypeAuto()));
   //isGNUAutoType
-  arboretum_create_edge(obj, context_.data_model_.isGNUAutoType, context_.data_model_.arboretum_node_for(D->isGNUAutoType()));
+  arboretum_create_edge(obj, context_.data_model_.method_isGNUAutoType, context_.data_model_.arboretum_node_for(D->isGNUAutoType()));
   //getKeyword
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getKeyword());
+    const Id* enum_value = context_.data_model_.resolve(D->getKeyword());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getKeyword1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getKeyword, enum_value);
     }
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitBTFTagAttributedType(clang::BTFTagAttributedType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getWrappedType
   {
-    const Entity* other = context_.resolve(D->getWrappedType());
-    arboretum_create_edge(obj, context_.data_model_.getWrappedType, other);
+    const Id* other = context_.resolve(D->getWrappedType());
+    arboretum_create_edge(obj, context_.data_model_.method_getWrappedType, other);
   }
   //getAttr
   {
-    const Entity* other = context_.resolve(D->getAttr());
-    arboretum_create_edge(obj, context_.data_model_.getAttr1, other);
+    const Id* other = context_.resolve(D->getAttr());
+    arboretum_create_edge(obj, context_.data_model_.method_getAttr, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared15, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_3, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar15, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_3, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitBitIntType(clang::BitIntType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isUnsigned
-  arboretum_create_edge(obj, context_.data_model_.isUnsigned, context_.data_model_.arboretum_node_for(D->isUnsigned()));
+  arboretum_create_edge(obj, context_.data_model_.method_isUnsigned, context_.data_model_.arboretum_node_for(D->isUnsigned()));
   //isSigned
-  arboretum_create_edge(obj, context_.data_model_.isSigned, context_.data_model_.arboretum_node_for(D->isSigned()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSigned, context_.data_model_.arboretum_node_for(D->isSigned()));
   //getNumBits
   // unsigned int
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared4, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_4, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar4, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_4, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitBlockPointerType(clang::BlockPointerType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getPointeeType
   {
-    const Entity* other = context_.resolve(D->getPointeeType());
-    arboretum_create_edge(obj, context_.data_model_.getPointeeType1, other);
+    const Id* other = context_.resolve(D->getPointeeType());
+    arboretum_create_edge(obj, context_.data_model_.method_getPointeeType, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared5, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_5, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar5, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_5, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitBuiltinType(clang::BuiltinType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getKind8, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getKind, enum_value);
     }
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared18, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_6, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar18, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_6, other);
   }
   //isInteger
-  arboretum_create_edge(obj, context_.data_model_.isInteger, context_.data_model_.arboretum_node_for(D->isInteger()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInteger, context_.data_model_.arboretum_node_for(D->isInteger()));
   //isSignedInteger
-  arboretum_create_edge(obj, context_.data_model_.isSignedInteger, context_.data_model_.arboretum_node_for(D->isSignedInteger()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSignedInteger, context_.data_model_.arboretum_node_for(D->isSignedInteger()));
   //isUnsignedInteger
-  arboretum_create_edge(obj, context_.data_model_.isUnsignedInteger, context_.data_model_.arboretum_node_for(D->isUnsignedInteger()));
+  arboretum_create_edge(obj, context_.data_model_.method_isUnsignedInteger, context_.data_model_.arboretum_node_for(D->isUnsignedInteger()));
   //isFloatingPoint
-  arboretum_create_edge(obj, context_.data_model_.isFloatingPoint, context_.data_model_.arboretum_node_for(D->isFloatingPoint()));
+  arboretum_create_edge(obj, context_.data_model_.method_isFloatingPoint, context_.data_model_.arboretum_node_for(D->isFloatingPoint()));
   //isSVEBool
-  arboretum_create_edge(obj, context_.data_model_.isSVEBool, context_.data_model_.arboretum_node_for(D->isSVEBool()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSVEBool, context_.data_model_.arboretum_node_for(D->isSVEBool()));
   //isSVECount
-  arboretum_create_edge(obj, context_.data_model_.isSVECount, context_.data_model_.arboretum_node_for(D->isSVECount()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSVECount, context_.data_model_.arboretum_node_for(D->isSVECount()));
   //isPlaceholderType
-  arboretum_create_edge(obj, context_.data_model_.isPlaceholderType1, context_.data_model_.arboretum_node_for(D->isPlaceholderType()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPlaceholderType, context_.data_model_.arboretum_node_for(D->isPlaceholderType()));
   //isNonOverloadPlaceholderType
-  arboretum_create_edge(obj, context_.data_model_.isNonOverloadPlaceholderType1, context_.data_model_.arboretum_node_for(D->isNonOverloadPlaceholderType()));
+  arboretum_create_edge(obj, context_.data_model_.method_isNonOverloadPlaceholderType, context_.data_model_.arboretum_node_for(D->isNonOverloadPlaceholderType()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitComplexType(clang::ComplexType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getElementType
   {
-    const Entity* other = context_.resolve(D->getElementType());
-    arboretum_create_edge(obj, context_.data_model_.getElementType, other);
+    const Id* other = context_.resolve(D->getElementType());
+    arboretum_create_edge(obj, context_.data_model_.method_getElementType_1, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared2, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_7, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar2, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_7, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitConstantArrayType(clang::ConstantArrayType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSize
   // const llvm::APInt &
   //getSizeExpr
   {
-    const Entity* other = context_.resolve(D->getSizeExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSizeExpr1, other);
+    const Id* other = context_.resolve(D->getSizeExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSizeExpr, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared34, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_8, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar34, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_8, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitConstantMatrixType(clang::ConstantMatrixType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getNumRows
   // unsigned int
   //getNumColumns
@@ -270,340 +270,340 @@ bool ArboretumASTVisitor::VisitConstantMatrixType(clang::ConstantMatrixType* D) 
 }
 
 bool ArboretumASTVisitor::VisitDecayedType(clang::DecayedType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getDecayedType
   {
-    const Entity* other = context_.resolve(D->getDecayedType());
-    arboretum_create_edge(obj, context_.data_model_.getDecayedType, other);
+    const Id* other = context_.resolve(D->getDecayedType());
+    arboretum_create_edge(obj, context_.data_model_.method_getDecayedType, other);
   }
   //getPointeeType
   {
-    const Entity* other = context_.resolve(D->getPointeeType());
-    arboretum_create_edge(obj, context_.data_model_.getPointeeType4, other);
+    const Id* other = context_.resolve(D->getPointeeType());
+    arboretum_create_edge(obj, context_.data_model_.method_getPointeeType_1, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDecltypeType(clang::DecltypeType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getUnderlyingExpr
   {
-    const Entity* other = context_.resolve(D->getUnderlyingExpr());
-    arboretum_create_edge(obj, context_.data_model_.getUnderlyingExpr1, other);
+    const Id* other = context_.resolve(D->getUnderlyingExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getUnderlyingExpr, other);
   }
   //getUnderlyingType
   {
-    const Entity* other = context_.resolve(D->getUnderlyingType());
-    arboretum_create_edge(obj, context_.data_model_.getUnderlyingType2, other);
+    const Id* other = context_.resolve(D->getUnderlyingType());
+    arboretum_create_edge(obj, context_.data_model_.method_getUnderlyingType, other);
   }
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar17, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_9, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared17, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_9, context_.data_model_.arboretum_node_for(D->isSugared()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDeducedTemplateSpecializationType(clang::DeducedTemplateSpecializationType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTemplateName
   // TemplateName
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDeducedType(clang::DeducedType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared43, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_10, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar43, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_10, other);
   }
   //getDeducedType
   {
-    const Entity* other = context_.resolve(D->getDeducedType());
-    arboretum_create_edge(obj, context_.data_model_.getDeducedType, other);
+    const Id* other = context_.resolve(D->getDeducedType());
+    arboretum_create_edge(obj, context_.data_model_.method_getDeducedType, other);
   }
   //isDeduced
-  arboretum_create_edge(obj, context_.data_model_.isDeduced, context_.data_model_.arboretum_node_for(D->isDeduced()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDeduced, context_.data_model_.arboretum_node_for(D->isDeduced()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDependentAddressSpaceType(clang::DependentAddressSpaceType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getAddrSpaceExpr
   {
-    const Entity* other = context_.resolve(D->getAddrSpaceExpr());
-    arboretum_create_edge(obj, context_.data_model_.getAddrSpaceExpr, other);
+    const Id* other = context_.resolve(D->getAddrSpaceExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getAddrSpaceExpr, other);
   }
   //getPointeeType
   {
-    const Entity* other = context_.resolve(D->getPointeeType());
-    arboretum_create_edge(obj, context_.data_model_.getPointeeType6, other);
+    const Id* other = context_.resolve(D->getPointeeType());
+    arboretum_create_edge(obj, context_.data_model_.method_getPointeeType_2, other);
   }
   //getAttributeLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getAttributeLoc());
-    arboretum_create_edge(obj, context_.data_model_.getAttributeLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getAttributeLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getAttributeLoc, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared42, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_11, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar42, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_11, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDependentBitIntType(clang::DependentBitIntType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isUnsigned
-  arboretum_create_edge(obj, context_.data_model_.isUnsigned1, context_.data_model_.arboretum_node_for(D->isUnsigned()));
+  arboretum_create_edge(obj, context_.data_model_.method_isUnsigned_1, context_.data_model_.arboretum_node_for(D->isUnsigned()));
   //isSigned
-  arboretum_create_edge(obj, context_.data_model_.isSigned1, context_.data_model_.arboretum_node_for(D->isSigned()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSigned_1, context_.data_model_.arboretum_node_for(D->isSigned()));
   //getNumBitsExpr
   {
-    const Entity* other = context_.resolve(D->getNumBitsExpr());
-    arboretum_create_edge(obj, context_.data_model_.getNumBitsExpr, other);
+    const Id* other = context_.resolve(D->getNumBitsExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getNumBitsExpr, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared28, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_12, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar28, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_12, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDependentDecltypeType(clang::DependentDecltypeType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDependentNameType(clang::DependentNameType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getQualifier
   //getIdentifier
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared33, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_13, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar33, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_13, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDependentSizedArrayType(clang::DependentSizedArrayType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSizeExpr
   {
-    const Entity* other = context_.resolve(D->getSizeExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSizeExpr4, other);
+    const Id* other = context_.resolve(D->getSizeExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSizeExpr_1, other);
   }
   //getBracketsRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getBracketsRange());
-    arboretum_create_edge(obj, context_.data_model_.getBracketsRange1, other);
+    const Id* other = context_.source_model_.resolve(D->getBracketsRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getBracketsRange, other);
   }
   //getLBracketLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLBracketLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLBracketLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getLBracketLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLBracketLoc, other);
   }
   //getRBracketLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRBracketLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRBracketLoc5, other);
+    const Id* other = context_.source_model_.resolve(D->getRBracketLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRBracketLoc, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared44, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_14, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar44, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_14, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDependentSizedExtVectorType(clang::DependentSizedExtVectorType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSizeExpr
   {
-    const Entity* other = context_.resolve(D->getSizeExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSizeExpr2, other);
+    const Id* other = context_.resolve(D->getSizeExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSizeExpr_2, other);
   }
   //getElementType
   {
-    const Entity* other = context_.resolve(D->getElementType());
-    arboretum_create_edge(obj, context_.data_model_.getElementType4, other);
+    const Id* other = context_.resolve(D->getElementType());
+    arboretum_create_edge(obj, context_.data_model_.method_getElementType_2, other);
   }
   //getAttributeLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getAttributeLoc());
-    arboretum_create_edge(obj, context_.data_model_.getAttributeLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getAttributeLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getAttributeLoc_1, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared39, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_15, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar39, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_15, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDependentSizedMatrixType(clang::DependentSizedMatrixType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getRowExpr
   {
-    const Entity* other = context_.resolve(D->getRowExpr());
-    arboretum_create_edge(obj, context_.data_model_.getRowExpr, other);
+    const Id* other = context_.resolve(D->getRowExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getRowExpr, other);
   }
   //getColumnExpr
   {
-    const Entity* other = context_.resolve(D->getColumnExpr());
-    arboretum_create_edge(obj, context_.data_model_.getColumnExpr, other);
+    const Id* other = context_.resolve(D->getColumnExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getColumnExpr, other);
   }
   //getAttributeLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getAttributeLoc());
-    arboretum_create_edge(obj, context_.data_model_.getAttributeLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getAttributeLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getAttributeLoc_2, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDependentTemplateSpecializationType(clang::DependentTemplateSpecializationType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getQualifier
   //getIdentifier
   //template_arguments
   // ArrayRef<TemplateArgument>
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared7, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_16, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar7, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_16, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDependentTypeOfExprType(clang::DependentTypeOfExprType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDependentUnaryTransformType(clang::DependentUnaryTransformType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDependentVectorType(clang::DependentVectorType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSizeExpr
   {
-    const Entity* other = context_.resolve(D->getSizeExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSizeExpr3, other);
+    const Id* other = context_.resolve(D->getSizeExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSizeExpr_3, other);
   }
   //getElementType
   {
-    const Entity* other = context_.resolve(D->getElementType());
-    arboretum_create_edge(obj, context_.data_model_.getElementType5, other);
+    const Id* other = context_.resolve(D->getElementType());
+    arboretum_create_edge(obj, context_.data_model_.method_getElementType_3, other);
   }
   //getAttributeLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getAttributeLoc());
-    arboretum_create_edge(obj, context_.data_model_.getAttributeLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getAttributeLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getAttributeLoc_3, other);
   }
   //getVectorKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getVectorKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getVectorKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getVectorKind1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getVectorKind, enum_value);
     }
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared41, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_17, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar41, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_17, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitElaboratedType(clang::ElaboratedType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getQualifier
   //getNamedType
   {
-    const Entity* other = context_.resolve(D->getNamedType());
-    arboretum_create_edge(obj, context_.data_model_.getNamedType, other);
+    const Id* other = context_.resolve(D->getNamedType());
+    arboretum_create_edge(obj, context_.data_model_.method_getNamedType, other);
   }
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar27, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_18, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared27, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_18, context_.data_model_.arboretum_node_for(D->isSugared()));
   //getOwnedTagDecl
   {
-    const Entity* other = context_.resolve(D->getOwnedTagDecl());
-    arboretum_create_edge(obj, context_.data_model_.getOwnedTagDecl, other);
+    const Id* other = context_.resolve(D->getOwnedTagDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getOwnedTagDecl, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitEnumType(clang::EnumType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getDecl
   {
-    const Entity* other = context_.resolve(D->getDecl());
-    arboretum_create_edge(obj, context_.data_model_.getDecl11, other);
+    const Id* other = context_.resolve(D->getDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getDecl, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared31, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_19, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar31, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_19, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitExtVectorType(clang::ExtVectorType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared9, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_20, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar9, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_20, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitFunctionNoProtoType(clang::FunctionNoProtoType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared20, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_21, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar20, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_21, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitFunctionProtoType(clang::FunctionProtoType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getNumParams
   // unsigned int
   //getParamTypes
@@ -612,65 +612,65 @@ bool ArboretumASTVisitor::VisitFunctionProtoType(clang::FunctionProtoType* D) {
   // ExtProtoInfo
   //getExceptionSpecType
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getExceptionSpecType());
+    const Id* enum_value = context_.data_model_.resolve(D->getExceptionSpecType());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getExceptionSpecType1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getExceptionSpecType, enum_value);
     }
   }
   //hasExceptionSpec
-  arboretum_create_edge(obj, context_.data_model_.hasExceptionSpec, context_.data_model_.arboretum_node_for(D->hasExceptionSpec()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasExceptionSpec, context_.data_model_.arboretum_node_for(D->hasExceptionSpec()));
   //hasDynamicExceptionSpec
-  arboretum_create_edge(obj, context_.data_model_.hasDynamicExceptionSpec, context_.data_model_.arboretum_node_for(D->hasDynamicExceptionSpec()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasDynamicExceptionSpec, context_.data_model_.arboretum_node_for(D->hasDynamicExceptionSpec()));
   //hasNoexceptExceptionSpec
-  arboretum_create_edge(obj, context_.data_model_.hasNoexceptExceptionSpec, context_.data_model_.arboretum_node_for(D->hasNoexceptExceptionSpec()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNoexceptExceptionSpec, context_.data_model_.arboretum_node_for(D->hasNoexceptExceptionSpec()));
   //hasDependentExceptionSpec
-  arboretum_create_edge(obj, context_.data_model_.hasDependentExceptionSpec, context_.data_model_.arboretum_node_for(D->hasDependentExceptionSpec()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasDependentExceptionSpec, context_.data_model_.arboretum_node_for(D->hasDependentExceptionSpec()));
   //hasInstantiationDependentExceptionSpec
-  arboretum_create_edge(obj, context_.data_model_.hasInstantiationDependentExceptionSpec, context_.data_model_.arboretum_node_for(D->hasInstantiationDependentExceptionSpec()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasInstantiationDependentExceptionSpec, context_.data_model_.arboretum_node_for(D->hasInstantiationDependentExceptionSpec()));
   //getExceptionSpecInfo
   // ExceptionSpecInfo
   //getNumExceptions
   // unsigned int
   //getNoexceptExpr
   {
-    const Entity* other = context_.resolve(D->getNoexceptExpr());
-    arboretum_create_edge(obj, context_.data_model_.getNoexceptExpr, other);
+    const Id* other = context_.resolve(D->getNoexceptExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getNoexceptExpr, other);
   }
   //getExceptionSpecDecl
   {
-    const Entity* other = context_.resolve(D->getExceptionSpecDecl());
-    arboretum_create_edge(obj, context_.data_model_.getExceptionSpecDecl, other);
+    const Id* other = context_.resolve(D->getExceptionSpecDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getExceptionSpecDecl, other);
   }
   //getExceptionSpecTemplate
   {
-    const Entity* other = context_.resolve(D->getExceptionSpecTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getExceptionSpecTemplate, other);
+    const Id* other = context_.resolve(D->getExceptionSpecTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getExceptionSpecTemplate, other);
   }
   //canThrow
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->canThrow());
+    const Id* enum_value = context_.data_model_.resolve(D->canThrow());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.canThrow, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_canThrow, enum_value);
     }
   }
   //isVariadic
-  arboretum_create_edge(obj, context_.data_model_.isVariadic2, context_.data_model_.arboretum_node_for(D->isVariadic()));
+  arboretum_create_edge(obj, context_.data_model_.method_isVariadic, context_.data_model_.arboretum_node_for(D->isVariadic()));
   //getEllipsisLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEllipsisLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEllipsisLoc5, other);
+    const Id* other = context_.source_model_.resolve(D->getEllipsisLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEllipsisLoc, other);
   }
   //isTemplateVariadic
-  arboretum_create_edge(obj, context_.data_model_.isTemplateVariadic, context_.data_model_.arboretum_node_for(D->isTemplateVariadic()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTemplateVariadic, context_.data_model_.arboretum_node_for(D->isTemplateVariadic()));
   //hasTrailingReturn
-  arboretum_create_edge(obj, context_.data_model_.hasTrailingReturn, context_.data_model_.arboretum_node_for(D->hasTrailingReturn()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTrailingReturn, context_.data_model_.arboretum_node_for(D->hasTrailingReturn()));
   //getMethodQuals
   // Qualifiers
   //getRefQualifier
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getRefQualifier());
+    const Id* enum_value = context_.data_model_.resolve(D->getRefQualifier());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getRefQualifier1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getRefQualifier, enum_value);
     }
   }
   //param_types
@@ -678,346 +678,346 @@ bool ArboretumASTVisitor::VisitFunctionProtoType(clang::FunctionProtoType* D) {
   //exceptions
   // ArrayRef<QualType>
   //hasExtParameterInfos
-  arboretum_create_edge(obj, context_.data_model_.hasExtParameterInfos, context_.data_model_.arboretum_node_for(D->hasExtParameterInfos()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasExtParameterInfos, context_.data_model_.arboretum_node_for(D->hasExtParameterInfos()));
   //getExtParameterInfos
   // ArrayRef<ExtParameterInfo>
   //getExtParameterInfosOrNull
   //getAArch64SMEAttributes
   // unsigned int
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared1, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_22, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar1, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_22, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitFunctionType(clang::FunctionType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getReturnType
   {
-    const Entity* other = context_.resolve(D->getReturnType());
-    arboretum_create_edge(obj, context_.data_model_.getReturnType2, other);
+    const Id* other = context_.resolve(D->getReturnType());
+    arboretum_create_edge(obj, context_.data_model_.method_getReturnType, other);
   }
   //getHasRegParm
-  arboretum_create_edge(obj, context_.data_model_.getHasRegParm, context_.data_model_.arboretum_node_for(D->getHasRegParm()));
+  arboretum_create_edge(obj, context_.data_model_.method_getHasRegParm, context_.data_model_.arboretum_node_for(D->getHasRegParm()));
   //getRegParmType
   // unsigned int
   //getNoReturnAttr
-  arboretum_create_edge(obj, context_.data_model_.getNoReturnAttr, context_.data_model_.arboretum_node_for(D->getNoReturnAttr()));
+  arboretum_create_edge(obj, context_.data_model_.method_getNoReturnAttr, context_.data_model_.arboretum_node_for(D->getNoReturnAttr()));
   //getCmseNSCallAttr
-  arboretum_create_edge(obj, context_.data_model_.getCmseNSCallAttr, context_.data_model_.arboretum_node_for(D->getCmseNSCallAttr()));
+  arboretum_create_edge(obj, context_.data_model_.method_getCmseNSCallAttr, context_.data_model_.arboretum_node_for(D->getCmseNSCallAttr()));
   //getCallConv
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getCallConv());
+    const Id* enum_value = context_.data_model_.resolve(D->getCallConv());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getCallConv, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getCallConv, enum_value);
     }
   }
   //getExtInfo
   // ExtInfo
   //isConst
-  arboretum_create_edge(obj, context_.data_model_.isConst1, context_.data_model_.arboretum_node_for(D->isConst()));
+  arboretum_create_edge(obj, context_.data_model_.method_isConst, context_.data_model_.arboretum_node_for(D->isConst()));
   //isVolatile
-  arboretum_create_edge(obj, context_.data_model_.isVolatile3, context_.data_model_.arboretum_node_for(D->isVolatile()));
+  arboretum_create_edge(obj, context_.data_model_.method_isVolatile, context_.data_model_.arboretum_node_for(D->isVolatile()));
   //isRestrict
-  arboretum_create_edge(obj, context_.data_model_.isRestrict, context_.data_model_.arboretum_node_for(D->isRestrict()));
+  arboretum_create_edge(obj, context_.data_model_.method_isRestrict, context_.data_model_.arboretum_node_for(D->isRestrict()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitIncompleteArrayType(clang::IncompleteArrayType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared45, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_23, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar45, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_23, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitInjectedClassNameType(clang::InjectedClassNameType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getInjectedSpecializationType
   {
-    const Entity* other = context_.resolve(D->getInjectedSpecializationType());
-    arboretum_create_edge(obj, context_.data_model_.getInjectedSpecializationType, other);
+    const Id* other = context_.resolve(D->getInjectedSpecializationType());
+    arboretum_create_edge(obj, context_.data_model_.method_getInjectedSpecializationType, other);
   }
   //getInjectedTST
   {
-    const Entity* other = context_.resolve(D->getInjectedTST());
-    arboretum_create_edge(obj, context_.data_model_.getInjectedTST, other);
+    const Id* other = context_.resolve(D->getInjectedTST());
+    arboretum_create_edge(obj, context_.data_model_.method_getInjectedTST, other);
   }
   //getTemplateName
   // TemplateName
   //getDecl
   {
-    const Entity* other = context_.resolve(D->getDecl());
-    arboretum_create_edge(obj, context_.data_model_.getDecl7, other);
+    const Id* other = context_.resolve(D->getDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getDecl_1, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared16, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_24, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar16, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_24, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitLValueReferenceType(clang::LValueReferenceType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared12, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_25, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar12, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_25, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitMacroQualifiedType(clang::MacroQualifiedType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getMacroIdentifier
   //getUnderlyingType
   {
-    const Entity* other = context_.resolve(D->getUnderlyingType());
-    arboretum_create_edge(obj, context_.data_model_.getUnderlyingType1, other);
+    const Id* other = context_.resolve(D->getUnderlyingType());
+    arboretum_create_edge(obj, context_.data_model_.method_getUnderlyingType_1, other);
   }
   //getModifiedType
   {
-    const Entity* other = context_.resolve(D->getModifiedType());
-    arboretum_create_edge(obj, context_.data_model_.getModifiedType, other);
+    const Id* other = context_.resolve(D->getModifiedType());
+    arboretum_create_edge(obj, context_.data_model_.method_getModifiedType_1, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared10, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_26, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar10, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_26, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitMatrixType(clang::MatrixType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getElementType
   {
-    const Entity* other = context_.resolve(D->getElementType());
-    arboretum_create_edge(obj, context_.data_model_.getElementType1, other);
+    const Id* other = context_.resolve(D->getElementType());
+    arboretum_create_edge(obj, context_.data_model_.method_getElementType_4, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared3, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_27, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar3, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_27, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitMemberPointerType(clang::MemberPointerType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getPointeeType
   {
-    const Entity* other = context_.resolve(D->getPointeeType());
-    arboretum_create_edge(obj, context_.data_model_.getPointeeType3, other);
+    const Id* other = context_.resolve(D->getPointeeType());
+    arboretum_create_edge(obj, context_.data_model_.method_getPointeeType_3, other);
   }
   //isMemberFunctionPointer
-  arboretum_create_edge(obj, context_.data_model_.isMemberFunctionPointer, context_.data_model_.arboretum_node_for(D->isMemberFunctionPointer()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMemberFunctionPointer, context_.data_model_.arboretum_node_for(D->isMemberFunctionPointer()));
   //isMemberDataPointer
-  arboretum_create_edge(obj, context_.data_model_.isMemberDataPointer, context_.data_model_.arboretum_node_for(D->isMemberDataPointer()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMemberDataPointer, context_.data_model_.arboretum_node_for(D->isMemberDataPointer()));
   //getClass
   {
-    const Entity* other = context_.resolve(D->getClass());
-    arboretum_create_edge(obj, context_.data_model_.getClass, other);
+    const Id* other = context_.resolve(D->getClass());
+    arboretum_create_edge(obj, context_.data_model_.method_getClass, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared14, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_28, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar14, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_28, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCInterfaceType(clang::ObjCInterfaceType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCObjectPointerType(clang::ObjCObjectPointerType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCObjectType(clang::ObjCObjectType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCObjectTypeImpl(clang::ObjCObjectTypeImpl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCTypeParamType(clang::ObjCTypeParamType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitPackExpansionType(clang::PackExpansionType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getPattern
   {
-    const Entity* other = context_.resolve(D->getPattern());
-    arboretum_create_edge(obj, context_.data_model_.getPattern3, other);
+    const Id* other = context_.resolve(D->getPattern());
+    arboretum_create_edge(obj, context_.data_model_.method_getPattern, other);
   }
   //getNumExpansions
   // std::optional<unsigned int>
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared32, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_29, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar32, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_29, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitParenType(clang::ParenType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getInnerType
   {
-    const Entity* other = context_.resolve(D->getInnerType());
-    arboretum_create_edge(obj, context_.data_model_.getInnerType10, other);
+    const Id* other = context_.resolve(D->getInnerType());
+    arboretum_create_edge(obj, context_.data_model_.method_getInnerType, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared23, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_30, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar23, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_30, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitPipeType(clang::PipeType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getElementType
   {
-    const Entity* other = context_.resolve(D->getElementType());
-    arboretum_create_edge(obj, context_.data_model_.getElementType6, other);
+    const Id* other = context_.resolve(D->getElementType());
+    arboretum_create_edge(obj, context_.data_model_.method_getElementType_5, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared48, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_31, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar48, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_31, other);
   }
   //isReadOnly
-  arboretum_create_edge(obj, context_.data_model_.isReadOnly2, context_.data_model_.arboretum_node_for(D->isReadOnly()));
+  arboretum_create_edge(obj, context_.data_model_.method_isReadOnly, context_.data_model_.arboretum_node_for(D->isReadOnly()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitPointerType(clang::PointerType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getPointeeType
   {
-    const Entity* other = context_.resolve(D->getPointeeType());
-    arboretum_create_edge(obj, context_.data_model_.getPointeeType, other);
+    const Id* other = context_.resolve(D->getPointeeType());
+    arboretum_create_edge(obj, context_.data_model_.method_getPointeeType_4, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_32, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_32, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitRValueReferenceType(clang::RValueReferenceType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared46, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_33, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar46, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_33, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitRecordType(clang::RecordType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getDecl
   {
-    const Entity* other = context_.resolve(D->getDecl());
-    arboretum_create_edge(obj, context_.data_model_.getDecl16, other);
+    const Id* other = context_.resolve(D->getDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getDecl_2, other);
   }
   //hasConstFields
-  arboretum_create_edge(obj, context_.data_model_.hasConstFields, context_.data_model_.arboretum_node_for(D->hasConstFields()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasConstFields, context_.data_model_.arboretum_node_for(D->hasConstFields()));
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared49, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_34, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar49, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_34, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitReferenceType(clang::ReferenceType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isSpelledAsLValue
-  arboretum_create_edge(obj, context_.data_model_.isSpelledAsLValue, context_.data_model_.arboretum_node_for(D->isSpelledAsLValue()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSpelledAsLValue, context_.data_model_.arboretum_node_for(D->isSpelledAsLValue()));
   //isInnerRef
-  arboretum_create_edge(obj, context_.data_model_.isInnerRef, context_.data_model_.arboretum_node_for(D->isInnerRef()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInnerRef, context_.data_model_.arboretum_node_for(D->isInnerRef()));
   //getPointeeTypeAsWritten
   {
-    const Entity* other = context_.resolve(D->getPointeeTypeAsWritten());
-    arboretum_create_edge(obj, context_.data_model_.getPointeeTypeAsWritten, other);
+    const Id* other = context_.resolve(D->getPointeeTypeAsWritten());
+    arboretum_create_edge(obj, context_.data_model_.method_getPointeeTypeAsWritten, other);
   }
   //getPointeeType
   {
-    const Entity* other = context_.resolve(D->getPointeeType());
-    arboretum_create_edge(obj, context_.data_model_.getPointeeType7, other);
+    const Id* other = context_.resolve(D->getPointeeType());
+    arboretum_create_edge(obj, context_.data_model_.method_getPointeeType_5, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitSubstTemplateTypeParmPackType(clang::SubstTemplateTypeParmPackType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getIdentifier
   //getAssociatedDecl
   {
-    const Entity* other = context_.resolve(D->getAssociatedDecl());
-    arboretum_create_edge(obj, context_.data_model_.getAssociatedDecl3, other);
+    const Id* other = context_.resolve(D->getAssociatedDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getAssociatedDecl, other);
   }
   //getReplacedParameter
   {
-    const Entity* other = context_.resolve(D->getReplacedParameter());
-    arboretum_create_edge(obj, context_.data_model_.getReplacedParameter1, other);
+    const Id* other = context_.resolve(D->getReplacedParameter());
+    arboretum_create_edge(obj, context_.data_model_.method_getReplacedParameter, other);
   }
   //getIndex
   // unsigned int
   //getFinal
-  arboretum_create_edge(obj, context_.data_model_.getFinal, context_.data_model_.arboretum_node_for(D->getFinal()));
+  arboretum_create_edge(obj, context_.data_model_.method_getFinal, context_.data_model_.arboretum_node_for(D->getFinal()));
   //getNumArgs
   // unsigned int
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared26, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_35, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar26, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_35, other);
   }
   //getArgumentPack
   // TemplateArgument
@@ -1025,227 +1025,227 @@ bool ArboretumASTVisitor::VisitSubstTemplateTypeParmPackType(clang::SubstTemplat
 }
 
 bool ArboretumASTVisitor::VisitSubstTemplateTypeParmType(clang::SubstTemplateTypeParmType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getReplacementType
   {
-    const Entity* other = context_.resolve(D->getReplacementType());
-    arboretum_create_edge(obj, context_.data_model_.getReplacementType, other);
+    const Id* other = context_.resolve(D->getReplacementType());
+    arboretum_create_edge(obj, context_.data_model_.method_getReplacementType, other);
   }
   //getAssociatedDecl
   {
-    const Entity* other = context_.resolve(D->getAssociatedDecl());
-    arboretum_create_edge(obj, context_.data_model_.getAssociatedDecl, other);
+    const Id* other = context_.resolve(D->getAssociatedDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getAssociatedDecl_1, other);
   }
   //getReplacedParameter
   {
-    const Entity* other = context_.resolve(D->getReplacedParameter());
-    arboretum_create_edge(obj, context_.data_model_.getReplacedParameter, other);
+    const Id* other = context_.resolve(D->getReplacedParameter());
+    arboretum_create_edge(obj, context_.data_model_.method_getReplacedParameter_1, other);
   }
   //getIndex
   // unsigned int
   //getPackIndex
   // std::optional<unsigned int>
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared6, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_36, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar6, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_36, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTagType(clang::TagType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getDecl
   {
-    const Entity* other = context_.resolve(D->getDecl());
-    arboretum_create_edge(obj, context_.data_model_.getDecl10, other);
+    const Id* other = context_.resolve(D->getDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getDecl_3, other);
   }
   //isBeingDefined
-  arboretum_create_edge(obj, context_.data_model_.isBeingDefined1, context_.data_model_.arboretum_node_for(D->isBeingDefined()));
+  arboretum_create_edge(obj, context_.data_model_.method_isBeingDefined, context_.data_model_.arboretum_node_for(D->isBeingDefined()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTemplateSpecializationType(clang::TemplateSpecializationType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isCurrentInstantiation
-  arboretum_create_edge(obj, context_.data_model_.isCurrentInstantiation1, context_.data_model_.arboretum_node_for(D->isCurrentInstantiation()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCurrentInstantiation, context_.data_model_.arboretum_node_for(D->isCurrentInstantiation()));
   //isTypeAlias
-  arboretum_create_edge(obj, context_.data_model_.isTypeAlias1, context_.data_model_.arboretum_node_for(D->isTypeAlias()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTypeAlias, context_.data_model_.arboretum_node_for(D->isTypeAlias()));
   //getTemplateName
   // TemplateName
   //template_arguments
   // ArrayRef<TemplateArgument>
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared25, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_37, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar25, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_37, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTemplateTypeParmType(clang::TemplateTypeParmType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getDepth
   // unsigned int
   //getIndex
   // unsigned int
   //isParameterPack
-  arboretum_create_edge(obj, context_.data_model_.isParameterPack5, context_.data_model_.arboretum_node_for(D->isParameterPack()));
+  arboretum_create_edge(obj, context_.data_model_.method_isParameterPack, context_.data_model_.arboretum_node_for(D->isParameterPack()));
   //getDecl
   {
-    const Entity* other = context_.resolve(D->getDecl());
-    arboretum_create_edge(obj, context_.data_model_.getDecl5, other);
+    const Id* other = context_.resolve(D->getDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getDecl_4, other);
   }
   //getIdentifier
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared8, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_38, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar8, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_38, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitType(clang::Type* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //containsUnexpandedParameterPack
-  arboretum_create_edge(obj, context_.data_model_.containsUnexpandedParameterPack1, context_.data_model_.arboretum_node_for(D->containsUnexpandedParameterPack()));
+  arboretum_create_edge(obj, context_.data_model_.method_containsUnexpandedParameterPack, context_.data_model_.arboretum_node_for(D->containsUnexpandedParameterPack()));
   //getLocallyUnqualifiedSingleStepDesugaredType
   {
-    const Entity* other = context_.resolve(D->getLocallyUnqualifiedSingleStepDesugaredType());
-    arboretum_create_edge(obj, context_.data_model_.getLocallyUnqualifiedSingleStepDesugaredType, other);
+    const Id* other = context_.resolve(D->getLocallyUnqualifiedSingleStepDesugaredType());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocallyUnqualifiedSingleStepDesugaredType, other);
   }
   //getAsPlaceholderType
   {
-    const Entity* other = context_.resolve(D->getAsPlaceholderType());
-    arboretum_create_edge(obj, context_.data_model_.getAsPlaceholderType, other);
+    const Id* other = context_.resolve(D->getAsPlaceholderType());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsPlaceholderType, other);
   }
   //getObjCARCImplicitLifetime
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getObjCARCImplicitLifetime());
+    const Id* enum_value = context_.data_model_.resolve(D->getObjCARCImplicitLifetime());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getObjCARCImplicitLifetime, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getObjCARCImplicitLifetime, enum_value);
     }
   }
   //getDependence
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getDependence());
+    const Id* enum_value = context_.data_model_.resolve(D->getDependence());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getDependence1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getDependence, enum_value);
     }
   }
   //containsErrors
-  arboretum_create_edge(obj, context_.data_model_.containsErrors1, context_.data_model_.arboretum_node_for(D->containsErrors()));
+  arboretum_create_edge(obj, context_.data_model_.method_containsErrors, context_.data_model_.arboretum_node_for(D->containsErrors()));
   //hasSizedVLAType
-  arboretum_create_edge(obj, context_.data_model_.hasSizedVLAType, context_.data_model_.arboretum_node_for(D->hasSizedVLAType()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasSizedVLAType, context_.data_model_.arboretum_node_for(D->hasSizedVLAType()));
   //hasUnnamedOrLocalType
-  arboretum_create_edge(obj, context_.data_model_.hasUnnamedOrLocalType, context_.data_model_.arboretum_node_for(D->hasUnnamedOrLocalType()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUnnamedOrLocalType, context_.data_model_.arboretum_node_for(D->hasUnnamedOrLocalType()));
   //canDecayToPointerType
-  arboretum_create_edge(obj, context_.data_model_.canDecayToPointerType, context_.data_model_.arboretum_node_for(D->canDecayToPointerType()));
+  arboretum_create_edge(obj, context_.data_model_.method_canDecayToPointerType, context_.data_model_.arboretum_node_for(D->canDecayToPointerType()));
   //hasPointerRepresentation
-  arboretum_create_edge(obj, context_.data_model_.hasPointerRepresentation, context_.data_model_.arboretum_node_for(D->hasPointerRepresentation()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasPointerRepresentation, context_.data_model_.arboretum_node_for(D->hasPointerRepresentation()));
   //hasObjCPointerRepresentation
-  arboretum_create_edge(obj, context_.data_model_.hasObjCPointerRepresentation, context_.data_model_.arboretum_node_for(D->hasObjCPointerRepresentation()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasObjCPointerRepresentation, context_.data_model_.arboretum_node_for(D->hasObjCPointerRepresentation()));
   //hasIntegerRepresentation
-  arboretum_create_edge(obj, context_.data_model_.hasIntegerRepresentation, context_.data_model_.arboretum_node_for(D->hasIntegerRepresentation()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasIntegerRepresentation, context_.data_model_.arboretum_node_for(D->hasIntegerRepresentation()));
   //hasSignedIntegerRepresentation
-  arboretum_create_edge(obj, context_.data_model_.hasSignedIntegerRepresentation, context_.data_model_.arboretum_node_for(D->hasSignedIntegerRepresentation()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasSignedIntegerRepresentation, context_.data_model_.arboretum_node_for(D->hasSignedIntegerRepresentation()));
   //hasUnsignedIntegerRepresentation
-  arboretum_create_edge(obj, context_.data_model_.hasUnsignedIntegerRepresentation, context_.data_model_.arboretum_node_for(D->hasUnsignedIntegerRepresentation()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUnsignedIntegerRepresentation, context_.data_model_.arboretum_node_for(D->hasUnsignedIntegerRepresentation()));
   //hasFloatingRepresentation
-  arboretum_create_edge(obj, context_.data_model_.hasFloatingRepresentation, context_.data_model_.arboretum_node_for(D->hasFloatingRepresentation()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasFloatingRepresentation, context_.data_model_.arboretum_node_for(D->hasFloatingRepresentation()));
   //getAsStructureType
   {
-    const Entity* other = context_.resolve(D->getAsStructureType());
-    arboretum_create_edge(obj, context_.data_model_.getAsStructureType, other);
+    const Id* other = context_.resolve(D->getAsStructureType());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsStructureType, other);
   }
   //getAsUnionType
   {
-    const Entity* other = context_.resolve(D->getAsUnionType());
-    arboretum_create_edge(obj, context_.data_model_.getAsUnionType, other);
+    const Id* other = context_.resolve(D->getAsUnionType());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsUnionType, other);
   }
   //getAsComplexIntegerType
   {
-    const Entity* other = context_.resolve(D->getAsComplexIntegerType());
-    arboretum_create_edge(obj, context_.data_model_.getAsComplexIntegerType, other);
+    const Id* other = context_.resolve(D->getAsComplexIntegerType());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsComplexIntegerType, other);
   }
   //getAsObjCInterfaceType
   {
-    const Entity* other = context_.resolve(D->getAsObjCInterfaceType());
-    arboretum_create_edge(obj, context_.data_model_.getAsObjCInterfaceType, other);
+    const Id* other = context_.resolve(D->getAsObjCInterfaceType());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsObjCInterfaceType, other);
   }
   //getAsObjCInterfacePointerType
   {
-    const Entity* other = context_.resolve(D->getAsObjCInterfacePointerType());
-    arboretum_create_edge(obj, context_.data_model_.getAsObjCInterfacePointerType, other);
+    const Id* other = context_.resolve(D->getAsObjCInterfacePointerType());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsObjCInterfacePointerType, other);
   }
   //getAsObjCQualifiedIdType
   {
-    const Entity* other = context_.resolve(D->getAsObjCQualifiedIdType());
-    arboretum_create_edge(obj, context_.data_model_.getAsObjCQualifiedIdType, other);
+    const Id* other = context_.resolve(D->getAsObjCQualifiedIdType());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsObjCQualifiedIdType, other);
   }
   //getAsObjCQualifiedClassType
   {
-    const Entity* other = context_.resolve(D->getAsObjCQualifiedClassType());
-    arboretum_create_edge(obj, context_.data_model_.getAsObjCQualifiedClassType, other);
+    const Id* other = context_.resolve(D->getAsObjCQualifiedClassType());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsObjCQualifiedClassType, other);
   }
   //getAsObjCQualifiedInterfaceType
   {
-    const Entity* other = context_.resolve(D->getAsObjCQualifiedInterfaceType());
-    arboretum_create_edge(obj, context_.data_model_.getAsObjCQualifiedInterfaceType, other);
+    const Id* other = context_.resolve(D->getAsObjCQualifiedInterfaceType());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsObjCQualifiedInterfaceType, other);
   }
   //getAsCXXRecordDecl
   {
-    const Entity* other = context_.resolve(D->getAsCXXRecordDecl());
-    arboretum_create_edge(obj, context_.data_model_.getAsCXXRecordDecl, other);
+    const Id* other = context_.resolve(D->getAsCXXRecordDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsCXXRecordDecl, other);
   }
   //getAsRecordDecl
   {
-    const Entity* other = context_.resolve(D->getAsRecordDecl());
-    arboretum_create_edge(obj, context_.data_model_.getAsRecordDecl, other);
+    const Id* other = context_.resolve(D->getAsRecordDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsRecordDecl, other);
   }
   //getAsTagDecl
   {
-    const Entity* other = context_.resolve(D->getAsTagDecl());
-    arboretum_create_edge(obj, context_.data_model_.getAsTagDecl, other);
+    const Id* other = context_.resolve(D->getAsTagDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsTagDecl, other);
   }
   //getPointeeCXXRecordDecl
   {
-    const Entity* other = context_.resolve(D->getPointeeCXXRecordDecl());
-    arboretum_create_edge(obj, context_.data_model_.getPointeeCXXRecordDecl, other);
+    const Id* other = context_.resolve(D->getPointeeCXXRecordDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getPointeeCXXRecordDecl, other);
   }
   //getBaseElementTypeUnsafe
   {
-    const Entity* other = context_.resolve(D->getBaseElementTypeUnsafe());
-    arboretum_create_edge(obj, context_.data_model_.getBaseElementTypeUnsafe, other);
+    const Id* other = context_.resolve(D->getBaseElementTypeUnsafe());
+    arboretum_create_edge(obj, context_.data_model_.method_getBaseElementTypeUnsafe, other);
   }
   //getArrayElementTypeNoTypeQual
   {
-    const Entity* other = context_.resolve(D->getArrayElementTypeNoTypeQual());
-    arboretum_create_edge(obj, context_.data_model_.getArrayElementTypeNoTypeQual, other);
+    const Id* other = context_.resolve(D->getArrayElementTypeNoTypeQual());
+    arboretum_create_edge(obj, context_.data_model_.method_getArrayElementTypeNoTypeQual, other);
   }
   //getPointeeOrArrayElementType
   {
-    const Entity* other = context_.resolve(D->getPointeeOrArrayElementType());
-    arboretum_create_edge(obj, context_.data_model_.getPointeeOrArrayElementType, other);
+    const Id* other = context_.resolve(D->getPointeeOrArrayElementType());
+    arboretum_create_edge(obj, context_.data_model_.method_getPointeeOrArrayElementType, other);
   }
   //getLinkage
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getLinkage());
+    const Id* enum_value = context_.data_model_.resolve(D->getLinkage());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getLinkage, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getLinkage, enum_value);
     }
   }
   //getVisibility
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getVisibility());
+    const Id* enum_value = context_.data_model_.resolve(D->getVisibility());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getVisibility1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getVisibility, enum_value);
     }
   }
   //getLinkageAndVisibility
@@ -1253,218 +1253,218 @@ bool ArboretumASTVisitor::VisitType(clang::Type* D) {
   //getNullability
   // std::optional<NullabilityKind>
   //acceptsObjCTypeParams
-  arboretum_create_edge(obj, context_.data_model_.acceptsObjCTypeParams, context_.data_model_.arboretum_node_for(D->acceptsObjCTypeParams()));
+  arboretum_create_edge(obj, context_.data_model_.method_acceptsObjCTypeParams, context_.data_model_.arboretum_node_for(D->acceptsObjCTypeParams()));
   //getTypeClassName
   //getCanonicalTypeInternal
   {
-    const Entity* other = context_.resolve(D->getCanonicalTypeInternal());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalTypeInternal, other);
+    const Id* other = context_.resolve(D->getCanonicalTypeInternal());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalTypeInternal, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTypeOfExprType(clang::TypeOfExprType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getUnderlyingExpr
   {
-    const Entity* other = context_.resolve(D->getUnderlyingExpr());
-    arboretum_create_edge(obj, context_.data_model_.getUnderlyingExpr2, other);
+    const Id* other = context_.resolve(D->getUnderlyingExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getUnderlyingExpr_1, other);
   }
   //getKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getKind10, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getKind_1, enum_value);
     }
   }
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar35, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_39, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared35, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_39, context_.data_model_.arboretum_node_for(D->isSugared()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTypeOfType(clang::TypeOfType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getUnmodifiedType
   {
-    const Entity* other = context_.resolve(D->getUnmodifiedType());
-    arboretum_create_edge(obj, context_.data_model_.getUnmodifiedType, other);
+    const Id* other = context_.resolve(D->getUnmodifiedType());
+    arboretum_create_edge(obj, context_.data_model_.method_getUnmodifiedType, other);
   }
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar24, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_40, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared24, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_40, context_.data_model_.arboretum_node_for(D->isSugared()));
   //getKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getKind9, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getKind_2, enum_value);
     }
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTypeWithKeyword(clang::TypeWithKeyword* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getKeyword
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getKeyword());
+    const Id* enum_value = context_.data_model_.resolve(D->getKeyword());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getKeyword, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getKeyword_1, enum_value);
     }
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTypedefType(clang::TypedefType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getDecl
   {
-    const Entity* other = context_.resolve(D->getDecl());
-    arboretum_create_edge(obj, context_.data_model_.getDecl13, other);
+    const Id* other = context_.resolve(D->getDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getDecl_5, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared40, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_41, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar40, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_41, other);
   }
   //typeMatchesDecl
-  arboretum_create_edge(obj, context_.data_model_.typeMatchesDecl1, context_.data_model_.arboretum_node_for(D->typeMatchesDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_typeMatchesDecl, context_.data_model_.arboretum_node_for(D->typeMatchesDecl()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitUnaryTransformType(clang::UnaryTransformType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared30, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_42, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar30, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_42, other);
   }
   //getUnderlyingType
   {
-    const Entity* other = context_.resolve(D->getUnderlyingType());
-    arboretum_create_edge(obj, context_.data_model_.getUnderlyingType3, other);
+    const Id* other = context_.resolve(D->getUnderlyingType());
+    arboretum_create_edge(obj, context_.data_model_.method_getUnderlyingType_2, other);
   }
   //getBaseType
   {
-    const Entity* other = context_.resolve(D->getBaseType());
-    arboretum_create_edge(obj, context_.data_model_.getBaseType3, other);
+    const Id* other = context_.resolve(D->getBaseType());
+    arboretum_create_edge(obj, context_.data_model_.method_getBaseType, other);
   }
   //getUTTKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getUTTKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getUTTKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getUTTKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getUTTKind, enum_value);
     }
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitUnresolvedUsingType(clang::UnresolvedUsingType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getDecl
   {
-    const Entity* other = context_.resolve(D->getDecl());
-    arboretum_create_edge(obj, context_.data_model_.getDecl6, other);
+    const Id* other = context_.resolve(D->getDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getDecl_6, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared13, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_43, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar13, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_43, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitUsingType(clang::UsingType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getFoundDecl
   {
-    const Entity* other = context_.resolve(D->getFoundDecl());
-    arboretum_create_edge(obj, context_.data_model_.getFoundDecl4, other);
+    const Id* other = context_.resolve(D->getFoundDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getFoundDecl, other);
   }
   //getUnderlyingType
   {
-    const Entity* other = context_.resolve(D->getUnderlyingType());
-    arboretum_create_edge(obj, context_.data_model_.getUnderlyingType4, other);
+    const Id* other = context_.resolve(D->getUnderlyingType());
+    arboretum_create_edge(obj, context_.data_model_.method_getUnderlyingType_3, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared37, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_44, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar37, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_44, other);
   }
   //typeMatchesDecl
-  arboretum_create_edge(obj, context_.data_model_.typeMatchesDecl, context_.data_model_.arboretum_node_for(D->typeMatchesDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_typeMatchesDecl_1, context_.data_model_.arboretum_node_for(D->typeMatchesDecl()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitVariableArrayType(clang::VariableArrayType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSizeExpr
   {
-    const Entity* other = context_.resolve(D->getSizeExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSizeExpr5, other);
+    const Id* other = context_.resolve(D->getSizeExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSizeExpr_4, other);
   }
   //getBracketsRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getBracketsRange());
-    arboretum_create_edge(obj, context_.data_model_.getBracketsRange2, other);
+    const Id* other = context_.source_model_.resolve(D->getBracketsRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getBracketsRange_1, other);
   }
   //getLBracketLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLBracketLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLBracketLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getLBracketLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLBracketLoc_1, other);
   }
   //getRBracketLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRBracketLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRBracketLoc6, other);
+    const Id* other = context_.source_model_.resolve(D->getRBracketLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRBracketLoc_1, other);
   }
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared47, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_45, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar47, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_45, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitVectorType(clang::VectorType* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getElementType
   {
-    const Entity* other = context_.resolve(D->getElementType());
-    arboretum_create_edge(obj, context_.data_model_.getElementType3, other);
+    const Id* other = context_.resolve(D->getElementType());
+    arboretum_create_edge(obj, context_.data_model_.method_getElementType_6, other);
   }
   //getNumElements
   // unsigned int
   //isSugared
-  arboretum_create_edge(obj, context_.data_model_.isSugared22, context_.data_model_.arboretum_node_for(D->isSugared()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSugared_46, context_.data_model_.arboretum_node_for(D->isSugared()));
   //desugar
   {
-    const Entity* other = context_.resolve(D->desugar());
-    arboretum_create_edge(obj, context_.data_model_.desugar22, other);
+    const Id* other = context_.resolve(D->desugar());
+    arboretum_create_edge(obj, context_.data_model_.method_desugar_46, other);
   }
   //getVectorKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getVectorKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getVectorKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getVectorKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getVectorKind_1, enum_value);
     }
   }
   return true;
@@ -1731,27 +1731,27 @@ bool ArboretumASTVisitor::VisitVectorTypeLoc(clang::VectorTypeLoc D) {
 
 // Decls
 bool ArboretumASTVisitor::VisitAccessSpecDecl(clang::AccessSpecDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getAccessSpecifierLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getAccessSpecifierLoc());
-    arboretum_create_edge(obj, context_.data_model_.getAccessSpecifierLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getAccessSpecifierLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getAccessSpecifierLoc, other);
   }
   //getColonLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getColonLoc());
-    arboretum_create_edge(obj, context_.data_model_.getColonLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getColonLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getColonLoc, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange20, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitBaseUsingDecl(clang::BaseUsingDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //shadows
   // shadow_range
   //shadow_size
@@ -1760,96 +1760,96 @@ bool ArboretumASTVisitor::VisitBaseUsingDecl(clang::BaseUsingDecl* D) {
 }
 
 bool ArboretumASTVisitor::VisitBindingDecl(clang::BindingDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBinding
   {
-    const Entity* other = context_.resolve(D->getBinding());
-    arboretum_create_edge(obj, context_.data_model_.getBinding, other);
+    const Id* other = context_.resolve(D->getBinding());
+    arboretum_create_edge(obj, context_.data_model_.method_getBinding, other);
   }
   //getDecomposedDecl
   {
-    const Entity* other = context_.resolve(D->getDecomposedDecl());
-    arboretum_create_edge(obj, context_.data_model_.getDecomposedDecl, other);
+    const Id* other = context_.resolve(D->getDecomposedDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getDecomposedDecl, other);
   }
   //getHoldingVar
   {
-    const Entity* other = context_.resolve(D->getHoldingVar());
-    arboretum_create_edge(obj, context_.data_model_.getHoldingVar, other);
+    const Id* other = context_.resolve(D->getHoldingVar());
+    arboretum_create_edge(obj, context_.data_model_.method_getHoldingVar, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitBlockDecl(clang::BlockDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCaretLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getCaretLocation());
-    arboretum_create_edge(obj, context_.data_model_.getCaretLocation1, other);
+    const Id* other = context_.source_model_.resolve(D->getCaretLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getCaretLocation, other);
   }
   //isVariadic
-  arboretum_create_edge(obj, context_.data_model_.isVariadic1, context_.data_model_.arboretum_node_for(D->isVariadic()));
+  arboretum_create_edge(obj, context_.data_model_.method_isVariadic_1, context_.data_model_.arboretum_node_for(D->isVariadic()));
   //getCompoundBody
   {
-    const Entity* other = context_.resolve(D->getCompoundBody());
-    arboretum_create_edge(obj, context_.data_model_.getCompoundBody, other);
+    const Id* other = context_.resolve(D->getCompoundBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getCompoundBody, other);
   }
   //getBody
   {
-    const Entity* other = context_.resolve(D->getBody());
-    arboretum_create_edge(obj, context_.data_model_.getBody16, other);
+    const Id* other = context_.resolve(D->getBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getBody, other);
   }
   //getSignatureAsWritten
   //parameters
   // ArrayRef<ParmVarDecl *>
   //param_empty
-  arboretum_create_edge(obj, context_.data_model_.param_empty1, context_.data_model_.arboretum_node_for(D->param_empty()));
+  arboretum_create_edge(obj, context_.data_model_.method_param_empty, context_.data_model_.arboretum_node_for(D->param_empty()));
   //param_size
   // size_t
   //getNumParams
   // unsigned int
   //hasCaptures
-  arboretum_create_edge(obj, context_.data_model_.hasCaptures, context_.data_model_.arboretum_node_for(D->hasCaptures()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasCaptures, context_.data_model_.arboretum_node_for(D->hasCaptures()));
   //getNumCaptures
   // unsigned int
   //captures
   // ArrayRef<Capture>
   //capturesCXXThis
-  arboretum_create_edge(obj, context_.data_model_.capturesCXXThis, context_.data_model_.arboretum_node_for(D->capturesCXXThis()));
+  arboretum_create_edge(obj, context_.data_model_.method_capturesCXXThis, context_.data_model_.arboretum_node_for(D->capturesCXXThis()));
   //blockMissingReturnType
-  arboretum_create_edge(obj, context_.data_model_.blockMissingReturnType, context_.data_model_.arboretum_node_for(D->blockMissingReturnType()));
+  arboretum_create_edge(obj, context_.data_model_.method_blockMissingReturnType, context_.data_model_.arboretum_node_for(D->blockMissingReturnType()));
   //isConversionFromLambda
-  arboretum_create_edge(obj, context_.data_model_.isConversionFromLambda, context_.data_model_.arboretum_node_for(D->isConversionFromLambda()));
+  arboretum_create_edge(obj, context_.data_model_.method_isConversionFromLambda, context_.data_model_.arboretum_node_for(D->isConversionFromLambda()));
   //doesNotEscape
-  arboretum_create_edge(obj, context_.data_model_.doesNotEscape, context_.data_model_.arboretum_node_for(D->doesNotEscape()));
+  arboretum_create_edge(obj, context_.data_model_.method_doesNotEscape, context_.data_model_.arboretum_node_for(D->doesNotEscape()));
   //canAvoidCopyToHeap
-  arboretum_create_edge(obj, context_.data_model_.canAvoidCopyToHeap, context_.data_model_.arboretum_node_for(D->canAvoidCopyToHeap()));
+  arboretum_create_edge(obj, context_.data_model_.method_canAvoidCopyToHeap, context_.data_model_.arboretum_node_for(D->canAvoidCopyToHeap()));
   //getBlockManglingNumber
   // unsigned int
   //getBlockManglingContextDecl
   {
-    const Entity* other = context_.resolve(D->getBlockManglingContextDecl());
-    arboretum_create_edge(obj, context_.data_model_.getBlockManglingContextDecl, other);
+    const Id* other = context_.resolve(D->getBlockManglingContextDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getBlockManglingContextDecl, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange32, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_1, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitBuiltinTemplateDecl(clang::BuiltinTemplateDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange54, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_2, other);
   }
   //getBuiltinTemplateKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getBuiltinTemplateKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getBuiltinTemplateKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getBuiltinTemplateKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getBuiltinTemplateKind, enum_value);
     }
   }
   return true;
@@ -1858,35 +1858,35 @@ bool ArboretumASTVisitor::VisitBuiltinTemplateDecl(clang::BuiltinTemplateDecl* D
 bool ArboretumASTVisitor::VisitCXXConstructorDecl(clang::CXXConstructorDecl* D) {
   if (!D->isThisDeclarationADefinition()) return true;
 
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getExplicitSpecifier
   // const ExplicitSpecifier
   //isExplicit
-  arboretum_create_edge(obj, context_.data_model_.isExplicit3, context_.data_model_.arboretum_node_for(D->isExplicit()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExplicit, context_.data_model_.arboretum_node_for(D->isExplicit()));
   //inits
   // init_const_range
   //getNumCtorInitializers
   // unsigned int
   //isDelegatingConstructor
-  arboretum_create_edge(obj, context_.data_model_.isDelegatingConstructor, context_.data_model_.arboretum_node_for(D->isDelegatingConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDelegatingConstructor, context_.data_model_.arboretum_node_for(D->isDelegatingConstructor()));
   //isDefaultConstructor
-  arboretum_create_edge(obj, context_.data_model_.isDefaultConstructor, context_.data_model_.arboretum_node_for(D->isDefaultConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDefaultConstructor, context_.data_model_.arboretum_node_for(D->isDefaultConstructor()));
   //isCopyConstructor
-  arboretum_create_edge(obj, context_.data_model_.isCopyConstructor1, context_.data_model_.arboretum_node_for(D->isCopyConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCopyConstructor, context_.data_model_.arboretum_node_for(D->isCopyConstructor()));
   //isMoveConstructor
-  arboretum_create_edge(obj, context_.data_model_.isMoveConstructor1, context_.data_model_.arboretum_node_for(D->isMoveConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMoveConstructor, context_.data_model_.arboretum_node_for(D->isMoveConstructor()));
   //isCopyOrMoveConstructor
-  arboretum_create_edge(obj, context_.data_model_.isCopyOrMoveConstructor1, context_.data_model_.arboretum_node_for(D->isCopyOrMoveConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCopyOrMoveConstructor, context_.data_model_.arboretum_node_for(D->isCopyOrMoveConstructor()));
   //isSpecializationCopyingObject
-  arboretum_create_edge(obj, context_.data_model_.isSpecializationCopyingObject, context_.data_model_.arboretum_node_for(D->isSpecializationCopyingObject()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSpecializationCopyingObject, context_.data_model_.arboretum_node_for(D->isSpecializationCopyingObject()));
   //isInheritingConstructor
-  arboretum_create_edge(obj, context_.data_model_.isInheritingConstructor, context_.data_model_.arboretum_node_for(D->isInheritingConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInheritingConstructor, context_.data_model_.arboretum_node_for(D->isInheritingConstructor()));
   //getInheritedConstructor
   // InheritedConstructor
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl63, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl, other);
   }
   return true;
 }
@@ -1894,47 +1894,47 @@ bool ArboretumASTVisitor::VisitCXXConstructorDecl(clang::CXXConstructorDecl* D) 
 bool ArboretumASTVisitor::VisitCXXConversionDecl(clang::CXXConversionDecl* D) {
   if (!D->isThisDeclarationADefinition()) return true;
 
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getExplicitSpecifier
   // const ExplicitSpecifier
   //isExplicit
-  arboretum_create_edge(obj, context_.data_model_.isExplicit1, context_.data_model_.arboretum_node_for(D->isExplicit()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExplicit_1, context_.data_model_.arboretum_node_for(D->isExplicit()));
   //getConversionType
   {
-    const Entity* other = context_.resolve(D->getConversionType());
-    arboretum_create_edge(obj, context_.data_model_.getConversionType, other);
+    const Id* other = context_.resolve(D->getConversionType());
+    arboretum_create_edge(obj, context_.data_model_.method_getConversionType, other);
   }
   //isLambdaToBlockPointerConversion
-  arboretum_create_edge(obj, context_.data_model_.isLambdaToBlockPointerConversion, context_.data_model_.arboretum_node_for(D->isLambdaToBlockPointerConversion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isLambdaToBlockPointerConversion, context_.data_model_.arboretum_node_for(D->isLambdaToBlockPointerConversion()));
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl39, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_1, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXDeductionGuideDecl(clang::CXXDeductionGuideDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getExplicitSpecifier
   // const ExplicitSpecifier
   //isExplicit
-  arboretum_create_edge(obj, context_.data_model_.isExplicit2, context_.data_model_.arboretum_node_for(D->isExplicit()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExplicit_2, context_.data_model_.arboretum_node_for(D->isExplicit()));
   //getDeducedTemplate
   {
-    const Entity* other = context_.resolve(D->getDeducedTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getDeducedTemplate, other);
+    const Id* other = context_.resolve(D->getDeducedTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getDeducedTemplate, other);
   }
   //getCorrespondingConstructor
   {
-    const Entity* other = context_.resolve(D->getCorrespondingConstructor());
-    arboretum_create_edge(obj, context_.data_model_.getCorrespondingConstructor, other);
+    const Id* other = context_.resolve(D->getCorrespondingConstructor());
+    arboretum_create_edge(obj, context_.data_model_.method_getCorrespondingConstructor, other);
   }
   //getDeductionCandidateKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getDeductionCandidateKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getDeductionCandidateKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getDeductionCandidateKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getDeductionCandidateKind, enum_value);
     }
   }
   return true;
@@ -1943,21 +1943,21 @@ bool ArboretumASTVisitor::VisitCXXDeductionGuideDecl(clang::CXXDeductionGuideDec
 bool ArboretumASTVisitor::VisitCXXDestructorDecl(clang::CXXDestructorDecl* D) {
   if (!D->isThisDeclarationADefinition()) return true;
 
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getOperatorDelete
   {
-    const Entity* other = context_.resolve(D->getOperatorDelete());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorDelete2, other);
+    const Id* other = context_.resolve(D->getOperatorDelete());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorDelete, other);
   }
   //getOperatorDeleteThisArg
   {
-    const Entity* other = context_.resolve(D->getOperatorDeleteThisArg());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorDeleteThisArg, other);
+    const Id* other = context_.resolve(D->getOperatorDeleteThisArg());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorDeleteThisArg, other);
   }
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl41, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_2, other);
   }
   return true;
 }
@@ -1965,34 +1965,34 @@ bool ArboretumASTVisitor::VisitCXXDestructorDecl(clang::CXXDestructorDecl* D) {
 bool ArboretumASTVisitor::VisitCXXMethodDecl(clang::CXXMethodDecl* D) {
   if (!D->isThisDeclarationADefinition()) return true;
 
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isStatic
-  arboretum_create_edge(obj, context_.data_model_.isStatic, context_.data_model_.arboretum_node_for(D->isStatic()));
+  arboretum_create_edge(obj, context_.data_model_.method_isStatic, context_.data_model_.arboretum_node_for(D->isStatic()));
   //isInstance
-  arboretum_create_edge(obj, context_.data_model_.isInstance, context_.data_model_.arboretum_node_for(D->isInstance()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInstance, context_.data_model_.arboretum_node_for(D->isInstance()));
   //isExplicitObjectMemberFunction
-  arboretum_create_edge(obj, context_.data_model_.isExplicitObjectMemberFunction, context_.data_model_.arboretum_node_for(D->isExplicitObjectMemberFunction()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExplicitObjectMemberFunction, context_.data_model_.arboretum_node_for(D->isExplicitObjectMemberFunction()));
   //isImplicitObjectMemberFunction
-  arboretum_create_edge(obj, context_.data_model_.isImplicitObjectMemberFunction, context_.data_model_.arboretum_node_for(D->isImplicitObjectMemberFunction()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImplicitObjectMemberFunction, context_.data_model_.arboretum_node_for(D->isImplicitObjectMemberFunction()));
   //isConst
-  arboretum_create_edge(obj, context_.data_model_.isConst, context_.data_model_.arboretum_node_for(D->isConst()));
+  arboretum_create_edge(obj, context_.data_model_.method_isConst_1, context_.data_model_.arboretum_node_for(D->isConst()));
   //isVolatile
-  arboretum_create_edge(obj, context_.data_model_.isVolatile2, context_.data_model_.arboretum_node_for(D->isVolatile()));
+  arboretum_create_edge(obj, context_.data_model_.method_isVolatile_1, context_.data_model_.arboretum_node_for(D->isVolatile()));
   //isVirtual
-  arboretum_create_edge(obj, context_.data_model_.isVirtual, context_.data_model_.arboretum_node_for(D->isVirtual()));
+  arboretum_create_edge(obj, context_.data_model_.method_isVirtual, context_.data_model_.arboretum_node_for(D->isVirtual()));
   //isCopyAssignmentOperator
-  arboretum_create_edge(obj, context_.data_model_.isCopyAssignmentOperator, context_.data_model_.arboretum_node_for(D->isCopyAssignmentOperator()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCopyAssignmentOperator, context_.data_model_.arboretum_node_for(D->isCopyAssignmentOperator()));
   //isMoveAssignmentOperator
-  arboretum_create_edge(obj, context_.data_model_.isMoveAssignmentOperator, context_.data_model_.arboretum_node_for(D->isMoveAssignmentOperator()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMoveAssignmentOperator, context_.data_model_.arboretum_node_for(D->isMoveAssignmentOperator()));
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl17, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_3, other);
   }
   //getMostRecentDecl
   {
-    const Entity* other = context_.resolve(D->getMostRecentDecl());
-    arboretum_create_edge(obj, context_.data_model_.getMostRecentDecl5, other);
+    const Id* other = context_.resolve(D->getMostRecentDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getMostRecentDecl, other);
   }
   //size_overridden_methods
   // unsigned int
@@ -2000,23 +2000,23 @@ bool ArboretumASTVisitor::VisitCXXMethodDecl(clang::CXXMethodDecl* D) {
   // overridden_method_range
   //getParent
   {
-    const Entity* other = context_.resolve(D->getParent());
-    arboretum_create_edge(obj, context_.data_model_.getParent, other);
+    const Id* other = context_.resolve(D->getParent());
+    arboretum_create_edge(obj, context_.data_model_.method_getParent, other);
   }
   //getThisType
   {
-    const Entity* other = context_.resolve(D->getThisType());
-    arboretum_create_edge(obj, context_.data_model_.getThisType, other);
+    const Id* other = context_.resolve(D->getThisType());
+    arboretum_create_edge(obj, context_.data_model_.method_getThisType, other);
   }
   //getFunctionObjectParameterReferenceType
   {
-    const Entity* other = context_.resolve(D->getFunctionObjectParameterReferenceType());
-    arboretum_create_edge(obj, context_.data_model_.getFunctionObjectParameterReferenceType, other);
+    const Id* other = context_.resolve(D->getFunctionObjectParameterReferenceType());
+    arboretum_create_edge(obj, context_.data_model_.method_getFunctionObjectParameterReferenceType, other);
   }
   //getFunctionObjectParameterType
   {
-    const Entity* other = context_.resolve(D->getFunctionObjectParameterType());
-    arboretum_create_edge(obj, context_.data_model_.getFunctionObjectParameterType, other);
+    const Id* other = context_.resolve(D->getFunctionObjectParameterType());
+    arboretum_create_edge(obj, context_.data_model_.method_getFunctionObjectParameterType, other);
   }
   //getNumExplicitParams
   // unsigned int
@@ -2024,52 +2024,52 @@ bool ArboretumASTVisitor::VisitCXXMethodDecl(clang::CXXMethodDecl* D) {
   // Qualifiers
   //getRefQualifier
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getRefQualifier());
+    const Id* enum_value = context_.data_model_.resolve(D->getRefQualifier());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getRefQualifier, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getRefQualifier_1, enum_value);
     }
   }
   //hasInlineBody
-  arboretum_create_edge(obj, context_.data_model_.hasInlineBody, context_.data_model_.arboretum_node_for(D->hasInlineBody()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasInlineBody, context_.data_model_.arboretum_node_for(D->hasInlineBody()));
   //isLambdaStaticInvoker
-  arboretum_create_edge(obj, context_.data_model_.isLambdaStaticInvoker, context_.data_model_.arboretum_node_for(D->isLambdaStaticInvoker()));
+  arboretum_create_edge(obj, context_.data_model_.method_isLambdaStaticInvoker, context_.data_model_.arboretum_node_for(D->isLambdaStaticInvoker()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXRecordDecl(clang::CXXRecordDecl* D) {
   if (!D->isThisDeclarationADefinition()) return true;
 
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl1, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_4, other);
   }
   //getPreviousDecl
   {
-    const Entity* other = context_.resolve(D->getPreviousDecl());
-    arboretum_create_edge(obj, context_.data_model_.getPreviousDecl1, other);
+    const Id* other = context_.resolve(D->getPreviousDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getPreviousDecl, other);
   }
   //getMostRecentDecl
   {
-    const Entity* other = context_.resolve(D->getMostRecentDecl());
-    arboretum_create_edge(obj, context_.data_model_.getMostRecentDecl1, other);
+    const Id* other = context_.resolve(D->getMostRecentDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getMostRecentDecl_1, other);
   }
   //getDefinition
   {
-    const Entity* other = context_.resolve(D->getDefinition());
-    arboretum_create_edge(obj, context_.data_model_.getDefinition, other);
+    const Id* other = context_.resolve(D->getDefinition());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefinition, other);
   }
   //hasDefinition
-  arboretum_create_edge(obj, context_.data_model_.hasDefinition, context_.data_model_.arboretum_node_for(D->hasDefinition()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasDefinition, context_.data_model_.arboretum_node_for(D->hasDefinition()));
   //isDynamicClass
-  arboretum_create_edge(obj, context_.data_model_.isDynamicClass, context_.data_model_.arboretum_node_for(D->isDynamicClass()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDynamicClass, context_.data_model_.arboretum_node_for(D->isDynamicClass()));
   //mayBeDynamicClass
-  arboretum_create_edge(obj, context_.data_model_.mayBeDynamicClass, context_.data_model_.arboretum_node_for(D->mayBeDynamicClass()));
+  arboretum_create_edge(obj, context_.data_model_.method_mayBeDynamicClass, context_.data_model_.arboretum_node_for(D->mayBeDynamicClass()));
   //mayBeNonDynamicClass
-  arboretum_create_edge(obj, context_.data_model_.mayBeNonDynamicClass, context_.data_model_.arboretum_node_for(D->mayBeNonDynamicClass()));
+  arboretum_create_edge(obj, context_.data_model_.method_mayBeNonDynamicClass, context_.data_model_.arboretum_node_for(D->mayBeNonDynamicClass()));
   //isParsingBaseSpecifiers
-  arboretum_create_edge(obj, context_.data_model_.isParsingBaseSpecifiers, context_.data_model_.arboretum_node_for(D->isParsingBaseSpecifiers()));
+  arboretum_create_edge(obj, context_.data_model_.method_isParsingBaseSpecifiers, context_.data_model_.arboretum_node_for(D->isParsingBaseSpecifiers()));
   //getODRHash
   // unsigned int
   //getNumBases
@@ -2081,7 +2081,7 @@ bool ArboretumASTVisitor::VisitCXXRecordDecl(clang::CXXRecordDecl* D) {
   //vbases
   // base_class_const_range
   //hasAnyDependentBases
-  arboretum_create_edge(obj, context_.data_model_.hasAnyDependentBases, context_.data_model_.arboretum_node_for(D->hasAnyDependentBases()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasAnyDependentBases, context_.data_model_.arboretum_node_for(D->hasAnyDependentBases()));
   //methods
   // method_range
   //ctors
@@ -2089,90 +2089,90 @@ bool ArboretumASTVisitor::VisitCXXRecordDecl(clang::CXXRecordDecl* D) {
   //friends
   // friend_range
   //hasFriends
-  arboretum_create_edge(obj, context_.data_model_.hasFriends, context_.data_model_.arboretum_node_for(D->hasFriends()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasFriends, context_.data_model_.arboretum_node_for(D->hasFriends()));
   //hasSimpleCopyConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasSimpleCopyConstructor, context_.data_model_.arboretum_node_for(D->hasSimpleCopyConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasSimpleCopyConstructor, context_.data_model_.arboretum_node_for(D->hasSimpleCopyConstructor()));
   //hasSimpleMoveConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasSimpleMoveConstructor, context_.data_model_.arboretum_node_for(D->hasSimpleMoveConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasSimpleMoveConstructor, context_.data_model_.arboretum_node_for(D->hasSimpleMoveConstructor()));
   //hasSimpleCopyAssignment
-  arboretum_create_edge(obj, context_.data_model_.hasSimpleCopyAssignment, context_.data_model_.arboretum_node_for(D->hasSimpleCopyAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasSimpleCopyAssignment, context_.data_model_.arboretum_node_for(D->hasSimpleCopyAssignment()));
   //hasSimpleMoveAssignment
-  arboretum_create_edge(obj, context_.data_model_.hasSimpleMoveAssignment, context_.data_model_.arboretum_node_for(D->hasSimpleMoveAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasSimpleMoveAssignment, context_.data_model_.arboretum_node_for(D->hasSimpleMoveAssignment()));
   //hasSimpleDestructor
-  arboretum_create_edge(obj, context_.data_model_.hasSimpleDestructor, context_.data_model_.arboretum_node_for(D->hasSimpleDestructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasSimpleDestructor, context_.data_model_.arboretum_node_for(D->hasSimpleDestructor()));
   //hasDefaultConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasDefaultConstructor, context_.data_model_.arboretum_node_for(D->hasDefaultConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasDefaultConstructor, context_.data_model_.arboretum_node_for(D->hasDefaultConstructor()));
   //needsImplicitDefaultConstructor
-  arboretum_create_edge(obj, context_.data_model_.needsImplicitDefaultConstructor, context_.data_model_.arboretum_node_for(D->needsImplicitDefaultConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_needsImplicitDefaultConstructor, context_.data_model_.arboretum_node_for(D->needsImplicitDefaultConstructor()));
   //hasUserDeclaredConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasUserDeclaredConstructor, context_.data_model_.arboretum_node_for(D->hasUserDeclaredConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUserDeclaredConstructor, context_.data_model_.arboretum_node_for(D->hasUserDeclaredConstructor()));
   //hasUserProvidedDefaultConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasUserProvidedDefaultConstructor, context_.data_model_.arboretum_node_for(D->hasUserProvidedDefaultConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUserProvidedDefaultConstructor, context_.data_model_.arboretum_node_for(D->hasUserProvidedDefaultConstructor()));
   //hasUserDeclaredCopyConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasUserDeclaredCopyConstructor, context_.data_model_.arboretum_node_for(D->hasUserDeclaredCopyConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUserDeclaredCopyConstructor, context_.data_model_.arboretum_node_for(D->hasUserDeclaredCopyConstructor()));
   //needsImplicitCopyConstructor
-  arboretum_create_edge(obj, context_.data_model_.needsImplicitCopyConstructor, context_.data_model_.arboretum_node_for(D->needsImplicitCopyConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_needsImplicitCopyConstructor, context_.data_model_.arboretum_node_for(D->needsImplicitCopyConstructor()));
   //needsOverloadResolutionForCopyConstructor
-  arboretum_create_edge(obj, context_.data_model_.needsOverloadResolutionForCopyConstructor, context_.data_model_.arboretum_node_for(D->needsOverloadResolutionForCopyConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_needsOverloadResolutionForCopyConstructor, context_.data_model_.arboretum_node_for(D->needsOverloadResolutionForCopyConstructor()));
   //implicitCopyConstructorHasConstParam
-  arboretum_create_edge(obj, context_.data_model_.implicitCopyConstructorHasConstParam, context_.data_model_.arboretum_node_for(D->implicitCopyConstructorHasConstParam()));
+  arboretum_create_edge(obj, context_.data_model_.method_implicitCopyConstructorHasConstParam, context_.data_model_.arboretum_node_for(D->implicitCopyConstructorHasConstParam()));
   //hasCopyConstructorWithConstParam
-  arboretum_create_edge(obj, context_.data_model_.hasCopyConstructorWithConstParam, context_.data_model_.arboretum_node_for(D->hasCopyConstructorWithConstParam()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasCopyConstructorWithConstParam, context_.data_model_.arboretum_node_for(D->hasCopyConstructorWithConstParam()));
   //hasUserDeclaredMoveOperation
-  arboretum_create_edge(obj, context_.data_model_.hasUserDeclaredMoveOperation, context_.data_model_.arboretum_node_for(D->hasUserDeclaredMoveOperation()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUserDeclaredMoveOperation, context_.data_model_.arboretum_node_for(D->hasUserDeclaredMoveOperation()));
   //hasUserDeclaredMoveConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasUserDeclaredMoveConstructor, context_.data_model_.arboretum_node_for(D->hasUserDeclaredMoveConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUserDeclaredMoveConstructor, context_.data_model_.arboretum_node_for(D->hasUserDeclaredMoveConstructor()));
   //hasMoveConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasMoveConstructor, context_.data_model_.arboretum_node_for(D->hasMoveConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasMoveConstructor, context_.data_model_.arboretum_node_for(D->hasMoveConstructor()));
   //needsImplicitMoveConstructor
-  arboretum_create_edge(obj, context_.data_model_.needsImplicitMoveConstructor, context_.data_model_.arboretum_node_for(D->needsImplicitMoveConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_needsImplicitMoveConstructor, context_.data_model_.arboretum_node_for(D->needsImplicitMoveConstructor()));
   //needsOverloadResolutionForMoveConstructor
-  arboretum_create_edge(obj, context_.data_model_.needsOverloadResolutionForMoveConstructor, context_.data_model_.arboretum_node_for(D->needsOverloadResolutionForMoveConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_needsOverloadResolutionForMoveConstructor, context_.data_model_.arboretum_node_for(D->needsOverloadResolutionForMoveConstructor()));
   //hasUserDeclaredCopyAssignment
-  arboretum_create_edge(obj, context_.data_model_.hasUserDeclaredCopyAssignment, context_.data_model_.arboretum_node_for(D->hasUserDeclaredCopyAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUserDeclaredCopyAssignment, context_.data_model_.arboretum_node_for(D->hasUserDeclaredCopyAssignment()));
   //needsImplicitCopyAssignment
-  arboretum_create_edge(obj, context_.data_model_.needsImplicitCopyAssignment, context_.data_model_.arboretum_node_for(D->needsImplicitCopyAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_needsImplicitCopyAssignment, context_.data_model_.arboretum_node_for(D->needsImplicitCopyAssignment()));
   //needsOverloadResolutionForCopyAssignment
-  arboretum_create_edge(obj, context_.data_model_.needsOverloadResolutionForCopyAssignment, context_.data_model_.arboretum_node_for(D->needsOverloadResolutionForCopyAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_needsOverloadResolutionForCopyAssignment, context_.data_model_.arboretum_node_for(D->needsOverloadResolutionForCopyAssignment()));
   //implicitCopyAssignmentHasConstParam
-  arboretum_create_edge(obj, context_.data_model_.implicitCopyAssignmentHasConstParam, context_.data_model_.arboretum_node_for(D->implicitCopyAssignmentHasConstParam()));
+  arboretum_create_edge(obj, context_.data_model_.method_implicitCopyAssignmentHasConstParam, context_.data_model_.arboretum_node_for(D->implicitCopyAssignmentHasConstParam()));
   //hasCopyAssignmentWithConstParam
-  arboretum_create_edge(obj, context_.data_model_.hasCopyAssignmentWithConstParam, context_.data_model_.arboretum_node_for(D->hasCopyAssignmentWithConstParam()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasCopyAssignmentWithConstParam, context_.data_model_.arboretum_node_for(D->hasCopyAssignmentWithConstParam()));
   //hasUserDeclaredMoveAssignment
-  arboretum_create_edge(obj, context_.data_model_.hasUserDeclaredMoveAssignment, context_.data_model_.arboretum_node_for(D->hasUserDeclaredMoveAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUserDeclaredMoveAssignment, context_.data_model_.arboretum_node_for(D->hasUserDeclaredMoveAssignment()));
   //hasMoveAssignment
-  arboretum_create_edge(obj, context_.data_model_.hasMoveAssignment, context_.data_model_.arboretum_node_for(D->hasMoveAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasMoveAssignment, context_.data_model_.arboretum_node_for(D->hasMoveAssignment()));
   //needsImplicitMoveAssignment
-  arboretum_create_edge(obj, context_.data_model_.needsImplicitMoveAssignment, context_.data_model_.arboretum_node_for(D->needsImplicitMoveAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_needsImplicitMoveAssignment, context_.data_model_.arboretum_node_for(D->needsImplicitMoveAssignment()));
   //needsOverloadResolutionForMoveAssignment
-  arboretum_create_edge(obj, context_.data_model_.needsOverloadResolutionForMoveAssignment, context_.data_model_.arboretum_node_for(D->needsOverloadResolutionForMoveAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_needsOverloadResolutionForMoveAssignment, context_.data_model_.arboretum_node_for(D->needsOverloadResolutionForMoveAssignment()));
   //hasUserDeclaredDestructor
-  arboretum_create_edge(obj, context_.data_model_.hasUserDeclaredDestructor, context_.data_model_.arboretum_node_for(D->hasUserDeclaredDestructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUserDeclaredDestructor, context_.data_model_.arboretum_node_for(D->hasUserDeclaredDestructor()));
   //needsImplicitDestructor
-  arboretum_create_edge(obj, context_.data_model_.needsImplicitDestructor, context_.data_model_.arboretum_node_for(D->needsImplicitDestructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_needsImplicitDestructor, context_.data_model_.arboretum_node_for(D->needsImplicitDestructor()));
   //needsOverloadResolutionForDestructor
-  arboretum_create_edge(obj, context_.data_model_.needsOverloadResolutionForDestructor, context_.data_model_.arboretum_node_for(D->needsOverloadResolutionForDestructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_needsOverloadResolutionForDestructor, context_.data_model_.arboretum_node_for(D->needsOverloadResolutionForDestructor()));
   //isLambda
-  arboretum_create_edge(obj, context_.data_model_.isLambda, context_.data_model_.arboretum_node_for(D->isLambda()));
+  arboretum_create_edge(obj, context_.data_model_.method_isLambda, context_.data_model_.arboretum_node_for(D->isLambda()));
   //isGenericLambda
-  arboretum_create_edge(obj, context_.data_model_.isGenericLambda1, context_.data_model_.arboretum_node_for(D->isGenericLambda()));
+  arboretum_create_edge(obj, context_.data_model_.method_isGenericLambda, context_.data_model_.arboretum_node_for(D->isGenericLambda()));
   //lambdaIsDefaultConstructibleAndAssignable
-  arboretum_create_edge(obj, context_.data_model_.lambdaIsDefaultConstructibleAndAssignable, context_.data_model_.arboretum_node_for(D->lambdaIsDefaultConstructibleAndAssignable()));
+  arboretum_create_edge(obj, context_.data_model_.method_lambdaIsDefaultConstructibleAndAssignable, context_.data_model_.arboretum_node_for(D->lambdaIsDefaultConstructibleAndAssignable()));
   //getLambdaCallOperator
   {
-    const Entity* other = context_.resolve(D->getLambdaCallOperator());
-    arboretum_create_edge(obj, context_.data_model_.getLambdaCallOperator, other);
+    const Id* other = context_.resolve(D->getLambdaCallOperator());
+    arboretum_create_edge(obj, context_.data_model_.method_getLambdaCallOperator, other);
   }
   //getDependentLambdaCallOperator
   {
-    const Entity* other = context_.resolve(D->getDependentLambdaCallOperator());
-    arboretum_create_edge(obj, context_.data_model_.getDependentLambdaCallOperator, other);
+    const Id* other = context_.resolve(D->getDependentLambdaCallOperator());
+    arboretum_create_edge(obj, context_.data_model_.method_getDependentLambdaCallOperator, other);
   }
   //getGenericLambdaTemplateParameterList
   //getLambdaExplicitTemplateParameters
   // ArrayRef<NamedDecl *>
   //isCapturelessLambda
-  arboretum_create_edge(obj, context_.data_model_.isCapturelessLambda, context_.data_model_.arboretum_node_for(D->isCapturelessLambda()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCapturelessLambda, context_.data_model_.arboretum_node_for(D->isCapturelessLambda()));
   //captures
   // capture_const_range
   //capture_size
@@ -2180,142 +2180,142 @@ bool ArboretumASTVisitor::VisitCXXRecordDecl(clang::CXXRecordDecl* D) {
   //getVisibleConversionFunctions
   // llvm::iterator_range<conversion_iterator>
   //isAggregate
-  arboretum_create_edge(obj, context_.data_model_.isAggregate, context_.data_model_.arboretum_node_for(D->isAggregate()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAggregate, context_.data_model_.arboretum_node_for(D->isAggregate()));
   //hasInClassInitializer
-  arboretum_create_edge(obj, context_.data_model_.hasInClassInitializer, context_.data_model_.arboretum_node_for(D->hasInClassInitializer()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasInClassInitializer, context_.data_model_.arboretum_node_for(D->hasInClassInitializer()));
   //hasUninitializedReferenceMember
-  arboretum_create_edge(obj, context_.data_model_.hasUninitializedReferenceMember, context_.data_model_.arboretum_node_for(D->hasUninitializedReferenceMember()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUninitializedReferenceMember, context_.data_model_.arboretum_node_for(D->hasUninitializedReferenceMember()));
   //isPOD
-  arboretum_create_edge(obj, context_.data_model_.isPOD, context_.data_model_.arboretum_node_for(D->isPOD()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPOD, context_.data_model_.arboretum_node_for(D->isPOD()));
   //isCLike
-  arboretum_create_edge(obj, context_.data_model_.isCLike, context_.data_model_.arboretum_node_for(D->isCLike()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCLike, context_.data_model_.arboretum_node_for(D->isCLike()));
   //isEmpty
-  arboretum_create_edge(obj, context_.data_model_.isEmpty, context_.data_model_.arboretum_node_for(D->isEmpty()));
+  arboretum_create_edge(obj, context_.data_model_.method_isEmpty, context_.data_model_.arboretum_node_for(D->isEmpty()));
   //hasInitMethod
-  arboretum_create_edge(obj, context_.data_model_.hasInitMethod, context_.data_model_.arboretum_node_for(D->hasInitMethod()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasInitMethod, context_.data_model_.arboretum_node_for(D->hasInitMethod()));
   //hasPrivateFields
-  arboretum_create_edge(obj, context_.data_model_.hasPrivateFields, context_.data_model_.arboretum_node_for(D->hasPrivateFields()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasPrivateFields, context_.data_model_.arboretum_node_for(D->hasPrivateFields()));
   //hasProtectedFields
-  arboretum_create_edge(obj, context_.data_model_.hasProtectedFields, context_.data_model_.arboretum_node_for(D->hasProtectedFields()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasProtectedFields, context_.data_model_.arboretum_node_for(D->hasProtectedFields()));
   //hasDirectFields
-  arboretum_create_edge(obj, context_.data_model_.hasDirectFields, context_.data_model_.arboretum_node_for(D->hasDirectFields()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasDirectFields, context_.data_model_.arboretum_node_for(D->hasDirectFields()));
   //isPolymorphic
-  arboretum_create_edge(obj, context_.data_model_.isPolymorphic, context_.data_model_.arboretum_node_for(D->isPolymorphic()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPolymorphic, context_.data_model_.arboretum_node_for(D->isPolymorphic()));
   //isAbstract
-  arboretum_create_edge(obj, context_.data_model_.isAbstract, context_.data_model_.arboretum_node_for(D->isAbstract()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAbstract, context_.data_model_.arboretum_node_for(D->isAbstract()));
   //isStandardLayout
-  arboretum_create_edge(obj, context_.data_model_.isStandardLayout, context_.data_model_.arboretum_node_for(D->isStandardLayout()));
+  arboretum_create_edge(obj, context_.data_model_.method_isStandardLayout, context_.data_model_.arboretum_node_for(D->isStandardLayout()));
   //isCXX11StandardLayout
-  arboretum_create_edge(obj, context_.data_model_.isCXX11StandardLayout, context_.data_model_.arboretum_node_for(D->isCXX11StandardLayout()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCXX11StandardLayout, context_.data_model_.arboretum_node_for(D->isCXX11StandardLayout()));
   //hasMutableFields
-  arboretum_create_edge(obj, context_.data_model_.hasMutableFields, context_.data_model_.arboretum_node_for(D->hasMutableFields()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasMutableFields, context_.data_model_.arboretum_node_for(D->hasMutableFields()));
   //hasVariantMembers
-  arboretum_create_edge(obj, context_.data_model_.hasVariantMembers, context_.data_model_.arboretum_node_for(D->hasVariantMembers()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasVariantMembers, context_.data_model_.arboretum_node_for(D->hasVariantMembers()));
   //hasTrivialDefaultConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasTrivialDefaultConstructor, context_.data_model_.arboretum_node_for(D->hasTrivialDefaultConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTrivialDefaultConstructor, context_.data_model_.arboretum_node_for(D->hasTrivialDefaultConstructor()));
   //hasNonTrivialDefaultConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasNonTrivialDefaultConstructor, context_.data_model_.arboretum_node_for(D->hasNonTrivialDefaultConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonTrivialDefaultConstructor, context_.data_model_.arboretum_node_for(D->hasNonTrivialDefaultConstructor()));
   //hasConstexprNonCopyMoveConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasConstexprNonCopyMoveConstructor, context_.data_model_.arboretum_node_for(D->hasConstexprNonCopyMoveConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasConstexprNonCopyMoveConstructor, context_.data_model_.arboretum_node_for(D->hasConstexprNonCopyMoveConstructor()));
   //defaultedDefaultConstructorIsConstexpr
-  arboretum_create_edge(obj, context_.data_model_.defaultedDefaultConstructorIsConstexpr, context_.data_model_.arboretum_node_for(D->defaultedDefaultConstructorIsConstexpr()));
+  arboretum_create_edge(obj, context_.data_model_.method_defaultedDefaultConstructorIsConstexpr, context_.data_model_.arboretum_node_for(D->defaultedDefaultConstructorIsConstexpr()));
   //hasConstexprDefaultConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasConstexprDefaultConstructor, context_.data_model_.arboretum_node_for(D->hasConstexprDefaultConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasConstexprDefaultConstructor, context_.data_model_.arboretum_node_for(D->hasConstexprDefaultConstructor()));
   //hasTrivialCopyConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasTrivialCopyConstructor, context_.data_model_.arboretum_node_for(D->hasTrivialCopyConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTrivialCopyConstructor, context_.data_model_.arboretum_node_for(D->hasTrivialCopyConstructor()));
   //hasTrivialCopyConstructorForCall
-  arboretum_create_edge(obj, context_.data_model_.hasTrivialCopyConstructorForCall, context_.data_model_.arboretum_node_for(D->hasTrivialCopyConstructorForCall()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTrivialCopyConstructorForCall, context_.data_model_.arboretum_node_for(D->hasTrivialCopyConstructorForCall()));
   //hasNonTrivialCopyConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasNonTrivialCopyConstructor, context_.data_model_.arboretum_node_for(D->hasNonTrivialCopyConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonTrivialCopyConstructor, context_.data_model_.arboretum_node_for(D->hasNonTrivialCopyConstructor()));
   //hasNonTrivialCopyConstructorForCall
-  arboretum_create_edge(obj, context_.data_model_.hasNonTrivialCopyConstructorForCall, context_.data_model_.arboretum_node_for(D->hasNonTrivialCopyConstructorForCall()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonTrivialCopyConstructorForCall, context_.data_model_.arboretum_node_for(D->hasNonTrivialCopyConstructorForCall()));
   //hasTrivialMoveConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasTrivialMoveConstructor, context_.data_model_.arboretum_node_for(D->hasTrivialMoveConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTrivialMoveConstructor, context_.data_model_.arboretum_node_for(D->hasTrivialMoveConstructor()));
   //hasTrivialMoveConstructorForCall
-  arboretum_create_edge(obj, context_.data_model_.hasTrivialMoveConstructorForCall, context_.data_model_.arboretum_node_for(D->hasTrivialMoveConstructorForCall()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTrivialMoveConstructorForCall, context_.data_model_.arboretum_node_for(D->hasTrivialMoveConstructorForCall()));
   //hasNonTrivialMoveConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasNonTrivialMoveConstructor, context_.data_model_.arboretum_node_for(D->hasNonTrivialMoveConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonTrivialMoveConstructor, context_.data_model_.arboretum_node_for(D->hasNonTrivialMoveConstructor()));
   //hasNonTrivialMoveConstructorForCall
-  arboretum_create_edge(obj, context_.data_model_.hasNonTrivialMoveConstructorForCall, context_.data_model_.arboretum_node_for(D->hasNonTrivialMoveConstructorForCall()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonTrivialMoveConstructorForCall, context_.data_model_.arboretum_node_for(D->hasNonTrivialMoveConstructorForCall()));
   //hasTrivialCopyAssignment
-  arboretum_create_edge(obj, context_.data_model_.hasTrivialCopyAssignment, context_.data_model_.arboretum_node_for(D->hasTrivialCopyAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTrivialCopyAssignment, context_.data_model_.arboretum_node_for(D->hasTrivialCopyAssignment()));
   //hasNonTrivialCopyAssignment
-  arboretum_create_edge(obj, context_.data_model_.hasNonTrivialCopyAssignment, context_.data_model_.arboretum_node_for(D->hasNonTrivialCopyAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonTrivialCopyAssignment, context_.data_model_.arboretum_node_for(D->hasNonTrivialCopyAssignment()));
   //hasTrivialMoveAssignment
-  arboretum_create_edge(obj, context_.data_model_.hasTrivialMoveAssignment, context_.data_model_.arboretum_node_for(D->hasTrivialMoveAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTrivialMoveAssignment, context_.data_model_.arboretum_node_for(D->hasTrivialMoveAssignment()));
   //hasNonTrivialMoveAssignment
-  arboretum_create_edge(obj, context_.data_model_.hasNonTrivialMoveAssignment, context_.data_model_.arboretum_node_for(D->hasNonTrivialMoveAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonTrivialMoveAssignment, context_.data_model_.arboretum_node_for(D->hasNonTrivialMoveAssignment()));
   //defaultedDestructorIsConstexpr
-  arboretum_create_edge(obj, context_.data_model_.defaultedDestructorIsConstexpr, context_.data_model_.arboretum_node_for(D->defaultedDestructorIsConstexpr()));
+  arboretum_create_edge(obj, context_.data_model_.method_defaultedDestructorIsConstexpr, context_.data_model_.arboretum_node_for(D->defaultedDestructorIsConstexpr()));
   //hasConstexprDestructor
-  arboretum_create_edge(obj, context_.data_model_.hasConstexprDestructor, context_.data_model_.arboretum_node_for(D->hasConstexprDestructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasConstexprDestructor, context_.data_model_.arboretum_node_for(D->hasConstexprDestructor()));
   //hasTrivialDestructor
-  arboretum_create_edge(obj, context_.data_model_.hasTrivialDestructor, context_.data_model_.arboretum_node_for(D->hasTrivialDestructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTrivialDestructor, context_.data_model_.arboretum_node_for(D->hasTrivialDestructor()));
   //hasTrivialDestructorForCall
-  arboretum_create_edge(obj, context_.data_model_.hasTrivialDestructorForCall, context_.data_model_.arboretum_node_for(D->hasTrivialDestructorForCall()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTrivialDestructorForCall, context_.data_model_.arboretum_node_for(D->hasTrivialDestructorForCall()));
   //hasNonTrivialDestructor
-  arboretum_create_edge(obj, context_.data_model_.hasNonTrivialDestructor, context_.data_model_.arboretum_node_for(D->hasNonTrivialDestructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonTrivialDestructor, context_.data_model_.arboretum_node_for(D->hasNonTrivialDestructor()));
   //hasNonTrivialDestructorForCall
-  arboretum_create_edge(obj, context_.data_model_.hasNonTrivialDestructorForCall, context_.data_model_.arboretum_node_for(D->hasNonTrivialDestructorForCall()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonTrivialDestructorForCall, context_.data_model_.arboretum_node_for(D->hasNonTrivialDestructorForCall()));
   //allowConstDefaultInit
-  arboretum_create_edge(obj, context_.data_model_.allowConstDefaultInit, context_.data_model_.arboretum_node_for(D->allowConstDefaultInit()));
+  arboretum_create_edge(obj, context_.data_model_.method_allowConstDefaultInit, context_.data_model_.arboretum_node_for(D->allowConstDefaultInit()));
   //hasIrrelevantDestructor
-  arboretum_create_edge(obj, context_.data_model_.hasIrrelevantDestructor, context_.data_model_.arboretum_node_for(D->hasIrrelevantDestructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasIrrelevantDestructor, context_.data_model_.arboretum_node_for(D->hasIrrelevantDestructor()));
   //hasNonLiteralTypeFieldsOrBases
-  arboretum_create_edge(obj, context_.data_model_.hasNonLiteralTypeFieldsOrBases, context_.data_model_.arboretum_node_for(D->hasNonLiteralTypeFieldsOrBases()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonLiteralTypeFieldsOrBases, context_.data_model_.arboretum_node_for(D->hasNonLiteralTypeFieldsOrBases()));
   //hasInheritedConstructor
-  arboretum_create_edge(obj, context_.data_model_.hasInheritedConstructor, context_.data_model_.arboretum_node_for(D->hasInheritedConstructor()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasInheritedConstructor, context_.data_model_.arboretum_node_for(D->hasInheritedConstructor()));
   //hasInheritedAssignment
-  arboretum_create_edge(obj, context_.data_model_.hasInheritedAssignment, context_.data_model_.arboretum_node_for(D->hasInheritedAssignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasInheritedAssignment, context_.data_model_.arboretum_node_for(D->hasInheritedAssignment()));
   //isTriviallyCopyable
-  arboretum_create_edge(obj, context_.data_model_.isTriviallyCopyable, context_.data_model_.arboretum_node_for(D->isTriviallyCopyable()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTriviallyCopyable, context_.data_model_.arboretum_node_for(D->isTriviallyCopyable()));
   //isTriviallyCopyConstructible
-  arboretum_create_edge(obj, context_.data_model_.isTriviallyCopyConstructible, context_.data_model_.arboretum_node_for(D->isTriviallyCopyConstructible()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTriviallyCopyConstructible, context_.data_model_.arboretum_node_for(D->isTriviallyCopyConstructible()));
   //isTrivial
-  arboretum_create_edge(obj, context_.data_model_.isTrivial, context_.data_model_.arboretum_node_for(D->isTrivial()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTrivial, context_.data_model_.arboretum_node_for(D->isTrivial()));
   //isLiteral
-  arboretum_create_edge(obj, context_.data_model_.isLiteral, context_.data_model_.arboretum_node_for(D->isLiteral()));
+  arboretum_create_edge(obj, context_.data_model_.method_isLiteral, context_.data_model_.arboretum_node_for(D->isLiteral()));
   //isStructural
-  arboretum_create_edge(obj, context_.data_model_.isStructural, context_.data_model_.arboretum_node_for(D->isStructural()));
+  arboretum_create_edge(obj, context_.data_model_.method_isStructural, context_.data_model_.arboretum_node_for(D->isStructural()));
   //getInstantiatedFromMemberClass
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromMemberClass());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromMemberClass, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromMemberClass());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromMemberClass, other);
   }
   //getMemberSpecializationInfo
   //getDescribedClassTemplate
   {
-    const Entity* other = context_.resolve(D->getDescribedClassTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getDescribedClassTemplate, other);
+    const Id* other = context_.resolve(D->getDescribedClassTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getDescribedClassTemplate, other);
   }
   //getTemplateSpecializationKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getTemplateSpecializationKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getTemplateSpecializationKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getTemplateSpecializationKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getTemplateSpecializationKind, enum_value);
     }
   }
   //getTemplateInstantiationPattern
   {
-    const Entity* other = context_.resolve(D->getTemplateInstantiationPattern());
-    arboretum_create_edge(obj, context_.data_model_.getTemplateInstantiationPattern, other);
+    const Id* other = context_.resolve(D->getTemplateInstantiationPattern());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplateInstantiationPattern, other);
   }
   //getDestructor
   {
-    const Entity* other = context_.resolve(D->getDestructor());
-    arboretum_create_edge(obj, context_.data_model_.getDestructor, other);
+    const Id* other = context_.resolve(D->getDestructor());
+    arboretum_create_edge(obj, context_.data_model_.method_getDestructor, other);
   }
   //isAnyDestructorNoReturn
-  arboretum_create_edge(obj, context_.data_model_.isAnyDestructorNoReturn, context_.data_model_.arboretum_node_for(D->isAnyDestructorNoReturn()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAnyDestructorNoReturn, context_.data_model_.arboretum_node_for(D->isAnyDestructorNoReturn()));
   //isLocalClass
   {
-    const Entity* other = context_.resolve(D->isLocalClass());
-    arboretum_create_edge(obj, context_.data_model_.isLocalClass, other);
+    const Id* other = context_.resolve(D->isLocalClass());
+    arboretum_create_edge(obj, context_.data_model_.method_isLocalClass, other);
   }
   //mayBeAbstract
-  arboretum_create_edge(obj, context_.data_model_.mayBeAbstract, context_.data_model_.arboretum_node_for(D->mayBeAbstract()));
+  arboretum_create_edge(obj, context_.data_model_.method_mayBeAbstract, context_.data_model_.arboretum_node_for(D->mayBeAbstract()));
   //isEffectivelyFinal
-  arboretum_create_edge(obj, context_.data_model_.isEffectivelyFinal, context_.data_model_.arboretum_node_for(D->isEffectivelyFinal()));
+  arboretum_create_edge(obj, context_.data_model_.method_isEffectivelyFinal, context_.data_model_.arboretum_node_for(D->isEffectivelyFinal()));
   //getLambdaManglingNumber
   // unsigned int
   //getLambdaIndexInContext
@@ -2326,15 +2326,15 @@ bool ArboretumASTVisitor::VisitCXXRecordDecl(clang::CXXRecordDecl* D) {
   // unsigned int
   //getMSVtorDispMode
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getMSVtorDispMode());
+    const Id* enum_value = context_.data_model_.resolve(D->getMSVtorDispMode());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getMSVtorDispMode, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getMSVtorDispMode, enum_value);
     }
   }
   //isDependentLambda
-  arboretum_create_edge(obj, context_.data_model_.isDependentLambda, context_.data_model_.arboretum_node_for(D->isDependentLambda()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDependentLambda, context_.data_model_.arboretum_node_for(D->isDependentLambda()));
   //isNeverDependentLambda
-  arboretum_create_edge(obj, context_.data_model_.isNeverDependentLambda, context_.data_model_.arboretum_node_for(D->isNeverDependentLambda()));
+  arboretum_create_edge(obj, context_.data_model_.method_isNeverDependentLambda, context_.data_model_.arboretum_node_for(D->isNeverDependentLambda()));
   //getLambdaDependencyKind
   // unsigned int
   //getLambdaTypeInfo
@@ -2342,22 +2342,22 @@ bool ArboretumASTVisitor::VisitCXXRecordDecl(clang::CXXRecordDecl* D) {
 }
 
 bool ArboretumASTVisitor::VisitCapturedDecl(clang::CapturedDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBody
   {
-    const Entity* other = context_.resolve(D->getBody());
-    arboretum_create_edge(obj, context_.data_model_.getBody17, other);
+    const Id* other = context_.resolve(D->getBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getBody_1, other);
   }
   //isNothrow
-  arboretum_create_edge(obj, context_.data_model_.isNothrow1, context_.data_model_.arboretum_node_for(D->isNothrow()));
+  arboretum_create_edge(obj, context_.data_model_.method_isNothrow, context_.data_model_.arboretum_node_for(D->isNothrow()));
   //getNumParams
   // unsigned int
   //parameters
   // ArrayRef<ImplicitParamDecl *>
   //getContextParam
   {
-    const Entity* other = context_.resolve(D->getContextParam());
-    arboretum_create_edge(obj, context_.data_model_.getContextParam, other);
+    const Id* other = context_.resolve(D->getContextParam());
+    arboretum_create_edge(obj, context_.data_model_.method_getContextParam, other);
   }
   //getContextParamPosition
   // unsigned int
@@ -2365,33 +2365,33 @@ bool ArboretumASTVisitor::VisitCapturedDecl(clang::CapturedDecl* D) {
 }
 
 bool ArboretumASTVisitor::VisitClassTemplateDecl(clang::ClassTemplateDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTemplatedDecl
   {
-    const Entity* other = context_.resolve(D->getTemplatedDecl());
-    arboretum_create_edge(obj, context_.data_model_.getTemplatedDecl, other);
+    const Id* other = context_.resolve(D->getTemplatedDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplatedDecl, other);
   }
   //isThisDeclarationADefinition
-  arboretum_create_edge(obj, context_.data_model_.isThisDeclarationADefinition1, context_.data_model_.arboretum_node_for(D->isThisDeclarationADefinition()));
+  arboretum_create_edge(obj, context_.data_model_.method_isThisDeclarationADefinition, context_.data_model_.arboretum_node_for(D->isThisDeclarationADefinition()));
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl11, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_5, other);
   }
   //getPreviousDecl
   {
-    const Entity* other = context_.resolve(D->getPreviousDecl());
-    arboretum_create_edge(obj, context_.data_model_.getPreviousDecl3, other);
+    const Id* other = context_.resolve(D->getPreviousDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getPreviousDecl_1, other);
   }
   //getMostRecentDecl
   {
-    const Entity* other = context_.resolve(D->getMostRecentDecl());
-    arboretum_create_edge(obj, context_.data_model_.getMostRecentDecl3, other);
+    const Id* other = context_.resolve(D->getMostRecentDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getMostRecentDecl_2, other);
   }
   //getInstantiatedFromMemberTemplate
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromMemberTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromMemberTemplate, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromMemberTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromMemberTemplate, other);
   }
   //specializations
   // spec_range
@@ -2401,25 +2401,25 @@ bool ArboretumASTVisitor::VisitClassTemplateDecl(clang::ClassTemplateDecl* D) {
 bool ArboretumASTVisitor::VisitClassTemplatePartialSpecializationDecl(clang::ClassTemplatePartialSpecializationDecl* D) {
   if (!D->isThisDeclarationADefinition()) return true;
 
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTemplateParameters
   //hasAssociatedConstraints
-  arboretum_create_edge(obj, context_.data_model_.hasAssociatedConstraints2, context_.data_model_.arboretum_node_for(D->hasAssociatedConstraints()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasAssociatedConstraints, context_.data_model_.arboretum_node_for(D->hasAssociatedConstraints()));
   //getTemplateArgsAsWritten
   //getInstantiatedFromMember
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromMember());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromMember1, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromMember());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromMember, other);
   }
   //getInstantiatedFromMemberTemplate
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromMemberTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromMemberTemplate4, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromMemberTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromMemberTemplate_1, other);
   }
   //getInjectedSpecializationType
   {
-    const Entity* other = context_.resolve(D->getInjectedSpecializationType());
-    arboretum_create_edge(obj, context_.data_model_.getInjectedSpecializationType1, other);
+    const Id* other = context_.resolve(D->getInjectedSpecializationType());
+    arboretum_create_edge(obj, context_.data_model_.method_getInjectedSpecializationType_1, other);
   }
   return true;
 }
@@ -2427,31 +2427,31 @@ bool ArboretumASTVisitor::VisitClassTemplatePartialSpecializationDecl(clang::Cla
 bool ArboretumASTVisitor::VisitClassTemplateSpecializationDecl(clang::ClassTemplateSpecializationDecl* D) {
   if (!D->isThisDeclarationADefinition()) return true;
 
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSpecializedTemplate
   {
-    const Entity* other = context_.resolve(D->getSpecializedTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getSpecializedTemplate1, other);
+    const Id* other = context_.resolve(D->getSpecializedTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getSpecializedTemplate, other);
   }
   //getTemplateArgs
   // const TemplateArgumentList &
   //getSpecializationKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getSpecializationKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getSpecializationKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getSpecializationKind1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getSpecializationKind, enum_value);
     }
   }
   //isExplicitSpecialization
-  arboretum_create_edge(obj, context_.data_model_.isExplicitSpecialization1, context_.data_model_.arboretum_node_for(D->isExplicitSpecialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExplicitSpecialization, context_.data_model_.arboretum_node_for(D->isExplicitSpecialization()));
   //isClassScopeExplicitSpecialization
-  arboretum_create_edge(obj, context_.data_model_.isClassScopeExplicitSpecialization1, context_.data_model_.arboretum_node_for(D->isClassScopeExplicitSpecialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_isClassScopeExplicitSpecialization, context_.data_model_.arboretum_node_for(D->isClassScopeExplicitSpecialization()));
   //isExplicitInstantiationOrSpecialization
-  arboretum_create_edge(obj, context_.data_model_.isExplicitInstantiationOrSpecialization1, context_.data_model_.arboretum_node_for(D->isExplicitInstantiationOrSpecialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExplicitInstantiationOrSpecialization, context_.data_model_.arboretum_node_for(D->isExplicitInstantiationOrSpecialization()));
   //getPointOfInstantiation
   {
-    const Entity* other = context_.source_model_.resolve(D->getPointOfInstantiation());
-    arboretum_create_edge(obj, context_.data_model_.getPointOfInstantiation3, other);
+    const Id* other = context_.source_model_.resolve(D->getPointOfInstantiation());
+    arboretum_create_edge(obj, context_.data_model_.method_getPointOfInstantiation, other);
   }
   //getInstantiatedFrom
   // llvm::PointerUnion<ClassTemplateDecl *, ClassTemplatePartialSpecializationDecl *>
@@ -2462,492 +2462,492 @@ bool ArboretumASTVisitor::VisitClassTemplateSpecializationDecl(clang::ClassTempl
   //getTypeAsWritten
   //getExternLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExternLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExternLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getExternLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExternLoc, other);
   }
   //getTemplateKeywordLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTemplateKeywordLoc5, other);
+    const Id* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplateKeywordLoc, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange37, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_3, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitConceptDecl(clang::ConceptDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getConstraintExpr
   {
-    const Entity* other = context_.resolve(D->getConstraintExpr());
-    arboretum_create_edge(obj, context_.data_model_.getConstraintExpr, other);
+    const Id* other = context_.resolve(D->getConstraintExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getConstraintExpr, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange60, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_4, other);
   }
   //isTypeConcept
-  arboretum_create_edge(obj, context_.data_model_.isTypeConcept, context_.data_model_.arboretum_node_for(D->isTypeConcept()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTypeConcept, context_.data_model_.arboretum_node_for(D->isTypeConcept()));
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl65, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_6, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitConstructorUsingShadowDecl(clang::ConstructorUsingShadowDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getIntroducer
   {
-    const Entity* other = context_.resolve(D->getIntroducer());
-    arboretum_create_edge(obj, context_.data_model_.getIntroducer1, other);
+    const Id* other = context_.resolve(D->getIntroducer());
+    arboretum_create_edge(obj, context_.data_model_.method_getIntroducer, other);
   }
   //getParent
   {
-    const Entity* other = context_.resolve(D->getParent());
-    arboretum_create_edge(obj, context_.data_model_.getParent4, other);
+    const Id* other = context_.resolve(D->getParent());
+    arboretum_create_edge(obj, context_.data_model_.method_getParent_1, other);
   }
   //getNominatedBaseClassShadowDecl
   {
-    const Entity* other = context_.resolve(D->getNominatedBaseClassShadowDecl());
-    arboretum_create_edge(obj, context_.data_model_.getNominatedBaseClassShadowDecl, other);
+    const Id* other = context_.resolve(D->getNominatedBaseClassShadowDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getNominatedBaseClassShadowDecl, other);
   }
   //getConstructedBaseClassShadowDecl
   {
-    const Entity* other = context_.resolve(D->getConstructedBaseClassShadowDecl());
-    arboretum_create_edge(obj, context_.data_model_.getConstructedBaseClassShadowDecl, other);
+    const Id* other = context_.resolve(D->getConstructedBaseClassShadowDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getConstructedBaseClassShadowDecl, other);
   }
   //getNominatedBaseClass
   {
-    const Entity* other = context_.resolve(D->getNominatedBaseClass());
-    arboretum_create_edge(obj, context_.data_model_.getNominatedBaseClass, other);
+    const Id* other = context_.resolve(D->getNominatedBaseClass());
+    arboretum_create_edge(obj, context_.data_model_.method_getNominatedBaseClass, other);
   }
   //getConstructedBaseClass
   {
-    const Entity* other = context_.resolve(D->getConstructedBaseClass());
-    arboretum_create_edge(obj, context_.data_model_.getConstructedBaseClass, other);
+    const Id* other = context_.resolve(D->getConstructedBaseClass());
+    arboretum_create_edge(obj, context_.data_model_.method_getConstructedBaseClass, other);
   }
   //constructsVirtualBase
-  arboretum_create_edge(obj, context_.data_model_.constructsVirtualBase, context_.data_model_.arboretum_node_for(D->constructsVirtualBase()));
+  arboretum_create_edge(obj, context_.data_model_.method_constructsVirtualBase, context_.data_model_.arboretum_node_for(D->constructsVirtualBase()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDecl(clang::Decl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   switch(D->getKind()) {
     case clang::Decl::CXXRecord: {
-assert(context_.data_model_.CXXRecordDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXRecordDecl); 
+assert(context_.data_model_.class_CXXRecordDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXRecordDecl); 
     } break;
     case clang::Decl::Using: {
-assert(context_.data_model_.UsingDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UsingDecl); 
-    } break;
-    case clang::Decl::Empty: {
-assert(context_.data_model_.EmptyDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.EmptyDecl); 
-    } break;
-    case clang::Decl::HLSLBuffer: {
-assert(context_.data_model_.HLSLBufferDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.HLSLBufferDecl); 
-    } break;
-    case clang::Decl::ClassTemplateSpecialization: {
-assert(context_.data_model_.ClassTemplateSpecializationDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ClassTemplateSpecializationDecl); 
-    } break;
-    case clang::Decl::NamespaceAlias: {
-assert(context_.data_model_.NamespaceAliasDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.NamespaceAliasDecl); 
-    } break;
-    case clang::Decl::TemplateParamObject: {
-assert(context_.data_model_.TemplateParamObjectDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.TemplateParamObjectDecl); 
-    } break;
-    case clang::Decl::MSProperty: {
-assert(context_.data_model_.MSPropertyDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.MSPropertyDecl); 
-    } break;
-    case clang::Decl::ConstructorUsingShadow: {
-assert(context_.data_model_.ConstructorUsingShadowDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ConstructorUsingShadowDecl); 
-    } break;
-    case clang::Decl::UsingShadow: {
-assert(context_.data_model_.UsingShadowDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UsingShadowDecl); 
-    } break;
-    case clang::Decl::TypeAlias: {
-assert(context_.data_model_.TypeAliasDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.TypeAliasDecl); 
-    } break;
-    case clang::Decl::UsingEnum: {
-assert(context_.data_model_.UsingEnumDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UsingEnumDecl); 
-    } break;
-    case clang::Decl::ClassTemplate: {
-assert(context_.data_model_.ClassTemplateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ClassTemplateDecl); 
-    } break;
-    case clang::Decl::ObjCTypeParam: {
-assert(context_.data_model_.ObjCTypeParamDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCTypeParamDecl); 
-    } break;
-    case clang::Decl::TemplateTemplateParm: {
-assert(context_.data_model_.TemplateTemplateParmDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.TemplateTemplateParmDecl); 
-    } break;
-    case clang::Decl::Concept: {
-assert(context_.data_model_.ConceptDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ConceptDecl); 
-    } break;
-    case clang::Decl::ObjCMethod: {
-assert(context_.data_model_.ObjCMethodDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCMethodDecl); 
-    } break;
-    case clang::Decl::UnresolvedUsingIfExists: {
-assert(context_.data_model_.UnresolvedUsingIfExistsDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UnresolvedUsingIfExistsDecl); 
-    } break;
-    case clang::Decl::ObjCProtocol: {
-assert(context_.data_model_.ObjCProtocolDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCProtocolDecl); 
-    } break;
-    case clang::Decl::OMPAllocate: {
-assert(context_.data_model_.OMPAllocateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPAllocateDecl); 
-    } break;
-    case clang::Decl::ObjCInterface: {
-assert(context_.data_model_.ObjCInterfaceDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCInterfaceDecl); 
-    } break;
-    case clang::Decl::StaticAssert: {
-assert(context_.data_model_.StaticAssertDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.StaticAssertDecl); 
-    } break;
-    case clang::Decl::ObjCPropertyImpl: {
-assert(context_.data_model_.ObjCPropertyImplDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCPropertyImplDecl); 
-    } break;
-    case clang::Decl::CXXMethod: {
-assert(context_.data_model_.CXXMethodDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXMethodDecl); 
-    } break;
-    case clang::Decl::Block: {
-assert(context_.data_model_.BlockDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.BlockDecl); 
-    } break;
-    case clang::Decl::OMPThreadPrivate: {
-assert(context_.data_model_.OMPThreadPrivateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPThreadPrivateDecl); 
-    } break;
-    case clang::Decl::Binding: {
-assert(context_.data_model_.BindingDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.BindingDecl); 
-    } break;
-    case clang::Decl::TypeAliasTemplate: {
-assert(context_.data_model_.TypeAliasTemplateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.TypeAliasTemplateDecl); 
-    } break;
-    case clang::Decl::UsingPack: {
-assert(context_.data_model_.UsingPackDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UsingPackDecl); 
+assert(context_.data_model_.class_UsingDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingDecl); 
     } break;
     case clang::Decl::Record: {
-assert(context_.data_model_.RecordDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.RecordDecl); 
+assert(context_.data_model_.class_RecordDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RecordDecl); 
     } break;
-    case clang::Decl::Typedef: {
-assert(context_.data_model_.TypedefDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.TypedefDecl); 
+    case clang::Decl::ConstructorUsingShadow: {
+assert(context_.data_model_.class_ConstructorUsingShadowDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstructorUsingShadowDecl); 
     } break;
-    case clang::Decl::ObjCAtDefsField: {
-assert(context_.data_model_.ObjCAtDefsFieldDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCAtDefsFieldDecl); 
-    } break;
-    case clang::Decl::OMPDeclareReduction: {
-assert(context_.data_model_.OMPDeclareReductionDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPDeclareReductionDecl); 
-    } break;
-    case clang::Decl::OMPDeclareMapper: {
-assert(context_.data_model_.OMPDeclareMapperDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPDeclareMapperDecl); 
-    } break;
-    case clang::Decl::ObjCProperty: {
-assert(context_.data_model_.ObjCPropertyDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCPropertyDecl); 
-    } break;
-    case clang::Decl::MSGuid: {
-assert(context_.data_model_.MSGuidDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.MSGuidDecl); 
-    } break;
-    case clang::Decl::Friend: {
-assert(context_.data_model_.FriendDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.FriendDecl); 
-    } break;
-    case clang::Decl::RequiresExprBody: {
-assert(context_.data_model_.RequiresExprBodyDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.RequiresExprBodyDecl); 
-    } break;
-    case clang::Decl::CXXConstructor: {
-assert(context_.data_model_.CXXConstructorDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXConstructorDecl); 
-    } break;
-    case clang::Decl::EnumConstant: {
-assert(context_.data_model_.EnumConstantDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.EnumConstantDecl); 
-    } break;
-    case clang::Decl::IndirectField: {
-assert(context_.data_model_.IndirectFieldDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.IndirectFieldDecl); 
-    } break;
-    case clang::Decl::UnnamedGlobalConstant: {
-assert(context_.data_model_.UnnamedGlobalConstantDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UnnamedGlobalConstantDecl); 
-    } break;
-    case clang::Decl::Label: {
-assert(context_.data_model_.LabelDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.LabelDecl); 
-    } break;
-    case clang::Decl::PragmaDetectMismatch: {
-assert(context_.data_model_.PragmaDetectMismatchDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.PragmaDetectMismatchDecl); 
-    } break;
-    case clang::Decl::ImplicitParam: {
-assert(context_.data_model_.ImplicitParamDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ImplicitParamDecl); 
-    } break;
-    case clang::Decl::ParmVar: {
-assert(context_.data_model_.ParmVarDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ParmVarDecl); 
-    } break;
-    case clang::Decl::CXXConversion: {
-assert(context_.data_model_.CXXConversionDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXConversionDecl); 
-    } break;
-    case clang::Decl::Enum: {
-assert(context_.data_model_.EnumDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.EnumDecl); 
-    } break;
-    case clang::Decl::CXXDestructor: {
-assert(context_.data_model_.CXXDestructorDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXDestructorDecl); 
-    } break;
-    case clang::Decl::VarTemplatePartialSpecialization: {
-assert(context_.data_model_.VarTemplatePartialSpecializationDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.VarTemplatePartialSpecializationDecl); 
-    } break;
-    case clang::Decl::OMPRequires: {
-assert(context_.data_model_.OMPRequiresDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPRequiresDecl); 
-    } break;
-    case clang::Decl::CXXDeductionGuide: {
-assert(context_.data_model_.CXXDeductionGuideDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXDeductionGuideDecl); 
-    } break;
-    case clang::Decl::ObjCIvar: {
-assert(context_.data_model_.ObjCIvarDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCIvarDecl); 
-    } break;
-    case clang::Decl::NonTypeTemplateParm: {
-assert(context_.data_model_.NonTypeTemplateParmDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.NonTypeTemplateParmDecl); 
-    } break;
-    case clang::Decl::ObjCCompatibleAlias: {
-assert(context_.data_model_.ObjCCompatibleAliasDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCCompatibleAliasDecl); 
-    } break;
-    case clang::Decl::UnresolvedUsingValue: {
-assert(context_.data_model_.UnresolvedUsingValueDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UnresolvedUsingValueDecl); 
-    } break;
-    case clang::Decl::Namespace: {
-assert(context_.data_model_.NamespaceDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.NamespaceDecl); 
-    } break;
-    case clang::Decl::ImplicitConceptSpecialization: {
-assert(context_.data_model_.ImplicitConceptSpecializationDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ImplicitConceptSpecializationDecl); 
-    } break;
-    case clang::Decl::VarTemplateSpecialization: {
-assert(context_.data_model_.VarTemplateSpecializationDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.VarTemplateSpecializationDecl); 
-    } break;
-    case clang::Decl::Decomposition: {
-assert(context_.data_model_.DecompositionDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.DecompositionDecl); 
-    } break;
-    case clang::Decl::Field: {
-assert(context_.data_model_.FieldDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.FieldDecl); 
+    case clang::Decl::UsingShadow: {
+assert(context_.data_model_.class_UsingShadowDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingShadowDecl); 
     } break;
     case clang::Decl::Captured: {
-assert(context_.data_model_.CapturedDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CapturedDecl); 
+assert(context_.data_model_.class_CapturedDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CapturedDecl); 
     } break;
-    case clang::Decl::OMPCapturedExpr: {
-assert(context_.data_model_.OMPCapturedExprDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPCapturedExprDecl); 
+    case clang::Decl::UsingEnum: {
+assert(context_.data_model_.class_UsingEnumDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingEnumDecl); 
     } break;
-    case clang::Decl::ClassTemplatePartialSpecialization: {
-assert(context_.data_model_.ClassTemplatePartialSpecializationDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ClassTemplatePartialSpecializationDecl); 
+    case clang::Decl::Typedef: {
+assert(context_.data_model_.class_TypedefDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypedefDecl); 
     } break;
-    case clang::Decl::PragmaComment: {
-assert(context_.data_model_.PragmaCommentDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.PragmaCommentDecl); 
+    case clang::Decl::ClassTemplate: {
+assert(context_.data_model_.class_ClassTemplateDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplateDecl); 
     } break;
-    case clang::Decl::Function: {
-assert(context_.data_model_.FunctionDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.FunctionDecl); 
+    case clang::Decl::ObjCTypeParam: {
+assert(context_.data_model_.class_ObjCTypeParamDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCTypeParamDecl); 
     } break;
-    case clang::Decl::ObjCCategoryImpl: {
-assert(context_.data_model_.ObjCCategoryImplDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCCategoryImplDecl); 
-    } break;
-    case clang::Decl::BuiltinTemplate: {
-assert(context_.data_model_.BuiltinTemplateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.BuiltinTemplateDecl); 
-    } break;
-    case clang::Decl::TopLevelStmt: {
-assert(context_.data_model_.TopLevelStmtDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.TopLevelStmtDecl); 
-    } break;
-    case clang::Decl::VarTemplate: {
-assert(context_.data_model_.VarTemplateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.VarTemplateDecl); 
-    } break;
-    case clang::Decl::Export: {
-assert(context_.data_model_.ExportDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ExportDecl); 
-    } break;
-    case clang::Decl::AccessSpec: {
-assert(context_.data_model_.AccessSpecDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.AccessSpecDecl); 
-    } break;
-    case clang::Decl::FunctionTemplate: {
-assert(context_.data_model_.FunctionTemplateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.FunctionTemplateDecl); 
-    } break;
-    case clang::Decl::TemplateTypeParm: {
-assert(context_.data_model_.TemplateTypeParmDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.TemplateTypeParmDecl); 
-    } break;
-    case clang::Decl::ExternCContext: {
-assert(context_.data_model_.ExternCContextDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ExternCContextDecl); 
-    } break;
-    case clang::Decl::LinkageSpec: {
-assert(context_.data_model_.LinkageSpecDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.LinkageSpecDecl); 
-    } break;
-    case clang::Decl::ObjCImplementation: {
-assert(context_.data_model_.ObjCImplementationDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCImplementationDecl); 
-    } break;
-    case clang::Decl::UnresolvedUsingTypename: {
-assert(context_.data_model_.UnresolvedUsingTypenameDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UnresolvedUsingTypenameDecl); 
+    case clang::Decl::TemplateTemplateParm: {
+assert(context_.data_model_.class_TemplateTemplateParmDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateTemplateParmDecl); 
     } break;
     case clang::Decl::FileScopeAsm: {
-assert(context_.data_model_.FileScopeAsmDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.FileScopeAsmDecl); 
+assert(context_.data_model_.class_FileScopeAsmDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FileScopeAsmDecl); 
     } break;
     case clang::Decl::Var: {
-assert(context_.data_model_.VarDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.VarDecl); 
+assert(context_.data_model_.class_VarDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarDecl); 
+    } break;
+    case clang::Decl::Concept: {
+assert(context_.data_model_.class_ConceptDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConceptDecl); 
+    } break;
+    case clang::Decl::UnresolvedUsingIfExists: {
+assert(context_.data_model_.class_UnresolvedUsingIfExistsDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingIfExistsDecl); 
+    } break;
+    case clang::Decl::ObjCProtocol: {
+assert(context_.data_model_.class_ObjCProtocolDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCProtocolDecl); 
+    } break;
+    case clang::Decl::OMPAllocate: {
+assert(context_.data_model_.class_OMPAllocateDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPAllocateDecl); 
+    } break;
+    case clang::Decl::ObjCInterface: {
+assert(context_.data_model_.class_ObjCInterfaceDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCInterfaceDecl); 
+    } break;
+    case clang::Decl::StaticAssert: {
+assert(context_.data_model_.class_StaticAssertDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StaticAssertDecl); 
+    } break;
+    case clang::Decl::ObjCPropertyImpl: {
+assert(context_.data_model_.class_ObjCPropertyImplDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyImplDecl); 
+    } break;
+    case clang::Decl::CXXMethod: {
+assert(context_.data_model_.class_CXXMethodDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXMethodDecl); 
+    } break;
+    case clang::Decl::UnresolvedUsingTypename: {
+assert(context_.data_model_.class_UnresolvedUsingTypenameDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingTypenameDecl); 
+    } break;
+    case clang::Decl::ObjCImplementation: {
+assert(context_.data_model_.class_ObjCImplementationDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCImplementationDecl); 
+    } break;
+    case clang::Decl::LinkageSpec: {
+assert(context_.data_model_.class_LinkageSpecDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LinkageSpecDecl); 
+    } break;
+    case clang::Decl::OMPThreadPrivate: {
+assert(context_.data_model_.class_OMPThreadPrivateDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPThreadPrivateDecl); 
+    } break;
+    case clang::Decl::Export: {
+assert(context_.data_model_.class_ExportDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExportDecl); 
+    } break;
+    case clang::Decl::Binding: {
+assert(context_.data_model_.class_BindingDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BindingDecl); 
+    } break;
+    case clang::Decl::ObjCCategoryImpl: {
+assert(context_.data_model_.class_ObjCCategoryImplDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCategoryImplDecl); 
+    } break;
+    case clang::Decl::BuiltinTemplate: {
+assert(context_.data_model_.class_BuiltinTemplateDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BuiltinTemplateDecl); 
+    } break;
+    case clang::Decl::CXXDeductionGuide: {
+assert(context_.data_model_.class_CXXDeductionGuideDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDeductionGuideDecl); 
+    } break;
+    case clang::Decl::TypeAlias: {
+assert(context_.data_model_.class_TypeAliasDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeAliasDecl); 
+    } break;
+    case clang::Decl::OMPDeclareReduction: {
+assert(context_.data_model_.class_OMPDeclareReductionDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDeclareReductionDecl); 
+    } break;
+    case clang::Decl::OMPDeclareMapper: {
+assert(context_.data_model_.class_OMPDeclareMapperDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDeclareMapperDecl); 
+    } break;
+    case clang::Decl::Enum: {
+assert(context_.data_model_.class_EnumDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EnumDecl); 
+    } break;
+    case clang::Decl::UnnamedGlobalConstant: {
+assert(context_.data_model_.class_UnnamedGlobalConstantDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnnamedGlobalConstantDecl); 
+    } break;
+    case clang::Decl::ImplicitParam: {
+assert(context_.data_model_.class_ImplicitParamDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitParamDecl); 
+    } break;
+    case clang::Decl::MSGuid: {
+assert(context_.data_model_.class_MSGuidDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSGuidDecl); 
+    } break;
+    case clang::Decl::Friend: {
+assert(context_.data_model_.class_FriendDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FriendDecl); 
+    } break;
+    case clang::Decl::RequiresExprBody: {
+assert(context_.data_model_.class_RequiresExprBodyDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RequiresExprBodyDecl); 
+    } break;
+    case clang::Decl::UnresolvedUsingValue: {
+assert(context_.data_model_.class_UnresolvedUsingValueDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingValueDecl); 
+    } break;
+    case clang::Decl::PragmaDetectMismatch: {
+assert(context_.data_model_.class_PragmaDetectMismatchDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PragmaDetectMismatchDecl); 
+    } break;
+    case clang::Decl::IndirectField: {
+assert(context_.data_model_.class_IndirectFieldDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IndirectFieldDecl); 
+    } break;
+    case clang::Decl::EnumConstant: {
+assert(context_.data_model_.class_EnumConstantDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EnumConstantDecl); 
     } break;
     case clang::Decl::LifetimeExtendedTemporary: {
-assert(context_.data_model_.LifetimeExtendedTemporaryDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.LifetimeExtendedTemporaryDecl); 
+assert(context_.data_model_.class_LifetimeExtendedTemporaryDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LifetimeExtendedTemporaryDecl); 
     } break;
-    case clang::Decl::UsingDirective: {
-assert(context_.data_model_.UsingDirectiveDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UsingDirectiveDecl); 
+    case clang::Decl::ObjCProperty: {
+assert(context_.data_model_.class_ObjCPropertyDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyDecl); 
     } break;
-    case clang::Decl::Import: {
-assert(context_.data_model_.ImportDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ImportDecl); 
+    case clang::Decl::PragmaComment: {
+assert(context_.data_model_.class_PragmaCommentDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PragmaCommentDecl); 
+    } break;
+    case clang::Decl::Function: {
+assert(context_.data_model_.class_FunctionDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionDecl); 
+    } break;
+    case clang::Decl::Namespace: {
+assert(context_.data_model_.class_NamespaceDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NamespaceDecl); 
+    } break;
+    case clang::Decl::ObjCCompatibleAlias: {
+assert(context_.data_model_.class_ObjCCompatibleAliasDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCompatibleAliasDecl); 
+    } break;
+    case clang::Decl::Decomposition: {
+assert(context_.data_model_.class_DecompositionDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DecompositionDecl); 
+    } break;
+    case clang::Decl::OMPCapturedExpr: {
+assert(context_.data_model_.class_OMPCapturedExprDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCapturedExprDecl); 
+    } break;
+    case clang::Decl::ClassTemplatePartialSpecialization: {
+assert(context_.data_model_.class_ClassTemplatePartialSpecializationDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplatePartialSpecializationDecl); 
+    } break;
+    case clang::Decl::ParmVar: {
+assert(context_.data_model_.class_ParmVarDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParmVarDecl); 
+    } break;
+    case clang::Decl::VarTemplatePartialSpecialization: {
+assert(context_.data_model_.class_VarTemplatePartialSpecializationDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplatePartialSpecializationDecl); 
+    } break;
+    case clang::Decl::NonTypeTemplateParm: {
+assert(context_.data_model_.class_NonTypeTemplateParmDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NonTypeTemplateParmDecl); 
+    } break;
+    case clang::Decl::ObjCIvar: {
+assert(context_.data_model_.class_ObjCIvarDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIvarDecl); 
+    } break;
+    case clang::Decl::ExternCContext: {
+assert(context_.data_model_.class_ExternCContextDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExternCContextDecl); 
+    } break;
+    case clang::Decl::OMPRequires: {
+assert(context_.data_model_.class_OMPRequiresDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPRequiresDecl); 
+    } break;
+    case clang::Decl::VarTemplate: {
+assert(context_.data_model_.class_VarTemplateDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplateDecl); 
+    } break;
+    case clang::Decl::CXXDestructor: {
+assert(context_.data_model_.class_CXXDestructorDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDestructorDecl); 
+    } break;
+    case clang::Decl::Label: {
+assert(context_.data_model_.class_LabelDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LabelDecl); 
+    } break;
+    case clang::Decl::CXXConversion: {
+assert(context_.data_model_.class_CXXConversionDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConversionDecl); 
+    } break;
+    case clang::Decl::ObjCAtDefsField: {
+assert(context_.data_model_.class_ObjCAtDefsFieldDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtDefsFieldDecl); 
+    } break;
+    case clang::Decl::CXXConstructor: {
+assert(context_.data_model_.class_CXXConstructorDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstructorDecl); 
+    } break;
+    case clang::Decl::Block: {
+assert(context_.data_model_.class_BlockDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BlockDecl); 
+    } break;
+    case clang::Decl::VarTemplateSpecialization: {
+assert(context_.data_model_.class_VarTemplateSpecializationDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplateSpecializationDecl); 
+    } break;
+    case clang::Decl::ImplicitConceptSpecialization: {
+assert(context_.data_model_.class_ImplicitConceptSpecializationDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitConceptSpecializationDecl); 
     } break;
     case clang::Decl::ObjCCategory: {
-assert(context_.data_model_.ObjCCategoryDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCCategoryDecl); 
+assert(context_.data_model_.class_ObjCCategoryDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCategoryDecl); 
+    } break;
+    case clang::Decl::UsingDirective: {
+assert(context_.data_model_.class_UsingDirectiveDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingDirectiveDecl); 
+    } break;
+    case clang::Decl::Field: {
+assert(context_.data_model_.class_FieldDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FieldDecl); 
+    } break;
+    case clang::Decl::ClassTemplateSpecialization: {
+assert(context_.data_model_.class_ClassTemplateSpecializationDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplateSpecializationDecl); 
+    } break;
+    case clang::Decl::TopLevelStmt: {
+assert(context_.data_model_.class_TopLevelStmtDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TopLevelStmtDecl); 
+    } break;
+    case clang::Decl::TypeAliasTemplate: {
+assert(context_.data_model_.class_TypeAliasTemplateDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeAliasTemplateDecl); 
+    } break;
+    case clang::Decl::UsingPack: {
+assert(context_.data_model_.class_UsingPackDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingPackDecl); 
+    } break;
+    case clang::Decl::TemplateParamObject: {
+assert(context_.data_model_.class_TemplateParamObjectDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateParamObjectDecl); 
+    } break;
+    case clang::Decl::NamespaceAlias: {
+assert(context_.data_model_.class_NamespaceAliasDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NamespaceAliasDecl); 
+    } break;
+    case clang::Decl::MSProperty: {
+assert(context_.data_model_.class_MSPropertyDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertyDecl); 
     } break;
     case clang::Decl::TranslationUnit: {
-assert(context_.data_model_.TranslationUnitDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.TranslationUnitDecl); 
+assert(context_.data_model_.class_TranslationUnitDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TranslationUnitDecl); 
+    } break;
+    case clang::Decl::Import: {
+assert(context_.data_model_.class_ImportDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImportDecl); 
+    } break;
+    case clang::Decl::Empty: {
+assert(context_.data_model_.class_EmptyDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EmptyDecl); 
+    } break;
+    case clang::Decl::AccessSpec: {
+assert(context_.data_model_.class_AccessSpecDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AccessSpecDecl); 
+    } break;
+    case clang::Decl::FunctionTemplate: {
+assert(context_.data_model_.class_FunctionTemplateDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionTemplateDecl); 
+    } break;
+    case clang::Decl::TemplateTypeParm: {
+assert(context_.data_model_.class_TemplateTypeParmDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateTypeParmDecl); 
+    } break;
+    case clang::Decl::ObjCMethod: {
+assert(context_.data_model_.class_ObjCMethodDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCMethodDecl); 
+    } break;
+    case clang::Decl::HLSLBuffer: {
+assert(context_.data_model_.class_HLSLBufferDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_HLSLBufferDecl); 
     } break;
     case clang::Decl::FriendTemplate: {
-assert(context_.data_model_.FriendTemplateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.FriendTemplateDecl); 
+assert(context_.data_model_.class_FriendTemplateDecl != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FriendTemplateDecl); 
     } break;
     default: break;
   }
 
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange25, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_5, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc109, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc110, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc, other);
   }
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation13, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation, other);
   }
   //getNextDeclInContext
   {
-    const Entity* other = context_.resolve(D->getNextDeclInContext());
-    arboretum_create_edge(obj, context_.data_model_.getNextDeclInContext1, other);
+    const Id* other = context_.resolve(D->getNextDeclInContext());
+    arboretum_create_edge(obj, context_.data_model_.method_getNextDeclInContext, other);
   }
   //getDeclContext
   //getNonTransparentDeclContext
   //getNonClosureContext
   {
-    const Entity* other = context_.resolve(D->getNonClosureContext());
-    arboretum_create_edge(obj, context_.data_model_.getNonClosureContext1, other);
+    const Id* other = context_.resolve(D->getNonClosureContext());
+    arboretum_create_edge(obj, context_.data_model_.method_getNonClosureContext, other);
   }
   //getTranslationUnitDecl
   {
-    const Entity* other = context_.resolve(D->getTranslationUnitDecl());
-    arboretum_create_edge(obj, context_.data_model_.getTranslationUnitDecl1, other);
+    const Id* other = context_.resolve(D->getTranslationUnitDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getTranslationUnitDecl, other);
   }
   //isInAnonymousNamespace
-  arboretum_create_edge(obj, context_.data_model_.isInAnonymousNamespace, context_.data_model_.arboretum_node_for(D->isInAnonymousNamespace()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInAnonymousNamespace, context_.data_model_.arboretum_node_for(D->isInAnonymousNamespace()));
   //isInStdNamespace
-  arboretum_create_edge(obj, context_.data_model_.isInStdNamespace, context_.data_model_.arboretum_node_for(D->isInStdNamespace()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInStdNamespace, context_.data_model_.arboretum_node_for(D->isInStdNamespace()));
   //isFileContextDecl
-  arboretum_create_edge(obj, context_.data_model_.isFileContextDecl, context_.data_model_.arboretum_node_for(D->isFileContextDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_isFileContextDecl, context_.data_model_.arboretum_node_for(D->isFileContextDecl()));
   //getLangOpts
   // const LangOptions &
   //getAccess
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getAccess());
+    const Id* enum_value = context_.data_model_.resolve(D->getAccess());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getAccess, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getAccess, enum_value);
     }
   }
   //getAccessUnsafe
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getAccessUnsafe());
+    const Id* enum_value = context_.data_model_.resolve(D->getAccessUnsafe());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getAccessUnsafe, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getAccessUnsafe, enum_value);
     }
   }
   //hasAttrs
-  arboretum_create_edge(obj, context_.data_model_.hasAttrs, context_.data_model_.arboretum_node_for(D->hasAttrs()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasAttrs, context_.data_model_.arboretum_node_for(D->hasAttrs()));
   //getAttrs
   // const AttrVec &
   //attrs
@@ -2955,40 +2955,40 @@ assert(context_.data_model_.FriendTemplateDecl != nullptr);
   //getMaxAlignment
   // unsigned int
   //isInvalidDecl
-  arboretum_create_edge(obj, context_.data_model_.isInvalidDecl, context_.data_model_.arboretum_node_for(D->isInvalidDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInvalidDecl, context_.data_model_.arboretum_node_for(D->isInvalidDecl()));
   //isImplicit
-  arboretum_create_edge(obj, context_.data_model_.isImplicit2, context_.data_model_.arboretum_node_for(D->isImplicit()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImplicit, context_.data_model_.arboretum_node_for(D->isImplicit()));
   //isReferenced
-  arboretum_create_edge(obj, context_.data_model_.isReferenced, context_.data_model_.arboretum_node_for(D->isReferenced()));
+  arboretum_create_edge(obj, context_.data_model_.method_isReferenced, context_.data_model_.arboretum_node_for(D->isReferenced()));
   //isThisDeclarationReferenced
-  arboretum_create_edge(obj, context_.data_model_.isThisDeclarationReferenced, context_.data_model_.arboretum_node_for(D->isThisDeclarationReferenced()));
+  arboretum_create_edge(obj, context_.data_model_.method_isThisDeclarationReferenced, context_.data_model_.arboretum_node_for(D->isThisDeclarationReferenced()));
   //isTopLevelDeclInObjCContainer
-  arboretum_create_edge(obj, context_.data_model_.isTopLevelDeclInObjCContainer, context_.data_model_.arboretum_node_for(D->isTopLevelDeclInObjCContainer()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTopLevelDeclInObjCContainer, context_.data_model_.arboretum_node_for(D->isTopLevelDeclInObjCContainer()));
   //isModulePrivate
-  arboretum_create_edge(obj, context_.data_model_.isModulePrivate, context_.data_model_.arboretum_node_for(D->isModulePrivate()));
+  arboretum_create_edge(obj, context_.data_model_.method_isModulePrivate, context_.data_model_.arboretum_node_for(D->isModulePrivate()));
   //isInExportDeclContext
-  arboretum_create_edge(obj, context_.data_model_.isInExportDeclContext, context_.data_model_.arboretum_node_for(D->isInExportDeclContext()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInExportDeclContext, context_.data_model_.arboretum_node_for(D->isInExportDeclContext()));
   //isInvisibleOutsideTheOwningModule
-  arboretum_create_edge(obj, context_.data_model_.isInvisibleOutsideTheOwningModule, context_.data_model_.arboretum_node_for(D->isInvisibleOutsideTheOwningModule()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInvisibleOutsideTheOwningModule, context_.data_model_.arboretum_node_for(D->isInvisibleOutsideTheOwningModule()));
   //isInAnotherModuleUnit
-  arboretum_create_edge(obj, context_.data_model_.isInAnotherModuleUnit, context_.data_model_.arboretum_node_for(D->isInAnotherModuleUnit()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInAnotherModuleUnit, context_.data_model_.arboretum_node_for(D->isInAnotherModuleUnit()));
   //isDiscardedInGlobalModuleFragment
-  arboretum_create_edge(obj, context_.data_model_.isDiscardedInGlobalModuleFragment, context_.data_model_.arboretum_node_for(D->isDiscardedInGlobalModuleFragment()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDiscardedInGlobalModuleFragment, context_.data_model_.arboretum_node_for(D->isDiscardedInGlobalModuleFragment()));
   //shouldSkipCheckingODR
-  arboretum_create_edge(obj, context_.data_model_.shouldSkipCheckingODR, context_.data_model_.arboretum_node_for(D->shouldSkipCheckingODR()));
+  arboretum_create_edge(obj, context_.data_model_.method_shouldSkipCheckingODR, context_.data_model_.arboretum_node_for(D->shouldSkipCheckingODR()));
   //hasDefiningAttr
-  arboretum_create_edge(obj, context_.data_model_.hasDefiningAttr, context_.data_model_.arboretum_node_for(D->hasDefiningAttr()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasDefiningAttr, context_.data_model_.arboretum_node_for(D->hasDefiningAttr()));
   //getDefiningAttr
   {
-    const Entity* other = context_.resolve(D->getDefiningAttr());
-    arboretum_create_edge(obj, context_.data_model_.getDefiningAttr, other);
+    const Id* other = context_.resolve(D->getDefiningAttr());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefiningAttr, other);
   }
   //getVersionIntroduced
   // VersionTuple
   //isWeakImported
-  arboretum_create_edge(obj, context_.data_model_.isWeakImported, context_.data_model_.arboretum_node_for(D->isWeakImported()));
+  arboretum_create_edge(obj, context_.data_model_.method_isWeakImported, context_.data_model_.arboretum_node_for(D->isWeakImported()));
   //isFromASTFile
-  arboretum_create_edge(obj, context_.data_model_.isFromASTFile, context_.data_model_.arboretum_node_for(D->isFromASTFile()));
+  arboretum_create_edge(obj, context_.data_model_.method_isFromASTFile, context_.data_model_.arboretum_node_for(D->isFromASTFile()));
   //getGlobalID
   // unsigned int
   //getOwningModuleID
@@ -2996,178 +2996,178 @@ assert(context_.data_model_.FriendTemplateDecl != nullptr);
   //getImportedOwningModule
   //getLocalOwningModule
   //hasOwningModule
-  arboretum_create_edge(obj, context_.data_model_.hasOwningModule, context_.data_model_.arboretum_node_for(D->hasOwningModule()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasOwningModule, context_.data_model_.arboretum_node_for(D->hasOwningModule()));
   //getOwningModule
   //isUnconditionallyVisible
-  arboretum_create_edge(obj, context_.data_model_.isUnconditionallyVisible, context_.data_model_.arboretum_node_for(D->isUnconditionallyVisible()));
+  arboretum_create_edge(obj, context_.data_model_.method_isUnconditionallyVisible, context_.data_model_.arboretum_node_for(D->isUnconditionallyVisible()));
   //isReachable
-  arboretum_create_edge(obj, context_.data_model_.isReachable, context_.data_model_.arboretum_node_for(D->isReachable()));
+  arboretum_create_edge(obj, context_.data_model_.method_isReachable, context_.data_model_.arboretum_node_for(D->isReachable()));
   //getModuleOwnershipKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getModuleOwnershipKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getModuleOwnershipKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getModuleOwnershipKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getModuleOwnershipKind, enum_value);
     }
   }
   //getIdentifierNamespace
   // unsigned int
   //hasTagIdentifierNamespace
-  arboretum_create_edge(obj, context_.data_model_.hasTagIdentifierNamespace, context_.data_model_.arboretum_node_for(D->hasTagIdentifierNamespace()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTagIdentifierNamespace, context_.data_model_.arboretum_node_for(D->hasTagIdentifierNamespace()));
   //getLexicalDeclContext
   //isOutOfLine
-  arboretum_create_edge(obj, context_.data_model_.isOutOfLine1, context_.data_model_.arboretum_node_for(D->isOutOfLine()));
+  arboretum_create_edge(obj, context_.data_model_.method_isOutOfLine, context_.data_model_.arboretum_node_for(D->isOutOfLine()));
   //isTemplated
-  arboretum_create_edge(obj, context_.data_model_.isTemplated, context_.data_model_.arboretum_node_for(D->isTemplated()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTemplated, context_.data_model_.arboretum_node_for(D->isTemplated()));
   //getTemplateDepth
   // unsigned int
   //isDefinedOutsideFunctionOrMethod
-  arboretum_create_edge(obj, context_.data_model_.isDefinedOutsideFunctionOrMethod, context_.data_model_.arboretum_node_for(D->isDefinedOutsideFunctionOrMethod()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDefinedOutsideFunctionOrMethod, context_.data_model_.arboretum_node_for(D->isDefinedOutsideFunctionOrMethod()));
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl25, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_7, other);
   }
   //isCanonicalDecl
-  arboretum_create_edge(obj, context_.data_model_.isCanonicalDecl, context_.data_model_.arboretum_node_for(D->isCanonicalDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCanonicalDecl, context_.data_model_.arboretum_node_for(D->isCanonicalDecl()));
   //redecls
   // redecl_range
   //getPreviousDecl
   {
-    const Entity* other = context_.resolve(D->getPreviousDecl());
-    arboretum_create_edge(obj, context_.data_model_.getPreviousDecl9, other);
+    const Id* other = context_.resolve(D->getPreviousDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getPreviousDecl_2, other);
   }
   //isFirstDecl
-  arboretum_create_edge(obj, context_.data_model_.isFirstDecl, context_.data_model_.arboretum_node_for(D->isFirstDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_isFirstDecl, context_.data_model_.arboretum_node_for(D->isFirstDecl()));
   //getMostRecentDecl
   {
-    const Entity* other = context_.resolve(D->getMostRecentDecl());
-    arboretum_create_edge(obj, context_.data_model_.getMostRecentDecl12, other);
+    const Id* other = context_.resolve(D->getMostRecentDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getMostRecentDecl_3, other);
   }
   //getBody
   {
-    const Entity* other = context_.resolve(D->getBody());
-    arboretum_create_edge(obj, context_.data_model_.getBody13, other);
+    const Id* other = context_.resolve(D->getBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getBody_2, other);
   }
   //hasBody
-  arboretum_create_edge(obj, context_.data_model_.hasBody, context_.data_model_.arboretum_node_for(D->hasBody()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasBody, context_.data_model_.arboretum_node_for(D->hasBody()));
   //getBodyRBrace
   {
-    const Entity* other = context_.source_model_.resolve(D->getBodyRBrace());
-    arboretum_create_edge(obj, context_.data_model_.getBodyRBrace, other);
+    const Id* other = context_.source_model_.resolve(D->getBodyRBrace());
+    arboretum_create_edge(obj, context_.data_model_.method_getBodyRBrace, other);
   }
   //isTemplateParameter
-  arboretum_create_edge(obj, context_.data_model_.isTemplateParameter, context_.data_model_.arboretum_node_for(D->isTemplateParameter()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTemplateParameter, context_.data_model_.arboretum_node_for(D->isTemplateParameter()));
   //isTemplateParameterPack
-  arboretum_create_edge(obj, context_.data_model_.isTemplateParameterPack, context_.data_model_.arboretum_node_for(D->isTemplateParameterPack()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTemplateParameterPack, context_.data_model_.arboretum_node_for(D->isTemplateParameterPack()));
   //isParameterPack
-  arboretum_create_edge(obj, context_.data_model_.isParameterPack3, context_.data_model_.arboretum_node_for(D->isParameterPack()));
+  arboretum_create_edge(obj, context_.data_model_.method_isParameterPack_1, context_.data_model_.arboretum_node_for(D->isParameterPack()));
   //isTemplateDecl
-  arboretum_create_edge(obj, context_.data_model_.isTemplateDecl, context_.data_model_.arboretum_node_for(D->isTemplateDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTemplateDecl, context_.data_model_.arboretum_node_for(D->isTemplateDecl()));
   //isFunctionOrFunctionTemplate
-  arboretum_create_edge(obj, context_.data_model_.isFunctionOrFunctionTemplate, context_.data_model_.arboretum_node_for(D->isFunctionOrFunctionTemplate()));
+  arboretum_create_edge(obj, context_.data_model_.method_isFunctionOrFunctionTemplate, context_.data_model_.arboretum_node_for(D->isFunctionOrFunctionTemplate()));
   //getDescribedTemplate
   {
-    const Entity* other = context_.resolve(D->getDescribedTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getDescribedTemplate, other);
+    const Id* other = context_.resolve(D->getDescribedTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getDescribedTemplate, other);
   }
   //getDescribedTemplateParams
   //getAsFunction
   {
-    const Entity* other = context_.resolve(D->getAsFunction());
-    arboretum_create_edge(obj, context_.data_model_.getAsFunction1, other);
+    const Id* other = context_.resolve(D->getAsFunction());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsFunction, other);
   }
   //isLocalExternDecl
-  arboretum_create_edge(obj, context_.data_model_.isLocalExternDecl, context_.data_model_.arboretum_node_for(D->isLocalExternDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_isLocalExternDecl, context_.data_model_.arboretum_node_for(D->isLocalExternDecl()));
   //getFriendObjectKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getFriendObjectKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getFriendObjectKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getFriendObjectKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getFriendObjectKind, enum_value);
     }
   }
   //getID
   // int64_t
   //isFunctionPointerType
-  arboretum_create_edge(obj, context_.data_model_.isFunctionPointerType, context_.data_model_.arboretum_node_for(D->isFunctionPointerType()));
+  arboretum_create_edge(obj, context_.data_model_.method_isFunctionPointerType, context_.data_model_.arboretum_node_for(D->isFunctionPointerType()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDeclaratorDecl(clang::DeclaratorDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTypeSourceInfo
   //getInnerLocStart
   {
-    const Entity* other = context_.source_model_.resolve(D->getInnerLocStart());
-    arboretum_create_edge(obj, context_.data_model_.getInnerLocStart1, other);
+    const Id* other = context_.source_model_.resolve(D->getInnerLocStart());
+    arboretum_create_edge(obj, context_.data_model_.method_getInnerLocStart, other);
   }
   //getOuterLocStart
   {
-    const Entity* other = context_.source_model_.resolve(D->getOuterLocStart());
-    arboretum_create_edge(obj, context_.data_model_.getOuterLocStart1, other);
+    const Id* other = context_.source_model_.resolve(D->getOuterLocStart());
+    arboretum_create_edge(obj, context_.data_model_.method_getOuterLocStart, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange45, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_6, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc128, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_1, other);
   }
   //getQualifier
   //getQualifierLoc
   // NestedNameSpecifierLoc
   //getTrailingRequiresClause
   {
-    const Entity* other = context_.resolve(D->getTrailingRequiresClause());
-    arboretum_create_edge(obj, context_.data_model_.getTrailingRequiresClause2, other);
+    const Id* other = context_.resolve(D->getTrailingRequiresClause());
+    arboretum_create_edge(obj, context_.data_model_.method_getTrailingRequiresClause, other);
   }
   //getNumTemplateParameterLists
   // unsigned int
   //getTypeSpecStartLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTypeSpecStartLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTypeSpecStartLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getTypeSpecStartLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTypeSpecStartLoc, other);
   }
   //getTypeSpecEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTypeSpecEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTypeSpecEndLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getTypeSpecEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTypeSpecEndLoc, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDecompositionDecl(clang::DecompositionDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //bindings
   // ArrayRef<BindingDecl *>
   return true;
 }
 
 bool ArboretumASTVisitor::VisitEmptyDecl(clang::EmptyDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitEnumConstantDecl(clang::EnumConstantDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getInitExpr
   {
-    const Entity* other = context_.resolve(D->getInitExpr());
-    arboretum_create_edge(obj, context_.data_model_.getInitExpr, other);
+    const Id* other = context_.resolve(D->getInitExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getInitExpr, other);
   }
   //getInitVal
   // llvm::APSInt
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange43, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_7, other);
   }
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl51, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_8, other);
   }
   return true;
 }
@@ -3175,83 +3175,83 @@ bool ArboretumASTVisitor::VisitEnumConstantDecl(clang::EnumConstantDecl* D) {
 bool ArboretumASTVisitor::VisitEnumDecl(clang::EnumDecl* D) {
   if (!D->isThisDeclarationADefinition()) return true;
 
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl31, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_9, other);
   }
   //getPreviousDecl
   {
-    const Entity* other = context_.resolve(D->getPreviousDecl());
-    arboretum_create_edge(obj, context_.data_model_.getPreviousDecl15, other);
+    const Id* other = context_.resolve(D->getPreviousDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getPreviousDecl_3, other);
   }
   //getMostRecentDecl
   {
-    const Entity* other = context_.resolve(D->getMostRecentDecl());
-    arboretum_create_edge(obj, context_.data_model_.getMostRecentDecl18, other);
+    const Id* other = context_.resolve(D->getMostRecentDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getMostRecentDecl_4, other);
   }
   //getDefinition
   {
-    const Entity* other = context_.resolve(D->getDefinition());
-    arboretum_create_edge(obj, context_.data_model_.getDefinition14, other);
+    const Id* other = context_.resolve(D->getDefinition());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefinition_1, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange27, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_8, other);
   }
   //enumerators
   // enumerator_range
   //getPromotionType
   {
-    const Entity* other = context_.resolve(D->getPromotionType());
-    arboretum_create_edge(obj, context_.data_model_.getPromotionType, other);
+    const Id* other = context_.resolve(D->getPromotionType());
+    arboretum_create_edge(obj, context_.data_model_.method_getPromotionType, other);
   }
   //getIntegerType
   {
-    const Entity* other = context_.resolve(D->getIntegerType());
-    arboretum_create_edge(obj, context_.data_model_.getIntegerType, other);
+    const Id* other = context_.resolve(D->getIntegerType());
+    arboretum_create_edge(obj, context_.data_model_.method_getIntegerType, other);
   }
   //getIntegerTypeSourceInfo
   //getIntegerTypeRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getIntegerTypeRange());
-    arboretum_create_edge(obj, context_.data_model_.getIntegerTypeRange, other);
+    const Id* other = context_.source_model_.resolve(D->getIntegerTypeRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getIntegerTypeRange, other);
   }
   //getNumPositiveBits
   // unsigned int
   //getNumNegativeBits
   // unsigned int
   //isScoped
-  arboretum_create_edge(obj, context_.data_model_.isScoped, context_.data_model_.arboretum_node_for(D->isScoped()));
+  arboretum_create_edge(obj, context_.data_model_.method_isScoped, context_.data_model_.arboretum_node_for(D->isScoped()));
   //isScopedUsingClassTag
-  arboretum_create_edge(obj, context_.data_model_.isScopedUsingClassTag, context_.data_model_.arboretum_node_for(D->isScopedUsingClassTag()));
+  arboretum_create_edge(obj, context_.data_model_.method_isScopedUsingClassTag, context_.data_model_.arboretum_node_for(D->isScopedUsingClassTag()));
   //isFixed
-  arboretum_create_edge(obj, context_.data_model_.isFixed, context_.data_model_.arboretum_node_for(D->isFixed()));
+  arboretum_create_edge(obj, context_.data_model_.method_isFixed, context_.data_model_.arboretum_node_for(D->isFixed()));
   //isComplete
-  arboretum_create_edge(obj, context_.data_model_.isComplete, context_.data_model_.arboretum_node_for(D->isComplete()));
+  arboretum_create_edge(obj, context_.data_model_.method_isComplete, context_.data_model_.arboretum_node_for(D->isComplete()));
   //isClosed
-  arboretum_create_edge(obj, context_.data_model_.isClosed, context_.data_model_.arboretum_node_for(D->isClosed()));
+  arboretum_create_edge(obj, context_.data_model_.method_isClosed, context_.data_model_.arboretum_node_for(D->isClosed()));
   //isClosedFlag
-  arboretum_create_edge(obj, context_.data_model_.isClosedFlag, context_.data_model_.arboretum_node_for(D->isClosedFlag()));
+  arboretum_create_edge(obj, context_.data_model_.method_isClosedFlag, context_.data_model_.arboretum_node_for(D->isClosedFlag()));
   //isClosedNonFlag
-  arboretum_create_edge(obj, context_.data_model_.isClosedNonFlag, context_.data_model_.arboretum_node_for(D->isClosedNonFlag()));
+  arboretum_create_edge(obj, context_.data_model_.method_isClosedNonFlag, context_.data_model_.arboretum_node_for(D->isClosedNonFlag()));
   //getTemplateInstantiationPattern
   {
-    const Entity* other = context_.resolve(D->getTemplateInstantiationPattern());
-    arboretum_create_edge(obj, context_.data_model_.getTemplateInstantiationPattern4, other);
+    const Id* other = context_.resolve(D->getTemplateInstantiationPattern());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplateInstantiationPattern_1, other);
   }
   //getInstantiatedFromMemberEnum
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromMemberEnum());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromMemberEnum, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromMemberEnum());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromMemberEnum, other);
   }
   //getTemplateSpecializationKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getTemplateSpecializationKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getTemplateSpecializationKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getTemplateSpecializationKind3, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getTemplateSpecializationKind_1, enum_value);
     }
   }
   //getMemberSpecializationInfo
@@ -3259,159 +3259,159 @@ bool ArboretumASTVisitor::VisitEnumDecl(clang::EnumDecl* D) {
 }
 
 bool ArboretumASTVisitor::VisitExportDecl(clang::ExportDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getExportLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExportLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExportLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getExportLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExportLoc, other);
   }
   //getRBraceLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRBraceLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRBraceLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getRBraceLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRBraceLoc, other);
   }
   //hasBraces
-  arboretum_create_edge(obj, context_.data_model_.hasBraces1, context_.data_model_.arboretum_node_for(D->hasBraces()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasBraces, context_.data_model_.arboretum_node_for(D->hasBraces()));
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc109, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_1, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange23, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_9, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitExternCContextDecl(clang::ExternCContextDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitFieldDecl(clang::FieldDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getFieldIndex
   // unsigned int
   //isMutable
-  arboretum_create_edge(obj, context_.data_model_.isMutable1, context_.data_model_.arboretum_node_for(D->isMutable()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMutable, context_.data_model_.arboretum_node_for(D->isMutable()));
   //isBitField
-  arboretum_create_edge(obj, context_.data_model_.isBitField, context_.data_model_.arboretum_node_for(D->isBitField()));
+  arboretum_create_edge(obj, context_.data_model_.method_isBitField, context_.data_model_.arboretum_node_for(D->isBitField()));
   //isUnnamedBitfield
-  arboretum_create_edge(obj, context_.data_model_.isUnnamedBitfield, context_.data_model_.arboretum_node_for(D->isUnnamedBitfield()));
+  arboretum_create_edge(obj, context_.data_model_.method_isUnnamedBitfield, context_.data_model_.arboretum_node_for(D->isUnnamedBitfield()));
   //isAnonymousStructOrUnion
-  arboretum_create_edge(obj, context_.data_model_.isAnonymousStructOrUnion1, context_.data_model_.arboretum_node_for(D->isAnonymousStructOrUnion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAnonymousStructOrUnion, context_.data_model_.arboretum_node_for(D->isAnonymousStructOrUnion()));
   //getBitWidth
   {
-    const Entity* other = context_.resolve(D->getBitWidth());
-    arboretum_create_edge(obj, context_.data_model_.getBitWidth, other);
+    const Id* other = context_.resolve(D->getBitWidth());
+    arboretum_create_edge(obj, context_.data_model_.method_getBitWidth, other);
   }
   //isPotentiallyOverlapping
-  arboretum_create_edge(obj, context_.data_model_.isPotentiallyOverlapping, context_.data_model_.arboretum_node_for(D->isPotentiallyOverlapping()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPotentiallyOverlapping, context_.data_model_.arboretum_node_for(D->isPotentiallyOverlapping()));
   //getInClassInitStyle
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getInClassInitStyle());
+    const Id* enum_value = context_.data_model_.resolve(D->getInClassInitStyle());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getInClassInitStyle, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getInClassInitStyle, enum_value);
     }
   }
   //hasInClassInitializer
-  arboretum_create_edge(obj, context_.data_model_.hasInClassInitializer1, context_.data_model_.arboretum_node_for(D->hasInClassInitializer()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasInClassInitializer_1, context_.data_model_.arboretum_node_for(D->hasInClassInitializer()));
   //hasNonNullInClassInitializer
-  arboretum_create_edge(obj, context_.data_model_.hasNonNullInClassInitializer, context_.data_model_.arboretum_node_for(D->hasNonNullInClassInitializer()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonNullInClassInitializer, context_.data_model_.arboretum_node_for(D->hasNonNullInClassInitializer()));
   //getInClassInitializer
   {
-    const Entity* other = context_.resolve(D->getInClassInitializer());
-    arboretum_create_edge(obj, context_.data_model_.getInClassInitializer, other);
+    const Id* other = context_.resolve(D->getInClassInitializer());
+    arboretum_create_edge(obj, context_.data_model_.method_getInClassInitializer, other);
   }
   //hasCapturedVLAType
-  arboretum_create_edge(obj, context_.data_model_.hasCapturedVLAType, context_.data_model_.arboretum_node_for(D->hasCapturedVLAType()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasCapturedVLAType, context_.data_model_.arboretum_node_for(D->hasCapturedVLAType()));
   //getCapturedVLAType
   {
-    const Entity* other = context_.resolve(D->getCapturedVLAType());
-    arboretum_create_edge(obj, context_.data_model_.getCapturedVLAType, other);
+    const Id* other = context_.resolve(D->getCapturedVLAType());
+    arboretum_create_edge(obj, context_.data_model_.method_getCapturedVLAType, other);
   }
   //getParent
   {
-    const Entity* other = context_.resolve(D->getParent());
-    arboretum_create_edge(obj, context_.data_model_.getParent2, other);
+    const Id* other = context_.resolve(D->getParent());
+    arboretum_create_edge(obj, context_.data_model_.method_getParent_2, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange30, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_10, other);
   }
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl37, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_10, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitFileScopeAsmDecl(clang::FileScopeAsmDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getAsmLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getAsmLoc());
-    arboretum_create_edge(obj, context_.data_model_.getAsmLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getAsmLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsmLoc, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc22, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange21, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_11, other);
   }
   //getAsmString
   {
-    const Entity* other = context_.resolve(D->getAsmString());
-    arboretum_create_edge(obj, context_.data_model_.getAsmString3, other);
+    const Id* other = context_.resolve(D->getAsmString());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsmString, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitFriendDecl(clang::FriendDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getFriendType
   //getFriendTypeNumTemplateParameterLists
   // unsigned int
   //getFriendDecl
   {
-    const Entity* other = context_.resolve(D->getFriendDecl());
-    arboretum_create_edge(obj, context_.data_model_.getFriendDecl, other);
+    const Id* other = context_.resolve(D->getFriendDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getFriendDecl, other);
   }
   //getFriendLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getFriendLoc());
-    arboretum_create_edge(obj, context_.data_model_.getFriendLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getFriendLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getFriendLoc, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange47, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_12, other);
   }
   //isUnsupportedFriend
-  arboretum_create_edge(obj, context_.data_model_.isUnsupportedFriend, context_.data_model_.arboretum_node_for(D->isUnsupportedFriend()));
+  arboretum_create_edge(obj, context_.data_model_.method_isUnsupportedFriend, context_.data_model_.arboretum_node_for(D->isUnsupportedFriend()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitFriendTemplateDecl(clang::FriendTemplateDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getFriendType
   //getFriendDecl
   {
-    const Entity* other = context_.resolve(D->getFriendDecl());
-    arboretum_create_edge(obj, context_.data_model_.getFriendDecl1, other);
+    const Id* other = context_.resolve(D->getFriendDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getFriendDecl_1, other);
   }
   //getFriendLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getFriendLoc());
-    arboretum_create_edge(obj, context_.data_model_.getFriendLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getFriendLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getFriendLoc_1, other);
   }
   //getNumTemplateParameters
   // unsigned int
@@ -3421,163 +3421,163 @@ bool ArboretumASTVisitor::VisitFriendTemplateDecl(clang::FriendTemplateDecl* D) 
 bool ArboretumASTVisitor::VisitFunctionDecl(clang::FunctionDecl* D) {
   if (!D->isThisDeclarationADefinition()) return true;
 
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getNameInfo
   // DeclarationNameInfo
   //getEllipsisLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEllipsisLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEllipsisLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getEllipsisLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEllipsisLoc_1, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange26, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_13, other);
   }
   //hasBody
-  arboretum_create_edge(obj, context_.data_model_.hasBody2, context_.data_model_.arboretum_node_for(D->hasBody()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasBody_1, context_.data_model_.arboretum_node_for(D->hasBody()));
   //hasTrivialBody
-  arboretum_create_edge(obj, context_.data_model_.hasTrivialBody, context_.data_model_.arboretum_node_for(D->hasTrivialBody()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTrivialBody, context_.data_model_.arboretum_node_for(D->hasTrivialBody()));
   //isDefined
-  arboretum_create_edge(obj, context_.data_model_.isDefined1, context_.data_model_.arboretum_node_for(D->isDefined()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDefined, context_.data_model_.arboretum_node_for(D->isDefined()));
   //getDefinition
   {
-    const Entity* other = context_.resolve(D->getDefinition());
-    arboretum_create_edge(obj, context_.data_model_.getDefinition12, other);
+    const Id* other = context_.resolve(D->getDefinition());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefinition_2, other);
   }
   //getBody
   {
-    const Entity* other = context_.resolve(D->getBody());
-    arboretum_create_edge(obj, context_.data_model_.getBody15, other);
+    const Id* other = context_.resolve(D->getBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getBody_3, other);
   }
   //isThisDeclarationADefinition
-  arboretum_create_edge(obj, context_.data_model_.isThisDeclarationADefinition8, context_.data_model_.arboretum_node_for(D->isThisDeclarationADefinition()));
+  arboretum_create_edge(obj, context_.data_model_.method_isThisDeclarationADefinition_1, context_.data_model_.arboretum_node_for(D->isThisDeclarationADefinition()));
   //isThisDeclarationInstantiatedFromAFriendDefinition
-  arboretum_create_edge(obj, context_.data_model_.isThisDeclarationInstantiatedFromAFriendDefinition, context_.data_model_.arboretum_node_for(D->isThisDeclarationInstantiatedFromAFriendDefinition()));
+  arboretum_create_edge(obj, context_.data_model_.method_isThisDeclarationInstantiatedFromAFriendDefinition, context_.data_model_.arboretum_node_for(D->isThisDeclarationInstantiatedFromAFriendDefinition()));
   //doesThisDeclarationHaveABody
-  arboretum_create_edge(obj, context_.data_model_.doesThisDeclarationHaveABody, context_.data_model_.arboretum_node_for(D->doesThisDeclarationHaveABody()));
+  arboretum_create_edge(obj, context_.data_model_.method_doesThisDeclarationHaveABody, context_.data_model_.arboretum_node_for(D->doesThisDeclarationHaveABody()));
   //getDefaultedFunctionInfo
   //isVariadic
-  arboretum_create_edge(obj, context_.data_model_.isVariadic, context_.data_model_.arboretum_node_for(D->isVariadic()));
+  arboretum_create_edge(obj, context_.data_model_.method_isVariadic_2, context_.data_model_.arboretum_node_for(D->isVariadic()));
   //isVirtualAsWritten
-  arboretum_create_edge(obj, context_.data_model_.isVirtualAsWritten, context_.data_model_.arboretum_node_for(D->isVirtualAsWritten()));
+  arboretum_create_edge(obj, context_.data_model_.method_isVirtualAsWritten, context_.data_model_.arboretum_node_for(D->isVirtualAsWritten()));
   //isPureVirtual
-  arboretum_create_edge(obj, context_.data_model_.isPureVirtual, context_.data_model_.arboretum_node_for(D->isPureVirtual()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPureVirtual, context_.data_model_.arboretum_node_for(D->isPureVirtual()));
   //isLateTemplateParsed
-  arboretum_create_edge(obj, context_.data_model_.isLateTemplateParsed, context_.data_model_.arboretum_node_for(D->isLateTemplateParsed()));
+  arboretum_create_edge(obj, context_.data_model_.method_isLateTemplateParsed, context_.data_model_.arboretum_node_for(D->isLateTemplateParsed()));
   //isTrivial
-  arboretum_create_edge(obj, context_.data_model_.isTrivial1, context_.data_model_.arboretum_node_for(D->isTrivial()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTrivial_1, context_.data_model_.arboretum_node_for(D->isTrivial()));
   //isTrivialForCall
-  arboretum_create_edge(obj, context_.data_model_.isTrivialForCall, context_.data_model_.arboretum_node_for(D->isTrivialForCall()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTrivialForCall, context_.data_model_.arboretum_node_for(D->isTrivialForCall()));
   //isDefaulted
-  arboretum_create_edge(obj, context_.data_model_.isDefaulted, context_.data_model_.arboretum_node_for(D->isDefaulted()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDefaulted, context_.data_model_.arboretum_node_for(D->isDefaulted()));
   //isExplicitlyDefaulted
-  arboretum_create_edge(obj, context_.data_model_.isExplicitlyDefaulted, context_.data_model_.arboretum_node_for(D->isExplicitlyDefaulted()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExplicitlyDefaulted, context_.data_model_.arboretum_node_for(D->isExplicitlyDefaulted()));
   //getDefaultLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getDefaultLoc());
-    arboretum_create_edge(obj, context_.data_model_.getDefaultLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getDefaultLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefaultLoc, other);
   }
   //isUserProvided
-  arboretum_create_edge(obj, context_.data_model_.isUserProvided, context_.data_model_.arboretum_node_for(D->isUserProvided()));
+  arboretum_create_edge(obj, context_.data_model_.method_isUserProvided, context_.data_model_.arboretum_node_for(D->isUserProvided()));
   //isIneligibleOrNotSelected
-  arboretum_create_edge(obj, context_.data_model_.isIneligibleOrNotSelected, context_.data_model_.arboretum_node_for(D->isIneligibleOrNotSelected()));
+  arboretum_create_edge(obj, context_.data_model_.method_isIneligibleOrNotSelected, context_.data_model_.arboretum_node_for(D->isIneligibleOrNotSelected()));
   //hasImplicitReturnZero
-  arboretum_create_edge(obj, context_.data_model_.hasImplicitReturnZero, context_.data_model_.arboretum_node_for(D->hasImplicitReturnZero()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasImplicitReturnZero, context_.data_model_.arboretum_node_for(D->hasImplicitReturnZero()));
   //hasPrototype
-  arboretum_create_edge(obj, context_.data_model_.hasPrototype, context_.data_model_.arboretum_node_for(D->hasPrototype()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasPrototype, context_.data_model_.arboretum_node_for(D->hasPrototype()));
   //hasWrittenPrototype
-  arboretum_create_edge(obj, context_.data_model_.hasWrittenPrototype, context_.data_model_.arboretum_node_for(D->hasWrittenPrototype()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasWrittenPrototype, context_.data_model_.arboretum_node_for(D->hasWrittenPrototype()));
   //hasInheritedPrototype
-  arboretum_create_edge(obj, context_.data_model_.hasInheritedPrototype, context_.data_model_.arboretum_node_for(D->hasInheritedPrototype()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasInheritedPrototype, context_.data_model_.arboretum_node_for(D->hasInheritedPrototype()));
   //isConstexpr
-  arboretum_create_edge(obj, context_.data_model_.isConstexpr1, context_.data_model_.arboretum_node_for(D->isConstexpr()));
+  arboretum_create_edge(obj, context_.data_model_.method_isConstexpr, context_.data_model_.arboretum_node_for(D->isConstexpr()));
   //getConstexprKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getConstexprKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getConstexprKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getConstexprKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getConstexprKind, enum_value);
     }
   }
   //isConstexprSpecified
-  arboretum_create_edge(obj, context_.data_model_.isConstexprSpecified, context_.data_model_.arboretum_node_for(D->isConstexprSpecified()));
+  arboretum_create_edge(obj, context_.data_model_.method_isConstexprSpecified, context_.data_model_.arboretum_node_for(D->isConstexprSpecified()));
   //isConsteval
-  arboretum_create_edge(obj, context_.data_model_.isConsteval, context_.data_model_.arboretum_node_for(D->isConsteval()));
+  arboretum_create_edge(obj, context_.data_model_.method_isConsteval, context_.data_model_.arboretum_node_for(D->isConsteval()));
   //BodyContainsImmediateEscalatingExpressions
-  arboretum_create_edge(obj, context_.data_model_.BodyContainsImmediateEscalatingExpressions, context_.data_model_.arboretum_node_for(D->BodyContainsImmediateEscalatingExpressions()));
+  arboretum_create_edge(obj, context_.data_model_.method_BodyContainsImmediateEscalatingExpressions, context_.data_model_.arboretum_node_for(D->BodyContainsImmediateEscalatingExpressions()));
   //isImmediateEscalating
-  arboretum_create_edge(obj, context_.data_model_.isImmediateEscalating2, context_.data_model_.arboretum_node_for(D->isImmediateEscalating()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImmediateEscalating, context_.data_model_.arboretum_node_for(D->isImmediateEscalating()));
   //isImmediateFunction
-  arboretum_create_edge(obj, context_.data_model_.isImmediateFunction, context_.data_model_.arboretum_node_for(D->isImmediateFunction()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImmediateFunction, context_.data_model_.arboretum_node_for(D->isImmediateFunction()));
   //instantiationIsPending
-  arboretum_create_edge(obj, context_.data_model_.instantiationIsPending, context_.data_model_.arboretum_node_for(D->instantiationIsPending()));
+  arboretum_create_edge(obj, context_.data_model_.method_instantiationIsPending, context_.data_model_.arboretum_node_for(D->instantiationIsPending()));
   //usesSEHTry
-  arboretum_create_edge(obj, context_.data_model_.usesSEHTry, context_.data_model_.arboretum_node_for(D->usesSEHTry()));
+  arboretum_create_edge(obj, context_.data_model_.method_usesSEHTry, context_.data_model_.arboretum_node_for(D->usesSEHTry()));
   //isDeleted
-  arboretum_create_edge(obj, context_.data_model_.isDeleted, context_.data_model_.arboretum_node_for(D->isDeleted()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDeleted, context_.data_model_.arboretum_node_for(D->isDeleted()));
   //isDeletedAsWritten
-  arboretum_create_edge(obj, context_.data_model_.isDeletedAsWritten, context_.data_model_.arboretum_node_for(D->isDeletedAsWritten()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDeletedAsWritten, context_.data_model_.arboretum_node_for(D->isDeletedAsWritten()));
   //isMain
-  arboretum_create_edge(obj, context_.data_model_.isMain, context_.data_model_.arboretum_node_for(D->isMain()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMain, context_.data_model_.arboretum_node_for(D->isMain()));
   //isMSVCRTEntryPoint
-  arboretum_create_edge(obj, context_.data_model_.isMSVCRTEntryPoint, context_.data_model_.arboretum_node_for(D->isMSVCRTEntryPoint()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMSVCRTEntryPoint, context_.data_model_.arboretum_node_for(D->isMSVCRTEntryPoint()));
   //isReservedGlobalPlacementOperator
-  arboretum_create_edge(obj, context_.data_model_.isReservedGlobalPlacementOperator, context_.data_model_.arboretum_node_for(D->isReservedGlobalPlacementOperator()));
+  arboretum_create_edge(obj, context_.data_model_.method_isReservedGlobalPlacementOperator, context_.data_model_.arboretum_node_for(D->isReservedGlobalPlacementOperator()));
   //isInlineBuiltinDeclaration
-  arboretum_create_edge(obj, context_.data_model_.isInlineBuiltinDeclaration, context_.data_model_.arboretum_node_for(D->isInlineBuiltinDeclaration()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInlineBuiltinDeclaration, context_.data_model_.arboretum_node_for(D->isInlineBuiltinDeclaration()));
   //isDestroyingOperatorDelete
-  arboretum_create_edge(obj, context_.data_model_.isDestroyingOperatorDelete, context_.data_model_.arboretum_node_for(D->isDestroyingOperatorDelete()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDestroyingOperatorDelete, context_.data_model_.arboretum_node_for(D->isDestroyingOperatorDelete()));
   //getLanguageLinkage
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getLanguageLinkage());
+    const Id* enum_value = context_.data_model_.resolve(D->getLanguageLinkage());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getLanguageLinkage1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getLanguageLinkage, enum_value);
     }
   }
   //isExternC
-  arboretum_create_edge(obj, context_.data_model_.isExternC1, context_.data_model_.arboretum_node_for(D->isExternC()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExternC, context_.data_model_.arboretum_node_for(D->isExternC()));
   //isInExternCContext
-  arboretum_create_edge(obj, context_.data_model_.isInExternCContext1, context_.data_model_.arboretum_node_for(D->isInExternCContext()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInExternCContext, context_.data_model_.arboretum_node_for(D->isInExternCContext()));
   //isInExternCXXContext
-  arboretum_create_edge(obj, context_.data_model_.isInExternCXXContext1, context_.data_model_.arboretum_node_for(D->isInExternCXXContext()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInExternCXXContext, context_.data_model_.arboretum_node_for(D->isInExternCXXContext()));
   //isGlobal
-  arboretum_create_edge(obj, context_.data_model_.isGlobal, context_.data_model_.arboretum_node_for(D->isGlobal()));
+  arboretum_create_edge(obj, context_.data_model_.method_isGlobal, context_.data_model_.arboretum_node_for(D->isGlobal()));
   //isNoReturn
-  arboretum_create_edge(obj, context_.data_model_.isNoReturn, context_.data_model_.arboretum_node_for(D->isNoReturn()));
+  arboretum_create_edge(obj, context_.data_model_.method_isNoReturn, context_.data_model_.arboretum_node_for(D->isNoReturn()));
   //hasSkippedBody
-  arboretum_create_edge(obj, context_.data_model_.hasSkippedBody, context_.data_model_.arboretum_node_for(D->hasSkippedBody()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasSkippedBody, context_.data_model_.arboretum_node_for(D->hasSkippedBody()));
   //willHaveBody
-  arboretum_create_edge(obj, context_.data_model_.willHaveBody, context_.data_model_.arboretum_node_for(D->willHaveBody()));
+  arboretum_create_edge(obj, context_.data_model_.method_willHaveBody, context_.data_model_.arboretum_node_for(D->willHaveBody()));
   //isMultiVersion
-  arboretum_create_edge(obj, context_.data_model_.isMultiVersion, context_.data_model_.arboretum_node_for(D->isMultiVersion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMultiVersion, context_.data_model_.arboretum_node_for(D->isMultiVersion()));
   //FriendConstraintRefersToEnclosingTemplate
-  arboretum_create_edge(obj, context_.data_model_.FriendConstraintRefersToEnclosingTemplate, context_.data_model_.arboretum_node_for(D->FriendConstraintRefersToEnclosingTemplate()));
+  arboretum_create_edge(obj, context_.data_model_.method_FriendConstraintRefersToEnclosingTemplate, context_.data_model_.arboretum_node_for(D->FriendConstraintRefersToEnclosingTemplate()));
   //isMemberLikeConstrainedFriend
-  arboretum_create_edge(obj, context_.data_model_.isMemberLikeConstrainedFriend, context_.data_model_.arboretum_node_for(D->isMemberLikeConstrainedFriend()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMemberLikeConstrainedFriend, context_.data_model_.arboretum_node_for(D->isMemberLikeConstrainedFriend()));
   //getMultiVersionKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getMultiVersionKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getMultiVersionKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getMultiVersionKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getMultiVersionKind, enum_value);
     }
   }
   //isCPUDispatchMultiVersion
-  arboretum_create_edge(obj, context_.data_model_.isCPUDispatchMultiVersion, context_.data_model_.arboretum_node_for(D->isCPUDispatchMultiVersion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCPUDispatchMultiVersion, context_.data_model_.arboretum_node_for(D->isCPUDispatchMultiVersion()));
   //isCPUSpecificMultiVersion
-  arboretum_create_edge(obj, context_.data_model_.isCPUSpecificMultiVersion, context_.data_model_.arboretum_node_for(D->isCPUSpecificMultiVersion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCPUSpecificMultiVersion, context_.data_model_.arboretum_node_for(D->isCPUSpecificMultiVersion()));
   //isTargetMultiVersion
-  arboretum_create_edge(obj, context_.data_model_.isTargetMultiVersion, context_.data_model_.arboretum_node_for(D->isTargetMultiVersion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTargetMultiVersion, context_.data_model_.arboretum_node_for(D->isTargetMultiVersion()));
   //isTargetClonesMultiVersion
-  arboretum_create_edge(obj, context_.data_model_.isTargetClonesMultiVersion, context_.data_model_.arboretum_node_for(D->isTargetClonesMultiVersion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTargetClonesMultiVersion, context_.data_model_.arboretum_node_for(D->isTargetClonesMultiVersion()));
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl27, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_11, other);
   }
   //parameters
   // ArrayRef<ParmVarDecl *>
   //param_empty
-  arboretum_create_edge(obj, context_.data_model_.param_empty, context_.data_model_.arboretum_node_for(D->param_empty()));
+  arboretum_create_edge(obj, context_.data_model_.method_param_empty_1, context_.data_model_.arboretum_node_for(D->param_empty()));
   //param_size
   // size_t
   //getNumParams
@@ -3587,140 +3587,140 @@ bool ArboretumASTVisitor::VisitFunctionDecl(clang::FunctionDecl* D) {
   //getMinRequiredExplicitArguments
   // unsigned int
   //hasCXXExplicitFunctionObjectParameter
-  arboretum_create_edge(obj, context_.data_model_.hasCXXExplicitFunctionObjectParameter, context_.data_model_.arboretum_node_for(D->hasCXXExplicitFunctionObjectParameter()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasCXXExplicitFunctionObjectParameter, context_.data_model_.arboretum_node_for(D->hasCXXExplicitFunctionObjectParameter()));
   //getNumNonObjectParams
   // unsigned int
   //hasOneParamOrDefaultArgs
-  arboretum_create_edge(obj, context_.data_model_.hasOneParamOrDefaultArgs, context_.data_model_.arboretum_node_for(D->hasOneParamOrDefaultArgs()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasOneParamOrDefaultArgs, context_.data_model_.arboretum_node_for(D->hasOneParamOrDefaultArgs()));
   //getFunctionTypeLoc
   // FunctionTypeLoc
   //getReturnType
   {
-    const Entity* other = context_.resolve(D->getReturnType());
-    arboretum_create_edge(obj, context_.data_model_.getReturnType, other);
+    const Id* other = context_.resolve(D->getReturnType());
+    arboretum_create_edge(obj, context_.data_model_.method_getReturnType_1, other);
   }
   //getReturnTypeSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getReturnTypeSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getReturnTypeSourceRange, other);
+    const Id* other = context_.source_model_.resolve(D->getReturnTypeSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getReturnTypeSourceRange, other);
   }
   //getParametersSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getParametersSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getParametersSourceRange, other);
+    const Id* other = context_.source_model_.resolve(D->getParametersSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getParametersSourceRange, other);
   }
   //getDeclaredReturnType
   {
-    const Entity* other = context_.resolve(D->getDeclaredReturnType());
-    arboretum_create_edge(obj, context_.data_model_.getDeclaredReturnType, other);
+    const Id* other = context_.resolve(D->getDeclaredReturnType());
+    arboretum_create_edge(obj, context_.data_model_.method_getDeclaredReturnType, other);
   }
   //getExceptionSpecType
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getExceptionSpecType());
+    const Id* enum_value = context_.data_model_.resolve(D->getExceptionSpecType());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getExceptionSpecType, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getExceptionSpecType_1, enum_value);
     }
   }
   //getExceptionSpecSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getExceptionSpecSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getExceptionSpecSourceRange, other);
+    const Id* other = context_.source_model_.resolve(D->getExceptionSpecSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getExceptionSpecSourceRange, other);
   }
   //getCallResultType
   {
-    const Entity* other = context_.resolve(D->getCallResultType());
-    arboretum_create_edge(obj, context_.data_model_.getCallResultType, other);
+    const Id* other = context_.resolve(D->getCallResultType());
+    arboretum_create_edge(obj, context_.data_model_.method_getCallResultType, other);
   }
   //getStorageClass
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getStorageClass());
+    const Id* enum_value = context_.data_model_.resolve(D->getStorageClass());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getStorageClass1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getStorageClass, enum_value);
     }
   }
   //isInlineSpecified
-  arboretum_create_edge(obj, context_.data_model_.isInlineSpecified1, context_.data_model_.arboretum_node_for(D->isInlineSpecified()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInlineSpecified, context_.data_model_.arboretum_node_for(D->isInlineSpecified()));
   //UsesFPIntrin
-  arboretum_create_edge(obj, context_.data_model_.UsesFPIntrin, context_.data_model_.arboretum_node_for(D->UsesFPIntrin()));
+  arboretum_create_edge(obj, context_.data_model_.method_UsesFPIntrin, context_.data_model_.arboretum_node_for(D->UsesFPIntrin()));
   //isInlined
-  arboretum_create_edge(obj, context_.data_model_.isInlined, context_.data_model_.arboretum_node_for(D->isInlined()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInlined, context_.data_model_.arboretum_node_for(D->isInlined()));
   //isInlineDefinitionExternallyVisible
-  arboretum_create_edge(obj, context_.data_model_.isInlineDefinitionExternallyVisible, context_.data_model_.arboretum_node_for(D->isInlineDefinitionExternallyVisible()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInlineDefinitionExternallyVisible, context_.data_model_.arboretum_node_for(D->isInlineDefinitionExternallyVisible()));
   //isMSExternInline
-  arboretum_create_edge(obj, context_.data_model_.isMSExternInline, context_.data_model_.arboretum_node_for(D->isMSExternInline()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMSExternInline, context_.data_model_.arboretum_node_for(D->isMSExternInline()));
   //doesDeclarationForceExternallyVisibleDefinition
-  arboretum_create_edge(obj, context_.data_model_.doesDeclarationForceExternallyVisibleDefinition, context_.data_model_.arboretum_node_for(D->doesDeclarationForceExternallyVisibleDefinition()));
+  arboretum_create_edge(obj, context_.data_model_.method_doesDeclarationForceExternallyVisibleDefinition, context_.data_model_.arboretum_node_for(D->doesDeclarationForceExternallyVisibleDefinition()));
   //isStatic
-  arboretum_create_edge(obj, context_.data_model_.isStatic1, context_.data_model_.arboretum_node_for(D->isStatic()));
+  arboretum_create_edge(obj, context_.data_model_.method_isStatic_1, context_.data_model_.arboretum_node_for(D->isStatic()));
   //isOverloadedOperator
-  arboretum_create_edge(obj, context_.data_model_.isOverloadedOperator, context_.data_model_.arboretum_node_for(D->isOverloadedOperator()));
+  arboretum_create_edge(obj, context_.data_model_.method_isOverloadedOperator, context_.data_model_.arboretum_node_for(D->isOverloadedOperator()));
   //getOverloadedOperator
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getOverloadedOperator());
+    const Id* enum_value = context_.data_model_.resolve(D->getOverloadedOperator());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getOverloadedOperator2, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getOverloadedOperator, enum_value);
     }
   }
   //getLiteralIdentifier
   //getInstantiatedFromMemberFunction
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromMemberFunction());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromMemberFunction, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromMemberFunction());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromMemberFunction, other);
   }
   //getTemplatedKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getTemplatedKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getTemplatedKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getTemplatedKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getTemplatedKind, enum_value);
     }
   }
   //getMemberSpecializationInfo
   //getInstantiatedFromDecl
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromDecl());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromDecl, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromDecl, other);
   }
   //getDescribedFunctionTemplate
   {
-    const Entity* other = context_.resolve(D->getDescribedFunctionTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getDescribedFunctionTemplate, other);
+    const Id* other = context_.resolve(D->getDescribedFunctionTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getDescribedFunctionTemplate, other);
   }
   //isFunctionTemplateSpecialization
-  arboretum_create_edge(obj, context_.data_model_.isFunctionTemplateSpecialization, context_.data_model_.arboretum_node_for(D->isFunctionTemplateSpecialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_isFunctionTemplateSpecialization, context_.data_model_.arboretum_node_for(D->isFunctionTemplateSpecialization()));
   //getTemplateSpecializationInfo
   //isImplicitlyInstantiable
-  arboretum_create_edge(obj, context_.data_model_.isImplicitlyInstantiable, context_.data_model_.arboretum_node_for(D->isImplicitlyInstantiable()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImplicitlyInstantiable, context_.data_model_.arboretum_node_for(D->isImplicitlyInstantiable()));
   //isTemplateInstantiation
-  arboretum_create_edge(obj, context_.data_model_.isTemplateInstantiation, context_.data_model_.arboretum_node_for(D->isTemplateInstantiation()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTemplateInstantiation, context_.data_model_.arboretum_node_for(D->isTemplateInstantiation()));
   //getPrimaryTemplate
   {
-    const Entity* other = context_.resolve(D->getPrimaryTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getPrimaryTemplate, other);
+    const Id* other = context_.resolve(D->getPrimaryTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getPrimaryTemplate, other);
   }
   //getTemplateSpecializationArgs
   //getTemplateSpecializationArgsAsWritten
   //getDependentSpecializationInfo
   //getTemplateSpecializationKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getTemplateSpecializationKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getTemplateSpecializationKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getTemplateSpecializationKind2, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getTemplateSpecializationKind_2, enum_value);
     }
   }
   //getTemplateSpecializationKindForInstantiation
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getTemplateSpecializationKindForInstantiation());
+    const Id* enum_value = context_.data_model_.resolve(D->getTemplateSpecializationKindForInstantiation());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getTemplateSpecializationKindForInstantiation1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getTemplateSpecializationKindForInstantiation, enum_value);
     }
   }
   //getPointOfInstantiation
   {
-    const Entity* other = context_.source_model_.resolve(D->getPointOfInstantiation());
-    arboretum_create_edge(obj, context_.data_model_.getPointOfInstantiation2, other);
+    const Id* other = context_.source_model_.resolve(D->getPointOfInstantiation());
+    arboretum_create_edge(obj, context_.data_model_.method_getPointOfInstantiation_1, other);
   }
   //isOutOfLine
-  arboretum_create_edge(obj, context_.data_model_.isOutOfLine2, context_.data_model_.arboretum_node_for(D->isOutOfLine()));
+  arboretum_create_edge(obj, context_.data_model_.method_isOutOfLine_1, context_.data_model_.arboretum_node_for(D->isOutOfLine()));
   //getMemoryFunctionKind
   // unsigned int
   //getODRHash
@@ -3729,165 +3729,165 @@ bool ArboretumASTVisitor::VisitFunctionDecl(clang::FunctionDecl* D) {
 }
 
 bool ArboretumASTVisitor::VisitFunctionTemplateDecl(clang::FunctionTemplateDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTemplatedDecl
   {
-    const Entity* other = context_.resolve(D->getTemplatedDecl());
-    arboretum_create_edge(obj, context_.data_model_.getTemplatedDecl2, other);
+    const Id* other = context_.resolve(D->getTemplatedDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplatedDecl_1, other);
   }
   //isThisDeclarationADefinition
-  arboretum_create_edge(obj, context_.data_model_.isThisDeclarationADefinition4, context_.data_model_.arboretum_node_for(D->isThisDeclarationADefinition()));
+  arboretum_create_edge(obj, context_.data_model_.method_isThisDeclarationADefinition_2, context_.data_model_.arboretum_node_for(D->isThisDeclarationADefinition()));
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl19, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_12, other);
   }
   //getPreviousDecl
   {
-    const Entity* other = context_.resolve(D->getPreviousDecl());
-    arboretum_create_edge(obj, context_.data_model_.getPreviousDecl5, other);
+    const Id* other = context_.resolve(D->getPreviousDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getPreviousDecl_4, other);
   }
   //getMostRecentDecl
   {
-    const Entity* other = context_.resolve(D->getMostRecentDecl());
-    arboretum_create_edge(obj, context_.data_model_.getMostRecentDecl8, other);
+    const Id* other = context_.resolve(D->getMostRecentDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getMostRecentDecl_5, other);
   }
   //getInstantiatedFromMemberTemplate
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromMemberTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromMemberTemplate1, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromMemberTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromMemberTemplate_2, other);
   }
   //specializations
   // spec_range
   //isAbbreviated
-  arboretum_create_edge(obj, context_.data_model_.isAbbreviated, context_.data_model_.arboretum_node_for(D->isAbbreviated()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAbbreviated, context_.data_model_.arboretum_node_for(D->isAbbreviated()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitHLSLBufferDecl(clang::HLSLBufferDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange59, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_14, other);
   }
   //getLocStart
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocStart());
-    arboretum_create_edge(obj, context_.data_model_.getLocStart, other);
+    const Id* other = context_.source_model_.resolve(D->getLocStart());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocStart, other);
   }
   //getLBraceLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLBraceLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLBraceLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getLBraceLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLBraceLoc, other);
   }
   //getRBraceLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRBraceLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRBraceLoc5, other);
+    const Id* other = context_.source_model_.resolve(D->getRBraceLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRBraceLoc_1, other);
   }
   //isCBuffer
-  arboretum_create_edge(obj, context_.data_model_.isCBuffer, context_.data_model_.arboretum_node_for(D->isCBuffer()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCBuffer, context_.data_model_.arboretum_node_for(D->isCBuffer()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitImplicitConceptSpecializationDecl(clang::ImplicitConceptSpecializationDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTemplateArguments
   // ArrayRef<TemplateArgument>
   return true;
 }
 
 bool ArboretumASTVisitor::VisitImplicitParamDecl(clang::ImplicitParamDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getParameterKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getParameterKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getParameterKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getParameterKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getParameterKind, enum_value);
     }
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitImportDecl(clang::ImportDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getImportedModule
   //getIdentifierLocs
   // ArrayRef<SourceLocation>
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange33, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_15, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitIndirectFieldDecl(clang::IndirectFieldDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //chain
   // ArrayRef<NamedDecl *>
   //getChainingSize
   // unsigned int
   //getAnonField
   {
-    const Entity* other = context_.resolve(D->getAnonField());
-    arboretum_create_edge(obj, context_.data_model_.getAnonField, other);
+    const Id* other = context_.resolve(D->getAnonField());
+    arboretum_create_edge(obj, context_.data_model_.method_getAnonField, other);
   }
   //getVarDecl
   {
-    const Entity* other = context_.resolve(D->getVarDecl());
-    arboretum_create_edge(obj, context_.data_model_.getVarDecl, other);
+    const Id* other = context_.resolve(D->getVarDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getVarDecl, other);
   }
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl45, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_13, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitLabelDecl(clang::LabelDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getStmt
   {
-    const Entity* other = context_.resolve(D->getStmt());
-    arboretum_create_edge(obj, context_.data_model_.getStmt2, other);
+    const Id* other = context_.resolve(D->getStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getStmt, other);
   }
   //isGnuLocal
-  arboretum_create_edge(obj, context_.data_model_.isGnuLocal, context_.data_model_.arboretum_node_for(D->isGnuLocal()));
+  arboretum_create_edge(obj, context_.data_model_.method_isGnuLocal, context_.data_model_.arboretum_node_for(D->isGnuLocal()));
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange61, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_16, other);
   }
   //isMSAsmLabel
-  arboretum_create_edge(obj, context_.data_model_.isMSAsmLabel, context_.data_model_.arboretum_node_for(D->isMSAsmLabel()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMSAsmLabel, context_.data_model_.arboretum_node_for(D->isMSAsmLabel()));
   //isResolvedMSAsmLabel
-  arboretum_create_edge(obj, context_.data_model_.isResolvedMSAsmLabel, context_.data_model_.arboretum_node_for(D->isResolvedMSAsmLabel()));
+  arboretum_create_edge(obj, context_.data_model_.method_isResolvedMSAsmLabel, context_.data_model_.arboretum_node_for(D->isResolvedMSAsmLabel()));
   //getMSAsmLabel
   // StringRef
   return true;
 }
 
 bool ArboretumASTVisitor::VisitLifetimeExtendedTemporaryDecl(clang::LifetimeExtendedTemporaryDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getExtendingDecl
   {
-    const Entity* other = context_.resolve(D->getExtendingDecl());
-    arboretum_create_edge(obj, context_.data_model_.getExtendingDecl3, other);
+    const Id* other = context_.resolve(D->getExtendingDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getExtendingDecl, other);
   }
   //getStorageDuration
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getStorageDuration());
+    const Id* enum_value = context_.data_model_.resolve(D->getStorageDuration());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getStorageDuration1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getStorageDuration, enum_value);
     }
   }
   //getTemporaryExpr
   {
-    const Entity* other = context_.resolve(D->getTemporaryExpr());
-    arboretum_create_edge(obj, context_.data_model_.getTemporaryExpr1, other);
+    const Id* other = context_.resolve(D->getTemporaryExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemporaryExpr, other);
   }
   //getManglingNumber
   // unsigned int
@@ -3898,41 +3898,41 @@ bool ArboretumASTVisitor::VisitLifetimeExtendedTemporaryDecl(clang::LifetimeExte
 }
 
 bool ArboretumASTVisitor::VisitLinkageSpecDecl(clang::LinkageSpecDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getLanguage
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getLanguage());
+    const Id* enum_value = context_.data_model_.resolve(D->getLanguage());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getLanguage, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getLanguage, enum_value);
     }
   }
   //hasBraces
-  arboretum_create_edge(obj, context_.data_model_.hasBraces2, context_.data_model_.arboretum_node_for(D->hasBraces()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasBraces_1, context_.data_model_.arboretum_node_for(D->hasBraces()));
   //getExternLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExternLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExternLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getExternLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExternLoc_1, other);
   }
   //getRBraceLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRBraceLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRBraceLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getRBraceLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRBraceLoc_2, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc118, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_2, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange39, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_17, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitMSGuidDecl(clang::MSGuidDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getParts
   // Parts
   //getAsAPValue
@@ -3941,18 +3941,18 @@ bool ArboretumASTVisitor::VisitMSGuidDecl(clang::MSGuidDecl* D) {
 }
 
 bool ArboretumASTVisitor::VisitMSPropertyDecl(clang::MSPropertyDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //hasGetter
-  arboretum_create_edge(obj, context_.data_model_.hasGetter, context_.data_model_.arboretum_node_for(D->hasGetter()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasGetter, context_.data_model_.arboretum_node_for(D->hasGetter()));
   //getGetterId
   //hasSetter
-  arboretum_create_edge(obj, context_.data_model_.hasSetter, context_.data_model_.arboretum_node_for(D->hasSetter()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasSetter, context_.data_model_.arboretum_node_for(D->hasSetter()));
   //getSetterId
   return true;
 }
 
 bool ArboretumASTVisitor::VisitNamedDecl(clang::NamedDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getIdentifier
   //getName
   // StringRef
@@ -3963,351 +3963,351 @@ bool ArboretumASTVisitor::VisitNamedDecl(clang::NamedDecl* D) {
   //getQualifiedNameAsString
   // std::string
   //hasLinkage
-  arboretum_create_edge(obj, context_.data_model_.hasLinkage, context_.data_model_.arboretum_node_for(D->hasLinkage()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasLinkage, context_.data_model_.arboretum_node_for(D->hasLinkage()));
   //isCXXClassMember
-  arboretum_create_edge(obj, context_.data_model_.isCXXClassMember, context_.data_model_.arboretum_node_for(D->isCXXClassMember()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCXXClassMember, context_.data_model_.arboretum_node_for(D->isCXXClassMember()));
   //isCXXInstanceMember
-  arboretum_create_edge(obj, context_.data_model_.isCXXInstanceMember, context_.data_model_.arboretum_node_for(D->isCXXInstanceMember()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCXXInstanceMember, context_.data_model_.arboretum_node_for(D->isCXXInstanceMember()));
   //getLinkageInternal
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getLinkageInternal());
+    const Id* enum_value = context_.data_model_.resolve(D->getLinkageInternal());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getLinkageInternal, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getLinkageInternal, enum_value);
     }
   }
   //getFormalLinkage
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getFormalLinkage());
+    const Id* enum_value = context_.data_model_.resolve(D->getFormalLinkage());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getFormalLinkage, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getFormalLinkage, enum_value);
     }
   }
   //hasExternalFormalLinkage
-  arboretum_create_edge(obj, context_.data_model_.hasExternalFormalLinkage, context_.data_model_.arboretum_node_for(D->hasExternalFormalLinkage()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasExternalFormalLinkage, context_.data_model_.arboretum_node_for(D->hasExternalFormalLinkage()));
   //isExternallyVisible
-  arboretum_create_edge(obj, context_.data_model_.isExternallyVisible, context_.data_model_.arboretum_node_for(D->isExternallyVisible()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExternallyVisible, context_.data_model_.arboretum_node_for(D->isExternallyVisible()));
   //isExternallyDeclarable
-  arboretum_create_edge(obj, context_.data_model_.isExternallyDeclarable, context_.data_model_.arboretum_node_for(D->isExternallyDeclarable()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExternallyDeclarable, context_.data_model_.arboretum_node_for(D->isExternallyDeclarable()));
   //isLinkageValid
-  arboretum_create_edge(obj, context_.data_model_.isLinkageValid, context_.data_model_.arboretum_node_for(D->isLinkageValid()));
+  arboretum_create_edge(obj, context_.data_model_.method_isLinkageValid, context_.data_model_.arboretum_node_for(D->isLinkageValid()));
   //hasLinkageBeenComputed
-  arboretum_create_edge(obj, context_.data_model_.hasLinkageBeenComputed, context_.data_model_.arboretum_node_for(D->hasLinkageBeenComputed()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasLinkageBeenComputed, context_.data_model_.arboretum_node_for(D->hasLinkageBeenComputed()));
   //getUnderlyingDecl
   {
-    const Entity* other = context_.resolve(D->getUnderlyingDecl());
-    arboretum_create_edge(obj, context_.data_model_.getUnderlyingDecl1, other);
+    const Id* other = context_.resolve(D->getUnderlyingDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getUnderlyingDecl, other);
   }
   //getMostRecentDecl
   {
-    const Entity* other = context_.resolve(D->getMostRecentDecl());
-    arboretum_create_edge(obj, context_.data_model_.getMostRecentDecl14, other);
+    const Id* other = context_.resolve(D->getMostRecentDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getMostRecentDecl_6, other);
   }
   //getObjCFStringFormattingFamily
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getObjCFStringFormattingFamily());
+    const Id* enum_value = context_.data_model_.resolve(D->getObjCFStringFormattingFamily());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getObjCFStringFormattingFamily, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getObjCFStringFormattingFamily, enum_value);
     }
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitNamespaceAliasDecl(clang::NamespaceAliasDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl47, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_14, other);
   }
   //getQualifierLoc
   // NestedNameSpecifierLoc
   //getQualifier
   //getNamespace
   {
-    const Entity* other = context_.resolve(D->getNamespace());
-    arboretum_create_edge(obj, context_.data_model_.getNamespace1, other);
+    const Id* other = context_.resolve(D->getNamespace());
+    arboretum_create_edge(obj, context_.data_model_.method_getNamespace, other);
   }
   //getAliasLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getAliasLoc());
-    arboretum_create_edge(obj, context_.data_model_.getAliasLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getAliasLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getAliasLoc, other);
   }
   //getNamespaceLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getNamespaceLoc());
-    arboretum_create_edge(obj, context_.data_model_.getNamespaceLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getNamespaceLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getNamespaceLoc, other);
   }
   //getTargetNameLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTargetNameLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTargetNameLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getTargetNameLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTargetNameLoc, other);
   }
   //getAliasedNamespace
   {
-    const Entity* other = context_.resolve(D->getAliasedNamespace());
-    arboretum_create_edge(obj, context_.data_model_.getAliasedNamespace, other);
+    const Id* other = context_.resolve(D->getAliasedNamespace());
+    arboretum_create_edge(obj, context_.data_model_.method_getAliasedNamespace, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange38, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_18, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitNamespaceDecl(clang::NamespaceDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isAnonymousNamespace
-  arboretum_create_edge(obj, context_.data_model_.isAnonymousNamespace, context_.data_model_.arboretum_node_for(D->isAnonymousNamespace()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAnonymousNamespace, context_.data_model_.arboretum_node_for(D->isAnonymousNamespace()));
   //isInline
-  arboretum_create_edge(obj, context_.data_model_.isInline1, context_.data_model_.arboretum_node_for(D->isInline()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInline, context_.data_model_.arboretum_node_for(D->isInline()));
   //isNested
-  arboretum_create_edge(obj, context_.data_model_.isNested, context_.data_model_.arboretum_node_for(D->isNested()));
+  arboretum_create_edge(obj, context_.data_model_.method_isNested, context_.data_model_.arboretum_node_for(D->isNested()));
   //getOriginalNamespace
   {
-    const Entity* other = context_.resolve(D->getOriginalNamespace());
-    arboretum_create_edge(obj, context_.data_model_.getOriginalNamespace1, other);
+    const Id* other = context_.resolve(D->getOriginalNamespace());
+    arboretum_create_edge(obj, context_.data_model_.method_getOriginalNamespace, other);
   }
   //isOriginalNamespace
-  arboretum_create_edge(obj, context_.data_model_.isOriginalNamespace, context_.data_model_.arboretum_node_for(D->isOriginalNamespace()));
+  arboretum_create_edge(obj, context_.data_model_.method_isOriginalNamespace, context_.data_model_.arboretum_node_for(D->isOriginalNamespace()));
   //getAnonymousNamespace
   {
-    const Entity* other = context_.resolve(D->getAnonymousNamespace());
-    arboretum_create_edge(obj, context_.data_model_.getAnonymousNamespace1, other);
+    const Id* other = context_.resolve(D->getAnonymousNamespace());
+    arboretum_create_edge(obj, context_.data_model_.method_getAnonymousNamespace, other);
   }
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl55, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_15, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange44, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_19, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc127, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_2, other);
   }
   //getRBraceLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRBraceLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRBraceLoc4, other);
+    const Id* other = context_.source_model_.resolve(D->getRBraceLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRBraceLoc_3, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitNonTypeTemplateParmDecl(clang::NonTypeTemplateParmDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange29, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_20, other);
   }
   //getDefaultArgStorage
   // const DefArgStorage &
   //hasDefaultArgument
-  arboretum_create_edge(obj, context_.data_model_.hasDefaultArgument2, context_.data_model_.arboretum_node_for(D->hasDefaultArgument()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasDefaultArgument, context_.data_model_.arboretum_node_for(D->hasDefaultArgument()));
   //getDefaultArgument
   {
-    const Entity* other = context_.resolve(D->getDefaultArgument());
-    arboretum_create_edge(obj, context_.data_model_.getDefaultArgument2, other);
+    const Id* other = context_.resolve(D->getDefaultArgument());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefaultArgument, other);
   }
   //getDefaultArgumentLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getDefaultArgumentLoc());
-    arboretum_create_edge(obj, context_.data_model_.getDefaultArgumentLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getDefaultArgumentLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefaultArgumentLoc, other);
   }
   //defaultArgumentWasInherited
-  arboretum_create_edge(obj, context_.data_model_.defaultArgumentWasInherited2, context_.data_model_.arboretum_node_for(D->defaultArgumentWasInherited()));
+  arboretum_create_edge(obj, context_.data_model_.method_defaultArgumentWasInherited, context_.data_model_.arboretum_node_for(D->defaultArgumentWasInherited()));
   //isParameterPack
-  arboretum_create_edge(obj, context_.data_model_.isParameterPack4, context_.data_model_.arboretum_node_for(D->isParameterPack()));
+  arboretum_create_edge(obj, context_.data_model_.method_isParameterPack_2, context_.data_model_.arboretum_node_for(D->isParameterPack()));
   //isPackExpansion
-  arboretum_create_edge(obj, context_.data_model_.isPackExpansion3, context_.data_model_.arboretum_node_for(D->isPackExpansion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPackExpansion, context_.data_model_.arboretum_node_for(D->isPackExpansion()));
   //isExpandedParameterPack
-  arboretum_create_edge(obj, context_.data_model_.isExpandedParameterPack2, context_.data_model_.arboretum_node_for(D->isExpandedParameterPack()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExpandedParameterPack, context_.data_model_.arboretum_node_for(D->isExpandedParameterPack()));
   //getNumExpansionTypes
   // unsigned int
   //getPlaceholderTypeConstraint
   {
-    const Entity* other = context_.resolve(D->getPlaceholderTypeConstraint());
-    arboretum_create_edge(obj, context_.data_model_.getPlaceholderTypeConstraint, other);
+    const Id* other = context_.resolve(D->getPlaceholderTypeConstraint());
+    arboretum_create_edge(obj, context_.data_model_.method_getPlaceholderTypeConstraint, other);
   }
   //hasPlaceholderTypeConstraint
-  arboretum_create_edge(obj, context_.data_model_.hasPlaceholderTypeConstraint, context_.data_model_.arboretum_node_for(D->hasPlaceholderTypeConstraint()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasPlaceholderTypeConstraint, context_.data_model_.arboretum_node_for(D->hasPlaceholderTypeConstraint()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPAllocateDecl(clang::OMPAllocateDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPCapturedExprDecl(clang::OMPCapturedExprDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPDeclareMapperDecl(clang::OMPDeclareMapperDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPDeclareReductionDecl(clang::OMPDeclareReductionDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPRequiresDecl(clang::OMPRequiresDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPThreadPrivateDecl(clang::OMPThreadPrivateDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCAtDefsFieldDecl(clang::ObjCAtDefsFieldDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCCategoryDecl(clang::ObjCCategoryDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCCategoryImplDecl(clang::ObjCCategoryImplDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCCompatibleAliasDecl(clang::ObjCCompatibleAliasDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCContainerDecl(clang::ObjCContainerDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCImplDecl(clang::ObjCImplDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCImplementationDecl(clang::ObjCImplementationDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCInterfaceDecl(clang::ObjCInterfaceDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCIvarDecl(clang::ObjCIvarDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCMethodDecl(clang::ObjCMethodDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCPropertyDecl(clang::ObjCPropertyDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCPropertyImplDecl(clang::ObjCPropertyImplDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCProtocolDecl(clang::ObjCProtocolDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCTypeParamDecl(clang::ObjCTypeParamDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitParmVarDecl(clang::ParmVarDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange62, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_21, other);
   }
   //isObjCMethodParameter
-  arboretum_create_edge(obj, context_.data_model_.isObjCMethodParameter, context_.data_model_.arboretum_node_for(D->isObjCMethodParameter()));
+  arboretum_create_edge(obj, context_.data_model_.method_isObjCMethodParameter, context_.data_model_.arboretum_node_for(D->isObjCMethodParameter()));
   //isDestroyedInCallee
-  arboretum_create_edge(obj, context_.data_model_.isDestroyedInCallee, context_.data_model_.arboretum_node_for(D->isDestroyedInCallee()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDestroyedInCallee, context_.data_model_.arboretum_node_for(D->isDestroyedInCallee()));
   //getFunctionScopeDepth
   // unsigned int
   //getFunctionScopeIndex
   // unsigned int
   //getObjCDeclQualifier
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getObjCDeclQualifier());
+    const Id* enum_value = context_.data_model_.resolve(D->getObjCDeclQualifier());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getObjCDeclQualifier1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getObjCDeclQualifier, enum_value);
     }
   }
   //isKNRPromoted
-  arboretum_create_edge(obj, context_.data_model_.isKNRPromoted, context_.data_model_.arboretum_node_for(D->isKNRPromoted()));
+  arboretum_create_edge(obj, context_.data_model_.method_isKNRPromoted, context_.data_model_.arboretum_node_for(D->isKNRPromoted()));
   //isExplicitObjectParameter
-  arboretum_create_edge(obj, context_.data_model_.isExplicitObjectParameter, context_.data_model_.arboretum_node_for(D->isExplicitObjectParameter()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExplicitObjectParameter, context_.data_model_.arboretum_node_for(D->isExplicitObjectParameter()));
   //getExplicitObjectParamThisLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExplicitObjectParamThisLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExplicitObjectParamThisLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getExplicitObjectParamThisLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExplicitObjectParamThisLoc, other);
   }
   //getDefaultArg
   {
-    const Entity* other = context_.resolve(D->getDefaultArg());
-    arboretum_create_edge(obj, context_.data_model_.getDefaultArg1, other);
+    const Id* other = context_.resolve(D->getDefaultArg());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefaultArg, other);
   }
   //getDefaultArgRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getDefaultArgRange());
-    arboretum_create_edge(obj, context_.data_model_.getDefaultArgRange, other);
+    const Id* other = context_.source_model_.resolve(D->getDefaultArgRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefaultArgRange, other);
   }
   //getUninstantiatedDefaultArg
   {
-    const Entity* other = context_.resolve(D->getUninstantiatedDefaultArg());
-    arboretum_create_edge(obj, context_.data_model_.getUninstantiatedDefaultArg1, other);
+    const Id* other = context_.resolve(D->getUninstantiatedDefaultArg());
+    arboretum_create_edge(obj, context_.data_model_.method_getUninstantiatedDefaultArg, other);
   }
   //hasDefaultArg
-  arboretum_create_edge(obj, context_.data_model_.hasDefaultArg, context_.data_model_.arboretum_node_for(D->hasDefaultArg()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasDefaultArg, context_.data_model_.arboretum_node_for(D->hasDefaultArg()));
   //hasUnparsedDefaultArg
-  arboretum_create_edge(obj, context_.data_model_.hasUnparsedDefaultArg, context_.data_model_.arboretum_node_for(D->hasUnparsedDefaultArg()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUnparsedDefaultArg, context_.data_model_.arboretum_node_for(D->hasUnparsedDefaultArg()));
   //hasUninstantiatedDefaultArg
-  arboretum_create_edge(obj, context_.data_model_.hasUninstantiatedDefaultArg, context_.data_model_.arboretum_node_for(D->hasUninstantiatedDefaultArg()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUninstantiatedDefaultArg, context_.data_model_.arboretum_node_for(D->hasUninstantiatedDefaultArg()));
   //hasInheritedDefaultArg
-  arboretum_create_edge(obj, context_.data_model_.hasInheritedDefaultArg, context_.data_model_.arboretum_node_for(D->hasInheritedDefaultArg()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasInheritedDefaultArg, context_.data_model_.arboretum_node_for(D->hasInheritedDefaultArg()));
   //getOriginalType
   {
-    const Entity* other = context_.resolve(D->getOriginalType());
-    arboretum_create_edge(obj, context_.data_model_.getOriginalType1, other);
+    const Id* other = context_.resolve(D->getOriginalType());
+    arboretum_create_edge(obj, context_.data_model_.method_getOriginalType_1, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitPragmaCommentDecl(clang::PragmaCommentDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCommentKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getCommentKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getCommentKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getCommentKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getCommentKind, enum_value);
     }
   }
   //getArg
@@ -4316,7 +4316,7 @@ bool ArboretumASTVisitor::VisitPragmaCommentDecl(clang::PragmaCommentDecl* D) {
 }
 
 bool ArboretumASTVisitor::VisitPragmaDetectMismatchDecl(clang::PragmaDetectMismatchDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getName
   // StringRef
   //getValue
@@ -4327,122 +4327,122 @@ bool ArboretumASTVisitor::VisitPragmaDetectMismatchDecl(clang::PragmaDetectMisma
 bool ArboretumASTVisitor::VisitRecordDecl(clang::RecordDecl* D) {
   if (!D->isThisDeclarationADefinition()) return true;
 
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getPreviousDecl
   {
-    const Entity* other = context_.resolve(D->getPreviousDecl());
-    arboretum_create_edge(obj, context_.data_model_.getPreviousDecl13, other);
+    const Id* other = context_.resolve(D->getPreviousDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getPreviousDecl_5, other);
   }
   //getMostRecentDecl
   {
-    const Entity* other = context_.resolve(D->getMostRecentDecl());
-    arboretum_create_edge(obj, context_.data_model_.getMostRecentDecl16, other);
+    const Id* other = context_.resolve(D->getMostRecentDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getMostRecentDecl_7, other);
   }
   //hasFlexibleArrayMember
-  arboretum_create_edge(obj, context_.data_model_.hasFlexibleArrayMember, context_.data_model_.arboretum_node_for(D->hasFlexibleArrayMember()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasFlexibleArrayMember, context_.data_model_.arboretum_node_for(D->hasFlexibleArrayMember()));
   //isAnonymousStructOrUnion
-  arboretum_create_edge(obj, context_.data_model_.isAnonymousStructOrUnion, context_.data_model_.arboretum_node_for(D->isAnonymousStructOrUnion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAnonymousStructOrUnion_1, context_.data_model_.arboretum_node_for(D->isAnonymousStructOrUnion()));
   //hasObjectMember
-  arboretum_create_edge(obj, context_.data_model_.hasObjectMember, context_.data_model_.arboretum_node_for(D->hasObjectMember()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasObjectMember, context_.data_model_.arboretum_node_for(D->hasObjectMember()));
   //hasVolatileMember
-  arboretum_create_edge(obj, context_.data_model_.hasVolatileMember, context_.data_model_.arboretum_node_for(D->hasVolatileMember()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasVolatileMember, context_.data_model_.arboretum_node_for(D->hasVolatileMember()));
   //hasLoadedFieldsFromExternalStorage
-  arboretum_create_edge(obj, context_.data_model_.hasLoadedFieldsFromExternalStorage, context_.data_model_.arboretum_node_for(D->hasLoadedFieldsFromExternalStorage()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasLoadedFieldsFromExternalStorage, context_.data_model_.arboretum_node_for(D->hasLoadedFieldsFromExternalStorage()));
   //isNonTrivialToPrimitiveDefaultInitialize
-  arboretum_create_edge(obj, context_.data_model_.isNonTrivialToPrimitiveDefaultInitialize, context_.data_model_.arboretum_node_for(D->isNonTrivialToPrimitiveDefaultInitialize()));
+  arboretum_create_edge(obj, context_.data_model_.method_isNonTrivialToPrimitiveDefaultInitialize, context_.data_model_.arboretum_node_for(D->isNonTrivialToPrimitiveDefaultInitialize()));
   //isNonTrivialToPrimitiveCopy
-  arboretum_create_edge(obj, context_.data_model_.isNonTrivialToPrimitiveCopy, context_.data_model_.arboretum_node_for(D->isNonTrivialToPrimitiveCopy()));
+  arboretum_create_edge(obj, context_.data_model_.method_isNonTrivialToPrimitiveCopy, context_.data_model_.arboretum_node_for(D->isNonTrivialToPrimitiveCopy()));
   //isNonTrivialToPrimitiveDestroy
-  arboretum_create_edge(obj, context_.data_model_.isNonTrivialToPrimitiveDestroy, context_.data_model_.arboretum_node_for(D->isNonTrivialToPrimitiveDestroy()));
+  arboretum_create_edge(obj, context_.data_model_.method_isNonTrivialToPrimitiveDestroy, context_.data_model_.arboretum_node_for(D->isNonTrivialToPrimitiveDestroy()));
   //hasNonTrivialToPrimitiveDefaultInitializeCUnion
-  arboretum_create_edge(obj, context_.data_model_.hasNonTrivialToPrimitiveDefaultInitializeCUnion, context_.data_model_.arboretum_node_for(D->hasNonTrivialToPrimitiveDefaultInitializeCUnion()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonTrivialToPrimitiveDefaultInitializeCUnion, context_.data_model_.arboretum_node_for(D->hasNonTrivialToPrimitiveDefaultInitializeCUnion()));
   //hasNonTrivialToPrimitiveDestructCUnion
-  arboretum_create_edge(obj, context_.data_model_.hasNonTrivialToPrimitiveDestructCUnion, context_.data_model_.arboretum_node_for(D->hasNonTrivialToPrimitiveDestructCUnion()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonTrivialToPrimitiveDestructCUnion, context_.data_model_.arboretum_node_for(D->hasNonTrivialToPrimitiveDestructCUnion()));
   //hasNonTrivialToPrimitiveCopyCUnion
-  arboretum_create_edge(obj, context_.data_model_.hasNonTrivialToPrimitiveCopyCUnion, context_.data_model_.arboretum_node_for(D->hasNonTrivialToPrimitiveCopyCUnion()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNonTrivialToPrimitiveCopyCUnion, context_.data_model_.arboretum_node_for(D->hasNonTrivialToPrimitiveCopyCUnion()));
   //canPassInRegisters
-  arboretum_create_edge(obj, context_.data_model_.canPassInRegisters, context_.data_model_.arboretum_node_for(D->canPassInRegisters()));
+  arboretum_create_edge(obj, context_.data_model_.method_canPassInRegisters, context_.data_model_.arboretum_node_for(D->canPassInRegisters()));
   //getArgPassingRestrictions
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getArgPassingRestrictions());
+    const Id* enum_value = context_.data_model_.resolve(D->getArgPassingRestrictions());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getArgPassingRestrictions, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getArgPassingRestrictions, enum_value);
     }
   }
   //isParamDestroyedInCallee
-  arboretum_create_edge(obj, context_.data_model_.isParamDestroyedInCallee, context_.data_model_.arboretum_node_for(D->isParamDestroyedInCallee()));
+  arboretum_create_edge(obj, context_.data_model_.method_isParamDestroyedInCallee, context_.data_model_.arboretum_node_for(D->isParamDestroyedInCallee()));
   //isRandomized
-  arboretum_create_edge(obj, context_.data_model_.isRandomized, context_.data_model_.arboretum_node_for(D->isRandomized()));
+  arboretum_create_edge(obj, context_.data_model_.method_isRandomized, context_.data_model_.arboretum_node_for(D->isRandomized()));
   //isInjectedClassName
-  arboretum_create_edge(obj, context_.data_model_.isInjectedClassName, context_.data_model_.arboretum_node_for(D->isInjectedClassName()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInjectedClassName, context_.data_model_.arboretum_node_for(D->isInjectedClassName()));
   //isLambda
-  arboretum_create_edge(obj, context_.data_model_.isLambda1, context_.data_model_.arboretum_node_for(D->isLambda()));
+  arboretum_create_edge(obj, context_.data_model_.method_isLambda_1, context_.data_model_.arboretum_node_for(D->isLambda()));
   //isCapturedRecord
-  arboretum_create_edge(obj, context_.data_model_.isCapturedRecord, context_.data_model_.arboretum_node_for(D->isCapturedRecord()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCapturedRecord, context_.data_model_.arboretum_node_for(D->isCapturedRecord()));
   //getDefinition
   {
-    const Entity* other = context_.resolve(D->getDefinition());
-    arboretum_create_edge(obj, context_.data_model_.getDefinition13, other);
+    const Id* other = context_.resolve(D->getDefinition());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefinition_3, other);
   }
   //isOrContainsUnion
-  arboretum_create_edge(obj, context_.data_model_.isOrContainsUnion, context_.data_model_.arboretum_node_for(D->isOrContainsUnion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isOrContainsUnion, context_.data_model_.arboretum_node_for(D->isOrContainsUnion()));
   //fields
   // field_range
   //field_empty
-  arboretum_create_edge(obj, context_.data_model_.field_empty, context_.data_model_.arboretum_node_for(D->field_empty()));
+  arboretum_create_edge(obj, context_.data_model_.method_field_empty, context_.data_model_.arboretum_node_for(D->field_empty()));
   //findFirstNamedDataMember
   {
-    const Entity* other = context_.resolve(D->findFirstNamedDataMember());
-    arboretum_create_edge(obj, context_.data_model_.findFirstNamedDataMember, other);
+    const Id* other = context_.resolve(D->findFirstNamedDataMember());
+    arboretum_create_edge(obj, context_.data_model_.method_findFirstNamedDataMember, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitRedeclarableTemplateDecl(clang::RedeclarableTemplateDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl59, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_16, other);
   }
   //isMemberSpecialization
-  arboretum_create_edge(obj, context_.data_model_.isMemberSpecialization2, context_.data_model_.arboretum_node_for(D->isMemberSpecialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMemberSpecialization, context_.data_model_.arboretum_node_for(D->isMemberSpecialization()));
   //getInstantiatedFromMemberTemplate
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromMemberTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromMemberTemplate5, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromMemberTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromMemberTemplate_3, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitRequiresExprBodyDecl(clang::RequiresExprBodyDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitStaticAssertDecl(clang::StaticAssertDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getAssertExpr
   {
-    const Entity* other = context_.resolve(D->getAssertExpr());
-    arboretum_create_edge(obj, context_.data_model_.getAssertExpr1, other);
+    const Id* other = context_.resolve(D->getAssertExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getAssertExpr, other);
   }
   //getMessage
   {
-    const Entity* other = context_.resolve(D->getMessage());
-    arboretum_create_edge(obj, context_.data_model_.getMessage1, other);
+    const Id* other = context_.resolve(D->getMessage());
+    arboretum_create_edge(obj, context_.data_model_.method_getMessage, other);
   }
   //isFailed
-  arboretum_create_edge(obj, context_.data_model_.isFailed, context_.data_model_.arboretum_node_for(D->isFailed()));
+  arboretum_create_edge(obj, context_.data_model_.method_isFailed, context_.data_model_.arboretum_node_for(D->isFailed()));
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc21, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_1, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange15, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_22, other);
   }
   return true;
 }
@@ -4450,80 +4450,80 @@ bool ArboretumASTVisitor::VisitStaticAssertDecl(clang::StaticAssertDecl* D) {
 bool ArboretumASTVisitor::VisitTagDecl(clang::TagDecl* D) {
   if (!D->isThisDeclarationADefinition()) return true;
 
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBraceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getBraceRange());
-    arboretum_create_edge(obj, context_.data_model_.getBraceRange, other);
+    const Id* other = context_.source_model_.resolve(D->getBraceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getBraceRange, other);
   }
   //getInnerLocStart
   {
-    const Entity* other = context_.source_model_.resolve(D->getInnerLocStart());
-    arboretum_create_edge(obj, context_.data_model_.getInnerLocStart, other);
+    const Id* other = context_.source_model_.resolve(D->getInnerLocStart());
+    arboretum_create_edge(obj, context_.data_model_.method_getInnerLocStart_1, other);
   }
   //getOuterLocStart
   {
-    const Entity* other = context_.source_model_.resolve(D->getOuterLocStart());
-    arboretum_create_edge(obj, context_.data_model_.getOuterLocStart, other);
+    const Id* other = context_.source_model_.resolve(D->getOuterLocStart());
+    arboretum_create_edge(obj, context_.data_model_.method_getOuterLocStart_1, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange8, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_23, other);
   }
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl3, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_17, other);
   }
   //isThisDeclarationADefinition
-  arboretum_create_edge(obj, context_.data_model_.isThisDeclarationADefinition, context_.data_model_.arboretum_node_for(D->isThisDeclarationADefinition()));
+  arboretum_create_edge(obj, context_.data_model_.method_isThisDeclarationADefinition_3, context_.data_model_.arboretum_node_for(D->isThisDeclarationADefinition()));
   //isCompleteDefinition
-  arboretum_create_edge(obj, context_.data_model_.isCompleteDefinition, context_.data_model_.arboretum_node_for(D->isCompleteDefinition()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCompleteDefinition, context_.data_model_.arboretum_node_for(D->isCompleteDefinition()));
   //isCompleteDefinitionRequired
-  arboretum_create_edge(obj, context_.data_model_.isCompleteDefinitionRequired, context_.data_model_.arboretum_node_for(D->isCompleteDefinitionRequired()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCompleteDefinitionRequired, context_.data_model_.arboretum_node_for(D->isCompleteDefinitionRequired()));
   //isBeingDefined
-  arboretum_create_edge(obj, context_.data_model_.isBeingDefined, context_.data_model_.arboretum_node_for(D->isBeingDefined()));
+  arboretum_create_edge(obj, context_.data_model_.method_isBeingDefined_1, context_.data_model_.arboretum_node_for(D->isBeingDefined()));
   //isEmbeddedInDeclarator
-  arboretum_create_edge(obj, context_.data_model_.isEmbeddedInDeclarator, context_.data_model_.arboretum_node_for(D->isEmbeddedInDeclarator()));
+  arboretum_create_edge(obj, context_.data_model_.method_isEmbeddedInDeclarator, context_.data_model_.arboretum_node_for(D->isEmbeddedInDeclarator()));
   //isFreeStanding
-  arboretum_create_edge(obj, context_.data_model_.isFreeStanding, context_.data_model_.arboretum_node_for(D->isFreeStanding()));
+  arboretum_create_edge(obj, context_.data_model_.method_isFreeStanding, context_.data_model_.arboretum_node_for(D->isFreeStanding()));
   //mayHaveOutOfDateDef
-  arboretum_create_edge(obj, context_.data_model_.mayHaveOutOfDateDef, context_.data_model_.arboretum_node_for(D->mayHaveOutOfDateDef()));
+  arboretum_create_edge(obj, context_.data_model_.method_mayHaveOutOfDateDef, context_.data_model_.arboretum_node_for(D->mayHaveOutOfDateDef()));
   //isDependentType
-  arboretum_create_edge(obj, context_.data_model_.isDependentType, context_.data_model_.arboretum_node_for(D->isDependentType()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDependentType, context_.data_model_.arboretum_node_for(D->isDependentType()));
   //isThisDeclarationADemotedDefinition
-  arboretum_create_edge(obj, context_.data_model_.isThisDeclarationADemotedDefinition, context_.data_model_.arboretum_node_for(D->isThisDeclarationADemotedDefinition()));
+  arboretum_create_edge(obj, context_.data_model_.method_isThisDeclarationADemotedDefinition, context_.data_model_.arboretum_node_for(D->isThisDeclarationADemotedDefinition()));
   //getDefinition
   {
-    const Entity* other = context_.resolve(D->getDefinition());
-    arboretum_create_edge(obj, context_.data_model_.getDefinition1, other);
+    const Id* other = context_.resolve(D->getDefinition());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefinition_4, other);
   }
   //getKindName
   // StringRef
   //getTagKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getTagKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getTagKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getTagKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getTagKind, enum_value);
     }
   }
   //isStruct
-  arboretum_create_edge(obj, context_.data_model_.isStruct, context_.data_model_.arboretum_node_for(D->isStruct()));
+  arboretum_create_edge(obj, context_.data_model_.method_isStruct, context_.data_model_.arboretum_node_for(D->isStruct()));
   //isInterface
-  arboretum_create_edge(obj, context_.data_model_.isInterface, context_.data_model_.arboretum_node_for(D->isInterface()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInterface, context_.data_model_.arboretum_node_for(D->isInterface()));
   //isClass
-  arboretum_create_edge(obj, context_.data_model_.isClass, context_.data_model_.arboretum_node_for(D->isClass()));
+  arboretum_create_edge(obj, context_.data_model_.method_isClass, context_.data_model_.arboretum_node_for(D->isClass()));
   //isUnion
-  arboretum_create_edge(obj, context_.data_model_.isUnion, context_.data_model_.arboretum_node_for(D->isUnion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isUnion, context_.data_model_.arboretum_node_for(D->isUnion()));
   //isEnum
-  arboretum_create_edge(obj, context_.data_model_.isEnum, context_.data_model_.arboretum_node_for(D->isEnum()));
+  arboretum_create_edge(obj, context_.data_model_.method_isEnum, context_.data_model_.arboretum_node_for(D->isEnum()));
   //hasNameForLinkage
-  arboretum_create_edge(obj, context_.data_model_.hasNameForLinkage, context_.data_model_.arboretum_node_for(D->hasNameForLinkage()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasNameForLinkage, context_.data_model_.arboretum_node_for(D->hasNameForLinkage()));
   //getTypedefNameForAnonDecl
   {
-    const Entity* other = context_.resolve(D->getTypedefNameForAnonDecl());
-    arboretum_create_edge(obj, context_.data_model_.getTypedefNameForAnonDecl, other);
+    const Id* other = context_.resolve(D->getTypedefNameForAnonDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getTypedefNameForAnonDecl, other);
   }
   //getQualifier
   //getQualifierLoc
@@ -4534,247 +4534,247 @@ bool ArboretumASTVisitor::VisitTagDecl(clang::TagDecl* D) {
 }
 
 bool ArboretumASTVisitor::VisitTemplateDecl(clang::TemplateDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTemplateParameters
   //hasAssociatedConstraints
-  arboretum_create_edge(obj, context_.data_model_.hasAssociatedConstraints, context_.data_model_.arboretum_node_for(D->hasAssociatedConstraints()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasAssociatedConstraints_1, context_.data_model_.arboretum_node_for(D->hasAssociatedConstraints()));
   //getTemplatedDecl
   {
-    const Entity* other = context_.resolve(D->getTemplatedDecl());
-    arboretum_create_edge(obj, context_.data_model_.getTemplatedDecl1, other);
+    const Id* other = context_.resolve(D->getTemplatedDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplatedDecl_2, other);
   }
   //isTypeAlias
-  arboretum_create_edge(obj, context_.data_model_.isTypeAlias, context_.data_model_.arboretum_node_for(D->isTypeAlias()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTypeAlias_1, context_.data_model_.arboretum_node_for(D->isTypeAlias()));
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange12, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_24, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTemplateParamObjectDecl(clang::TemplateParamObjectDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getValue
   // const APValue &
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl5, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_18, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTemplateTemplateParmDecl(clang::TemplateTemplateParmDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isParameterPack
-  arboretum_create_edge(obj, context_.data_model_.isParameterPack, context_.data_model_.arboretum_node_for(D->isParameterPack()));
+  arboretum_create_edge(obj, context_.data_model_.method_isParameterPack_3, context_.data_model_.arboretum_node_for(D->isParameterPack()));
   //isPackExpansion
-  arboretum_create_edge(obj, context_.data_model_.isPackExpansion, context_.data_model_.arboretum_node_for(D->isPackExpansion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPackExpansion_1, context_.data_model_.arboretum_node_for(D->isPackExpansion()));
   //isExpandedParameterPack
-  arboretum_create_edge(obj, context_.data_model_.isExpandedParameterPack, context_.data_model_.arboretum_node_for(D->isExpandedParameterPack()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExpandedParameterPack_1, context_.data_model_.arboretum_node_for(D->isExpandedParameterPack()));
   //getNumExpansionTemplateParameters
   // unsigned int
   //getDefaultArgStorage
   // const DefArgStorage &
   //hasDefaultArgument
-  arboretum_create_edge(obj, context_.data_model_.hasDefaultArgument, context_.data_model_.arboretum_node_for(D->hasDefaultArgument()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasDefaultArgument_1, context_.data_model_.arboretum_node_for(D->hasDefaultArgument()));
   //getDefaultArgument
   // const TemplateArgumentLoc &
   //getDefaultArgumentLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getDefaultArgumentLoc());
-    arboretum_create_edge(obj, context_.data_model_.getDefaultArgumentLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getDefaultArgumentLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefaultArgumentLoc_1, other);
   }
   //defaultArgumentWasInherited
-  arboretum_create_edge(obj, context_.data_model_.defaultArgumentWasInherited, context_.data_model_.arboretum_node_for(D->defaultArgumentWasInherited()));
+  arboretum_create_edge(obj, context_.data_model_.method_defaultArgumentWasInherited_1, context_.data_model_.arboretum_node_for(D->defaultArgumentWasInherited()));
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange10, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_25, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTemplateTypeParmDecl(clang::TemplateTypeParmDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //wasDeclaredWithTypename
-  arboretum_create_edge(obj, context_.data_model_.wasDeclaredWithTypename, context_.data_model_.arboretum_node_for(D->wasDeclaredWithTypename()));
+  arboretum_create_edge(obj, context_.data_model_.method_wasDeclaredWithTypename, context_.data_model_.arboretum_node_for(D->wasDeclaredWithTypename()));
   //getDefaultArgStorage
   // const DefArgStorage &
   //hasDefaultArgument
-  arboretum_create_edge(obj, context_.data_model_.hasDefaultArgument1, context_.data_model_.arboretum_node_for(D->hasDefaultArgument()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasDefaultArgument_2, context_.data_model_.arboretum_node_for(D->hasDefaultArgument()));
   //getDefaultArgumentInfo
   //getDefaultArgumentLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getDefaultArgumentLoc());
-    arboretum_create_edge(obj, context_.data_model_.getDefaultArgumentLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getDefaultArgumentLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefaultArgumentLoc_2, other);
   }
   //defaultArgumentWasInherited
-  arboretum_create_edge(obj, context_.data_model_.defaultArgumentWasInherited1, context_.data_model_.arboretum_node_for(D->defaultArgumentWasInherited()));
+  arboretum_create_edge(obj, context_.data_model_.method_defaultArgumentWasInherited_2, context_.data_model_.arboretum_node_for(D->defaultArgumentWasInherited()));
   //getDepth
   // unsigned int
   //getIndex
   // unsigned int
   //isParameterPack
-  arboretum_create_edge(obj, context_.data_model_.isParameterPack1, context_.data_model_.arboretum_node_for(D->isParameterPack()));
+  arboretum_create_edge(obj, context_.data_model_.method_isParameterPack_4, context_.data_model_.arboretum_node_for(D->isParameterPack()));
   //isPackExpansion
-  arboretum_create_edge(obj, context_.data_model_.isPackExpansion1, context_.data_model_.arboretum_node_for(D->isPackExpansion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPackExpansion_2, context_.data_model_.arboretum_node_for(D->isPackExpansion()));
   //isExpandedParameterPack
-  arboretum_create_edge(obj, context_.data_model_.isExpandedParameterPack1, context_.data_model_.arboretum_node_for(D->isExpandedParameterPack()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExpandedParameterPack_2, context_.data_model_.arboretum_node_for(D->isExpandedParameterPack()));
   //getNumExpansionParameters
   // unsigned int
   //getTypeConstraint
   //hasTypeConstraint
-  arboretum_create_edge(obj, context_.data_model_.hasTypeConstraint, context_.data_model_.arboretum_node_for(D->hasTypeConstraint()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTypeConstraint, context_.data_model_.arboretum_node_for(D->hasTypeConstraint()));
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange18, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_26, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTopLevelStmtDecl(clang::TopLevelStmtDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange24, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_27, other);
   }
   //getStmt
   {
-    const Entity* other = context_.resolve(D->getStmt());
-    arboretum_create_edge(obj, context_.data_model_.getStmt1, other);
+    const Id* other = context_.resolve(D->getStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getStmt_1, other);
   }
   //isSemiMissing
-  arboretum_create_edge(obj, context_.data_model_.isSemiMissing, context_.data_model_.arboretum_node_for(D->isSemiMissing()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSemiMissing, context_.data_model_.arboretum_node_for(D->isSemiMissing()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTranslationUnitDecl(clang::TranslationUnitDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getAnonymousNamespace
   {
-    const Entity* other = context_.resolve(D->getAnonymousNamespace());
-    arboretum_create_edge(obj, context_.data_model_.getAnonymousNamespace, other);
+    const Id* other = context_.resolve(D->getAnonymousNamespace());
+    arboretum_create_edge(obj, context_.data_model_.method_getAnonymousNamespace_1, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTypeAliasDecl(clang::TypeAliasDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange31, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_28, other);
   }
   //getDescribedAliasTemplate
   {
-    const Entity* other = context_.resolve(D->getDescribedAliasTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getDescribedAliasTemplate, other);
+    const Id* other = context_.resolve(D->getDescribedAliasTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getDescribedAliasTemplate, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTypeAliasTemplateDecl(clang::TypeAliasTemplateDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTemplatedDecl
   {
-    const Entity* other = context_.resolve(D->getTemplatedDecl());
-    arboretum_create_edge(obj, context_.data_model_.getTemplatedDecl4, other);
+    const Id* other = context_.resolve(D->getTemplatedDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplatedDecl_3, other);
   }
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl29, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_19, other);
   }
   //getPreviousDecl
   {
-    const Entity* other = context_.resolve(D->getPreviousDecl());
-    arboretum_create_edge(obj, context_.data_model_.getPreviousDecl11, other);
+    const Id* other = context_.resolve(D->getPreviousDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getPreviousDecl_6, other);
   }
   //getInstantiatedFromMemberTemplate
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromMemberTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromMemberTemplate3, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromMemberTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromMemberTemplate_4, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTypeDecl(clang::TypeDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTypeForDecl
   {
-    const Entity* other = context_.resolve(D->getTypeForDecl());
-    arboretum_create_edge(obj, context_.data_model_.getTypeForDecl1, other);
+    const Id* other = context_.resolve(D->getTypeForDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getTypeForDecl, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc143, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_3, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange50, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_29, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTypedefDecl(clang::TypedefDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange42, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_30, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitTypedefNameDecl(clang::TypedefNameDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isModed
-  arboretum_create_edge(obj, context_.data_model_.isModed, context_.data_model_.arboretum_node_for(D->isModed()));
+  arboretum_create_edge(obj, context_.data_model_.method_isModed, context_.data_model_.arboretum_node_for(D->isModed()));
   //getTypeSourceInfo
   //getUnderlyingType
   {
-    const Entity* other = context_.resolve(D->getUnderlyingType());
-    arboretum_create_edge(obj, context_.data_model_.getUnderlyingType, other);
+    const Id* other = context_.resolve(D->getUnderlyingType());
+    arboretum_create_edge(obj, context_.data_model_.method_getUnderlyingType_4, other);
   }
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl33, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_20, other);
   }
   //isTransparentTag
-  arboretum_create_edge(obj, context_.data_model_.isTransparentTag, context_.data_model_.arboretum_node_for(D->isTransparentTag()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTransparentTag, context_.data_model_.arboretum_node_for(D->isTransparentTag()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitUnnamedGlobalConstantDecl(clang::UnnamedGlobalConstantDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getValue
   // const APValue &
   return true;
 }
 
 bool ArboretumASTVisitor::VisitUnresolvedUsingIfExistsDecl(clang::UnresolvedUsingIfExistsDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitUnresolvedUsingTypenameDecl(clang::UnresolvedUsingTypenameDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getUsingLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getUsingLoc());
-    arboretum_create_edge(obj, context_.data_model_.getUsingLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getUsingLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getUsingLoc, other);
   }
   //getTypenameLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTypenameLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTypenameLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getTypenameLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTypenameLoc, other);
   }
   //getQualifierLoc
   // NestedNameSpecifierLoc
@@ -4782,60 +4782,60 @@ bool ArboretumASTVisitor::VisitUnresolvedUsingTypenameDecl(clang::UnresolvedUsin
   //getNameInfo
   // DeclarationNameInfo
   //isPackExpansion
-  arboretum_create_edge(obj, context_.data_model_.isPackExpansion5, context_.data_model_.arboretum_node_for(D->isPackExpansion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPackExpansion_3, context_.data_model_.arboretum_node_for(D->isPackExpansion()));
   //getEllipsisLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEllipsisLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEllipsisLoc6, other);
+    const Id* other = context_.source_model_.resolve(D->getEllipsisLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEllipsisLoc_2, other);
   }
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl53, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_21, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitUnresolvedUsingValueDecl(clang::UnresolvedUsingValueDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getUsingLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getUsingLoc());
-    arboretum_create_edge(obj, context_.data_model_.getUsingLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getUsingLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getUsingLoc_1, other);
   }
   //isAccessDeclaration
-  arboretum_create_edge(obj, context_.data_model_.isAccessDeclaration, context_.data_model_.arboretum_node_for(D->isAccessDeclaration()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAccessDeclaration, context_.data_model_.arboretum_node_for(D->isAccessDeclaration()));
   //getQualifierLoc
   // NestedNameSpecifierLoc
   //getQualifier
   //getNameInfo
   // DeclarationNameInfo
   //isPackExpansion
-  arboretum_create_edge(obj, context_.data_model_.isPackExpansion2, context_.data_model_.arboretum_node_for(D->isPackExpansion()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPackExpansion_4, context_.data_model_.arboretum_node_for(D->isPackExpansion()));
   //getEllipsisLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEllipsisLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEllipsisLoc4, other);
+    const Id* other = context_.source_model_.resolve(D->getEllipsisLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEllipsisLoc_3, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange28, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_31, other);
   }
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl35, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_22, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitUsingDecl(clang::UsingDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getUsingLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getUsingLoc());
-    arboretum_create_edge(obj, context_.data_model_.getUsingLoc4, other);
+    const Id* other = context_.source_model_.resolve(D->getUsingLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getUsingLoc_2, other);
   }
   //getQualifierLoc
   // NestedNameSpecifierLoc
@@ -4843,72 +4843,72 @@ bool ArboretumASTVisitor::VisitUsingDecl(clang::UsingDecl* D) {
   //getNameInfo
   // DeclarationNameInfo
   //isAccessDeclaration
-  arboretum_create_edge(obj, context_.data_model_.isAccessDeclaration1, context_.data_model_.arboretum_node_for(D->isAccessDeclaration()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAccessDeclaration_1, context_.data_model_.arboretum_node_for(D->isAccessDeclaration()));
   //hasTypename
-  arboretum_create_edge(obj, context_.data_model_.hasTypename, context_.data_model_.arboretum_node_for(D->hasTypename()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTypename, context_.data_model_.arboretum_node_for(D->hasTypename()));
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange49, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_32, other);
   }
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl57, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_23, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitUsingDirectiveDecl(clang::UsingDirectiveDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getQualifierLoc
   // NestedNameSpecifierLoc
   //getQualifier
   //getNominatedNamespaceAsWritten
   {
-    const Entity* other = context_.resolve(D->getNominatedNamespaceAsWritten());
-    arboretum_create_edge(obj, context_.data_model_.getNominatedNamespaceAsWritten1, other);
+    const Id* other = context_.resolve(D->getNominatedNamespaceAsWritten());
+    arboretum_create_edge(obj, context_.data_model_.method_getNominatedNamespaceAsWritten, other);
   }
   //getNominatedNamespace
   {
-    const Entity* other = context_.resolve(D->getNominatedNamespace());
-    arboretum_create_edge(obj, context_.data_model_.getNominatedNamespace1, other);
+    const Id* other = context_.resolve(D->getNominatedNamespace());
+    arboretum_create_edge(obj, context_.data_model_.method_getNominatedNamespace, other);
   }
   //getCommonAncestor
   //getUsingLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getUsingLoc());
-    arboretum_create_edge(obj, context_.data_model_.getUsingLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getUsingLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getUsingLoc_3, other);
   }
   //getNamespaceKeyLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getNamespaceKeyLocation());
-    arboretum_create_edge(obj, context_.data_model_.getNamespaceKeyLocation, other);
+    const Id* other = context_.source_model_.resolve(D->getNamespaceKeyLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getNamespaceKeyLocation, other);
   }
   //getIdentLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getIdentLocation());
-    arboretum_create_edge(obj, context_.data_model_.getIdentLocation, other);
+    const Id* other = context_.source_model_.resolve(D->getIdentLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getIdentLocation, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange16, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_33, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitUsingEnumDecl(clang::UsingEnumDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getUsingLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getUsingLoc());
-    arboretum_create_edge(obj, context_.data_model_.getUsingLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getUsingLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getUsingLoc_4, other);
   }
   //getEnumLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEnumLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEnumLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getEnumLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEnumLoc, other);
   }
   //getQualifier
   //getQualifierLoc
@@ -4918,315 +4918,315 @@ bool ArboretumASTVisitor::VisitUsingEnumDecl(clang::UsingEnumDecl* D) {
   //getEnumType
   //getEnumDecl
   {
-    const Entity* other = context_.resolve(D->getEnumDecl());
-    arboretum_create_edge(obj, context_.data_model_.getEnumDecl, other);
+    const Id* other = context_.resolve(D->getEnumDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getEnumDecl, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange9, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_34, other);
   }
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl9, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_24, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitUsingPackDecl(clang::UsingPackDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getInstantiatedFromUsingDecl
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromUsingDecl());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromUsingDecl, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromUsingDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromUsingDecl, other);
   }
   //expansions
   // ArrayRef<NamedDecl *>
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange36, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_35, other);
   }
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl43, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_25, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitUsingShadowDecl(clang::UsingShadowDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl7, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_26, other);
   }
   //getTargetDecl
   {
-    const Entity* other = context_.resolve(D->getTargetDecl());
-    arboretum_create_edge(obj, context_.data_model_.getTargetDecl, other);
+    const Id* other = context_.resolve(D->getTargetDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getTargetDecl, other);
   }
   //getIntroducer
   {
-    const Entity* other = context_.resolve(D->getIntroducer());
-    arboretum_create_edge(obj, context_.data_model_.getIntroducer, other);
+    const Id* other = context_.resolve(D->getIntroducer());
+    arboretum_create_edge(obj, context_.data_model_.method_getIntroducer_1, other);
   }
   //getNextUsingShadowDecl
   {
-    const Entity* other = context_.resolve(D->getNextUsingShadowDecl());
-    arboretum_create_edge(obj, context_.data_model_.getNextUsingShadowDecl, other);
+    const Id* other = context_.resolve(D->getNextUsingShadowDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getNextUsingShadowDecl, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitValueDecl(clang::ValueDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getType
   {
-    const Entity* other = context_.resolve(D->getType());
-    arboretum_create_edge(obj, context_.data_model_.getType1, other);
+    const Id* other = context_.resolve(D->getType());
+    arboretum_create_edge(obj, context_.data_model_.method_getType, other);
   }
   //isWeak
-  arboretum_create_edge(obj, context_.data_model_.isWeak, context_.data_model_.arboretum_node_for(D->isWeak()));
+  arboretum_create_edge(obj, context_.data_model_.method_isWeak, context_.data_model_.arboretum_node_for(D->isWeak()));
   //isInitCapture
-  arboretum_create_edge(obj, context_.data_model_.isInitCapture2, context_.data_model_.arboretum_node_for(D->isInitCapture()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInitCapture, context_.data_model_.arboretum_node_for(D->isInitCapture()));
   //getPotentiallyDecomposedVarDecl
   {
-    const Entity* other = context_.resolve(D->getPotentiallyDecomposedVarDecl());
-    arboretum_create_edge(obj, context_.data_model_.getPotentiallyDecomposedVarDecl1, other);
+    const Id* other = context_.resolve(D->getPotentiallyDecomposedVarDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getPotentiallyDecomposedVarDecl, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitVarDecl(clang::VarDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange22, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_36, other);
   }
   //getStorageClass
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getStorageClass());
+    const Id* enum_value = context_.data_model_.resolve(D->getStorageClass());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getStorageClass, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getStorageClass_1, enum_value);
     }
   }
   //getTSCSpec
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getTSCSpec());
+    const Id* enum_value = context_.data_model_.resolve(D->getTSCSpec());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getTSCSpec, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getTSCSpec, enum_value);
     }
   }
   //getTLSKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getTLSKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getTLSKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getTLSKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getTLSKind, enum_value);
     }
   }
   //hasLocalStorage
-  arboretum_create_edge(obj, context_.data_model_.hasLocalStorage, context_.data_model_.arboretum_node_for(D->hasLocalStorage()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasLocalStorage, context_.data_model_.arboretum_node_for(D->hasLocalStorage()));
   //isStaticLocal
-  arboretum_create_edge(obj, context_.data_model_.isStaticLocal, context_.data_model_.arboretum_node_for(D->isStaticLocal()));
+  arboretum_create_edge(obj, context_.data_model_.method_isStaticLocal, context_.data_model_.arboretum_node_for(D->isStaticLocal()));
   //hasExternalStorage
-  arboretum_create_edge(obj, context_.data_model_.hasExternalStorage, context_.data_model_.arboretum_node_for(D->hasExternalStorage()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasExternalStorage, context_.data_model_.arboretum_node_for(D->hasExternalStorage()));
   //hasGlobalStorage
-  arboretum_create_edge(obj, context_.data_model_.hasGlobalStorage, context_.data_model_.arboretum_node_for(D->hasGlobalStorage()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasGlobalStorage, context_.data_model_.arboretum_node_for(D->hasGlobalStorage()));
   //getStorageDuration
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getStorageDuration());
+    const Id* enum_value = context_.data_model_.resolve(D->getStorageDuration());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getStorageDuration2, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getStorageDuration_1, enum_value);
     }
   }
   //getLanguageLinkage
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getLanguageLinkage());
+    const Id* enum_value = context_.data_model_.resolve(D->getLanguageLinkage());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getLanguageLinkage, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getLanguageLinkage_1, enum_value);
     }
   }
   //isExternC
-  arboretum_create_edge(obj, context_.data_model_.isExternC, context_.data_model_.arboretum_node_for(D->isExternC()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExternC_1, context_.data_model_.arboretum_node_for(D->isExternC()));
   //isInExternCContext
-  arboretum_create_edge(obj, context_.data_model_.isInExternCContext, context_.data_model_.arboretum_node_for(D->isInExternCContext()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInExternCContext_1, context_.data_model_.arboretum_node_for(D->isInExternCContext()));
   //isInExternCXXContext
-  arboretum_create_edge(obj, context_.data_model_.isInExternCXXContext, context_.data_model_.arboretum_node_for(D->isInExternCXXContext()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInExternCXXContext_1, context_.data_model_.arboretum_node_for(D->isInExternCXXContext()));
   //isLocalVarDecl
-  arboretum_create_edge(obj, context_.data_model_.isLocalVarDecl, context_.data_model_.arboretum_node_for(D->isLocalVarDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_isLocalVarDecl, context_.data_model_.arboretum_node_for(D->isLocalVarDecl()));
   //isLocalVarDeclOrParm
-  arboretum_create_edge(obj, context_.data_model_.isLocalVarDeclOrParm, context_.data_model_.arboretum_node_for(D->isLocalVarDeclOrParm()));
+  arboretum_create_edge(obj, context_.data_model_.method_isLocalVarDeclOrParm, context_.data_model_.arboretum_node_for(D->isLocalVarDeclOrParm()));
   //isFunctionOrMethodVarDecl
-  arboretum_create_edge(obj, context_.data_model_.isFunctionOrMethodVarDecl, context_.data_model_.arboretum_node_for(D->isFunctionOrMethodVarDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_isFunctionOrMethodVarDecl, context_.data_model_.arboretum_node_for(D->isFunctionOrMethodVarDecl()));
   //isStaticDataMember
-  arboretum_create_edge(obj, context_.data_model_.isStaticDataMember, context_.data_model_.arboretum_node_for(D->isStaticDataMember()));
+  arboretum_create_edge(obj, context_.data_model_.method_isStaticDataMember, context_.data_model_.arboretum_node_for(D->isStaticDataMember()));
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl21, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_27, other);
   }
   //isThisDeclarationADefinition
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->isThisDeclarationADefinition());
+    const Id* enum_value = context_.data_model_.resolve(D->isThisDeclarationADefinition());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.isThisDeclarationADefinition6, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_isThisDeclarationADefinition_4, enum_value);
     }
   }
   //hasDefinition
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->hasDefinition());
+    const Id* enum_value = context_.data_model_.resolve(D->hasDefinition());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.hasDefinition4, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_hasDefinition_1, enum_value);
     }
   }
   //getActingDefinition
   {
-    const Entity* other = context_.resolve(D->getActingDefinition());
-    arboretum_create_edge(obj, context_.data_model_.getActingDefinition1, other);
+    const Id* other = context_.resolve(D->getActingDefinition());
+    arboretum_create_edge(obj, context_.data_model_.method_getActingDefinition, other);
   }
   //getDefinition
   {
-    const Entity* other = context_.resolve(D->getDefinition());
-    arboretum_create_edge(obj, context_.data_model_.getDefinition9, other);
+    const Id* other = context_.resolve(D->getDefinition());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefinition_5, other);
   }
   //isOutOfLine
-  arboretum_create_edge(obj, context_.data_model_.isOutOfLine, context_.data_model_.arboretum_node_for(D->isOutOfLine()));
+  arboretum_create_edge(obj, context_.data_model_.method_isOutOfLine_2, context_.data_model_.arboretum_node_for(D->isOutOfLine()));
   //isFileVarDecl
-  arboretum_create_edge(obj, context_.data_model_.isFileVarDecl, context_.data_model_.arboretum_node_for(D->isFileVarDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_isFileVarDecl, context_.data_model_.arboretum_node_for(D->isFileVarDecl()));
   //getAnyInitializer
   {
-    const Entity* other = context_.resolve(D->getAnyInitializer());
-    arboretum_create_edge(obj, context_.data_model_.getAnyInitializer, other);
+    const Id* other = context_.resolve(D->getAnyInitializer());
+    arboretum_create_edge(obj, context_.data_model_.method_getAnyInitializer, other);
   }
   //hasInit
-  arboretum_create_edge(obj, context_.data_model_.hasInit, context_.data_model_.arboretum_node_for(D->hasInit()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasInit, context_.data_model_.arboretum_node_for(D->hasInit()));
   //getInit
   {
-    const Entity* other = context_.resolve(D->getInit());
-    arboretum_create_edge(obj, context_.data_model_.getInit8, other);
+    const Id* other = context_.resolve(D->getInit());
+    arboretum_create_edge(obj, context_.data_model_.method_getInit, other);
   }
   //getInitializingDeclaration
   {
-    const Entity* other = context_.resolve(D->getInitializingDeclaration());
-    arboretum_create_edge(obj, context_.data_model_.getInitializingDeclaration1, other);
+    const Id* other = context_.resolve(D->getInitializingDeclaration());
+    arboretum_create_edge(obj, context_.data_model_.method_getInitializingDeclaration, other);
   }
   //ensureEvaluatedStmt
   //getEvaluatedStmt
   //evaluateValue
   //getEvaluatedValue
   //hasConstantInitialization
-  arboretum_create_edge(obj, context_.data_model_.hasConstantInitialization, context_.data_model_.arboretum_node_for(D->hasConstantInitialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasConstantInitialization, context_.data_model_.arboretum_node_for(D->hasConstantInitialization()));
   //getInitStyle
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getInitStyle());
+    const Id* enum_value = context_.data_model_.resolve(D->getInitStyle());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getInitStyle, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getInitStyle, enum_value);
     }
   }
   //isDirectInit
-  arboretum_create_edge(obj, context_.data_model_.isDirectInit, context_.data_model_.arboretum_node_for(D->isDirectInit()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDirectInit, context_.data_model_.arboretum_node_for(D->isDirectInit()));
   //isThisDeclarationADemotedDefinition
-  arboretum_create_edge(obj, context_.data_model_.isThisDeclarationADemotedDefinition1, context_.data_model_.arboretum_node_for(D->isThisDeclarationADemotedDefinition()));
+  arboretum_create_edge(obj, context_.data_model_.method_isThisDeclarationADemotedDefinition_1, context_.data_model_.arboretum_node_for(D->isThisDeclarationADemotedDefinition()));
   //isExceptionVariable
-  arboretum_create_edge(obj, context_.data_model_.isExceptionVariable, context_.data_model_.arboretum_node_for(D->isExceptionVariable()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExceptionVariable, context_.data_model_.arboretum_node_for(D->isExceptionVariable()));
   //isNRVOVariable
-  arboretum_create_edge(obj, context_.data_model_.isNRVOVariable, context_.data_model_.arboretum_node_for(D->isNRVOVariable()));
+  arboretum_create_edge(obj, context_.data_model_.method_isNRVOVariable, context_.data_model_.arboretum_node_for(D->isNRVOVariable()));
   //isCXXForRangeDecl
-  arboretum_create_edge(obj, context_.data_model_.isCXXForRangeDecl, context_.data_model_.arboretum_node_for(D->isCXXForRangeDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCXXForRangeDecl, context_.data_model_.arboretum_node_for(D->isCXXForRangeDecl()));
   //isObjCForDecl
-  arboretum_create_edge(obj, context_.data_model_.isObjCForDecl, context_.data_model_.arboretum_node_for(D->isObjCForDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_isObjCForDecl, context_.data_model_.arboretum_node_for(D->isObjCForDecl()));
   //isARCPseudoStrong
-  arboretum_create_edge(obj, context_.data_model_.isARCPseudoStrong, context_.data_model_.arboretum_node_for(D->isARCPseudoStrong()));
+  arboretum_create_edge(obj, context_.data_model_.method_isARCPseudoStrong, context_.data_model_.arboretum_node_for(D->isARCPseudoStrong()));
   //isInline
-  arboretum_create_edge(obj, context_.data_model_.isInline, context_.data_model_.arboretum_node_for(D->isInline()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInline_1, context_.data_model_.arboretum_node_for(D->isInline()));
   //isInlineSpecified
-  arboretum_create_edge(obj, context_.data_model_.isInlineSpecified, context_.data_model_.arboretum_node_for(D->isInlineSpecified()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInlineSpecified_1, context_.data_model_.arboretum_node_for(D->isInlineSpecified()));
   //isConstexpr
-  arboretum_create_edge(obj, context_.data_model_.isConstexpr, context_.data_model_.arboretum_node_for(D->isConstexpr()));
+  arboretum_create_edge(obj, context_.data_model_.method_isConstexpr_1, context_.data_model_.arboretum_node_for(D->isConstexpr()));
   //isInitCapture
-  arboretum_create_edge(obj, context_.data_model_.isInitCapture1, context_.data_model_.arboretum_node_for(D->isInitCapture()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInitCapture_1, context_.data_model_.arboretum_node_for(D->isInitCapture()));
   //isParameterPack
-  arboretum_create_edge(obj, context_.data_model_.isParameterPack2, context_.data_model_.arboretum_node_for(D->isParameterPack()));
+  arboretum_create_edge(obj, context_.data_model_.method_isParameterPack_5, context_.data_model_.arboretum_node_for(D->isParameterPack()));
   //isPreviousDeclInSameBlockScope
-  arboretum_create_edge(obj, context_.data_model_.isPreviousDeclInSameBlockScope, context_.data_model_.arboretum_node_for(D->isPreviousDeclInSameBlockScope()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPreviousDeclInSameBlockScope, context_.data_model_.arboretum_node_for(D->isPreviousDeclInSameBlockScope()));
   //isEscapingByref
-  arboretum_create_edge(obj, context_.data_model_.isEscapingByref, context_.data_model_.arboretum_node_for(D->isEscapingByref()));
+  arboretum_create_edge(obj, context_.data_model_.method_isEscapingByref, context_.data_model_.arboretum_node_for(D->isEscapingByref()));
   //isNonEscapingByref
-  arboretum_create_edge(obj, context_.data_model_.isNonEscapingByref, context_.data_model_.arboretum_node_for(D->isNonEscapingByref()));
+  arboretum_create_edge(obj, context_.data_model_.method_isNonEscapingByref, context_.data_model_.arboretum_node_for(D->isNonEscapingByref()));
   //hasDependentAlignment
-  arboretum_create_edge(obj, context_.data_model_.hasDependentAlignment, context_.data_model_.arboretum_node_for(D->hasDependentAlignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasDependentAlignment, context_.data_model_.arboretum_node_for(D->hasDependentAlignment()));
   //getTemplateInstantiationPattern
   {
-    const Entity* other = context_.resolve(D->getTemplateInstantiationPattern());
-    arboretum_create_edge(obj, context_.data_model_.getTemplateInstantiationPattern2, other);
+    const Id* other = context_.resolve(D->getTemplateInstantiationPattern());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplateInstantiationPattern_2, other);
   }
   //getInstantiatedFromStaticDataMember
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromStaticDataMember());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromStaticDataMember, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromStaticDataMember());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromStaticDataMember, other);
   }
   //getTemplateSpecializationKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getTemplateSpecializationKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getTemplateSpecializationKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getTemplateSpecializationKind1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getTemplateSpecializationKind_3, enum_value);
     }
   }
   //getTemplateSpecializationKindForInstantiation
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getTemplateSpecializationKindForInstantiation());
+    const Id* enum_value = context_.data_model_.resolve(D->getTemplateSpecializationKindForInstantiation());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getTemplateSpecializationKindForInstantiation, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getTemplateSpecializationKindForInstantiation_1, enum_value);
     }
   }
   //getPointOfInstantiation
   {
-    const Entity* other = context_.source_model_.resolve(D->getPointOfInstantiation());
-    arboretum_create_edge(obj, context_.data_model_.getPointOfInstantiation1, other);
+    const Id* other = context_.source_model_.resolve(D->getPointOfInstantiation());
+    arboretum_create_edge(obj, context_.data_model_.method_getPointOfInstantiation_2, other);
   }
   //getMemberSpecializationInfo
   //getDescribedVarTemplate
   {
-    const Entity* other = context_.resolve(D->getDescribedVarTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getDescribedVarTemplate, other);
+    const Id* other = context_.resolve(D->getDescribedVarTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getDescribedVarTemplate, other);
   }
   //isKnownToBeDefined
-  arboretum_create_edge(obj, context_.data_model_.isKnownToBeDefined, context_.data_model_.arboretum_node_for(D->isKnownToBeDefined()));
+  arboretum_create_edge(obj, context_.data_model_.method_isKnownToBeDefined, context_.data_model_.arboretum_node_for(D->isKnownToBeDefined()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitVarTemplateDecl(clang::VarTemplateDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTemplatedDecl
   {
-    const Entity* other = context_.resolve(D->getTemplatedDecl());
-    arboretum_create_edge(obj, context_.data_model_.getTemplatedDecl3, other);
+    const Id* other = context_.resolve(D->getTemplatedDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplatedDecl_4, other);
   }
   //isThisDeclarationADefinition
-  arboretum_create_edge(obj, context_.data_model_.isThisDeclarationADefinition7, context_.data_model_.arboretum_node_for(D->isThisDeclarationADefinition()));
+  arboretum_create_edge(obj, context_.data_model_.method_isThisDeclarationADefinition_5, context_.data_model_.arboretum_node_for(D->isThisDeclarationADefinition()));
   //getCanonicalDecl
   {
-    const Entity* other = context_.resolve(D->getCanonicalDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCanonicalDecl23, other);
+    const Id* other = context_.resolve(D->getCanonicalDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCanonicalDecl_28, other);
   }
   //getPreviousDecl
   {
-    const Entity* other = context_.resolve(D->getPreviousDecl());
-    arboretum_create_edge(obj, context_.data_model_.getPreviousDecl7, other);
+    const Id* other = context_.resolve(D->getPreviousDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getPreviousDecl_7, other);
   }
   //getMostRecentDecl
   {
-    const Entity* other = context_.resolve(D->getMostRecentDecl());
-    arboretum_create_edge(obj, context_.data_model_.getMostRecentDecl10, other);
+    const Id* other = context_.resolve(D->getMostRecentDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getMostRecentDecl_8, other);
   }
   //getInstantiatedFromMemberTemplate
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromMemberTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromMemberTemplate2, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromMemberTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromMemberTemplate_5, other);
   }
   //specializations
   // spec_range
@@ -5234,51 +5234,51 @@ bool ArboretumASTVisitor::VisitVarTemplateDecl(clang::VarTemplateDecl* D) {
 }
 
 bool ArboretumASTVisitor::VisitVarTemplatePartialSpecializationDecl(clang::VarTemplatePartialSpecializationDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTemplateParameters
   //getTemplateArgsAsWritten
   //hasAssociatedConstraints
-  arboretum_create_edge(obj, context_.data_model_.hasAssociatedConstraints1, context_.data_model_.arboretum_node_for(D->hasAssociatedConstraints()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasAssociatedConstraints_2, context_.data_model_.arboretum_node_for(D->hasAssociatedConstraints()));
   //getInstantiatedFromMember
   {
-    const Entity* other = context_.resolve(D->getInstantiatedFromMember());
-    arboretum_create_edge(obj, context_.data_model_.getInstantiatedFromMember, other);
+    const Id* other = context_.resolve(D->getInstantiatedFromMember());
+    arboretum_create_edge(obj, context_.data_model_.method_getInstantiatedFromMember_1, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange41, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_37, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitVarTemplateSpecializationDecl(clang::VarTemplateSpecializationDecl* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSpecializedTemplate
   {
-    const Entity* other = context_.resolve(D->getSpecializedTemplate());
-    arboretum_create_edge(obj, context_.data_model_.getSpecializedTemplate, other);
+    const Id* other = context_.resolve(D->getSpecializedTemplate());
+    arboretum_create_edge(obj, context_.data_model_.method_getSpecializedTemplate_1, other);
   }
   //getTemplateArgs
   // const TemplateArgumentList &
   //getTemplateArgsInfo
   //getSpecializationKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getSpecializationKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getSpecializationKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getSpecializationKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getSpecializationKind_1, enum_value);
     }
   }
   //isExplicitSpecialization
-  arboretum_create_edge(obj, context_.data_model_.isExplicitSpecialization, context_.data_model_.arboretum_node_for(D->isExplicitSpecialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExplicitSpecialization_1, context_.data_model_.arboretum_node_for(D->isExplicitSpecialization()));
   //isClassScopeExplicitSpecialization
-  arboretum_create_edge(obj, context_.data_model_.isClassScopeExplicitSpecialization, context_.data_model_.arboretum_node_for(D->isClassScopeExplicitSpecialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_isClassScopeExplicitSpecialization_1, context_.data_model_.arboretum_node_for(D->isClassScopeExplicitSpecialization()));
   //isExplicitInstantiationOrSpecialization
-  arboretum_create_edge(obj, context_.data_model_.isExplicitInstantiationOrSpecialization, context_.data_model_.arboretum_node_for(D->isExplicitInstantiationOrSpecialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExplicitInstantiationOrSpecialization_1, context_.data_model_.arboretum_node_for(D->isExplicitInstantiationOrSpecialization()));
   //getPointOfInstantiation
   {
-    const Entity* other = context_.source_model_.resolve(D->getPointOfInstantiation());
-    arboretum_create_edge(obj, context_.data_model_.getPointOfInstantiation, other);
+    const Id* other = context_.source_model_.resolve(D->getPointOfInstantiation());
+    arboretum_create_edge(obj, context_.data_model_.method_getPointOfInstantiation_3, other);
   }
   //getInstantiatedFrom
   // llvm::PointerUnion<VarTemplateDecl *, VarTemplatePartialSpecializationDecl *>
@@ -5289,18 +5289,18 @@ bool ArboretumASTVisitor::VisitVarTemplateSpecializationDecl(clang::VarTemplateS
   //getTypeAsWritten
   //getExternLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExternLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExternLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getExternLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExternLoc_2, other);
   }
   //getTemplateKeywordLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTemplateKeywordLoc4, other);
+    const Id* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplateKeywordLoc_1, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange17, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_38, other);
   }
   return true;
 }
@@ -5308,61 +5308,61 @@ bool ArboretumASTVisitor::VisitVarTemplateSpecializationDecl(clang::VarTemplateS
 
 // Stmts
 bool ArboretumASTVisitor::VisitAbstractConditionalOperator(clang::AbstractConditionalOperator* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCond
   {
-    const Entity* other = context_.resolve(D->getCond());
-    arboretum_create_edge(obj, context_.data_model_.getCond7, other);
+    const Id* other = context_.resolve(D->getCond());
+    arboretum_create_edge(obj, context_.data_model_.method_getCond, other);
   }
   //getTrueExpr
   {
-    const Entity* other = context_.resolve(D->getTrueExpr());
-    arboretum_create_edge(obj, context_.data_model_.getTrueExpr, other);
+    const Id* other = context_.resolve(D->getTrueExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getTrueExpr, other);
   }
   //getFalseExpr
   {
-    const Entity* other = context_.resolve(D->getFalseExpr());
-    arboretum_create_edge(obj, context_.data_model_.getFalseExpr, other);
+    const Id* other = context_.resolve(D->getFalseExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getFalseExpr, other);
   }
   //getQuestionLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getQuestionLoc());
-    arboretum_create_edge(obj, context_.data_model_.getQuestionLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getQuestionLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getQuestionLoc, other);
   }
   //getColonLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getColonLoc());
-    arboretum_create_edge(obj, context_.data_model_.getColonLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getColonLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getColonLoc_1, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitAddrLabelExpr(clang::AddrLabelExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getAmpAmpLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getAmpAmpLoc());
-    arboretum_create_edge(obj, context_.data_model_.getAmpAmpLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getAmpAmpLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getAmpAmpLoc, other);
   }
   //getLabelLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLabelLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLabelLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getLabelLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLabelLoc, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc52, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_4, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc52, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_3, other);
   }
   //getLabel
   {
-    const Entity* other = context_.resolve(D->getLabel());
-    arboretum_create_edge(obj, context_.data_model_.getLabel, other);
+    const Id* other = context_.resolve(D->getLabel());
+    arboretum_create_edge(obj, context_.data_model_.method_getLabel, other);
   }
   //children
   // const_child_range
@@ -5370,16 +5370,16 @@ bool ArboretumASTVisitor::VisitAddrLabelExpr(clang::AddrLabelExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitArrayInitIndexExpr(clang::ArrayInitIndexExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc84, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_5, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc84, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_4, other);
   }
   //children
   // const_child_range
@@ -5387,28 +5387,28 @@ bool ArboretumASTVisitor::VisitArrayInitIndexExpr(clang::ArrayInitIndexExpr* D) 
 }
 
 bool ArboretumASTVisitor::VisitArrayInitLoopExpr(clang::ArrayInitLoopExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCommonExpr
   {
-    const Entity* other = context_.resolve(D->getCommonExpr());
-    arboretum_create_edge(obj, context_.data_model_.getCommonExpr, other);
+    const Id* other = context_.resolve(D->getCommonExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getCommonExpr, other);
   }
   //getSubExpr
   {
-    const Entity* other = context_.resolve(D->getSubExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSubExpr11, other);
+    const Id* other = context_.resolve(D->getSubExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubExpr, other);
   }
   //getArraySize
   // llvm::APInt
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc85, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_6, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc85, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_5, other);
   }
   //children
   // const_child_range
@@ -5416,46 +5416,46 @@ bool ArboretumASTVisitor::VisitArrayInitLoopExpr(clang::ArrayInitLoopExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitArraySubscriptExpr(clang::ArraySubscriptExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getLHS
   {
-    const Entity* other = context_.resolve(D->getLHS());
-    arboretum_create_edge(obj, context_.data_model_.getLHS7, other);
+    const Id* other = context_.resolve(D->getLHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getLHS, other);
   }
   //getRHS
   {
-    const Entity* other = context_.resolve(D->getRHS());
-    arboretum_create_edge(obj, context_.data_model_.getRHS7, other);
+    const Id* other = context_.resolve(D->getRHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getRHS, other);
   }
   //getBase
   {
-    const Entity* other = context_.resolve(D->getBase());
-    arboretum_create_edge(obj, context_.data_model_.getBase19, other);
+    const Id* other = context_.resolve(D->getBase());
+    arboretum_create_edge(obj, context_.data_model_.method_getBase, other);
   }
   //getIdx
   {
-    const Entity* other = context_.resolve(D->getIdx());
-    arboretum_create_edge(obj, context_.data_model_.getIdx3, other);
+    const Id* other = context_.resolve(D->getIdx());
+    arboretum_create_edge(obj, context_.data_model_.method_getIdx, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc104, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_7, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc104, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_6, other);
   }
   //getRBracketLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRBracketLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRBracketLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getRBracketLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRBracketLoc_2, other);
   }
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc14, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc, other);
   }
   //children
   // const_child_range
@@ -5463,34 +5463,34 @@ bool ArboretumASTVisitor::VisitArraySubscriptExpr(clang::ArraySubscriptExpr* D) 
 }
 
 bool ArboretumASTVisitor::VisitArrayTypeTraitExpr(clang::ArrayTypeTraitExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc12, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_8, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc12, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_7, other);
   }
   //getTrait
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getTrait());
+    const Id* enum_value = context_.data_model_.resolve(D->getTrait());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getTrait, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getTrait, enum_value);
     }
   }
   //getQueriedType
   {
-    const Entity* other = context_.resolve(D->getQueriedType());
-    arboretum_create_edge(obj, context_.data_model_.getQueriedType, other);
+    const Id* other = context_.resolve(D->getQueriedType());
+    arboretum_create_edge(obj, context_.data_model_.method_getQueriedType, other);
   }
   //getQueriedTypeSourceInfo
   //getDimensionExpression
   {
-    const Entity* other = context_.resolve(D->getDimensionExpression());
-    arboretum_create_edge(obj, context_.data_model_.getDimensionExpression, other);
+    const Id* other = context_.resolve(D->getDimensionExpression());
+    arboretum_create_edge(obj, context_.data_model_.method_getDimensionExpression, other);
   }
   //children
   // const_child_range
@@ -5498,31 +5498,31 @@ bool ArboretumASTVisitor::VisitArrayTypeTraitExpr(clang::ArrayTypeTraitExpr* D) 
 }
 
 bool ArboretumASTVisitor::VisitAsTypeExpr(clang::AsTypeExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSrcExpr
   {
-    const Entity* other = context_.resolve(D->getSrcExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSrcExpr, other);
+    const Id* other = context_.resolve(D->getSrcExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSrcExpr, other);
   }
   //getBuiltinLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBuiltinLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBuiltinLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getBuiltinLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBuiltinLoc, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc12, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_2, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc80, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_9, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc80, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_8, other);
   }
   //children
   // const_child_range
@@ -5530,25 +5530,25 @@ bool ArboretumASTVisitor::VisitAsTypeExpr(clang::AsTypeExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitAsmStmt(clang::AsmStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getAsmLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getAsmLoc());
-    arboretum_create_edge(obj, context_.data_model_.getAsmLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getAsmLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsmLoc_1, other);
   }
   //isSimple
-  arboretum_create_edge(obj, context_.data_model_.isSimple, context_.data_model_.arboretum_node_for(D->isSimple()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSimple, context_.data_model_.arboretum_node_for(D->isSimple()));
   //isVolatile
-  arboretum_create_edge(obj, context_.data_model_.isVolatile, context_.data_model_.arboretum_node_for(D->isVolatile()));
+  arboretum_create_edge(obj, context_.data_model_.method_isVolatile_2, context_.data_model_.arboretum_node_for(D->isVolatile()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc6, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_10, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc6, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_9, other);
   }
   //getNumOutputs
   // unsigned int
@@ -5568,52 +5568,52 @@ bool ArboretumASTVisitor::VisitAsmStmt(clang::AsmStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitAtomicExpr(clang::AtomicExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getPtr
   {
-    const Entity* other = context_.resolve(D->getPtr());
-    arboretum_create_edge(obj, context_.data_model_.getPtr, other);
+    const Id* other = context_.resolve(D->getPtr());
+    arboretum_create_edge(obj, context_.data_model_.method_getPtr, other);
   }
   //getOrder
   {
-    const Entity* other = context_.resolve(D->getOrder());
-    arboretum_create_edge(obj, context_.data_model_.getOrder, other);
+    const Id* other = context_.resolve(D->getOrder());
+    arboretum_create_edge(obj, context_.data_model_.method_getOrder, other);
   }
   //getScope
   {
-    const Entity* other = context_.resolve(D->getScope());
-    arboretum_create_edge(obj, context_.data_model_.getScope, other);
+    const Id* other = context_.resolve(D->getScope());
+    arboretum_create_edge(obj, context_.data_model_.method_getScope, other);
   }
   //getVal1
   {
-    const Entity* other = context_.resolve(D->getVal1());
-    arboretum_create_edge(obj, context_.data_model_.getVal1, other);
+    const Id* other = context_.resolve(D->getVal1());
+    arboretum_create_edge(obj, context_.data_model_.method_getVal1, other);
   }
   //getOrderFail
   {
-    const Entity* other = context_.resolve(D->getOrderFail());
-    arboretum_create_edge(obj, context_.data_model_.getOrderFail, other);
+    const Id* other = context_.resolve(D->getOrderFail());
+    arboretum_create_edge(obj, context_.data_model_.method_getOrderFail, other);
   }
   //getVal2
   {
-    const Entity* other = context_.resolve(D->getVal2());
-    arboretum_create_edge(obj, context_.data_model_.getVal2, other);
+    const Id* other = context_.resolve(D->getVal2());
+    arboretum_create_edge(obj, context_.data_model_.method_getVal2, other);
   }
   //getWeak
   {
-    const Entity* other = context_.resolve(D->getWeak());
-    arboretum_create_edge(obj, context_.data_model_.getWeak, other);
+    const Id* other = context_.resolve(D->getWeak());
+    arboretum_create_edge(obj, context_.data_model_.method_getWeak, other);
   }
   //getValueType
   {
-    const Entity* other = context_.resolve(D->getValueType());
-    arboretum_create_edge(obj, context_.data_model_.getValueType, other);
+    const Id* other = context_.resolve(D->getValueType());
+    arboretum_create_edge(obj, context_.data_model_.method_getValueType_1, other);
   }
   //getOp
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getOp());
+    const Id* enum_value = context_.data_model_.resolve(D->getOp());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getOp, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getOp, enum_value);
     }
   }
   //getOpAsString
@@ -5622,30 +5622,30 @@ bool ArboretumASTVisitor::VisitAtomicExpr(clang::AtomicExpr* D) {
   // unsigned int
   //getSubExprs
   //isVolatile
-  arboretum_create_edge(obj, context_.data_model_.isVolatile1, context_.data_model_.arboretum_node_for(D->isVolatile()));
+  arboretum_create_edge(obj, context_.data_model_.method_isVolatile_3, context_.data_model_.arboretum_node_for(D->isVolatile()));
   //isCmpXChg
-  arboretum_create_edge(obj, context_.data_model_.isCmpXChg, context_.data_model_.arboretum_node_for(D->isCmpXChg()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCmpXChg, context_.data_model_.arboretum_node_for(D->isCmpXChg()));
   //isOpenCL
-  arboretum_create_edge(obj, context_.data_model_.isOpenCL, context_.data_model_.arboretum_node_for(D->isOpenCL()));
+  arboretum_create_edge(obj, context_.data_model_.method_isOpenCL, context_.data_model_.arboretum_node_for(D->isOpenCL()));
   //getBuiltinLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBuiltinLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBuiltinLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getBuiltinLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBuiltinLoc_1, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc11, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_3, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc77, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_11, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc77, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_10, other);
   }
   //children
   // const_child_range
@@ -5655,28 +5655,28 @@ bool ArboretumASTVisitor::VisitAtomicExpr(clang::AtomicExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitAttributedStmt(clang::AttributedStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getAttrLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getAttrLoc());
-    arboretum_create_edge(obj, context_.data_model_.getAttrLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getAttrLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getAttrLoc, other);
   }
   //getAttrs
   // ArrayRef<const Attr *>
   //getSubStmt
   {
-    const Entity* other = context_.resolve(D->getSubStmt());
-    arboretum_create_edge(obj, context_.data_model_.getSubStmt9, other);
+    const Id* other = context_.resolve(D->getSubStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubStmt, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc112, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_12, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc113, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_11, other);
   }
   //children
   // const_child_range
@@ -5684,41 +5684,41 @@ bool ArboretumASTVisitor::VisitAttributedStmt(clang::AttributedStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitBinaryConditionalOperator(clang::BinaryConditionalOperator* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCommon
   {
-    const Entity* other = context_.resolve(D->getCommon());
-    arboretum_create_edge(obj, context_.data_model_.getCommon, other);
+    const Id* other = context_.resolve(D->getCommon());
+    arboretum_create_edge(obj, context_.data_model_.method_getCommon, other);
   }
   //getOpaqueValue
   {
-    const Entity* other = context_.resolve(D->getOpaqueValue());
-    arboretum_create_edge(obj, context_.data_model_.getOpaqueValue, other);
+    const Id* other = context_.resolve(D->getOpaqueValue());
+    arboretum_create_edge(obj, context_.data_model_.method_getOpaqueValue, other);
   }
   //getCond
   {
-    const Entity* other = context_.resolve(D->getCond());
-    arboretum_create_edge(obj, context_.data_model_.getCond8, other);
+    const Id* other = context_.resolve(D->getCond());
+    arboretum_create_edge(obj, context_.data_model_.method_getCond_1, other);
   }
   //getTrueExpr
   {
-    const Entity* other = context_.resolve(D->getTrueExpr());
-    arboretum_create_edge(obj, context_.data_model_.getTrueExpr1, other);
+    const Id* other = context_.resolve(D->getTrueExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getTrueExpr_1, other);
   }
   //getFalseExpr
   {
-    const Entity* other = context_.resolve(D->getFalseExpr());
-    arboretum_create_edge(obj, context_.data_model_.getFalseExpr1, other);
+    const Id* other = context_.resolve(D->getFalseExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getFalseExpr_1, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc49, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_13, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc49, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_12, other);
   }
   //children
   // const_child_range
@@ -5726,76 +5726,76 @@ bool ArboretumASTVisitor::VisitBinaryConditionalOperator(clang::BinaryConditiona
 }
 
 bool ArboretumASTVisitor::VisitBinaryOperator(clang::BinaryOperator* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc11, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc_1, other);
   }
   //getOperatorLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getOperatorLoc());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorLoc4, other);
+    const Id* other = context_.source_model_.resolve(D->getOperatorLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorLoc, other);
   }
   //getOpcode
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getOpcode());
+    const Id* enum_value = context_.data_model_.resolve(D->getOpcode());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getOpcode1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getOpcode, enum_value);
     }
   }
   //getLHS
   {
-    const Entity* other = context_.resolve(D->getLHS());
-    arboretum_create_edge(obj, context_.data_model_.getLHS5, other);
+    const Id* other = context_.resolve(D->getLHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getLHS_1, other);
   }
   //getRHS
   {
-    const Entity* other = context_.resolve(D->getRHS());
-    arboretum_create_edge(obj, context_.data_model_.getRHS5, other);
+    const Id* other = context_.resolve(D->getRHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getRHS_1, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc88, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_14, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc88, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_13, other);
   }
   //getOpcodeStr
   // StringRef
   //isPtrMemOp
-  arboretum_create_edge(obj, context_.data_model_.isPtrMemOp1, context_.data_model_.arboretum_node_for(D->isPtrMemOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPtrMemOp, context_.data_model_.arboretum_node_for(D->isPtrMemOp()));
   //isMultiplicativeOp
-  arboretum_create_edge(obj, context_.data_model_.isMultiplicativeOp1, context_.data_model_.arboretum_node_for(D->isMultiplicativeOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMultiplicativeOp, context_.data_model_.arboretum_node_for(D->isMultiplicativeOp()));
   //isAdditiveOp
-  arboretum_create_edge(obj, context_.data_model_.isAdditiveOp1, context_.data_model_.arboretum_node_for(D->isAdditiveOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAdditiveOp, context_.data_model_.arboretum_node_for(D->isAdditiveOp()));
   //isShiftOp
-  arboretum_create_edge(obj, context_.data_model_.isShiftOp1, context_.data_model_.arboretum_node_for(D->isShiftOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isShiftOp, context_.data_model_.arboretum_node_for(D->isShiftOp()));
   //isBitwiseOp
-  arboretum_create_edge(obj, context_.data_model_.isBitwiseOp1, context_.data_model_.arboretum_node_for(D->isBitwiseOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isBitwiseOp, context_.data_model_.arboretum_node_for(D->isBitwiseOp()));
   //isRelationalOp
-  arboretum_create_edge(obj, context_.data_model_.isRelationalOp1, context_.data_model_.arboretum_node_for(D->isRelationalOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isRelationalOp, context_.data_model_.arboretum_node_for(D->isRelationalOp()));
   //isEqualityOp
-  arboretum_create_edge(obj, context_.data_model_.isEqualityOp1, context_.data_model_.arboretum_node_for(D->isEqualityOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isEqualityOp, context_.data_model_.arboretum_node_for(D->isEqualityOp()));
   //isComparisonOp
-  arboretum_create_edge(obj, context_.data_model_.isComparisonOp2, context_.data_model_.arboretum_node_for(D->isComparisonOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isComparisonOp, context_.data_model_.arboretum_node_for(D->isComparisonOp()));
   //isCommaOp
-  arboretum_create_edge(obj, context_.data_model_.isCommaOp1, context_.data_model_.arboretum_node_for(D->isCommaOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCommaOp, context_.data_model_.arboretum_node_for(D->isCommaOp()));
   //isLogicalOp
-  arboretum_create_edge(obj, context_.data_model_.isLogicalOp1, context_.data_model_.arboretum_node_for(D->isLogicalOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isLogicalOp, context_.data_model_.arboretum_node_for(D->isLogicalOp()));
   //isAssignmentOp
-  arboretum_create_edge(obj, context_.data_model_.isAssignmentOp2, context_.data_model_.arboretum_node_for(D->isAssignmentOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAssignmentOp, context_.data_model_.arboretum_node_for(D->isAssignmentOp()));
   //isCompoundAssignmentOp
-  arboretum_create_edge(obj, context_.data_model_.isCompoundAssignmentOp1, context_.data_model_.arboretum_node_for(D->isCompoundAssignmentOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCompoundAssignmentOp, context_.data_model_.arboretum_node_for(D->isCompoundAssignmentOp()));
   //isShiftAssignOp
-  arboretum_create_edge(obj, context_.data_model_.isShiftAssignOp1, context_.data_model_.arboretum_node_for(D->isShiftAssignOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isShiftAssignOp, context_.data_model_.arboretum_node_for(D->isShiftAssignOp()));
   //children
   // const_child_range
   //hasStoredFPFeatures
-  arboretum_create_edge(obj, context_.data_model_.hasStoredFPFeatures1, context_.data_model_.arboretum_node_for(D->hasStoredFPFeatures()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasStoredFPFeatures, context_.data_model_.arboretum_node_for(D->hasStoredFPFeatures()));
   //getStoredFPFeatures
   // FPOptionsOverride
   //getFPFeatures
@@ -5804,36 +5804,36 @@ bool ArboretumASTVisitor::VisitBinaryOperator(clang::BinaryOperator* D) {
 }
 
 bool ArboretumASTVisitor::VisitBlockExpr(clang::BlockExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBlockDecl
   {
-    const Entity* other = context_.resolve(D->getBlockDecl());
-    arboretum_create_edge(obj, context_.data_model_.getBlockDecl, other);
+    const Id* other = context_.resolve(D->getBlockDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getBlockDecl, other);
   }
   //getCaretLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getCaretLocation());
-    arboretum_create_edge(obj, context_.data_model_.getCaretLocation, other);
+    const Id* other = context_.source_model_.resolve(D->getCaretLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getCaretLocation_1, other);
   }
   //getBody
   {
-    const Entity* other = context_.resolve(D->getBody());
-    arboretum_create_edge(obj, context_.data_model_.getBody3, other);
+    const Id* other = context_.resolve(D->getBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getBody_4, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc23, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_15, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc23, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_14, other);
   }
   //getFunctionType
   {
-    const Entity* other = context_.resolve(D->getFunctionType());
-    arboretum_create_edge(obj, context_.data_model_.getFunctionType, other);
+    const Id* other = context_.resolve(D->getFunctionType());
+    arboretum_create_edge(obj, context_.data_model_.method_getFunctionType, other);
   }
   //children
   // const_child_range
@@ -5841,21 +5841,21 @@ bool ArboretumASTVisitor::VisitBlockExpr(clang::BlockExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitBreakStmt(clang::BreakStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBreakLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBreakLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBreakLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getBreakLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBreakLoc, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc155, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_16, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc153, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_15, other);
   }
   //children
   // const_child_range
@@ -5863,77 +5863,77 @@ bool ArboretumASTVisitor::VisitBreakStmt(clang::BreakStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitBuiltinBitCastExpr(clang::BuiltinBitCastExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc122, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_17, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc124, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_16, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCStyleCastExpr(clang::CStyleCastExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getLParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLParenLoc11, other);
+    const Id* other = context_.source_model_.resolve(D->getLParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParenLoc, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc17, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_4, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc92, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_18, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc92, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_17, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCUDAKernelCallExpr(clang::CUDAKernelCallExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getConfig
   {
-    const Entity* other = context_.resolve(D->getConfig());
-    arboretum_create_edge(obj, context_.data_model_.getConfig, other);
+    const Id* other = context_.resolve(D->getConfig());
+    arboretum_create_edge(obj, context_.data_model_.method_getConfig, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXAddrspaceCastExpr(clang::CXXAddrspaceCastExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXBindTemporaryExpr(clang::CXXBindTemporaryExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTemporary
   //getSubExpr
   {
-    const Entity* other = context_.resolve(D->getSubExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSubExpr2, other);
+    const Id* other = context_.resolve(D->getSubExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubExpr_1, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc7, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_19, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc7, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_18, other);
   }
   //children
   // const_child_range
@@ -5941,23 +5941,23 @@ bool ArboretumASTVisitor::VisitCXXBindTemporaryExpr(clang::CXXBindTemporaryExpr*
 }
 
 bool ArboretumASTVisitor::VisitCXXBoolLiteralExpr(clang::CXXBoolLiteralExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getValue
-  arboretum_create_edge(obj, context_.data_model_.getValue1, context_.data_model_.arboretum_node_for(D->getValue()));
+  arboretum_create_edge(obj, context_.data_model_.method_getValue_4, context_.data_model_.arboretum_node_for(D->getValue()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc16, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_20, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc16, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_19, other);
   }
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_1, other);
   }
   //children
   // const_child_range
@@ -5965,36 +5965,36 @@ bool ArboretumASTVisitor::VisitCXXBoolLiteralExpr(clang::CXXBoolLiteralExpr* D) 
 }
 
 bool ArboretumASTVisitor::VisitCXXCatchStmt(clang::CXXCatchStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc44, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_21, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc44, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_20, other);
   }
   //getCatchLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getCatchLoc());
-    arboretum_create_edge(obj, context_.data_model_.getCatchLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getCatchLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getCatchLoc, other);
   }
   //getExceptionDecl
   {
-    const Entity* other = context_.resolve(D->getExceptionDecl());
-    arboretum_create_edge(obj, context_.data_model_.getExceptionDecl, other);
+    const Id* other = context_.resolve(D->getExceptionDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getExceptionDecl, other);
   }
   //getCaughtType
   {
-    const Entity* other = context_.resolve(D->getCaughtType());
-    arboretum_create_edge(obj, context_.data_model_.getCaughtType, other);
+    const Id* other = context_.resolve(D->getCaughtType());
+    arboretum_create_edge(obj, context_.data_model_.method_getCaughtType, other);
   }
   //getHandlerBlock
   {
-    const Entity* other = context_.resolve(D->getHandlerBlock());
-    arboretum_create_edge(obj, context_.data_model_.getHandlerBlock, other);
+    const Id* other = context_.resolve(D->getHandlerBlock());
+    arboretum_create_edge(obj, context_.data_model_.method_getHandlerBlock, other);
   }
   //children
   // const_child_range
@@ -6002,37 +6002,37 @@ bool ArboretumASTVisitor::VisitCXXCatchStmt(clang::CXXCatchStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitCXXConstCastExpr(clang::CXXConstCastExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXConstructExpr(clang::CXXConstructExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getConstructor
   {
-    const Entity* other = context_.resolve(D->getConstructor());
-    arboretum_create_edge(obj, context_.data_model_.getConstructor, other);
+    const Id* other = context_.resolve(D->getConstructor());
+    arboretum_create_edge(obj, context_.data_model_.method_getConstructor, other);
   }
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation8, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_2, other);
   }
   //isElidable
-  arboretum_create_edge(obj, context_.data_model_.isElidable, context_.data_model_.arboretum_node_for(D->isElidable()));
+  arboretum_create_edge(obj, context_.data_model_.method_isElidable, context_.data_model_.arboretum_node_for(D->isElidable()));
   //hadMultipleCandidates
-  arboretum_create_edge(obj, context_.data_model_.hadMultipleCandidates2, context_.data_model_.arboretum_node_for(D->hadMultipleCandidates()));
+  arboretum_create_edge(obj, context_.data_model_.method_hadMultipleCandidates, context_.data_model_.arboretum_node_for(D->hadMultipleCandidates()));
   //isListInitialization
-  arboretum_create_edge(obj, context_.data_model_.isListInitialization1, context_.data_model_.arboretum_node_for(D->isListInitialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_isListInitialization, context_.data_model_.arboretum_node_for(D->isListInitialization()));
   //isStdInitListInitialization
-  arboretum_create_edge(obj, context_.data_model_.isStdInitListInitialization, context_.data_model_.arboretum_node_for(D->isStdInitListInitialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_isStdInitListInitialization, context_.data_model_.arboretum_node_for(D->isStdInitListInitialization()));
   //requiresZeroInitialization
-  arboretum_create_edge(obj, context_.data_model_.requiresZeroInitialization, context_.data_model_.arboretum_node_for(D->requiresZeroInitialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_requiresZeroInitialization, context_.data_model_.arboretum_node_for(D->requiresZeroInitialization()));
   //getConstructionKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getConstructionKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getConstructionKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getConstructionKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getConstructionKind, enum_value);
     }
   }
   //arguments
@@ -6041,21 +6041,21 @@ bool ArboretumASTVisitor::VisitCXXConstructExpr(clang::CXXConstructExpr* D) {
   //getNumArgs
   // unsigned int
   //isImmediateEscalating
-  arboretum_create_edge(obj, context_.data_model_.isImmediateEscalating1, context_.data_model_.arboretum_node_for(D->isImmediateEscalating()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImmediateEscalating_1, context_.data_model_.arboretum_node_for(D->isImmediateEscalating()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc68, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_22, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc68, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_21, other);
   }
   //getParenOrBraceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getParenOrBraceRange());
-    arboretum_create_edge(obj, context_.data_model_.getParenOrBraceRange, other);
+    const Id* other = context_.source_model_.resolve(D->getParenOrBraceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getParenOrBraceRange, other);
   }
   //children
   // const_child_range
@@ -6063,49 +6063,49 @@ bool ArboretumASTVisitor::VisitCXXConstructExpr(clang::CXXConstructExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitCXXDefaultArgExpr(clang::CXXDefaultArgExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getParam
   {
-    const Entity* other = context_.resolve(D->getParam());
-    arboretum_create_edge(obj, context_.data_model_.getParam, other);
+    const Id* other = context_.resolve(D->getParam());
+    arboretum_create_edge(obj, context_.data_model_.method_getParam, other);
   }
   //hasRewrittenInit
-  arboretum_create_edge(obj, context_.data_model_.hasRewrittenInit1, context_.data_model_.arboretum_node_for(D->hasRewrittenInit()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasRewrittenInit, context_.data_model_.arboretum_node_for(D->hasRewrittenInit()));
   //getExpr
   {
-    const Entity* other = context_.resolve(D->getExpr());
-    arboretum_create_edge(obj, context_.data_model_.getExpr7, other);
+    const Id* other = context_.resolve(D->getExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getExpr, other);
   }
   //getRewrittenExpr
   {
-    const Entity* other = context_.resolve(D->getRewrittenExpr());
-    arboretum_create_edge(obj, context_.data_model_.getRewrittenExpr3, other);
+    const Id* other = context_.resolve(D->getRewrittenExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getRewrittenExpr, other);
   }
   //getAdjustedRewrittenExpr
   {
-    const Entity* other = context_.resolve(D->getAdjustedRewrittenExpr());
-    arboretum_create_edge(obj, context_.data_model_.getAdjustedRewrittenExpr1, other);
+    const Id* other = context_.resolve(D->getAdjustedRewrittenExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getAdjustedRewrittenExpr, other);
   }
   //getUsedContext
   //getUsedLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getUsedLocation());
-    arboretum_create_edge(obj, context_.data_model_.getUsedLocation1, other);
+    const Id* other = context_.source_model_.resolve(D->getUsedLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getUsedLocation, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc71, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_23, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc71, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_22, other);
   }
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc6, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc_2, other);
   }
   //children
   // const_child_range
@@ -6113,39 +6113,39 @@ bool ArboretumASTVisitor::VisitCXXDefaultArgExpr(clang::CXXDefaultArgExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitCXXDefaultInitExpr(clang::CXXDefaultInitExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //hasRewrittenInit
-  arboretum_create_edge(obj, context_.data_model_.hasRewrittenInit, context_.data_model_.arboretum_node_for(D->hasRewrittenInit()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasRewrittenInit_1, context_.data_model_.arboretum_node_for(D->hasRewrittenInit()));
   //getField
   {
-    const Entity* other = context_.resolve(D->getField());
-    arboretum_create_edge(obj, context_.data_model_.getField1, other);
+    const Id* other = context_.resolve(D->getField());
+    arboretum_create_edge(obj, context_.data_model_.method_getField, other);
   }
   //getExpr
   {
-    const Entity* other = context_.resolve(D->getExpr());
-    arboretum_create_edge(obj, context_.data_model_.getExpr5, other);
+    const Id* other = context_.resolve(D->getExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getExpr_1, other);
   }
   //getRewrittenExpr
   {
-    const Entity* other = context_.resolve(D->getRewrittenExpr());
-    arboretum_create_edge(obj, context_.data_model_.getRewrittenExpr, other);
+    const Id* other = context_.resolve(D->getRewrittenExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getRewrittenExpr_1, other);
   }
   //getUsedContext
   //getUsedLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getUsedLocation());
-    arboretum_create_edge(obj, context_.data_model_.getUsedLocation, other);
+    const Id* other = context_.source_model_.resolve(D->getUsedLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getUsedLocation_1, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc70, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_24, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc70, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_23, other);
   }
   //children
   // const_child_range
@@ -6153,39 +6153,39 @@ bool ArboretumASTVisitor::VisitCXXDefaultInitExpr(clang::CXXDefaultInitExpr* D) 
 }
 
 bool ArboretumASTVisitor::VisitCXXDeleteExpr(clang::CXXDeleteExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isGlobalDelete
-  arboretum_create_edge(obj, context_.data_model_.isGlobalDelete, context_.data_model_.arboretum_node_for(D->isGlobalDelete()));
+  arboretum_create_edge(obj, context_.data_model_.method_isGlobalDelete, context_.data_model_.arboretum_node_for(D->isGlobalDelete()));
   //isArrayForm
-  arboretum_create_edge(obj, context_.data_model_.isArrayForm, context_.data_model_.arboretum_node_for(D->isArrayForm()));
+  arboretum_create_edge(obj, context_.data_model_.method_isArrayForm, context_.data_model_.arboretum_node_for(D->isArrayForm()));
   //isArrayFormAsWritten
-  arboretum_create_edge(obj, context_.data_model_.isArrayFormAsWritten, context_.data_model_.arboretum_node_for(D->isArrayFormAsWritten()));
+  arboretum_create_edge(obj, context_.data_model_.method_isArrayFormAsWritten, context_.data_model_.arboretum_node_for(D->isArrayFormAsWritten()));
   //doesUsualArrayDeleteWantSize
-  arboretum_create_edge(obj, context_.data_model_.doesUsualArrayDeleteWantSize1, context_.data_model_.arboretum_node_for(D->doesUsualArrayDeleteWantSize()));
+  arboretum_create_edge(obj, context_.data_model_.method_doesUsualArrayDeleteWantSize, context_.data_model_.arboretum_node_for(D->doesUsualArrayDeleteWantSize()));
   //getOperatorDelete
   {
-    const Entity* other = context_.resolve(D->getOperatorDelete());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorDelete1, other);
+    const Id* other = context_.resolve(D->getOperatorDelete());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorDelete_1, other);
   }
   //getArgument
   {
-    const Entity* other = context_.resolve(D->getArgument());
-    arboretum_create_edge(obj, context_.data_model_.getArgument1, other);
+    const Id* other = context_.resolve(D->getArgument());
+    arboretum_create_edge(obj, context_.data_model_.method_getArgument, other);
   }
   //getDestroyedType
   {
-    const Entity* other = context_.resolve(D->getDestroyedType());
-    arboretum_create_edge(obj, context_.data_model_.getDestroyedType, other);
+    const Id* other = context_.resolve(D->getDestroyedType());
+    arboretum_create_edge(obj, context_.data_model_.method_getDestroyedType, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc107, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_25, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc107, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_24, other);
   }
   //children
   // const_child_range
@@ -6193,28 +6193,28 @@ bool ArboretumASTVisitor::VisitCXXDeleteExpr(clang::CXXDeleteExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitCXXDependentScopeMemberExpr(clang::CXXDependentScopeMemberExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isImplicitAccess
-  arboretum_create_edge(obj, context_.data_model_.isImplicitAccess1, context_.data_model_.arboretum_node_for(D->isImplicitAccess()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImplicitAccess, context_.data_model_.arboretum_node_for(D->isImplicitAccess()));
   //getBaseType
   {
-    const Entity* other = context_.resolve(D->getBaseType());
-    arboretum_create_edge(obj, context_.data_model_.getBaseType, other);
+    const Id* other = context_.resolve(D->getBaseType());
+    arboretum_create_edge(obj, context_.data_model_.method_getBaseType_1, other);
   }
   //isArrow
-  arboretum_create_edge(obj, context_.data_model_.isArrow3, context_.data_model_.arboretum_node_for(D->isArrow()));
+  arboretum_create_edge(obj, context_.data_model_.method_isArrow, context_.data_model_.arboretum_node_for(D->isArrow()));
   //getOperatorLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getOperatorLoc());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getOperatorLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorLoc_1, other);
   }
   //getQualifier
   //getQualifierLoc
   // NestedNameSpecifierLoc
   //getFirstQualifierFoundInScope
   {
-    const Entity* other = context_.resolve(D->getFirstQualifierFoundInScope());
-    arboretum_create_edge(obj, context_.data_model_.getFirstQualifierFoundInScope, other);
+    const Id* other = context_.resolve(D->getFirstQualifierFoundInScope());
+    arboretum_create_edge(obj, context_.data_model_.method_getFirstQualifierFoundInScope, other);
   }
   //getMemberNameInfo
   // const DeclarationNameInfo &
@@ -6222,28 +6222,28 @@ bool ArboretumASTVisitor::VisitCXXDependentScopeMemberExpr(clang::CXXDependentSc
   // DeclarationName
   //getMemberLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getMemberLoc());
-    arboretum_create_edge(obj, context_.data_model_.getMemberLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getMemberLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getMemberLoc, other);
   }
   //getTemplateKeywordLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTemplateKeywordLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplateKeywordLoc_2, other);
   }
   //getLAngleLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLAngleLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLAngleLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getLAngleLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLAngleLoc, other);
   }
   //getRAngleLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRAngleLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRAngleLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getRAngleLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRAngleLoc, other);
   }
   //hasTemplateKeyword
-  arboretum_create_edge(obj, context_.data_model_.hasTemplateKeyword2, context_.data_model_.arboretum_node_for(D->hasTemplateKeyword()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTemplateKeyword, context_.data_model_.arboretum_node_for(D->hasTemplateKeyword()));
   //hasExplicitTemplateArgs
-  arboretum_create_edge(obj, context_.data_model_.hasExplicitTemplateArgs3, context_.data_model_.arboretum_node_for(D->hasExplicitTemplateArgs()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasExplicitTemplateArgs, context_.data_model_.arboretum_node_for(D->hasExplicitTemplateArgs()));
   //getTemplateArgs
   //getNumTemplateArgs
   // unsigned int
@@ -6251,13 +6251,13 @@ bool ArboretumASTVisitor::VisitCXXDependentScopeMemberExpr(clang::CXXDependentSc
   // ArrayRef<TemplateArgumentLoc>
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc63, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_26, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc63, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_25, other);
   }
   //children
   // const_child_range
@@ -6265,76 +6265,76 @@ bool ArboretumASTVisitor::VisitCXXDependentScopeMemberExpr(clang::CXXDependentSc
 }
 
 bool ArboretumASTVisitor::VisitCXXDynamicCastExpr(clang::CXXDynamicCastExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isAlwaysNull
-  arboretum_create_edge(obj, context_.data_model_.isAlwaysNull, context_.data_model_.arboretum_node_for(D->isAlwaysNull()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAlwaysNull, context_.data_model_.arboretum_node_for(D->isAlwaysNull()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXFoldExpr(clang::CXXFoldExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCallee
   {
-    const Entity* other = context_.resolve(D->getCallee());
-    arboretum_create_edge(obj, context_.data_model_.getCallee, other);
+    const Id* other = context_.resolve(D->getCallee());
+    arboretum_create_edge(obj, context_.data_model_.method_getCallee, other);
   }
   //getLHS
   {
-    const Entity* other = context_.resolve(D->getLHS());
-    arboretum_create_edge(obj, context_.data_model_.getLHS2, other);
+    const Id* other = context_.resolve(D->getLHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getLHS_2, other);
   }
   //getRHS
   {
-    const Entity* other = context_.resolve(D->getRHS());
-    arboretum_create_edge(obj, context_.data_model_.getRHS2, other);
+    const Id* other = context_.resolve(D->getRHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getRHS_2, other);
   }
   //isRightFold
-  arboretum_create_edge(obj, context_.data_model_.isRightFold, context_.data_model_.arboretum_node_for(D->isRightFold()));
+  arboretum_create_edge(obj, context_.data_model_.method_isRightFold, context_.data_model_.arboretum_node_for(D->isRightFold()));
   //isLeftFold
-  arboretum_create_edge(obj, context_.data_model_.isLeftFold, context_.data_model_.arboretum_node_for(D->isLeftFold()));
+  arboretum_create_edge(obj, context_.data_model_.method_isLeftFold, context_.data_model_.arboretum_node_for(D->isLeftFold()));
   //getPattern
   {
-    const Entity* other = context_.resolve(D->getPattern());
-    arboretum_create_edge(obj, context_.data_model_.getPattern, other);
+    const Id* other = context_.resolve(D->getPattern());
+    arboretum_create_edge(obj, context_.data_model_.method_getPattern_1, other);
   }
   //getInit
   {
-    const Entity* other = context_.resolve(D->getInit());
-    arboretum_create_edge(obj, context_.data_model_.getInit5, other);
+    const Id* other = context_.resolve(D->getInit());
+    arboretum_create_edge(obj, context_.data_model_.method_getInit_1, other);
   }
   //getLParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLParenLoc6, other);
+    const Id* other = context_.source_model_.resolve(D->getLParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParenLoc_1, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc9, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_5, other);
   }
   //getEllipsisLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEllipsisLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEllipsisLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getEllipsisLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEllipsisLoc_4, other);
   }
   //getOperator
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getOperator());
+    const Id* enum_value = context_.data_model_.resolve(D->getOperator());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getOperator, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getOperator, enum_value);
     }
   }
   //getNumExpansions
   // std::optional<unsigned int>
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc53, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_27, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc53, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_26, other);
   }
   //children
   // const_child_range
@@ -6342,86 +6342,86 @@ bool ArboretumASTVisitor::VisitCXXFoldExpr(clang::CXXFoldExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitCXXForRangeStmt(clang::CXXForRangeStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getInit
   {
-    const Entity* other = context_.resolve(D->getInit());
-    arboretum_create_edge(obj, context_.data_model_.getInit14, other);
+    const Id* other = context_.resolve(D->getInit());
+    arboretum_create_edge(obj, context_.data_model_.method_getInit_2, other);
   }
   //getLoopVariable
   {
-    const Entity* other = context_.resolve(D->getLoopVariable());
-    arboretum_create_edge(obj, context_.data_model_.getLoopVariable1, other);
+    const Id* other = context_.resolve(D->getLoopVariable());
+    arboretum_create_edge(obj, context_.data_model_.method_getLoopVariable, other);
   }
   //getRangeInit
   {
-    const Entity* other = context_.resolve(D->getRangeInit());
-    arboretum_create_edge(obj, context_.data_model_.getRangeInit1, other);
+    const Id* other = context_.resolve(D->getRangeInit());
+    arboretum_create_edge(obj, context_.data_model_.method_getRangeInit, other);
   }
   //getRangeStmt
   {
-    const Entity* other = context_.resolve(D->getRangeStmt());
-    arboretum_create_edge(obj, context_.data_model_.getRangeStmt1, other);
+    const Id* other = context_.resolve(D->getRangeStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getRangeStmt, other);
   }
   //getBeginStmt
   {
-    const Entity* other = context_.resolve(D->getBeginStmt());
-    arboretum_create_edge(obj, context_.data_model_.getBeginStmt1, other);
+    const Id* other = context_.resolve(D->getBeginStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginStmt, other);
   }
   //getEndStmt
   {
-    const Entity* other = context_.resolve(D->getEndStmt());
-    arboretum_create_edge(obj, context_.data_model_.getEndStmt1, other);
+    const Id* other = context_.resolve(D->getEndStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndStmt, other);
   }
   //getCond
   {
-    const Entity* other = context_.resolve(D->getCond());
-    arboretum_create_edge(obj, context_.data_model_.getCond18, other);
+    const Id* other = context_.resolve(D->getCond());
+    arboretum_create_edge(obj, context_.data_model_.method_getCond_2, other);
   }
   //getInc
   {
-    const Entity* other = context_.resolve(D->getInc());
-    arboretum_create_edge(obj, context_.data_model_.getInc4, other);
+    const Id* other = context_.resolve(D->getInc());
+    arboretum_create_edge(obj, context_.data_model_.method_getInc, other);
   }
   //getLoopVarStmt
   {
-    const Entity* other = context_.resolve(D->getLoopVarStmt());
-    arboretum_create_edge(obj, context_.data_model_.getLoopVarStmt1, other);
+    const Id* other = context_.resolve(D->getLoopVarStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getLoopVarStmt, other);
   }
   //getBody
   {
-    const Entity* other = context_.resolve(D->getBody());
-    arboretum_create_edge(obj, context_.data_model_.getBody22, other);
+    const Id* other = context_.resolve(D->getBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getBody_5, other);
   }
   //getForLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getForLoc());
-    arboretum_create_edge(obj, context_.data_model_.getForLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getForLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getForLoc, other);
   }
   //getCoawaitLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getCoawaitLoc());
-    arboretum_create_edge(obj, context_.data_model_.getCoawaitLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getCoawaitLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getCoawaitLoc, other);
   }
   //getColonLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getColonLoc());
-    arboretum_create_edge(obj, context_.data_model_.getColonLoc4, other);
+    const Id* other = context_.source_model_.resolve(D->getColonLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getColonLoc_2, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc36, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_6, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc156, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_28, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc154, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_27, other);
   }
   //children
   // const_child_range
@@ -6429,64 +6429,64 @@ bool ArboretumASTVisitor::VisitCXXForRangeStmt(clang::CXXForRangeStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitCXXFunctionalCastExpr(clang::CXXFunctionalCastExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getLParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLParenLoc10, other);
+    const Id* other = context_.source_model_.resolve(D->getLParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParenLoc_2, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc15, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_7, other);
   }
   //isListInitialization
-  arboretum_create_edge(obj, context_.data_model_.isListInitialization2, context_.data_model_.arboretum_node_for(D->isListInitialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_isListInitialization_1, context_.data_model_.arboretum_node_for(D->isListInitialization()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc89, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_29, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc89, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_28, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXInheritedCtorInitExpr(clang::CXXInheritedCtorInitExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getConstructor
   {
-    const Entity* other = context_.resolve(D->getConstructor());
-    arboretum_create_edge(obj, context_.data_model_.getConstructor1, other);
+    const Id* other = context_.resolve(D->getConstructor());
+    arboretum_create_edge(obj, context_.data_model_.method_getConstructor_1, other);
   }
   //constructsVBase
-  arboretum_create_edge(obj, context_.data_model_.constructsVBase, context_.data_model_.arboretum_node_for(D->constructsVBase()));
+  arboretum_create_edge(obj, context_.data_model_.method_constructsVBase, context_.data_model_.arboretum_node_for(D->constructsVBase()));
   //getConstructionKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getConstructionKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getConstructionKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getConstructionKind1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getConstructionKind_1, enum_value);
     }
   }
   //inheritedFromVBase
-  arboretum_create_edge(obj, context_.data_model_.inheritedFromVBase, context_.data_model_.arboretum_node_for(D->inheritedFromVBase()));
+  arboretum_create_edge(obj, context_.data_model_.method_inheritedFromVBase, context_.data_model_.arboretum_node_for(D->inheritedFromVBase()));
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation16, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_3, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc145, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_30, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc144, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_29, other);
   }
   //children
   // const_child_range
@@ -6494,143 +6494,143 @@ bool ArboretumASTVisitor::VisitCXXInheritedCtorInitExpr(clang::CXXInheritedCtorI
 }
 
 bool ArboretumASTVisitor::VisitCXXMemberCallExpr(clang::CXXMemberCallExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getImplicitObjectArgument
   {
-    const Entity* other = context_.resolve(D->getImplicitObjectArgument());
-    arboretum_create_edge(obj, context_.data_model_.getImplicitObjectArgument, other);
+    const Id* other = context_.resolve(D->getImplicitObjectArgument());
+    arboretum_create_edge(obj, context_.data_model_.method_getImplicitObjectArgument, other);
   }
   //getObjectType
   {
-    const Entity* other = context_.resolve(D->getObjectType());
-    arboretum_create_edge(obj, context_.data_model_.getObjectType, other);
+    const Id* other = context_.resolve(D->getObjectType());
+    arboretum_create_edge(obj, context_.data_model_.method_getObjectType, other);
   }
   //getMethodDecl
   {
-    const Entity* other = context_.resolve(D->getMethodDecl());
-    arboretum_create_edge(obj, context_.data_model_.getMethodDecl, other);
+    const Id* other = context_.resolve(D->getMethodDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getMethodDecl, other);
   }
   //getRecordDecl
   {
-    const Entity* other = context_.resolve(D->getRecordDecl());
-    arboretum_create_edge(obj, context_.data_model_.getRecordDecl, other);
+    const Id* other = context_.resolve(D->getRecordDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getRecordDecl, other);
   }
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc15, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc_3, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXNamedCastExpr(clang::CXXNamedCastExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCastName
   //getOperatorLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getOperatorLoc());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorLoc9, other);
+    const Id* other = context_.source_model_.resolve(D->getOperatorLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorLoc_2, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc30, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_8, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc139, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_31, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc139, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_30, other);
   }
   //getAngleBrackets
   {
-    const Entity* other = context_.source_model_.resolve(D->getAngleBrackets());
-    arboretum_create_edge(obj, context_.data_model_.getAngleBrackets, other);
+    const Id* other = context_.source_model_.resolve(D->getAngleBrackets());
+    arboretum_create_edge(obj, context_.data_model_.method_getAngleBrackets, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXNewExpr(clang::CXXNewExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getAllocatedType
   {
-    const Entity* other = context_.resolve(D->getAllocatedType());
-    arboretum_create_edge(obj, context_.data_model_.getAllocatedType, other);
+    const Id* other = context_.resolve(D->getAllocatedType());
+    arboretum_create_edge(obj, context_.data_model_.method_getAllocatedType, other);
   }
   //getAllocatedTypeSourceInfo
   //getOperatorNew
   {
-    const Entity* other = context_.resolve(D->getOperatorNew());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorNew, other);
+    const Id* other = context_.resolve(D->getOperatorNew());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorNew, other);
   }
   //getOperatorDelete
   {
-    const Entity* other = context_.resolve(D->getOperatorDelete());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorDelete, other);
+    const Id* other = context_.resolve(D->getOperatorDelete());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorDelete_2, other);
   }
   //isArray
-  arboretum_create_edge(obj, context_.data_model_.isArray, context_.data_model_.arboretum_node_for(D->isArray()));
+  arboretum_create_edge(obj, context_.data_model_.method_isArray, context_.data_model_.arboretum_node_for(D->isArray()));
   //getArraySize
   // std::optional<const Expr *>
   //getNumPlacementArgs
   // unsigned int
   //isParenTypeId
-  arboretum_create_edge(obj, context_.data_model_.isParenTypeId, context_.data_model_.arboretum_node_for(D->isParenTypeId()));
+  arboretum_create_edge(obj, context_.data_model_.method_isParenTypeId, context_.data_model_.arboretum_node_for(D->isParenTypeId()));
   //getTypeIdParens
   {
-    const Entity* other = context_.source_model_.resolve(D->getTypeIdParens());
-    arboretum_create_edge(obj, context_.data_model_.getTypeIdParens, other);
+    const Id* other = context_.source_model_.resolve(D->getTypeIdParens());
+    arboretum_create_edge(obj, context_.data_model_.method_getTypeIdParens, other);
   }
   //isGlobalNew
-  arboretum_create_edge(obj, context_.data_model_.isGlobalNew, context_.data_model_.arboretum_node_for(D->isGlobalNew()));
+  arboretum_create_edge(obj, context_.data_model_.method_isGlobalNew, context_.data_model_.arboretum_node_for(D->isGlobalNew()));
   //hasInitializer
-  arboretum_create_edge(obj, context_.data_model_.hasInitializer, context_.data_model_.arboretum_node_for(D->hasInitializer()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasInitializer, context_.data_model_.arboretum_node_for(D->hasInitializer()));
   //getInitializationStyle
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getInitializationStyle());
+    const Id* enum_value = context_.data_model_.resolve(D->getInitializationStyle());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getInitializationStyle, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getInitializationStyle, enum_value);
     }
   }
   //getInitializer
   {
-    const Entity* other = context_.resolve(D->getInitializer());
-    arboretum_create_edge(obj, context_.data_model_.getInitializer1, other);
+    const Id* other = context_.resolve(D->getInitializer());
+    arboretum_create_edge(obj, context_.data_model_.method_getInitializer, other);
   }
   //getConstructExpr
   {
-    const Entity* other = context_.resolve(D->getConstructExpr());
-    arboretum_create_edge(obj, context_.data_model_.getConstructExpr, other);
+    const Id* other = context_.resolve(D->getConstructExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getConstructExpr, other);
   }
   //passAlignment
-  arboretum_create_edge(obj, context_.data_model_.passAlignment, context_.data_model_.arboretum_node_for(D->passAlignment()));
+  arboretum_create_edge(obj, context_.data_model_.method_passAlignment, context_.data_model_.arboretum_node_for(D->passAlignment()));
   //doesUsualArrayDeleteWantSize
-  arboretum_create_edge(obj, context_.data_model_.doesUsualArrayDeleteWantSize, context_.data_model_.arboretum_node_for(D->doesUsualArrayDeleteWantSize()));
+  arboretum_create_edge(obj, context_.data_model_.method_doesUsualArrayDeleteWantSize_1, context_.data_model_.arboretum_node_for(D->doesUsualArrayDeleteWantSize()));
   //placement_arguments
   // llvm::iterator_range<const_arg_iterator>
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc65, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_32, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc65, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_31, other);
   }
   //getDirectInitRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getDirectInitRange());
-    arboretum_create_edge(obj, context_.data_model_.getDirectInitRange, other);
+    const Id* other = context_.source_model_.resolve(D->getDirectInitRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getDirectInitRange, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange5, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_39, other);
   }
   //children
   // const_child_range
@@ -6638,50 +6638,50 @@ bool ArboretumASTVisitor::VisitCXXNewExpr(clang::CXXNewExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitCXXNoexceptExpr(clang::CXXNoexceptExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getOperand
   {
-    const Entity* other = context_.resolve(D->getOperand());
-    arboretum_create_edge(obj, context_.data_model_.getOperand1, other);
+    const Id* other = context_.resolve(D->getOperand());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperand, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc136, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_33, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc136, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_32, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange48, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_40, other);
   }
   //getValue
-  arboretum_create_edge(obj, context_.data_model_.getValue11, context_.data_model_.arboretum_node_for(D->getValue()));
+  arboretum_create_edge(obj, context_.data_model_.method_getValue_5, context_.data_model_.arboretum_node_for(D->getValue()));
   //children
   // const_child_range
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXNullPtrLiteralExpr(clang::CXXNullPtrLiteralExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc158, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_34, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc156, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_33, other);
   }
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation19, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_4, other);
   }
   //children
   // const_child_range
@@ -6689,83 +6689,83 @@ bool ArboretumASTVisitor::VisitCXXNullPtrLiteralExpr(clang::CXXNullPtrLiteralExp
 }
 
 bool ArboretumASTVisitor::VisitCXXOperatorCallExpr(clang::CXXOperatorCallExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getOperator
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getOperator());
+    const Id* enum_value = context_.data_model_.resolve(D->getOperator());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getOperator2, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getOperator_1, enum_value);
     }
   }
   //isAssignmentOp
-  arboretum_create_edge(obj, context_.data_model_.isAssignmentOp4, context_.data_model_.arboretum_node_for(D->isAssignmentOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAssignmentOp_1, context_.data_model_.arboretum_node_for(D->isAssignmentOp()));
   //isComparisonOp
-  arboretum_create_edge(obj, context_.data_model_.isComparisonOp4, context_.data_model_.arboretum_node_for(D->isComparisonOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isComparisonOp_1, context_.data_model_.arboretum_node_for(D->isComparisonOp()));
   //isInfixBinaryOp
-  arboretum_create_edge(obj, context_.data_model_.isInfixBinaryOp, context_.data_model_.arboretum_node_for(D->isInfixBinaryOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInfixBinaryOp, context_.data_model_.arboretum_node_for(D->isInfixBinaryOp()));
   //getOperatorLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getOperatorLoc());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorLoc11, other);
+    const Id* other = context_.source_model_.resolve(D->getOperatorLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorLoc_3, other);
   }
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc17, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc_4, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc151, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_35, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc150, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_34, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange55, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_41, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXParenListInitExpr(clang::CXXParenListInitExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getInitExprs
   // const ArrayRef<Expr *>
   //getUserSpecifiedInitExprs
   // const ArrayRef<Expr *>
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_36, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_35, other);
   }
   //getInitLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getInitLoc());
-    arboretum_create_edge(obj, context_.data_model_.getInitLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getInitLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getInitLoc, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange1, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_42, other);
   }
   //getArrayFiller
   {
-    const Entity* other = context_.resolve(D->getArrayFiller());
-    arboretum_create_edge(obj, context_.data_model_.getArrayFiller1, other);
+    const Id* other = context_.resolve(D->getArrayFiller());
+    arboretum_create_edge(obj, context_.data_model_.method_getArrayFiller, other);
   }
   //getInitializedFieldInUnion
   {
-    const Entity* other = context_.resolve(D->getInitializedFieldInUnion());
-    arboretum_create_edge(obj, context_.data_model_.getInitializedFieldInUnion1, other);
+    const Id* other = context_.resolve(D->getInitializedFieldInUnion());
+    arboretum_create_edge(obj, context_.data_model_.method_getInitializedFieldInUnion, other);
   }
   //children
   // const_child_range
@@ -6773,56 +6773,56 @@ bool ArboretumASTVisitor::VisitCXXParenListInitExpr(clang::CXXParenListInitExpr*
 }
 
 bool ArboretumASTVisitor::VisitCXXPseudoDestructorExpr(clang::CXXPseudoDestructorExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBase
   {
-    const Entity* other = context_.resolve(D->getBase());
-    arboretum_create_edge(obj, context_.data_model_.getBase20, other);
+    const Id* other = context_.resolve(D->getBase());
+    arboretum_create_edge(obj, context_.data_model_.method_getBase_1, other);
   }
   //hasQualifier
-  arboretum_create_edge(obj, context_.data_model_.hasQualifier2, context_.data_model_.arboretum_node_for(D->hasQualifier()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasQualifier, context_.data_model_.arboretum_node_for(D->hasQualifier()));
   //getQualifierLoc
   // NestedNameSpecifierLoc
   //getQualifier
   //isArrow
-  arboretum_create_edge(obj, context_.data_model_.isArrow6, context_.data_model_.arboretum_node_for(D->isArrow()));
+  arboretum_create_edge(obj, context_.data_model_.method_isArrow_1, context_.data_model_.arboretum_node_for(D->isArrow()));
   //getOperatorLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getOperatorLoc());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorLoc8, other);
+    const Id* other = context_.source_model_.resolve(D->getOperatorLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorLoc_4, other);
   }
   //getScopeTypeInfo
   //getColonColonLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getColonColonLoc());
-    arboretum_create_edge(obj, context_.data_model_.getColonColonLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getColonColonLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getColonColonLoc, other);
   }
   //getTildeLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTildeLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTildeLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getTildeLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTildeLoc, other);
   }
   //getDestroyedTypeInfo
   //getDestroyedTypeIdentifier
   //getDestroyedType
   {
-    const Entity* other = context_.resolve(D->getDestroyedType());
-    arboretum_create_edge(obj, context_.data_model_.getDestroyedType1, other);
+    const Id* other = context_.resolve(D->getDestroyedType());
+    arboretum_create_edge(obj, context_.data_model_.method_getDestroyedType_1, other);
   }
   //getDestroyedTypeLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getDestroyedTypeLoc());
-    arboretum_create_edge(obj, context_.data_model_.getDestroyedTypeLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getDestroyedTypeLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getDestroyedTypeLoc, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc126, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_37, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc128, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_36, other);
   }
   //children
   // const_child_range
@@ -6830,96 +6830,96 @@ bool ArboretumASTVisitor::VisitCXXPseudoDestructorExpr(clang::CXXPseudoDestructo
 }
 
 bool ArboretumASTVisitor::VisitCXXReinterpretCastExpr(clang::CXXReinterpretCastExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXRewrittenBinaryOperator(clang::CXXRewrittenBinaryOperator* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSemanticForm
   {
-    const Entity* other = context_.resolve(D->getSemanticForm());
-    arboretum_create_edge(obj, context_.data_model_.getSemanticForm1, other);
+    const Id* other = context_.resolve(D->getSemanticForm());
+    arboretum_create_edge(obj, context_.data_model_.method_getSemanticForm, other);
   }
   //getDecomposedForm
   // DecomposedForm
   //isReversed
-  arboretum_create_edge(obj, context_.data_model_.isReversed, context_.data_model_.arboretum_node_for(D->isReversed()));
+  arboretum_create_edge(obj, context_.data_model_.method_isReversed, context_.data_model_.arboretum_node_for(D->isReversed()));
   //getOperator
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getOperator());
+    const Id* enum_value = context_.data_model_.resolve(D->getOperator());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getOperator1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getOperator_2, enum_value);
     }
   }
   //getOpcode
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getOpcode());
+    const Id* enum_value = context_.data_model_.resolve(D->getOpcode());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getOpcode, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getOpcode_1, enum_value);
     }
   }
   //getOpcodeStr
   // StringRef
   //isComparisonOp
-  arboretum_create_edge(obj, context_.data_model_.isComparisonOp, context_.data_model_.arboretum_node_for(D->isComparisonOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isComparisonOp_2, context_.data_model_.arboretum_node_for(D->isComparisonOp()));
   //isAssignmentOp
-  arboretum_create_edge(obj, context_.data_model_.isAssignmentOp, context_.data_model_.arboretum_node_for(D->isAssignmentOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAssignmentOp_2, context_.data_model_.arboretum_node_for(D->isAssignmentOp()));
   //getLHS
   {
-    const Entity* other = context_.resolve(D->getLHS());
-    arboretum_create_edge(obj, context_.data_model_.getLHS3, other);
+    const Id* other = context_.resolve(D->getLHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getLHS_3, other);
   }
   //getRHS
   {
-    const Entity* other = context_.resolve(D->getRHS());
-    arboretum_create_edge(obj, context_.data_model_.getRHS3, other);
+    const Id* other = context_.resolve(D->getRHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getRHS_3, other);
   }
   //getOperatorLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getOperatorLoc());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getOperatorLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorLoc_5, other);
   }
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc8, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc_5, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc74, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_38, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc74, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_37, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange7, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_43, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXScalarValueInitExpr(clang::CXXScalarValueInitExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTypeSourceInfo
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc16, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_9, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc91, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_39, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc91, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_38, other);
   }
   //children
   // const_child_range
@@ -6927,31 +6927,31 @@ bool ArboretumASTVisitor::VisitCXXScalarValueInitExpr(clang::CXXScalarValueInitE
 }
 
 bool ArboretumASTVisitor::VisitCXXStaticCastExpr(clang::CXXStaticCastExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXStdInitializerListExpr(clang::CXXStdInitializerListExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSubExpr
   {
-    const Entity* other = context_.resolve(D->getSubExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSubExpr1, other);
+    const Id* other = context_.resolve(D->getSubExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubExpr_2, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_40, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_39, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_44, other);
   }
   //children
   // const_child_range
@@ -6959,68 +6959,68 @@ bool ArboretumASTVisitor::VisitCXXStdInitializerListExpr(clang::CXXStdInitialize
 }
 
 bool ArboretumASTVisitor::VisitCXXTemporaryObjectExpr(clang::CXXTemporaryObjectExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTypeSourceInfo
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc130, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_41, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc130, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_40, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXThisExpr(clang::CXXThisExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation7, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_5, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc62, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_42, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc62, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_41, other);
   }
   //isImplicit
-  arboretum_create_edge(obj, context_.data_model_.isImplicit1, context_.data_model_.arboretum_node_for(D->isImplicit()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImplicit_1, context_.data_model_.arboretum_node_for(D->isImplicit()));
   //children
   // const_child_range
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCXXThrowExpr(clang::CXXThrowExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSubExpr
   {
-    const Entity* other = context_.resolve(D->getSubExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSubExpr7, other);
+    const Id* other = context_.resolve(D->getSubExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubExpr_3, other);
   }
   //getThrowLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getThrowLoc());
-    arboretum_create_edge(obj, context_.data_model_.getThrowLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getThrowLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getThrowLoc, other);
   }
   //isThrownVariableInScope
-  arboretum_create_edge(obj, context_.data_model_.isThrownVariableInScope, context_.data_model_.arboretum_node_for(D->isThrownVariableInScope()));
+  arboretum_create_edge(obj, context_.data_model_.method_isThrownVariableInScope, context_.data_model_.arboretum_node_for(D->isThrownVariableInScope()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc72, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_43, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc72, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_42, other);
   }
   //children
   // const_child_range
@@ -7028,26 +7028,26 @@ bool ArboretumASTVisitor::VisitCXXThrowExpr(clang::CXXThrowExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitCXXTryStmt(clang::CXXTryStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc20, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_44, other);
   }
   //getTryLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTryLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTryLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getTryLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTryLoc, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc20, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_43, other);
   }
   //getTryBlock
   {
-    const Entity* other = context_.resolve(D->getTryBlock());
-    arboretum_create_edge(obj, context_.data_model_.getTryBlock2, other);
+    const Id* other = context_.resolve(D->getTryBlock());
+    arboretum_create_edge(obj, context_.data_model_.method_getTryBlock, other);
   }
   //getNumHandlers
   // unsigned int
@@ -7057,31 +7057,31 @@ bool ArboretumASTVisitor::VisitCXXTryStmt(clang::CXXTryStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitCXXTypeidExpr(clang::CXXTypeidExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isPotentiallyEvaluated
-  arboretum_create_edge(obj, context_.data_model_.isPotentiallyEvaluated, context_.data_model_.arboretum_node_for(D->isPotentiallyEvaluated()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPotentiallyEvaluated, context_.data_model_.arboretum_node_for(D->isPotentiallyEvaluated()));
   //isTypeOperand
-  arboretum_create_edge(obj, context_.data_model_.isTypeOperand1, context_.data_model_.arboretum_node_for(D->isTypeOperand()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTypeOperand, context_.data_model_.arboretum_node_for(D->isTypeOperand()));
   //getTypeOperandSourceInfo
   //getExprOperand
   {
-    const Entity* other = context_.resolve(D->getExprOperand());
-    arboretum_create_edge(obj, context_.data_model_.getExprOperand1, other);
+    const Id* other = context_.resolve(D->getExprOperand());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprOperand, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc131, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_45, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc131, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_44, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange46, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_45, other);
   }
   //children
   // const_child_range
@@ -7089,38 +7089,38 @@ bool ArboretumASTVisitor::VisitCXXTypeidExpr(clang::CXXTypeidExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitCXXUnresolvedConstructExpr(clang::CXXUnresolvedConstructExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTypeAsWritten
   {
-    const Entity* other = context_.resolve(D->getTypeAsWritten());
-    arboretum_create_edge(obj, context_.data_model_.getTypeAsWritten1, other);
+    const Id* other = context_.resolve(D->getTypeAsWritten());
+    arboretum_create_edge(obj, context_.data_model_.method_getTypeAsWritten_2, other);
   }
   //getTypeSourceInfo
   //getLParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLParenLoc4, other);
+    const Id* other = context_.source_model_.resolve(D->getLParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParenLoc_3, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc6, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_10, other);
   }
   //isListInitialization
-  arboretum_create_edge(obj, context_.data_model_.isListInitialization, context_.data_model_.arboretum_node_for(D->isListInitialization()));
+  arboretum_create_edge(obj, context_.data_model_.method_isListInitialization_2, context_.data_model_.arboretum_node_for(D->isListInitialization()));
   //getNumArgs
   // unsigned int
   //arguments
   // const_arg_range
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc42, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_46, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc42, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_45, other);
   }
   //children
   // const_child_range
@@ -7128,34 +7128,34 @@ bool ArboretumASTVisitor::VisitCXXUnresolvedConstructExpr(clang::CXXUnresolvedCo
 }
 
 bool ArboretumASTVisitor::VisitCXXUuidofExpr(clang::CXXUuidofExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isTypeOperand
-  arboretum_create_edge(obj, context_.data_model_.isTypeOperand, context_.data_model_.arboretum_node_for(D->isTypeOperand()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTypeOperand_1, context_.data_model_.arboretum_node_for(D->isTypeOperand()));
   //getTypeOperandSourceInfo
   //getExprOperand
   {
-    const Entity* other = context_.resolve(D->getExprOperand());
-    arboretum_create_edge(obj, context_.data_model_.getExprOperand, other);
+    const Id* other = context_.resolve(D->getExprOperand());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprOperand_1, other);
   }
   //getGuidDecl
   {
-    const Entity* other = context_.resolve(D->getGuidDecl());
-    arboretum_create_edge(obj, context_.data_model_.getGuidDecl, other);
+    const Id* other = context_.resolve(D->getGuidDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getGuidDecl, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc120, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_47, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc122, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_46, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange40, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_46, other);
   }
   //children
   // const_child_range
@@ -7163,32 +7163,32 @@ bool ArboretumASTVisitor::VisitCXXUuidofExpr(clang::CXXUuidofExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitCallExpr(clang::CallExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCallee
   {
-    const Entity* other = context_.resolve(D->getCallee());
-    arboretum_create_edge(obj, context_.data_model_.getCallee2, other);
+    const Id* other = context_.resolve(D->getCallee());
+    arboretum_create_edge(obj, context_.data_model_.method_getCallee_1, other);
   }
   //getADLCallKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getADLCallKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getADLCallKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getADLCallKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getADLCallKind, enum_value);
     }
   }
   //usesADL
-  arboretum_create_edge(obj, context_.data_model_.usesADL, context_.data_model_.arboretum_node_for(D->usesADL()));
+  arboretum_create_edge(obj, context_.data_model_.method_usesADL, context_.data_model_.arboretum_node_for(D->usesADL()));
   //hasStoredFPFeatures
-  arboretum_create_edge(obj, context_.data_model_.hasStoredFPFeatures3, context_.data_model_.arboretum_node_for(D->hasStoredFPFeatures()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasStoredFPFeatures_1, context_.data_model_.arboretum_node_for(D->hasStoredFPFeatures()));
   //getCalleeDecl
   {
-    const Entity* other = context_.resolve(D->getCalleeDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCalleeDecl1, other);
+    const Id* other = context_.resolve(D->getCalleeDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCalleeDecl, other);
   }
   //getDirectCallee
   {
-    const Entity* other = context_.resolve(D->getDirectCallee());
-    arboretum_create_edge(obj, context_.data_model_.getDirectCallee1, other);
+    const Id* other = context_.resolve(D->getDirectCallee());
+    arboretum_create_edge(obj, context_.data_model_.method_getDirectCallee, other);
   }
   //getNumArgs
   // unsigned int
@@ -7203,49 +7203,49 @@ bool ArboretumASTVisitor::VisitCallExpr(clang::CallExpr* D) {
   // unsigned int
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc18, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_11, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc94, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_48, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc94, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_47, other);
   }
   //isCallToStdMove
-  arboretum_create_edge(obj, context_.data_model_.isCallToStdMove, context_.data_model_.arboretum_node_for(D->isCallToStdMove()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCallToStdMove, context_.data_model_.arboretum_node_for(D->isCallToStdMove()));
   //children
   // const_child_range
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCapturedStmt(clang::CapturedStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCapturedStmt
   {
-    const Entity* other = context_.resolve(D->getCapturedStmt());
-    arboretum_create_edge(obj, context_.data_model_.getCapturedStmt2, other);
+    const Id* other = context_.resolve(D->getCapturedStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getCapturedStmt, other);
   }
   //getCapturedDecl
   {
-    const Entity* other = context_.resolve(D->getCapturedDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCapturedDecl1, other);
+    const Id* other = context_.resolve(D->getCapturedDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCapturedDecl, other);
   }
   //getCapturedRegionKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getCapturedRegionKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getCapturedRegionKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getCapturedRegionKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getCapturedRegionKind, enum_value);
     }
   }
   //getCapturedRecordDecl
   {
-    const Entity* other = context_.resolve(D->getCapturedRecordDecl());
-    arboretum_create_edge(obj, context_.data_model_.getCapturedRecordDecl, other);
+    const Id* other = context_.resolve(D->getCapturedRecordDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getCapturedRecordDecl, other);
   }
   //captures
   // capture_const_range
@@ -7255,18 +7255,18 @@ bool ArboretumASTVisitor::VisitCapturedStmt(clang::CapturedStmt* D) {
   // const_capture_init_range
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc67, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_49, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc67, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_48, other);
   }
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange6, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_47, other);
   }
   //children
   // const_child_range
@@ -7274,43 +7274,43 @@ bool ArboretumASTVisitor::VisitCapturedStmt(clang::CapturedStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitCaseStmt(clang::CaseStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //caseStmtIsGNURange
-  arboretum_create_edge(obj, context_.data_model_.caseStmtIsGNURange, context_.data_model_.arboretum_node_for(D->caseStmtIsGNURange()));
+  arboretum_create_edge(obj, context_.data_model_.method_caseStmtIsGNURange, context_.data_model_.arboretum_node_for(D->caseStmtIsGNURange()));
   //getCaseLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getCaseLoc());
-    arboretum_create_edge(obj, context_.data_model_.getCaseLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getCaseLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getCaseLoc, other);
   }
   //getEllipsisLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEllipsisLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEllipsisLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getEllipsisLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEllipsisLoc_5, other);
   }
   //getLHS
   {
-    const Entity* other = context_.resolve(D->getLHS());
-    arboretum_create_edge(obj, context_.data_model_.getLHS1, other);
+    const Id* other = context_.resolve(D->getLHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getLHS_4, other);
   }
   //getRHS
   {
-    const Entity* other = context_.resolve(D->getRHS());
-    arboretum_create_edge(obj, context_.data_model_.getRHS1, other);
+    const Id* other = context_.resolve(D->getRHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getRHS_4, other);
   }
   //getSubStmt
   {
-    const Entity* other = context_.resolve(D->getSubStmt());
-    arboretum_create_edge(obj, context_.data_model_.getSubStmt5, other);
+    const Id* other = context_.resolve(D->getSubStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubStmt_1, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc38, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_50, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc38, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_49, other);
   }
   //children
   // const_child_range
@@ -7318,72 +7318,72 @@ bool ArboretumASTVisitor::VisitCaseStmt(clang::CaseStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitCastExpr(clang::CastExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCastKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getCastKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getCastKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getCastKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getCastKind, enum_value);
     }
   }
   //getCastKindName
   //getSubExpr
   {
-    const Entity* other = context_.resolve(D->getSubExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSubExpr20, other);
+    const Id* other = context_.resolve(D->getSubExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubExpr_4, other);
   }
   //getSubExprAsWritten
   {
-    const Entity* other = context_.resolve(D->getSubExprAsWritten());
-    arboretum_create_edge(obj, context_.data_model_.getSubExprAsWritten1, other);
+    const Id* other = context_.resolve(D->getSubExprAsWritten());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubExprAsWritten, other);
   }
   //getConversionFunction
   {
-    const Entity* other = context_.resolve(D->getConversionFunction());
-    arboretum_create_edge(obj, context_.data_model_.getConversionFunction, other);
+    const Id* other = context_.resolve(D->getConversionFunction());
+    arboretum_create_edge(obj, context_.data_model_.method_getConversionFunction, other);
   }
   //path_empty
-  arboretum_create_edge(obj, context_.data_model_.path_empty, context_.data_model_.arboretum_node_for(D->path_empty()));
+  arboretum_create_edge(obj, context_.data_model_.method_path_empty, context_.data_model_.arboretum_node_for(D->path_empty()));
   //path_size
   // unsigned int
   //path
   // llvm::iterator_range<path_const_iterator>
   //hasStoredFPFeatures
-  arboretum_create_edge(obj, context_.data_model_.hasStoredFPFeatures4, context_.data_model_.arboretum_node_for(D->hasStoredFPFeatures()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasStoredFPFeatures_2, context_.data_model_.arboretum_node_for(D->hasStoredFPFeatures()));
   //getStoredFPFeatures
   // FPOptionsOverride
   //getFPFeatures
   // FPOptionsOverride
   //changesVolatileQualification
-  arboretum_create_edge(obj, context_.data_model_.changesVolatileQualification, context_.data_model_.arboretum_node_for(D->changesVolatileQualification()));
+  arboretum_create_edge(obj, context_.data_model_.method_changesVolatileQualification, context_.data_model_.arboretum_node_for(D->changesVolatileQualification()));
   //children
   // const_child_range
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCharacterLiteral(clang::CharacterLiteral* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation5, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_6, other);
   }
   //getKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getKind_3, enum_value);
     }
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc46, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_51, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc46, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_50, other);
   }
   //getValue
   // unsigned int
@@ -7393,50 +7393,50 @@ bool ArboretumASTVisitor::VisitCharacterLiteral(clang::CharacterLiteral* D) {
 }
 
 bool ArboretumASTVisitor::VisitChooseExpr(clang::ChooseExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isConditionTrue
-  arboretum_create_edge(obj, context_.data_model_.isConditionTrue, context_.data_model_.arboretum_node_for(D->isConditionTrue()));
+  arboretum_create_edge(obj, context_.data_model_.method_isConditionTrue, context_.data_model_.arboretum_node_for(D->isConditionTrue()));
   //isConditionDependent
-  arboretum_create_edge(obj, context_.data_model_.isConditionDependent, context_.data_model_.arboretum_node_for(D->isConditionDependent()));
+  arboretum_create_edge(obj, context_.data_model_.method_isConditionDependent, context_.data_model_.arboretum_node_for(D->isConditionDependent()));
   //getChosenSubExpr
   {
-    const Entity* other = context_.resolve(D->getChosenSubExpr());
-    arboretum_create_edge(obj, context_.data_model_.getChosenSubExpr, other);
+    const Id* other = context_.resolve(D->getChosenSubExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getChosenSubExpr, other);
   }
   //getCond
   {
-    const Entity* other = context_.resolve(D->getCond());
-    arboretum_create_edge(obj, context_.data_model_.getCond12, other);
+    const Id* other = context_.resolve(D->getCond());
+    arboretum_create_edge(obj, context_.data_model_.method_getCond_3, other);
   }
   //getLHS
   {
-    const Entity* other = context_.resolve(D->getLHS());
-    arboretum_create_edge(obj, context_.data_model_.getLHS8, other);
+    const Id* other = context_.resolve(D->getLHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getLHS_5, other);
   }
   //getRHS
   {
-    const Entity* other = context_.resolve(D->getRHS());
-    arboretum_create_edge(obj, context_.data_model_.getRHS8, other);
+    const Id* other = context_.resolve(D->getRHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getRHS_5, other);
   }
   //getBuiltinLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBuiltinLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBuiltinLoc5, other);
+    const Id* other = context_.source_model_.resolve(D->getBuiltinLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBuiltinLoc_2, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc27, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_12, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc129, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_52, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc129, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_51, other);
   }
   //children
   // const_child_range
@@ -7444,51 +7444,51 @@ bool ArboretumASTVisitor::VisitChooseExpr(clang::ChooseExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitCoawaitExpr(clang::CoawaitExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isImplicit
-  arboretum_create_edge(obj, context_.data_model_.isImplicit, context_.data_model_.arboretum_node_for(D->isImplicit()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImplicit_2, context_.data_model_.arboretum_node_for(D->isImplicit()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCompoundAssignOperator(clang::CompoundAssignOperator* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getComputationLHSType
   {
-    const Entity* other = context_.resolve(D->getComputationLHSType());
-    arboretum_create_edge(obj, context_.data_model_.getComputationLHSType, other);
+    const Id* other = context_.resolve(D->getComputationLHSType());
+    arboretum_create_edge(obj, context_.data_model_.method_getComputationLHSType, other);
   }
   //getComputationResultType
   {
-    const Entity* other = context_.resolve(D->getComputationResultType());
-    arboretum_create_edge(obj, context_.data_model_.getComputationResultType, other);
+    const Id* other = context_.resolve(D->getComputationResultType());
+    arboretum_create_edge(obj, context_.data_model_.method_getComputationResultType, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitCompoundLiteralExpr(clang::CompoundLiteralExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getInitializer
   {
-    const Entity* other = context_.resolve(D->getInitializer());
-    arboretum_create_edge(obj, context_.data_model_.getInitializer2, other);
+    const Id* other = context_.resolve(D->getInitializer());
+    arboretum_create_edge(obj, context_.data_model_.method_getInitializer_1, other);
   }
   //isFileScope
-  arboretum_create_edge(obj, context_.data_model_.isFileScope, context_.data_model_.arboretum_node_for(D->isFileScope()));
+  arboretum_create_edge(obj, context_.data_model_.method_isFileScope, context_.data_model_.arboretum_node_for(D->isFileScope()));
   //getLParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLParenLoc8, other);
+    const Id* other = context_.source_model_.resolve(D->getLParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParenLoc_4, other);
   }
   //getTypeSourceInfo
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc69, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_53, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc69, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_52, other);
   }
   //children
   // const_child_range
@@ -7496,51 +7496,51 @@ bool ArboretumASTVisitor::VisitCompoundLiteralExpr(clang::CompoundLiteralExpr* D
 }
 
 bool ArboretumASTVisitor::VisitCompoundStmt(clang::CompoundStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //body_empty
-  arboretum_create_edge(obj, context_.data_model_.body_empty, context_.data_model_.arboretum_node_for(D->body_empty()));
+  arboretum_create_edge(obj, context_.data_model_.method_body_empty, context_.data_model_.arboretum_node_for(D->body_empty()));
   //size
   // unsigned int
   //hasStoredFPFeatures
-  arboretum_create_edge(obj, context_.data_model_.hasStoredFPFeatures, context_.data_model_.arboretum_node_for(D->hasStoredFPFeatures()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasStoredFPFeatures_3, context_.data_model_.arboretum_node_for(D->hasStoredFPFeatures()));
   //getStoredFPFeatures
   // FPOptionsOverride
   //body
   // body_const_range
   //body_front
   {
-    const Entity* other = context_.resolve(D->body_front());
-    arboretum_create_edge(obj, context_.data_model_.body_front1, other);
+    const Id* other = context_.resolve(D->body_front());
+    arboretum_create_edge(obj, context_.data_model_.method_body_front, other);
   }
   //body_back
   {
-    const Entity* other = context_.resolve(D->body_back());
-    arboretum_create_edge(obj, context_.data_model_.body_back1, other);
+    const Id* other = context_.resolve(D->body_back());
+    arboretum_create_edge(obj, context_.data_model_.method_body_back, other);
   }
   //getStmtExprResult
   {
-    const Entity* other = context_.resolve(D->getStmtExprResult());
-    arboretum_create_edge(obj, context_.data_model_.getStmtExprResult1, other);
+    const Id* other = context_.resolve(D->getStmtExprResult());
+    arboretum_create_edge(obj, context_.data_model_.method_getStmtExprResult, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc37, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_54, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc37, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_53, other);
   }
   //getLBracLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLBracLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLBracLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getLBracLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLBracLoc, other);
   }
   //getRBracLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRBracLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRBracLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getRBracLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRBracLoc, other);
   }
   //children
   // const_child_range
@@ -7548,58 +7548,58 @@ bool ArboretumASTVisitor::VisitCompoundStmt(clang::CompoundStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitConceptSpecializationExpr(clang::ConceptSpecializationExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTemplateArguments
   // ArrayRef<TemplateArgument>
   //getConceptReference
   //getNamedConcept
   {
-    const Entity* other = context_.resolve(D->getNamedConcept());
-    arboretum_create_edge(obj, context_.data_model_.getNamedConcept, other);
+    const Id* other = context_.resolve(D->getNamedConcept());
+    arboretum_create_edge(obj, context_.data_model_.method_getNamedConcept, other);
   }
   //hasExplicitTemplateArgs
-  arboretum_create_edge(obj, context_.data_model_.hasExplicitTemplateArgs2, context_.data_model_.arboretum_node_for(D->hasExplicitTemplateArgs()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasExplicitTemplateArgs_1, context_.data_model_.arboretum_node_for(D->hasExplicitTemplateArgs()));
   //getConceptNameLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getConceptNameLoc());
-    arboretum_create_edge(obj, context_.data_model_.getConceptNameLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getConceptNameLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getConceptNameLoc, other);
   }
   //getTemplateArgsAsWritten
   //getNestedNameSpecifierLoc
   // const NestedNameSpecifierLoc &
   //getTemplateKWLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTemplateKWLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTemplateKWLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getTemplateKWLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplateKWLoc, other);
   }
   //getFoundDecl
   {
-    const Entity* other = context_.resolve(D->getFoundDecl());
-    arboretum_create_edge(obj, context_.data_model_.getFoundDecl3, other);
+    const Id* other = context_.resolve(D->getFoundDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getFoundDecl_1, other);
   }
   //getConceptNameInfo
   // const DeclarationNameInfo &
   //getSpecializationDecl
   {
-    const Entity* other = context_.resolve(D->getSpecializationDecl());
-    arboretum_create_edge(obj, context_.data_model_.getSpecializationDecl, other);
+    const Id* other = context_.resolve(D->getSpecializationDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getSpecializationDecl, other);
   }
   //getSatisfaction
   // const ASTConstraintSatisfaction &
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc51, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_55, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc51, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_54, other);
   }
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc4, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc_6, other);
   }
   //children
   // const_child_range
@@ -7607,41 +7607,41 @@ bool ArboretumASTVisitor::VisitConceptSpecializationExpr(clang::ConceptSpecializ
 }
 
 bool ArboretumASTVisitor::VisitConditionalOperator(clang::ConditionalOperator* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCond
   {
-    const Entity* other = context_.resolve(D->getCond());
-    arboretum_create_edge(obj, context_.data_model_.getCond9, other);
+    const Id* other = context_.resolve(D->getCond());
+    arboretum_create_edge(obj, context_.data_model_.method_getCond_4, other);
   }
   //getTrueExpr
   {
-    const Entity* other = context_.resolve(D->getTrueExpr());
-    arboretum_create_edge(obj, context_.data_model_.getTrueExpr2, other);
+    const Id* other = context_.resolve(D->getTrueExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getTrueExpr_2, other);
   }
   //getFalseExpr
   {
-    const Entity* other = context_.resolve(D->getFalseExpr());
-    arboretum_create_edge(obj, context_.data_model_.getFalseExpr2, other);
+    const Id* other = context_.resolve(D->getFalseExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getFalseExpr_2, other);
   }
   //getLHS
   {
-    const Entity* other = context_.resolve(D->getLHS());
-    arboretum_create_edge(obj, context_.data_model_.getLHS4, other);
+    const Id* other = context_.resolve(D->getLHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getLHS_6, other);
   }
   //getRHS
   {
-    const Entity* other = context_.resolve(D->getRHS());
-    arboretum_create_edge(obj, context_.data_model_.getRHS4, other);
+    const Id* other = context_.resolve(D->getRHS());
+    arboretum_create_edge(obj, context_.data_model_.method_getRHS_6, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc87, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_56, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc87, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_55, other);
   }
   //children
   // const_child_range
@@ -7649,35 +7649,35 @@ bool ArboretumASTVisitor::VisitConditionalOperator(clang::ConditionalOperator* D
 }
 
 bool ArboretumASTVisitor::VisitConstantExpr(clang::ConstantExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc30, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_57, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc30, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_56, other);
   }
   //getResultAPValueKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getResultAPValueKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getResultAPValueKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getResultAPValueKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getResultAPValueKind, enum_value);
     }
   }
   //getResultStorageKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getResultStorageKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getResultStorageKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getResultStorageKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getResultStorageKind, enum_value);
     }
   }
   //isImmediateInvocation
-  arboretum_create_edge(obj, context_.data_model_.isImmediateInvocation, context_.data_model_.arboretum_node_for(D->isImmediateInvocation()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImmediateInvocation, context_.data_model_.arboretum_node_for(D->isImmediateInvocation()));
   //hasAPValueResult
-  arboretum_create_edge(obj, context_.data_model_.hasAPValueResult, context_.data_model_.arboretum_node_for(D->hasAPValueResult()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasAPValueResult, context_.data_model_.arboretum_node_for(D->hasAPValueResult()));
   //getAPValueResult
   // APValue
   //getResultAsAPSInt
@@ -7688,21 +7688,21 @@ bool ArboretumASTVisitor::VisitConstantExpr(clang::ConstantExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitContinueStmt(clang::ContinueStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getContinueLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getContinueLoc());
-    arboretum_create_edge(obj, context_.data_model_.getContinueLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getContinueLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getContinueLoc, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc32, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_58, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc32, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_57, other);
   }
   //children
   // const_child_range
@@ -7710,32 +7710,32 @@ bool ArboretumASTVisitor::VisitContinueStmt(clang::ContinueStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitConvertVectorExpr(clang::ConvertVectorExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSrcExpr
   {
-    const Entity* other = context_.resolve(D->getSrcExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSrcExpr1, other);
+    const Id* other = context_.resolve(D->getSrcExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSrcExpr_1, other);
   }
   //getTypeSourceInfo
   //getBuiltinLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBuiltinLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBuiltinLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getBuiltinLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBuiltinLoc_3, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc14, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_13, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc86, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_59, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc86, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_58, other);
   }
   //children
   // const_child_range
@@ -7743,33 +7743,33 @@ bool ArboretumASTVisitor::VisitConvertVectorExpr(clang::ConvertVectorExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitCoreturnStmt(clang::CoreturnStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getKeywordLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getKeywordLoc());
-    arboretum_create_edge(obj, context_.data_model_.getKeywordLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getKeywordLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getKeywordLoc, other);
   }
   //getOperand
   {
-    const Entity* other = context_.resolve(D->getOperand());
-    arboretum_create_edge(obj, context_.data_model_.getOperand2, other);
+    const Id* other = context_.resolve(D->getOperand());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperand_1, other);
   }
   //getPromiseCall
   {
-    const Entity* other = context_.resolve(D->getPromiseCall());
-    arboretum_create_edge(obj, context_.data_model_.getPromiseCall, other);
+    const Id* other = context_.resolve(D->getPromiseCall());
+    arboretum_create_edge(obj, context_.data_model_.method_getPromiseCall, other);
   }
   //isImplicit
-  arboretum_create_edge(obj, context_.data_model_.isImplicit5, context_.data_model_.arboretum_node_for(D->isImplicit()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImplicit_3, context_.data_model_.arboretum_node_for(D->isImplicit()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc138, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_60, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc138, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_59, other);
   }
   //children
   // const_child_range
@@ -7777,90 +7777,90 @@ bool ArboretumASTVisitor::VisitCoreturnStmt(clang::CoreturnStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitCoroutineBodyStmt(clang::CoroutineBodyStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //hasDependentPromiseType
-  arboretum_create_edge(obj, context_.data_model_.hasDependentPromiseType, context_.data_model_.arboretum_node_for(D->hasDependentPromiseType()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasDependentPromiseType, context_.data_model_.arboretum_node_for(D->hasDependentPromiseType()));
   //getBody
   {
-    const Entity* other = context_.resolve(D->getBody());
-    arboretum_create_edge(obj, context_.data_model_.getBody2, other);
+    const Id* other = context_.resolve(D->getBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getBody_6, other);
   }
   //getPromiseDeclStmt
   {
-    const Entity* other = context_.resolve(D->getPromiseDeclStmt());
-    arboretum_create_edge(obj, context_.data_model_.getPromiseDeclStmt, other);
+    const Id* other = context_.resolve(D->getPromiseDeclStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getPromiseDeclStmt, other);
   }
   //getPromiseDecl
   {
-    const Entity* other = context_.resolve(D->getPromiseDecl());
-    arboretum_create_edge(obj, context_.data_model_.getPromiseDecl, other);
+    const Id* other = context_.resolve(D->getPromiseDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getPromiseDecl, other);
   }
   //getInitSuspendStmt
   {
-    const Entity* other = context_.resolve(D->getInitSuspendStmt());
-    arboretum_create_edge(obj, context_.data_model_.getInitSuspendStmt, other);
+    const Id* other = context_.resolve(D->getInitSuspendStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getInitSuspendStmt, other);
   }
   //getFinalSuspendStmt
   {
-    const Entity* other = context_.resolve(D->getFinalSuspendStmt());
-    arboretum_create_edge(obj, context_.data_model_.getFinalSuspendStmt, other);
+    const Id* other = context_.resolve(D->getFinalSuspendStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getFinalSuspendStmt, other);
   }
   //getExceptionHandler
   {
-    const Entity* other = context_.resolve(D->getExceptionHandler());
-    arboretum_create_edge(obj, context_.data_model_.getExceptionHandler, other);
+    const Id* other = context_.resolve(D->getExceptionHandler());
+    arboretum_create_edge(obj, context_.data_model_.method_getExceptionHandler, other);
   }
   //getFallthroughHandler
   {
-    const Entity* other = context_.resolve(D->getFallthroughHandler());
-    arboretum_create_edge(obj, context_.data_model_.getFallthroughHandler, other);
+    const Id* other = context_.resolve(D->getFallthroughHandler());
+    arboretum_create_edge(obj, context_.data_model_.method_getFallthroughHandler, other);
   }
   //getAllocate
   {
-    const Entity* other = context_.resolve(D->getAllocate());
-    arboretum_create_edge(obj, context_.data_model_.getAllocate, other);
+    const Id* other = context_.resolve(D->getAllocate());
+    arboretum_create_edge(obj, context_.data_model_.method_getAllocate, other);
   }
   //getDeallocate
   {
-    const Entity* other = context_.resolve(D->getDeallocate());
-    arboretum_create_edge(obj, context_.data_model_.getDeallocate, other);
+    const Id* other = context_.resolve(D->getDeallocate());
+    arboretum_create_edge(obj, context_.data_model_.method_getDeallocate, other);
   }
   //getResultDecl
   {
-    const Entity* other = context_.resolve(D->getResultDecl());
-    arboretum_create_edge(obj, context_.data_model_.getResultDecl, other);
+    const Id* other = context_.resolve(D->getResultDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getResultDecl, other);
   }
   //getReturnValueInit
   {
-    const Entity* other = context_.resolve(D->getReturnValueInit());
-    arboretum_create_edge(obj, context_.data_model_.getReturnValueInit, other);
+    const Id* other = context_.resolve(D->getReturnValueInit());
+    arboretum_create_edge(obj, context_.data_model_.method_getReturnValueInit, other);
   }
   //getReturnValue
   {
-    const Entity* other = context_.resolve(D->getReturnValue());
-    arboretum_create_edge(obj, context_.data_model_.getReturnValue, other);
+    const Id* other = context_.resolve(D->getReturnValue());
+    arboretum_create_edge(obj, context_.data_model_.method_getReturnValue, other);
   }
   //getReturnStmt
   {
-    const Entity* other = context_.resolve(D->getReturnStmt());
-    arboretum_create_edge(obj, context_.data_model_.getReturnStmt, other);
+    const Id* other = context_.resolve(D->getReturnStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getReturnStmt, other);
   }
   //getReturnStmtOnAllocFailure
   {
-    const Entity* other = context_.resolve(D->getReturnStmtOnAllocFailure());
-    arboretum_create_edge(obj, context_.data_model_.getReturnStmtOnAllocFailure, other);
+    const Id* other = context_.resolve(D->getReturnStmtOnAllocFailure());
+    arboretum_create_edge(obj, context_.data_model_.method_getReturnStmtOnAllocFailure, other);
   }
   //getParamMoves
   // ArrayRef<const Stmt *>
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc11, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_61, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc11, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_60, other);
   }
   //children
   // const_child_range
@@ -7870,51 +7870,51 @@ bool ArboretumASTVisitor::VisitCoroutineBodyStmt(clang::CoroutineBodyStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitCoroutineSuspendExpr(clang::CoroutineSuspendExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCommonExpr
   {
-    const Entity* other = context_.resolve(D->getCommonExpr());
-    arboretum_create_edge(obj, context_.data_model_.getCommonExpr1, other);
+    const Id* other = context_.resolve(D->getCommonExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getCommonExpr_1, other);
   }
   //getOpaqueValue
   {
-    const Entity* other = context_.resolve(D->getOpaqueValue());
-    arboretum_create_edge(obj, context_.data_model_.getOpaqueValue1, other);
+    const Id* other = context_.resolve(D->getOpaqueValue());
+    arboretum_create_edge(obj, context_.data_model_.method_getOpaqueValue_1, other);
   }
   //getReadyExpr
   {
-    const Entity* other = context_.resolve(D->getReadyExpr());
-    arboretum_create_edge(obj, context_.data_model_.getReadyExpr, other);
+    const Id* other = context_.resolve(D->getReadyExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getReadyExpr, other);
   }
   //getSuspendExpr
   {
-    const Entity* other = context_.resolve(D->getSuspendExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSuspendExpr, other);
+    const Id* other = context_.resolve(D->getSuspendExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSuspendExpr, other);
   }
   //getResumeExpr
   {
-    const Entity* other = context_.resolve(D->getResumeExpr());
-    arboretum_create_edge(obj, context_.data_model_.getResumeExpr, other);
+    const Id* other = context_.resolve(D->getResumeExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getResumeExpr, other);
   }
   //getOperand
   {
-    const Entity* other = context_.resolve(D->getOperand());
-    arboretum_create_edge(obj, context_.data_model_.getOperand3, other);
+    const Id* other = context_.resolve(D->getOperand());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperand_2, other);
   }
   //getKeywordLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getKeywordLoc());
-    arboretum_create_edge(obj, context_.data_model_.getKeywordLoc4, other);
+    const Id* other = context_.source_model_.resolve(D->getKeywordLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getKeywordLoc_1, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc162, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_62, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc160, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_61, other);
   }
   //children
   // const_child_range
@@ -7922,105 +7922,105 @@ bool ArboretumASTVisitor::VisitCoroutineSuspendExpr(clang::CoroutineSuspendExpr*
 }
 
 bool ArboretumASTVisitor::VisitCoyieldExpr(clang::CoyieldExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDeclRefExpr(clang::DeclRefExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getDecl
   {
-    const Entity* other = context_.resolve(D->getDecl());
-    arboretum_create_edge(obj, context_.data_model_.getDecl4, other);
+    const Id* other = context_.resolve(D->getDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getDecl_7, other);
   }
   //getNameInfo
   // DeclarationNameInfo
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation3, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_7, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc34, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_63, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc34, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_62, other);
   }
   //hasQualifier
-  arboretum_create_edge(obj, context_.data_model_.hasQualifier1, context_.data_model_.arboretum_node_for(D->hasQualifier()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasQualifier_1, context_.data_model_.arboretum_node_for(D->hasQualifier()));
   //getQualifierLoc
   // NestedNameSpecifierLoc
   //getQualifier
   //getFoundDecl
   {
-    const Entity* other = context_.resolve(D->getFoundDecl());
-    arboretum_create_edge(obj, context_.data_model_.getFoundDecl2, other);
+    const Id* other = context_.resolve(D->getFoundDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getFoundDecl_2, other);
   }
   //hasTemplateKWAndArgsInfo
-  arboretum_create_edge(obj, context_.data_model_.hasTemplateKWAndArgsInfo1, context_.data_model_.arboretum_node_for(D->hasTemplateKWAndArgsInfo()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTemplateKWAndArgsInfo, context_.data_model_.arboretum_node_for(D->hasTemplateKWAndArgsInfo()));
   //getTemplateKeywordLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTemplateKeywordLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplateKeywordLoc_3, other);
   }
   //getLAngleLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLAngleLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLAngleLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getLAngleLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLAngleLoc_1, other);
   }
   //getRAngleLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRAngleLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRAngleLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getRAngleLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRAngleLoc_1, other);
   }
   //hasTemplateKeyword
-  arboretum_create_edge(obj, context_.data_model_.hasTemplateKeyword1, context_.data_model_.arboretum_node_for(D->hasTemplateKeyword()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTemplateKeyword_1, context_.data_model_.arboretum_node_for(D->hasTemplateKeyword()));
   //hasExplicitTemplateArgs
-  arboretum_create_edge(obj, context_.data_model_.hasExplicitTemplateArgs1, context_.data_model_.arboretum_node_for(D->hasExplicitTemplateArgs()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasExplicitTemplateArgs_2, context_.data_model_.arboretum_node_for(D->hasExplicitTemplateArgs()));
   //getTemplateArgs
   //getNumTemplateArgs
   // unsigned int
   //template_arguments
   // ArrayRef<TemplateArgumentLoc>
   //hadMultipleCandidates
-  arboretum_create_edge(obj, context_.data_model_.hadMultipleCandidates1, context_.data_model_.arboretum_node_for(D->hadMultipleCandidates()));
+  arboretum_create_edge(obj, context_.data_model_.method_hadMultipleCandidates_1, context_.data_model_.arboretum_node_for(D->hadMultipleCandidates()));
   //isNonOdrUse
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->isNonOdrUse());
+    const Id* enum_value = context_.data_model_.resolve(D->isNonOdrUse());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.isNonOdrUse1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_isNonOdrUse, enum_value);
     }
   }
   //refersToEnclosingVariableOrCapture
-  arboretum_create_edge(obj, context_.data_model_.refersToEnclosingVariableOrCapture, context_.data_model_.arboretum_node_for(D->refersToEnclosingVariableOrCapture()));
+  arboretum_create_edge(obj, context_.data_model_.method_refersToEnclosingVariableOrCapture, context_.data_model_.arboretum_node_for(D->refersToEnclosingVariableOrCapture()));
   //isImmediateEscalating
-  arboretum_create_edge(obj, context_.data_model_.isImmediateEscalating, context_.data_model_.arboretum_node_for(D->isImmediateEscalating()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImmediateEscalating_2, context_.data_model_.arboretum_node_for(D->isImmediateEscalating()));
   //isCapturedByCopyInLambdaWithExplicitObjectParameter
-  arboretum_create_edge(obj, context_.data_model_.isCapturedByCopyInLambdaWithExplicitObjectParameter, context_.data_model_.arboretum_node_for(D->isCapturedByCopyInLambdaWithExplicitObjectParameter()));
+  arboretum_create_edge(obj, context_.data_model_.method_isCapturedByCopyInLambdaWithExplicitObjectParameter, context_.data_model_.arboretum_node_for(D->isCapturedByCopyInLambdaWithExplicitObjectParameter()));
   //children
   // const_child_range
   return true;
 }
 
 bool ArboretumASTVisitor::VisitDeclStmt(clang::DeclStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isSingleDecl
-  arboretum_create_edge(obj, context_.data_model_.isSingleDecl, context_.data_model_.arboretum_node_for(D->isSingleDecl()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSingleDecl, context_.data_model_.arboretum_node_for(D->isSingleDecl()));
   //getDeclGroup
   // const DeclGroupRef
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc105, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_63, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc105, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_64, other);
   }
   //children
   // const_child_range
@@ -8030,26 +8030,26 @@ bool ArboretumASTVisitor::VisitDeclStmt(clang::DeclStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitDefaultStmt(clang::DefaultStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSubStmt
   {
-    const Entity* other = context_.resolve(D->getSubStmt());
-    arboretum_create_edge(obj, context_.data_model_.getSubStmt7, other);
+    const Id* other = context_.resolve(D->getSubStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubStmt_2, other);
   }
   //getDefaultLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getDefaultLoc());
-    arboretum_create_edge(obj, context_.data_model_.getDefaultLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getDefaultLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefaultLoc_1, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc103, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_65, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc103, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_64, other);
   }
   //children
   // const_child_range
@@ -8057,31 +8057,31 @@ bool ArboretumASTVisitor::VisitDefaultStmt(clang::DefaultStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitDependentCoawaitExpr(clang::DependentCoawaitExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getOperand
   {
-    const Entity* other = context_.resolve(D->getOperand());
-    arboretum_create_edge(obj, context_.data_model_.getOperand, other);
+    const Id* other = context_.resolve(D->getOperand());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperand_3, other);
   }
   //getOperatorCoawaitLookup
   {
-    const Entity* other = context_.resolve(D->getOperatorCoawaitLookup());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorCoawaitLookup, other);
+    const Id* other = context_.resolve(D->getOperatorCoawaitLookup());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorCoawaitLookup, other);
   }
   //getKeywordLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getKeywordLoc());
-    arboretum_create_edge(obj, context_.data_model_.getKeywordLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getKeywordLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getKeywordLoc_2, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc58, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_66, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc58, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_65, other);
   }
   //children
   // const_child_range
@@ -8089,38 +8089,38 @@ bool ArboretumASTVisitor::VisitDependentCoawaitExpr(clang::DependentCoawaitExpr*
 }
 
 bool ArboretumASTVisitor::VisitDependentScopeDeclRefExpr(clang::DependentScopeDeclRefExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getNameInfo
   // const DeclarationNameInfo &
   //getDeclName
   // DeclarationName
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation20, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_8, other);
   }
   //getQualifierLoc
   // NestedNameSpecifierLoc
   //getQualifier
   //getTemplateKeywordLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTemplateKeywordLoc8, other);
+    const Id* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplateKeywordLoc_4, other);
   }
   //getLAngleLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLAngleLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLAngleLoc6, other);
+    const Id* other = context_.source_model_.resolve(D->getLAngleLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLAngleLoc_2, other);
   }
   //getRAngleLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRAngleLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRAngleLoc6, other);
+    const Id* other = context_.source_model_.resolve(D->getRAngleLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRAngleLoc_2, other);
   }
   //hasTemplateKeyword
-  arboretum_create_edge(obj, context_.data_model_.hasTemplateKeyword4, context_.data_model_.arboretum_node_for(D->hasTemplateKeyword()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTemplateKeyword_2, context_.data_model_.arboretum_node_for(D->hasTemplateKeyword()));
   //hasExplicitTemplateArgs
-  arboretum_create_edge(obj, context_.data_model_.hasExplicitTemplateArgs5, context_.data_model_.arboretum_node_for(D->hasExplicitTemplateArgs()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasExplicitTemplateArgs_3, context_.data_model_.arboretum_node_for(D->hasExplicitTemplateArgs()));
   //getTemplateArgs
   //getNumTemplateArgs
   // unsigned int
@@ -8128,13 +8128,13 @@ bool ArboretumASTVisitor::VisitDependentScopeDeclRefExpr(clang::DependentScopeDe
   // ArrayRef<TemplateArgumentLoc>
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc160, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_67, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc158, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_66, other);
   }
   //children
   // const_child_range
@@ -8142,41 +8142,41 @@ bool ArboretumASTVisitor::VisitDependentScopeDeclRefExpr(clang::DependentScopeDe
 }
 
 bool ArboretumASTVisitor::VisitDesignatedInitExpr(clang::DesignatedInitExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //size
   // unsigned int
   //designators
   // llvm::ArrayRef<Designator>
   //getEqualOrColonLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEqualOrColonLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEqualOrColonLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getEqualOrColonLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEqualOrColonLoc, other);
   }
   //isDirectInit
-  arboretum_create_edge(obj, context_.data_model_.isDirectInit1, context_.data_model_.arboretum_node_for(D->isDirectInit()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDirectInit_1, context_.data_model_.arboretum_node_for(D->isDirectInit()));
   //usesGNUSyntax
-  arboretum_create_edge(obj, context_.data_model_.usesGNUSyntax, context_.data_model_.arboretum_node_for(D->usesGNUSyntax()));
+  arboretum_create_edge(obj, context_.data_model_.method_usesGNUSyntax, context_.data_model_.arboretum_node_for(D->usesGNUSyntax()));
   //getInit
   {
-    const Entity* other = context_.resolve(D->getInit());
-    arboretum_create_edge(obj, context_.data_model_.getInit12, other);
+    const Id* other = context_.resolve(D->getInit());
+    arboretum_create_edge(obj, context_.data_model_.method_getInit_3, other);
   }
   //getNumSubExprs
   // unsigned int
   //getDesignatorsSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getDesignatorsSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getDesignatorsSourceRange, other);
+    const Id* other = context_.source_model_.resolve(D->getDesignatorsSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getDesignatorsSourceRange, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc141, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_68, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc141, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_67, other);
   }
   //children
   // const_child_range
@@ -8184,26 +8184,26 @@ bool ArboretumASTVisitor::VisitDesignatedInitExpr(clang::DesignatedInitExpr* D) 
 }
 
 bool ArboretumASTVisitor::VisitDesignatedInitUpdateExpr(clang::DesignatedInitUpdateExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc101, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_69, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc101, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_68, other);
   }
   //getBase
   {
-    const Entity* other = context_.resolve(D->getBase());
-    arboretum_create_edge(obj, context_.data_model_.getBase17, other);
+    const Id* other = context_.resolve(D->getBase());
+    arboretum_create_edge(obj, context_.data_model_.method_getBase_2, other);
   }
   //getUpdater
   {
-    const Entity* other = context_.resolve(D->getUpdater());
-    arboretum_create_edge(obj, context_.data_model_.getUpdater, other);
+    const Id* other = context_.resolve(D->getUpdater());
+    arboretum_create_edge(obj, context_.data_model_.method_getUpdater, other);
   }
   //children
   // const_child_range
@@ -8211,41 +8211,41 @@ bool ArboretumASTVisitor::VisitDesignatedInitUpdateExpr(clang::DesignatedInitUpd
 }
 
 bool ArboretumASTVisitor::VisitDoStmt(clang::DoStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCond
   {
-    const Entity* other = context_.resolve(D->getCond());
-    arboretum_create_edge(obj, context_.data_model_.getCond14, other);
+    const Id* other = context_.resolve(D->getCond());
+    arboretum_create_edge(obj, context_.data_model_.method_getCond_5, other);
   }
   //getBody
   {
-    const Entity* other = context_.resolve(D->getBody());
-    arboretum_create_edge(obj, context_.data_model_.getBody19, other);
+    const Id* other = context_.resolve(D->getBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getBody_7, other);
   }
   //getDoLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getDoLoc());
-    arboretum_create_edge(obj, context_.data_model_.getDoLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getDoLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getDoLoc, other);
   }
   //getWhileLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getWhileLoc());
-    arboretum_create_edge(obj, context_.data_model_.getWhileLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getWhileLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getWhileLoc, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc29, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_14, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc135, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_70, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc135, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_69, other);
   }
   //children
   // const_child_range
@@ -8253,168 +8253,168 @@ bool ArboretumASTVisitor::VisitDoStmt(clang::DoStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitExplicitCastExpr(clang::ExplicitCastExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTypeInfoAsWritten
   //getTypeAsWritten
   {
-    const Entity* other = context_.resolve(D->getTypeAsWritten());
-    arboretum_create_edge(obj, context_.data_model_.getTypeAsWritten, other);
+    const Id* other = context_.resolve(D->getTypeAsWritten());
+    arboretum_create_edge(obj, context_.data_model_.method_getTypeAsWritten_3, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitExpr(clang::Expr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getType
   {
-    const Entity* other = context_.resolve(D->getType());
-    arboretum_create_edge(obj, context_.data_model_.getType, other);
+    const Id* other = context_.resolve(D->getType());
+    arboretum_create_edge(obj, context_.data_model_.method_getType_1, other);
   }
   //getDependence
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getDependence());
+    const Id* enum_value = context_.data_model_.resolve(D->getDependence());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getDependence, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getDependence_1, enum_value);
     }
   }
   //isValueDependent
-  arboretum_create_edge(obj, context_.data_model_.isValueDependent, context_.data_model_.arboretum_node_for(D->isValueDependent()));
+  arboretum_create_edge(obj, context_.data_model_.method_isValueDependent, context_.data_model_.arboretum_node_for(D->isValueDependent()));
   //isTypeDependent
-  arboretum_create_edge(obj, context_.data_model_.isTypeDependent, context_.data_model_.arboretum_node_for(D->isTypeDependent()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTypeDependent, context_.data_model_.arboretum_node_for(D->isTypeDependent()));
   //isInstantiationDependent
-  arboretum_create_edge(obj, context_.data_model_.isInstantiationDependent, context_.data_model_.arboretum_node_for(D->isInstantiationDependent()));
+  arboretum_create_edge(obj, context_.data_model_.method_isInstantiationDependent, context_.data_model_.arboretum_node_for(D->isInstantiationDependent()));
   //containsUnexpandedParameterPack
-  arboretum_create_edge(obj, context_.data_model_.containsUnexpandedParameterPack, context_.data_model_.arboretum_node_for(D->containsUnexpandedParameterPack()));
+  arboretum_create_edge(obj, context_.data_model_.method_containsUnexpandedParameterPack_1, context_.data_model_.arboretum_node_for(D->containsUnexpandedParameterPack()));
   //containsErrors
-  arboretum_create_edge(obj, context_.data_model_.containsErrors, context_.data_model_.arboretum_node_for(D->containsErrors()));
+  arboretum_create_edge(obj, context_.data_model_.method_containsErrors_1, context_.data_model_.arboretum_node_for(D->containsErrors()));
   //isLValue
-  arboretum_create_edge(obj, context_.data_model_.isLValue, context_.data_model_.arboretum_node_for(D->isLValue()));
+  arboretum_create_edge(obj, context_.data_model_.method_isLValue, context_.data_model_.arboretum_node_for(D->isLValue()));
   //isPRValue
-  arboretum_create_edge(obj, context_.data_model_.isPRValue, context_.data_model_.arboretum_node_for(D->isPRValue()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPRValue, context_.data_model_.arboretum_node_for(D->isPRValue()));
   //isXValue
-  arboretum_create_edge(obj, context_.data_model_.isXValue, context_.data_model_.arboretum_node_for(D->isXValue()));
+  arboretum_create_edge(obj, context_.data_model_.method_isXValue, context_.data_model_.arboretum_node_for(D->isXValue()));
   //isGLValue
-  arboretum_create_edge(obj, context_.data_model_.isGLValue, context_.data_model_.arboretum_node_for(D->isGLValue()));
+  arboretum_create_edge(obj, context_.data_model_.method_isGLValue, context_.data_model_.arboretum_node_for(D->isGLValue()));
   //getValueKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getValueKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getValueKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getValueKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getValueKind, enum_value);
     }
   }
   //getObjectKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getObjectKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getObjectKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getObjectKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getObjectKind, enum_value);
     }
   }
   //isOrdinaryOrBitFieldObject
-  arboretum_create_edge(obj, context_.data_model_.isOrdinaryOrBitFieldObject, context_.data_model_.arboretum_node_for(D->isOrdinaryOrBitFieldObject()));
+  arboretum_create_edge(obj, context_.data_model_.method_isOrdinaryOrBitFieldObject, context_.data_model_.arboretum_node_for(D->isOrdinaryOrBitFieldObject()));
   //refersToBitField
-  arboretum_create_edge(obj, context_.data_model_.refersToBitField, context_.data_model_.arboretum_node_for(D->refersToBitField()));
+  arboretum_create_edge(obj, context_.data_model_.method_refersToBitField, context_.data_model_.arboretum_node_for(D->refersToBitField()));
   //getSourceBitField
   {
-    const Entity* other = context_.resolve(D->getSourceBitField());
-    arboretum_create_edge(obj, context_.data_model_.getSourceBitField1, other);
+    const Id* other = context_.resolve(D->getSourceBitField());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceBitField, other);
   }
   //getReferencedDeclOfCallee
   {
-    const Entity* other = context_.resolve(D->getReferencedDeclOfCallee());
-    arboretum_create_edge(obj, context_.data_model_.getReferencedDeclOfCallee1, other);
+    const Id* other = context_.resolve(D->getReferencedDeclOfCallee());
+    arboretum_create_edge(obj, context_.data_model_.method_getReferencedDeclOfCallee, other);
   }
   //getObjCProperty
   {
-    const Entity* other = context_.resolve(D->getObjCProperty());
-    arboretum_create_edge(obj, context_.data_model_.getObjCProperty, other);
+    const Id* other = context_.resolve(D->getObjCProperty());
+    arboretum_create_edge(obj, context_.data_model_.method_getObjCProperty, other);
   }
   //isObjCSelfExpr
-  arboretum_create_edge(obj, context_.data_model_.isObjCSelfExpr, context_.data_model_.arboretum_node_for(D->isObjCSelfExpr()));
+  arboretum_create_edge(obj, context_.data_model_.method_isObjCSelfExpr, context_.data_model_.arboretum_node_for(D->isObjCSelfExpr()));
   //refersToVectorElement
-  arboretum_create_edge(obj, context_.data_model_.refersToVectorElement, context_.data_model_.arboretum_node_for(D->refersToVectorElement()));
+  arboretum_create_edge(obj, context_.data_model_.method_refersToVectorElement, context_.data_model_.arboretum_node_for(D->refersToVectorElement()));
   //refersToMatrixElement
-  arboretum_create_edge(obj, context_.data_model_.refersToMatrixElement, context_.data_model_.arboretum_node_for(D->refersToMatrixElement()));
+  arboretum_create_edge(obj, context_.data_model_.method_refersToMatrixElement, context_.data_model_.arboretum_node_for(D->refersToMatrixElement()));
   //refersToGlobalRegisterVar
-  arboretum_create_edge(obj, context_.data_model_.refersToGlobalRegisterVar, context_.data_model_.arboretum_node_for(D->refersToGlobalRegisterVar()));
+  arboretum_create_edge(obj, context_.data_model_.method_refersToGlobalRegisterVar, context_.data_model_.arboretum_node_for(D->refersToGlobalRegisterVar()));
   //IgnoreImpCasts
   {
-    const Entity* other = context_.resolve(D->IgnoreImpCasts());
-    arboretum_create_edge(obj, context_.data_model_.IgnoreImpCasts1, other);
+    const Id* other = context_.resolve(D->IgnoreImpCasts());
+    arboretum_create_edge(obj, context_.data_model_.method_IgnoreImpCasts, other);
   }
   //IgnoreCasts
   {
-    const Entity* other = context_.resolve(D->IgnoreCasts());
-    arboretum_create_edge(obj, context_.data_model_.IgnoreCasts1, other);
+    const Id* other = context_.resolve(D->IgnoreCasts());
+    arboretum_create_edge(obj, context_.data_model_.method_IgnoreCasts, other);
   }
   //IgnoreImplicit
   {
-    const Entity* other = context_.resolve(D->IgnoreImplicit());
-    arboretum_create_edge(obj, context_.data_model_.IgnoreImplicit1, other);
+    const Id* other = context_.resolve(D->IgnoreImplicit());
+    arboretum_create_edge(obj, context_.data_model_.method_IgnoreImplicit, other);
   }
   //IgnoreImplicitAsWritten
   {
-    const Entity* other = context_.resolve(D->IgnoreImplicitAsWritten());
-    arboretum_create_edge(obj, context_.data_model_.IgnoreImplicitAsWritten1, other);
+    const Id* other = context_.resolve(D->IgnoreImplicitAsWritten());
+    arboretum_create_edge(obj, context_.data_model_.method_IgnoreImplicitAsWritten, other);
   }
   //IgnoreParens
   {
-    const Entity* other = context_.resolve(D->IgnoreParens());
-    arboretum_create_edge(obj, context_.data_model_.IgnoreParens1, other);
+    const Id* other = context_.resolve(D->IgnoreParens());
+    arboretum_create_edge(obj, context_.data_model_.method_IgnoreParens, other);
   }
   //IgnoreParenImpCasts
   {
-    const Entity* other = context_.resolve(D->IgnoreParenImpCasts());
-    arboretum_create_edge(obj, context_.data_model_.IgnoreParenImpCasts1, other);
+    const Id* other = context_.resolve(D->IgnoreParenImpCasts());
+    arboretum_create_edge(obj, context_.data_model_.method_IgnoreParenImpCasts, other);
   }
   //IgnoreParenCasts
   {
-    const Entity* other = context_.resolve(D->IgnoreParenCasts());
-    arboretum_create_edge(obj, context_.data_model_.IgnoreParenCasts1, other);
+    const Id* other = context_.resolve(D->IgnoreParenCasts());
+    arboretum_create_edge(obj, context_.data_model_.method_IgnoreParenCasts, other);
   }
   //IgnoreConversionOperatorSingleStep
   {
-    const Entity* other = context_.resolve(D->IgnoreConversionOperatorSingleStep());
-    arboretum_create_edge(obj, context_.data_model_.IgnoreConversionOperatorSingleStep1, other);
+    const Id* other = context_.resolve(D->IgnoreConversionOperatorSingleStep());
+    arboretum_create_edge(obj, context_.data_model_.method_IgnoreConversionOperatorSingleStep, other);
   }
   //IgnoreParenLValueCasts
   {
-    const Entity* other = context_.resolve(D->IgnoreParenLValueCasts());
-    arboretum_create_edge(obj, context_.data_model_.IgnoreParenLValueCasts1, other);
+    const Id* other = context_.resolve(D->IgnoreParenLValueCasts());
+    arboretum_create_edge(obj, context_.data_model_.method_IgnoreParenLValueCasts, other);
   }
   //IgnoreParenBaseCasts
   {
-    const Entity* other = context_.resolve(D->IgnoreParenBaseCasts());
-    arboretum_create_edge(obj, context_.data_model_.IgnoreParenBaseCasts1, other);
+    const Id* other = context_.resolve(D->IgnoreParenBaseCasts());
+    arboretum_create_edge(obj, context_.data_model_.method_IgnoreParenBaseCasts, other);
   }
   //isDefaultArgument
-  arboretum_create_edge(obj, context_.data_model_.isDefaultArgument, context_.data_model_.arboretum_node_for(D->isDefaultArgument()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDefaultArgument, context_.data_model_.arboretum_node_for(D->isDefaultArgument()));
   //isImplicitCXXThis
-  arboretum_create_edge(obj, context_.data_model_.isImplicitCXXThis, context_.data_model_.arboretum_node_for(D->isImplicitCXXThis()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImplicitCXXThis, context_.data_model_.arboretum_node_for(D->isImplicitCXXThis()));
   //skipRValueSubobjectAdjustments
   {
-    const Entity* other = context_.resolve(D->skipRValueSubobjectAdjustments());
-    arboretum_create_edge(obj, context_.data_model_.skipRValueSubobjectAdjustments1, other);
+    const Id* other = context_.resolve(D->skipRValueSubobjectAdjustments());
+    arboretum_create_edge(obj, context_.data_model_.method_skipRValueSubobjectAdjustments, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitExprWithCleanups(clang::ExprWithCleanups* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getObjects
   // ArrayRef<CleanupObject>
   //getNumObjects
   // unsigned int
   //cleanupsHaveSideEffects
-  arboretum_create_edge(obj, context_.data_model_.cleanupsHaveSideEffects, context_.data_model_.arboretum_node_for(D->cleanupsHaveSideEffects()));
+  arboretum_create_edge(obj, context_.data_model_.method_cleanupsHaveSideEffects, context_.data_model_.arboretum_node_for(D->cleanupsHaveSideEffects()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc102, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_71, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc102, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_70, other);
   }
   //children
   // const_child_range
@@ -8422,87 +8422,87 @@ bool ArboretumASTVisitor::VisitExprWithCleanups(clang::ExprWithCleanups* D) {
 }
 
 bool ArboretumASTVisitor::VisitExpressionTraitExpr(clang::ExpressionTraitExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc115, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_72, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc116, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_71, other);
   }
   //getTrait
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getTrait());
+    const Id* enum_value = context_.data_model_.resolve(D->getTrait());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getTrait2, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getTrait_1, enum_value);
     }
   }
   //getQueriedExpression
   {
-    const Entity* other = context_.resolve(D->getQueriedExpression());
-    arboretum_create_edge(obj, context_.data_model_.getQueriedExpression, other);
+    const Id* other = context_.resolve(D->getQueriedExpression());
+    arboretum_create_edge(obj, context_.data_model_.method_getQueriedExpression, other);
   }
   //getValue
-  arboretum_create_edge(obj, context_.data_model_.getValue9, context_.data_model_.arboretum_node_for(D->getValue()));
+  arboretum_create_edge(obj, context_.data_model_.method_getValue_7, context_.data_model_.arboretum_node_for(D->getValue()));
   //children
   // const_child_range
   return true;
 }
 
 bool ArboretumASTVisitor::VisitExtVectorElementExpr(clang::ExtVectorElementExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBase
   {
-    const Entity* other = context_.resolve(D->getBase());
-    arboretum_create_edge(obj, context_.data_model_.getBase15, other);
+    const Id* other = context_.resolve(D->getBase());
+    arboretum_create_edge(obj, context_.data_model_.method_getBase_3, other);
   }
   //getAccessor
   // IdentifierInfo &
   //getAccessorLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getAccessorLoc());
-    arboretum_create_edge(obj, context_.data_model_.getAccessorLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getAccessorLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getAccessorLoc, other);
   }
   //getNumElements
   // unsigned int
   //containsDuplicateElements
-  arboretum_create_edge(obj, context_.data_model_.containsDuplicateElements, context_.data_model_.arboretum_node_for(D->containsDuplicateElements()));
+  arboretum_create_edge(obj, context_.data_model_.method_containsDuplicateElements, context_.data_model_.arboretum_node_for(D->containsDuplicateElements()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc81, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_73, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc81, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_72, other);
   }
   //isArrow
-  arboretum_create_edge(obj, context_.data_model_.isArrow5, context_.data_model_.arboretum_node_for(D->isArrow()));
+  arboretum_create_edge(obj, context_.data_model_.method_isArrow_2, context_.data_model_.arboretum_node_for(D->isArrow()));
   //children
   // const_child_range
   return true;
 }
 
 bool ArboretumASTVisitor::VisitFixedPointLiteral(clang::FixedPointLiteral* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc35, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_74, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc35, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_73, other);
   }
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation4, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_9, other);
   }
   //getScale
   // unsigned int
@@ -8512,36 +8512,36 @@ bool ArboretumASTVisitor::VisitFixedPointLiteral(clang::FixedPointLiteral* D) {
 }
 
 bool ArboretumASTVisitor::VisitFloatingLiteral(clang::FloatingLiteral* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getValue
   // llvm::APFloat
   //getRawSemantics
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getRawSemantics());
+    const Id* enum_value = context_.data_model_.resolve(D->getRawSemantics());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getRawSemantics, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getRawSemantics, enum_value);
     }
   }
   //getSemantics
   // const llvm::fltSemantics &
   //isExact
-  arboretum_create_edge(obj, context_.data_model_.isExact, context_.data_model_.arboretum_node_for(D->isExact()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExact, context_.data_model_.arboretum_node_for(D->isExact()));
   //getValueAsApproximateDouble
   // double
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation11, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_10, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc99, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_75, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc99, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_74, other);
   }
   //children
   // const_child_range
@@ -8549,61 +8549,61 @@ bool ArboretumASTVisitor::VisitFloatingLiteral(clang::FloatingLiteral* D) {
 }
 
 bool ArboretumASTVisitor::VisitForStmt(clang::ForStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getConditionVariable
   {
-    const Entity* other = context_.resolve(D->getConditionVariable());
-    arboretum_create_edge(obj, context_.data_model_.getConditionVariable, other);
+    const Id* other = context_.resolve(D->getConditionVariable());
+    arboretum_create_edge(obj, context_.data_model_.method_getConditionVariable, other);
   }
   //getConditionVariableDeclStmt
   {
-    const Entity* other = context_.resolve(D->getConditionVariableDeclStmt());
-    arboretum_create_edge(obj, context_.data_model_.getConditionVariableDeclStmt1, other);
+    const Id* other = context_.resolve(D->getConditionVariableDeclStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getConditionVariableDeclStmt, other);
   }
   //getInit
   {
-    const Entity* other = context_.resolve(D->getInit());
-    arboretum_create_edge(obj, context_.data_model_.getInit1, other);
+    const Id* other = context_.resolve(D->getInit());
+    arboretum_create_edge(obj, context_.data_model_.method_getInit_4, other);
   }
   //getCond
   {
-    const Entity* other = context_.resolve(D->getCond());
-    arboretum_create_edge(obj, context_.data_model_.getCond1, other);
+    const Id* other = context_.resolve(D->getCond());
+    arboretum_create_edge(obj, context_.data_model_.method_getCond_6, other);
   }
   //getInc
   {
-    const Entity* other = context_.resolve(D->getInc());
-    arboretum_create_edge(obj, context_.data_model_.getInc1, other);
+    const Id* other = context_.resolve(D->getInc());
+    arboretum_create_edge(obj, context_.data_model_.method_getInc_1, other);
   }
   //getBody
   {
-    const Entity* other = context_.resolve(D->getBody());
-    arboretum_create_edge(obj, context_.data_model_.getBody1, other);
+    const Id* other = context_.resolve(D->getBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getBody_8, other);
   }
   //getForLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getForLoc());
-    arboretum_create_edge(obj, context_.data_model_.getForLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getForLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getForLoc_1, other);
   }
   //getLParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLParenLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getLParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParenLoc_5, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_15, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_76, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_75, other);
   }
   //children
   // const_child_range
@@ -8611,38 +8611,38 @@ bool ArboretumASTVisitor::VisitForStmt(clang::ForStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitFullExpr(clang::FullExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSubExpr
   {
-    const Entity* other = context_.resolve(D->getSubExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSubExpr13, other);
+    const Id* other = context_.resolve(D->getSubExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubExpr_5, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitFunctionParmPackExpr(clang::FunctionParmPackExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getParameterPack
   {
-    const Entity* other = context_.resolve(D->getParameterPack());
-    arboretum_create_edge(obj, context_.data_model_.getParameterPack, other);
+    const Id* other = context_.resolve(D->getParameterPack());
+    arboretum_create_edge(obj, context_.data_model_.method_getParameterPack, other);
   }
   //getParameterPackLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getParameterPackLocation());
-    arboretum_create_edge(obj, context_.data_model_.getParameterPackLocation, other);
+    const Id* other = context_.source_model_.resolve(D->getParameterPackLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getParameterPackLocation, other);
   }
   //getNumExpansions
   // unsigned int
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc33, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_77, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc33, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_76, other);
   }
   //children
   // const_child_range
@@ -8650,52 +8650,52 @@ bool ArboretumASTVisitor::VisitFunctionParmPackExpr(clang::FunctionParmPackExpr*
 }
 
 bool ArboretumASTVisitor::VisitGCCAsmStmt(clang::GCCAsmStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_16, other);
   }
   //getAsmString
   {
-    const Entity* other = context_.resolve(D->getAsmString());
-    arboretum_create_edge(obj, context_.data_model_.getAsmString, other);
+    const Id* other = context_.resolve(D->getAsmString());
+    arboretum_create_edge(obj, context_.data_model_.method_getAsmString_1, other);
   }
   //isAsmGoto
-  arboretum_create_edge(obj, context_.data_model_.isAsmGoto, context_.data_model_.arboretum_node_for(D->isAsmGoto()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAsmGoto, context_.data_model_.arboretum_node_for(D->isAsmGoto()));
   //getNumLabels
   // unsigned int
   //labels
   // labels_const_range
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc4, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_78, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc4, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_77, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitGNUNullExpr(clang::GNUNullExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTokenLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getTokenLocation());
-    arboretum_create_edge(obj, context_.data_model_.getTokenLocation, other);
+    const Id* other = context_.source_model_.resolve(D->getTokenLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getTokenLocation, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc54, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_79, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc54, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_78, other);
   }
   //children
   // const_child_range
@@ -8703,27 +8703,27 @@ bool ArboretumASTVisitor::VisitGNUNullExpr(clang::GNUNullExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitGenericSelectionExpr(clang::GenericSelectionExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getNumAssocs
   // unsigned int
   //getResultIndex
   // unsigned int
   //isResultDependent
-  arboretum_create_edge(obj, context_.data_model_.isResultDependent, context_.data_model_.arboretum_node_for(D->isResultDependent()));
+  arboretum_create_edge(obj, context_.data_model_.method_isResultDependent, context_.data_model_.arboretum_node_for(D->isResultDependent()));
   //isExprPredicate
-  arboretum_create_edge(obj, context_.data_model_.isExprPredicate, context_.data_model_.arboretum_node_for(D->isExprPredicate()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExprPredicate, context_.data_model_.arboretum_node_for(D->isExprPredicate()));
   //isTypePredicate
-  arboretum_create_edge(obj, context_.data_model_.isTypePredicate, context_.data_model_.arboretum_node_for(D->isTypePredicate()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTypePredicate, context_.data_model_.arboretum_node_for(D->isTypePredicate()));
   //getControllingExpr
   {
-    const Entity* other = context_.resolve(D->getControllingExpr());
-    arboretum_create_edge(obj, context_.data_model_.getControllingExpr1, other);
+    const Id* other = context_.resolve(D->getControllingExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getControllingExpr, other);
   }
   //getControllingType
   //getResultExpr
   {
-    const Entity* other = context_.resolve(D->getResultExpr());
-    arboretum_create_edge(obj, context_.data_model_.getResultExpr3, other);
+    const Id* other = context_.resolve(D->getResultExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getResultExpr, other);
   }
   //getAssocExprs
   // ArrayRef<Expr *>
@@ -8733,28 +8733,28 @@ bool ArboretumASTVisitor::VisitGenericSelectionExpr(clang::GenericSelectionExpr*
   // const_association_range
   //getGenericLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getGenericLoc());
-    arboretum_create_edge(obj, context_.data_model_.getGenericLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getGenericLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getGenericLoc, other);
   }
   //getDefaultLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getDefaultLoc());
-    arboretum_create_edge(obj, context_.data_model_.getDefaultLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getDefaultLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getDefaultLoc_2, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc28, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_17, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc134, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_80, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc134, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_79, other);
   }
   //children
   // const_child_range
@@ -8762,31 +8762,31 @@ bool ArboretumASTVisitor::VisitGenericSelectionExpr(clang::GenericSelectionExpr*
 }
 
 bool ArboretumASTVisitor::VisitGotoStmt(clang::GotoStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getLabel
   {
-    const Entity* other = context_.resolve(D->getLabel());
-    arboretum_create_edge(obj, context_.data_model_.getLabel2, other);
+    const Id* other = context_.resolve(D->getLabel());
+    arboretum_create_edge(obj, context_.data_model_.method_getLabel_1, other);
   }
   //getGotoLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getGotoLoc());
-    arboretum_create_edge(obj, context_.data_model_.getGotoLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getGotoLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getGotoLoc, other);
   }
   //getLabelLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLabelLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLabelLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getLabelLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLabelLoc_1, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc123, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_81, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc125, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_80, other);
   }
   //children
   // const_child_range
@@ -8794,89 +8794,89 @@ bool ArboretumASTVisitor::VisitGotoStmt(clang::GotoStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitIfStmt(clang::IfStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //hasInitStorage
-  arboretum_create_edge(obj, context_.data_model_.hasInitStorage1, context_.data_model_.arboretum_node_for(D->hasInitStorage()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasInitStorage, context_.data_model_.arboretum_node_for(D->hasInitStorage()));
   //hasVarStorage
-  arboretum_create_edge(obj, context_.data_model_.hasVarStorage2, context_.data_model_.arboretum_node_for(D->hasVarStorage()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasVarStorage, context_.data_model_.arboretum_node_for(D->hasVarStorage()));
   //hasElseStorage
-  arboretum_create_edge(obj, context_.data_model_.hasElseStorage, context_.data_model_.arboretum_node_for(D->hasElseStorage()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasElseStorage, context_.data_model_.arboretum_node_for(D->hasElseStorage()));
   //getCond
   {
-    const Entity* other = context_.resolve(D->getCond());
-    arboretum_create_edge(obj, context_.data_model_.getCond11, other);
+    const Id* other = context_.resolve(D->getCond());
+    arboretum_create_edge(obj, context_.data_model_.method_getCond_7, other);
   }
   //getThen
   {
-    const Entity* other = context_.resolve(D->getThen());
-    arboretum_create_edge(obj, context_.data_model_.getThen1, other);
+    const Id* other = context_.resolve(D->getThen());
+    arboretum_create_edge(obj, context_.data_model_.method_getThen, other);
   }
   //getElse
   {
-    const Entity* other = context_.resolve(D->getElse());
-    arboretum_create_edge(obj, context_.data_model_.getElse1, other);
+    const Id* other = context_.resolve(D->getElse());
+    arboretum_create_edge(obj, context_.data_model_.method_getElse, other);
   }
   //getConditionVariable
   {
-    const Entity* other = context_.resolve(D->getConditionVariable());
-    arboretum_create_edge(obj, context_.data_model_.getConditionVariable6, other);
+    const Id* other = context_.resolve(D->getConditionVariable());
+    arboretum_create_edge(obj, context_.data_model_.method_getConditionVariable_1, other);
   }
   //getConditionVariableDeclStmt
   {
-    const Entity* other = context_.resolve(D->getConditionVariableDeclStmt());
-    arboretum_create_edge(obj, context_.data_model_.getConditionVariableDeclStmt7, other);
+    const Id* other = context_.resolve(D->getConditionVariableDeclStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getConditionVariableDeclStmt_1, other);
   }
   //getInit
   {
-    const Entity* other = context_.resolve(D->getInit());
-    arboretum_create_edge(obj, context_.data_model_.getInit11, other);
+    const Id* other = context_.resolve(D->getInit());
+    arboretum_create_edge(obj, context_.data_model_.method_getInit_5, other);
   }
   //getIfLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getIfLoc());
-    arboretum_create_edge(obj, context_.data_model_.getIfLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getIfLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getIfLoc, other);
   }
   //getElseLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getElseLoc());
-    arboretum_create_edge(obj, context_.data_model_.getElseLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getElseLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getElseLoc, other);
   }
   //isConsteval
-  arboretum_create_edge(obj, context_.data_model_.isConsteval1, context_.data_model_.arboretum_node_for(D->isConsteval()));
+  arboretum_create_edge(obj, context_.data_model_.method_isConsteval_1, context_.data_model_.arboretum_node_for(D->isConsteval()));
   //isNonNegatedConsteval
-  arboretum_create_edge(obj, context_.data_model_.isNonNegatedConsteval, context_.data_model_.arboretum_node_for(D->isNonNegatedConsteval()));
+  arboretum_create_edge(obj, context_.data_model_.method_isNonNegatedConsteval, context_.data_model_.arboretum_node_for(D->isNonNegatedConsteval()));
   //isNegatedConsteval
-  arboretum_create_edge(obj, context_.data_model_.isNegatedConsteval, context_.data_model_.arboretum_node_for(D->isNegatedConsteval()));
+  arboretum_create_edge(obj, context_.data_model_.method_isNegatedConsteval, context_.data_model_.arboretum_node_for(D->isNegatedConsteval()));
   //isConstexpr
-  arboretum_create_edge(obj, context_.data_model_.isConstexpr2, context_.data_model_.arboretum_node_for(D->isConstexpr()));
+  arboretum_create_edge(obj, context_.data_model_.method_isConstexpr_2, context_.data_model_.arboretum_node_for(D->isConstexpr()));
   //getStatementKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getStatementKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getStatementKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getStatementKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getStatementKind, enum_value);
     }
   }
   //isObjCAvailabilityCheck
-  arboretum_create_edge(obj, context_.data_model_.isObjCAvailabilityCheck, context_.data_model_.arboretum_node_for(D->isObjCAvailabilityCheck()));
+  arboretum_create_edge(obj, context_.data_model_.method_isObjCAvailabilityCheck, context_.data_model_.arboretum_node_for(D->isObjCAvailabilityCheck()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc117, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_82, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc119, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_81, other);
   }
   //getLParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLParenLoc12, other);
+    const Id* other = context_.source_model_.resolve(D->getLParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParenLoc_6, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc24, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_18, other);
   }
   //children
   // const_child_range
@@ -8884,21 +8884,21 @@ bool ArboretumASTVisitor::VisitIfStmt(clang::IfStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitImaginaryLiteral(clang::ImaginaryLiteral* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSubExpr
   {
-    const Entity* other = context_.resolve(D->getSubExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSubExpr15, other);
+    const Id* other = context_.resolve(D->getSubExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubExpr_6, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc110, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_83, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc111, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_82, other);
   }
   //children
   // const_child_range
@@ -8906,33 +8906,33 @@ bool ArboretumASTVisitor::VisitImaginaryLiteral(clang::ImaginaryLiteral* D) {
 }
 
 bool ArboretumASTVisitor::VisitImplicitCastExpr(clang::ImplicitCastExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isPartOfExplicitCast
-  arboretum_create_edge(obj, context_.data_model_.isPartOfExplicitCast, context_.data_model_.arboretum_node_for(D->isPartOfExplicitCast()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPartOfExplicitCast, context_.data_model_.arboretum_node_for(D->isPartOfExplicitCast()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc66, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_84, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc66, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_83, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitImplicitValueInitExpr(clang::ImplicitValueInitExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc116, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_85, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc117, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_84, other);
   }
   //children
   // const_child_range
@@ -8940,36 +8940,36 @@ bool ArboretumASTVisitor::VisitImplicitValueInitExpr(clang::ImplicitValueInitExp
 }
 
 bool ArboretumASTVisitor::VisitIndirectGotoStmt(clang::IndirectGotoStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getGotoLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getGotoLoc());
-    arboretum_create_edge(obj, context_.data_model_.getGotoLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getGotoLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getGotoLoc_1, other);
   }
   //getStarLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getStarLoc());
-    arboretum_create_edge(obj, context_.data_model_.getStarLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getStarLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getStarLoc, other);
   }
   //getTarget
   {
-    const Entity* other = context_.resolve(D->getTarget());
-    arboretum_create_edge(obj, context_.data_model_.getTarget1, other);
+    const Id* other = context_.resolve(D->getTarget());
+    arboretum_create_edge(obj, context_.data_model_.method_getTarget, other);
   }
   //getConstantTarget
   {
-    const Entity* other = context_.resolve(D->getConstantTarget());
-    arboretum_create_edge(obj, context_.data_model_.getConstantTarget1, other);
+    const Id* other = context_.resolve(D->getConstantTarget());
+    arboretum_create_edge(obj, context_.data_model_.method_getConstantTarget, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc150, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_86, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc149, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_85, other);
   }
   //children
   // const_child_range
@@ -8977,66 +8977,66 @@ bool ArboretumASTVisitor::VisitIndirectGotoStmt(clang::IndirectGotoStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitInitListExpr(clang::InitListExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getNumInits
   // unsigned int
   //inits
   // ArrayRef<Expr *>
   //getArrayFiller
   {
-    const Entity* other = context_.resolve(D->getArrayFiller());
-    arboretum_create_edge(obj, context_.data_model_.getArrayFiller3, other);
+    const Id* other = context_.resolve(D->getArrayFiller());
+    arboretum_create_edge(obj, context_.data_model_.method_getArrayFiller_1, other);
   }
   //hasArrayFiller
-  arboretum_create_edge(obj, context_.data_model_.hasArrayFiller, context_.data_model_.arboretum_node_for(D->hasArrayFiller()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasArrayFiller, context_.data_model_.arboretum_node_for(D->hasArrayFiller()));
   //hasDesignatedInit
-  arboretum_create_edge(obj, context_.data_model_.hasDesignatedInit, context_.data_model_.arboretum_node_for(D->hasDesignatedInit()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasDesignatedInit, context_.data_model_.arboretum_node_for(D->hasDesignatedInit()));
   //getInitializedFieldInUnion
   {
-    const Entity* other = context_.resolve(D->getInitializedFieldInUnion());
-    arboretum_create_edge(obj, context_.data_model_.getInitializedFieldInUnion3, other);
+    const Id* other = context_.resolve(D->getInitializedFieldInUnion());
+    arboretum_create_edge(obj, context_.data_model_.method_getInitializedFieldInUnion_1, other);
   }
   //isExplicit
-  arboretum_create_edge(obj, context_.data_model_.isExplicit, context_.data_model_.arboretum_node_for(D->isExplicit()));
+  arboretum_create_edge(obj, context_.data_model_.method_isExplicit_3, context_.data_model_.arboretum_node_for(D->isExplicit()));
   //isStringLiteralInit
-  arboretum_create_edge(obj, context_.data_model_.isStringLiteralInit, context_.data_model_.arboretum_node_for(D->isStringLiteralInit()));
+  arboretum_create_edge(obj, context_.data_model_.method_isStringLiteralInit, context_.data_model_.arboretum_node_for(D->isStringLiteralInit()));
   //isTransparent
-  arboretum_create_edge(obj, context_.data_model_.isTransparent1, context_.data_model_.arboretum_node_for(D->isTransparent()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTransparent, context_.data_model_.arboretum_node_for(D->isTransparent()));
   //getLBraceLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLBraceLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLBraceLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getLBraceLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLBraceLoc_1, other);
   }
   //getRBraceLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRBraceLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRBraceLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getRBraceLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRBraceLoc_4, other);
   }
   //isSemanticForm
-  arboretum_create_edge(obj, context_.data_model_.isSemanticForm, context_.data_model_.arboretum_node_for(D->isSemanticForm()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSemanticForm, context_.data_model_.arboretum_node_for(D->isSemanticForm()));
   //getSemanticForm
   {
-    const Entity* other = context_.resolve(D->getSemanticForm());
-    arboretum_create_edge(obj, context_.data_model_.getSemanticForm2, other);
+    const Id* other = context_.resolve(D->getSemanticForm());
+    arboretum_create_edge(obj, context_.data_model_.method_getSemanticForm_1, other);
   }
   //isSyntacticForm
-  arboretum_create_edge(obj, context_.data_model_.isSyntacticForm, context_.data_model_.arboretum_node_for(D->isSyntacticForm()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSyntacticForm, context_.data_model_.arboretum_node_for(D->isSyntacticForm()));
   //getSyntacticForm
   {
-    const Entity* other = context_.resolve(D->getSyntacticForm());
-    arboretum_create_edge(obj, context_.data_model_.getSyntacticForm2, other);
+    const Id* other = context_.resolve(D->getSyntacticForm());
+    arboretum_create_edge(obj, context_.data_model_.method_getSyntacticForm, other);
   }
   //hadArrayRangeDesignator
-  arboretum_create_edge(obj, context_.data_model_.hadArrayRangeDesignator, context_.data_model_.arboretum_node_for(D->hadArrayRangeDesignator()));
+  arboretum_create_edge(obj, context_.data_model_.method_hadArrayRangeDesignator, context_.data_model_.arboretum_node_for(D->hadArrayRangeDesignator()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc106, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_87, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc106, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_86, other);
   }
   //children
   // const_child_range
@@ -9044,21 +9044,21 @@ bool ArboretumASTVisitor::VisitInitListExpr(clang::InitListExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitIntegerLiteral(clang::IntegerLiteral* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc93, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_88, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc93, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_87, other);
   }
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation9, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_11, other);
   }
   //children
   // const_child_range
@@ -9066,53 +9066,53 @@ bool ArboretumASTVisitor::VisitIntegerLiteral(clang::IntegerLiteral* D) {
 }
 
 bool ArboretumASTVisitor::VisitLabelStmt(clang::LabelStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getIdentLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getIdentLoc());
-    arboretum_create_edge(obj, context_.data_model_.getIdentLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getIdentLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getIdentLoc, other);
   }
   //getDecl
   {
-    const Entity* other = context_.resolve(D->getDecl());
-    arboretum_create_edge(obj, context_.data_model_.getDecl2, other);
+    const Id* other = context_.resolve(D->getDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getDecl_8, other);
   }
   //getName
   //getSubStmt
   {
-    const Entity* other = context_.resolve(D->getSubStmt());
-    arboretum_create_edge(obj, context_.data_model_.getSubStmt3, other);
+    const Id* other = context_.resolve(D->getSubStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubStmt_3, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc31, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_89, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc31, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_88, other);
   }
   //children
   // const_child_range
   //isSideEntry
-  arboretum_create_edge(obj, context_.data_model_.isSideEntry, context_.data_model_.arboretum_node_for(D->isSideEntry()));
+  arboretum_create_edge(obj, context_.data_model_.method_isSideEntry, context_.data_model_.arboretum_node_for(D->isSideEntry()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitLambdaExpr(clang::LambdaExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getCaptureDefault
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getCaptureDefault());
+    const Id* enum_value = context_.data_model_.resolve(D->getCaptureDefault());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getCaptureDefault, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getCaptureDefault, enum_value);
     }
   }
   //getCaptureDefaultLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getCaptureDefaultLoc());
-    arboretum_create_edge(obj, context_.data_model_.getCaptureDefaultLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getCaptureDefaultLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getCaptureDefaultLoc, other);
   }
   //captures
   // capture_range
@@ -9126,59 +9126,59 @@ bool ArboretumASTVisitor::VisitLambdaExpr(clang::LambdaExpr* D) {
   // llvm::iterator_range<const_capture_init_iterator>
   //getIntroducerRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getIntroducerRange());
-    arboretum_create_edge(obj, context_.data_model_.getIntroducerRange, other);
+    const Id* other = context_.source_model_.resolve(D->getIntroducerRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getIntroducerRange, other);
   }
   //getLambdaClass
   {
-    const Entity* other = context_.resolve(D->getLambdaClass());
-    arboretum_create_edge(obj, context_.data_model_.getLambdaClass, other);
+    const Id* other = context_.resolve(D->getLambdaClass());
+    arboretum_create_edge(obj, context_.data_model_.method_getLambdaClass, other);
   }
   //getCallOperator
   {
-    const Entity* other = context_.resolve(D->getCallOperator());
-    arboretum_create_edge(obj, context_.data_model_.getCallOperator, other);
+    const Id* other = context_.resolve(D->getCallOperator());
+    arboretum_create_edge(obj, context_.data_model_.method_getCallOperator, other);
   }
   //getDependentCallOperator
   {
-    const Entity* other = context_.resolve(D->getDependentCallOperator());
-    arboretum_create_edge(obj, context_.data_model_.getDependentCallOperator, other);
+    const Id* other = context_.resolve(D->getDependentCallOperator());
+    arboretum_create_edge(obj, context_.data_model_.method_getDependentCallOperator, other);
   }
   //getTemplateParameterList
   //getExplicitTemplateParameters
   // ArrayRef<NamedDecl *>
   //getTrailingRequiresClause
   {
-    const Entity* other = context_.resolve(D->getTrailingRequiresClause());
-    arboretum_create_edge(obj, context_.data_model_.getTrailingRequiresClause, other);
+    const Id* other = context_.resolve(D->getTrailingRequiresClause());
+    arboretum_create_edge(obj, context_.data_model_.method_getTrailingRequiresClause_1, other);
   }
   //isGenericLambda
-  arboretum_create_edge(obj, context_.data_model_.isGenericLambda, context_.data_model_.arboretum_node_for(D->isGenericLambda()));
+  arboretum_create_edge(obj, context_.data_model_.method_isGenericLambda_1, context_.data_model_.arboretum_node_for(D->isGenericLambda()));
   //getBody
   {
-    const Entity* other = context_.resolve(D->getBody());
-    arboretum_create_edge(obj, context_.data_model_.getBody12, other);
+    const Id* other = context_.resolve(D->getBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getBody_9, other);
   }
   //getCompoundStmtBody
   {
-    const Entity* other = context_.resolve(D->getCompoundStmtBody());
-    arboretum_create_edge(obj, context_.data_model_.getCompoundStmtBody, other);
+    const Id* other = context_.resolve(D->getCompoundStmtBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getCompoundStmtBody, other);
   }
   //isMutable
-  arboretum_create_edge(obj, context_.data_model_.isMutable, context_.data_model_.arboretum_node_for(D->isMutable()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMutable_1, context_.data_model_.arboretum_node_for(D->isMutable()));
   //hasExplicitParameters
-  arboretum_create_edge(obj, context_.data_model_.hasExplicitParameters, context_.data_model_.arboretum_node_for(D->hasExplicitParameters()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasExplicitParameters, context_.data_model_.arboretum_node_for(D->hasExplicitParameters()));
   //hasExplicitResultType
-  arboretum_create_edge(obj, context_.data_model_.hasExplicitResultType, context_.data_model_.arboretum_node_for(D->hasExplicitResultType()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasExplicitResultType, context_.data_model_.arboretum_node_for(D->hasExplicitResultType()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc59, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_90, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc59, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_89, other);
   }
   //children
   // const_child_range
@@ -9186,19 +9186,19 @@ bool ArboretumASTVisitor::VisitLambdaExpr(clang::LambdaExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitMSAsmStmt(clang::MSAsmStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getLBraceLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLBraceLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLBraceLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getLBraceLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLBraceLoc_2, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc5, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_90, other);
   }
   //hasBraces
-  arboretum_create_edge(obj, context_.data_model_.hasBraces, context_.data_model_.arboretum_node_for(D->hasBraces()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasBraces_2, context_.data_model_.arboretum_node_for(D->hasBraces()));
   //getAsmString
   // StringRef
   //getAllConstraints
@@ -9209,8 +9209,8 @@ bool ArboretumASTVisitor::VisitMSAsmStmt(clang::MSAsmStmt* D) {
   // ArrayRef<Expr *>
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc5, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_91, other);
   }
   //children
   // const_child_range
@@ -9218,34 +9218,34 @@ bool ArboretumASTVisitor::VisitMSAsmStmt(clang::MSAsmStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitMSDependentExistsStmt(clang::MSDependentExistsStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getKeywordLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getKeywordLoc());
-    arboretum_create_edge(obj, context_.data_model_.getKeywordLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getKeywordLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getKeywordLoc_3, other);
   }
   //isIfExists
-  arboretum_create_edge(obj, context_.data_model_.isIfExists, context_.data_model_.arboretum_node_for(D->isIfExists()));
+  arboretum_create_edge(obj, context_.data_model_.method_isIfExists, context_.data_model_.arboretum_node_for(D->isIfExists()));
   //isIfNotExists
-  arboretum_create_edge(obj, context_.data_model_.isIfNotExists, context_.data_model_.arboretum_node_for(D->isIfNotExists()));
+  arboretum_create_edge(obj, context_.data_model_.method_isIfNotExists, context_.data_model_.arboretum_node_for(D->isIfNotExists()));
   //getQualifierLoc
   // NestedNameSpecifierLoc
   //getNameInfo
   // DeclarationNameInfo
   //getSubStmt
   {
-    const Entity* other = context_.resolve(D->getSubStmt());
-    arboretum_create_edge(obj, context_.data_model_.getSubStmt14, other);
+    const Id* other = context_.resolve(D->getSubStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubStmt_4, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc161, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_92, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc159, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_91, other);
   }
   //children
   // const_child_range
@@ -9253,42 +9253,42 @@ bool ArboretumASTVisitor::VisitMSDependentExistsStmt(clang::MSDependentExistsStm
 }
 
 bool ArboretumASTVisitor::VisitMSPropertyRefExpr(clang::MSPropertyRefExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSourceRange
   {
-    const Entity* other = context_.source_model_.resolve(D->getSourceRange());
-    arboretum_create_edge(obj, context_.data_model_.getSourceRange52, other);
+    const Id* other = context_.source_model_.resolve(D->getSourceRange());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceRange_48, other);
   }
   //isImplicitAccess
-  arboretum_create_edge(obj, context_.data_model_.isImplicitAccess3, context_.data_model_.arboretum_node_for(D->isImplicitAccess()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImplicitAccess_1, context_.data_model_.arboretum_node_for(D->isImplicitAccess()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc147, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_93, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc146, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_92, other);
   }
   //children
   // const_child_range
   //getBaseExpr
   {
-    const Entity* other = context_.resolve(D->getBaseExpr());
-    arboretum_create_edge(obj, context_.data_model_.getBaseExpr1, other);
+    const Id* other = context_.resolve(D->getBaseExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getBaseExpr, other);
   }
   //getPropertyDecl
   {
-    const Entity* other = context_.resolve(D->getPropertyDecl());
-    arboretum_create_edge(obj, context_.data_model_.getPropertyDecl, other);
+    const Id* other = context_.resolve(D->getPropertyDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getPropertyDecl, other);
   }
   //isArrow
-  arboretum_create_edge(obj, context_.data_model_.isArrow7, context_.data_model_.arboretum_node_for(D->isArrow()));
+  arboretum_create_edge(obj, context_.data_model_.method_isArrow_3, context_.data_model_.arboretum_node_for(D->isArrow()));
   //getMemberLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getMemberLoc());
-    arboretum_create_edge(obj, context_.data_model_.getMemberLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getMemberLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getMemberLoc_1, other);
   }
   //getQualifierLoc
   // NestedNameSpecifierLoc
@@ -9296,36 +9296,36 @@ bool ArboretumASTVisitor::VisitMSPropertyRefExpr(clang::MSPropertyRefExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitMSPropertySubscriptExpr(clang::MSPropertySubscriptExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBase
   {
-    const Entity* other = context_.resolve(D->getBase());
-    arboretum_create_edge(obj, context_.data_model_.getBase12, other);
+    const Id* other = context_.resolve(D->getBase());
+    arboretum_create_edge(obj, context_.data_model_.method_getBase_4, other);
   }
   //getIdx
   {
-    const Entity* other = context_.resolve(D->getIdx());
-    arboretum_create_edge(obj, context_.data_model_.getIdx1, other);
+    const Id* other = context_.resolve(D->getIdx());
+    arboretum_create_edge(obj, context_.data_model_.method_getIdx_1, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc73, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_94, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc73, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_93, other);
   }
   //getRBracketLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRBracketLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRBracketLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getRBracketLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRBracketLoc_3, other);
   }
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc7, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc_7, other);
   }
   //children
   // const_child_range
@@ -9333,42 +9333,42 @@ bool ArboretumASTVisitor::VisitMSPropertySubscriptExpr(clang::MSPropertySubscrip
 }
 
 bool ArboretumASTVisitor::VisitMaterializeTemporaryExpr(clang::MaterializeTemporaryExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSubExpr
   {
-    const Entity* other = context_.resolve(D->getSubExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSubExpr6, other);
+    const Id* other = context_.resolve(D->getSubExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubExpr_7, other);
   }
   //getStorageDuration
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getStorageDuration());
+    const Id* enum_value = context_.data_model_.resolve(D->getStorageDuration());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getStorageDuration, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getStorageDuration_2, enum_value);
     }
   }
   //getLifetimeExtendedTemporaryDecl
   {
-    const Entity* other = context_.resolve(D->getLifetimeExtendedTemporaryDecl());
-    arboretum_create_edge(obj, context_.data_model_.getLifetimeExtendedTemporaryDecl1, other);
+    const Id* other = context_.resolve(D->getLifetimeExtendedTemporaryDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getLifetimeExtendedTemporaryDecl, other);
   }
   //getExtendingDecl
   {
-    const Entity* other = context_.resolve(D->getExtendingDecl());
-    arboretum_create_edge(obj, context_.data_model_.getExtendingDecl1, other);
+    const Id* other = context_.resolve(D->getExtendingDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getExtendingDecl_1, other);
   }
   //getManglingNumber
   // unsigned int
   //isBoundToLvalueReference
-  arboretum_create_edge(obj, context_.data_model_.isBoundToLvalueReference, context_.data_model_.arboretum_node_for(D->isBoundToLvalueReference()));
+  arboretum_create_edge(obj, context_.data_model_.method_isBoundToLvalueReference, context_.data_model_.arboretum_node_for(D->isBoundToLvalueReference()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc60, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_95, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc60, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_94, other);
   }
   //children
   // const_child_range
@@ -9376,43 +9376,43 @@ bool ArboretumASTVisitor::VisitMaterializeTemporaryExpr(clang::MaterializeTempor
 }
 
 bool ArboretumASTVisitor::VisitMatrixSubscriptExpr(clang::MatrixSubscriptExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isIncomplete
-  arboretum_create_edge(obj, context_.data_model_.isIncomplete, context_.data_model_.arboretum_node_for(D->isIncomplete()));
+  arboretum_create_edge(obj, context_.data_model_.method_isIncomplete, context_.data_model_.arboretum_node_for(D->isIncomplete()));
   //getBase
   {
-    const Entity* other = context_.resolve(D->getBase());
-    arboretum_create_edge(obj, context_.data_model_.getBase14, other);
+    const Id* other = context_.resolve(D->getBase());
+    arboretum_create_edge(obj, context_.data_model_.method_getBase_5, other);
   }
   //getRowIdx
   {
-    const Entity* other = context_.resolve(D->getRowIdx());
-    arboretum_create_edge(obj, context_.data_model_.getRowIdx1, other);
+    const Id* other = context_.resolve(D->getRowIdx());
+    arboretum_create_edge(obj, context_.data_model_.method_getRowIdx, other);
   }
   //getColumnIdx
   {
-    const Entity* other = context_.resolve(D->getColumnIdx());
-    arboretum_create_edge(obj, context_.data_model_.getColumnIdx1, other);
+    const Id* other = context_.resolve(D->getColumnIdx());
+    arboretum_create_edge(obj, context_.data_model_.method_getColumnIdx, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc75, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_96, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc75, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_95, other);
   }
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc9, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc_8, other);
   }
   //getRBracketLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRBracketLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRBracketLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getRBracketLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRBracketLoc_4, other);
   }
   //children
   // const_child_range
@@ -9420,43 +9420,43 @@ bool ArboretumASTVisitor::VisitMatrixSubscriptExpr(clang::MatrixSubscriptExpr* D
 }
 
 bool ArboretumASTVisitor::VisitMemberExpr(clang::MemberExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBase
   {
-    const Entity* other = context_.resolve(D->getBase());
-    arboretum_create_edge(obj, context_.data_model_.getBase, other);
+    const Id* other = context_.resolve(D->getBase());
+    arboretum_create_edge(obj, context_.data_model_.method_getBase_6, other);
   }
   //getMemberDecl
   {
-    const Entity* other = context_.resolve(D->getMemberDecl());
-    arboretum_create_edge(obj, context_.data_model_.getMemberDecl, other);
+    const Id* other = context_.resolve(D->getMemberDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getMemberDecl, other);
   }
   //getFoundDecl
   // DeclAccessPair
   //hasQualifier
-  arboretum_create_edge(obj, context_.data_model_.hasQualifier, context_.data_model_.arboretum_node_for(D->hasQualifier()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasQualifier_2, context_.data_model_.arboretum_node_for(D->hasQualifier()));
   //getQualifierLoc
   // NestedNameSpecifierLoc
   //getQualifier
   //getTemplateKeywordLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTemplateKeywordLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplateKeywordLoc_5, other);
   }
   //getLAngleLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLAngleLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLAngleLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getLAngleLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLAngleLoc_3, other);
   }
   //getRAngleLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRAngleLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRAngleLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getRAngleLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRAngleLoc_3, other);
   }
   //hasTemplateKeyword
-  arboretum_create_edge(obj, context_.data_model_.hasTemplateKeyword, context_.data_model_.arboretum_node_for(D->hasTemplateKeyword()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTemplateKeyword_3, context_.data_model_.arboretum_node_for(D->hasTemplateKeyword()));
   //hasExplicitTemplateArgs
-  arboretum_create_edge(obj, context_.data_model_.hasExplicitTemplateArgs, context_.data_model_.arboretum_node_for(D->hasExplicitTemplateArgs()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasExplicitTemplateArgs_4, context_.data_model_.arboretum_node_for(D->hasExplicitTemplateArgs()));
   //getTemplateArgs
   //getNumTemplateArgs
   // unsigned int
@@ -9466,40 +9466,40 @@ bool ArboretumASTVisitor::VisitMemberExpr(clang::MemberExpr* D) {
   // DeclarationNameInfo
   //getOperatorLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getOperatorLoc());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getOperatorLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorLoc_6, other);
   }
   //isArrow
-  arboretum_create_edge(obj, context_.data_model_.isArrow, context_.data_model_.arboretum_node_for(D->isArrow()));
+  arboretum_create_edge(obj, context_.data_model_.method_isArrow_4, context_.data_model_.arboretum_node_for(D->isArrow()));
   //getMemberLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getMemberLoc());
-    arboretum_create_edge(obj, context_.data_model_.getMemberLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getMemberLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getMemberLoc_2, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc9, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_97, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc9, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_96, other);
   }
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc_9, other);
   }
   //isImplicitAccess
-  arboretum_create_edge(obj, context_.data_model_.isImplicitAccess, context_.data_model_.arboretum_node_for(D->isImplicitAccess()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImplicitAccess_2, context_.data_model_.arboretum_node_for(D->isImplicitAccess()));
   //hadMultipleCandidates
-  arboretum_create_edge(obj, context_.data_model_.hadMultipleCandidates, context_.data_model_.arboretum_node_for(D->hadMultipleCandidates()));
+  arboretum_create_edge(obj, context_.data_model_.method_hadMultipleCandidates_2, context_.data_model_.arboretum_node_for(D->hadMultipleCandidates()));
   //isNonOdrUse
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->isNonOdrUse());
+    const Id* enum_value = context_.data_model_.resolve(D->isNonOdrUse());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.isNonOdrUse, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_isNonOdrUse_1, enum_value);
     }
   }
   //children
@@ -9508,16 +9508,16 @@ bool ArboretumASTVisitor::VisitMemberExpr(clang::MemberExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitNoInitExpr(clang::NoInitExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc83, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_98, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc83, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_97, other);
   }
   //children
   // const_child_range
@@ -9525,23 +9525,23 @@ bool ArboretumASTVisitor::VisitNoInitExpr(clang::NoInitExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitNullStmt(clang::NullStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSemiLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getSemiLoc());
-    arboretum_create_edge(obj, context_.data_model_.getSemiLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getSemiLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getSemiLoc, other);
   }
   //hasLeadingEmptyMacro
-  arboretum_create_edge(obj, context_.data_model_.hasLeadingEmptyMacro, context_.data_model_.arboretum_node_for(D->hasLeadingEmptyMacro()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasLeadingEmptyMacro, context_.data_model_.arboretum_node_for(D->hasLeadingEmptyMacro()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc118, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_99, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc120, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_98, other);
   }
   //children
   // const_child_range
@@ -9549,531 +9549,531 @@ bool ArboretumASTVisitor::VisitNullStmt(clang::NullStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitOMPArraySectionExpr(clang::OMPArraySectionExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPArrayShapingExpr(clang::OMPArrayShapingExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPAtomicDirective(clang::OMPAtomicDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPBarrierDirective(clang::OMPBarrierDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPCancelDirective(clang::OMPCancelDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPCancellationPointDirective(clang::OMPCancellationPointDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPCanonicalLoop(clang::OMPCanonicalLoop* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPCriticalDirective(clang::OMPCriticalDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPDepobjDirective(clang::OMPDepobjDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPDispatchDirective(clang::OMPDispatchDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPDistributeDirective(clang::OMPDistributeDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPDistributeParallelForDirective(clang::OMPDistributeParallelForDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPDistributeParallelForSimdDirective(clang::OMPDistributeParallelForSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPDistributeSimdDirective(clang::OMPDistributeSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPErrorDirective(clang::OMPErrorDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPExecutableDirective(clang::OMPExecutableDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPFlushDirective(clang::OMPFlushDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPForDirective(clang::OMPForDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPForSimdDirective(clang::OMPForSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPGenericLoopDirective(clang::OMPGenericLoopDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPInteropDirective(clang::OMPInteropDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPIteratorExpr(clang::OMPIteratorExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPLoopBasedDirective(clang::OMPLoopBasedDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPLoopDirective(clang::OMPLoopDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPLoopTransformationDirective(clang::OMPLoopTransformationDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPMaskedDirective(clang::OMPMaskedDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPMaskedTaskLoopDirective(clang::OMPMaskedTaskLoopDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPMaskedTaskLoopSimdDirective(clang::OMPMaskedTaskLoopSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPMasterDirective(clang::OMPMasterDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPMasterTaskLoopDirective(clang::OMPMasterTaskLoopDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPMasterTaskLoopSimdDirective(clang::OMPMasterTaskLoopSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPMetaDirective(clang::OMPMetaDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPOrderedDirective(clang::OMPOrderedDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPParallelDirective(clang::OMPParallelDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPParallelForDirective(clang::OMPParallelForDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPParallelForSimdDirective(clang::OMPParallelForSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPParallelGenericLoopDirective(clang::OMPParallelGenericLoopDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPParallelMaskedDirective(clang::OMPParallelMaskedDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPParallelMaskedTaskLoopDirective(clang::OMPParallelMaskedTaskLoopDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPParallelMaskedTaskLoopSimdDirective(clang::OMPParallelMaskedTaskLoopSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPParallelMasterDirective(clang::OMPParallelMasterDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPParallelMasterTaskLoopDirective(clang::OMPParallelMasterTaskLoopDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPParallelMasterTaskLoopSimdDirective(clang::OMPParallelMasterTaskLoopSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPParallelSectionsDirective(clang::OMPParallelSectionsDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPScanDirective(clang::OMPScanDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPScopeDirective(clang::OMPScopeDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPSectionDirective(clang::OMPSectionDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPSectionsDirective(clang::OMPSectionsDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPSimdDirective(clang::OMPSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPSingleDirective(clang::OMPSingleDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetDataDirective(clang::OMPTargetDataDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetDirective(clang::OMPTargetDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetEnterDataDirective(clang::OMPTargetEnterDataDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetExitDataDirective(clang::OMPTargetExitDataDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetParallelDirective(clang::OMPTargetParallelDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetParallelForDirective(clang::OMPTargetParallelForDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetParallelForSimdDirective(clang::OMPTargetParallelForSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetParallelGenericLoopDirective(clang::OMPTargetParallelGenericLoopDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetSimdDirective(clang::OMPTargetSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetTeamsDirective(clang::OMPTargetTeamsDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetTeamsDistributeDirective(clang::OMPTargetTeamsDistributeDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetTeamsDistributeParallelForDirective(clang::OMPTargetTeamsDistributeParallelForDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetTeamsDistributeParallelForSimdDirective(clang::OMPTargetTeamsDistributeParallelForSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetTeamsDistributeSimdDirective(clang::OMPTargetTeamsDistributeSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetTeamsGenericLoopDirective(clang::OMPTargetTeamsGenericLoopDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTargetUpdateDirective(clang::OMPTargetUpdateDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTaskDirective(clang::OMPTaskDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTaskLoopDirective(clang::OMPTaskLoopDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTaskLoopSimdDirective(clang::OMPTaskLoopSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTaskgroupDirective(clang::OMPTaskgroupDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTaskwaitDirective(clang::OMPTaskwaitDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTaskyieldDirective(clang::OMPTaskyieldDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTeamsDirective(clang::OMPTeamsDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTeamsDistributeDirective(clang::OMPTeamsDistributeDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTeamsDistributeParallelForDirective(clang::OMPTeamsDistributeParallelForDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTeamsDistributeParallelForSimdDirective(clang::OMPTeamsDistributeParallelForSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTeamsDistributeSimdDirective(clang::OMPTeamsDistributeSimdDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTeamsGenericLoopDirective(clang::OMPTeamsGenericLoopDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPTileDirective(clang::OMPTileDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOMPUnrollDirective(clang::OMPUnrollDirective* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCArrayLiteral(clang::ObjCArrayLiteral* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCAtCatchStmt(clang::ObjCAtCatchStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCAtFinallyStmt(clang::ObjCAtFinallyStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCAtSynchronizedStmt(clang::ObjCAtSynchronizedStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCAtThrowStmt(clang::ObjCAtThrowStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCAtTryStmt(clang::ObjCAtTryStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCAutoreleasePoolStmt(clang::ObjCAutoreleasePoolStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCAvailabilityCheckExpr(clang::ObjCAvailabilityCheckExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCBoolLiteralExpr(clang::ObjCBoolLiteralExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCBoxedExpr(clang::ObjCBoxedExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCBridgedCastExpr(clang::ObjCBridgedCastExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCDictionaryLiteral(clang::ObjCDictionaryLiteral* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCEncodeExpr(clang::ObjCEncodeExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCForCollectionStmt(clang::ObjCForCollectionStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCIndirectCopyRestoreExpr(clang::ObjCIndirectCopyRestoreExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCIsaExpr(clang::ObjCIsaExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCIvarRefExpr(clang::ObjCIvarRefExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCMessageExpr(clang::ObjCMessageExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCPropertyRefExpr(clang::ObjCPropertyRefExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCProtocolExpr(clang::ObjCProtocolExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCSelectorExpr(clang::ObjCSelectorExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCStringLiteral(clang::ObjCStringLiteral* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitObjCSubscriptRefExpr(clang::ObjCSubscriptRefExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOffsetOfExpr(clang::OffsetOfExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getOperatorLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getOperatorLoc());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorLoc7, other);
+    const Id* other = context_.source_model_.resolve(D->getOperatorLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorLoc_7, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc20, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_19, other);
   }
   //getTypeSourceInfo
   //getNumComponents
@@ -10082,13 +10082,13 @@ bool ArboretumASTVisitor::VisitOffsetOfExpr(clang::OffsetOfExpr* D) {
   // unsigned int
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc96, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_100, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc96, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_99, other);
   }
   //children
   // const_child_range
@@ -10096,45 +10096,45 @@ bool ArboretumASTVisitor::VisitOffsetOfExpr(clang::OffsetOfExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitOpaqueValueExpr(clang::OpaqueValueExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation12, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_12, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc100, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_101, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc100, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_100, other);
   }
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc13, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc_10, other);
   }
   //children
   // const_child_range
   //getSourceExpr
   {
-    const Entity* other = context_.resolve(D->getSourceExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSourceExpr, other);
+    const Id* other = context_.resolve(D->getSourceExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSourceExpr, other);
   }
   //isUnique
-  arboretum_create_edge(obj, context_.data_model_.isUnique, context_.data_model_.arboretum_node_for(D->isUnique()));
+  arboretum_create_edge(obj, context_.data_model_.method_isUnique, context_.data_model_.arboretum_node_for(D->isUnique()));
   return true;
 }
 
 bool ArboretumASTVisitor::VisitOverloadExpr(clang::OverloadExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getNamingClass
   {
-    const Entity* other = context_.resolve(D->getNamingClass());
-    arboretum_create_edge(obj, context_.data_model_.getNamingClass3, other);
+    const Id* other = context_.resolve(D->getNamingClass());
+    arboretum_create_edge(obj, context_.data_model_.method_getNamingClass, other);
   }
   //decls
   // llvm::iterator_range<decls_iterator>
@@ -10146,31 +10146,31 @@ bool ArboretumASTVisitor::VisitOverloadExpr(clang::OverloadExpr* D) {
   // DeclarationName
   //getNameLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getNameLoc());
-    arboretum_create_edge(obj, context_.data_model_.getNameLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getNameLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getNameLoc, other);
   }
   //getQualifier
   //getQualifierLoc
   // NestedNameSpecifierLoc
   //getTemplateKeywordLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTemplateKeywordLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getTemplateKeywordLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTemplateKeywordLoc_6, other);
   }
   //getLAngleLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLAngleLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLAngleLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getLAngleLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLAngleLoc_4, other);
   }
   //getRAngleLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRAngleLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRAngleLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getRAngleLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRAngleLoc_4, other);
   }
   //hasTemplateKeyword
-  arboretum_create_edge(obj, context_.data_model_.hasTemplateKeyword3, context_.data_model_.arboretum_node_for(D->hasTemplateKeyword()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasTemplateKeyword_4, context_.data_model_.arboretum_node_for(D->hasTemplateKeyword()));
   //hasExplicitTemplateArgs
-  arboretum_create_edge(obj, context_.data_model_.hasExplicitTemplateArgs4, context_.data_model_.arboretum_node_for(D->hasExplicitTemplateArgs()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasExplicitTemplateArgs_5, context_.data_model_.arboretum_node_for(D->hasExplicitTemplateArgs()));
   //getTemplateArgs
   //getNumTemplateArgs
   // unsigned int
@@ -10180,28 +10180,28 @@ bool ArboretumASTVisitor::VisitOverloadExpr(clang::OverloadExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitPackExpansionExpr(clang::PackExpansionExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getPattern
   {
-    const Entity* other = context_.resolve(D->getPattern());
-    arboretum_create_edge(obj, context_.data_model_.getPattern2, other);
+    const Id* other = context_.resolve(D->getPattern());
+    arboretum_create_edge(obj, context_.data_model_.method_getPattern_2, other);
   }
   //getEllipsisLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEllipsisLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEllipsisLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getEllipsisLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEllipsisLoc_6, other);
   }
   //getNumExpansions
   // std::optional<unsigned int>
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc61, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_102, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc61, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_101, other);
   }
   //children
   // const_child_range
@@ -10209,31 +10209,31 @@ bool ArboretumASTVisitor::VisitPackExpansionExpr(clang::PackExpansionExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitParenExpr(clang::ParenExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSubExpr
   {
-    const Entity* other = context_.resolve(D->getSubExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSubExpr9, other);
+    const Id* other = context_.resolve(D->getSubExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubExpr_8, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc79, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_103, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc79, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_102, other);
   }
   //getLParen
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParen());
-    arboretum_create_edge(obj, context_.data_model_.getLParen, other);
+    const Id* other = context_.source_model_.resolve(D->getLParen());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParen, other);
   }
   //getRParen
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParen());
-    arboretum_create_edge(obj, context_.data_model_.getRParen, other);
+    const Id* other = context_.source_model_.resolve(D->getRParen());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParen, other);
   }
   //children
   // const_child_range
@@ -10241,28 +10241,28 @@ bool ArboretumASTVisitor::VisitParenExpr(clang::ParenExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitParenListExpr(clang::ParenListExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getNumExprs
   // unsigned int
   //getLParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLParenLoc9, other);
+    const Id* other = context_.source_model_.resolve(D->getLParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParenLoc_7, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc13, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_20, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc82, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_104, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc82, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_103, other);
   }
   //children
   // const_child_range
@@ -10270,37 +10270,37 @@ bool ArboretumASTVisitor::VisitParenListExpr(clang::ParenListExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitPredefinedExpr(clang::PredefinedExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getIdentKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getIdentKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getIdentKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getIdentKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getIdentKind, enum_value);
     }
   }
   //isTransparent
-  arboretum_create_edge(obj, context_.data_model_.isTransparent, context_.data_model_.arboretum_node_for(D->isTransparent()));
+  arboretum_create_edge(obj, context_.data_model_.method_isTransparent_1, context_.data_model_.arboretum_node_for(D->isTransparent()));
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation10, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_13, other);
   }
   //getFunctionName
   {
-    const Entity* other = context_.resolve(D->getFunctionName());
-    arboretum_create_edge(obj, context_.data_model_.getFunctionName1, other);
+    const Id* other = context_.resolve(D->getFunctionName());
+    arboretum_create_edge(obj, context_.data_model_.method_getFunctionName, other);
   }
   //getIdentKindName
   // StringRef
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc97, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_105, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc97, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_104, other);
   }
   //children
   // const_child_range
@@ -10308,18 +10308,18 @@ bool ArboretumASTVisitor::VisitPredefinedExpr(clang::PredefinedExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitPseudoObjectExpr(clang::PseudoObjectExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSyntacticForm
   {
-    const Entity* other = context_.resolve(D->getSyntacticForm());
-    arboretum_create_edge(obj, context_.data_model_.getSyntacticForm1, other);
+    const Id* other = context_.resolve(D->getSyntacticForm());
+    arboretum_create_edge(obj, context_.data_model_.method_getSyntacticForm_1, other);
   }
   //getResultExprIndex
   // unsigned int
   //getResultExpr
   {
-    const Entity* other = context_.resolve(D->getResultExpr());
-    arboretum_create_edge(obj, context_.data_model_.getResultExpr1, other);
+    const Id* other = context_.resolve(D->getResultExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getResultExpr_1, other);
   }
   //getNumSemanticExprs
   // unsigned int
@@ -10327,18 +10327,18 @@ bool ArboretumASTVisitor::VisitPseudoObjectExpr(clang::PseudoObjectExpr* D) {
   // ArrayRef<const Expr *>
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc10, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc_11, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc78, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_106, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc78, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_105, other);
   }
   //children
   // const_child_range
@@ -10346,62 +10346,62 @@ bool ArboretumASTVisitor::VisitPseudoObjectExpr(clang::PseudoObjectExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitRecoveryExpr(clang::RecoveryExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //subExpressions
   // ArrayRef<const Expr *>
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc28, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_107, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc28, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_106, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitRequiresExpr(clang::RequiresExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getLocalParameters
   // ArrayRef<ParmVarDecl *>
   //getBody
   {
-    const Entity* other = context_.resolve(D->getBody());
-    arboretum_create_edge(obj, context_.data_model_.getBody11, other);
+    const Id* other = context_.resolve(D->getBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getBody_10, other);
   }
   //getRequirements
   // ArrayRef<concepts::Requirement *>
   //getRequiresKWLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRequiresKWLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRequiresKWLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getRequiresKWLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRequiresKWLoc, other);
   }
   //getLParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLParenLoc7, other);
+    const Id* other = context_.source_model_.resolve(D->getLParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParenLoc_8, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc10, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_21, other);
   }
   //getRBraceLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRBraceLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRBraceLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getRBraceLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRBraceLoc_5, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc57, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_108, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc57, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_107, other);
   }
   //children
   // const_child_range
@@ -10409,31 +10409,31 @@ bool ArboretumASTVisitor::VisitRequiresExpr(clang::RequiresExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitReturnStmt(clang::ReturnStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getRetValue
   {
-    const Entity* other = context_.resolve(D->getRetValue());
-    arboretum_create_edge(obj, context_.data_model_.getRetValue1, other);
+    const Id* other = context_.resolve(D->getRetValue());
+    arboretum_create_edge(obj, context_.data_model_.method_getRetValue, other);
   }
   //getNRVOCandidate
   {
-    const Entity* other = context_.resolve(D->getNRVOCandidate());
-    arboretum_create_edge(obj, context_.data_model_.getNRVOCandidate, other);
+    const Id* other = context_.resolve(D->getNRVOCandidate());
+    arboretum_create_edge(obj, context_.data_model_.method_getNRVOCandidate, other);
   }
   //getReturnLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getReturnLoc());
-    arboretum_create_edge(obj, context_.data_model_.getReturnLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getReturnLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getReturnLoc, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc40, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_109, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc40, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_108, other);
   }
   //children
   // const_child_range
@@ -10441,31 +10441,31 @@ bool ArboretumASTVisitor::VisitReturnStmt(clang::ReturnStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitSEHExceptStmt(clang::SEHExceptStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc8, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_110, other);
   }
   //getExceptLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExceptLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExceptLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getExceptLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExceptLoc, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc8, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_109, other);
   }
   //getFilterExpr
   {
-    const Entity* other = context_.resolve(D->getFilterExpr());
-    arboretum_create_edge(obj, context_.data_model_.getFilterExpr, other);
+    const Id* other = context_.resolve(D->getFilterExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getFilterExpr, other);
   }
   //getBlock
   {
-    const Entity* other = context_.resolve(D->getBlock());
-    arboretum_create_edge(obj, context_.data_model_.getBlock, other);
+    const Id* other = context_.resolve(D->getBlock());
+    arboretum_create_edge(obj, context_.data_model_.method_getBlock, other);
   }
   //children
   // const_child_range
@@ -10473,26 +10473,26 @@ bool ArboretumASTVisitor::VisitSEHExceptStmt(clang::SEHExceptStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitSEHFinallyStmt(clang::SEHFinallyStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc164, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_111, other);
   }
   //getFinallyLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getFinallyLoc());
-    arboretum_create_edge(obj, context_.data_model_.getFinallyLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getFinallyLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getFinallyLoc, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc162, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_110, other);
   }
   //getBlock
   {
-    const Entity* other = context_.resolve(D->getBlock());
-    arboretum_create_edge(obj, context_.data_model_.getBlock1, other);
+    const Id* other = context_.resolve(D->getBlock());
+    arboretum_create_edge(obj, context_.data_model_.method_getBlock_1, other);
   }
   //children
   // const_child_range
@@ -10500,21 +10500,21 @@ bool ArboretumASTVisitor::VisitSEHFinallyStmt(clang::SEHFinallyStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitSEHLeaveStmt(clang::SEHLeaveStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getLeaveLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLeaveLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLeaveLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getLeaveLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLeaveLoc, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc121, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_112, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc123, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_111, other);
   }
   //children
   // const_child_range
@@ -10522,43 +10522,43 @@ bool ArboretumASTVisitor::VisitSEHLeaveStmt(clang::SEHLeaveStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitSEHTryStmt(clang::SEHTryStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc10, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_113, other);
   }
   //getTryLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getTryLoc());
-    arboretum_create_edge(obj, context_.data_model_.getTryLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getTryLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getTryLoc_1, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc10, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_112, other);
   }
   //getIsCXXTry
-  arboretum_create_edge(obj, context_.data_model_.getIsCXXTry, context_.data_model_.arboretum_node_for(D->getIsCXXTry()));
+  arboretum_create_edge(obj, context_.data_model_.method_getIsCXXTry, context_.data_model_.arboretum_node_for(D->getIsCXXTry()));
   //getTryBlock
   {
-    const Entity* other = context_.resolve(D->getTryBlock());
-    arboretum_create_edge(obj, context_.data_model_.getTryBlock, other);
+    const Id* other = context_.resolve(D->getTryBlock());
+    arboretum_create_edge(obj, context_.data_model_.method_getTryBlock_1, other);
   }
   //getHandler
   {
-    const Entity* other = context_.resolve(D->getHandler());
-    arboretum_create_edge(obj, context_.data_model_.getHandler, other);
+    const Id* other = context_.resolve(D->getHandler());
+    arboretum_create_edge(obj, context_.data_model_.method_getHandler, other);
   }
   //getExceptHandler
   {
-    const Entity* other = context_.resolve(D->getExceptHandler());
-    arboretum_create_edge(obj, context_.data_model_.getExceptHandler, other);
+    const Id* other = context_.resolve(D->getExceptHandler());
+    arboretum_create_edge(obj, context_.data_model_.method_getExceptHandler, other);
   }
   //getFinallyHandler
   {
-    const Entity* other = context_.resolve(D->getFinallyHandler());
-    arboretum_create_edge(obj, context_.data_model_.getFinallyHandler, other);
+    const Id* other = context_.resolve(D->getFinallyHandler());
+    arboretum_create_edge(obj, context_.data_model_.method_getFinallyHandler, other);
   }
   //children
   // const_child_range
@@ -10566,32 +10566,32 @@ bool ArboretumASTVisitor::VisitSEHTryStmt(clang::SEHTryStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitSYCLUniqueStableNameExpr(clang::SYCLUniqueStableNameExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTypeSourceInfo
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc17, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_114, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc17, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_113, other);
   }
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation1, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_14, other);
   }
   //getLParenLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParenLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLParenLocation, other);
+    const Id* other = context_.source_model_.resolve(D->getLParenLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParenLocation, other);
   }
   //getRParenLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLocation());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLocation, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLocation, other);
   }
   //children
   // const_child_range
@@ -10599,26 +10599,26 @@ bool ArboretumASTVisitor::VisitSYCLUniqueStableNameExpr(clang::SYCLUniqueStableN
 }
 
 bool ArboretumASTVisitor::VisitShuffleVectorExpr(clang::ShuffleVectorExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBuiltinLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBuiltinLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBuiltinLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getBuiltinLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBuiltinLoc_4, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc8, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_22, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc50, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_115, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc50, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_114, other);
   }
   //getNumSubExprs
   // unsigned int
@@ -10628,42 +10628,42 @@ bool ArboretumASTVisitor::VisitShuffleVectorExpr(clang::ShuffleVectorExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitSizeOfPackExpr(clang::SizeOfPackExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getOperatorLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getOperatorLoc());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorLoc10, other);
+    const Id* other = context_.source_model_.resolve(D->getOperatorLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorLoc_8, other);
   }
   //getPackLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getPackLoc());
-    arboretum_create_edge(obj, context_.data_model_.getPackLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getPackLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getPackLoc, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc31, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_23, other);
   }
   //getPack
   {
-    const Entity* other = context_.resolve(D->getPack());
-    arboretum_create_edge(obj, context_.data_model_.getPack, other);
+    const Id* other = context_.resolve(D->getPack());
+    arboretum_create_edge(obj, context_.data_model_.method_getPack, other);
   }
   //getPackLength
   // unsigned int
   //isPartiallySubstituted
-  arboretum_create_edge(obj, context_.data_model_.isPartiallySubstituted, context_.data_model_.arboretum_node_for(D->isPartiallySubstituted()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPartiallySubstituted, context_.data_model_.arboretum_node_for(D->isPartiallySubstituted()));
   //getPartialArguments
   // ArrayRef<TemplateArgument>
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc140, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_116, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc140, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_115, other);
   }
   //children
   // const_child_range
@@ -10671,33 +10671,33 @@ bool ArboretumASTVisitor::VisitSizeOfPackExpr(clang::SizeOfPackExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitSourceLocExpr(clang::SourceLocExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getBuiltinStr
   // StringRef
   //getIdentKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getIdentKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getIdentKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getIdentKind1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getIdentKind_1, enum_value);
     }
   }
   //isIntType
-  arboretum_create_edge(obj, context_.data_model_.isIntType, context_.data_model_.arboretum_node_for(D->isIntType()));
+  arboretum_create_edge(obj, context_.data_model_.method_isIntType, context_.data_model_.arboretum_node_for(D->isIntType()));
   //getParentContext
   //getLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getLocation());
-    arboretum_create_edge(obj, context_.data_model_.getLocation15, other);
+    const Id* other = context_.source_model_.resolve(D->getLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getLocation_15, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc137, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_117, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc137, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_116, other);
   }
   //children
   // const_child_range
@@ -10705,951 +10705,951 @@ bool ArboretumASTVisitor::VisitSourceLocExpr(clang::SourceLocExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitStmt(clang::Stmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   switch(D->getStmtClass()) {
     case clang::Stmt::ObjCArrayLiteralClass: {
-assert(context_.data_model_.ObjCArrayLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCArrayLiteral); 
-    } break;
-    case clang::Stmt::SwitchStmtClass: {
-assert(context_.data_model_.SwitchStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.SwitchStmt); 
+assert(context_.data_model_.class_ObjCArrayLiteral != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCArrayLiteral); 
     } break;
     case clang::Stmt::CXXStdInitializerListExprClass: {
-assert(context_.data_model_.CXXStdInitializerListExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXStdInitializerListExpr); 
+assert(context_.data_model_.class_CXXStdInitializerListExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXStdInitializerListExpr); 
     } break;
     case clang::Stmt::ImplicitCastExprClass: {
-assert(context_.data_model_.ImplicitCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ImplicitCastExpr); 
+assert(context_.data_model_.class_ImplicitCastExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitCastExpr); 
     } break;
     case clang::Stmt::ObjCSelectorExprClass: {
-assert(context_.data_model_.ObjCSelectorExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCSelectorExpr); 
+assert(context_.data_model_.class_ObjCSelectorExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCSelectorExpr); 
     } break;
     case clang::Stmt::ObjCAtTryStmtClass: {
-assert(context_.data_model_.ObjCAtTryStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCAtTryStmt); 
+assert(context_.data_model_.class_ObjCAtTryStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtTryStmt); 
     } break;
     case clang::Stmt::ObjCProtocolExprClass: {
-assert(context_.data_model_.ObjCProtocolExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCProtocolExpr); 
+assert(context_.data_model_.class_ObjCProtocolExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCProtocolExpr); 
     } break;
     case clang::Stmt::CXXTypeidExprClass: {
-assert(context_.data_model_.CXXTypeidExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXTypeidExpr); 
-    } break;
-    case clang::Stmt::ObjCPropertyRefExprClass: {
-assert(context_.data_model_.ObjCPropertyRefExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCPropertyRefExpr); 
-    } break;
-    case clang::Stmt::OMPTargetTeamsDistributeSimdDirectiveClass: {
-assert(context_.data_model_.OMPTargetTeamsDistributeSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetTeamsDistributeSimdDirective); 
-    } break;
-    case clang::Stmt::ObjCMessageExprClass: {
-assert(context_.data_model_.ObjCMessageExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCMessageExpr); 
-    } break;
-    case clang::Stmt::CXXParenListInitExprClass: {
-assert(context_.data_model_.CXXParenListInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXParenListInitExpr); 
-    } break;
-    case clang::Stmt::ObjCIsaExprClass: {
-assert(context_.data_model_.ObjCIsaExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCIsaExpr); 
-    } break;
-    case clang::Stmt::ForStmtClass: {
-assert(context_.data_model_.ForStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ForStmt); 
-    } break;
-    case clang::Stmt::OMPTaskgroupDirectiveClass: {
-assert(context_.data_model_.OMPTaskgroupDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTaskgroupDirective); 
-    } break;
-    case clang::Stmt::IndirectGotoStmtClass: {
-assert(context_.data_model_.IndirectGotoStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.IndirectGotoStmt); 
-    } break;
-    case clang::Stmt::OMPParallelMaskedTaskLoopSimdDirectiveClass: {
-assert(context_.data_model_.OMPParallelMaskedTaskLoopSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPParallelMaskedTaskLoopSimdDirective); 
-    } break;
-    case clang::Stmt::GCCAsmStmtClass: {
-assert(context_.data_model_.GCCAsmStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.GCCAsmStmt); 
-    } break;
-    case clang::Stmt::TypoExprClass: {
-assert(context_.data_model_.TypoExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.TypoExpr); 
-    } break;
-    case clang::Stmt::MSAsmStmtClass: {
-assert(context_.data_model_.MSAsmStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.MSAsmStmt); 
-    } break;
-    case clang::Stmt::CXXBindTemporaryExprClass: {
-assert(context_.data_model_.CXXBindTemporaryExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXBindTemporaryExpr); 
-    } break;
-    case clang::Stmt::CXXOperatorCallExprClass: {
-assert(context_.data_model_.CXXOperatorCallExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXOperatorCallExpr); 
-    } break;
-    case clang::Stmt::SEHExceptStmtClass: {
-assert(context_.data_model_.SEHExceptStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.SEHExceptStmt); 
-    } break;
-    case clang::Stmt::MemberExprClass: {
-assert(context_.data_model_.MemberExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.MemberExpr); 
-    } break;
-    case clang::Stmt::SEHTryStmtClass: {
-assert(context_.data_model_.SEHTryStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.SEHTryStmt); 
-    } break;
-    case clang::Stmt::CXXForRangeStmtClass: {
-assert(context_.data_model_.CXXForRangeStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXForRangeStmt); 
-    } break;
-    case clang::Stmt::ObjCEncodeExprClass: {
-assert(context_.data_model_.ObjCEncodeExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCEncodeExpr); 
-    } break;
-    case clang::Stmt::SubstNonTypeTemplateParmExprClass: {
-assert(context_.data_model_.SubstNonTypeTemplateParmExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.SubstNonTypeTemplateParmExpr); 
-    } break;
-    case clang::Stmt::ObjCIndirectCopyRestoreExprClass: {
-assert(context_.data_model_.ObjCIndirectCopyRestoreExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCIndirectCopyRestoreExpr); 
-    } break;
-    case clang::Stmt::CoroutineBodyStmtClass: {
-assert(context_.data_model_.CoroutineBodyStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CoroutineBodyStmt); 
-    } break;
-    case clang::Stmt::CoreturnStmtClass: {
-assert(context_.data_model_.CoreturnStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CoreturnStmt); 
-    } break;
-    case clang::Stmt::ArrayTypeTraitExprClass: {
-assert(context_.data_model_.ArrayTypeTraitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ArrayTypeTraitExpr); 
-    } break;
-    case clang::Stmt::CXXUuidofExprClass: {
-assert(context_.data_model_.CXXUuidofExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXUuidofExpr); 
-    } break;
-    case clang::Stmt::ObjCForCollectionStmtClass: {
-assert(context_.data_model_.ObjCForCollectionStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCForCollectionStmt); 
-    } break;
-    case clang::Stmt::ObjCAtCatchStmtClass: {
-assert(context_.data_model_.ObjCAtCatchStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCAtCatchStmt); 
-    } break;
-    case clang::Stmt::ObjCAtSynchronizedStmtClass: {
-assert(context_.data_model_.ObjCAtSynchronizedStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCAtSynchronizedStmt); 
-    } break;
-    case clang::Stmt::ObjCAtThrowStmtClass: {
-assert(context_.data_model_.ObjCAtThrowStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCAtThrowStmt); 
-    } break;
-    case clang::Stmt::OMPParallelMasterDirectiveClass: {
-assert(context_.data_model_.OMPParallelMasterDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPParallelMasterDirective); 
-    } break;
-    case clang::Stmt::ImaginaryLiteralClass: {
-assert(context_.data_model_.ImaginaryLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ImaginaryLiteral); 
+assert(context_.data_model_.class_CXXTypeidExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTypeidExpr); 
     } break;
     case clang::Stmt::NullStmtClass: {
-assert(context_.data_model_.NullStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.NullStmt); 
-    } break;
-    case clang::Stmt::ObjCAutoreleasePoolStmtClass: {
-assert(context_.data_model_.ObjCAutoreleasePoolStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCAutoreleasePoolStmt); 
-    } break;
-    case clang::Stmt::OMPCanonicalLoopClass: {
-assert(context_.data_model_.OMPCanonicalLoop != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPCanonicalLoop); 
-    } break;
-    case clang::Stmt::BreakStmtClass: {
-assert(context_.data_model_.BreakStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.BreakStmt); 
-    } break;
-    case clang::Stmt::OMPParallelDirectiveClass: {
-assert(context_.data_model_.OMPParallelDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPParallelDirective); 
-    } break;
-    case clang::Stmt::OMPTileDirectiveClass: {
-assert(context_.data_model_.OMPTileDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTileDirective); 
-    } break;
-    case clang::Stmt::MSPropertyRefExprClass: {
-assert(context_.data_model_.MSPropertyRefExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.MSPropertyRefExpr); 
-    } break;
-    case clang::Stmt::ObjCDictionaryLiteralClass: {
-assert(context_.data_model_.ObjCDictionaryLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCDictionaryLiteral); 
-    } break;
-    case clang::Stmt::OMPInteropDirectiveClass: {
-assert(context_.data_model_.OMPInteropDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPInteropDirective); 
-    } break;
-    case clang::Stmt::ObjCSubscriptRefExprClass: {
-assert(context_.data_model_.ObjCSubscriptRefExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCSubscriptRefExpr); 
-    } break;
-    case clang::Stmt::CXXBoolLiteralExprClass: {
-assert(context_.data_model_.CXXBoolLiteralExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXBoolLiteralExpr); 
-    } break;
-    case clang::Stmt::SYCLUniqueStableNameExprClass: {
-assert(context_.data_model_.SYCLUniqueStableNameExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.SYCLUniqueStableNameExpr); 
-    } break;
-    case clang::Stmt::OMPSimdDirectiveClass: {
-assert(context_.data_model_.OMPSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPSimdDirective); 
-    } break;
-    case clang::Stmt::OMPForSimdDirectiveClass: {
-assert(context_.data_model_.OMPForSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPForSimdDirective); 
-    } break;
-    case clang::Stmt::ObjCBoxedExprClass: {
-assert(context_.data_model_.ObjCBoxedExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCBoxedExpr); 
-    } break;
-    case clang::Stmt::OMPParallelSectionsDirectiveClass: {
-assert(context_.data_model_.OMPParallelSectionsDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPParallelSectionsDirective); 
-    } break;
-    case clang::Stmt::ObjCAvailabilityCheckExprClass: {
-assert(context_.data_model_.ObjCAvailabilityCheckExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCAvailabilityCheckExpr); 
-    } break;
-    case clang::Stmt::OMPParallelForDirectiveClass: {
-assert(context_.data_model_.OMPParallelForDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPParallelForDirective); 
-    } break;
-    case clang::Stmt::OMPTargetParallelForDirectiveClass: {
-assert(context_.data_model_.OMPTargetParallelForDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetParallelForDirective); 
-    } break;
-    case clang::Stmt::OMPErrorDirectiveClass: {
-assert(context_.data_model_.OMPErrorDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPErrorDirective); 
-    } break;
-    case clang::Stmt::OMPTaskLoopSimdDirectiveClass: {
-assert(context_.data_model_.OMPTaskLoopSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTaskLoopSimdDirective); 
-    } break;
-    case clang::Stmt::OMPMaskedTaskLoopDirectiveClass: {
-assert(context_.data_model_.OMPMaskedTaskLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPMaskedTaskLoopDirective); 
-    } break;
-    case clang::Stmt::OMPMasterTaskLoopSimdDirectiveClass: {
-assert(context_.data_model_.OMPMasterTaskLoopSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPMasterTaskLoopSimdDirective); 
-    } break;
-    case clang::Stmt::CXXTryStmtClass: {
-assert(context_.data_model_.CXXTryStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXTryStmt); 
-    } break;
-    case clang::Stmt::OMPMaskedTaskLoopSimdDirectiveClass: {
-assert(context_.data_model_.OMPMaskedTaskLoopSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPMaskedTaskLoopSimdDirective); 
-    } break;
-    case clang::Stmt::CompoundAssignOperatorClass: {
-assert(context_.data_model_.CompoundAssignOperator != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CompoundAssignOperator); 
-    } break;
-    case clang::Stmt::SEHFinallyStmtClass: {
-assert(context_.data_model_.SEHFinallyStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.SEHFinallyStmt); 
-    } break;
-    case clang::Stmt::OMPParallelMaskedTaskLoopDirectiveClass: {
-assert(context_.data_model_.OMPParallelMaskedTaskLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPParallelMaskedTaskLoopDirective); 
-    } break;
-    case clang::Stmt::ObjCAtFinallyStmtClass: {
-assert(context_.data_model_.ObjCAtFinallyStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCAtFinallyStmt); 
-    } break;
-    case clang::Stmt::OMPParallelMasterTaskLoopDirectiveClass: {
-assert(context_.data_model_.OMPParallelMasterTaskLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPParallelMasterTaskLoopDirective); 
-    } break;
-    case clang::Stmt::BlockExprClass: {
-assert(context_.data_model_.BlockExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.BlockExpr); 
-    } break;
-    case clang::Stmt::OMPMasterDirectiveClass: {
-assert(context_.data_model_.OMPMasterDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPMasterDirective); 
-    } break;
-    case clang::Stmt::CXXNoexceptExprClass: {
-assert(context_.data_model_.CXXNoexceptExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXNoexceptExpr); 
-    } break;
-    case clang::Stmt::WhileStmtClass: {
-assert(context_.data_model_.WhileStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.WhileStmt); 
-    } break;
-    case clang::Stmt::OMPSingleDirectiveClass: {
-assert(context_.data_model_.OMPSingleDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPSingleDirective); 
-    } break;
-    case clang::Stmt::ObjCIvarRefExprClass: {
-assert(context_.data_model_.ObjCIvarRefExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCIvarRefExpr); 
-    } break;
-    case clang::Stmt::CUDAKernelCallExprClass: {
-assert(context_.data_model_.CUDAKernelCallExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CUDAKernelCallExpr); 
-    } break;
-    case clang::Stmt::OMPTaskyieldDirectiveClass: {
-assert(context_.data_model_.OMPTaskyieldDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTaskyieldDirective); 
-    } break;
-    case clang::Stmt::OMPIteratorExprClass: {
-assert(context_.data_model_.OMPIteratorExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPIteratorExpr); 
-    } break;
-    case clang::Stmt::MSDependentExistsStmtClass: {
-assert(context_.data_model_.MSDependentExistsStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.MSDependentExistsStmt); 
-    } break;
-    case clang::Stmt::OMPTargetUpdateDirectiveClass: {
-assert(context_.data_model_.OMPTargetUpdateDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetUpdateDirective); 
-    } break;
-    case clang::Stmt::OMPCancelDirectiveClass: {
-assert(context_.data_model_.OMPCancelDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPCancelDirective); 
-    } break;
-    case clang::Stmt::RecoveryExprClass: {
-assert(context_.data_model_.RecoveryExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.RecoveryExpr); 
-    } break;
-    case clang::Stmt::OMPDistributeParallelForDirectiveClass: {
-assert(context_.data_model_.OMPDistributeParallelForDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPDistributeParallelForDirective); 
-    } break;
-    case clang::Stmt::OMPTaskwaitDirectiveClass: {
-assert(context_.data_model_.OMPTaskwaitDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTaskwaitDirective); 
-    } break;
-    case clang::Stmt::OMPTargetParallelDirectiveClass: {
-assert(context_.data_model_.OMPTargetParallelDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetParallelDirective); 
-    } break;
-    case clang::Stmt::OMPCriticalDirectiveClass: {
-assert(context_.data_model_.OMPCriticalDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPCriticalDirective); 
-    } break;
-    case clang::Stmt::IfStmtClass: {
-assert(context_.data_model_.IfStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.IfStmt); 
-    } break;
-    case clang::Stmt::OMPDistributeParallelForSimdDirectiveClass: {
-assert(context_.data_model_.OMPDistributeParallelForSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPDistributeParallelForSimdDirective); 
-    } break;
-    case clang::Stmt::OMPGenericLoopDirectiveClass: {
-assert(context_.data_model_.OMPGenericLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPGenericLoopDirective); 
-    } break;
-    case clang::Stmt::CapturedStmtClass: {
-assert(context_.data_model_.CapturedStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CapturedStmt); 
-    } break;
-    case clang::Stmt::OMPForDirectiveClass: {
-assert(context_.data_model_.OMPForDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPForDirective); 
-    } break;
-    case clang::Stmt::OMPTargetSimdDirectiveClass: {
-assert(context_.data_model_.OMPTargetSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetSimdDirective); 
-    } break;
-    case clang::Stmt::OMPDepobjDirectiveClass: {
-assert(context_.data_model_.OMPDepobjDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPDepobjDirective); 
-    } break;
-    case clang::Stmt::ConstantExprClass: {
-assert(context_.data_model_.ConstantExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ConstantExpr); 
-    } break;
-    case clang::Stmt::LabelStmtClass: {
-assert(context_.data_model_.LabelStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.LabelStmt); 
-    } break;
-    case clang::Stmt::OMPParallelForSimdDirectiveClass: {
-assert(context_.data_model_.OMPParallelForSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPParallelForSimdDirective); 
-    } break;
-    case clang::Stmt::OMPParallelMaskedDirectiveClass: {
-assert(context_.data_model_.OMPParallelMaskedDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPParallelMaskedDirective); 
-    } break;
-    case clang::Stmt::InitListExprClass: {
-assert(context_.data_model_.InitListExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.InitListExpr); 
-    } break;
-    case clang::Stmt::OMPTargetTeamsGenericLoopDirectiveClass: {
-assert(context_.data_model_.OMPTargetTeamsGenericLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetTeamsGenericLoopDirective); 
-    } break;
-    case clang::Stmt::CXXUnresolvedConstructExprClass: {
-assert(context_.data_model_.CXXUnresolvedConstructExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXUnresolvedConstructExpr); 
-    } break;
-    case clang::Stmt::OMPTargetDirectiveClass: {
-assert(context_.data_model_.OMPTargetDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetDirective); 
-    } break;
-    case clang::Stmt::OMPTargetDataDirectiveClass: {
-assert(context_.data_model_.OMPTargetDataDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetDataDirective); 
-    } break;
-    case clang::Stmt::OMPTargetEnterDataDirectiveClass: {
-assert(context_.data_model_.OMPTargetEnterDataDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetEnterDataDirective); 
-    } break;
-    case clang::Stmt::OMPTeamsDistributeDirectiveClass: {
-assert(context_.data_model_.OMPTeamsDistributeDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTeamsDistributeDirective); 
-    } break;
-    case clang::Stmt::OMPOrderedDirectiveClass: {
-assert(context_.data_model_.OMPOrderedDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPOrderedDirective); 
-    } break;
-    case clang::Stmt::ContinueStmtClass: {
-assert(context_.data_model_.ContinueStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ContinueStmt); 
-    } break;
-    case clang::Stmt::CXXDependentScopeMemberExprClass: {
-assert(context_.data_model_.CXXDependentScopeMemberExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXDependentScopeMemberExpr); 
-    } break;
-    case clang::Stmt::ExpressionTraitExprClass: {
-assert(context_.data_model_.ExpressionTraitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ExpressionTraitExpr); 
-    } break;
-    case clang::Stmt::CXXNullPtrLiteralExprClass: {
-assert(context_.data_model_.CXXNullPtrLiteralExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXNullPtrLiteralExpr); 
-    } break;
-    case clang::Stmt::GenericSelectionExprClass: {
-assert(context_.data_model_.GenericSelectionExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.GenericSelectionExpr); 
-    } break;
-    case clang::Stmt::OMPTeamsDirectiveClass: {
-assert(context_.data_model_.OMPTeamsDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTeamsDirective); 
-    } break;
-    case clang::Stmt::CXXInheritedCtorInitExprClass: {
-assert(context_.data_model_.CXXInheritedCtorInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXInheritedCtorInitExpr); 
-    } break;
-    case clang::Stmt::OMPTeamsDistributeParallelForDirectiveClass: {
-assert(context_.data_model_.OMPTeamsDistributeParallelForDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTeamsDistributeParallelForDirective); 
-    } break;
-    case clang::Stmt::MSPropertySubscriptExprClass: {
-assert(context_.data_model_.MSPropertySubscriptExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.MSPropertySubscriptExpr); 
-    } break;
-    case clang::Stmt::DesignatedInitExprClass: {
-assert(context_.data_model_.DesignatedInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.DesignatedInitExpr); 
-    } break;
-    case clang::Stmt::ArraySubscriptExprClass: {
-assert(context_.data_model_.ArraySubscriptExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ArraySubscriptExpr); 
-    } break;
-    case clang::Stmt::AtomicExprClass: {
-assert(context_.data_model_.AtomicExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.AtomicExpr); 
-    } break;
-    case clang::Stmt::CoyieldExprClass: {
-assert(context_.data_model_.CoyieldExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CoyieldExpr); 
-    } break;
-    case clang::Stmt::CXXScalarValueInitExprClass: {
-assert(context_.data_model_.CXXScalarValueInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXScalarValueInitExpr); 
-    } break;
-    case clang::Stmt::CXXDeleteExprClass: {
-assert(context_.data_model_.CXXDeleteExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXDeleteExpr); 
-    } break;
-    case clang::Stmt::CXXThrowExprClass: {
-assert(context_.data_model_.CXXThrowExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXThrowExpr); 
-    } break;
-    case clang::Stmt::PseudoObjectExprClass: {
-assert(context_.data_model_.PseudoObjectExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.PseudoObjectExpr); 
-    } break;
-    case clang::Stmt::ParenExprClass: {
-assert(context_.data_model_.ParenExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ParenExpr); 
-    } break;
-    case clang::Stmt::ExtVectorElementExprClass: {
-assert(context_.data_model_.ExtVectorElementExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ExtVectorElementExpr); 
-    } break;
-    case clang::Stmt::OMPUnrollDirectiveClass: {
-assert(context_.data_model_.OMPUnrollDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPUnrollDirective); 
-    } break;
-    case clang::Stmt::FunctionParmPackExprClass: {
-assert(context_.data_model_.FunctionParmPackExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.FunctionParmPackExpr); 
-    } break;
-    case clang::Stmt::VAArgExprClass: {
-assert(context_.data_model_.VAArgExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.VAArgExpr); 
-    } break;
-    case clang::Stmt::AsTypeExprClass: {
-assert(context_.data_model_.AsTypeExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.AsTypeExpr); 
-    } break;
-    case clang::Stmt::OMPFlushDirectiveClass: {
-assert(context_.data_model_.OMPFlushDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPFlushDirective); 
-    } break;
-    case clang::Stmt::TypeTraitExprClass: {
-assert(context_.data_model_.TypeTraitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.TypeTraitExpr); 
-    } break;
-    case clang::Stmt::CXXMemberCallExprClass: {
-assert(context_.data_model_.CXXMemberCallExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXMemberCallExpr); 
-    } break;
-    case clang::Stmt::UnaryExprOrTypeTraitExprClass: {
-assert(context_.data_model_.UnaryExprOrTypeTraitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UnaryExprOrTypeTraitExpr); 
-    } break;
-    case clang::Stmt::CXXFunctionalCastExprClass: {
-assert(context_.data_model_.CXXFunctionalCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXFunctionalCastExpr); 
-    } break;
-    case clang::Stmt::OffsetOfExprClass: {
-assert(context_.data_model_.OffsetOfExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OffsetOfExpr); 
-    } break;
-    case clang::Stmt::DefaultStmtClass: {
-assert(context_.data_model_.DefaultStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.DefaultStmt); 
-    } break;
-    case clang::Stmt::CXXPseudoDestructorExprClass: {
-assert(context_.data_model_.CXXPseudoDestructorExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXPseudoDestructorExpr); 
-    } break;
-    case clang::Stmt::StringLiteralClass: {
-assert(context_.data_model_.StringLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.StringLiteral); 
-    } break;
-    case clang::Stmt::FloatingLiteralClass: {
-assert(context_.data_model_.FloatingLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.FloatingLiteral); 
-    } break;
-    case clang::Stmt::UnaryOperatorClass: {
-assert(context_.data_model_.UnaryOperator != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UnaryOperator); 
-    } break;
-    case clang::Stmt::OMPTargetTeamsDirectiveClass: {
-assert(context_.data_model_.OMPTargetTeamsDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetTeamsDirective); 
-    } break;
-    case clang::Stmt::CXXReinterpretCastExprClass: {
-assert(context_.data_model_.CXXReinterpretCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXReinterpretCastExpr); 
-    } break;
-    case clang::Stmt::SourceLocExprClass: {
-assert(context_.data_model_.SourceLocExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.SourceLocExpr); 
-    } break;
-    case clang::Stmt::CXXNewExprClass: {
-assert(context_.data_model_.CXXNewExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXNewExpr); 
-    } break;
-    case clang::Stmt::ParenListExprClass: {
-assert(context_.data_model_.ParenListExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ParenListExpr); 
-    } break;
-    case clang::Stmt::BuiltinBitCastExprClass: {
-assert(context_.data_model_.BuiltinBitCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.BuiltinBitCastExpr); 
-    } break;
-    case clang::Stmt::PredefinedExprClass: {
-assert(context_.data_model_.PredefinedExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.PredefinedExpr); 
-    } break;
-    case clang::Stmt::CXXDefaultArgExprClass: {
-assert(context_.data_model_.CXXDefaultArgExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXDefaultArgExpr); 
-    } break;
-    case clang::Stmt::OpaqueValueExprClass: {
-assert(context_.data_model_.OpaqueValueExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OpaqueValueExpr); 
-    } break;
-    case clang::Stmt::OMPTargetParallelGenericLoopDirectiveClass: {
-assert(context_.data_model_.OMPTargetParallelGenericLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetParallelGenericLoopDirective); 
-    } break;
-    case clang::Stmt::ReturnStmtClass: {
-assert(context_.data_model_.ReturnStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ReturnStmt); 
-    } break;
-    case clang::Stmt::ArrayInitIndexExprClass: {
-assert(context_.data_model_.ArrayInitIndexExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ArrayInitIndexExpr); 
-    } break;
-    case clang::Stmt::IntegerLiteralClass: {
-assert(context_.data_model_.IntegerLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.IntegerLiteral); 
-    } break;
-    case clang::Stmt::CStyleCastExprClass: {
-assert(context_.data_model_.CStyleCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CStyleCastExpr); 
-    } break;
-    case clang::Stmt::UnresolvedMemberExprClass: {
-assert(context_.data_model_.UnresolvedMemberExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UnresolvedMemberExpr); 
-    } break;
-    case clang::Stmt::CompoundLiteralExprClass: {
-assert(context_.data_model_.CompoundLiteralExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CompoundLiteralExpr); 
-    } break;
-    case clang::Stmt::CXXConstructExprClass: {
-assert(context_.data_model_.CXXConstructExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXConstructExpr); 
-    } break;
-    case clang::Stmt::ExprWithCleanupsClass: {
-assert(context_.data_model_.ExprWithCleanups != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ExprWithCleanups); 
-    } break;
-    case clang::Stmt::ObjCBridgedCastExprClass: {
-assert(context_.data_model_.ObjCBridgedCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCBridgedCastExpr); 
-    } break;
-    case clang::Stmt::DeclStmtClass: {
-assert(context_.data_model_.DeclStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.DeclStmt); 
-    } break;
-    case clang::Stmt::BinaryOperatorClass: {
-assert(context_.data_model_.BinaryOperator != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.BinaryOperator); 
-    } break;
-    case clang::Stmt::CoawaitExprClass: {
-assert(context_.data_model_.CoawaitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CoawaitExpr); 
-    } break;
-    case clang::Stmt::CXXStaticCastExprClass: {
-assert(context_.data_model_.CXXStaticCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXStaticCastExpr); 
-    } break;
-    case clang::Stmt::CXXDynamicCastExprClass: {
-assert(context_.data_model_.CXXDynamicCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXDynamicCastExpr); 
-    } break;
-    case clang::Stmt::CXXConstCastExprClass: {
-assert(context_.data_model_.CXXConstCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXConstCastExpr); 
-    } break;
-    case clang::Stmt::StmtExprClass: {
-assert(context_.data_model_.StmtExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.StmtExpr); 
-    } break;
-    case clang::Stmt::CXXDefaultInitExprClass: {
-assert(context_.data_model_.CXXDefaultInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXDefaultInitExpr); 
-    } break;
-    case clang::Stmt::MatrixSubscriptExprClass: {
-assert(context_.data_model_.MatrixSubscriptExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.MatrixSubscriptExpr); 
-    } break;
-    case clang::Stmt::CXXRewrittenBinaryOperatorClass: {
-assert(context_.data_model_.CXXRewrittenBinaryOperator != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXRewrittenBinaryOperator); 
-    } break;
-    case clang::Stmt::OMPBarrierDirectiveClass: {
-assert(context_.data_model_.OMPBarrierDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPBarrierDirective); 
-    } break;
-    case clang::Stmt::OMPScanDirectiveClass: {
-assert(context_.data_model_.OMPScanDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPScanDirective); 
-    } break;
-    case clang::Stmt::AttributedStmtClass: {
-assert(context_.data_model_.AttributedStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.AttributedStmt); 
-    } break;
-    case clang::Stmt::ConvertVectorExprClass: {
-assert(context_.data_model_.ConvertVectorExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ConvertVectorExpr); 
-    } break;
-    case clang::Stmt::ImplicitValueInitExprClass: {
-assert(context_.data_model_.ImplicitValueInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ImplicitValueInitExpr); 
-    } break;
-    case clang::Stmt::NoInitExprClass: {
-assert(context_.data_model_.NoInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.NoInitExpr); 
-    } break;
-    case clang::Stmt::CallExprClass: {
-assert(context_.data_model_.CallExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CallExpr); 
-    } break;
-    case clang::Stmt::OMPScopeDirectiveClass: {
-assert(context_.data_model_.OMPScopeDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPScopeDirective); 
-    } break;
-    case clang::Stmt::ConditionalOperatorClass: {
-assert(context_.data_model_.ConditionalOperator != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ConditionalOperator); 
-    } break;
-    case clang::Stmt::DesignatedInitUpdateExprClass: {
-assert(context_.data_model_.DesignatedInitUpdateExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.DesignatedInitUpdateExpr); 
-    } break;
-    case clang::Stmt::ArrayInitLoopExprClass: {
-assert(context_.data_model_.ArrayInitLoopExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ArrayInitLoopExpr); 
-    } break;
-    case clang::Stmt::CXXThisExprClass: {
-assert(context_.data_model_.CXXThisExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXThisExpr); 
-    } break;
-    case clang::Stmt::PackExpansionExprClass: {
-assert(context_.data_model_.PackExpansionExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.PackExpansionExpr); 
-    } break;
-    case clang::Stmt::MaterializeTemporaryExprClass: {
-assert(context_.data_model_.MaterializeTemporaryExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.MaterializeTemporaryExpr); 
-    } break;
-    case clang::Stmt::LambdaExprClass: {
-assert(context_.data_model_.LambdaExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.LambdaExpr); 
-    } break;
-    case clang::Stmt::DependentCoawaitExprClass: {
-assert(context_.data_model_.DependentCoawaitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.DependentCoawaitExpr); 
-    } break;
-    case clang::Stmt::SizeOfPackExprClass: {
-assert(context_.data_model_.SizeOfPackExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.SizeOfPackExpr); 
-    } break;
-    case clang::Stmt::RequiresExprClass: {
-assert(context_.data_model_.RequiresExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.RequiresExpr); 
-    } break;
-    case clang::Stmt::ObjCStringLiteralClass: {
-assert(context_.data_model_.ObjCStringLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCStringLiteral); 
-    } break;
-    case clang::Stmt::ObjCBoolLiteralExprClass: {
-assert(context_.data_model_.ObjCBoolLiteralExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ObjCBoolLiteralExpr); 
-    } break;
-    case clang::Stmt::CXXFoldExprClass: {
-assert(context_.data_model_.CXXFoldExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXFoldExpr); 
+assert(context_.data_model_.class_NullStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NullStmt); 
+    } break;
+    case clang::Stmt::ObjCPropertyRefExprClass: {
+assert(context_.data_model_.class_ObjCPropertyRefExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyRefExpr); 
+    } break;
+    case clang::Stmt::OMPTargetTeamsDistributeSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetTeamsDistributeSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeSimdDirective); 
+    } break;
+    case clang::Stmt::ObjCMessageExprClass: {
+assert(context_.data_model_.class_ObjCMessageExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCMessageExpr); 
+    } break;
+    case clang::Stmt::CXXParenListInitExprClass: {
+assert(context_.data_model_.class_CXXParenListInitExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXParenListInitExpr); 
+    } break;
+    case clang::Stmt::ObjCIsaExprClass: {
+assert(context_.data_model_.class_ObjCIsaExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIsaExpr); 
     } break;
     case clang::Stmt::DoStmtClass: {
-assert(context_.data_model_.DoStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.DoStmt); 
+assert(context_.data_model_.class_DoStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DoStmt); 
     } break;
-    case clang::Stmt::OMPMetaDirectiveClass: {
-assert(context_.data_model_.OMPMetaDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPMetaDirective); 
-    } break;
-    case clang::Stmt::OMPAtomicDirectiveClass: {
-assert(context_.data_model_.OMPAtomicDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPAtomicDirective); 
-    } break;
-    case clang::Stmt::AddrLabelExprClass: {
-assert(context_.data_model_.AddrLabelExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.AddrLabelExpr); 
-    } break;
-    case clang::Stmt::GNUNullExprClass: {
-assert(context_.data_model_.GNUNullExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.GNUNullExpr); 
-    } break;
-    case clang::Stmt::ConceptSpecializationExprClass: {
-assert(context_.data_model_.ConceptSpecializationExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ConceptSpecializationExpr); 
-    } break;
-    case clang::Stmt::OMPTargetParallelForSimdDirectiveClass: {
-assert(context_.data_model_.OMPTargetParallelForSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetParallelForSimdDirective); 
-    } break;
-    case clang::Stmt::OMPTaskDirectiveClass: {
-assert(context_.data_model_.OMPTaskDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTaskDirective); 
-    } break;
-    case clang::Stmt::ShuffleVectorExprClass: {
-assert(context_.data_model_.ShuffleVectorExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ShuffleVectorExpr); 
-    } break;
-    case clang::Stmt::BinaryConditionalOperatorClass: {
-assert(context_.data_model_.BinaryConditionalOperator != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.BinaryConditionalOperator); 
-    } break;
-    case clang::Stmt::OMPTeamsDistributeSimdDirectiveClass: {
-assert(context_.data_model_.OMPTeamsDistributeSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTeamsDistributeSimdDirective); 
-    } break;
-    case clang::Stmt::OMPArrayShapingExprClass: {
-assert(context_.data_model_.OMPArrayShapingExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPArrayShapingExpr); 
-    } break;
-    case clang::Stmt::UnresolvedLookupExprClass: {
-assert(context_.data_model_.UnresolvedLookupExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UnresolvedLookupExpr); 
-    } break;
-    case clang::Stmt::OMPTeamsDistributeParallelForSimdDirectiveClass: {
-assert(context_.data_model_.OMPTeamsDistributeParallelForSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTeamsDistributeParallelForSimdDirective); 
-    } break;
-    case clang::Stmt::CharacterLiteralClass: {
-assert(context_.data_model_.CharacterLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CharacterLiteral); 
-    } break;
-    case clang::Stmt::SEHLeaveStmtClass: {
-assert(context_.data_model_.SEHLeaveStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.SEHLeaveStmt); 
-    } break;
-    case clang::Stmt::OMPTargetTeamsDistributeParallelForSimdDirectiveClass: {
-assert(context_.data_model_.OMPTargetTeamsDistributeParallelForSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetTeamsDistributeParallelForSimdDirective); 
-    } break;
-    case clang::Stmt::CXXAddrspaceCastExprClass: {
-assert(context_.data_model_.CXXAddrspaceCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXAddrspaceCastExpr); 
-    } break;
-    case clang::Stmt::OMPDispatchDirectiveClass: {
-assert(context_.data_model_.OMPDispatchDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPDispatchDirective); 
-    } break;
-    case clang::Stmt::CompoundStmtClass: {
-assert(context_.data_model_.CompoundStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CompoundStmt); 
-    } break;
-    case clang::Stmt::OMPTargetTeamsDistributeParallelForDirectiveClass: {
-assert(context_.data_model_.OMPTargetTeamsDistributeParallelForDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetTeamsDistributeParallelForDirective); 
-    } break;
-    case clang::Stmt::UserDefinedLiteralClass: {
-assert(context_.data_model_.UserDefinedLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.UserDefinedLiteral); 
-    } break;
-    case clang::Stmt::OMPMaskedDirectiveClass: {
-assert(context_.data_model_.OMPMaskedDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPMaskedDirective); 
-    } break;
-    case clang::Stmt::OMPTeamsGenericLoopDirectiveClass: {
-assert(context_.data_model_.OMPTeamsGenericLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTeamsGenericLoopDirective); 
-    } break;
-    case clang::Stmt::OMPArraySectionExprClass: {
-assert(context_.data_model_.OMPArraySectionExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPArraySectionExpr); 
-    } break;
-    case clang::Stmt::OMPParallelGenericLoopDirectiveClass: {
-assert(context_.data_model_.OMPParallelGenericLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPParallelGenericLoopDirective); 
-    } break;
-    case clang::Stmt::CXXTemporaryObjectExprClass: {
-assert(context_.data_model_.CXXTemporaryObjectExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXTemporaryObjectExpr); 
-    } break;
-    case clang::Stmt::OMPSectionsDirectiveClass: {
-assert(context_.data_model_.OMPSectionsDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPSectionsDirective); 
-    } break;
-    case clang::Stmt::ChooseExprClass: {
-assert(context_.data_model_.ChooseExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.ChooseExpr); 
-    } break;
-    case clang::Stmt::OMPDistributeSimdDirectiveClass: {
-assert(context_.data_model_.OMPDistributeSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPDistributeSimdDirective); 
-    } break;
-    case clang::Stmt::OMPParallelMasterTaskLoopSimdDirectiveClass: {
-assert(context_.data_model_.OMPParallelMasterTaskLoopSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPParallelMasterTaskLoopSimdDirective); 
-    } break;
-    case clang::Stmt::OMPMasterTaskLoopDirectiveClass: {
-assert(context_.data_model_.OMPMasterTaskLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPMasterTaskLoopDirective); 
-    } break;
-    case clang::Stmt::OMPSectionDirectiveClass: {
-assert(context_.data_model_.OMPSectionDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPSectionDirective); 
-    } break;
-    case clang::Stmt::OMPDistributeDirectiveClass: {
-assert(context_.data_model_.OMPDistributeDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPDistributeDirective); 
-    } break;
-    case clang::Stmt::CaseStmtClass: {
-assert(context_.data_model_.CaseStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CaseStmt); 
-    } break;
-    case clang::Stmt::OMPTaskLoopDirectiveClass: {
-assert(context_.data_model_.OMPTaskLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTaskLoopDirective); 
-    } break;
-    case clang::Stmt::OMPTargetExitDataDirectiveClass: {
-assert(context_.data_model_.OMPTargetExitDataDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetExitDataDirective); 
-    } break;
-    case clang::Stmt::CXXCatchStmtClass: {
-assert(context_.data_model_.CXXCatchStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.CXXCatchStmt); 
+    case clang::Stmt::FloatingLiteralClass: {
+assert(context_.data_model_.class_FloatingLiteral != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FloatingLiteral); 
     } break;
     case clang::Stmt::GotoStmtClass: {
-assert(context_.data_model_.GotoStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.GotoStmt); 
+assert(context_.data_model_.class_GotoStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GotoStmt); 
+    } break;
+    case clang::Stmt::OMPDistributeDirectiveClass: {
+assert(context_.data_model_.class_OMPDistributeDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeDirective); 
+    } break;
+    case clang::Stmt::ContinueStmtClass: {
+assert(context_.data_model_.class_ContinueStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ContinueStmt); 
+    } break;
+    case clang::Stmt::CoawaitExprClass: {
+assert(context_.data_model_.class_CoawaitExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoawaitExpr); 
+    } break;
+    case clang::Stmt::ReturnStmtClass: {
+assert(context_.data_model_.class_ReturnStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ReturnStmt); 
+    } break;
+    case clang::Stmt::UnresolvedMemberExprClass: {
+assert(context_.data_model_.class_UnresolvedMemberExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedMemberExpr); 
+    } break;
+    case clang::Stmt::GCCAsmStmtClass: {
+assert(context_.data_model_.class_GCCAsmStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GCCAsmStmt); 
+    } break;
+    case clang::Stmt::CXXReinterpretCastExprClass: {
+assert(context_.data_model_.class_CXXReinterpretCastExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXReinterpretCastExpr); 
+    } break;
+    case clang::Stmt::SEHExceptStmtClass: {
+assert(context_.data_model_.class_SEHExceptStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHExceptStmt); 
+    } break;
+    case clang::Stmt::SEHTryStmtClass: {
+assert(context_.data_model_.class_SEHTryStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHTryStmt); 
+    } break;
+    case clang::Stmt::OMPSingleDirectiveClass: {
+assert(context_.data_model_.class_OMPSingleDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSingleDirective); 
+    } break;
+    case clang::Stmt::SEHLeaveStmtClass: {
+assert(context_.data_model_.class_SEHLeaveStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHLeaveStmt); 
+    } break;
+    case clang::Stmt::ImplicitValueInitExprClass: {
+assert(context_.data_model_.class_ImplicitValueInitExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitValueInitExpr); 
+    } break;
+    case clang::Stmt::NoInitExprClass: {
+assert(context_.data_model_.class_NoInitExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NoInitExpr); 
+    } break;
+    case clang::Stmt::CXXForRangeStmtClass: {
+assert(context_.data_model_.class_CXXForRangeStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXForRangeStmt); 
+    } break;
+    case clang::Stmt::ObjCEncodeExprClass: {
+assert(context_.data_model_.class_ObjCEncodeExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCEncodeExpr); 
+    } break;
+    case clang::Stmt::SubstNonTypeTemplateParmExprClass: {
+assert(context_.data_model_.class_SubstNonTypeTemplateParmExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstNonTypeTemplateParmExpr); 
+    } break;
+    case clang::Stmt::ObjCIndirectCopyRestoreExprClass: {
+assert(context_.data_model_.class_ObjCIndirectCopyRestoreExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIndirectCopyRestoreExpr); 
+    } break;
+    case clang::Stmt::SEHFinallyStmtClass: {
+assert(context_.data_model_.class_SEHFinallyStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHFinallyStmt); 
+    } break;
+    case clang::Stmt::CoroutineBodyStmtClass: {
+assert(context_.data_model_.class_CoroutineBodyStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoroutineBodyStmt); 
+    } break;
+    case clang::Stmt::CoreturnStmtClass: {
+assert(context_.data_model_.class_CoreturnStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoreturnStmt); 
+    } break;
+    case clang::Stmt::ArrayTypeTraitExprClass: {
+assert(context_.data_model_.class_ArrayTypeTraitExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayTypeTraitExpr); 
+    } break;
+    case clang::Stmt::CXXUuidofExprClass: {
+assert(context_.data_model_.class_CXXUuidofExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXUuidofExpr); 
+    } break;
+    case clang::Stmt::ObjCForCollectionStmtClass: {
+assert(context_.data_model_.class_ObjCForCollectionStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCForCollectionStmt); 
+    } break;
+    case clang::Stmt::ObjCAtCatchStmtClass: {
+assert(context_.data_model_.class_ObjCAtCatchStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtCatchStmt); 
+    } break;
+    case clang::Stmt::ObjCAtSynchronizedStmtClass: {
+assert(context_.data_model_.class_ObjCAtSynchronizedStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtSynchronizedStmt); 
+    } break;
+    case clang::Stmt::ObjCAtThrowStmtClass: {
+assert(context_.data_model_.class_ObjCAtThrowStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtThrowStmt); 
+    } break;
+    case clang::Stmt::OMPParallelMasterDirectiveClass: {
+assert(context_.data_model_.class_OMPParallelMasterDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterDirective); 
+    } break;
+    case clang::Stmt::ImaginaryLiteralClass: {
+assert(context_.data_model_.class_ImaginaryLiteral != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImaginaryLiteral); 
+    } break;
+    case clang::Stmt::ObjCAutoreleasePoolStmtClass: {
+assert(context_.data_model_.class_ObjCAutoreleasePoolStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAutoreleasePoolStmt); 
+    } break;
+    case clang::Stmt::OMPCanonicalLoopClass: {
+assert(context_.data_model_.class_OMPCanonicalLoop != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCanonicalLoop); 
+    } break;
+    case clang::Stmt::OMPParallelDirectiveClass: {
+assert(context_.data_model_.class_OMPParallelDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelDirective); 
+    } break;
+    case clang::Stmt::BreakStmtClass: {
+assert(context_.data_model_.class_BreakStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BreakStmt); 
+    } break;
+    case clang::Stmt::OMPTileDirectiveClass: {
+assert(context_.data_model_.class_OMPTileDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTileDirective); 
+    } break;
+    case clang::Stmt::MSPropertyRefExprClass: {
+assert(context_.data_model_.class_MSPropertyRefExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertyRefExpr); 
+    } break;
+    case clang::Stmt::ObjCDictionaryLiteralClass: {
+assert(context_.data_model_.class_ObjCDictionaryLiteral != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCDictionaryLiteral); 
+    } break;
+    case clang::Stmt::OMPInteropDirectiveClass: {
+assert(context_.data_model_.class_OMPInteropDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPInteropDirective); 
+    } break;
+    case clang::Stmt::ObjCSubscriptRefExprClass: {
+assert(context_.data_model_.class_ObjCSubscriptRefExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCSubscriptRefExpr); 
+    } break;
+    case clang::Stmt::CXXBoolLiteralExprClass: {
+assert(context_.data_model_.class_CXXBoolLiteralExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXBoolLiteralExpr); 
+    } break;
+    case clang::Stmt::SYCLUniqueStableNameExprClass: {
+assert(context_.data_model_.class_SYCLUniqueStableNameExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SYCLUniqueStableNameExpr); 
+    } break;
+    case clang::Stmt::OMPSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSimdDirective); 
+    } break;
+    case clang::Stmt::OMPForSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPForSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPForSimdDirective); 
+    } break;
+    case clang::Stmt::ObjCBoxedExprClass: {
+assert(context_.data_model_.class_ObjCBoxedExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBoxedExpr); 
+    } break;
+    case clang::Stmt::OMPParallelSectionsDirectiveClass: {
+assert(context_.data_model_.class_OMPParallelSectionsDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelSectionsDirective); 
+    } break;
+    case clang::Stmt::ObjCAvailabilityCheckExprClass: {
+assert(context_.data_model_.class_ObjCAvailabilityCheckExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAvailabilityCheckExpr); 
+    } break;
+    case clang::Stmt::OMPParallelForDirectiveClass: {
+assert(context_.data_model_.class_OMPParallelForDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelForDirective); 
+    } break;
+    case clang::Stmt::OMPTargetParallelForDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetParallelForDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelForDirective); 
+    } break;
+    case clang::Stmt::OMPErrorDirectiveClass: {
+assert(context_.data_model_.class_OMPErrorDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPErrorDirective); 
+    } break;
+    case clang::Stmt::OMPTaskLoopSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPTaskLoopSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskLoopSimdDirective); 
+    } break;
+    case clang::Stmt::IndirectGotoStmtClass: {
+assert(context_.data_model_.class_IndirectGotoStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IndirectGotoStmt); 
+    } break;
+    case clang::Stmt::OMPMaskedTaskLoopDirectiveClass: {
+assert(context_.data_model_.class_OMPMaskedTaskLoopDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMaskedTaskLoopDirective); 
+    } break;
+    case clang::Stmt::OMPMasterTaskLoopSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPMasterTaskLoopSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterTaskLoopSimdDirective); 
+    } break;
+    case clang::Stmt::CXXTryStmtClass: {
+assert(context_.data_model_.class_CXXTryStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTryStmt); 
+    } break;
+    case clang::Stmt::OMPMaskedTaskLoopSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPMaskedTaskLoopSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMaskedTaskLoopSimdDirective); 
+    } break;
+    case clang::Stmt::CompoundAssignOperatorClass: {
+assert(context_.data_model_.class_CompoundAssignOperator != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundAssignOperator); 
+    } break;
+    case clang::Stmt::ObjCAtFinallyStmtClass: {
+assert(context_.data_model_.class_ObjCAtFinallyStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtFinallyStmt); 
+    } break;
+    case clang::Stmt::OMPParallelMasterTaskLoopDirectiveClass: {
+assert(context_.data_model_.class_OMPParallelMasterTaskLoopDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterTaskLoopDirective); 
+    } break;
+    case clang::Stmt::BlockExprClass: {
+assert(context_.data_model_.class_BlockExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BlockExpr); 
+    } break;
+    case clang::Stmt::OMPParallelMaskedTaskLoopDirectiveClass: {
+assert(context_.data_model_.class_OMPParallelMaskedTaskLoopDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedTaskLoopDirective); 
+    } break;
+    case clang::Stmt::OMPMasterDirectiveClass: {
+assert(context_.data_model_.class_OMPMasterDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterDirective); 
+    } break;
+    case clang::Stmt::CXXNoexceptExprClass: {
+assert(context_.data_model_.class_CXXNoexceptExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNoexceptExpr); 
+    } break;
+    case clang::Stmt::ObjCIvarRefExprClass: {
+assert(context_.data_model_.class_ObjCIvarRefExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIvarRefExpr); 
+    } break;
+    case clang::Stmt::CUDAKernelCallExprClass: {
+assert(context_.data_model_.class_CUDAKernelCallExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CUDAKernelCallExpr); 
+    } break;
+    case clang::Stmt::OMPTaskyieldDirectiveClass: {
+assert(context_.data_model_.class_OMPTaskyieldDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskyieldDirective); 
+    } break;
+    case clang::Stmt::OMPIteratorExprClass: {
+assert(context_.data_model_.class_OMPIteratorExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPIteratorExpr); 
+    } break;
+    case clang::Stmt::MSDependentExistsStmtClass: {
+assert(context_.data_model_.class_MSDependentExistsStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSDependentExistsStmt); 
+    } break;
+    case clang::Stmt::OMPTargetUpdateDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetUpdateDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetUpdateDirective); 
+    } break;
+    case clang::Stmt::OMPCancelDirectiveClass: {
+assert(context_.data_model_.class_OMPCancelDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCancelDirective); 
+    } break;
+    case clang::Stmt::RecoveryExprClass: {
+assert(context_.data_model_.class_RecoveryExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RecoveryExpr); 
+    } break;
+    case clang::Stmt::OMPDistributeParallelForDirectiveClass: {
+assert(context_.data_model_.class_OMPDistributeParallelForDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeParallelForDirective); 
+    } break;
+    case clang::Stmt::OMPTaskwaitDirectiveClass: {
+assert(context_.data_model_.class_OMPTaskwaitDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskwaitDirective); 
+    } break;
+    case clang::Stmt::OMPTargetParallelDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetParallelDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelDirective); 
+    } break;
+    case clang::Stmt::OMPCriticalDirectiveClass: {
+assert(context_.data_model_.class_OMPCriticalDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCriticalDirective); 
+    } break;
+    case clang::Stmt::OMPForDirectiveClass: {
+assert(context_.data_model_.class_OMPForDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPForDirective); 
+    } break;
+    case clang::Stmt::OMPTargetSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetSimdDirective); 
+    } break;
+    case clang::Stmt::ForStmtClass: {
+assert(context_.data_model_.class_ForStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ForStmt); 
+    } break;
+    case clang::Stmt::OMPDepobjDirectiveClass: {
+assert(context_.data_model_.class_OMPDepobjDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDepobjDirective); 
+    } break;
+    case clang::Stmt::ConstantExprClass: {
+assert(context_.data_model_.class_ConstantExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstantExpr); 
+    } break;
+    case clang::Stmt::OMPParallelForSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPParallelForSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelForSimdDirective); 
+    } break;
+    case clang::Stmt::OMPParallelMaskedDirectiveClass: {
+assert(context_.data_model_.class_OMPParallelMaskedDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedDirective); 
+    } break;
+    case clang::Stmt::InitListExprClass: {
+assert(context_.data_model_.class_InitListExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_InitListExpr); 
+    } break;
+    case clang::Stmt::OMPTargetTeamsGenericLoopDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetTeamsGenericLoopDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsGenericLoopDirective); 
+    } break;
+    case clang::Stmt::CXXUnresolvedConstructExprClass: {
+assert(context_.data_model_.class_CXXUnresolvedConstructExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXUnresolvedConstructExpr); 
+    } break;
+    case clang::Stmt::OMPTargetDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetDirective); 
+    } break;
+    case clang::Stmt::OMPTargetDataDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetDataDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetDataDirective); 
+    } break;
+    case clang::Stmt::SwitchStmtClass: {
+assert(context_.data_model_.class_SwitchStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SwitchStmt); 
+    } break;
+    case clang::Stmt::MSAsmStmtClass: {
+assert(context_.data_model_.class_MSAsmStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSAsmStmt); 
+    } break;
+    case clang::Stmt::CXXNullPtrLiteralExprClass: {
+assert(context_.data_model_.class_CXXNullPtrLiteralExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNullPtrLiteralExpr); 
+    } break;
+    case clang::Stmt::OMPTargetEnterDataDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetEnterDataDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetEnterDataDirective); 
+    } break;
+    case clang::Stmt::OMPTeamsDistributeDirectiveClass: {
+assert(context_.data_model_.class_OMPTeamsDistributeDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeDirective); 
+    } break;
+    case clang::Stmt::OMPOrderedDirectiveClass: {
+assert(context_.data_model_.class_OMPOrderedDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPOrderedDirective); 
+    } break;
+    case clang::Stmt::OMPTaskgroupDirectiveClass: {
+assert(context_.data_model_.class_OMPTaskgroupDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskgroupDirective); 
+    } break;
+    case clang::Stmt::ExpressionTraitExprClass: {
+assert(context_.data_model_.class_ExpressionTraitExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExpressionTraitExpr); 
+    } break;
+    case clang::Stmt::GenericSelectionExprClass: {
+assert(context_.data_model_.class_GenericSelectionExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GenericSelectionExpr); 
+    } break;
+    case clang::Stmt::OMPTeamsDirectiveClass: {
+assert(context_.data_model_.class_OMPTeamsDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDirective); 
+    } break;
+    case clang::Stmt::CXXDeleteExprClass: {
+assert(context_.data_model_.class_CXXDeleteExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDeleteExpr); 
+    } break;
+    case clang::Stmt::CXXScalarValueInitExprClass: {
+assert(context_.data_model_.class_CXXScalarValueInitExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXScalarValueInitExpr); 
+    } break;
+    case clang::Stmt::CXXInheritedCtorInitExprClass: {
+assert(context_.data_model_.class_CXXInheritedCtorInitExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXInheritedCtorInitExpr); 
+    } break;
+    case clang::Stmt::OMPTeamsDistributeParallelForDirectiveClass: {
+assert(context_.data_model_.class_OMPTeamsDistributeParallelForDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeParallelForDirective); 
+    } break;
+    case clang::Stmt::StmtExprClass: {
+assert(context_.data_model_.class_StmtExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StmtExpr); 
+    } break;
+    case clang::Stmt::MSPropertySubscriptExprClass: {
+assert(context_.data_model_.class_MSPropertySubscriptExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertySubscriptExpr); 
+    } break;
+    case clang::Stmt::DesignatedInitExprClass: {
+assert(context_.data_model_.class_DesignatedInitExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DesignatedInitExpr); 
+    } break;
+    case clang::Stmt::ArraySubscriptExprClass: {
+assert(context_.data_model_.class_ArraySubscriptExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArraySubscriptExpr); 
+    } break;
+    case clang::Stmt::AtomicExprClass: {
+assert(context_.data_model_.class_AtomicExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AtomicExpr); 
+    } break;
+    case clang::Stmt::CXXOperatorCallExprClass: {
+assert(context_.data_model_.class_CXXOperatorCallExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXOperatorCallExpr); 
+    } break;
+    case clang::Stmt::CXXBindTemporaryExprClass: {
+assert(context_.data_model_.class_CXXBindTemporaryExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXBindTemporaryExpr); 
+    } break;
+    case clang::Stmt::CoyieldExprClass: {
+assert(context_.data_model_.class_CoyieldExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoyieldExpr); 
+    } break;
+    case clang::Stmt::CXXThrowExprClass: {
+assert(context_.data_model_.class_CXXThrowExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXThrowExpr); 
+    } break;
+    case clang::Stmt::PseudoObjectExprClass: {
+assert(context_.data_model_.class_PseudoObjectExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PseudoObjectExpr); 
+    } break;
+    case clang::Stmt::ParenExprClass: {
+assert(context_.data_model_.class_ParenExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParenExpr); 
+    } break;
+    case clang::Stmt::ExtVectorElementExprClass: {
+assert(context_.data_model_.class_ExtVectorElementExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExtVectorElementExpr); 
+    } break;
+    case clang::Stmt::OMPUnrollDirectiveClass: {
+assert(context_.data_model_.class_OMPUnrollDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPUnrollDirective); 
+    } break;
+    case clang::Stmt::FunctionParmPackExprClass: {
+assert(context_.data_model_.class_FunctionParmPackExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionParmPackExpr); 
+    } break;
+    case clang::Stmt::VAArgExprClass: {
+assert(context_.data_model_.class_VAArgExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VAArgExpr); 
+    } break;
+    case clang::Stmt::AsTypeExprClass: {
+assert(context_.data_model_.class_AsTypeExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AsTypeExpr); 
+    } break;
+    case clang::Stmt::OMPFlushDirectiveClass: {
+assert(context_.data_model_.class_OMPFlushDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPFlushDirective); 
+    } break;
+    case clang::Stmt::TypeTraitExprClass: {
+assert(context_.data_model_.class_TypeTraitExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeTraitExpr); 
+    } break;
+    case clang::Stmt::CaseStmtClass: {
+assert(context_.data_model_.class_CaseStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CaseStmt); 
+    } break;
+    case clang::Stmt::ArrayInitIndexExprClass: {
+assert(context_.data_model_.class_ArrayInitIndexExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayInitIndexExpr); 
+    } break;
+    case clang::Stmt::CXXPseudoDestructorExprClass: {
+assert(context_.data_model_.class_CXXPseudoDestructorExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXPseudoDestructorExpr); 
+    } break;
+    case clang::Stmt::StringLiteralClass: {
+assert(context_.data_model_.class_StringLiteral != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StringLiteral); 
+    } break;
+    case clang::Stmt::CompoundStmtClass: {
+assert(context_.data_model_.class_CompoundStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundStmt); 
+    } break;
+    case clang::Stmt::BinaryOperatorClass: {
+assert(context_.data_model_.class_BinaryOperator != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BinaryOperator); 
+    } break;
+    case clang::Stmt::CXXDefaultArgExprClass: {
+assert(context_.data_model_.class_CXXDefaultArgExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDefaultArgExpr); 
+    } break;
+    case clang::Stmt::PredefinedExprClass: {
+assert(context_.data_model_.class_PredefinedExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PredefinedExpr); 
+    } break;
+    case clang::Stmt::SourceLocExprClass: {
+assert(context_.data_model_.class_SourceLocExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SourceLocExpr); 
+    } break;
+    case clang::Stmt::CXXNewExprClass: {
+assert(context_.data_model_.class_CXXNewExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNewExpr); 
+    } break;
+    case clang::Stmt::TypoExprClass: {
+assert(context_.data_model_.class_TypoExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypoExpr); 
+    } break;
+    case clang::Stmt::DesignatedInitUpdateExprClass: {
+assert(context_.data_model_.class_DesignatedInitUpdateExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DesignatedInitUpdateExpr); 
+    } break;
+    case clang::Stmt::OpaqueValueExprClass: {
+assert(context_.data_model_.class_OpaqueValueExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OpaqueValueExpr); 
+    } break;
+    case clang::Stmt::OMPTargetParallelGenericLoopDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetParallelGenericLoopDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelGenericLoopDirective); 
+    } break;
+    case clang::Stmt::CapturedStmtClass: {
+assert(context_.data_model_.class_CapturedStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CapturedStmt); 
+    } break;
+    case clang::Stmt::IfStmtClass: {
+assert(context_.data_model_.class_IfStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IfStmt); 
+    } break;
+    case clang::Stmt::CompoundLiteralExprClass: {
+assert(context_.data_model_.class_CompoundLiteralExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundLiteralExpr); 
+    } break;
+    case clang::Stmt::CXXConstructExprClass: {
+assert(context_.data_model_.class_CXXConstructExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstructExpr); 
+    } break;
+    case clang::Stmt::ExprWithCleanupsClass: {
+assert(context_.data_model_.class_ExprWithCleanups != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExprWithCleanups); 
+    } break;
+    case clang::Stmt::BuiltinBitCastExprClass: {
+assert(context_.data_model_.class_BuiltinBitCastExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BuiltinBitCastExpr); 
+    } break;
+    case clang::Stmt::ParenListExprClass: {
+assert(context_.data_model_.class_ParenListExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParenListExpr); 
+    } break;
+    case clang::Stmt::CXXFunctionalCastExprClass: {
+assert(context_.data_model_.class_CXXFunctionalCastExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXFunctionalCastExpr); 
+    } break;
+    case clang::Stmt::UnaryExprOrTypeTraitExprClass: {
+assert(context_.data_model_.class_UnaryExprOrTypeTraitExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnaryExprOrTypeTraitExpr); 
+    } break;
+    case clang::Stmt::LabelStmtClass: {
+assert(context_.data_model_.class_LabelStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LabelStmt); 
+    } break;
+    case clang::Stmt::ConditionalOperatorClass: {
+assert(context_.data_model_.class_ConditionalOperator != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConditionalOperator); 
+    } break;
+    case clang::Stmt::CXXMemberCallExprClass: {
+assert(context_.data_model_.class_CXXMemberCallExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXMemberCallExpr); 
+    } break;
+    case clang::Stmt::OffsetOfExprClass: {
+assert(context_.data_model_.class_OffsetOfExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OffsetOfExpr); 
+    } break;
+    case clang::Stmt::ObjCBridgedCastExprClass: {
+assert(context_.data_model_.class_ObjCBridgedCastExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBridgedCastExpr); 
+    } break;
+    case clang::Stmt::UnaryOperatorClass: {
+assert(context_.data_model_.class_UnaryOperator != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnaryOperator); 
+    } break;
+    case clang::Stmt::CStyleCastExprClass: {
+assert(context_.data_model_.class_CStyleCastExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CStyleCastExpr); 
+    } break;
+    case clang::Stmt::IntegerLiteralClass: {
+assert(context_.data_model_.class_IntegerLiteral != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IntegerLiteral); 
+    } break;
+    case clang::Stmt::OMPTargetTeamsDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetTeamsDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDirective); 
+    } break;
+    case clang::Stmt::CharacterLiteralClass: {
+assert(context_.data_model_.class_CharacterLiteral != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CharacterLiteral); 
+    } break;
+    case clang::Stmt::OMPParallelMaskedTaskLoopSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPParallelMaskedTaskLoopSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedTaskLoopSimdDirective); 
+    } break;
+    case clang::Stmt::WhileStmtClass: {
+assert(context_.data_model_.class_WhileStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_WhileStmt); 
+    } break;
+    case clang::Stmt::CXXStaticCastExprClass: {
+assert(context_.data_model_.class_CXXStaticCastExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXStaticCastExpr); 
+    } break;
+    case clang::Stmt::MemberExprClass: {
+assert(context_.data_model_.class_MemberExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MemberExpr); 
+    } break;
+    case clang::Stmt::CXXDynamicCastExprClass: {
+assert(context_.data_model_.class_CXXDynamicCastExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDynamicCastExpr); 
+    } break;
+    case clang::Stmt::CXXConstCastExprClass: {
+assert(context_.data_model_.class_CXXConstCastExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstCastExpr); 
+    } break;
+    case clang::Stmt::AttributedStmtClass: {
+assert(context_.data_model_.class_AttributedStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AttributedStmt); 
+    } break;
+    case clang::Stmt::CXXDefaultInitExprClass: {
+assert(context_.data_model_.class_CXXDefaultInitExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDefaultInitExpr); 
+    } break;
+    case clang::Stmt::MatrixSubscriptExprClass: {
+assert(context_.data_model_.class_MatrixSubscriptExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MatrixSubscriptExpr); 
+    } break;
+    case clang::Stmt::CXXRewrittenBinaryOperatorClass: {
+assert(context_.data_model_.class_CXXRewrittenBinaryOperator != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXRewrittenBinaryOperator); 
+    } break;
+    case clang::Stmt::OMPBarrierDirectiveClass: {
+assert(context_.data_model_.class_OMPBarrierDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPBarrierDirective); 
+    } break;
+    case clang::Stmt::DeclStmtClass: {
+assert(context_.data_model_.class_DeclStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DeclStmt); 
+    } break;
+    case clang::Stmt::OMPScanDirectiveClass: {
+assert(context_.data_model_.class_OMPScanDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPScanDirective); 
+    } break;
+    case clang::Stmt::ConvertVectorExprClass: {
+assert(context_.data_model_.class_ConvertVectorExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConvertVectorExpr); 
+    } break;
+    case clang::Stmt::CallExprClass: {
+assert(context_.data_model_.class_CallExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CallExpr); 
+    } break;
+    case clang::Stmt::OMPScopeDirectiveClass: {
+assert(context_.data_model_.class_OMPScopeDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPScopeDirective); 
+    } break;
+    case clang::Stmt::ArrayInitLoopExprClass: {
+assert(context_.data_model_.class_ArrayInitLoopExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayInitLoopExpr); 
     } break;
     case clang::Stmt::DependentScopeDeclRefExprClass: {
-assert(context_.data_model_.DependentScopeDeclRefExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.DependentScopeDeclRefExpr); 
+assert(context_.data_model_.class_DependentScopeDeclRefExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentScopeDeclRefExpr); 
     } break;
-    case clang::Stmt::FixedPointLiteralClass: {
-assert(context_.data_model_.FixedPointLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.FixedPointLiteral); 
+    case clang::Stmt::CXXDependentScopeMemberExprClass: {
+assert(context_.data_model_.class_CXXDependentScopeMemberExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDependentScopeMemberExpr); 
     } break;
-    case clang::Stmt::OMPCancellationPointDirectiveClass: {
-assert(context_.data_model_.OMPCancellationPointDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPCancellationPointDirective); 
+    case clang::Stmt::CXXThisExprClass: {
+assert(context_.data_model_.class_CXXThisExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXThisExpr); 
+    } break;
+    case clang::Stmt::PackExpansionExprClass: {
+assert(context_.data_model_.class_PackExpansionExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PackExpansionExpr); 
+    } break;
+    case clang::Stmt::MaterializeTemporaryExprClass: {
+assert(context_.data_model_.class_MaterializeTemporaryExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MaterializeTemporaryExpr); 
+    } break;
+    case clang::Stmt::CXXFoldExprClass: {
+assert(context_.data_model_.class_CXXFoldExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXFoldExpr); 
+    } break;
+    case clang::Stmt::LambdaExprClass: {
+assert(context_.data_model_.class_LambdaExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LambdaExpr); 
+    } break;
+    case clang::Stmt::DependentCoawaitExprClass: {
+assert(context_.data_model_.class_DependentCoawaitExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentCoawaitExpr); 
+    } break;
+    case clang::Stmt::SizeOfPackExprClass: {
+assert(context_.data_model_.class_SizeOfPackExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SizeOfPackExpr); 
+    } break;
+    case clang::Stmt::RequiresExprClass: {
+assert(context_.data_model_.class_RequiresExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RequiresExpr); 
+    } break;
+    case clang::Stmt::ObjCStringLiteralClass: {
+assert(context_.data_model_.class_ObjCStringLiteral != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCStringLiteral); 
+    } break;
+    case clang::Stmt::ObjCBoolLiteralExprClass: {
+assert(context_.data_model_.class_ObjCBoolLiteralExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBoolLiteralExpr); 
+    } break;
+    case clang::Stmt::OMPMetaDirectiveClass: {
+assert(context_.data_model_.class_OMPMetaDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMetaDirective); 
+    } break;
+    case clang::Stmt::OMPAtomicDirectiveClass: {
+assert(context_.data_model_.class_OMPAtomicDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPAtomicDirective); 
+    } break;
+    case clang::Stmt::GNUNullExprClass: {
+assert(context_.data_model_.class_GNUNullExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GNUNullExpr); 
+    } break;
+    case clang::Stmt::AddrLabelExprClass: {
+assert(context_.data_model_.class_AddrLabelExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AddrLabelExpr); 
+    } break;
+    case clang::Stmt::ConceptSpecializationExprClass: {
+assert(context_.data_model_.class_ConceptSpecializationExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConceptSpecializationExpr); 
+    } break;
+    case clang::Stmt::OMPTargetParallelForSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetParallelForSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelForSimdDirective); 
+    } break;
+    case clang::Stmt::OMPTaskDirectiveClass: {
+assert(context_.data_model_.class_OMPTaskDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskDirective); 
+    } break;
+    case clang::Stmt::ShuffleVectorExprClass: {
+assert(context_.data_model_.class_ShuffleVectorExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ShuffleVectorExpr); 
+    } break;
+    case clang::Stmt::BinaryConditionalOperatorClass: {
+assert(context_.data_model_.class_BinaryConditionalOperator != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BinaryConditionalOperator); 
+    } break;
+    case clang::Stmt::OMPTeamsDistributeSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPTeamsDistributeSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeSimdDirective); 
+    } break;
+    case clang::Stmt::OMPArrayShapingExprClass: {
+assert(context_.data_model_.class_OMPArrayShapingExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPArrayShapingExpr); 
+    } break;
+    case clang::Stmt::UnresolvedLookupExprClass: {
+assert(context_.data_model_.class_UnresolvedLookupExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedLookupExpr); 
     } break;
     case clang::Stmt::OMPTargetTeamsDistributeDirectiveClass: {
-assert(context_.data_model_.OMPTargetTeamsDistributeDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.OMPTargetTeamsDistributeDirective); 
+assert(context_.data_model_.class_OMPTargetTeamsDistributeDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeDirective); 
     } break;
     case clang::Stmt::SubstNonTypeTemplateParmPackExprClass: {
-assert(context_.data_model_.SubstNonTypeTemplateParmPackExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.SubstNonTypeTemplateParmPackExpr); 
+assert(context_.data_model_.class_SubstNonTypeTemplateParmPackExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstNonTypeTemplateParmPackExpr); 
     } break;
     case clang::Stmt::DeclRefExprClass: {
-assert(context_.data_model_.DeclRefExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.DeclRefExpr); 
+assert(context_.data_model_.class_DeclRefExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DeclRefExpr); 
+    } break;
+    case clang::Stmt::OMPTargetTeamsDistributeParallelForSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetTeamsDistributeParallelForSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeParallelForSimdDirective); 
+    } break;
+    case clang::Stmt::CXXAddrspaceCastExprClass: {
+assert(context_.data_model_.class_CXXAddrspaceCastExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXAddrspaceCastExpr); 
+    } break;
+    case clang::Stmt::OMPGenericLoopDirectiveClass: {
+assert(context_.data_model_.class_OMPGenericLoopDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPGenericLoopDirective); 
+    } break;
+    case clang::Stmt::OMPDistributeParallelForSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPDistributeParallelForSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeParallelForSimdDirective); 
+    } break;
+    case clang::Stmt::OMPDispatchDirectiveClass: {
+assert(context_.data_model_.class_OMPDispatchDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDispatchDirective); 
+    } break;
+    case clang::Stmt::UserDefinedLiteralClass: {
+assert(context_.data_model_.class_UserDefinedLiteral != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UserDefinedLiteral); 
+    } break;
+    case clang::Stmt::OMPMaskedDirectiveClass: {
+assert(context_.data_model_.class_OMPMaskedDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMaskedDirective); 
+    } break;
+    case clang::Stmt::OMPTeamsDistributeParallelForSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPTeamsDistributeParallelForSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeParallelForSimdDirective); 
+    } break;
+    case clang::Stmt::OMPTeamsGenericLoopDirectiveClass: {
+assert(context_.data_model_.class_OMPTeamsGenericLoopDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsGenericLoopDirective); 
+    } break;
+    case clang::Stmt::OMPArraySectionExprClass: {
+assert(context_.data_model_.class_OMPArraySectionExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPArraySectionExpr); 
+    } break;
+    case clang::Stmt::OMPParallelGenericLoopDirectiveClass: {
+assert(context_.data_model_.class_OMPParallelGenericLoopDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelGenericLoopDirective); 
+    } break;
+    case clang::Stmt::CXXTemporaryObjectExprClass: {
+assert(context_.data_model_.class_CXXTemporaryObjectExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTemporaryObjectExpr); 
+    } break;
+    case clang::Stmt::OMPSectionsDirectiveClass: {
+assert(context_.data_model_.class_OMPSectionsDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSectionsDirective); 
+    } break;
+    case clang::Stmt::ChooseExprClass: {
+assert(context_.data_model_.class_ChooseExpr != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ChooseExpr); 
+    } break;
+    case clang::Stmt::OMPDistributeSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPDistributeSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeSimdDirective); 
+    } break;
+    case clang::Stmt::OMPParallelMasterTaskLoopSimdDirectiveClass: {
+assert(context_.data_model_.class_OMPParallelMasterTaskLoopSimdDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterTaskLoopSimdDirective); 
+    } break;
+    case clang::Stmt::OMPMasterTaskLoopDirectiveClass: {
+assert(context_.data_model_.class_OMPMasterTaskLoopDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterTaskLoopDirective); 
+    } break;
+    case clang::Stmt::OMPSectionDirectiveClass: {
+assert(context_.data_model_.class_OMPSectionDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSectionDirective); 
+    } break;
+    case clang::Stmt::OMPTargetTeamsDistributeParallelForDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetTeamsDistributeParallelForDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeParallelForDirective); 
+    } break;
+    case clang::Stmt::DefaultStmtClass: {
+assert(context_.data_model_.class_DefaultStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DefaultStmt); 
+    } break;
+    case clang::Stmt::OMPTargetExitDataDirectiveClass: {
+assert(context_.data_model_.class_OMPTargetExitDataDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetExitDataDirective); 
+    } break;
+    case clang::Stmt::CXXCatchStmtClass: {
+assert(context_.data_model_.class_CXXCatchStmt != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXCatchStmt); 
+    } break;
+    case clang::Stmt::FixedPointLiteralClass: {
+assert(context_.data_model_.class_FixedPointLiteral != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FixedPointLiteral); 
+    } break;
+    case clang::Stmt::OMPCancellationPointDirectiveClass: {
+assert(context_.data_model_.class_OMPCancellationPointDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCancellationPointDirective); 
+    } break;
+    case clang::Stmt::OMPTaskLoopDirectiveClass: {
+assert(context_.data_model_.class_OMPTaskLoopDirective != nullptr);
+     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskLoopDirective); 
     } break;
     default: break;
   }
 
   //stripLabelLikeStatements
   {
-    const Entity* other = context_.resolve(D->stripLabelLikeStatements());
-    arboretum_create_edge(obj, context_.data_model_.stripLabelLikeStatements, other);
+    const Id* other = context_.resolve(D->stripLabelLikeStatements());
+    arboretum_create_edge(obj, context_.data_model_.method_stripLabelLikeStatements, other);
   }
   //children
   // const_child_range
@@ -11657,31 +11657,31 @@ assert(context_.data_model_.DeclRefExpr != nullptr);
 }
 
 bool ArboretumASTVisitor::VisitStmtExpr(clang::StmtExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSubStmt
   {
-    const Entity* other = context_.resolve(D->getSubStmt());
-    arboretum_create_edge(obj, context_.data_model_.getSubStmt11, other);
+    const Id* other = context_.resolve(D->getSubStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubStmt_5, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc154, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_118, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc152, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_117, other);
   }
   //getLParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLParenLoc16, other);
+    const Id* other = context_.source_model_.resolve(D->getLParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParenLoc_9, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc35, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_24, other);
   }
   //getTemplateDepth
   // unsigned int
@@ -11691,7 +11691,7 @@ bool ArboretumASTVisitor::VisitStmtExpr(clang::StmtExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitStringLiteral(clang::StringLiteral* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getString
   // StringRef
   //getBytes
@@ -11704,40 +11704,40 @@ bool ArboretumASTVisitor::VisitStringLiteral(clang::StringLiteral* D) {
   // unsigned int
   //getKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getKind2, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getKind_4, enum_value);
     }
   }
   //isOrdinary
-  arboretum_create_edge(obj, context_.data_model_.isOrdinary, context_.data_model_.arboretum_node_for(D->isOrdinary()));
+  arboretum_create_edge(obj, context_.data_model_.method_isOrdinary, context_.data_model_.arboretum_node_for(D->isOrdinary()));
   //isWide
-  arboretum_create_edge(obj, context_.data_model_.isWide, context_.data_model_.arboretum_node_for(D->isWide()));
+  arboretum_create_edge(obj, context_.data_model_.method_isWide, context_.data_model_.arboretum_node_for(D->isWide()));
   //isUTF8
-  arboretum_create_edge(obj, context_.data_model_.isUTF8, context_.data_model_.arboretum_node_for(D->isUTF8()));
+  arboretum_create_edge(obj, context_.data_model_.method_isUTF8, context_.data_model_.arboretum_node_for(D->isUTF8()));
   //isUTF16
-  arboretum_create_edge(obj, context_.data_model_.isUTF16, context_.data_model_.arboretum_node_for(D->isUTF16()));
+  arboretum_create_edge(obj, context_.data_model_.method_isUTF16, context_.data_model_.arboretum_node_for(D->isUTF16()));
   //isUTF32
-  arboretum_create_edge(obj, context_.data_model_.isUTF32, context_.data_model_.arboretum_node_for(D->isUTF32()));
+  arboretum_create_edge(obj, context_.data_model_.method_isUTF32, context_.data_model_.arboretum_node_for(D->isUTF32()));
   //isUnevaluated
-  arboretum_create_edge(obj, context_.data_model_.isUnevaluated, context_.data_model_.arboretum_node_for(D->isUnevaluated()));
+  arboretum_create_edge(obj, context_.data_model_.method_isUnevaluated, context_.data_model_.arboretum_node_for(D->isUnevaluated()));
   //isPascal
-  arboretum_create_edge(obj, context_.data_model_.isPascal, context_.data_model_.arboretum_node_for(D->isPascal()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPascal, context_.data_model_.arboretum_node_for(D->isPascal()));
   //containsNonAscii
-  arboretum_create_edge(obj, context_.data_model_.containsNonAscii, context_.data_model_.arboretum_node_for(D->containsNonAscii()));
+  arboretum_create_edge(obj, context_.data_model_.method_containsNonAscii, context_.data_model_.arboretum_node_for(D->containsNonAscii()));
   //containsNonAsciiOrNull
-  arboretum_create_edge(obj, context_.data_model_.containsNonAsciiOrNull, context_.data_model_.arboretum_node_for(D->containsNonAsciiOrNull()));
+  arboretum_create_edge(obj, context_.data_model_.method_containsNonAsciiOrNull, context_.data_model_.arboretum_node_for(D->containsNonAsciiOrNull()));
   //getNumConcatenated
   // unsigned int
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc98, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_119, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc98, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_118, other);
   }
   //children
   // const_child_range
@@ -11745,31 +11745,31 @@ bool ArboretumASTVisitor::VisitStringLiteral(clang::StringLiteral* D) {
 }
 
 bool ArboretumASTVisitor::VisitSubstNonTypeTemplateParmExpr(clang::SubstNonTypeTemplateParmExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getNameLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getNameLoc());
-    arboretum_create_edge(obj, context_.data_model_.getNameLoc6, other);
+    const Id* other = context_.source_model_.resolve(D->getNameLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getNameLoc_1, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc146, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_120, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc145, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_119, other);
   }
   //getReplacement
   {
-    const Entity* other = context_.resolve(D->getReplacement());
-    arboretum_create_edge(obj, context_.data_model_.getReplacement1, other);
+    const Id* other = context_.resolve(D->getReplacement());
+    arboretum_create_edge(obj, context_.data_model_.method_getReplacement, other);
   }
   //getAssociatedDecl
   {
-    const Entity* other = context_.resolve(D->getAssociatedDecl());
-    arboretum_create_edge(obj, context_.data_model_.getAssociatedDecl2, other);
+    const Id* other = context_.resolve(D->getAssociatedDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getAssociatedDecl_2, other);
   }
   //getIndex
   // unsigned int
@@ -11777,46 +11777,46 @@ bool ArboretumASTVisitor::VisitSubstNonTypeTemplateParmExpr(clang::SubstNonTypeT
   // std::optional<unsigned int>
   //getParameter
   {
-    const Entity* other = context_.resolve(D->getParameter());
-    arboretum_create_edge(obj, context_.data_model_.getParameter, other);
+    const Id* other = context_.resolve(D->getParameter());
+    arboretum_create_edge(obj, context_.data_model_.method_getParameter, other);
   }
   //isReferenceParameter
-  arboretum_create_edge(obj, context_.data_model_.isReferenceParameter, context_.data_model_.arboretum_node_for(D->isReferenceParameter()));
+  arboretum_create_edge(obj, context_.data_model_.method_isReferenceParameter, context_.data_model_.arboretum_node_for(D->isReferenceParameter()));
   //children
   // const_child_range
   return true;
 }
 
 bool ArboretumASTVisitor::VisitSubstNonTypeTemplateParmPackExpr(clang::SubstNonTypeTemplateParmPackExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getAssociatedDecl
   {
-    const Entity* other = context_.resolve(D->getAssociatedDecl());
-    arboretum_create_edge(obj, context_.data_model_.getAssociatedDecl1, other);
+    const Id* other = context_.resolve(D->getAssociatedDecl());
+    arboretum_create_edge(obj, context_.data_model_.method_getAssociatedDecl_3, other);
   }
   //getIndex
   // unsigned int
   //getParameterPack
   {
-    const Entity* other = context_.resolve(D->getParameterPack());
-    arboretum_create_edge(obj, context_.data_model_.getParameterPack1, other);
+    const Id* other = context_.resolve(D->getParameterPack());
+    arboretum_create_edge(obj, context_.data_model_.method_getParameterPack_1, other);
   }
   //getParameterPackLocation
   {
-    const Entity* other = context_.source_model_.resolve(D->getParameterPackLocation());
-    arboretum_create_edge(obj, context_.data_model_.getParameterPackLocation1, other);
+    const Id* other = context_.source_model_.resolve(D->getParameterPackLocation());
+    arboretum_create_edge(obj, context_.data_model_.method_getParameterPackLocation_1, other);
   }
   //getArgumentPack
   // TemplateArgument
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc125, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_121, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc127, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_120, other);
   }
   //children
   // const_child_range
@@ -11824,102 +11824,102 @@ bool ArboretumASTVisitor::VisitSubstNonTypeTemplateParmPackExpr(clang::SubstNonT
 }
 
 bool ArboretumASTVisitor::VisitSwitchCase(clang::SwitchCase* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getNextSwitchCase
   {
-    const Entity* other = context_.resolve(D->getNextSwitchCase());
-    arboretum_create_edge(obj, context_.data_model_.getNextSwitchCase, other);
+    const Id* other = context_.resolve(D->getNextSwitchCase());
+    arboretum_create_edge(obj, context_.data_model_.method_getNextSwitchCase, other);
   }
   //getKeywordLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getKeywordLoc());
-    arboretum_create_edge(obj, context_.data_model_.getKeywordLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getKeywordLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getKeywordLoc_4, other);
   }
   //getColonLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getColonLoc());
-    arboretum_create_edge(obj, context_.data_model_.getColonLoc5, other);
+    const Id* other = context_.source_model_.resolve(D->getColonLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getColonLoc_3, other);
   }
   //getSubStmt
   {
-    const Entity* other = context_.resolve(D->getSubStmt());
-    arboretum_create_edge(obj, context_.data_model_.getSubStmt13, other);
+    const Id* other = context_.resolve(D->getSubStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubStmt_6, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc157, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_122, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc155, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_121, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitSwitchStmt(clang::SwitchStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //hasInitStorage
-  arboretum_create_edge(obj, context_.data_model_.hasInitStorage, context_.data_model_.arboretum_node_for(D->hasInitStorage()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasInitStorage_1, context_.data_model_.arboretum_node_for(D->hasInitStorage()));
   //hasVarStorage
-  arboretum_create_edge(obj, context_.data_model_.hasVarStorage1, context_.data_model_.arboretum_node_for(D->hasVarStorage()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasVarStorage_1, context_.data_model_.arboretum_node_for(D->hasVarStorage()));
   //getCond
   {
-    const Entity* other = context_.resolve(D->getCond());
-    arboretum_create_edge(obj, context_.data_model_.getCond5, other);
+    const Id* other = context_.resolve(D->getCond());
+    arboretum_create_edge(obj, context_.data_model_.method_getCond_8, other);
   }
   //getBody
   {
-    const Entity* other = context_.resolve(D->getBody());
-    arboretum_create_edge(obj, context_.data_model_.getBody8, other);
+    const Id* other = context_.resolve(D->getBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getBody_11, other);
   }
   //getInit
   {
-    const Entity* other = context_.resolve(D->getInit());
-    arboretum_create_edge(obj, context_.data_model_.getInit3, other);
+    const Id* other = context_.resolve(D->getInit());
+    arboretum_create_edge(obj, context_.data_model_.method_getInit_6, other);
   }
   //getConditionVariable
   {
-    const Entity* other = context_.resolve(D->getConditionVariable());
-    arboretum_create_edge(obj, context_.data_model_.getConditionVariable4, other);
+    const Id* other = context_.resolve(D->getConditionVariable());
+    arboretum_create_edge(obj, context_.data_model_.method_getConditionVariable_2, other);
   }
   //getConditionVariableDeclStmt
   {
-    const Entity* other = context_.resolve(D->getConditionVariableDeclStmt());
-    arboretum_create_edge(obj, context_.data_model_.getConditionVariableDeclStmt5, other);
+    const Id* other = context_.resolve(D->getConditionVariableDeclStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getConditionVariableDeclStmt_2, other);
   }
   //getSwitchCaseList
   {
-    const Entity* other = context_.resolve(D->getSwitchCaseList());
-    arboretum_create_edge(obj, context_.data_model_.getSwitchCaseList1, other);
+    const Id* other = context_.resolve(D->getSwitchCaseList());
+    arboretum_create_edge(obj, context_.data_model_.method_getSwitchCaseList, other);
   }
   //getSwitchLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getSwitchLoc());
-    arboretum_create_edge(obj, context_.data_model_.getSwitchLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getSwitchLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getSwitchLoc, other);
   }
   //getLParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLParenLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getLParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParenLoc_10, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc5, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_25, other);
   }
   //isAllEnumCasesCovered
-  arboretum_create_edge(obj, context_.data_model_.isAllEnumCasesCovered, context_.data_model_.arboretum_node_for(D->isAllEnumCasesCovered()));
+  arboretum_create_edge(obj, context_.data_model_.method_isAllEnumCasesCovered, context_.data_model_.arboretum_node_for(D->isAllEnumCasesCovered()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc29, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_123, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc29, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_122, other);
   }
   //children
   // const_child_range
@@ -11927,12 +11927,12 @@ bool ArboretumASTVisitor::VisitSwitchStmt(clang::SwitchStmt* D) {
 }
 
 bool ArboretumASTVisitor::VisitTypeTraitExpr(clang::TypeTraitExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getTrait
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getTrait());
+    const Id* enum_value = context_.data_model_.resolve(D->getTrait());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getTrait1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getTrait_2, enum_value);
     }
   }
   //getNumArgs
@@ -11941,13 +11941,13 @@ bool ArboretumASTVisitor::VisitTypeTraitExpr(clang::TypeTraitExpr* D) {
   // ArrayRef<TypeSourceInfo *>
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc113, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_124, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc114, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_123, other);
   }
   //children
   // const_child_range
@@ -11955,57 +11955,57 @@ bool ArboretumASTVisitor::VisitTypeTraitExpr(clang::TypeTraitExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitTypoExpr(clang::TypoExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //children
   // const_child_range
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc26, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_125, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc26, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_124, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitUnaryExprOrTypeTraitExpr(clang::UnaryExprOrTypeTraitExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getKind1, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getKind_5, enum_value);
     }
   }
   //isArgumentType
-  arboretum_create_edge(obj, context_.data_model_.isArgumentType, context_.data_model_.arboretum_node_for(D->isArgumentType()));
+  arboretum_create_edge(obj, context_.data_model_.method_isArgumentType, context_.data_model_.arboretum_node_for(D->isArgumentType()));
   //getTypeOfArgument
   {
-    const Entity* other = context_.resolve(D->getTypeOfArgument());
-    arboretum_create_edge(obj, context_.data_model_.getTypeOfArgument, other);
+    const Id* other = context_.resolve(D->getTypeOfArgument());
+    arboretum_create_edge(obj, context_.data_model_.method_getTypeOfArgument, other);
   }
   //getOperatorLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getOperatorLoc());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorLoc6, other);
+    const Id* other = context_.source_model_.resolve(D->getOperatorLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorLoc_9, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc19, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_26, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc95, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_126, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc95, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_125, other);
   }
   //children
   // const_child_range
@@ -12013,57 +12013,57 @@ bool ArboretumASTVisitor::VisitUnaryExprOrTypeTraitExpr(clang::UnaryExprOrTypeTr
 }
 
 bool ArboretumASTVisitor::VisitUnaryOperator(clang::UnaryOperator* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getOpcode
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getOpcode());
+    const Id* enum_value = context_.data_model_.resolve(D->getOpcode());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getOpcode2, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getOpcode_2, enum_value);
     }
   }
   //getSubExpr
   {
-    const Entity* other = context_.resolve(D->getSubExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSubExpr12, other);
+    const Id* other = context_.resolve(D->getSubExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubExpr_9, other);
   }
   //getOperatorLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getOperatorLoc());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorLoc5, other);
+    const Id* other = context_.source_model_.resolve(D->getOperatorLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorLoc_10, other);
   }
   //canOverflow
-  arboretum_create_edge(obj, context_.data_model_.canOverflow, context_.data_model_.arboretum_node_for(D->canOverflow()));
+  arboretum_create_edge(obj, context_.data_model_.method_canOverflow, context_.data_model_.arboretum_node_for(D->canOverflow()));
   //isPrefix
-  arboretum_create_edge(obj, context_.data_model_.isPrefix1, context_.data_model_.arboretum_node_for(D->isPrefix()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPrefix, context_.data_model_.arboretum_node_for(D->isPrefix()));
   //isPostfix
-  arboretum_create_edge(obj, context_.data_model_.isPostfix1, context_.data_model_.arboretum_node_for(D->isPostfix()));
+  arboretum_create_edge(obj, context_.data_model_.method_isPostfix, context_.data_model_.arboretum_node_for(D->isPostfix()));
   //isIncrementOp
-  arboretum_create_edge(obj, context_.data_model_.isIncrementOp1, context_.data_model_.arboretum_node_for(D->isIncrementOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isIncrementOp, context_.data_model_.arboretum_node_for(D->isIncrementOp()));
   //isDecrementOp
-  arboretum_create_edge(obj, context_.data_model_.isDecrementOp1, context_.data_model_.arboretum_node_for(D->isDecrementOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isDecrementOp, context_.data_model_.arboretum_node_for(D->isDecrementOp()));
   //isIncrementDecrementOp
-  arboretum_create_edge(obj, context_.data_model_.isIncrementDecrementOp1, context_.data_model_.arboretum_node_for(D->isIncrementDecrementOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isIncrementDecrementOp, context_.data_model_.arboretum_node_for(D->isIncrementDecrementOp()));
   //isArithmeticOp
-  arboretum_create_edge(obj, context_.data_model_.isArithmeticOp1, context_.data_model_.arboretum_node_for(D->isArithmeticOp()));
+  arboretum_create_edge(obj, context_.data_model_.method_isArithmeticOp, context_.data_model_.arboretum_node_for(D->isArithmeticOp()));
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc90, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_127, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc90, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_126, other);
   }
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc12, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc_12, other);
   }
   //children
   // const_child_range
   //hasStoredFPFeatures
-  arboretum_create_edge(obj, context_.data_model_.hasStoredFPFeatures2, context_.data_model_.arboretum_node_for(D->hasStoredFPFeatures()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasStoredFPFeatures_4, context_.data_model_.arboretum_node_for(D->hasStoredFPFeatures()));
   //getStoredFPFeatures
   // FPOptionsOverride
   //getFPOptionsOverride
@@ -12072,25 +12072,25 @@ bool ArboretumASTVisitor::VisitUnaryOperator(clang::UnaryOperator* D) {
 }
 
 bool ArboretumASTVisitor::VisitUnresolvedLookupExpr(clang::UnresolvedLookupExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //requiresADL
-  arboretum_create_edge(obj, context_.data_model_.requiresADL, context_.data_model_.arboretum_node_for(D->requiresADL()));
+  arboretum_create_edge(obj, context_.data_model_.method_requiresADL, context_.data_model_.arboretum_node_for(D->requiresADL()));
   //isOverloaded
-  arboretum_create_edge(obj, context_.data_model_.isOverloaded, context_.data_model_.arboretum_node_for(D->isOverloaded()));
+  arboretum_create_edge(obj, context_.data_model_.method_isOverloaded, context_.data_model_.arboretum_node_for(D->isOverloaded()));
   //getNamingClass
   {
-    const Entity* other = context_.resolve(D->getNamingClass());
-    arboretum_create_edge(obj, context_.data_model_.getNamingClass1, other);
+    const Id* other = context_.resolve(D->getNamingClass());
+    arboretum_create_edge(obj, context_.data_model_.method_getNamingClass_1, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc48, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_128, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc48, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_127, other);
   }
   //children
   // const_child_range
@@ -12098,27 +12098,27 @@ bool ArboretumASTVisitor::VisitUnresolvedLookupExpr(clang::UnresolvedLookupExpr*
 }
 
 bool ArboretumASTVisitor::VisitUnresolvedMemberExpr(clang::UnresolvedMemberExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //isImplicitAccess
-  arboretum_create_edge(obj, context_.data_model_.isImplicitAccess2, context_.data_model_.arboretum_node_for(D->isImplicitAccess()));
+  arboretum_create_edge(obj, context_.data_model_.method_isImplicitAccess_3, context_.data_model_.arboretum_node_for(D->isImplicitAccess()));
   //getBaseType
   {
-    const Entity* other = context_.resolve(D->getBaseType());
-    arboretum_create_edge(obj, context_.data_model_.getBaseType1, other);
+    const Id* other = context_.resolve(D->getBaseType());
+    arboretum_create_edge(obj, context_.data_model_.method_getBaseType_2, other);
   }
   //hasUnresolvedUsing
-  arboretum_create_edge(obj, context_.data_model_.hasUnresolvedUsing, context_.data_model_.arboretum_node_for(D->hasUnresolvedUsing()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasUnresolvedUsing, context_.data_model_.arboretum_node_for(D->hasUnresolvedUsing()));
   //isArrow
-  arboretum_create_edge(obj, context_.data_model_.isArrow4, context_.data_model_.arboretum_node_for(D->isArrow()));
+  arboretum_create_edge(obj, context_.data_model_.method_isArrow_5, context_.data_model_.arboretum_node_for(D->isArrow()));
   //getOperatorLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getOperatorLoc());
-    arboretum_create_edge(obj, context_.data_model_.getOperatorLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getOperatorLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getOperatorLoc_11, other);
   }
   //getNamingClass
   {
-    const Entity* other = context_.resolve(D->getNamingClass());
-    arboretum_create_edge(obj, context_.data_model_.getNamingClass5, other);
+    const Id* other = context_.resolve(D->getNamingClass());
+    arboretum_create_edge(obj, context_.data_model_.method_getNamingClass_2, other);
   }
   //getMemberNameInfo
   // const DeclarationNameInfo &
@@ -12126,23 +12126,23 @@ bool ArboretumASTVisitor::VisitUnresolvedMemberExpr(clang::UnresolvedMemberExpr*
   // DeclarationName
   //getMemberLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getMemberLoc());
-    arboretum_create_edge(obj, context_.data_model_.getMemberLoc2, other);
+    const Id* other = context_.source_model_.resolve(D->getMemberLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getMemberLoc_3, other);
   }
   //getExprLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getExprLoc());
-    arboretum_create_edge(obj, context_.data_model_.getExprLoc5, other);
+    const Id* other = context_.source_model_.resolve(D->getExprLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprLoc_13, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc64, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_129, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc64, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_128, other);
   }
   //children
   // const_child_range
@@ -12150,67 +12150,67 @@ bool ArboretumASTVisitor::VisitUnresolvedMemberExpr(clang::UnresolvedMemberExpr*
 }
 
 bool ArboretumASTVisitor::VisitUserDefinedLiteral(clang::UserDefinedLiteral* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getLiteralOperatorKind
   {
-    const Entity* enum_value = context_.data_model_.resolve(D->getLiteralOperatorKind());
+    const Id* enum_value = context_.data_model_.resolve(D->getLiteralOperatorKind());
     if (enum_value != nullptr) {
-      arboretum_create_edge(obj, context_.data_model_.getLiteralOperatorKind, enum_value);
+      arboretum_create_edge(obj, context_.data_model_.method_getLiteralOperatorKind, enum_value);
     }
   }
   //getCookedLiteral
   {
-    const Entity* other = context_.resolve(D->getCookedLiteral());
-    arboretum_create_edge(obj, context_.data_model_.getCookedLiteral1, other);
+    const Id* other = context_.resolve(D->getCookedLiteral());
+    arboretum_create_edge(obj, context_.data_model_.method_getCookedLiteral, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc43, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_130, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc43, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_129, other);
   }
   //getUDSuffixLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getUDSuffixLoc());
-    arboretum_create_edge(obj, context_.data_model_.getUDSuffixLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getUDSuffixLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getUDSuffixLoc, other);
   }
   //getUDSuffix
   return true;
 }
 
 bool ArboretumASTVisitor::VisitVAArgExpr(clang::VAArgExpr* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getSubExpr
   {
-    const Entity* other = context_.resolve(D->getSubExpr());
-    arboretum_create_edge(obj, context_.data_model_.getSubExpr17, other);
+    const Id* other = context_.resolve(D->getSubExpr());
+    arboretum_create_edge(obj, context_.data_model_.method_getSubExpr_10, other);
   }
   //isMicrosoftABI
-  arboretum_create_edge(obj, context_.data_model_.isMicrosoftABI, context_.data_model_.arboretum_node_for(D->isMicrosoftABI()));
+  arboretum_create_edge(obj, context_.data_model_.method_isMicrosoftABI, context_.data_model_.arboretum_node_for(D->isMicrosoftABI()));
   //getWrittenTypeInfo
   //getBuiltinLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBuiltinLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBuiltinLoc4, other);
+    const Id* other = context_.source_model_.resolve(D->getBuiltinLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBuiltinLoc_5, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc23, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_27, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc114, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_131, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc115, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_130, other);
   }
   //children
   // const_child_range
@@ -12218,63 +12218,63 @@ bool ArboretumASTVisitor::VisitVAArgExpr(clang::VAArgExpr* D) {
 }
 
 bool ArboretumASTVisitor::VisitValueStmt(clang::ValueStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //getExprStmt
   {
-    const Entity* other = context_.resolve(D->getExprStmt());
-    arboretum_create_edge(obj, context_.data_model_.getExprStmt, other);
+    const Id* other = context_.resolve(D->getExprStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getExprStmt, other);
   }
   return true;
 }
 
 bool ArboretumASTVisitor::VisitWhileStmt(clang::WhileStmt* D) {
-  const Entity* obj = context_.resolve(D);
+  const Id* obj = context_.resolve(D);
   //hasVarStorage
-  arboretum_create_edge(obj, context_.data_model_.hasVarStorage, context_.data_model_.arboretum_node_for(D->hasVarStorage()));
+  arboretum_create_edge(obj, context_.data_model_.method_hasVarStorage_2, context_.data_model_.arboretum_node_for(D->hasVarStorage()));
   //getCond
   {
-    const Entity* other = context_.resolve(D->getCond());
-    arboretum_create_edge(obj, context_.data_model_.getCond3, other);
+    const Id* other = context_.resolve(D->getCond());
+    arboretum_create_edge(obj, context_.data_model_.method_getCond_9, other);
   }
   //getBody
   {
-    const Entity* other = context_.resolve(D->getBody());
-    arboretum_create_edge(obj, context_.data_model_.getBody6, other);
+    const Id* other = context_.resolve(D->getBody());
+    arboretum_create_edge(obj, context_.data_model_.method_getBody_12, other);
   }
   //getConditionVariable
   {
-    const Entity* other = context_.resolve(D->getConditionVariable());
-    arboretum_create_edge(obj, context_.data_model_.getConditionVariable2, other);
+    const Id* other = context_.resolve(D->getConditionVariable());
+    arboretum_create_edge(obj, context_.data_model_.method_getConditionVariable_3, other);
   }
   //getConditionVariableDeclStmt
   {
-    const Entity* other = context_.resolve(D->getConditionVariableDeclStmt());
-    arboretum_create_edge(obj, context_.data_model_.getConditionVariableDeclStmt3, other);
+    const Id* other = context_.resolve(D->getConditionVariableDeclStmt());
+    arboretum_create_edge(obj, context_.data_model_.method_getConditionVariableDeclStmt_3, other);
   }
   //getWhileLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getWhileLoc());
-    arboretum_create_edge(obj, context_.data_model_.getWhileLoc, other);
+    const Id* other = context_.source_model_.resolve(D->getWhileLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getWhileLoc_1, other);
   }
   //getLParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getLParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getLParenLoc1, other);
+    const Id* other = context_.source_model_.resolve(D->getLParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getLParenLoc_11, other);
   }
   //getRParenLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getRParenLoc());
-    arboretum_create_edge(obj, context_.data_model_.getRParenLoc3, other);
+    const Id* other = context_.source_model_.resolve(D->getRParenLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getRParenLoc_28, other);
   }
   //getBeginLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getBeginLoc());
-    arboretum_create_edge(obj, context_.data_model_.getBeginLoc24, other);
+    const Id* other = context_.source_model_.resolve(D->getBeginLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getBeginLoc_132, other);
   }
   //getEndLoc
   {
-    const Entity* other = context_.source_model_.resolve(D->getEndLoc());
-    arboretum_create_edge(obj, context_.data_model_.getEndLoc24, other);
+    const Id* other = context_.source_model_.resolve(D->getEndLoc());
+    arboretum_create_edge(obj, context_.data_model_.method_getEndLoc_131, other);
   }
   //children
   // const_child_range

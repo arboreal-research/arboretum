@@ -5,7 +5,7 @@
 
 namespace arboretum {
 
-const Entity *SourceModel::resolve(clang::FileID fid) {
+const Id *SourceModel::resolve(clang::FileID fid) {
   clang::SourceManager &sm = ctx_.getSourceManager();
   auto file_entry = sm.getFileEntryRefForID(fid);
   if (!file_entry.has_value())
@@ -39,7 +39,7 @@ const Entity *SourceModel::resolve(clang::FileID fid) {
   return file;
 }
 
-const Entity *SourceModel::resolve(clang::SourceLocation source_location) {
+const Id *SourceModel::resolve(clang::SourceLocation source_location) {
   clang::SourceManager &sm = ctx_.getSourceManager();
   void *key = source_location.getPtrEncoding();
 
@@ -51,7 +51,7 @@ const Entity *SourceModel::resolve(clang::SourceLocation source_location) {
     return find_itr->second;
   }
 
-  Entity *source_loc = arboretum_create_nameless_node();
+  Id *source_loc = arboretum_create_nameless_node();
   source_location_lookup_.insert(std::make_pair(key, source_loc));
   arboretum_create_edge(source_loc, data_model_.meta_class_,
                         data_model_.source_location_class_);
@@ -75,13 +75,13 @@ const Entity *SourceModel::resolve(clang::SourceLocation source_location) {
     }
   }
 
-  const Entity *expansion_loc = resolve(sm.getExpansionLoc(source_location));
+  const Id *expansion_loc = resolve(sm.getExpansionLoc(source_location));
   if (expansion_loc != source_loc) {
     arboretum_create_edge(
         source_loc, data_model_.source_location_expansion_loc_, expansion_loc);
   }
 
-  const Entity *spelling_loc = resolve(sm.getSpellingLoc(source_location));
+  const Id *spelling_loc = resolve(sm.getSpellingLoc(source_location));
   if (spelling_loc != source_loc) {
     arboretum_create_edge(source_loc, data_model_.source_location_spelling_loc_,
                           spelling_loc);
@@ -90,7 +90,7 @@ const Entity *SourceModel::resolve(clang::SourceLocation source_location) {
   return source_loc;
 }
 
-const Entity *SourceModel::resolve(clang::SourceRange source_range) {
+const Id *SourceModel::resolve(clang::SourceRange source_range) {
 
   auto begin_loc = resolve(source_range.getBegin());
   auto end_loc = resolve(source_range.getEnd());
@@ -101,7 +101,7 @@ const Entity *SourceModel::resolve(clang::SourceRange source_range) {
     return find_itr->second;
   }
 
-  Entity *result = arboretum_create_nameless_node();
+  Id *result = arboretum_create_nameless_node();
   source_range_lookup_.insert(std::make_pair(key, result));
 
   arboretum_create_edge(result, data_model_.meta_class_,

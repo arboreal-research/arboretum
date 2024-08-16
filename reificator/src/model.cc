@@ -6,92 +6,61 @@
 
 namespace arboretum {
 
-void assign_entity_names(Index &index,
-                         std::unordered_map<const clang::CXXMethodDecl *,
-                                            std::string> &method_entity_map,
-                         std::unordered_map<const clang::CXXRecordDecl *,
-                                            std::string> &class_entity_map) {
-  std::unordered_map<std::string, size_t> name_use_count;
+namespace {
 
-  auto make_name = [&](const std::string &name) {
-    auto find_itr = name_use_count.find(name);
-    if (find_itr != name_use_count.end()) {
-      std::stringstream ss;
-      ss << name << find_itr->second++;
-      return ss.str();
-    } else {
-      name_use_count.insert(std::pair(name, 1));
-      return name;
-    }
-  };
+template <typename T>
+std::string build_fresh_name(EntityNameMap<T> &entity_map, const char *prefix,
+                             std::string &&root) {
+  auto find_itr = entity_map.name_count.find(root);
+  size_t name_idx;
+  if (find_itr != entity_map.name_count.end()) {
+    name_idx = find_itr->second++;
+  } else {
+    name_idx = 0;
+    entity_map.name_count.insert(std::pair(root, name_idx + 1));
+  }
 
-  for (auto decl : index.clang.all_decls) {
-    class_entity_map[decl] = make_name(decl->getNameAsString());
-    for (auto method : decl->methods()) {
-      method_entity_map[method] = make_name(method->getNameAsString());
-    }
+  std::stringstream ss;
+  ss << prefix << '_' << root;
+  if (name_idx != 0) {
+    ss << '_' << name_idx;
+  }
+  return ss.str();
+}
+
+template <typename T>
+std::string entity_name_impl(const char *prefix, EntityNameMap<T> &entity_map,
+                             T t) {
+  std::string name = t->getNameAsString();
+  auto find_itr = entity_map.entity_map.find(t);
+  if (find_itr != entity_map.entity_map.end()) {
+    return find_itr->second;
+  } else {
+    name = build_fresh_name(entity_map, prefix, std::move(name));
+    entity_map.entity_map.insert(std::pair(t, name));
+    return name;
   }
 }
+
+} // namespace
 
 Model::Model(clang::ASTContext &ctx_, Index &&index_)
-    : ast_ctx(ctx_), index(std::move(index_)) {
-  assign_entity_names(index, method_entity_map, class_entity_map);
+    : ast_ctx(ctx_), index(std::move(index_)) {}
+
+std::string Model::entity_name(const clang::CXXMethodDecl *decl) {
+  return entity_name_impl("method", method_entity_map, decl);
 }
 
-std::string Model::assign_entity_name(const clang::CXXMethodDecl *decl) {
-  std::string name = decl->getNameAsString();
-  auto find_itr = method_entity_map.find(decl);
-  if (find_itr != method_entity_map.end()) {
-    return find_itr->second;
-  } else {
-    std::stringstream ss;
-    ss << "method_" << name << '_' << name_idx++;
-    name = ss.str();
-    method_entity_map.insert(std::pair(decl, name));
-    return name;
-  }
+std::string Model::entity_name(const clang::CXXRecordDecl *decl) {
+  return entity_name_impl("class", class_entity_map, decl);
 }
 
-std::string Model::assign_entity_name(const clang::CXXRecordDecl *decl) {
-  std::string name = decl->getNameAsString();
-  auto find_itr = class_entity_map.find(decl);
-  if (find_itr != class_entity_map.end()) {
-    return find_itr->second;
-  } else {
-    std::stringstream ss;
-    ss << "class_" << name << '_' << name_idx++;
-    name = ss.str();
-    class_entity_map.insert(std::pair(decl, name));
-    return name;
-  }
+std::string Model::entity_name(const clang::EnumDecl *decl) {
+  return entity_name_impl("enum", enum_entity_map, decl);
 }
 
-std::string Model::assign_entity_name(const clang::EnumDecl *decl) {
-  std::string name = decl->getNameAsString();
-  auto find_itr = enum_entity_map.find(decl);
-  if (find_itr != enum_entity_map.end()) {
-    return find_itr->second;
-  } else {
-    std::stringstream ss;
-    ss << "enum_" << name << '_' << name_idx++;
-    name = ss.str();
-    enum_entity_map.insert(std::pair(decl, name));
-    return name;
-  }
-}
-
-std::string Model::assign_entity_name(const clang::EnumConstantDecl *decl) {
-  std::string name = decl->getNameAsString();
-  auto find_itr = enum_constant_entity_map.find(decl);
-  if (find_itr != enum_constant_entity_map.end()) {
-    return find_itr->second;
-  } else {
-    std::stringstream ss;
-    ss << "enum_constant_" << name << '_' << name_idx++;
-    name = ss.str();
-    enum_constant_entity_map.insert(std::pair(decl, name));
-    return name;
-  }
+std::string Model::entity_name(const clang::EnumConstantDecl *decl) {
+  return entity_name_impl("enum_constant", enum_constant_entity_map, decl);
 }
 
 } // namespace arboretum

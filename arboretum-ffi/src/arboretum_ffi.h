@@ -2,12 +2,12 @@
 
 #include <cstdint>
 
-struct Entity;
+struct Id;
+struct Value;
 
 extern "C" {
 
 /*
-
   _____      _
  /  ___|    | |
  \ `--.  ___| |_ _   _ _ __
@@ -16,13 +16,13 @@ extern "C" {
  \____/ \___|\__|\__,_| .__/
                       | |
                       |_|
-
 */
 
 uint8_t arboretum_connect(const char *addr);
 
-/*
+void arboretum_stop();
 
+/*
   _   _           _
  | \ | |         | |
  |  \| | ___   __| | ___
@@ -32,16 +32,27 @@ uint8_t arboretum_connect(const char *addr);
 
 */
 
-Entity *arboretum_create_named_node(const char *name);
+void arboretum_destroy_id(Id *ulid);
 
-Entity *arboretum_create_named_node_with_id(const char *name, uint64_t id_hi,
-                                            uint64_t id_lo);
+Value *arboretum_create_value_unsigned(uint64_t v);
+Value *arboretum_create_value_signed(int64_t v);
+Value *arboretum_create_value_double(double d);
+Value *arboretum_create_value_string(const char *s);
 
-Entity *arboretum_create_nameless_node();
+Id *arboretum_create_named_node(const char *name);
+Id *arboretum_create_named_node_with_props(const char *name, Value *props);
 
-Entity *arboretum_get_named_node(const char *name);
+Id *arboretum_create_named_node_with_id(const char *name, uint64_t id);
+Id *arboretum_create_named_node_with_id_props(const char *name, uint64_t id,
+                                              Value *props);
 
-Entity *arboretum_get_ulid_node(uint64_t id_hi, uint64_t id_lo);
+Id *arboretum_create_nameless_node();
+Id *arboretum_create_nameless_node_with_props(Value *props);
+
+Id *arboretum_create_nameless_node_with_id(uint64_t id);
+Id *arboretum_create_nameless_node_with_id_props(uint64_t id, Value *props);
+
+// Ulid *arboretum_get_named_node(const char *name);
 
 /*
 
@@ -55,17 +66,7 @@ Entity *arboretum_get_ulid_node(uint64_t id_hi, uint64_t id_lo);
              |___/
 */
 
-void arboretum_create_edge(const Entity *sub, const Entity *pred,
-                           const Entity *obj);
-
-/**
-  _____      _                        _
- |_   _|    | |                      | |
-   | | _ __ | |_ ___ _ __ _ __   __ _| |
-   | || '_ \| __/ _ \ '__| '_ \ / _` | |
-  _| || | | | ||  __/ |  | | | | (_| | |
-  \___/_| |_|\__\___|_|  |_| |_|\__,_|_|
-*/
-
-void arboretum_dump();
+void arboretum_create_edge(const Id *sub, const Id *pred, const Id *obj);
+void arboretum_create_edge_with_props(const Id *sub, const Id *pred,
+                                      const Id *obj, Value *props);
 }

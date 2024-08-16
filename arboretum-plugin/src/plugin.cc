@@ -18,9 +18,7 @@ public:
   ArboretumASTConsumer() {}
 
   void HandleTranslationUnit(clang::ASTContext &ctx) override {
-    llvm::errs() << "test\n";
-
-    arboretum_connect("");
+    arboretum_connect("localhost:3232");
     DataModel data_model = EmitDataModel();
     SourceModel source_model = EmitSourceModel(ctx, data_model);
 
@@ -28,7 +26,9 @@ public:
     ArboretumASTVisitor visitor(arboretum_ctx);
     visitor.TraverseAST(ctx);
 
-    arboretum_dump();
+    llvm::errs() << "Traversal complete.\n";
+
+    arboretum_stop();
   }
 };
 

@@ -12,6 +12,11 @@
 
 namespace arboretum {
 
+template <typename T> struct EntityNameMap {
+  std::unordered_map<std::string, size_t> name_count;
+  std::unordered_map<T, std::string> entity_map;
+};
+
 struct Model {
   explicit Model(clang::ASTContext &ctx_, Index &&index_);
 
@@ -21,20 +26,17 @@ struct Model {
 
   size_t name_idx = 0;
 
-  std::unordered_map<const clang::CXXMethodDecl *, std::string>
-      method_entity_map;
-  std::string assign_entity_name(const clang::CXXMethodDecl *method);
+  EntityNameMap<const clang::CXXMethodDecl *> method_entity_map;
+  std::string entity_name(const clang::CXXMethodDecl *method);
 
-  std::unordered_map<const clang::CXXRecordDecl *, std::string>
-      class_entity_map;
-  std::string assign_entity_name(const clang::CXXRecordDecl *cls);
+  EntityNameMap<const clang::CXXRecordDecl *> class_entity_map;
+  std::string entity_name(const clang::CXXRecordDecl *cls);
 
-  std::unordered_map<const clang::EnumDecl *, std::string> enum_entity_map;
-  std::string assign_entity_name(const clang::EnumDecl *cls);
+  EntityNameMap<const clang::EnumDecl *> enum_entity_map;
+  std::string entity_name(const clang::EnumDecl *cls);
 
-  std::unordered_map<const clang::EnumConstantDecl *, std::string>
-      enum_constant_entity_map;
-  std::string assign_entity_name(const clang::EnumConstantDecl *cls);
+  EntityNameMap<const clang::EnumConstantDecl *> enum_constant_entity_map;
+  std::string entity_name(const clang::EnumConstantDecl *cls);
 };
 
 } // namespace arboretum

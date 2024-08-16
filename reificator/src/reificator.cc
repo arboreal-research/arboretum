@@ -20,7 +20,7 @@ std::vector<std::string> split_tab(const std::string &s) {
 
 struct CommandArgs {
   std::string reify_cpp_dir = "./reify-cpp/";
-  std::string reify_rs = "./reify-rs/";
+  std::string reify_rs_dir = "./reify-rs/";
 
   std::string property_table = "./reificator/properties.csv";
 };
@@ -37,7 +37,8 @@ public:
     auto property_table = ReadPropertyTable();
     UpdatePropertyTable(property_table, model);
 
-    EmitReifyCpp(model, property_table, args_.reify_cpp_dir);
+    EmitReifyCpp(model, property_table, args_.reify_cpp_dir,
+                 args_.reify_rs_dir);
   }
 
   std::map<std::string, bool> ReadPropertyTable() {

@@ -1,56 +1,68 @@
-use actix::{Actor, System};
+use std::sync::Arc;
 
-mod clang_annotation;
-mod graph;
-mod module_layout;
-mod networking;
-mod rust_annotation;
-mod rust_syntax;
-mod translation;
-mod z3_actor;
+use arboretum_graph::RootGraph;
+use clap::Parser;
+
+mod tcp_server;
+use tcp_server::tcp_server_bind;
+use tracing::{info, trace};
+
+#[derive(Parser, Debug)]
+#[command(version, about, long_about = None)]
+struct Args {
+    #[arg(short, long)]
+    db_dir: String,
+
+    #[arg(long, default_value = "localhost:3232")]
+    bind_addr: String,
+}
 
 #[derive(Debug)]
 enum ArboretumError {
-    GraphActorError(graph::GraphError),
-    IoError(std::io::Error),
+    GraphError(arboretum_graph::Error),
+}
+impl From<arboretum_graph::Error> for ArboretumError {
+    fn from(e: arboretum_graph::Error) -> Self {
+        ArboretumError::GraphError(e)
+    }
 }
 
 #[actix::main]
 async fn main() -> Result<(), ArboretumError> {
-    let system = System::new();
+    tracing_subscriber::fmt::init();
 
     // Process command line flags.
+    let args = Args::parse();
 
-    // The graph actor is responsible for performing queries and updates to the underlying knowledge graph representation.
-    // Additionally, it handles the
-    let graph_actor = graph::GraphActor::new()
-        .map_err(|e| ArboretumError::GraphActorError(e))?
-        .start();
+    // Load the root graph.
+    let root_graph = Arc::new(RootGraph::from_folder(args.db_dir, Default::default()).await?);
+    if root_graph.union_graph().subgraphs().await.len() == 0 {
+        tracing::info!("Loading clang data model.");
+        let data_model = reify_rs::build_data_model();
+        let num_named_nodes = data_model.named_nodes().len();
+        root_graph.add_graph_buffer(data_model).await.unwrap();
+        tracing::info!("Data model loaded with {} named nodes.", num_named_nodes);
+    }
 
-    // The clang annotation actor is responsible for annotating freshly obtained clang data with semantic nodes which tie it into
-    // the existing knowledge graph:
-    //  - Merges type definitions
-    //  - Maintains the canonical decl view.
-    let clang_annotation_actor =
-        clang_annotation::ClangAnnotationActor::new(graph_actor.clone()).start();
+    info!("Subgraphs at startup: {:?}", root_graph.union_graph().subgraphs().await);
 
-    // let rust_annotation_actor = rust_annotation::RustAnnotationActor::new().start();
+    // Setup a channel and start recieving graphs.
+    let (graph_buffer_tx, mut graph_buffer_rx) = tokio::sync::mpsc::channel(10);
 
-    // The module layout actor is responsible for maintaining a tree of modules, and assigning each new decl to a module.
-    let module_layout_actor = module_layout::ModuleLayoutActor::new(graph_actor.clone()).start();
+    // Setup a handler which loads buffers into the root.
+    tokio::spawn(async move {
+        while let Some(buf) = graph_buffer_rx.recv().await {
+            let root_graph_1 = root_graph.clone();
+            tokio::spawn(async move {
+                tracing::info!("Adding graph buffer to root graph: {:?}", buf);
+                root_graph_1.add_graph_buffer(buf).await.unwrap();
+            });
+        }
+    });
 
-    // The z3 actor is responsible for performing constraint solving.
-    let z3_actor = z3_actor::Z3Actor::new(graph_actor.clone()).start();
+    tcp_server_bind(graph_buffer_tx, args.bind_addr)
+        .await
+        .unwrap();
 
-    // The reactive translation actor uses constraint solver values to attempt to locate a translation.
-    // Failures are reported back to z3 for continued solving.
-    let translation_actor = translation::ReactiveTranslationActor::new(graph_actor.clone()).start();
-
-    // The rust syntax actor is responsible for maintaining a tree of rust syntax based on the graph structure.
-    let rust_syn_actor = rust_syntax::RustSyntaxActor::new(graph_actor.clone()).start();
-
-    // The networking actor is responsible for managing client connections.
-    let networking_actor = networking::NetworkingActor::new(graph_actor.clone()).start();
-
-    system.run().map_err(|e| ArboretumError::IoError(e))
+    Ok(())
 }

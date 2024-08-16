@@ -21,22 +21,22 @@ struct ArboretumContext {
   DataModel &data_model_;
   SourceModel &source_model_;
 
-  std::map<const clang::Attr *, Entity *> attrs;
-  Entity *resolve(const clang::Attr *attr);
+  std::map<const clang::Attr *, Id *> attrs;
+  Id *resolve(const clang::Attr *attr);
 
-  std::map<const clang::Decl *, Entity *> decls;
-  Entity *resolve(const clang::Decl *decl);
+  std::map<const clang::Decl *, Id *> decls;
+  Id *resolve(const clang::Decl *decl);
 
-  std::map<const clang::Type *, Entity *> types;
-  Entity *resolve(const clang::Type *type);
+  std::map<const clang::Type *, Id *> types;
+  Id *resolve(const clang::Type *type);
 
-  std::map<const clang::Stmt *, Entity *> stmts;
-  Entity *resolve(const clang::Stmt *stmt);
+  std::map<const clang::Stmt *, Id *> stmts;
+  Id *resolve(const clang::Stmt *stmt);
 
-  std::map<std::pair<const clang::Type *, unsigned>, Entity *> qualtypes;
-  Entity *resolve(clang::QualType qt);
+  std::map<std::pair<const clang::Type *, unsigned>, Id *> qualtypes;
+  Id *resolve(clang::QualType qt);
 
-  // std::map<std::tuple<const clang::Type*, clang::SourceRange>, Entity*>
+  // std::map<std::tuple<const clang::Type*, clang::SourceRange>, Id*>
   // typelocs;
 };
 
