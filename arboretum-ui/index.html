@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: rgb(66, 84, 51); 
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body style="">
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <script type="module">
+        import init from "./pkg/graph_view.js";
+        init();
+    </script>
+</body>
+</html>

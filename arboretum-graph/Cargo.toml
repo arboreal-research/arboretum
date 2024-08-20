@@ -1,0 +1,25 @@
+[package]
+name = "arboretum-graph"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+memmap2 = "0.9.4"
+num = "0.4.3"
+rayon = "1.10.0"
+rkyv = { version = "0.7.44"}
+sled = "0.34.7"
+tokio = { version = "1.39.2", features = ["macros", "rt-multi-thread", "sync"] }
+tokio-rayon = "2.1.0"
+tracing = "0.1.40"
+
+# Unix-specific dependencies
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+# Windows-specific dependencies
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["sysinfoapi"] }
+
+[dev-dependencies]
+tempdir = "0.3.7"

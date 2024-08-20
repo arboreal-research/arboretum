@@ -56,7 +56,7 @@ const Id *SourceModel::resolve(clang::SourceLocation source_location) {
   arboretum_create_edge(source_loc, data_model_.meta_class_,
                         data_model_.source_location_class_);
   arboretum_create_edge(
-      source_loc, data_model_.source_location_is_file,
+      source_loc, data_model_.source_location_is_file_,
       data_model_.arboretum_node_for(source_location.isFileID()));
 
   if (source_location.isFileID()) {

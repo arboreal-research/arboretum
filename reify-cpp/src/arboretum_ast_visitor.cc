@@ -2541,348 +2541,348 @@ bool ArboretumASTVisitor::VisitDecl(clang::Decl* D) {
   const Id* obj = context_.resolve(D);
   switch(D->getKind()) {
     case clang::Decl::CXXRecord: {
-assert(context_.data_model_.class_CXXRecordDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXRecordDecl); 
+      assert(context_.data_model_.class_CXXRecordDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXRecordDecl); 
     } break;
     case clang::Decl::Using: {
-assert(context_.data_model_.class_UsingDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingDecl); 
-    } break;
-    case clang::Decl::Record: {
-assert(context_.data_model_.class_RecordDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RecordDecl); 
-    } break;
-    case clang::Decl::ConstructorUsingShadow: {
-assert(context_.data_model_.class_ConstructorUsingShadowDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstructorUsingShadowDecl); 
-    } break;
-    case clang::Decl::UsingShadow: {
-assert(context_.data_model_.class_UsingShadowDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingShadowDecl); 
-    } break;
-    case clang::Decl::Captured: {
-assert(context_.data_model_.class_CapturedDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CapturedDecl); 
-    } break;
-    case clang::Decl::UsingEnum: {
-assert(context_.data_model_.class_UsingEnumDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingEnumDecl); 
-    } break;
-    case clang::Decl::Typedef: {
-assert(context_.data_model_.class_TypedefDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypedefDecl); 
-    } break;
-    case clang::Decl::ClassTemplate: {
-assert(context_.data_model_.class_ClassTemplateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplateDecl); 
-    } break;
-    case clang::Decl::ObjCTypeParam: {
-assert(context_.data_model_.class_ObjCTypeParamDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCTypeParamDecl); 
-    } break;
-    case clang::Decl::TemplateTemplateParm: {
-assert(context_.data_model_.class_TemplateTemplateParmDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateTemplateParmDecl); 
-    } break;
-    case clang::Decl::FileScopeAsm: {
-assert(context_.data_model_.class_FileScopeAsmDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FileScopeAsmDecl); 
-    } break;
-    case clang::Decl::Var: {
-assert(context_.data_model_.class_VarDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarDecl); 
-    } break;
-    case clang::Decl::Concept: {
-assert(context_.data_model_.class_ConceptDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConceptDecl); 
-    } break;
-    case clang::Decl::UnresolvedUsingIfExists: {
-assert(context_.data_model_.class_UnresolvedUsingIfExistsDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingIfExistsDecl); 
-    } break;
-    case clang::Decl::ObjCProtocol: {
-assert(context_.data_model_.class_ObjCProtocolDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCProtocolDecl); 
-    } break;
-    case clang::Decl::OMPAllocate: {
-assert(context_.data_model_.class_OMPAllocateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPAllocateDecl); 
-    } break;
-    case clang::Decl::ObjCInterface: {
-assert(context_.data_model_.class_ObjCInterfaceDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCInterfaceDecl); 
-    } break;
-    case clang::Decl::StaticAssert: {
-assert(context_.data_model_.class_StaticAssertDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StaticAssertDecl); 
-    } break;
-    case clang::Decl::ObjCPropertyImpl: {
-assert(context_.data_model_.class_ObjCPropertyImplDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyImplDecl); 
-    } break;
-    case clang::Decl::CXXMethod: {
-assert(context_.data_model_.class_CXXMethodDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXMethodDecl); 
-    } break;
-    case clang::Decl::UnresolvedUsingTypename: {
-assert(context_.data_model_.class_UnresolvedUsingTypenameDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingTypenameDecl); 
-    } break;
-    case clang::Decl::ObjCImplementation: {
-assert(context_.data_model_.class_ObjCImplementationDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCImplementationDecl); 
-    } break;
-    case clang::Decl::LinkageSpec: {
-assert(context_.data_model_.class_LinkageSpecDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LinkageSpecDecl); 
-    } break;
-    case clang::Decl::OMPThreadPrivate: {
-assert(context_.data_model_.class_OMPThreadPrivateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPThreadPrivateDecl); 
-    } break;
-    case clang::Decl::Export: {
-assert(context_.data_model_.class_ExportDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExportDecl); 
-    } break;
-    case clang::Decl::Binding: {
-assert(context_.data_model_.class_BindingDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BindingDecl); 
-    } break;
-    case clang::Decl::ObjCCategoryImpl: {
-assert(context_.data_model_.class_ObjCCategoryImplDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCategoryImplDecl); 
-    } break;
-    case clang::Decl::BuiltinTemplate: {
-assert(context_.data_model_.class_BuiltinTemplateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BuiltinTemplateDecl); 
-    } break;
-    case clang::Decl::CXXDeductionGuide: {
-assert(context_.data_model_.class_CXXDeductionGuideDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDeductionGuideDecl); 
-    } break;
-    case clang::Decl::TypeAlias: {
-assert(context_.data_model_.class_TypeAliasDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeAliasDecl); 
-    } break;
-    case clang::Decl::OMPDeclareReduction: {
-assert(context_.data_model_.class_OMPDeclareReductionDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDeclareReductionDecl); 
-    } break;
-    case clang::Decl::OMPDeclareMapper: {
-assert(context_.data_model_.class_OMPDeclareMapperDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDeclareMapperDecl); 
-    } break;
-    case clang::Decl::Enum: {
-assert(context_.data_model_.class_EnumDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EnumDecl); 
-    } break;
-    case clang::Decl::UnnamedGlobalConstant: {
-assert(context_.data_model_.class_UnnamedGlobalConstantDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnnamedGlobalConstantDecl); 
-    } break;
-    case clang::Decl::ImplicitParam: {
-assert(context_.data_model_.class_ImplicitParamDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitParamDecl); 
-    } break;
-    case clang::Decl::MSGuid: {
-assert(context_.data_model_.class_MSGuidDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSGuidDecl); 
-    } break;
-    case clang::Decl::Friend: {
-assert(context_.data_model_.class_FriendDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FriendDecl); 
-    } break;
-    case clang::Decl::RequiresExprBody: {
-assert(context_.data_model_.class_RequiresExprBodyDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RequiresExprBodyDecl); 
-    } break;
-    case clang::Decl::UnresolvedUsingValue: {
-assert(context_.data_model_.class_UnresolvedUsingValueDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingValueDecl); 
-    } break;
-    case clang::Decl::PragmaDetectMismatch: {
-assert(context_.data_model_.class_PragmaDetectMismatchDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PragmaDetectMismatchDecl); 
-    } break;
-    case clang::Decl::IndirectField: {
-assert(context_.data_model_.class_IndirectFieldDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IndirectFieldDecl); 
-    } break;
-    case clang::Decl::EnumConstant: {
-assert(context_.data_model_.class_EnumConstantDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EnumConstantDecl); 
-    } break;
-    case clang::Decl::LifetimeExtendedTemporary: {
-assert(context_.data_model_.class_LifetimeExtendedTemporaryDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LifetimeExtendedTemporaryDecl); 
-    } break;
-    case clang::Decl::ObjCProperty: {
-assert(context_.data_model_.class_ObjCPropertyDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyDecl); 
-    } break;
-    case clang::Decl::PragmaComment: {
-assert(context_.data_model_.class_PragmaCommentDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PragmaCommentDecl); 
-    } break;
-    case clang::Decl::Function: {
-assert(context_.data_model_.class_FunctionDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionDecl); 
-    } break;
-    case clang::Decl::Namespace: {
-assert(context_.data_model_.class_NamespaceDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NamespaceDecl); 
-    } break;
-    case clang::Decl::ObjCCompatibleAlias: {
-assert(context_.data_model_.class_ObjCCompatibleAliasDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCompatibleAliasDecl); 
-    } break;
-    case clang::Decl::Decomposition: {
-assert(context_.data_model_.class_DecompositionDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DecompositionDecl); 
-    } break;
-    case clang::Decl::OMPCapturedExpr: {
-assert(context_.data_model_.class_OMPCapturedExprDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCapturedExprDecl); 
-    } break;
-    case clang::Decl::ClassTemplatePartialSpecialization: {
-assert(context_.data_model_.class_ClassTemplatePartialSpecializationDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplatePartialSpecializationDecl); 
-    } break;
-    case clang::Decl::ParmVar: {
-assert(context_.data_model_.class_ParmVarDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParmVarDecl); 
-    } break;
-    case clang::Decl::VarTemplatePartialSpecialization: {
-assert(context_.data_model_.class_VarTemplatePartialSpecializationDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplatePartialSpecializationDecl); 
-    } break;
-    case clang::Decl::NonTypeTemplateParm: {
-assert(context_.data_model_.class_NonTypeTemplateParmDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NonTypeTemplateParmDecl); 
-    } break;
-    case clang::Decl::ObjCIvar: {
-assert(context_.data_model_.class_ObjCIvarDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIvarDecl); 
-    } break;
-    case clang::Decl::ExternCContext: {
-assert(context_.data_model_.class_ExternCContextDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExternCContextDecl); 
-    } break;
-    case clang::Decl::OMPRequires: {
-assert(context_.data_model_.class_OMPRequiresDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPRequiresDecl); 
-    } break;
-    case clang::Decl::VarTemplate: {
-assert(context_.data_model_.class_VarTemplateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplateDecl); 
-    } break;
-    case clang::Decl::CXXDestructor: {
-assert(context_.data_model_.class_CXXDestructorDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDestructorDecl); 
-    } break;
-    case clang::Decl::Label: {
-assert(context_.data_model_.class_LabelDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LabelDecl); 
-    } break;
-    case clang::Decl::CXXConversion: {
-assert(context_.data_model_.class_CXXConversionDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConversionDecl); 
-    } break;
-    case clang::Decl::ObjCAtDefsField: {
-assert(context_.data_model_.class_ObjCAtDefsFieldDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtDefsFieldDecl); 
-    } break;
-    case clang::Decl::CXXConstructor: {
-assert(context_.data_model_.class_CXXConstructorDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstructorDecl); 
-    } break;
-    case clang::Decl::Block: {
-assert(context_.data_model_.class_BlockDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BlockDecl); 
-    } break;
-    case clang::Decl::VarTemplateSpecialization: {
-assert(context_.data_model_.class_VarTemplateSpecializationDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplateSpecializationDecl); 
-    } break;
-    case clang::Decl::ImplicitConceptSpecialization: {
-assert(context_.data_model_.class_ImplicitConceptSpecializationDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitConceptSpecializationDecl); 
-    } break;
-    case clang::Decl::ObjCCategory: {
-assert(context_.data_model_.class_ObjCCategoryDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCategoryDecl); 
-    } break;
-    case clang::Decl::UsingDirective: {
-assert(context_.data_model_.class_UsingDirectiveDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingDirectiveDecl); 
-    } break;
-    case clang::Decl::Field: {
-assert(context_.data_model_.class_FieldDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FieldDecl); 
-    } break;
-    case clang::Decl::ClassTemplateSpecialization: {
-assert(context_.data_model_.class_ClassTemplateSpecializationDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplateSpecializationDecl); 
-    } break;
-    case clang::Decl::TopLevelStmt: {
-assert(context_.data_model_.class_TopLevelStmtDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TopLevelStmtDecl); 
-    } break;
-    case clang::Decl::TypeAliasTemplate: {
-assert(context_.data_model_.class_TypeAliasTemplateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeAliasTemplateDecl); 
-    } break;
-    case clang::Decl::UsingPack: {
-assert(context_.data_model_.class_UsingPackDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingPackDecl); 
-    } break;
-    case clang::Decl::TemplateParamObject: {
-assert(context_.data_model_.class_TemplateParamObjectDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateParamObjectDecl); 
-    } break;
-    case clang::Decl::NamespaceAlias: {
-assert(context_.data_model_.class_NamespaceAliasDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NamespaceAliasDecl); 
-    } break;
-    case clang::Decl::MSProperty: {
-assert(context_.data_model_.class_MSPropertyDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertyDecl); 
-    } break;
-    case clang::Decl::TranslationUnit: {
-assert(context_.data_model_.class_TranslationUnitDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TranslationUnitDecl); 
-    } break;
-    case clang::Decl::Import: {
-assert(context_.data_model_.class_ImportDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImportDecl); 
-    } break;
-    case clang::Decl::Empty: {
-assert(context_.data_model_.class_EmptyDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EmptyDecl); 
-    } break;
-    case clang::Decl::AccessSpec: {
-assert(context_.data_model_.class_AccessSpecDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AccessSpecDecl); 
-    } break;
-    case clang::Decl::FunctionTemplate: {
-assert(context_.data_model_.class_FunctionTemplateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionTemplateDecl); 
-    } break;
-    case clang::Decl::TemplateTypeParm: {
-assert(context_.data_model_.class_TemplateTypeParmDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateTypeParmDecl); 
-    } break;
-    case clang::Decl::ObjCMethod: {
-assert(context_.data_model_.class_ObjCMethodDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCMethodDecl); 
+      assert(context_.data_model_.class_UsingDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingDecl); 
     } break;
     case clang::Decl::HLSLBuffer: {
-assert(context_.data_model_.class_HLSLBufferDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_HLSLBufferDecl); 
+      assert(context_.data_model_.class_HLSLBufferDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_HLSLBufferDecl); 
+    } break;
+    case clang::Decl::ObjCCompatibleAlias: {
+      assert(context_.data_model_.class_ObjCCompatibleAliasDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCompatibleAliasDecl); 
+    } break;
+    case clang::Decl::ClassTemplateSpecialization: {
+      assert(context_.data_model_.class_ClassTemplateSpecializationDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplateSpecializationDecl); 
+    } break;
+    case clang::Decl::NamespaceAlias: {
+      assert(context_.data_model_.class_NamespaceAliasDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NamespaceAliasDecl); 
+    } break;
+    case clang::Decl::TemplateParamObject: {
+      assert(context_.data_model_.class_TemplateParamObjectDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateParamObjectDecl); 
+    } break;
+    case clang::Decl::MSProperty: {
+      assert(context_.data_model_.class_MSPropertyDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertyDecl); 
+    } break;
+    case clang::Decl::ConstructorUsingShadow: {
+      assert(context_.data_model_.class_ConstructorUsingShadowDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstructorUsingShadowDecl); 
+    } break;
+    case clang::Decl::UsingShadow: {
+      assert(context_.data_model_.class_UsingShadowDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingShadowDecl); 
+    } break;
+    case clang::Decl::UsingEnum: {
+      assert(context_.data_model_.class_UsingEnumDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingEnumDecl); 
+    } break;
+    case clang::Decl::Record: {
+      assert(context_.data_model_.class_RecordDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RecordDecl); 
+    } break;
+    case clang::Decl::NonTypeTemplateParm: {
+      assert(context_.data_model_.class_NonTypeTemplateParmDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NonTypeTemplateParmDecl); 
+    } break;
+    case clang::Decl::ObjCIvar: {
+      assert(context_.data_model_.class_ObjCIvarDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIvarDecl); 
+    } break;
+    case clang::Decl::ClassTemplate: {
+      assert(context_.data_model_.class_ClassTemplateDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplateDecl); 
+    } break;
+    case clang::Decl::ObjCTypeParam: {
+      assert(context_.data_model_.class_ObjCTypeParamDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCTypeParamDecl); 
+    } break;
+    case clang::Decl::TemplateTemplateParm: {
+      assert(context_.data_model_.class_TemplateTemplateParmDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateTemplateParmDecl); 
+    } break;
+    case clang::Decl::Concept: {
+      assert(context_.data_model_.class_ConceptDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConceptDecl); 
+    } break;
+    case clang::Decl::ObjCMethod: {
+      assert(context_.data_model_.class_ObjCMethodDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCMethodDecl); 
+    } break;
+    case clang::Decl::ObjCProperty: {
+      assert(context_.data_model_.class_ObjCPropertyDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyDecl); 
+    } break;
+    case clang::Decl::UnresolvedUsingIfExists: {
+      assert(context_.data_model_.class_UnresolvedUsingIfExistsDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingIfExistsDecl); 
+    } break;
+    case clang::Decl::ObjCProtocol: {
+      assert(context_.data_model_.class_ObjCProtocolDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCProtocolDecl); 
+    } break;
+    case clang::Decl::OMPAllocate: {
+      assert(context_.data_model_.class_OMPAllocateDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPAllocateDecl); 
+    } break;
+    case clang::Decl::ObjCInterface: {
+      assert(context_.data_model_.class_ObjCInterfaceDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCInterfaceDecl); 
+    } break;
+    case clang::Decl::StaticAssert: {
+      assert(context_.data_model_.class_StaticAssertDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StaticAssertDecl); 
+    } break;
+    case clang::Decl::FileScopeAsm: {
+      assert(context_.data_model_.class_FileScopeAsmDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FileScopeAsmDecl); 
+    } break;
+    case clang::Decl::Var: {
+      assert(context_.data_model_.class_VarDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarDecl); 
+    } break;
+    case clang::Decl::ObjCCategoryImpl: {
+      assert(context_.data_model_.class_ObjCCategoryImplDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCategoryImplDecl); 
+    } break;
+    case clang::Decl::BuiltinTemplate: {
+      assert(context_.data_model_.class_BuiltinTemplateDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BuiltinTemplateDecl); 
+    } break;
+    case clang::Decl::TypeAlias: {
+      assert(context_.data_model_.class_TypeAliasDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeAliasDecl); 
+    } break;
+    case clang::Decl::Typedef: {
+      assert(context_.data_model_.class_TypedefDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypedefDecl); 
+    } break;
+    case clang::Decl::OMPDeclareMapper: {
+      assert(context_.data_model_.class_OMPDeclareMapperDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDeclareMapperDecl); 
+    } break;
+    case clang::Decl::PragmaDetectMismatch: {
+      assert(context_.data_model_.class_PragmaDetectMismatchDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PragmaDetectMismatchDecl); 
+    } break;
+    case clang::Decl::UnnamedGlobalConstant: {
+      assert(context_.data_model_.class_UnnamedGlobalConstantDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnnamedGlobalConstantDecl); 
+    } break;
+    case clang::Decl::UnresolvedUsingValue: {
+      assert(context_.data_model_.class_UnresolvedUsingValueDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingValueDecl); 
+    } break;
+    case clang::Decl::CXXConstructor: {
+      assert(context_.data_model_.class_CXXConstructorDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstructorDecl); 
+    } break;
+    case clang::Decl::Field: {
+      assert(context_.data_model_.class_FieldDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FieldDecl); 
+    } break;
+    case clang::Decl::Captured: {
+      assert(context_.data_model_.class_CapturedDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CapturedDecl); 
+    } break;
+    case clang::Decl::ObjCAtDefsField: {
+      assert(context_.data_model_.class_ObjCAtDefsFieldDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtDefsFieldDecl); 
+    } break;
+    case clang::Decl::Block: {
+      assert(context_.data_model_.class_BlockDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BlockDecl); 
+    } break;
+    case clang::Decl::OMPDeclareReduction: {
+      assert(context_.data_model_.class_OMPDeclareReductionDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDeclareReductionDecl); 
+    } break;
+    case clang::Decl::Label: {
+      assert(context_.data_model_.class_LabelDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LabelDecl); 
+    } break;
+    case clang::Decl::AccessSpec: {
+      assert(context_.data_model_.class_AccessSpecDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AccessSpecDecl); 
+    } break;
+    case clang::Decl::FunctionTemplate: {
+      assert(context_.data_model_.class_FunctionTemplateDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionTemplateDecl); 
+    } break;
+    case clang::Decl::PragmaComment: {
+      assert(context_.data_model_.class_PragmaCommentDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PragmaCommentDecl); 
+    } break;
+    case clang::Decl::Function: {
+      assert(context_.data_model_.class_FunctionDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionDecl); 
+    } break;
+    case clang::Decl::CXXDeductionGuide: {
+      assert(context_.data_model_.class_CXXDeductionGuideDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDeductionGuideDecl); 
+    } break;
+    case clang::Decl::Namespace: {
+      assert(context_.data_model_.class_NamespaceDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NamespaceDecl); 
+    } break;
+    case clang::Decl::Decomposition: {
+      assert(context_.data_model_.class_DecompositionDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DecompositionDecl); 
+    } break;
+    case clang::Decl::OMPCapturedExpr: {
+      assert(context_.data_model_.class_OMPCapturedExprDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCapturedExprDecl); 
+    } break;
+    case clang::Decl::ClassTemplatePartialSpecialization: {
+      assert(context_.data_model_.class_ClassTemplatePartialSpecializationDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplatePartialSpecializationDecl); 
+    } break;
+    case clang::Decl::TopLevelStmt: {
+      assert(context_.data_model_.class_TopLevelStmtDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TopLevelStmtDecl); 
+    } break;
+    case clang::Decl::CXXDestructor: {
+      assert(context_.data_model_.class_CXXDestructorDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDestructorDecl); 
+    } break;
+    case clang::Decl::VarTemplate: {
+      assert(context_.data_model_.class_VarTemplateDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplateDecl); 
+    } break;
+    case clang::Decl::ImplicitParam: {
+      assert(context_.data_model_.class_ImplicitParamDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitParamDecl); 
+    } break;
+    case clang::Decl::UsingDirective: {
+      assert(context_.data_model_.class_UsingDirectiveDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingDirectiveDecl); 
+    } break;
+    case clang::Decl::ObjCCategory: {
+      assert(context_.data_model_.class_ObjCCategoryDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCategoryDecl); 
+    } break;
+    case clang::Decl::ParmVar: {
+      assert(context_.data_model_.class_ParmVarDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParmVarDecl); 
+    } break;
+    case clang::Decl::VarTemplatePartialSpecialization: {
+      assert(context_.data_model_.class_VarTemplatePartialSpecializationDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplatePartialSpecializationDecl); 
+    } break;
+    case clang::Decl::OMPRequires: {
+      assert(context_.data_model_.class_OMPRequiresDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPRequiresDecl); 
+    } break;
+    case clang::Decl::EnumConstant: {
+      assert(context_.data_model_.class_EnumConstantDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EnumConstantDecl); 
+    } break;
+    case clang::Decl::IndirectField: {
+      assert(context_.data_model_.class_IndirectFieldDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IndirectFieldDecl); 
+    } break;
+    case clang::Decl::CXXConversion: {
+      assert(context_.data_model_.class_CXXConversionDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConversionDecl); 
+    } break;
+    case clang::Decl::TypeAliasTemplate: {
+      assert(context_.data_model_.class_TypeAliasTemplateDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeAliasTemplateDecl); 
+    } break;
+    case clang::Decl::UsingPack: {
+      assert(context_.data_model_.class_UsingPackDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingPackDecl); 
+    } break;
+    case clang::Decl::Friend: {
+      assert(context_.data_model_.class_FriendDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FriendDecl); 
+    } break;
+    case clang::Decl::RequiresExprBody: {
+      assert(context_.data_model_.class_RequiresExprBodyDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RequiresExprBodyDecl); 
+    } break;
+    case clang::Decl::MSGuid: {
+      assert(context_.data_model_.class_MSGuidDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSGuidDecl); 
+    } break;
+    case clang::Decl::Export: {
+      assert(context_.data_model_.class_ExportDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExportDecl); 
+    } break;
+    case clang::Decl::LifetimeExtendedTemporary: {
+      assert(context_.data_model_.class_LifetimeExtendedTemporaryDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LifetimeExtendedTemporaryDecl); 
+    } break;
+    case clang::Decl::TemplateTypeParm: {
+      assert(context_.data_model_.class_TemplateTypeParmDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateTypeParmDecl); 
+    } break;
+    case clang::Decl::Enum: {
+      assert(context_.data_model_.class_EnumDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EnumDecl); 
+    } break;
+    case clang::Decl::ImplicitConceptSpecialization: {
+      assert(context_.data_model_.class_ImplicitConceptSpecializationDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitConceptSpecializationDecl); 
+    } break;
+    case clang::Decl::VarTemplateSpecialization: {
+      assert(context_.data_model_.class_VarTemplateSpecializationDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplateSpecializationDecl); 
+    } break;
+    case clang::Decl::TranslationUnit: {
+      assert(context_.data_model_.class_TranslationUnitDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TranslationUnitDecl); 
+    } break;
+    case clang::Decl::Import: {
+      assert(context_.data_model_.class_ImportDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImportDecl); 
+    } break;
+    case clang::Decl::Empty: {
+      assert(context_.data_model_.class_EmptyDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EmptyDecl); 
+    } break;
+    case clang::Decl::ObjCPropertyImpl: {
+      assert(context_.data_model_.class_ObjCPropertyImplDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyImplDecl); 
+    } break;
+    case clang::Decl::CXXMethod: {
+      assert(context_.data_model_.class_CXXMethodDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXMethodDecl); 
     } break;
     case clang::Decl::FriendTemplate: {
-assert(context_.data_model_.class_FriendTemplateDecl != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FriendTemplateDecl); 
+      assert(context_.data_model_.class_FriendTemplateDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FriendTemplateDecl); 
+    } break;
+    case clang::Decl::ExternCContext: {
+      assert(context_.data_model_.class_ExternCContextDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExternCContextDecl); 
+    } break;
+    case clang::Decl::Binding: {
+      assert(context_.data_model_.class_BindingDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BindingDecl); 
+    } break;
+    case clang::Decl::OMPThreadPrivate: {
+      assert(context_.data_model_.class_OMPThreadPrivateDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPThreadPrivateDecl); 
+    } break;
+    case clang::Decl::LinkageSpec: {
+      assert(context_.data_model_.class_LinkageSpecDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LinkageSpecDecl); 
+    } break;
+    case clang::Decl::ObjCImplementation: {
+      assert(context_.data_model_.class_ObjCImplementationDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCImplementationDecl); 
+    } break;
+    case clang::Decl::UnresolvedUsingTypename: {
+      assert(context_.data_model_.class_UnresolvedUsingTypenameDecl != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingTypenameDecl); 
     } break;
     default: break;
   }
@@ -10708,940 +10708,940 @@ bool ArboretumASTVisitor::VisitStmt(clang::Stmt* D) {
   const Id* obj = context_.resolve(D);
   switch(D->getStmtClass()) {
     case clang::Stmt::ObjCArrayLiteralClass: {
-assert(context_.data_model_.class_ObjCArrayLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCArrayLiteral); 
-    } break;
-    case clang::Stmt::CXXStdInitializerListExprClass: {
-assert(context_.data_model_.class_CXXStdInitializerListExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXStdInitializerListExpr); 
-    } break;
-    case clang::Stmt::ImplicitCastExprClass: {
-assert(context_.data_model_.class_ImplicitCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitCastExpr); 
-    } break;
-    case clang::Stmt::ObjCSelectorExprClass: {
-assert(context_.data_model_.class_ObjCSelectorExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCSelectorExpr); 
-    } break;
-    case clang::Stmt::ObjCAtTryStmtClass: {
-assert(context_.data_model_.class_ObjCAtTryStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtTryStmt); 
-    } break;
-    case clang::Stmt::ObjCProtocolExprClass: {
-assert(context_.data_model_.class_ObjCProtocolExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCProtocolExpr); 
-    } break;
-    case clang::Stmt::CXXTypeidExprClass: {
-assert(context_.data_model_.class_CXXTypeidExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTypeidExpr); 
-    } break;
-    case clang::Stmt::NullStmtClass: {
-assert(context_.data_model_.class_NullStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NullStmt); 
-    } break;
-    case clang::Stmt::ObjCPropertyRefExprClass: {
-assert(context_.data_model_.class_ObjCPropertyRefExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyRefExpr); 
-    } break;
-    case clang::Stmt::OMPTargetTeamsDistributeSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetTeamsDistributeSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeSimdDirective); 
-    } break;
-    case clang::Stmt::ObjCMessageExprClass: {
-assert(context_.data_model_.class_ObjCMessageExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCMessageExpr); 
-    } break;
-    case clang::Stmt::CXXParenListInitExprClass: {
-assert(context_.data_model_.class_CXXParenListInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXParenListInitExpr); 
-    } break;
-    case clang::Stmt::ObjCIsaExprClass: {
-assert(context_.data_model_.class_ObjCIsaExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIsaExpr); 
-    } break;
-    case clang::Stmt::DoStmtClass: {
-assert(context_.data_model_.class_DoStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DoStmt); 
-    } break;
-    case clang::Stmt::FloatingLiteralClass: {
-assert(context_.data_model_.class_FloatingLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FloatingLiteral); 
-    } break;
-    case clang::Stmt::GotoStmtClass: {
-assert(context_.data_model_.class_GotoStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GotoStmt); 
-    } break;
-    case clang::Stmt::OMPDistributeDirectiveClass: {
-assert(context_.data_model_.class_OMPDistributeDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeDirective); 
-    } break;
-    case clang::Stmt::ContinueStmtClass: {
-assert(context_.data_model_.class_ContinueStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ContinueStmt); 
-    } break;
-    case clang::Stmt::CoawaitExprClass: {
-assert(context_.data_model_.class_CoawaitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoawaitExpr); 
-    } break;
-    case clang::Stmt::ReturnStmtClass: {
-assert(context_.data_model_.class_ReturnStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ReturnStmt); 
-    } break;
-    case clang::Stmt::UnresolvedMemberExprClass: {
-assert(context_.data_model_.class_UnresolvedMemberExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedMemberExpr); 
-    } break;
-    case clang::Stmt::GCCAsmStmtClass: {
-assert(context_.data_model_.class_GCCAsmStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GCCAsmStmt); 
-    } break;
-    case clang::Stmt::CXXReinterpretCastExprClass: {
-assert(context_.data_model_.class_CXXReinterpretCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXReinterpretCastExpr); 
-    } break;
-    case clang::Stmt::SEHExceptStmtClass: {
-assert(context_.data_model_.class_SEHExceptStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHExceptStmt); 
-    } break;
-    case clang::Stmt::SEHTryStmtClass: {
-assert(context_.data_model_.class_SEHTryStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHTryStmt); 
-    } break;
-    case clang::Stmt::OMPSingleDirectiveClass: {
-assert(context_.data_model_.class_OMPSingleDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSingleDirective); 
-    } break;
-    case clang::Stmt::SEHLeaveStmtClass: {
-assert(context_.data_model_.class_SEHLeaveStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHLeaveStmt); 
-    } break;
-    case clang::Stmt::ImplicitValueInitExprClass: {
-assert(context_.data_model_.class_ImplicitValueInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitValueInitExpr); 
-    } break;
-    case clang::Stmt::NoInitExprClass: {
-assert(context_.data_model_.class_NoInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NoInitExpr); 
-    } break;
-    case clang::Stmt::CXXForRangeStmtClass: {
-assert(context_.data_model_.class_CXXForRangeStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXForRangeStmt); 
-    } break;
-    case clang::Stmt::ObjCEncodeExprClass: {
-assert(context_.data_model_.class_ObjCEncodeExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCEncodeExpr); 
-    } break;
-    case clang::Stmt::SubstNonTypeTemplateParmExprClass: {
-assert(context_.data_model_.class_SubstNonTypeTemplateParmExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstNonTypeTemplateParmExpr); 
-    } break;
-    case clang::Stmt::ObjCIndirectCopyRestoreExprClass: {
-assert(context_.data_model_.class_ObjCIndirectCopyRestoreExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIndirectCopyRestoreExpr); 
-    } break;
-    case clang::Stmt::SEHFinallyStmtClass: {
-assert(context_.data_model_.class_SEHFinallyStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHFinallyStmt); 
-    } break;
-    case clang::Stmt::CoroutineBodyStmtClass: {
-assert(context_.data_model_.class_CoroutineBodyStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoroutineBodyStmt); 
-    } break;
-    case clang::Stmt::CoreturnStmtClass: {
-assert(context_.data_model_.class_CoreturnStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoreturnStmt); 
-    } break;
-    case clang::Stmt::ArrayTypeTraitExprClass: {
-assert(context_.data_model_.class_ArrayTypeTraitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayTypeTraitExpr); 
-    } break;
-    case clang::Stmt::CXXUuidofExprClass: {
-assert(context_.data_model_.class_CXXUuidofExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXUuidofExpr); 
-    } break;
-    case clang::Stmt::ObjCForCollectionStmtClass: {
-assert(context_.data_model_.class_ObjCForCollectionStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCForCollectionStmt); 
-    } break;
-    case clang::Stmt::ObjCAtCatchStmtClass: {
-assert(context_.data_model_.class_ObjCAtCatchStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtCatchStmt); 
-    } break;
-    case clang::Stmt::ObjCAtSynchronizedStmtClass: {
-assert(context_.data_model_.class_ObjCAtSynchronizedStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtSynchronizedStmt); 
-    } break;
-    case clang::Stmt::ObjCAtThrowStmtClass: {
-assert(context_.data_model_.class_ObjCAtThrowStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtThrowStmt); 
-    } break;
-    case clang::Stmt::OMPParallelMasterDirectiveClass: {
-assert(context_.data_model_.class_OMPParallelMasterDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterDirective); 
-    } break;
-    case clang::Stmt::ImaginaryLiteralClass: {
-assert(context_.data_model_.class_ImaginaryLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImaginaryLiteral); 
-    } break;
-    case clang::Stmt::ObjCAutoreleasePoolStmtClass: {
-assert(context_.data_model_.class_ObjCAutoreleasePoolStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAutoreleasePoolStmt); 
-    } break;
-    case clang::Stmt::OMPCanonicalLoopClass: {
-assert(context_.data_model_.class_OMPCanonicalLoop != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCanonicalLoop); 
-    } break;
-    case clang::Stmt::OMPParallelDirectiveClass: {
-assert(context_.data_model_.class_OMPParallelDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelDirective); 
-    } break;
-    case clang::Stmt::BreakStmtClass: {
-assert(context_.data_model_.class_BreakStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BreakStmt); 
-    } break;
-    case clang::Stmt::OMPTileDirectiveClass: {
-assert(context_.data_model_.class_OMPTileDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTileDirective); 
-    } break;
-    case clang::Stmt::MSPropertyRefExprClass: {
-assert(context_.data_model_.class_MSPropertyRefExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertyRefExpr); 
-    } break;
-    case clang::Stmt::ObjCDictionaryLiteralClass: {
-assert(context_.data_model_.class_ObjCDictionaryLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCDictionaryLiteral); 
-    } break;
-    case clang::Stmt::OMPInteropDirectiveClass: {
-assert(context_.data_model_.class_OMPInteropDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPInteropDirective); 
-    } break;
-    case clang::Stmt::ObjCSubscriptRefExprClass: {
-assert(context_.data_model_.class_ObjCSubscriptRefExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCSubscriptRefExpr); 
-    } break;
-    case clang::Stmt::CXXBoolLiteralExprClass: {
-assert(context_.data_model_.class_CXXBoolLiteralExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXBoolLiteralExpr); 
-    } break;
-    case clang::Stmt::SYCLUniqueStableNameExprClass: {
-assert(context_.data_model_.class_SYCLUniqueStableNameExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SYCLUniqueStableNameExpr); 
-    } break;
-    case clang::Stmt::OMPSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSimdDirective); 
-    } break;
-    case clang::Stmt::OMPForSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPForSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPForSimdDirective); 
-    } break;
-    case clang::Stmt::ObjCBoxedExprClass: {
-assert(context_.data_model_.class_ObjCBoxedExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBoxedExpr); 
-    } break;
-    case clang::Stmt::OMPParallelSectionsDirectiveClass: {
-assert(context_.data_model_.class_OMPParallelSectionsDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelSectionsDirective); 
-    } break;
-    case clang::Stmt::ObjCAvailabilityCheckExprClass: {
-assert(context_.data_model_.class_ObjCAvailabilityCheckExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAvailabilityCheckExpr); 
-    } break;
-    case clang::Stmt::OMPParallelForDirectiveClass: {
-assert(context_.data_model_.class_OMPParallelForDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelForDirective); 
-    } break;
-    case clang::Stmt::OMPTargetParallelForDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetParallelForDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelForDirective); 
-    } break;
-    case clang::Stmt::OMPErrorDirectiveClass: {
-assert(context_.data_model_.class_OMPErrorDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPErrorDirective); 
-    } break;
-    case clang::Stmt::OMPTaskLoopSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPTaskLoopSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskLoopSimdDirective); 
-    } break;
-    case clang::Stmt::IndirectGotoStmtClass: {
-assert(context_.data_model_.class_IndirectGotoStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IndirectGotoStmt); 
-    } break;
-    case clang::Stmt::OMPMaskedTaskLoopDirectiveClass: {
-assert(context_.data_model_.class_OMPMaskedTaskLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMaskedTaskLoopDirective); 
-    } break;
-    case clang::Stmt::OMPMasterTaskLoopSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPMasterTaskLoopSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterTaskLoopSimdDirective); 
-    } break;
-    case clang::Stmt::CXXTryStmtClass: {
-assert(context_.data_model_.class_CXXTryStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTryStmt); 
-    } break;
-    case clang::Stmt::OMPMaskedTaskLoopSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPMaskedTaskLoopSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMaskedTaskLoopSimdDirective); 
-    } break;
-    case clang::Stmt::CompoundAssignOperatorClass: {
-assert(context_.data_model_.class_CompoundAssignOperator != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundAssignOperator); 
-    } break;
-    case clang::Stmt::ObjCAtFinallyStmtClass: {
-assert(context_.data_model_.class_ObjCAtFinallyStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtFinallyStmt); 
-    } break;
-    case clang::Stmt::OMPParallelMasterTaskLoopDirectiveClass: {
-assert(context_.data_model_.class_OMPParallelMasterTaskLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterTaskLoopDirective); 
-    } break;
-    case clang::Stmt::BlockExprClass: {
-assert(context_.data_model_.class_BlockExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BlockExpr); 
-    } break;
-    case clang::Stmt::OMPParallelMaskedTaskLoopDirectiveClass: {
-assert(context_.data_model_.class_OMPParallelMaskedTaskLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedTaskLoopDirective); 
-    } break;
-    case clang::Stmt::OMPMasterDirectiveClass: {
-assert(context_.data_model_.class_OMPMasterDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterDirective); 
-    } break;
-    case clang::Stmt::CXXNoexceptExprClass: {
-assert(context_.data_model_.class_CXXNoexceptExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNoexceptExpr); 
-    } break;
-    case clang::Stmt::ObjCIvarRefExprClass: {
-assert(context_.data_model_.class_ObjCIvarRefExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIvarRefExpr); 
-    } break;
-    case clang::Stmt::CUDAKernelCallExprClass: {
-assert(context_.data_model_.class_CUDAKernelCallExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CUDAKernelCallExpr); 
-    } break;
-    case clang::Stmt::OMPTaskyieldDirectiveClass: {
-assert(context_.data_model_.class_OMPTaskyieldDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskyieldDirective); 
-    } break;
-    case clang::Stmt::OMPIteratorExprClass: {
-assert(context_.data_model_.class_OMPIteratorExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPIteratorExpr); 
-    } break;
-    case clang::Stmt::MSDependentExistsStmtClass: {
-assert(context_.data_model_.class_MSDependentExistsStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSDependentExistsStmt); 
-    } break;
-    case clang::Stmt::OMPTargetUpdateDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetUpdateDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetUpdateDirective); 
-    } break;
-    case clang::Stmt::OMPCancelDirectiveClass: {
-assert(context_.data_model_.class_OMPCancelDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCancelDirective); 
-    } break;
-    case clang::Stmt::RecoveryExprClass: {
-assert(context_.data_model_.class_RecoveryExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RecoveryExpr); 
-    } break;
-    case clang::Stmt::OMPDistributeParallelForDirectiveClass: {
-assert(context_.data_model_.class_OMPDistributeParallelForDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeParallelForDirective); 
-    } break;
-    case clang::Stmt::OMPTaskwaitDirectiveClass: {
-assert(context_.data_model_.class_OMPTaskwaitDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskwaitDirective); 
-    } break;
-    case clang::Stmt::OMPTargetParallelDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetParallelDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelDirective); 
-    } break;
-    case clang::Stmt::OMPCriticalDirectiveClass: {
-assert(context_.data_model_.class_OMPCriticalDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCriticalDirective); 
-    } break;
-    case clang::Stmt::OMPForDirectiveClass: {
-assert(context_.data_model_.class_OMPForDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPForDirective); 
-    } break;
-    case clang::Stmt::OMPTargetSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetSimdDirective); 
-    } break;
-    case clang::Stmt::ForStmtClass: {
-assert(context_.data_model_.class_ForStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ForStmt); 
-    } break;
-    case clang::Stmt::OMPDepobjDirectiveClass: {
-assert(context_.data_model_.class_OMPDepobjDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDepobjDirective); 
-    } break;
-    case clang::Stmt::ConstantExprClass: {
-assert(context_.data_model_.class_ConstantExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstantExpr); 
-    } break;
-    case clang::Stmt::OMPParallelForSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPParallelForSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelForSimdDirective); 
-    } break;
-    case clang::Stmt::OMPParallelMaskedDirectiveClass: {
-assert(context_.data_model_.class_OMPParallelMaskedDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedDirective); 
-    } break;
-    case clang::Stmt::InitListExprClass: {
-assert(context_.data_model_.class_InitListExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_InitListExpr); 
-    } break;
-    case clang::Stmt::OMPTargetTeamsGenericLoopDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetTeamsGenericLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsGenericLoopDirective); 
-    } break;
-    case clang::Stmt::CXXUnresolvedConstructExprClass: {
-assert(context_.data_model_.class_CXXUnresolvedConstructExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXUnresolvedConstructExpr); 
-    } break;
-    case clang::Stmt::OMPTargetDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetDirective); 
-    } break;
-    case clang::Stmt::OMPTargetDataDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetDataDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetDataDirective); 
-    } break;
-    case clang::Stmt::SwitchStmtClass: {
-assert(context_.data_model_.class_SwitchStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SwitchStmt); 
-    } break;
-    case clang::Stmt::MSAsmStmtClass: {
-assert(context_.data_model_.class_MSAsmStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSAsmStmt); 
-    } break;
-    case clang::Stmt::CXXNullPtrLiteralExprClass: {
-assert(context_.data_model_.class_CXXNullPtrLiteralExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNullPtrLiteralExpr); 
-    } break;
-    case clang::Stmt::OMPTargetEnterDataDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetEnterDataDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetEnterDataDirective); 
-    } break;
-    case clang::Stmt::OMPTeamsDistributeDirectiveClass: {
-assert(context_.data_model_.class_OMPTeamsDistributeDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeDirective); 
-    } break;
-    case clang::Stmt::OMPOrderedDirectiveClass: {
-assert(context_.data_model_.class_OMPOrderedDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPOrderedDirective); 
-    } break;
-    case clang::Stmt::OMPTaskgroupDirectiveClass: {
-assert(context_.data_model_.class_OMPTaskgroupDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskgroupDirective); 
-    } break;
-    case clang::Stmt::ExpressionTraitExprClass: {
-assert(context_.data_model_.class_ExpressionTraitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExpressionTraitExpr); 
-    } break;
-    case clang::Stmt::GenericSelectionExprClass: {
-assert(context_.data_model_.class_GenericSelectionExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GenericSelectionExpr); 
-    } break;
-    case clang::Stmt::OMPTeamsDirectiveClass: {
-assert(context_.data_model_.class_OMPTeamsDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDirective); 
-    } break;
-    case clang::Stmt::CXXDeleteExprClass: {
-assert(context_.data_model_.class_CXXDeleteExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDeleteExpr); 
-    } break;
-    case clang::Stmt::CXXScalarValueInitExprClass: {
-assert(context_.data_model_.class_CXXScalarValueInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXScalarValueInitExpr); 
-    } break;
-    case clang::Stmt::CXXInheritedCtorInitExprClass: {
-assert(context_.data_model_.class_CXXInheritedCtorInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXInheritedCtorInitExpr); 
-    } break;
-    case clang::Stmt::OMPTeamsDistributeParallelForDirectiveClass: {
-assert(context_.data_model_.class_OMPTeamsDistributeParallelForDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeParallelForDirective); 
-    } break;
-    case clang::Stmt::StmtExprClass: {
-assert(context_.data_model_.class_StmtExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StmtExpr); 
-    } break;
-    case clang::Stmt::MSPropertySubscriptExprClass: {
-assert(context_.data_model_.class_MSPropertySubscriptExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertySubscriptExpr); 
-    } break;
-    case clang::Stmt::DesignatedInitExprClass: {
-assert(context_.data_model_.class_DesignatedInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DesignatedInitExpr); 
-    } break;
-    case clang::Stmt::ArraySubscriptExprClass: {
-assert(context_.data_model_.class_ArraySubscriptExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArraySubscriptExpr); 
-    } break;
-    case clang::Stmt::AtomicExprClass: {
-assert(context_.data_model_.class_AtomicExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AtomicExpr); 
-    } break;
-    case clang::Stmt::CXXOperatorCallExprClass: {
-assert(context_.data_model_.class_CXXOperatorCallExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXOperatorCallExpr); 
-    } break;
-    case clang::Stmt::CXXBindTemporaryExprClass: {
-assert(context_.data_model_.class_CXXBindTemporaryExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXBindTemporaryExpr); 
-    } break;
-    case clang::Stmt::CoyieldExprClass: {
-assert(context_.data_model_.class_CoyieldExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoyieldExpr); 
-    } break;
-    case clang::Stmt::CXXThrowExprClass: {
-assert(context_.data_model_.class_CXXThrowExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXThrowExpr); 
-    } break;
-    case clang::Stmt::PseudoObjectExprClass: {
-assert(context_.data_model_.class_PseudoObjectExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PseudoObjectExpr); 
-    } break;
-    case clang::Stmt::ParenExprClass: {
-assert(context_.data_model_.class_ParenExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParenExpr); 
-    } break;
-    case clang::Stmt::ExtVectorElementExprClass: {
-assert(context_.data_model_.class_ExtVectorElementExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExtVectorElementExpr); 
-    } break;
-    case clang::Stmt::OMPUnrollDirectiveClass: {
-assert(context_.data_model_.class_OMPUnrollDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPUnrollDirective); 
-    } break;
-    case clang::Stmt::FunctionParmPackExprClass: {
-assert(context_.data_model_.class_FunctionParmPackExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionParmPackExpr); 
-    } break;
-    case clang::Stmt::VAArgExprClass: {
-assert(context_.data_model_.class_VAArgExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VAArgExpr); 
-    } break;
-    case clang::Stmt::AsTypeExprClass: {
-assert(context_.data_model_.class_AsTypeExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AsTypeExpr); 
-    } break;
-    case clang::Stmt::OMPFlushDirectiveClass: {
-assert(context_.data_model_.class_OMPFlushDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPFlushDirective); 
-    } break;
-    case clang::Stmt::TypeTraitExprClass: {
-assert(context_.data_model_.class_TypeTraitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeTraitExpr); 
-    } break;
-    case clang::Stmt::CaseStmtClass: {
-assert(context_.data_model_.class_CaseStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CaseStmt); 
-    } break;
-    case clang::Stmt::ArrayInitIndexExprClass: {
-assert(context_.data_model_.class_ArrayInitIndexExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayInitIndexExpr); 
-    } break;
-    case clang::Stmt::CXXPseudoDestructorExprClass: {
-assert(context_.data_model_.class_CXXPseudoDestructorExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXPseudoDestructorExpr); 
-    } break;
-    case clang::Stmt::StringLiteralClass: {
-assert(context_.data_model_.class_StringLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StringLiteral); 
-    } break;
-    case clang::Stmt::CompoundStmtClass: {
-assert(context_.data_model_.class_CompoundStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundStmt); 
-    } break;
-    case clang::Stmt::BinaryOperatorClass: {
-assert(context_.data_model_.class_BinaryOperator != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BinaryOperator); 
-    } break;
-    case clang::Stmt::CXXDefaultArgExprClass: {
-assert(context_.data_model_.class_CXXDefaultArgExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDefaultArgExpr); 
-    } break;
-    case clang::Stmt::PredefinedExprClass: {
-assert(context_.data_model_.class_PredefinedExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PredefinedExpr); 
-    } break;
-    case clang::Stmt::SourceLocExprClass: {
-assert(context_.data_model_.class_SourceLocExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SourceLocExpr); 
-    } break;
-    case clang::Stmt::CXXNewExprClass: {
-assert(context_.data_model_.class_CXXNewExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNewExpr); 
-    } break;
-    case clang::Stmt::TypoExprClass: {
-assert(context_.data_model_.class_TypoExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypoExpr); 
-    } break;
-    case clang::Stmt::DesignatedInitUpdateExprClass: {
-assert(context_.data_model_.class_DesignatedInitUpdateExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DesignatedInitUpdateExpr); 
-    } break;
-    case clang::Stmt::OpaqueValueExprClass: {
-assert(context_.data_model_.class_OpaqueValueExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OpaqueValueExpr); 
-    } break;
-    case clang::Stmt::OMPTargetParallelGenericLoopDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetParallelGenericLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelGenericLoopDirective); 
-    } break;
-    case clang::Stmt::CapturedStmtClass: {
-assert(context_.data_model_.class_CapturedStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CapturedStmt); 
-    } break;
-    case clang::Stmt::IfStmtClass: {
-assert(context_.data_model_.class_IfStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IfStmt); 
-    } break;
-    case clang::Stmt::CompoundLiteralExprClass: {
-assert(context_.data_model_.class_CompoundLiteralExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundLiteralExpr); 
-    } break;
-    case clang::Stmt::CXXConstructExprClass: {
-assert(context_.data_model_.class_CXXConstructExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstructExpr); 
-    } break;
-    case clang::Stmt::ExprWithCleanupsClass: {
-assert(context_.data_model_.class_ExprWithCleanups != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExprWithCleanups); 
-    } break;
-    case clang::Stmt::BuiltinBitCastExprClass: {
-assert(context_.data_model_.class_BuiltinBitCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BuiltinBitCastExpr); 
-    } break;
-    case clang::Stmt::ParenListExprClass: {
-assert(context_.data_model_.class_ParenListExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParenListExpr); 
-    } break;
-    case clang::Stmt::CXXFunctionalCastExprClass: {
-assert(context_.data_model_.class_CXXFunctionalCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXFunctionalCastExpr); 
-    } break;
-    case clang::Stmt::UnaryExprOrTypeTraitExprClass: {
-assert(context_.data_model_.class_UnaryExprOrTypeTraitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnaryExprOrTypeTraitExpr); 
-    } break;
-    case clang::Stmt::LabelStmtClass: {
-assert(context_.data_model_.class_LabelStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LabelStmt); 
-    } break;
-    case clang::Stmt::ConditionalOperatorClass: {
-assert(context_.data_model_.class_ConditionalOperator != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConditionalOperator); 
-    } break;
-    case clang::Stmt::CXXMemberCallExprClass: {
-assert(context_.data_model_.class_CXXMemberCallExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXMemberCallExpr); 
-    } break;
-    case clang::Stmt::OffsetOfExprClass: {
-assert(context_.data_model_.class_OffsetOfExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OffsetOfExpr); 
-    } break;
-    case clang::Stmt::ObjCBridgedCastExprClass: {
-assert(context_.data_model_.class_ObjCBridgedCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBridgedCastExpr); 
-    } break;
-    case clang::Stmt::UnaryOperatorClass: {
-assert(context_.data_model_.class_UnaryOperator != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnaryOperator); 
-    } break;
-    case clang::Stmt::CStyleCastExprClass: {
-assert(context_.data_model_.class_CStyleCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CStyleCastExpr); 
-    } break;
-    case clang::Stmt::IntegerLiteralClass: {
-assert(context_.data_model_.class_IntegerLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IntegerLiteral); 
-    } break;
-    case clang::Stmt::OMPTargetTeamsDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetTeamsDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDirective); 
-    } break;
-    case clang::Stmt::CharacterLiteralClass: {
-assert(context_.data_model_.class_CharacterLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CharacterLiteral); 
-    } break;
-    case clang::Stmt::OMPParallelMaskedTaskLoopSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPParallelMaskedTaskLoopSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedTaskLoopSimdDirective); 
+      assert(context_.data_model_.class_ObjCArrayLiteral != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCArrayLiteral); 
     } break;
     case clang::Stmt::WhileStmtClass: {
-assert(context_.data_model_.class_WhileStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_WhileStmt); 
+      assert(context_.data_model_.class_WhileStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_WhileStmt); 
     } break;
-    case clang::Stmt::CXXStaticCastExprClass: {
-assert(context_.data_model_.class_CXXStaticCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXStaticCastExpr); 
+    case clang::Stmt::CXXStdInitializerListExprClass: {
+      assert(context_.data_model_.class_CXXStdInitializerListExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXStdInitializerListExpr); 
     } break;
-    case clang::Stmt::MemberExprClass: {
-assert(context_.data_model_.class_MemberExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MemberExpr); 
+    case clang::Stmt::ImplicitCastExprClass: {
+      assert(context_.data_model_.class_ImplicitCastExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitCastExpr); 
     } break;
-    case clang::Stmt::CXXDynamicCastExprClass: {
-assert(context_.data_model_.class_CXXDynamicCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDynamicCastExpr); 
+    case clang::Stmt::ObjCSelectorExprClass: {
+      assert(context_.data_model_.class_ObjCSelectorExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCSelectorExpr); 
     } break;
-    case clang::Stmt::CXXConstCastExprClass: {
-assert(context_.data_model_.class_CXXConstCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstCastExpr); 
+    case clang::Stmt::ObjCAtTryStmtClass: {
+      assert(context_.data_model_.class_ObjCAtTryStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtTryStmt); 
     } break;
-    case clang::Stmt::AttributedStmtClass: {
-assert(context_.data_model_.class_AttributedStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AttributedStmt); 
+    case clang::Stmt::ObjCProtocolExprClass: {
+      assert(context_.data_model_.class_ObjCProtocolExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCProtocolExpr); 
     } break;
-    case clang::Stmt::CXXDefaultInitExprClass: {
-assert(context_.data_model_.class_CXXDefaultInitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDefaultInitExpr); 
+    case clang::Stmt::CXXTypeidExprClass: {
+      assert(context_.data_model_.class_CXXTypeidExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTypeidExpr); 
     } break;
-    case clang::Stmt::MatrixSubscriptExprClass: {
-assert(context_.data_model_.class_MatrixSubscriptExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MatrixSubscriptExpr); 
+    case clang::Stmt::ObjCPropertyRefExprClass: {
+      assert(context_.data_model_.class_ObjCPropertyRefExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyRefExpr); 
     } break;
-    case clang::Stmt::CXXRewrittenBinaryOperatorClass: {
-assert(context_.data_model_.class_CXXRewrittenBinaryOperator != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXRewrittenBinaryOperator); 
+    case clang::Stmt::OMPTargetTeamsDistributeSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetTeamsDistributeSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeSimdDirective); 
     } break;
-    case clang::Stmt::OMPBarrierDirectiveClass: {
-assert(context_.data_model_.class_OMPBarrierDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPBarrierDirective); 
+    case clang::Stmt::ObjCMessageExprClass: {
+      assert(context_.data_model_.class_ObjCMessageExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCMessageExpr); 
     } break;
-    case clang::Stmt::DeclStmtClass: {
-assert(context_.data_model_.class_DeclStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DeclStmt); 
-    } break;
-    case clang::Stmt::OMPScanDirectiveClass: {
-assert(context_.data_model_.class_OMPScanDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPScanDirective); 
+    case clang::Stmt::CXXParenListInitExprClass: {
+      assert(context_.data_model_.class_CXXParenListInitExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXParenListInitExpr); 
     } break;
     case clang::Stmt::ConvertVectorExprClass: {
-assert(context_.data_model_.class_ConvertVectorExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConvertVectorExpr); 
+      assert(context_.data_model_.class_ConvertVectorExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConvertVectorExpr); 
     } break;
-    case clang::Stmt::CallExprClass: {
-assert(context_.data_model_.class_CallExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CallExpr); 
+    case clang::Stmt::GotoStmtClass: {
+      assert(context_.data_model_.class_GotoStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GotoStmt); 
     } break;
-    case clang::Stmt::OMPScopeDirectiveClass: {
-assert(context_.data_model_.class_OMPScopeDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPScopeDirective); 
+    case clang::Stmt::BreakStmtClass: {
+      assert(context_.data_model_.class_BreakStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BreakStmt); 
+    } break;
+    case clang::Stmt::ReturnStmtClass: {
+      assert(context_.data_model_.class_ReturnStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ReturnStmt); 
+    } break;
+    case clang::Stmt::OMPParallelMaskedTaskLoopDirectiveClass: {
+      assert(context_.data_model_.class_OMPParallelMaskedTaskLoopDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedTaskLoopDirective); 
+    } break;
+    case clang::Stmt::ObjCIsaExprClass: {
+      assert(context_.data_model_.class_ObjCIsaExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIsaExpr); 
+    } break;
+    case clang::Stmt::GCCAsmStmtClass: {
+      assert(context_.data_model_.class_GCCAsmStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GCCAsmStmt); 
+    } break;
+    case clang::Stmt::CXXDynamicCastExprClass: {
+      assert(context_.data_model_.class_CXXDynamicCastExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDynamicCastExpr); 
+    } break;
+    case clang::Stmt::SEHExceptStmtClass: {
+      assert(context_.data_model_.class_SEHExceptStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHExceptStmt); 
+    } break;
+    case clang::Stmt::SEHLeaveStmtClass: {
+      assert(context_.data_model_.class_SEHLeaveStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHLeaveStmt); 
+    } break;
+    case clang::Stmt::CXXForRangeStmtClass: {
+      assert(context_.data_model_.class_CXXForRangeStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXForRangeStmt); 
+    } break;
+    case clang::Stmt::ObjCEncodeExprClass: {
+      assert(context_.data_model_.class_ObjCEncodeExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCEncodeExpr); 
+    } break;
+    case clang::Stmt::SubstNonTypeTemplateParmExprClass: {
+      assert(context_.data_model_.class_SubstNonTypeTemplateParmExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstNonTypeTemplateParmExpr); 
+    } break;
+    case clang::Stmt::ObjCIndirectCopyRestoreExprClass: {
+      assert(context_.data_model_.class_ObjCIndirectCopyRestoreExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIndirectCopyRestoreExpr); 
+    } break;
+    case clang::Stmt::CoroutineBodyStmtClass: {
+      assert(context_.data_model_.class_CoroutineBodyStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoroutineBodyStmt); 
+    } break;
+    case clang::Stmt::CoreturnStmtClass: {
+      assert(context_.data_model_.class_CoreturnStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoreturnStmt); 
+    } break;
+    case clang::Stmt::ArrayTypeTraitExprClass: {
+      assert(context_.data_model_.class_ArrayTypeTraitExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayTypeTraitExpr); 
+    } break;
+    case clang::Stmt::CXXUuidofExprClass: {
+      assert(context_.data_model_.class_CXXUuidofExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXUuidofExpr); 
+    } break;
+    case clang::Stmt::ObjCForCollectionStmtClass: {
+      assert(context_.data_model_.class_ObjCForCollectionStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCForCollectionStmt); 
+    } break;
+    case clang::Stmt::ObjCAtCatchStmtClass: {
+      assert(context_.data_model_.class_ObjCAtCatchStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtCatchStmt); 
+    } break;
+    case clang::Stmt::ForStmtClass: {
+      assert(context_.data_model_.class_ForStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ForStmt); 
+    } break;
+    case clang::Stmt::ObjCAtSynchronizedStmtClass: {
+      assert(context_.data_model_.class_ObjCAtSynchronizedStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtSynchronizedStmt); 
+    } break;
+    case clang::Stmt::ObjCAtThrowStmtClass: {
+      assert(context_.data_model_.class_ObjCAtThrowStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtThrowStmt); 
+    } break;
+    case clang::Stmt::OMPParallelMasterDirectiveClass: {
+      assert(context_.data_model_.class_OMPParallelMasterDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterDirective); 
+    } break;
+    case clang::Stmt::ImaginaryLiteralClass: {
+      assert(context_.data_model_.class_ImaginaryLiteral != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImaginaryLiteral); 
+    } break;
+    case clang::Stmt::ObjCAutoreleasePoolStmtClass: {
+      assert(context_.data_model_.class_ObjCAutoreleasePoolStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAutoreleasePoolStmt); 
+    } break;
+    case clang::Stmt::OMPCanonicalLoopClass: {
+      assert(context_.data_model_.class_OMPCanonicalLoop != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCanonicalLoop); 
+    } break;
+    case clang::Stmt::OMPParallelDirectiveClass: {
+      assert(context_.data_model_.class_OMPParallelDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelDirective); 
+    } break;
+    case clang::Stmt::OMPTileDirectiveClass: {
+      assert(context_.data_model_.class_OMPTileDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTileDirective); 
+    } break;
+    case clang::Stmt::MSPropertyRefExprClass: {
+      assert(context_.data_model_.class_MSPropertyRefExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertyRefExpr); 
+    } break;
+    case clang::Stmt::ObjCDictionaryLiteralClass: {
+      assert(context_.data_model_.class_ObjCDictionaryLiteral != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCDictionaryLiteral); 
+    } break;
+    case clang::Stmt::OMPInteropDirectiveClass: {
+      assert(context_.data_model_.class_OMPInteropDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPInteropDirective); 
+    } break;
+    case clang::Stmt::ObjCSubscriptRefExprClass: {
+      assert(context_.data_model_.class_ObjCSubscriptRefExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCSubscriptRefExpr); 
+    } break;
+    case clang::Stmt::CXXBoolLiteralExprClass: {
+      assert(context_.data_model_.class_CXXBoolLiteralExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXBoolLiteralExpr); 
+    } break;
+    case clang::Stmt::SYCLUniqueStableNameExprClass: {
+      assert(context_.data_model_.class_SYCLUniqueStableNameExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SYCLUniqueStableNameExpr); 
+    } break;
+    case clang::Stmt::OMPSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSimdDirective); 
+    } break;
+    case clang::Stmt::OMPForSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPForSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPForSimdDirective); 
+    } break;
+    case clang::Stmt::ObjCBoxedExprClass: {
+      assert(context_.data_model_.class_ObjCBoxedExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBoxedExpr); 
+    } break;
+    case clang::Stmt::OMPParallelSectionsDirectiveClass: {
+      assert(context_.data_model_.class_OMPParallelSectionsDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelSectionsDirective); 
+    } break;
+    case clang::Stmt::IfStmtClass: {
+      assert(context_.data_model_.class_IfStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IfStmt); 
+    } break;
+    case clang::Stmt::ObjCAvailabilityCheckExprClass: {
+      assert(context_.data_model_.class_ObjCAvailabilityCheckExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAvailabilityCheckExpr); 
+    } break;
+    case clang::Stmt::OMPParallelForDirectiveClass: {
+      assert(context_.data_model_.class_OMPParallelForDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelForDirective); 
+    } break;
+    case clang::Stmt::DoStmtClass: {
+      assert(context_.data_model_.class_DoStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DoStmt); 
+    } break;
+    case clang::Stmt::ConditionalOperatorClass: {
+      assert(context_.data_model_.class_ConditionalOperator != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConditionalOperator); 
+    } break;
+    case clang::Stmt::OMPTargetParallelForDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetParallelForDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelForDirective); 
+    } break;
+    case clang::Stmt::OMPErrorDirectiveClass: {
+      assert(context_.data_model_.class_OMPErrorDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPErrorDirective); 
+    } break;
+    case clang::Stmt::OMPTaskLoopSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPTaskLoopSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskLoopSimdDirective); 
+    } break;
+    case clang::Stmt::OMPMaskedTaskLoopDirectiveClass: {
+      assert(context_.data_model_.class_OMPMaskedTaskLoopDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMaskedTaskLoopDirective); 
+    } break;
+    case clang::Stmt::OMPMasterTaskLoopSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPMasterTaskLoopSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterTaskLoopSimdDirective); 
+    } break;
+    case clang::Stmt::IndirectGotoStmtClass: {
+      assert(context_.data_model_.class_IndirectGotoStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IndirectGotoStmt); 
+    } break;
+    case clang::Stmt::OMPForDirectiveClass: {
+      assert(context_.data_model_.class_OMPForDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPForDirective); 
+    } break;
+    case clang::Stmt::CXXTryStmtClass: {
+      assert(context_.data_model_.class_CXXTryStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTryStmt); 
+    } break;
+    case clang::Stmt::OMPMaskedTaskLoopSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPMaskedTaskLoopSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMaskedTaskLoopSimdDirective); 
+    } break;
+    case clang::Stmt::CompoundAssignOperatorClass: {
+      assert(context_.data_model_.class_CompoundAssignOperator != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundAssignOperator); 
+    } break;
+    case clang::Stmt::ObjCAtFinallyStmtClass: {
+      assert(context_.data_model_.class_ObjCAtFinallyStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtFinallyStmt); 
+    } break;
+    case clang::Stmt::OMPParallelMasterTaskLoopDirectiveClass: {
+      assert(context_.data_model_.class_OMPParallelMasterTaskLoopDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterTaskLoopDirective); 
+    } break;
+    case clang::Stmt::BlockExprClass: {
+      assert(context_.data_model_.class_BlockExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BlockExpr); 
+    } break;
+    case clang::Stmt::OMPMasterDirectiveClass: {
+      assert(context_.data_model_.class_OMPMasterDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterDirective); 
+    } break;
+    case clang::Stmt::CXXNoexceptExprClass: {
+      assert(context_.data_model_.class_CXXNoexceptExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNoexceptExpr); 
+    } break;
+    case clang::Stmt::SEHTryStmtClass: {
+      assert(context_.data_model_.class_SEHTryStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHTryStmt); 
+    } break;
+    case clang::Stmt::UnresolvedMemberExprClass: {
+      assert(context_.data_model_.class_UnresolvedMemberExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedMemberExpr); 
+    } break;
+    case clang::Stmt::OMPSingleDirectiveClass: {
+      assert(context_.data_model_.class_OMPSingleDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSingleDirective); 
+    } break;
+    case clang::Stmt::ObjCIvarRefExprClass: {
+      assert(context_.data_model_.class_ObjCIvarRefExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIvarRefExpr); 
+    } break;
+    case clang::Stmt::CUDAKernelCallExprClass: {
+      assert(context_.data_model_.class_CUDAKernelCallExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CUDAKernelCallExpr); 
+    } break;
+    case clang::Stmt::OMPTaskyieldDirectiveClass: {
+      assert(context_.data_model_.class_OMPTaskyieldDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskyieldDirective); 
+    } break;
+    case clang::Stmt::OMPIteratorExprClass: {
+      assert(context_.data_model_.class_OMPIteratorExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPIteratorExpr); 
+    } break;
+    case clang::Stmt::MSDependentExistsStmtClass: {
+      assert(context_.data_model_.class_MSDependentExistsStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSDependentExistsStmt); 
+    } break;
+    case clang::Stmt::OMPTargetUpdateDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetUpdateDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetUpdateDirective); 
+    } break;
+    case clang::Stmt::OMPCancelDirectiveClass: {
+      assert(context_.data_model_.class_OMPCancelDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCancelDirective); 
+    } break;
+    case clang::Stmt::RecoveryExprClass: {
+      assert(context_.data_model_.class_RecoveryExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RecoveryExpr); 
+    } break;
+    case clang::Stmt::OMPDistributeParallelForDirectiveClass: {
+      assert(context_.data_model_.class_OMPDistributeParallelForDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeParallelForDirective); 
+    } break;
+    case clang::Stmt::OMPTaskwaitDirectiveClass: {
+      assert(context_.data_model_.class_OMPTaskwaitDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskwaitDirective); 
+    } break;
+    case clang::Stmt::OMPTargetParallelDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetParallelDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelDirective); 
+    } break;
+    case clang::Stmt::OMPCriticalDirectiveClass: {
+      assert(context_.data_model_.class_OMPCriticalDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCriticalDirective); 
+    } break;
+    case clang::Stmt::SwitchStmtClass: {
+      assert(context_.data_model_.class_SwitchStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SwitchStmt); 
+    } break;
+    case clang::Stmt::CXXNullPtrLiteralExprClass: {
+      assert(context_.data_model_.class_CXXNullPtrLiteralExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNullPtrLiteralExpr); 
+    } break;
+    case clang::Stmt::MSAsmStmtClass: {
+      assert(context_.data_model_.class_MSAsmStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSAsmStmt); 
+    } break;
+    case clang::Stmt::OMPTargetSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetSimdDirective); 
+    } break;
+    case clang::Stmt::OMPDepobjDirectiveClass: {
+      assert(context_.data_model_.class_OMPDepobjDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDepobjDirective); 
+    } break;
+    case clang::Stmt::ConstantExprClass: {
+      assert(context_.data_model_.class_ConstantExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstantExpr); 
+    } break;
+    case clang::Stmt::OMPParallelForSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPParallelForSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelForSimdDirective); 
+    } break;
+    case clang::Stmt::OMPParallelMaskedDirectiveClass: {
+      assert(context_.data_model_.class_OMPParallelMaskedDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedDirective); 
+    } break;
+    case clang::Stmt::InitListExprClass: {
+      assert(context_.data_model_.class_InitListExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_InitListExpr); 
+    } break;
+    case clang::Stmt::OMPTargetTeamsGenericLoopDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetTeamsGenericLoopDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsGenericLoopDirective); 
+    } break;
+    case clang::Stmt::CXXUnresolvedConstructExprClass: {
+      assert(context_.data_model_.class_CXXUnresolvedConstructExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXUnresolvedConstructExpr); 
+    } break;
+    case clang::Stmt::OMPTargetDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetDirective); 
+    } break;
+    case clang::Stmt::OMPTargetDataDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetDataDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetDataDirective); 
+    } break;
+    case clang::Stmt::OMPTargetEnterDataDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetEnterDataDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetEnterDataDirective); 
+    } break;
+    case clang::Stmt::OMPTeamsDistributeDirectiveClass: {
+      assert(context_.data_model_.class_OMPTeamsDistributeDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeDirective); 
+    } break;
+    case clang::Stmt::OMPOrderedDirectiveClass: {
+      assert(context_.data_model_.class_OMPOrderedDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPOrderedDirective); 
+    } break;
+    case clang::Stmt::OMPTaskgroupDirectiveClass: {
+      assert(context_.data_model_.class_OMPTaskgroupDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskgroupDirective); 
+    } break;
+    case clang::Stmt::OMPTargetTeamsDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetTeamsDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDirective); 
+    } break;
+    case clang::Stmt::OMPFlushDirectiveClass: {
+      assert(context_.data_model_.class_OMPFlushDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPFlushDirective); 
+    } break;
+    case clang::Stmt::OMPScanDirectiveClass: {
+      assert(context_.data_model_.class_OMPScanDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPScanDirective); 
+    } break;
+    case clang::Stmt::ExpressionTraitExprClass: {
+      assert(context_.data_model_.class_ExpressionTraitExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExpressionTraitExpr); 
+    } break;
+    case clang::Stmt::GenericSelectionExprClass: {
+      assert(context_.data_model_.class_GenericSelectionExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GenericSelectionExpr); 
+    } break;
+    case clang::Stmt::OMPTeamsDirectiveClass: {
+      assert(context_.data_model_.class_OMPTeamsDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDirective); 
+    } break;
+    case clang::Stmt::CXXInheritedCtorInitExprClass: {
+      assert(context_.data_model_.class_CXXInheritedCtorInitExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXInheritedCtorInitExpr); 
+    } break;
+    case clang::Stmt::OMPTeamsDistributeParallelForDirectiveClass: {
+      assert(context_.data_model_.class_OMPTeamsDistributeParallelForDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeParallelForDirective); 
+    } break;
+    case clang::Stmt::CXXThrowExprClass: {
+      assert(context_.data_model_.class_CXXThrowExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXThrowExpr); 
+    } break;
+    case clang::Stmt::CXXDefaultInitExprClass: {
+      assert(context_.data_model_.class_CXXDefaultInitExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDefaultInitExpr); 
+    } break;
+    case clang::Stmt::OMPBarrierDirectiveClass: {
+      assert(context_.data_model_.class_OMPBarrierDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPBarrierDirective); 
+    } break;
+    case clang::Stmt::CXXRewrittenBinaryOperatorClass: {
+      assert(context_.data_model_.class_CXXRewrittenBinaryOperator != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXRewrittenBinaryOperator); 
+    } break;
+    case clang::Stmt::MatrixSubscriptExprClass: {
+      assert(context_.data_model_.class_MatrixSubscriptExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MatrixSubscriptExpr); 
+    } break;
+    case clang::Stmt::ArraySubscriptExprClass: {
+      assert(context_.data_model_.class_ArraySubscriptExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArraySubscriptExpr); 
+    } break;
+    case clang::Stmt::AtomicExprClass: {
+      assert(context_.data_model_.class_AtomicExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AtomicExpr); 
+    } break;
+    case clang::Stmt::CXXOperatorCallExprClass: {
+      assert(context_.data_model_.class_CXXOperatorCallExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXOperatorCallExpr); 
+    } break;
+    case clang::Stmt::CXXBindTemporaryExprClass: {
+      assert(context_.data_model_.class_CXXBindTemporaryExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXBindTemporaryExpr); 
+    } break;
+    case clang::Stmt::CapturedStmtClass: {
+      assert(context_.data_model_.class_CapturedStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CapturedStmt); 
+    } break;
+    case clang::Stmt::CoyieldExprClass: {
+      assert(context_.data_model_.class_CoyieldExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoyieldExpr); 
+    } break;
+    case clang::Stmt::VAArgExprClass: {
+      assert(context_.data_model_.class_VAArgExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VAArgExpr); 
+    } break;
+    case clang::Stmt::AsTypeExprClass: {
+      assert(context_.data_model_.class_AsTypeExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AsTypeExpr); 
+    } break;
+    case clang::Stmt::TypeTraitExprClass: {
+      assert(context_.data_model_.class_TypeTraitExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeTraitExpr); 
+    } break;
+    case clang::Stmt::ExtVectorElementExprClass: {
+      assert(context_.data_model_.class_ExtVectorElementExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExtVectorElementExpr); 
+    } break;
+    case clang::Stmt::OMPUnrollDirectiveClass: {
+      assert(context_.data_model_.class_OMPUnrollDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPUnrollDirective); 
+    } break;
+    case clang::Stmt::FunctionParmPackExprClass: {
+      assert(context_.data_model_.class_FunctionParmPackExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionParmPackExpr); 
+    } break;
+    case clang::Stmt::ArrayInitIndexExprClass: {
+      assert(context_.data_model_.class_ArrayInitIndexExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayInitIndexExpr); 
     } break;
     case clang::Stmt::ArrayInitLoopExprClass: {
-assert(context_.data_model_.class_ArrayInitLoopExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayInitLoopExpr); 
+      assert(context_.data_model_.class_ArrayInitLoopExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayInitLoopExpr); 
     } break;
-    case clang::Stmt::DependentScopeDeclRefExprClass: {
-assert(context_.data_model_.class_DependentScopeDeclRefExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentScopeDeclRefExpr); 
+    case clang::Stmt::CXXPseudoDestructorExprClass: {
+      assert(context_.data_model_.class_CXXPseudoDestructorExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXPseudoDestructorExpr); 
     } break;
-    case clang::Stmt::CXXDependentScopeMemberExprClass: {
-assert(context_.data_model_.class_CXXDependentScopeMemberExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDependentScopeMemberExpr); 
+    case clang::Stmt::StringLiteralClass: {
+      assert(context_.data_model_.class_StringLiteral != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StringLiteral); 
     } break;
-    case clang::Stmt::CXXThisExprClass: {
-assert(context_.data_model_.class_CXXThisExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXThisExpr); 
+    case clang::Stmt::CaseStmtClass: {
+      assert(context_.data_model_.class_CaseStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CaseStmt); 
     } break;
-    case clang::Stmt::PackExpansionExprClass: {
-assert(context_.data_model_.class_PackExpansionExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PackExpansionExpr); 
+    case clang::Stmt::CXXFunctionalCastExprClass: {
+      assert(context_.data_model_.class_CXXFunctionalCastExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXFunctionalCastExpr); 
     } break;
-    case clang::Stmt::MaterializeTemporaryExprClass: {
-assert(context_.data_model_.class_MaterializeTemporaryExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MaterializeTemporaryExpr); 
+    case clang::Stmt::UnaryExprOrTypeTraitExprClass: {
+      assert(context_.data_model_.class_UnaryExprOrTypeTraitExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnaryExprOrTypeTraitExpr); 
     } break;
-    case clang::Stmt::CXXFoldExprClass: {
-assert(context_.data_model_.class_CXXFoldExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXFoldExpr); 
+    case clang::Stmt::CXXScalarValueInitExprClass: {
+      assert(context_.data_model_.class_CXXScalarValueInitExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXScalarValueInitExpr); 
     } break;
-    case clang::Stmt::LambdaExprClass: {
-assert(context_.data_model_.class_LambdaExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LambdaExpr); 
+    case clang::Stmt::CXXDeleteExprClass: {
+      assert(context_.data_model_.class_CXXDeleteExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDeleteExpr); 
     } break;
-    case clang::Stmt::DependentCoawaitExprClass: {
-assert(context_.data_model_.class_DependentCoawaitExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentCoawaitExpr); 
+    case clang::Stmt::FloatingLiteralClass: {
+      assert(context_.data_model_.class_FloatingLiteral != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FloatingLiteral); 
     } break;
-    case clang::Stmt::SizeOfPackExprClass: {
-assert(context_.data_model_.class_SizeOfPackExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SizeOfPackExpr); 
+    case clang::Stmt::UnaryOperatorClass: {
+      assert(context_.data_model_.class_UnaryOperator != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnaryOperator); 
     } break;
-    case clang::Stmt::RequiresExprClass: {
-assert(context_.data_model_.class_RequiresExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RequiresExpr); 
+    case clang::Stmt::NullStmtClass: {
+      assert(context_.data_model_.class_NullStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NullStmt); 
     } break;
-    case clang::Stmt::ObjCStringLiteralClass: {
-assert(context_.data_model_.class_ObjCStringLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCStringLiteral); 
+    case clang::Stmt::CXXDefaultArgExprClass: {
+      assert(context_.data_model_.class_CXXDefaultArgExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDefaultArgExpr); 
     } break;
-    case clang::Stmt::ObjCBoolLiteralExprClass: {
-assert(context_.data_model_.class_ObjCBoolLiteralExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBoolLiteralExpr); 
+    case clang::Stmt::PredefinedExprClass: {
+      assert(context_.data_model_.class_PredefinedExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PredefinedExpr); 
     } break;
-    case clang::Stmt::OMPMetaDirectiveClass: {
-assert(context_.data_model_.class_OMPMetaDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMetaDirective); 
+    case clang::Stmt::IntegerLiteralClass: {
+      assert(context_.data_model_.class_IntegerLiteral != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IntegerLiteral); 
     } break;
-    case clang::Stmt::OMPAtomicDirectiveClass: {
-assert(context_.data_model_.class_OMPAtomicDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPAtomicDirective); 
+    case clang::Stmt::CStyleCastExprClass: {
+      assert(context_.data_model_.class_CStyleCastExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CStyleCastExpr); 
     } break;
-    case clang::Stmt::GNUNullExprClass: {
-assert(context_.data_model_.class_GNUNullExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GNUNullExpr); 
+    case clang::Stmt::BinaryOperatorClass: {
+      assert(context_.data_model_.class_BinaryOperator != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BinaryOperator); 
     } break;
-    case clang::Stmt::AddrLabelExprClass: {
-assert(context_.data_model_.class_AddrLabelExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AddrLabelExpr); 
+    case clang::Stmt::CoawaitExprClass: {
+      assert(context_.data_model_.class_CoawaitExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoawaitExpr); 
     } break;
-    case clang::Stmt::ConceptSpecializationExprClass: {
-assert(context_.data_model_.class_ConceptSpecializationExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConceptSpecializationExpr); 
+    case clang::Stmt::CompoundLiteralExprClass: {
+      assert(context_.data_model_.class_CompoundLiteralExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundLiteralExpr); 
     } break;
-    case clang::Stmt::OMPTargetParallelForSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetParallelForSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelForSimdDirective); 
+    case clang::Stmt::CXXConstructExprClass: {
+      assert(context_.data_model_.class_CXXConstructExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstructExpr); 
     } break;
-    case clang::Stmt::OMPTaskDirectiveClass: {
-assert(context_.data_model_.class_OMPTaskDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskDirective); 
+    case clang::Stmt::ExprWithCleanupsClass: {
+      assert(context_.data_model_.class_ExprWithCleanups != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExprWithCleanups); 
     } break;
-    case clang::Stmt::ShuffleVectorExprClass: {
-assert(context_.data_model_.class_ShuffleVectorExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ShuffleVectorExpr); 
+    case clang::Stmt::ObjCBridgedCastExprClass: {
+      assert(context_.data_model_.class_ObjCBridgedCastExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBridgedCastExpr); 
     } break;
-    case clang::Stmt::BinaryConditionalOperatorClass: {
-assert(context_.data_model_.class_BinaryConditionalOperator != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BinaryConditionalOperator); 
-    } break;
-    case clang::Stmt::OMPTeamsDistributeSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPTeamsDistributeSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeSimdDirective); 
-    } break;
-    case clang::Stmt::OMPArrayShapingExprClass: {
-assert(context_.data_model_.class_OMPArrayShapingExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPArrayShapingExpr); 
-    } break;
-    case clang::Stmt::UnresolvedLookupExprClass: {
-assert(context_.data_model_.class_UnresolvedLookupExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedLookupExpr); 
-    } break;
-    case clang::Stmt::OMPTargetTeamsDistributeDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetTeamsDistributeDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeDirective); 
-    } break;
-    case clang::Stmt::SubstNonTypeTemplateParmPackExprClass: {
-assert(context_.data_model_.class_SubstNonTypeTemplateParmPackExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstNonTypeTemplateParmPackExpr); 
-    } break;
-    case clang::Stmt::DeclRefExprClass: {
-assert(context_.data_model_.class_DeclRefExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DeclRefExpr); 
-    } break;
-    case clang::Stmt::OMPTargetTeamsDistributeParallelForSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetTeamsDistributeParallelForSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeParallelForSimdDirective); 
-    } break;
-    case clang::Stmt::CXXAddrspaceCastExprClass: {
-assert(context_.data_model_.class_CXXAddrspaceCastExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXAddrspaceCastExpr); 
-    } break;
-    case clang::Stmt::OMPGenericLoopDirectiveClass: {
-assert(context_.data_model_.class_OMPGenericLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPGenericLoopDirective); 
-    } break;
-    case clang::Stmt::OMPDistributeParallelForSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPDistributeParallelForSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeParallelForSimdDirective); 
-    } break;
-    case clang::Stmt::OMPDispatchDirectiveClass: {
-assert(context_.data_model_.class_OMPDispatchDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDispatchDirective); 
-    } break;
-    case clang::Stmt::UserDefinedLiteralClass: {
-assert(context_.data_model_.class_UserDefinedLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UserDefinedLiteral); 
-    } break;
-    case clang::Stmt::OMPMaskedDirectiveClass: {
-assert(context_.data_model_.class_OMPMaskedDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMaskedDirective); 
-    } break;
-    case clang::Stmt::OMPTeamsDistributeParallelForSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPTeamsDistributeParallelForSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeParallelForSimdDirective); 
-    } break;
-    case clang::Stmt::OMPTeamsGenericLoopDirectiveClass: {
-assert(context_.data_model_.class_OMPTeamsGenericLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsGenericLoopDirective); 
-    } break;
-    case clang::Stmt::OMPArraySectionExprClass: {
-assert(context_.data_model_.class_OMPArraySectionExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPArraySectionExpr); 
-    } break;
-    case clang::Stmt::OMPParallelGenericLoopDirectiveClass: {
-assert(context_.data_model_.class_OMPParallelGenericLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelGenericLoopDirective); 
-    } break;
-    case clang::Stmt::CXXTemporaryObjectExprClass: {
-assert(context_.data_model_.class_CXXTemporaryObjectExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTemporaryObjectExpr); 
-    } break;
-    case clang::Stmt::OMPSectionsDirectiveClass: {
-assert(context_.data_model_.class_OMPSectionsDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSectionsDirective); 
-    } break;
-    case clang::Stmt::ChooseExprClass: {
-assert(context_.data_model_.class_ChooseExpr != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ChooseExpr); 
-    } break;
-    case clang::Stmt::OMPDistributeSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPDistributeSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeSimdDirective); 
-    } break;
-    case clang::Stmt::OMPParallelMasterTaskLoopSimdDirectiveClass: {
-assert(context_.data_model_.class_OMPParallelMasterTaskLoopSimdDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterTaskLoopSimdDirective); 
-    } break;
-    case clang::Stmt::OMPMasterTaskLoopDirectiveClass: {
-assert(context_.data_model_.class_OMPMasterTaskLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterTaskLoopDirective); 
-    } break;
-    case clang::Stmt::OMPSectionDirectiveClass: {
-assert(context_.data_model_.class_OMPSectionDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSectionDirective); 
-    } break;
-    case clang::Stmt::OMPTargetTeamsDistributeParallelForDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetTeamsDistributeParallelForDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeParallelForDirective); 
+    case clang::Stmt::CXXReinterpretCastExprClass: {
+      assert(context_.data_model_.class_CXXReinterpretCastExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXReinterpretCastExpr); 
     } break;
     case clang::Stmt::DefaultStmtClass: {
-assert(context_.data_model_.class_DefaultStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DefaultStmt); 
+      assert(context_.data_model_.class_DefaultStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DefaultStmt); 
+    } break;
+    case clang::Stmt::DesignatedInitExprClass: {
+      assert(context_.data_model_.class_DesignatedInitExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DesignatedInitExpr); 
+    } break;
+    case clang::Stmt::MSPropertySubscriptExprClass: {
+      assert(context_.data_model_.class_MSPropertySubscriptExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertySubscriptExpr); 
+    } break;
+    case clang::Stmt::OffsetOfExprClass: {
+      assert(context_.data_model_.class_OffsetOfExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OffsetOfExpr); 
+    } break;
+    case clang::Stmt::CharacterLiteralClass: {
+      assert(context_.data_model_.class_CharacterLiteral != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CharacterLiteral); 
+    } break;
+    case clang::Stmt::CXXStaticCastExprClass: {
+      assert(context_.data_model_.class_CXXStaticCastExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXStaticCastExpr); 
+    } break;
+    case clang::Stmt::SourceLocExprClass: {
+      assert(context_.data_model_.class_SourceLocExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SourceLocExpr); 
+    } break;
+    case clang::Stmt::CXXNewExprClass: {
+      assert(context_.data_model_.class_CXXNewExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNewExpr); 
+    } break;
+    case clang::Stmt::ParenListExprClass: {
+      assert(context_.data_model_.class_ParenListExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParenListExpr); 
+    } break;
+    case clang::Stmt::BuiltinBitCastExprClass: {
+      assert(context_.data_model_.class_BuiltinBitCastExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BuiltinBitCastExpr); 
+    } break;
+    case clang::Stmt::TypoExprClass: {
+      assert(context_.data_model_.class_TypoExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypoExpr); 
+    } break;
+    case clang::Stmt::DesignatedInitUpdateExprClass: {
+      assert(context_.data_model_.class_DesignatedInitUpdateExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DesignatedInitUpdateExpr); 
+    } break;
+    case clang::Stmt::OpaqueValueExprClass: {
+      assert(context_.data_model_.class_OpaqueValueExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OpaqueValueExpr); 
+    } break;
+    case clang::Stmt::OMPTargetParallelGenericLoopDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetParallelGenericLoopDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelGenericLoopDirective); 
+    } break;
+    case clang::Stmt::DeclStmtClass: {
+      assert(context_.data_model_.class_DeclStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DeclStmt); 
+    } break;
+    case clang::Stmt::CXXMemberCallExprClass: {
+      assert(context_.data_model_.class_CXXMemberCallExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXMemberCallExpr); 
+    } break;
+    case clang::Stmt::MemberExprClass: {
+      assert(context_.data_model_.class_MemberExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MemberExpr); 
+    } break;
+    case clang::Stmt::AttributedStmtClass: {
+      assert(context_.data_model_.class_AttributedStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AttributedStmt); 
+    } break;
+    case clang::Stmt::CXXConstCastExprClass: {
+      assert(context_.data_model_.class_CXXConstCastExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstCastExpr); 
+    } break;
+    case clang::Stmt::StmtExprClass: {
+      assert(context_.data_model_.class_StmtExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StmtExpr); 
+    } break;
+    case clang::Stmt::ImplicitValueInitExprClass: {
+      assert(context_.data_model_.class_ImplicitValueInitExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitValueInitExpr); 
+    } break;
+    case clang::Stmt::NoInitExprClass: {
+      assert(context_.data_model_.class_NoInitExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NoInitExpr); 
+    } break;
+    case clang::Stmt::CallExprClass: {
+      assert(context_.data_model_.class_CallExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CallExpr); 
+    } break;
+    case clang::Stmt::OMPScopeDirectiveClass: {
+      assert(context_.data_model_.class_OMPScopeDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPScopeDirective); 
+    } break;
+    case clang::Stmt::DependentScopeDeclRefExprClass: {
+      assert(context_.data_model_.class_DependentScopeDeclRefExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentScopeDeclRefExpr); 
+    } break;
+    case clang::Stmt::CXXDependentScopeMemberExprClass: {
+      assert(context_.data_model_.class_CXXDependentScopeMemberExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDependentScopeMemberExpr); 
+    } break;
+    case clang::Stmt::CXXThisExprClass: {
+      assert(context_.data_model_.class_CXXThisExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXThisExpr); 
+    } break;
+    case clang::Stmt::PackExpansionExprClass: {
+      assert(context_.data_model_.class_PackExpansionExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PackExpansionExpr); 
+    } break;
+    case clang::Stmt::MaterializeTemporaryExprClass: {
+      assert(context_.data_model_.class_MaterializeTemporaryExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MaterializeTemporaryExpr); 
+    } break;
+    case clang::Stmt::CXXFoldExprClass: {
+      assert(context_.data_model_.class_CXXFoldExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXFoldExpr); 
+    } break;
+    case clang::Stmt::OMPParallelMaskedTaskLoopSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPParallelMaskedTaskLoopSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedTaskLoopSimdDirective); 
+    } break;
+    case clang::Stmt::LabelStmtClass: {
+      assert(context_.data_model_.class_LabelStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LabelStmt); 
+    } break;
+    case clang::Stmt::LambdaExprClass: {
+      assert(context_.data_model_.class_LambdaExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LambdaExpr); 
+    } break;
+    case clang::Stmt::DependentCoawaitExprClass: {
+      assert(context_.data_model_.class_DependentCoawaitExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentCoawaitExpr); 
+    } break;
+    case clang::Stmt::SizeOfPackExprClass: {
+      assert(context_.data_model_.class_SizeOfPackExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SizeOfPackExpr); 
+    } break;
+    case clang::Stmt::RequiresExprClass: {
+      assert(context_.data_model_.class_RequiresExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RequiresExpr); 
+    } break;
+    case clang::Stmt::ObjCStringLiteralClass: {
+      assert(context_.data_model_.class_ObjCStringLiteral != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCStringLiteral); 
+    } break;
+    case clang::Stmt::ObjCBoolLiteralExprClass: {
+      assert(context_.data_model_.class_ObjCBoolLiteralExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBoolLiteralExpr); 
+    } break;
+    case clang::Stmt::GNUNullExprClass: {
+      assert(context_.data_model_.class_GNUNullExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GNUNullExpr); 
+    } break;
+    case clang::Stmt::OMPTargetParallelForSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetParallelForSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelForSimdDirective); 
+    } break;
+    case clang::Stmt::AddrLabelExprClass: {
+      assert(context_.data_model_.class_AddrLabelExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AddrLabelExpr); 
+    } break;
+    case clang::Stmt::ConceptSpecializationExprClass: {
+      assert(context_.data_model_.class_ConceptSpecializationExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConceptSpecializationExpr); 
+    } break;
+    case clang::Stmt::OMPMetaDirectiveClass: {
+      assert(context_.data_model_.class_OMPMetaDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMetaDirective); 
+    } break;
+    case clang::Stmt::OMPAtomicDirectiveClass: {
+      assert(context_.data_model_.class_OMPAtomicDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPAtomicDirective); 
+    } break;
+    case clang::Stmt::OMPTaskDirectiveClass: {
+      assert(context_.data_model_.class_OMPTaskDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskDirective); 
+    } break;
+    case clang::Stmt::ShuffleVectorExprClass: {
+      assert(context_.data_model_.class_ShuffleVectorExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ShuffleVectorExpr); 
+    } break;
+    case clang::Stmt::BinaryConditionalOperatorClass: {
+      assert(context_.data_model_.class_BinaryConditionalOperator != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BinaryConditionalOperator); 
+    } break;
+    case clang::Stmt::OMPTeamsDistributeSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPTeamsDistributeSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeSimdDirective); 
+    } break;
+    case clang::Stmt::ParenExprClass: {
+      assert(context_.data_model_.class_ParenExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParenExpr); 
+    } break;
+    case clang::Stmt::PseudoObjectExprClass: {
+      assert(context_.data_model_.class_PseudoObjectExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PseudoObjectExpr); 
+    } break;
+    case clang::Stmt::SEHFinallyStmtClass: {
+      assert(context_.data_model_.class_SEHFinallyStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHFinallyStmt); 
+    } break;
+    case clang::Stmt::OMPArrayShapingExprClass: {
+      assert(context_.data_model_.class_OMPArrayShapingExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPArrayShapingExpr); 
+    } break;
+    case clang::Stmt::UnresolvedLookupExprClass: {
+      assert(context_.data_model_.class_UnresolvedLookupExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedLookupExpr); 
+    } break;
+    case clang::Stmt::OMPTeamsDistributeParallelForSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPTeamsDistributeParallelForSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeParallelForSimdDirective); 
+    } break;
+    case clang::Stmt::OMPTargetTeamsDistributeDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetTeamsDistributeDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeDirective); 
+    } break;
+    case clang::Stmt::SubstNonTypeTemplateParmPackExprClass: {
+      assert(context_.data_model_.class_SubstNonTypeTemplateParmPackExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstNonTypeTemplateParmPackExpr); 
+    } break;
+    case clang::Stmt::DeclRefExprClass: {
+      assert(context_.data_model_.class_DeclRefExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DeclRefExpr); 
+    } break;
+    case clang::Stmt::OMPTargetTeamsDistributeParallelForSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetTeamsDistributeParallelForSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeParallelForSimdDirective); 
+    } break;
+    case clang::Stmt::CXXAddrspaceCastExprClass: {
+      assert(context_.data_model_.class_CXXAddrspaceCastExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXAddrspaceCastExpr); 
+    } break;
+    case clang::Stmt::OMPGenericLoopDirectiveClass: {
+      assert(context_.data_model_.class_OMPGenericLoopDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPGenericLoopDirective); 
+    } break;
+    case clang::Stmt::OMPDistributeParallelForSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPDistributeParallelForSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeParallelForSimdDirective); 
+    } break;
+    case clang::Stmt::OMPDispatchDirectiveClass: {
+      assert(context_.data_model_.class_OMPDispatchDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDispatchDirective); 
+    } break;
+    case clang::Stmt::OMPTargetTeamsDistributeParallelForDirectiveClass: {
+      assert(context_.data_model_.class_OMPTargetTeamsDistributeParallelForDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeParallelForDirective); 
+    } break;
+    case clang::Stmt::UserDefinedLiteralClass: {
+      assert(context_.data_model_.class_UserDefinedLiteral != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UserDefinedLiteral); 
+    } break;
+    case clang::Stmt::OMPMaskedDirectiveClass: {
+      assert(context_.data_model_.class_OMPMaskedDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMaskedDirective); 
+    } break;
+    case clang::Stmt::OMPTeamsGenericLoopDirectiveClass: {
+      assert(context_.data_model_.class_OMPTeamsGenericLoopDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsGenericLoopDirective); 
+    } break;
+    case clang::Stmt::OMPArraySectionExprClass: {
+      assert(context_.data_model_.class_OMPArraySectionExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPArraySectionExpr); 
+    } break;
+    case clang::Stmt::OMPParallelGenericLoopDirectiveClass: {
+      assert(context_.data_model_.class_OMPParallelGenericLoopDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelGenericLoopDirective); 
+    } break;
+    case clang::Stmt::CXXTemporaryObjectExprClass: {
+      assert(context_.data_model_.class_CXXTemporaryObjectExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTemporaryObjectExpr); 
+    } break;
+    case clang::Stmt::OMPSectionsDirectiveClass: {
+      assert(context_.data_model_.class_OMPSectionsDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSectionsDirective); 
+    } break;
+    case clang::Stmt::ChooseExprClass: {
+      assert(context_.data_model_.class_ChooseExpr != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ChooseExpr); 
+    } break;
+    case clang::Stmt::OMPDistributeSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPDistributeSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeSimdDirective); 
+    } break;
+    case clang::Stmt::OMPParallelMasterTaskLoopSimdDirectiveClass: {
+      assert(context_.data_model_.class_OMPParallelMasterTaskLoopSimdDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterTaskLoopSimdDirective); 
+    } break;
+    case clang::Stmt::OMPMasterTaskLoopDirectiveClass: {
+      assert(context_.data_model_.class_OMPMasterTaskLoopDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterTaskLoopDirective); 
+    } break;
+    case clang::Stmt::OMPSectionDirectiveClass: {
+      assert(context_.data_model_.class_OMPSectionDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSectionDirective); 
     } break;
     case clang::Stmt::OMPTargetExitDataDirectiveClass: {
-assert(context_.data_model_.class_OMPTargetExitDataDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetExitDataDirective); 
+      assert(context_.data_model_.class_OMPTargetExitDataDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetExitDataDirective); 
     } break;
     case clang::Stmt::CXXCatchStmtClass: {
-assert(context_.data_model_.class_CXXCatchStmt != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXCatchStmt); 
-    } break;
-    case clang::Stmt::FixedPointLiteralClass: {
-assert(context_.data_model_.class_FixedPointLiteral != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FixedPointLiteral); 
+      assert(context_.data_model_.class_CXXCatchStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXCatchStmt); 
     } break;
     case clang::Stmt::OMPCancellationPointDirectiveClass: {
-assert(context_.data_model_.class_OMPCancellationPointDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCancellationPointDirective); 
+      assert(context_.data_model_.class_OMPCancellationPointDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCancellationPointDirective); 
+    } break;
+    case clang::Stmt::FixedPointLiteralClass: {
+      assert(context_.data_model_.class_FixedPointLiteral != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FixedPointLiteral); 
+    } break;
+    case clang::Stmt::OMPDistributeDirectiveClass: {
+      assert(context_.data_model_.class_OMPDistributeDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeDirective); 
+    } break;
+    case clang::Stmt::CompoundStmtClass: {
+      assert(context_.data_model_.class_CompoundStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundStmt); 
     } break;
     case clang::Stmt::OMPTaskLoopDirectiveClass: {
-assert(context_.data_model_.class_OMPTaskLoopDirective != nullptr);
-     arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskLoopDirective); 
+      assert(context_.data_model_.class_OMPTaskLoopDirective != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskLoopDirective); 
+    } break;
+    case clang::Stmt::ContinueStmtClass: {
+      assert(context_.data_model_.class_ContinueStmt != nullptr);
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ContinueStmt); 
     } break;
     default: break;
   }

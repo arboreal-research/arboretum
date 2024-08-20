@@ -15,7 +15,7 @@ fn to_value(ffi_value: FfiValue) -> Value {
     }
 }
 
-pub async fn tcp_server_bind<U>(tx: Sender<GraphBuffer>, bind_addr: U) -> Result<(), std::io::Error>
+pub async fn clang_collector<U>(tx: Sender<GraphBuffer>, bind_addr: U) -> Result<(), std::io::Error>
 where
     U: ToSocketAddrs,
 {

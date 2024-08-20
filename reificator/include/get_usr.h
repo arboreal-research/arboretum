@@ -9,7 +9,8 @@
 
 namespace arboretum {
 
-std::optional<std::string> getUSR(clang::ASTContext &ctx,
-                                  const clang::Decl *decl);
+std::optional<std::string> getUSR(clang::ASTContext &ctx, const clang::Decl *decl);
 
-} // namespace arboretum
+std::optional<std::string> getUSR(clang::ASTContext &ctx, clang::QualType qt);
+
+}  // namespace arboretum

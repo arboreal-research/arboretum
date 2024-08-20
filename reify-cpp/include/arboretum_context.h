@@ -15,9 +15,10 @@
 namespace arboretum {
 
 struct ArboretumContext {
-  ArboretumContext(DataModel &data_model, SourceModel &source_model)
-      : data_model_(data_model), source_model_(source_model) {}
+  ArboretumContext(clang::ASTContext& ast_ctx, DataModel &data_model, SourceModel &source_model)
+      : ast_ctx_(ast_ctx), data_model_(data_model), source_model_(source_model) {}
 
+  clang::ASTContext& ast_ctx_;
   DataModel &data_model_;
   SourceModel &source_model_;
 

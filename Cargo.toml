@@ -1,6 +1,4 @@
 [workspace]
 resolver = "2"
 
-members = [ "arboretum", 
-    "arboretum-ffi", "reify-rs",
-]
+members = [ "arboretum", "arboretum-graph", "arboretum-ffi", "reify-rs", "arboretum-ui" , "arboretum-ui-protocol"]
