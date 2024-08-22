@@ -94,7 +94,7 @@ impl State {
             .add_edge(a, b, force_graph::EdgeData { user_data: props })
     }
 
-    pub fn update(&mut self, dt: f64) {
+    pub fn update(&mut self, _dt: f64) {
         self.graph.update(0.03 as f32);
 
         // Update the highlighted node if one was clicked

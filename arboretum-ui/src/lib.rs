@@ -15,7 +15,7 @@ mod listeners;
 mod render;
 pub use render::render_frame;
 
-enum Error {
+pub enum Error {
     JsError(JsValue),
     SerdeWasmBindgenError(serde_wasm_bindgen::Error),
 }
