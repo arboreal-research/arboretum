@@ -6,9 +6,8 @@
 
 namespace arboretum {
 
-struct ArboretumASTVisitor
-    : public clang::RecursiveASTVisitor<ArboretumASTVisitor> {
-  ArboretumASTVisitor(ArboretumContext &context) : context_(context) {}
+struct ArboretumASTVisitor : public clang::RecursiveASTVisitor<ArboretumASTVisitor> {
+  ArboretumASTVisitor(ArboretumContext& context) : context_(context) {}
 
   bool shouldVisitTemplateInstantiations() const { return true; }
 
@@ -502,7 +501,7 @@ struct ArboretumASTVisitor
   bool VisitWhileStmt(clang::WhileStmt* S);
   ////   END ARBORETUM GENERATED CODE ////
 
-  ArboretumContext &context_;
+  ArboretumContext& context_;
 };
 
-} // namespace arboretum
+}  // namespace arboretum

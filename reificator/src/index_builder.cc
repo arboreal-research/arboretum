@@ -6,8 +6,8 @@
 
 namespace arboretum {
 namespace {
-std::unordered_set<const clang::CXXRecordDecl *>
-TransitiveClosure(InheritanceHierarchy &ih, const clang::CXXRecordDecl *D) {
+std::unordered_set<const clang::CXXRecordDecl *> TransitiveClosure(InheritanceHierarchy &ih,
+                                                                   const clang::CXXRecordDecl *D) {
   std::unordered_set<const clang::CXXRecordDecl *> result;
 
   std::stack<const clang::CXXRecordDecl *> decls;
@@ -46,8 +46,7 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData &tmp, Index &data) {
         base_name = base_name.substr(0, base_name.size() - 4);
       }
 
-      auto find_itr = tmp.typeclass_enum_by_name.find(
-          std::string(base_name.data(), base_name.size()));
+      auto find_itr = tmp.typeclass_enum_by_name.find(std::string(base_name.data(), base_name.size()));
       if (find_itr != tmp.typeclass_enum_by_name.end()) {
         data.clang.typeclass_enum_by_decl[T] = find_itr->second;
       }
@@ -57,17 +56,12 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData &tmp, Index &data) {
     data.clang.all_decls.insert(T);
   }
 
-  for (auto *TL :
-       TransitiveClosure(data.inheritance, data.clang.typeloc_decl)) {
+  for (auto *TL : TransitiveClosure(data.inheritance, data.clang.typeloc_decl)) {
     llvm::StringRef name = TL->getName();
-    if (name == "ConcreteTypeLoc")
-      continue;
-    if (name == "InheritingConcreteTypeLoc")
-      continue;
-    if (name == "PointerLikeTypeLoc")
-      continue;
-    if (name == "TypeofLikeTypeLoc")
-      continue;
+    if (name == "ConcreteTypeLoc") continue;
+    if (name == "InheritingConcreteTypeLoc") continue;
+    if (name == "PointerLikeTypeLoc") continue;
+    if (name == "TypeofLikeTypeLoc") continue;
 
     {
       llvm::StringRef name = TL->getName();
@@ -76,8 +70,7 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData &tmp, Index &data) {
         base_name = base_name.substr(0, base_name.size() - 7);
       }
 
-      auto find_itr = tmp.typelocclass_enum_by_name.find(
-          std::string(base_name.data(), base_name.size()));
+      auto find_itr = tmp.typelocclass_enum_by_name.find(std::string(base_name.data(), base_name.size()));
       if (find_itr != tmp.typelocclass_enum_by_name.end()) {
         data.clang.typelocclass_enum_by_decl[TL] = find_itr->second;
       }
@@ -89,8 +82,7 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData &tmp, Index &data) {
 
   for (auto *D : TransitiveClosure(data.inheritance, data.clang.decl_decl)) {
     llvm::StringRef name = D->getName();
-    if (name == "OMPDeclarativeDirective")
-      continue;
+    if (name == "OMPDeclarativeDirective") continue;
 
     {
       llvm::StringRef name = D->getName();
@@ -99,8 +91,7 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData &tmp, Index &data) {
         base_name = base_name.substr(0, base_name.size() - 4);
       }
 
-      auto find_itr = tmp.declkind_enum_by_name.find(
-          std::string(base_name.data(), base_name.size()));
+      auto find_itr = tmp.declkind_enum_by_name.find(std::string(base_name.data(), base_name.size()));
       if (find_itr != tmp.declkind_enum_by_name.end()) {
         data.clang.declkind_enum_by_decl[D] = find_itr->second;
       }
@@ -114,8 +105,7 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData &tmp, Index &data) {
     {
       llvm::StringRef name = S->getName();
 
-      auto find_itr = tmp.stmtclass_enum_by_name.find(
-          std::string(name.data(), name.size()) + "Class");
+      auto find_itr = tmp.stmtclass_enum_by_name.find(std::string(name.data(), name.size()) + "Class");
       if (find_itr != tmp.stmtclass_enum_by_name.end()) {
         data.clang.stmtclass_enum_by_decl[S] = find_itr->second;
       }
@@ -125,7 +115,7 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData &tmp, Index &data) {
     data.clang.all_decls.insert(S);
   }
 }
-} // namespace
+}  // namespace
 
 bool IndexBuilder::shouldVisitTemplateInstantiations() const { return true; }
 
@@ -147,8 +137,7 @@ bool IndexBuilder::VisitTypedefNameDecl(clang::TypedefNameDecl *D) {
 }
 
 bool IndexBuilder::VisitEnumDecl(clang::EnumDecl *D) {
-  if (D->getDefinition() != D)
-    return true;
+  if (D->getDefinition() != D) return true;
 
   std::string name = D->getQualifiedNameAsString();
   if (name == "clang::attr::Kind") {
@@ -171,6 +160,8 @@ bool IndexBuilder::VisitEnumDecl(clang::EnumDecl *D) {
     for (auto *tag : D->enumerators()) {
       tmp.stmtclass_enum_by_name[tag->getNameAsString()] = tag;
     }
+  } else if (name == "clang::CFGTerminator::Kind") {
+    data.clang.cfg_terminator_kind = D;
   }
   return true;
 }
@@ -207,8 +198,7 @@ bool IndexBuilder::VisitClassTemplateDecl(clang::ClassTemplateDecl *TD) {
 }
 
 bool IndexBuilder::VisitCXXRecordDecl(clang::CXXRecordDecl *D) {
-  if (D->getDefinition() != D)
-    return true;
+  if (D->getDefinition() != D) return true;
 
   std::string name = D->getQualifiedNameAsString();
 
@@ -216,15 +206,12 @@ bool IndexBuilder::VisitCXXRecordDecl(clang::CXXRecordDecl *D) {
     data.clang.recursive_ast_visitor = D;
     for (auto *method : D->methods()) {
       std::string name = method->getNameAsString();
-      if (name.find("Visit") != 0)
-        continue;
-      if (method->getNumParams() != 1)
-        continue;
+      if (name.find("Visit") != 0) continue;
+      if (method->getNumParams() != 1) continue;
 
       clang::QualType arg_type = method->getParamDecl(0)->getType();
       auto *record_decl = arg_type->getAsCXXRecordDecl();
-      if (record_decl == nullptr)
-        continue;
+      if (record_decl == nullptr) continue;
       data.clang.visitable_decls.insert(record_decl);
     }
   } else if (name == "clang::ASTContext") {
@@ -266,9 +253,7 @@ bool IndexBuilder::VisitCXXRecordDecl(clang::CXXRecordDecl *D) {
   }
 
   for (auto &base_specifier : D->bases()) {
-    if (clang::CXXRecordDecl *base = base_specifier.getType()
-                                         ->getCanonicalTypeInternal()
-                                         ->getAsCXXRecordDecl()) {
+    if (clang::CXXRecordDecl *base = base_specifier.getType()->getCanonicalTypeInternal()->getAsCXXRecordDecl()) {
       data.inheritance.subs[base].push_back(D);
       data.inheritance.supers[D].push_back(base);
     }
@@ -301,4 +286,4 @@ Index IndexBuilder::Build() && {
   return std::move(data);
 }
 
-} // namespace arboretum
+}  // namespace arboretum

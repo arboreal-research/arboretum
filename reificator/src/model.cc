@@ -9,8 +9,7 @@ namespace arboretum {
 namespace {
 
 template <typename T>
-std::string build_fresh_name(EntityNameMap<T> &entity_map, const char *prefix,
-                             std::string &&root) {
+std::string build_fresh_name(EntityNameMap<T> &entity_map, const char *prefix, std::string &&root) {
   auto find_itr = entity_map.name_count.find(root);
   size_t name_idx;
   if (find_itr != entity_map.name_count.end()) {
@@ -29,8 +28,7 @@ std::string build_fresh_name(EntityNameMap<T> &entity_map, const char *prefix,
 }
 
 template <typename T>
-std::string entity_name_impl(const char *prefix, EntityNameMap<T> &entity_map,
-                             T t) {
+std::string entity_name_impl(const char *prefix, EntityNameMap<T> &entity_map, T t) {
   std::string name = t->getNameAsString();
   auto find_itr = entity_map.entity_map.find(t);
   if (find_itr != entity_map.entity_map.end()) {
@@ -42,10 +40,9 @@ std::string entity_name_impl(const char *prefix, EntityNameMap<T> &entity_map,
   }
 }
 
-} // namespace
+}  // namespace
 
-Model::Model(clang::ASTContext &ctx_, Index &&index_)
-    : ast_ctx(ctx_), index(std::move(index_)) {}
+Model::Model(clang::ASTContext &ctx_, Index &&index_) : ast_ctx(ctx_), index(std::move(index_)) {}
 
 std::string Model::entity_name(const clang::CXXMethodDecl *decl) {
   return entity_name_impl("method", method_entity_map, decl);
@@ -55,12 +52,10 @@ std::string Model::entity_name(const clang::CXXRecordDecl *decl) {
   return entity_name_impl("class", class_entity_map, decl);
 }
 
-std::string Model::entity_name(const clang::EnumDecl *decl) {
-  return entity_name_impl("enum", enum_entity_map, decl);
-}
+std::string Model::entity_name(const clang::EnumDecl *decl) { return entity_name_impl("enum", enum_entity_map, decl); }
 
 std::string Model::entity_name(const clang::EnumConstantDecl *decl) {
   return entity_name_impl("enum_constant", enum_constant_entity_map, decl);
 }
 
-} // namespace arboretum
+}  // namespace arboretum

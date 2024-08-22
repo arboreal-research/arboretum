@@ -21,16 +21,11 @@ class IndexBuilder : public clang::RecursiveASTVisitor<IndexBuilder> {
   Index Build() &&;
 
   struct TempData {
-    std::unordered_map<std::string, clang::EnumConstantDecl *>
-        attrkind_enum_by_name;
-    std::unordered_map<std::string, clang::EnumConstantDecl *>
-        typeclass_enum_by_name;
-    std::unordered_map<std::string, clang::EnumConstantDecl *>
-        typelocclass_enum_by_name;
-    std::unordered_map<std::string, clang::EnumConstantDecl *>
-        declkind_enum_by_name;
-    std::unordered_map<std::string, clang::EnumConstantDecl *>
-        stmtclass_enum_by_name;
+    std::unordered_map<std::string, clang::EnumConstantDecl *> attrkind_enum_by_name;
+    std::unordered_map<std::string, clang::EnumConstantDecl *> typeclass_enum_by_name;
+    std::unordered_map<std::string, clang::EnumConstantDecl *> typelocclass_enum_by_name;
+    std::unordered_map<std::string, clang::EnumConstantDecl *> declkind_enum_by_name;
+    std::unordered_map<std::string, clang::EnumConstantDecl *> stmtclass_enum_by_name;
   };
 
  private:

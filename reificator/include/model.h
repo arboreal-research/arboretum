@@ -12,7 +12,8 @@
 
 namespace arboretum {
 
-template <typename T> struct EntityNameMap {
+template <typename T>
+struct EntityNameMap {
   std::unordered_map<std::string, size_t> name_count;
   std::unordered_map<T, std::string> entity_map;
 };
@@ -39,4 +40,4 @@ struct Model {
   std::string entity_name(const clang::EnumConstantDecl *cls);
 };
 
-} // namespace arboretum
+}  // namespace arboretum

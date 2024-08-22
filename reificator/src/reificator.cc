@@ -28,7 +28,7 @@ struct CommandArgs {
 class ReificatorASTConsumer : public clang::ASTConsumer {
   CommandArgs args_;
 
-public:
+ public:
   ReificatorASTConsumer(CommandArgs args) : args_(std::move(args)) {}
 
   void HandleTranslationUnit(clang::ASTContext &ctx) override {
@@ -37,8 +37,7 @@ public:
     auto property_table = ReadPropertyTable();
     UpdatePropertyTable(property_table, model);
 
-    EmitReifyCpp(model, property_table, args_.reify_cpp_dir,
-                 args_.reify_rs_dir);
+    EmitReifyCpp(model, property_table, args_.reify_cpp_dir, args_.reify_rs_dir);
   }
 
   std::map<std::string, bool> ReadPropertyTable() {
@@ -55,8 +54,7 @@ public:
     return property_table;
   }
 
-  void UpdatePropertyTable(std::map<std::string, bool> &original_property_table,
-                           Model &model) {
+  void UpdatePropertyTable(std::map<std::string, bool> &original_property_table, Model &model) {
     std::ofstream out(args_.property_table);
 
     out << "Type\tPredicate\tEnabled\n";
@@ -64,38 +62,27 @@ public:
     for (auto &decl : model.index.clang.all_decls) {
       std::string decl_name = decl->getNameAsString();
 
-      if (decl_name.find("OMP") == 0 || decl_name.find("ObjC") == 0)
-        continue;
-      if (decl_name.rfind("Attr") == decl_name.size() - 4)
-        continue;
+      if (decl_name.find("OMP") == 0 || decl_name.find("ObjC") == 0) continue;
+      if (decl_name.rfind("Attr") == decl_name.size() - 4) continue;
 
       for (const auto *method_decl : decl->methods()) {
-        if (!method_decl->isConst())
-          continue;
-        if (method_decl->getAccess() != clang::AS_public)
-          continue;
-        if (method_decl->param_size() > 0)
-          continue;
-        if (method_decl->isOverloadedOperator())
-          continue;
-        if (method_decl->getReturnType()->isVoidType())
-          continue;
+        if (!method_decl->isConst()) continue;
+        if (method_decl->getAccess() != clang::AS_public) continue;
+        if (method_decl->param_size() > 0) continue;
+        if (method_decl->isOverloadedOperator()) continue;
+        if (method_decl->getReturnType()->isVoidType()) continue;
 
         std::string method_name = method_decl->getNameAsString();
-        std::optional<std::string> method_usr =
-            getUSR(model.ast_ctx, method_decl);
-        if (!method_usr.has_value())
-          continue;
-        if (method_name == "operator bool")
-          continue;
+        std::optional<std::string> method_usr = getUSR(model.ast_ctx, method_decl);
+        if (!method_usr.has_value()) continue;
+        if (method_name == "operator bool") continue;
 
         bool enabled = false;
         auto find_itr = original_property_table.find(*method_usr);
-        if (find_itr != original_property_table.end())
-          enabled = find_itr->second;
+        if (find_itr != original_property_table.end()) enabled = find_itr->second;
 
-        out << method_decl->getReturnType().getCanonicalType().getAsString()
-            << "\t" << *method_usr << "\t" << (enabled ? "1" : "0") << "\n";
+        out << method_decl->getReturnType().getCanonicalType().getAsString() << "\t" << *method_usr << "\t"
+            << (enabled ? "1" : "0") << "\n";
       }
     }
   }
@@ -110,17 +97,14 @@ public:
 class Reificator : public clang::PluginASTAction {
   CommandArgs args_;
 
-public:
+ public:
   virtual ~Reificator() {}
 
-  std::unique_ptr<clang::ASTConsumer>
-  CreateASTConsumer(clang::CompilerInstance &CI,
-                    llvm::StringRef InFile) override {
+  std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef InFile) override {
     return std::make_unique<ReificatorASTConsumer>(args_);
   }
 
-  bool ParseArgs(const clang::CompilerInstance &CI,
-                 const std::vector<std::string> &arg) override {
+  bool ParseArgs(const clang::CompilerInstance &CI, const std::vector<std::string> &arg) override {
     for (size_t i = 0, e = arg.size(); i < e; ++i) {
       // TODO add args
     }
@@ -130,9 +114,9 @@ public:
   ActionType getActionType() override { return ReplaceAction; }
 };
 
-} // namespace arboretum
+}  // namespace arboretum
 
-static clang::FrontendPluginRegistry::Add<arboretum::Reificator>
-    X("reificator",
-      "Constructs a clang plugin which can serialize an AST to a collector "
-      "process for analysis.");
+static clang::FrontendPluginRegistry::Add<arboretum::Reificator> X(
+    "reificator",
+    "Constructs a clang plugin which can serialize an AST to a collector "
+    "process for analysis.");
