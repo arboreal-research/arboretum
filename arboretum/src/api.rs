@@ -5,17 +5,21 @@ use std::{
 
 use actix_web::{get, web, App, HttpServer, Responder};
 use arboretum_graph::{query, RootGraph};
-use arboretum_ui_protocol::{Query, Response};
+use arboretum_ui_protocol::Response;
 
 #[get("/test")]
 async fn test_query(graph: web::Data<RootGraph>) -> impl Responder {
     let mut nodes = Vec::new();
     let mut edges = Vec::new();
 
-    if let Some(root) = graph.get_named_node("clang::Decl").await.unwrap() {
+    if let Some(root) = graph
+        .get_named_node("clang::BuiltinType::Kind")
+        .await
+        .unwrap()
+    {
         let mut q = VecDeque::from([(root, 7u32)]);
 
-        nodes.push(("clang::Decl".into(), 4.0));
+        nodes.push(("clang::BuiltinType::Kind".into(), 4.0));
 
         let mut seen_nodes = HashMap::from([(root, 0)]);
         let mut seen_predicates: HashMap<u64, String> = HashMap::from([]);

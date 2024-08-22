@@ -1,15 +1,14 @@
 use ::futures::future;
-use actix_web::{App, HttpServer};
-use arboretum_graph::{query, GraphBuffer, RootGraph};
+use arboretum_graph::{GraphBuffer, RootGraph};
 use clap::Parser;
 use tokio::{
-    sync::{broadcast, futures, mpsc},
+    sync::{broadcast, mpsc},
     task::JoinError,
 };
-use tracing::{info, trace};
+use tracing::info;
 
 mod api;
-use api::{api_server, test_query};
+use api::api_server;
 
 mod clang_collector;
 use clang_collector::clang_collector;
@@ -28,7 +27,7 @@ struct Args {
 }
 
 #[derive(Debug)]
-enum ArboretumError {
+pub enum ArboretumError {
     GraphError(arboretum_graph::Error),
     JoinError(JoinError),
     IoError(std::io::Error),
@@ -50,10 +49,10 @@ impl From<std::io::Error> for ArboretumError {
 }
 
 async fn canonical_view_extraction(
-    root_graph: RootGraph,
+    _root_graph: RootGraph,
     mut graph_change_rx: broadcast::Receiver<u32>,
 ) {
-    while let Ok(change) = graph_change_rx.recv().await {
+    while let Ok(_change) = graph_change_rx.recv().await {
         // Do nothing
     }
 
@@ -103,9 +102,13 @@ async fn main() -> Result<(), ArboretumError> {
     if g.subgraphs().await.len() == 0 {
         info!("Loading clang data model.");
         let data_model = reify_rs::build_data_model();
-        let num_named_nodes = data_model.named_nodes().len();
+        let num_named_nodes: usize = data_model.named_nodes().len();
+        let num_edges: usize = data_model.edges().iter().map(|(_, e)| e.len()).sum();
         g.add_graph_buffer(data_model).await.unwrap();
-        info!("Data model loaded with {} named nodes.", num_named_nodes);
+        info!(
+            "Data model loaded with {} named nodes and {} edges.",
+            num_named_nodes, num_edges
+        );
     }
     info!("Subgraphs at startup: {:?}", g.subgraphs().await);
 

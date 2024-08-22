@@ -43,6 +43,14 @@ impl GraphBuffer {
         self.map_id(&|id: u64| *subst.get(&id).unwrap_or(&id))
     }
 
+    pub fn edges(&self) -> &HashMap<Domain, HashMap<(u64, u64, u64), Option<Value>>> {
+        &self.edges
+    }
+
+    pub fn node_props(&self) -> &HashMap<Domain, HashMap<u64, Value>> {
+        &self.node_props
+    }
+
     pub fn named_nodes(&self) -> &HashMap<u64, String> {
         &self.named_nodes
     }

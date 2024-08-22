@@ -1,7 +1,5 @@
 use std::{
-    borrow::Borrow,
     collections::HashMap,
-    ops::Deref,
     path::{Path, PathBuf},
     sync::{Arc, Mutex},
 };

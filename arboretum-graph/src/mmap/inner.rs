@@ -3,7 +3,6 @@ use std::{collections::BTreeMap, path::PathBuf};
 use memmap2::Mmap;
 use num::{ToPrimitive, Zero};
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
-use tracing::trace;
 
 use crate::{
     mmap::{builder::MmapGraphArchive, EdgeOrder},
