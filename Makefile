@@ -34,7 +34,7 @@ $(BUILD_DIR)/libreificator.so: $(REIFICATOR_OBJS)
 $(BUILD_DIR)/reificator/%.o: reificator/src/%.cc | $(BUILD_DIR) $(LLVM_STAMP) reificator/properties.csv
 	./llvm/bin/clang++ -g -c $(CXXFLAGS) -fPIC -Ireificator/include/ -MMD -MF $(BUILD_DIR)/reificator/$*.d -o $@ $< 
 
-$(BUILD_DIR)/reificator-stamp: $(BUILD_DIR)/libreificator.so reificator/input.cc $(LLVM_STAMP)
+$(BUILD_DIR)/reificator-stamp: $(BUILD_DIR)/libreificator.so reificator/input.cc $(LLVM_STAMP) reificator/properties.csv
 	./llvm/bin/clang++ -fplugin=$(BUILD_DIR)/libreificator.so -c $(CXXFLAGS) reificator/input.cc
 	touch $(BUILD_DIR)/reificator-stamp
 
@@ -43,7 +43,7 @@ $(BUILD_DIR)/reify-cpp.a: $(REIFY_CPP_OBJS) | $(BUILD_DIR)/reificator-stamp
 	ar rcs $@ $^
 
 $(BUILD_DIR)/reify-cpp/%.o: reify-cpp/src/%.cc | $(BUILD_DIR) $(LLVM_STAMP) $(BUILD_DIR)/reificator-stamp
-	./llvm/bin/clang++ -O2 -c $(CXXFLAGS) -fPIC -Ireify-cpp/include/ -Iarboretum-ffi/src/ -MMD -MF $(BUILD_DIR)/reify-cpp/$*.d -o $@ $< 
+	./llvm/bin/clang++ -g -c $(CXXFLAGS) -fPIC -Ireify-cpp/include/ -Iarboretum-ffi/src/ -MMD -MF $(BUILD_DIR)/reify-cpp/$*.d -o $@ $< 
 
 # ARBORETUM FFI
 arboretum-ffi/src/lib.rs: arboretum-ffi/src/tcp_client.rs 
@@ -57,7 +57,7 @@ $(BUILD_DIR)/libarboretum.so: target/release/libarboretum_ffi.a $(BUILD_DIR)/rei
 	./llvm/bin/clang++ -shared -fPIC $(CXXFLAGS) -o $@ $(ARBORETUM_OBJS) $(BUILD_DIR)/reify-cpp.a target/release/libarboretum_ffi.a
 
 $(BUILD_DIR)/arboretum-plugin/%.o: arboretum-plugin/src/%.cc | $(BUILD_DIR) $(LLVM_STAMP) $(BUILD_DIR)/reificator-stamp
-	./llvm/bin/clang++ -O2 -c $(CXXFLAGS) -fPIC -Iarboretum-ffi/src/ -Ireify-cpp/include/ -MMD -MF $(BUILD_DIR)/arboretum-plugin/$*.d -o $@ $< 
+	./llvm/bin/clang++ -g -c $(CXXFLAGS) -fPIC -Iarboretum-ffi/src/ -Ireify-cpp/include/ -MMD -MF $(BUILD_DIR)/arboretum-plugin/$*.d -o $@ $< 
 
 $(BUILD_DIR):
 	@mkdir -p $(BUILD_DIR)

@@ -1,10 +1,3 @@
-use std::{
-    collections::{BTreeMap, HashMap},
-    fs::OpenOptions,
-    hash::Hash,
-    path::Path,
-};
-
 use memmap2::MmapMut;
 use num::{Integer, Unsigned};
 use rayon::iter::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator};
@@ -14,6 +7,13 @@ use rkyv::{
     ser::{ScratchSpace, Serializer},
     vec::{ArchivedVec, VecResolver},
     Archive, Fallible, Resolver, Serialize,
+};
+use std::{
+    collections::{BTreeMap, HashMap},
+    fs::OpenOptions,
+    hash::Hash,
+    mem::size_of,
+    path::Path,
 };
 
 use crate::{error::Error, mmap::MmapGraph, IdType, PropsType};
