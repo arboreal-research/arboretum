@@ -34,7 +34,7 @@ The `arboretum-graph` component provides the underlying storage layer for graph 
 
 - **sled Backend**: The sled backend is used for read-write subgraphs, providing a flexible and high-performance storage solution for dynamic graph data that may need to be updated or modified over time.
 
-### [**arboretum-query**](./arboretum-query/
+### [**arboretum-query**](./arboretum-query/)
 
 `arboretum-query` provides an abstract query interface which supports local, http/json with reqwest and http/json with reqwasm. 
 
