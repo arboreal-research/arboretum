@@ -1,12 +1,16 @@
 use arboretum_graph::{Prefix, Value};
 use serde::{Deserialize, Serialize};
 
-pub mod local;
-
+#[cfg(feature = "http_reqwest")]
 pub mod http_reqwest;
 
+#[cfg(feature = "http_reqwasm")]
+pub mod http_reqwasm;
+
+pub mod local;
+
 pub trait GraphQueryExecutor: Send + Sync {
-    fn run(&self, query: &GraphQuery) -> Result<GraphQueryResponse, Error>;
+    fn run_blocking(&self, query: &GraphQuery) -> Result<GraphQueryResponse, Error>;
 }
 
 #[derive(Serialize, Deserialize)]

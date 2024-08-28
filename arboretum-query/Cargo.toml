@@ -6,3 +6,18 @@ edition = "2021"
 [dependencies]
 serde = { version = "1.0.208", features = ["derive"] }
 arboretum-graph = {path="../arboretum-graph/"}
+reqwest = { version = "0.12.7", optional=true}
+tokio = { version = "1.39.3", optional=true}
+reqwasm = { version = "0.5.0", optional = true }
+wasm-bindgen = { version = "0.2.93", optional = true }
+wasm-bindgen-futures = { version = "0.4.43", optional = true }
+serde_json = { version = "1.0.127", optional = true }
+
+[features]
+default = []
+
+http_reqwest = ["dep:reqwest", "reqwest/json"]
+http_reqwest_async = ["http_reqwest", "dep:tokio"]
+http_reqwest_sync = ["http_reqwest", "reqwest/blocking"]
+
+http_reqwasm = ["dep:reqwasm", "dep:wasm-bindgen", "dep:wasm-bindgen-futures", "dep:serde_json"]

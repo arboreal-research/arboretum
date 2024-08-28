@@ -19,11 +19,17 @@ impl ApiServerState {
 }
 
 #[post("/api/query/")]
-async fn test_query(
+async fn api_query(
     request: web::Json<GraphQuery>,
     executor: web::Data<ApiServerState>,
 ) -> impl Responder {
-    web::Json(executor.query_executor.run(&request.0))
+    let r =
+        tokio::task::spawn_blocking(move || executor.query_executor.run_blocking(&request.0)).await;
+
+    match r {
+        Ok(r) => web::Json(r),
+        Err(e) => web::Json(Err(arboretum_query::Error::Message(e.to_string()))),
+    }
 }
 
 pub async fn api_server<U>(state: ApiServerState, bind_addr: U) -> Result<(), std::io::Error>
@@ -33,7 +39,7 @@ where
     HttpServer::new(move || {
         App::new()
             .app_data(web::Data::new(state.clone()))
-            .service(test_query)
+            .service(api_query)
     })
     .bind(bind_addr)?
     .run()

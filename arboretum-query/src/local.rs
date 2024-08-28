@@ -21,7 +21,7 @@ fn rewrite_edges(v: Vec<(u64, u64, u64, Option<arboretum_graph::Value>)>) -> Gra
 }
 
 impl GraphQueryExecutor for LocalGraphQueryExecutor {
-    fn run(&self, query: &GraphQuery) -> Result<GraphQueryResponse, Error> {
+    fn run_blocking(&self, query: &GraphQuery) -> Result<GraphQueryResponse, Error> {
         Ok(match query {
             GraphQuery::SPO(prefix) => self
                 .graph

@@ -94,5 +94,6 @@
     "typeindex": "cpp"
   },
   "cmake.configureOnOpen": false,
-  "C_Cpp.default.compilerPath": "/usr/bin/clang++"
+  "C_Cpp.default.compilerPath": "/usr/bin/clang++",
+  "rust-analyzer.cargo.features": "all"
 }
