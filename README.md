@@ -10,7 +10,7 @@
 
 Arboretum is a framework designed for analyzing C/C++ syntax trees at scale. It is composed of several key components that work together to create, store, and query code property graphs efficiently. Below is an overview of the primary components.
 
-## 1. **reificator**
+### [**reificator**](./reificator/)
 
 The `reificator` is a Clang plugin that serves two primary functions:
 
@@ -18,7 +18,7 @@ The `reificator` is a Clang plugin that serves two primary functions:
   
 - **Extractor Plugin**: This plugin simplifies the process of creating code property graphs by providing streamlined access to the properties of C/C++ code. The extractor plugin is highly configurable and designed to work seamlessly with various Clang-based workflows.
 
-## 2. **arboretumd**
+### [**arboretumd**](./arboretumd/)
 
 The `arboretumd` is a daemon process that acts as the central server for the Arboretum framework. It provides two main functions:
 
@@ -26,7 +26,7 @@ The `arboretumd` is a daemon process that acts as the central server for the Arb
 
 - **Query API**: `arboretumd` implements an HTTP/JSON API, enabling remote clients to query the stored graph data efficiently. This API is designed to support both simple and complex queries, making it easy to integrate Arboretum into various analysis pipelines.
 
-## 3. **arboretum-graph**
+### [**arboretum-graph**](./arboretum-graph/)
 
 The `arboretum-graph` component provides the underlying storage layer for graph data within Arboretum. It supports two formats optimized for different use cases:
 
@@ -34,7 +34,11 @@ The `arboretum-graph` component provides the underlying storage layer for graph 
 
 - **sled Backend**: The sled backend is used for read-write subgraphs, providing a flexible and high-performance storage solution for dynamic graph data that may need to be updated or modified over time.
 
-## 4. **arboretum-py**
+### [**arboretum-query**](./arboretum-query/
+
+`arboretum-query` provides an abstract query interface which supports local, http/json with reqwest and http/json with reqwasm. 
+
+### [**arboretum-py**](./arboretum-py/)
 
 `arboretum-py` is a Python module that exposes the core functionality of Arboretum, making it accessible to Python developers. It can operate in two modes:
 
