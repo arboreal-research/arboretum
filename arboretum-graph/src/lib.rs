@@ -1,4 +1,4 @@
-use rkyv::{Archive, Deserialize, Serialize};
+use rkyv::Archive;
 
 pub mod constant;
 
@@ -9,6 +9,7 @@ mod graph_buffer;
 mod map_id;
 mod memory_info;
 mod mmap;
+mod prefix;
 mod root_graph;
 mod sled;
 mod smart_mmap_builder;
@@ -23,12 +24,15 @@ pub use error::Error;
 pub use graph_buffer::GraphBuffer;
 pub use memory_info::{get_memory_info, MemoryInfo};
 pub use mmap::{MmapGraph, MmapGraphBuilder, MmapGraphBuilderOptions, MmapGraphRangeIter};
+pub use prefix::Prefix;
 pub use root_graph::RootGraph;
 pub use subgraph::Subgraph;
 pub use subgraph_config::SubgraphConfig;
 pub use types::{IdType, PropsType};
 
-#[derive(Clone, Debug, Archive, Serialize, Deserialize)]
+#[derive(
+    Clone, Debug, Archive, rkyv::Serialize, rkyv::Deserialize, serde::Serialize, serde::Deserialize,
+)]
 #[archive_attr(derive(Debug))]
 pub enum Value {
     Unsigned(u64),
@@ -40,27 +44,32 @@ pub enum Value {
 #[macro_export]
 macro_rules! query {
     ($mmap:expr, $sub:tt -?-> ?) => {{
-        $mmap.prefix_edges_spo(($sub, None))
-    }};
-
-    ($mmap:expr, $sub:tt -$pred:tt-> ?) => {{
-        $mmap.prefix_edges_spo(($sub, Some(($pred, None))))
-    }};
-
-    ($mmap:expr, $sub:tt -$pred:tt-> $obj:tt) => {{
-        $mmap.prefix_edges_spo(($sub, Some(($pred, $obj))))
+        use $crate::Prefix;
+        $mmap.prefix_edges_spo(Prefix::One($sub))
     }};
 
     ($mmap:expr, ? -$pred:tt-> ?) => {{
-        $mmap.prefix_edges_pos(($pred, None))
+        $mmap.prefix_edges_pos(Prefix::One($pred))
+    }};
+
+    ($mmap:expr, ? -?-> $obj:tt) => {{
+        $mmap.prefix_edges_osp(Prefix::One($pred))
+    }};
+
+    ($mmap:expr, $sub:tt -$pred:tt-> ?) => {{
+        $mmap.prefix_edges_spo(Prefix::Two($sub, $pred))
     }};
 
     ($mmap:expr, ? -$pred:tt-> $obj:tt) => {{
-        $mmap.prefix_edges_pos(($pred, Some(($obj, None))))
+        $mmap.prefix_edges_pos(Prefix::Two($pred, $obj))
     }};
 
     ($mmap:expr, $sub:tt -?-> $obj:tt) => {{
-        $mmap.prefix_edges_osp(($obj, Some(($sub, None))))
+        $mmap.prefix_edges_osp(Prefix::Two($obj, $sub))
+    }};
+
+    ($mmap:expr, $sub:tt -$pred:tt-> $obj:tt) => {{
+        $mmap.prefix_edges_spo(Prefix::Three($sub, $pred, $obj))
     }};
 
     ///////////////////////////////////////////////////////////////////////////
@@ -92,27 +101,33 @@ macro_rules! query {
 #[macro_export]
 macro_rules! par_query {
     ($mmap:expr, $sub:tt -?-> ?) => {{
-        $mmap.par_prefix_edges_spo(($sub, None))
-    }};
-
-    ($mmap:expr, $sub:tt -$pred:tt-> ?) => {{
-        $mmap.par_prefix_edges_spo(($sub, Some(($pred, None))))
-    }};
-
-    ($mmap:expr, $sub:tt -$pred:tt-> $obj:tt) => {{
-        $mmap.par_prefix_edges_spo(($sub, Some(($pred, $obj))))
+        use $crate::Prefix;
+        $mmap.par_prefix_edges_spo(Prefix::One($sub))
     }};
 
     ($mmap:expr, ? -$pred:tt-> ?) => {{
-        $mmap.par_prefix_edges_pos(($pred, None))
+        use $crate::Prefix;
+        $mmap.par_prefix_edges_pos(Prefix::One($pred))
+    }};
+
+    ($mmap:expr, $sub:tt -$pred:tt-> ?) => {{
+        use $crate::Prefix;
+        $mmap.par_prefix_edges_spo(Prefix::Two($sub, $pred))
     }};
 
     ($mmap:expr, ? -$pred:tt-> $obj:tt) => {{
-        $mmap.par_prefix_edges_pos(($pred, Some(($obj, None))))
+        use $crate::Prefix;
+        $mmap.par_prefix_edges_pos(Prefix::Two($pred, $obj))
     }};
 
     ($mmap:expr, $sub:tt -?-> $obj:tt) => {{
-        $mmap.par_prefix_edges_osp(($obj, Some(($sub, None))))
+        use $crate::Prefix;
+        $mmap.par_prefix_edges_osp(Prefix::Two($obj, $sub))
+    }};
+
+    ($mmap:expr, $sub:tt -$pred:tt-> $obj:tt) => {{
+        use $crate::Prefix;
+        $mmap.par_prefix_edges_spo(Prefix::Three($sub, $pred, $obj))
     }};
 
     ///////////////////////////////////////////////////////////////////////////

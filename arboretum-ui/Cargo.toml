@@ -10,7 +10,7 @@ serde-wasm-bindgen = "0.6.5"
 wasm-bindgen = "0.2.92"
 wasm-bindgen-futures = "0.4.43"
 web-sys = { version = "0.3.69", features = ["Document", "TextMetrics",  "HtmlCanvasElement", "VisibilityState", "CanvasRenderingContext2d", "Performance", "Window", "DomRect", "WheelEvent", "MouseEvent", "Path2d", "Response"] }
-arboretum-ui-protocol = {path="../arboretum-ui-protocol/"}
+arboretum-query = {path="../arboretum-query/"}
 
 
 [lib]

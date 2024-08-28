@@ -10,7 +10,7 @@ actix-service = "2.0.2"
 clap = { version = "4.5.13", features = ["derive"] }
 arboretum-graph = {path="../arboretum-graph/"}
 arboretum-ffi = {path="../arboretum-ffi/"}
-arboretum-ui-protocol = {path="../arboretum-ui-protocol/"}
+arboretum-query = {path="../arboretum-query/"}
 reify-rs = {path="../reify-rs/"}
 tokio = { version = "1.39.2", features = ["rt-multi-thread"] }
 tracing = "0.1.40"

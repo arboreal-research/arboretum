@@ -1,3 +1,5 @@
+use std::sync::Arc;
+
 use ::futures::future;
 use arboretum_graph::{GraphBuffer, RootGraph};
 use clap::Parser;
@@ -8,7 +10,7 @@ use tokio::{
 use tracing::info;
 
 mod api;
-use api::api_server;
+use api::{api_server, ApiServerState};
 
 mod clang_collector;
 use clang_collector::clang_collector;
@@ -82,7 +84,7 @@ async fn graph_buffer_loader(
         let changed_graph_tx = changed_graph_tx.clone();
         tokio::spawn(async move {
             tracing::info!("Adding graph buffer to root graph: {:?}", buf);
-            let (changed_graph_ids, _) = g.add_graph_buffer(buf).await.unwrap();
+            let (changed_graph_ids, _) = g.add_graph_buffer(buf).unwrap();
             for changed_graph_id in changed_graph_ids {
                 changed_graph_tx.send(changed_graph_id).unwrap();
             }
@@ -98,19 +100,19 @@ async fn main() -> Result<(), ArboretumError> {
     let args = Args::parse();
 
     // Load the root graph.
-    let g = RootGraph::from_folder(args.db_dir, Default::default()).await?;
-    if g.subgraphs().await.len() == 0 {
+    let g = RootGraph::from_folder(args.db_dir, Default::default())?;
+    if g.subgraphs()?.len() == 0 {
         info!("Loading clang data model.");
         let data_model = reify_rs::build_data_model();
         let num_named_nodes: usize = data_model.named_nodes().len();
         let num_edges: usize = data_model.edges().iter().map(|(_, e)| e.len()).sum();
-        g.add_graph_buffer(data_model).await.unwrap();
+        g.add_graph_buffer(data_model).unwrap();
         info!(
             "Data model loaded with {} named nodes and {} edges.",
             num_named_nodes, num_edges
         );
     }
-    info!("Subgraphs at startup: {:?}", g.subgraphs().await);
+    info!("Subgraphs at startup: {:?}", g.subgraphs());
 
     // Setup a channel and start recieving graphs.
     let (graph_buffer_tx, graph_buffer_rx) = tokio::sync::mpsc::channel(10);
@@ -130,7 +132,11 @@ async fn main() -> Result<(), ArboretumError> {
         graph_change_broadcast_tx.clone(),
     ));
 
-    let http_handle = api_server(g.clone(), args.api_bind_addr);
+    let query_executor = ApiServerState::new(Arc::new(
+        arboretum_query::local::LocalGraphQueryExecutor::new(g.clone()),
+    ));
+
+    let http_handle = api_server(query_executor, args.api_bind_addr);
     let collector_handle = clang_collector(graph_buffer_tx, args.collector_bind_addr);
 
     future::try_join(http_handle, collector_handle).await?;

@@ -1,4 +1,4 @@
-use std::{array::TryFromSliceError, sync::PoisonError};
+use std::{array::TryFromSliceError, num::TryFromIntError, sync::PoisonError};
 
 #[derive(Debug)]
 pub enum Error {
@@ -22,6 +22,8 @@ pub enum Error {
     MalformedRootGraphNextSubgraphId,
 
     LockPoison,
+
+    InvalidPrefix,
 }
 
 impl From<std::io::Error> for Error {
@@ -65,5 +67,11 @@ impl From<TryFromSliceError> for Error {
 impl<T> From<PoisonError<T>> for Error {
     fn from(_: PoisonError<T>) -> Self {
         Error::LockPoison
+    }
+}
+
+impl From<TryFromIntError> for Error {
+    fn from(_: TryFromIntError) -> Self {
+        Error::InvalidPrefix
     }
 }

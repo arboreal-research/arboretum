@@ -5,9 +5,8 @@ use std::{
 };
 
 use rkyv::{AlignedVec, Deserialize, Infallible};
-use tracing::trace;
 
-use crate::{error::Error, PropsType};
+use crate::{error::Error, Prefix, PropsType};
 
 pub struct SledGraph<NodeProps, EdgeProps>
 where
@@ -244,22 +243,22 @@ where
         Ok(v.into_iter())
     }
 
-    #[tracing::instrument]
     pub fn prefix_edges_spo(
         &self,
-        prefix: (u64, Option<(u64, Option<u64>)>),
+        prefix: Prefix<u64>,
     ) -> Result<impl Iterator<Item = (u64, u64, u64, Option<EdgeProps>)>, Error> {
         let (start_bound, end_bound) = {
-            let (pred, obj) = prefix
-                .1
-                .map(|p| (Some(p.0), p.1))
-                .unwrap_or_else(|| (None, None));
-            (
-                build_bound((prefix.0, pred.unwrap_or(u64::MIN), obj.unwrap_or(u64::MIN))),
-                build_bound((prefix.0, pred.unwrap_or(u64::MAX), obj.unwrap_or(u64::MAX))),
-            )
+            match prefix {
+                Prefix::One(a) => (
+                    build_bound((a, u64::MIN, u64::MIN)),
+                    build_bound((a, u64::MAX, u64::MAX)),
+                ),
+
+                Prefix::Two(a, b) => (build_bound((a, b, u64::MIN)), build_bound((a, b, u64::MAX))),
+
+                Prefix::Three(a, b, c) => (build_bound((a, b, c)), build_bound((a, b, c))),
+            }
         };
-        trace!(?start_bound, ?end_bound);
 
         let mut result = Vec::new();
         for r in self.spo.range((start_bound, end_bound)) {
@@ -291,17 +290,19 @@ where
 
     pub fn prefix_edges_pos(
         &self,
-        prefix: (u64, Option<(u64, Option<u64>)>),
+        prefix: Prefix<u64>,
     ) -> Result<impl Iterator<Item = (u64, u64, u64, Option<EdgeProps>)>, Error> {
         let (start_bound, end_bound) = {
-            let (pred, obj) = prefix
-                .1
-                .map(|p| (Some(p.0), p.1))
-                .unwrap_or_else(|| (None, None));
-            (
-                build_bound((prefix.0, pred.unwrap_or(u64::MIN), obj.unwrap_or(u64::MIN))),
-                build_bound((prefix.0, pred.unwrap_or(u64::MAX), obj.unwrap_or(u64::MAX))),
-            )
+            match prefix {
+                Prefix::One(a) => (
+                    build_bound((a, u64::MIN, u64::MIN)),
+                    build_bound((a, u64::MAX, u64::MAX)),
+                ),
+
+                Prefix::Two(a, b) => (build_bound((a, b, u64::MIN)), build_bound((a, b, u64::MAX))),
+
+                Prefix::Three(a, b, c) => (build_bound((a, b, c)), build_bound((a, b, c))),
+            }
         };
 
         let mut result = Vec::new();
@@ -334,17 +335,19 @@ where
 
     pub fn prefix_edges_osp(
         &self,
-        prefix: (u64, Option<(u64, Option<u64>)>),
+        prefix: Prefix<u64>,
     ) -> Result<impl Iterator<Item = (u64, u64, u64, Option<EdgeProps>)>, Error> {
         let (start_bound, end_bound) = {
-            let (pred, obj) = prefix
-                .1
-                .map(|p| (Some(p.0), p.1))
-                .unwrap_or_else(|| (None, None));
-            (
-                build_bound((prefix.0, pred.unwrap_or(u64::MIN), obj.unwrap_or(u64::MIN))),
-                build_bound((prefix.0, pred.unwrap_or(u64::MAX), obj.unwrap_or(u64::MAX))),
-            )
+            match prefix {
+                Prefix::One(a) => (
+                    build_bound((a, u64::MIN, u64::MIN)),
+                    build_bound((a, u64::MAX, u64::MAX)),
+                ),
+
+                Prefix::Two(a, b) => (build_bound((a, b, u64::MIN)), build_bound((a, b, u64::MAX))),
+
+                Prefix::Three(a, b, c) => (build_bound((a, b, c)), build_bound((a, b, c))),
+            }
         };
 
         let mut result = Vec::new();

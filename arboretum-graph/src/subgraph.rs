@@ -4,7 +4,7 @@ use num::NumCast;
 use rkyv::{Deserialize, Infallible};
 
 use crate::{
-    constant::*, error::Error, merge_u64, mmap, split_u64, ArchivedValue, SledGraph,
+    constant::*, error::Error, merge_u64, mmap, split_u64, ArchivedValue, Prefix, SledGraph,
     SubgraphConfig, Value,
 };
 
@@ -176,29 +176,17 @@ impl Subgraph {
 
     pub fn prefix_edges_spo<'a>(
         &'a self,
-        prefix: (u64, Option<(u64, Option<u64>)>),
+        prefix: Prefix<u64>,
     ) -> Result<Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a>, Error> {
         Ok(match self {
-            Subgraph::MmapGraph16 { graph_id, mmap } => try_rebuild_prefix(graph_id, prefix)
-                .map(
-                    |prefix| -> Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a> {
-                        Box::new(
-                            mmap.prefix_edges_spo(prefix)
-                                .map(|edge| rebuild_edge(graph_id, edge)),
-                        )
-                    },
-                )
-                .unwrap_or_else(|| Box::new([].into_iter())),
-            Subgraph::MmapGraph32 { graph_id, mmap } => try_rebuild_prefix(graph_id, prefix)
-                .map(
-                    |prefix| -> Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a> {
-                        Box::new(
-                            mmap.prefix_edges_spo(prefix)
-                                .map(|edge| rebuild_edge(graph_id, edge)),
-                        )
-                    },
-                )
-                .unwrap_or_else(|| Box::new([].into_iter())),
+            Subgraph::MmapGraph16 { graph_id, mmap } => Box::new(
+                mmap.prefix_edges_spo(TryInto::<Prefix<u16>>::try_into(prefix)?)
+                    .map(|edge| rebuild_edge(graph_id, edge)),
+            ),
+            Subgraph::MmapGraph32 { graph_id, mmap } => Box::new(
+                mmap.prefix_edges_spo(TryInto::<Prefix<u32>>::try_into(prefix)?)
+                    .map(|edge| rebuild_edge(graph_id, edge)),
+            ),
             Subgraph::MmapGraph64 { mmap } => {
                 Box::new(mmap.prefix_edges_spo(prefix).map(|(a, b, c, e)| {
                     (
@@ -221,29 +209,19 @@ impl Subgraph {
 
     pub fn prefix_edges_pos<'a>(
         &'a self,
-        prefix: (u64, Option<(u64, Option<u64>)>),
+        prefix: Prefix<u64>,
     ) -> Result<Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a>, Error> {
         Ok(match self {
-            Subgraph::MmapGraph16 { graph_id, mmap } => try_rebuild_prefix(graph_id, prefix)
-                .map(
-                    |prefix| -> Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a> {
-                        Box::new(
-                            mmap.prefix_edges_pos(prefix)
-                                .map(|edge| rebuild_edge(graph_id, edge)),
-                        )
-                    },
-                )
-                .unwrap_or_else(|| Box::new([].into_iter())),
-            Subgraph::MmapGraph32 { graph_id, mmap } => try_rebuild_prefix(graph_id, prefix)
-                .map(
-                    |prefix| -> Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a> {
-                        Box::new(
-                            mmap.prefix_edges_pos(prefix)
-                                .map(|edge| rebuild_edge(graph_id, edge)),
-                        )
-                    },
-                )
-                .unwrap_or_else(|| Box::new([].into_iter())),
+            Subgraph::MmapGraph16 { graph_id, mmap } => Box::new(
+                mmap.prefix_edges_pos(TryInto::<Prefix<u16>>::try_into(prefix)?)
+                    .map(|edge| rebuild_edge(graph_id, edge)),
+            ),
+
+            Subgraph::MmapGraph32 { graph_id, mmap } => Box::new(
+                mmap.prefix_edges_pos(TryInto::<Prefix<u32>>::try_into(prefix)?)
+                    .map(|edge| rebuild_edge(graph_id, edge)),
+            ),
+
             Subgraph::MmapGraph64 { mmap } => {
                 Box::new(mmap.prefix_edges_pos(prefix).map(|(a, b, c, e)| {
                     (
@@ -266,29 +244,17 @@ impl Subgraph {
 
     pub fn prefix_edges_osp<'a>(
         &'a self,
-        prefix: (u64, Option<(u64, Option<u64>)>),
+        prefix: Prefix<u64>,
     ) -> Result<Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a>, Error> {
         Ok(match self {
-            Subgraph::MmapGraph16 { graph_id, mmap } => try_rebuild_prefix(graph_id, prefix)
-                .map(
-                    |prefix| -> Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a> {
-                        Box::new(
-                            mmap.prefix_edges_osp(prefix)
-                                .map(|edge| rebuild_edge(graph_id, edge)),
-                        )
-                    },
-                )
-                .unwrap_or_else(|| Box::new([].into_iter())),
-            Subgraph::MmapGraph32 { graph_id, mmap } => try_rebuild_prefix(graph_id, prefix)
-                .map(
-                    |prefix| -> Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a> {
-                        Box::new(
-                            mmap.prefix_edges_osp(prefix)
-                                .map(|edge| rebuild_edge(graph_id, edge)),
-                        )
-                    },
-                )
-                .unwrap_or_else(|| Box::new([].into_iter())),
+            Subgraph::MmapGraph16 { graph_id, mmap } => Box::new(
+                mmap.prefix_edges_osp(TryInto::<Prefix<u16>>::try_into(prefix)?)
+                    .map(|edge| rebuild_edge(graph_id, edge)),
+            ),
+            Subgraph::MmapGraph32 { graph_id, mmap } => Box::new(
+                mmap.prefix_edges_osp(TryInto::<Prefix<u32>>::try_into(prefix)?)
+                    .map(|edge| rebuild_edge(graph_id, edge)),
+            ),
             Subgraph::MmapGraph64 { mmap } => {
                 Box::new(mmap.prefix_edges_osp(prefix).map(|(a, b, c, e)| {
                     (
@@ -308,43 +274,6 @@ impl Subgraph {
             Subgraph::SledGraph64 { g } => Box::new(g.prefix_edges_osp(prefix)?),
         })
     }
-}
-
-fn try_rebuild_prefix<I: NumCast>(
-    graph_id: &u32,
-    (a, rest): (u64, Option<(u64, Option<u64>)>),
-) -> Option<(I, Option<(I, Option<I>)>)> {
-    let (high_a, low_a) = split_u64(a);
-    if high_a != *graph_id {
-        return None;
-    }
-
-    I::from(low_a)
-        .map(|a| {
-            Ok::<_, ()>((
-                a,
-                rest.map(|(b, c)| {
-                    let (high_b, low_b) = split_u64(b);
-                    if high_b != *graph_id {
-                        return Err(());
-                    }
-                    Ok((
-                        I::from(low_b).ok_or(())?,
-                        c.map(|c| {
-                            let (high_c, low_c) = split_u64(c);
-                            if high_c != *graph_id {
-                                return Err(());
-                            }
-                            Ok(I::from(low_c).ok_or(())?)
-                        })
-                        .transpose()?,
-                    ))
-                })
-                .transpose()?,
-            ))
-        })
-        .transpose()
-        .unwrap_or(None)
 }
 
 fn rebuild_edge<I: NumCast>(

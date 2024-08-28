@@ -1,6 +1,5 @@
 use std::{cell::RefCell, rc::Rc};
 
-use arboretum_ui_protocol::Query;
 use wasm_bindgen::prelude::*;
 use web_sys::{CanvasRenderingContext2d, HtmlCanvasElement, Window};
 
@@ -8,7 +7,6 @@ mod state;
 use state::*;
 
 mod query;
-use query::*;
 
 mod listeners;
 
@@ -59,8 +57,12 @@ pub async fn main() -> Result<(), JsValue> {
         JsValue::from_str("rgb(231, 240, 220)"),
     )));
 
-    // Run an initial query for the data.
-    run_query(window.clone(), Query::TestQuery, state.clone());
+    // // Run an initial query for the data.
+    // run_query(
+    //     window.clone(),
+    //     GraphQuery::SPO(Prefix::One()),
+    //     state.clone(),
+    // );
 
     listeners::setup(
         canvas.clone(),

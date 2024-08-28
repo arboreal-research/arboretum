@@ -1,5 +1,5 @@
 use crate::error::Error;
-use crate::{IdType, PropsType};
+use crate::{IdType, Prefix, PropsType};
 use memmap2::{Mmap, MmapOptions};
 use num::{Bounded, CheckedAdd, Integer, NumCast, ToPrimitive, Zero};
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
@@ -130,25 +130,20 @@ where
         edge_order: EdgeOrder,
         index: &BTreeMap<(Id::Archived, Id::Archived, Id::Archived), Id::Archived>,
         default_end: Id::Archived,
-        prefix: (Id::Archived, Option<(Id::Archived, Option<Id::Archived>)>),
+        prefix: Prefix<Id::Archived>,
     ) -> MmapGraphRangeIter<'static, Id, NodeProps, EdgeProps> {
         let (start_bound, end_bound) = {
-            let (pred, obj) = prefix
-                .1
-                .map(|p| (Some(p.0), p.1))
-                .unwrap_or_else(|| (None, None));
-            (
-                (
-                    prefix.0.clone(),
-                    pred.clone().unwrap_or(Id::Archived::min_value()),
-                    obj.clone().unwrap_or(Id::Archived::min_value()),
+            let min = Id::Archived::min_value();
+            let max = Id::Archived::max_value();
+
+            match prefix {
+                Prefix::One(a) => (
+                    (a.clone(), min.clone(), min.clone()),
+                    (a, max.clone(), max.clone()),
                 ),
-                (
-                    prefix.0,
-                    pred.unwrap_or(Id::Archived::max_value()),
-                    obj.unwrap_or(Id::Archived::max_value()),
-                ),
-            )
+                Prefix::Two(a, b) => ((a.clone(), b.clone(), min), (a, b, max)),
+                Prefix::Three(a, b, c) => ((a.clone(), b.clone(), c.clone()), (a, b, c)),
+            }
         };
 
         // Use the index to find a rough start position for start_cur.
@@ -319,7 +314,7 @@ where
     /// Iterator through edges in the specified range in SPO order.
     pub fn prefix_edges_spo(
         &self,
-        prefix: (Id::Archived, Option<(Id::Archived, Option<Id::Archived>)>),
+        prefix: Prefix<Id::Archived>,
     ) -> MmapGraphRangeIter<'static, Id, NodeProps, EdgeProps> {
         self.make_range_iter(
             EdgeOrder::SPO,
@@ -332,7 +327,7 @@ where
     /// Parallel iterator through all edges in the specified range in SPO order.
     pub fn par_prefix_edges_spo(
         &self,
-        prefix: (Id::Archived, Option<(Id::Archived, Option<Id::Archived>)>),
+        prefix: Prefix<Id::Archived>,
     ) -> impl ParallelIterator<
         Item = (
             &'static Id::Archived,
@@ -423,7 +418,7 @@ where
     /// Iterator through all edges in the specified range in POS order.
     pub fn prefix_edges_pos(
         &self,
-        prefix: (Id::Archived, Option<(Id::Archived, Option<Id::Archived>)>),
+        prefix: Prefix<Id::Archived>,
     ) -> MmapGraphRangeIter<'_, Id, NodeProps, EdgeProps> {
         self.make_range_iter(
             EdgeOrder::POS,
@@ -436,7 +431,7 @@ where
     /// Parallel iterator through all edges in the specified range in POS order.
     pub fn par_prefix_edges_pos(
         &self,
-        prefix: (Id::Archived, Option<(Id::Archived, Option<Id::Archived>)>),
+        prefix: Prefix<Id::Archived>,
     ) -> impl ParallelIterator<
         Item = (
             &'static Id::Archived,
@@ -527,7 +522,7 @@ where
     /// Iterator through all edges in the specified range in OSP order.
     pub fn prefix_edges_osp(
         &self,
-        prefix: (Id::Archived, Option<(Id::Archived, Option<Id::Archived>)>),
+        prefix: Prefix<Id::Archived>,
     ) -> MmapGraphRangeIter<Id, NodeProps, EdgeProps> {
         self.make_range_iter(
             EdgeOrder::OSP,
@@ -540,7 +535,7 @@ where
     /// Parallel iterator through all edges in the specified range in OSP order.
     pub fn par_prefix_edges_osp(
         &self,
-        prefix: (Id::Archived, Option<(Id::Archived, Option<Id::Archived>)>),
+        prefix: Prefix<Id::Archived>,
     ) -> impl ParallelIterator<
         Item = (
             &'static Id::Archived,
@@ -631,8 +626,8 @@ mod test {
         builder.build(&dir.path().join("db")).unwrap()
     }
 
-    fn build_generated(dir: &tempdir::TempDir) -> MmapGraph<u32, u32, u32> {
-        let mut builder: MmapGraphBuilder<u32, u32, u32> =
+    fn build_generated(dir: &tempdir::TempDir) -> MmapGraph<u64, u64, u64> {
+        let mut builder: MmapGraphBuilder<u64, u64, u64> =
             MmapGraphBuilder::new(super::MmapGraphBuilderOptions {
                 page_size: 4096,
                 splits_per_page: 8,
@@ -738,7 +733,7 @@ mod test {
 
         let after_query2 = std::time::Instant::now();
 
-        let _: Vec<(u32, Vec<(&u32, &u32, &u32, Option<&u32>)>)> = (100001..200000)
+        let _: Vec<(u64, Vec<(&u64, &u64, &u64, Option<&u64>)>)> = (100001..200000)
             .into_par_iter()
             .map(|sub| (sub, par_query!(mmap, sub -?-> ?)))
             .map(|(sub, edges)| (sub, edges.collect::<Vec<_>>()))
