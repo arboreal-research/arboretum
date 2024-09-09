@@ -1,4 +1,4 @@
 [workspace]
 resolver = "2"
 
-members = [ "arboretum", "arboretum-graph", "arboretum-ffi", "reify-rs", "arboretum-ui" , "arboretum-query", "arboretum-py"]
+members = [ "arboretumd", "arboretum-graph", "arboretum-ffi", "reify-rs", "arboretum-ui" , "arboretum-query", "arboretum-py" ]
