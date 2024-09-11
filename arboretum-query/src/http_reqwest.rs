@@ -4,6 +4,12 @@ pub struct HttpGraphQueryExecutor {
     endpoint: String,
 }
 
+impl HttpGraphQueryExecutor {
+    pub fn new(endpoint: String) -> Self {
+        Self { endpoint }
+    }
+}
+
 impl GraphQueryExecutor for HttpGraphQueryExecutor {
     fn run_blocking(&self, query: &GraphQuery) -> Result<GraphQueryResponse, Error> {
         use reqwest::blocking::Client;
