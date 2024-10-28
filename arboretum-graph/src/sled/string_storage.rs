@@ -2,12 +2,16 @@ use std::path::Path;
 
 use crate::Error;
 
+/// A sled based association of strings to ids.
+///
+/// This is used to support named nodes.
 pub struct SledStringStorage {
     str_to_id: sled::Tree,
     id_to_str: sled::Tree,
 }
 
 impl SledStringStorage {
+    /// Open the sled database at the given path and use it to implement a sled based string to id.
     pub fn from_folder<P: AsRef<Path>>(path: P) -> Result<SledStringStorage, Error> {
         let db = sled::open(path)?;
 
@@ -20,6 +24,7 @@ impl SledStringStorage {
         })
     }
 
+    /// Associates `name` with `id`.
     pub fn assoc<S: AsRef<str>>(&self, name: S, id: u64) -> Result<(), Error> {
         let name_bytes = name.as_ref().as_bytes();
         let id_bytes = id.to_be_bytes();
@@ -29,6 +34,7 @@ impl SledStringStorage {
         Ok(())
     }
 
+    /// Gets the string associated with `id`.
     pub fn get_str(&self, id: u64) -> Result<Option<String>, Error> {
         let id_bytes = id.to_be_bytes();
         Ok(self
@@ -37,6 +43,7 @@ impl SledStringStorage {
             .map(|bytes| String::from_utf8_lossy(bytes.as_ref()).into_owned()))
     }
 
+    /// Gets the id associated with `name`.
     pub fn get_id<S: AsRef<str>>(&self, name: S) -> Result<Option<u64>, Error> {
         let name_bytes = name.as_ref().as_bytes();
 
@@ -46,6 +53,9 @@ impl SledStringStorage {
             .map(|bytes| u64::from_be_bytes(bytes.as_ref().try_into().unwrap())))
     }
 
+    /// Gets the id currently associated with `name`.
+    ///
+    /// If there is no id currently associated, then associates `proposed_id` and returns it.
     pub fn get_or_assoc<S: AsRef<str>>(&self, name: S, proposed_id: u64) -> Result<u64, Error> {
         let name_bytes = name.as_ref().as_bytes();
         let proposed_bytes = proposed_id.to_be_bytes();

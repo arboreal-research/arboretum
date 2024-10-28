@@ -2,6 +2,16 @@ use std::{fmt::Debug, num::TryFromIntError};
 
 use crate::IdType;
 
+/// Ordered edge components.
+///
+/// These can be in SPO, POS, or OSP order.
+///
+/// For example:
+///   * When querying edges in Subject-Predicate-Object order,
+///     then Two(3, 4) is an edge where the subject is 3 and the predicate is 4.
+///
+///   * When querying edges in Object-Subject-Predicate order,
+///     then Three(7, 8, 9) is an edge where the subject is 8, the predicate is 9, and the object is 7.
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub enum Prefix<Id: IdType> {
     One(Id),

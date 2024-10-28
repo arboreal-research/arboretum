@@ -7,8 +7,10 @@ use std::{
 
 use crate::{subgraph_entry::SubgraphEntry, Error};
 
+/// The strategy and parameters used to cache subgraphs.
 #[derive(Clone, Debug)]
 pub enum SubgraphCacheStrategy {
+    /// Least-Recently-Used
     LRU { max_usage_bytes: usize },
 }
 
@@ -20,6 +22,7 @@ pub(crate) trait SubgraphCache: Send + Sync {
     // fn entries_in_use(&mut self) -> Vec<SubgraphEntry>;
 }
 
+/// A [SubgraphEntry] along with the last moment when it was used.
 #[derive(PartialEq, Eq)]
 struct LruSubgraphCacheEntry {
     age: Instant,
@@ -48,11 +51,22 @@ impl LruSubgraphCacheEntry {
     }
 }
 
+/// An LRU cache of subgraphs
 pub(crate) struct LruSubgraphCache {
+    // The sum of memory used by all active subgraph entries.
     cur_usage: usize,
+
+    // The maximum allowed sum of memory used by all active subgraph entries.
     max_usage: usize,
+
+    // A lookup table which associates a [SubgraphEntry] to the [LruSubgraphCacheEntry]
+    // which maintains the last time it was accessed.
     entries: HashMap<SubgraphEntry, Arc<LruSubgraphCacheEntry>>,
+
+    // The heap which is used to determine the least recently used, active subgraph.
     cache: BinaryHeap<Arc<LruSubgraphCacheEntry>>,
+
+    // The path to the directory of subgraphs.
     subgraphs_path: PathBuf,
 }
 
@@ -69,6 +83,9 @@ impl LruSubgraphCache {
 }
 
 impl SubgraphCache for LruSubgraphCache {
+    /// Notifies the cache that a particular subgraph entry has been used by some operation
+    ///
+    /// The cache may respond by evicting other entries to maintain the configured amount of available system memory.
     fn notify_used(&mut self, entry: SubgraphEntry) -> Result<(), Error> {
         let entry_size = entry.size(self.subgraphs_path.as_path())?;
 
@@ -101,8 +118,4 @@ impl SubgraphCache for LruSubgraphCache {
 
         Ok(())
     }
-
-    // fn entries_in_use(&mut self) -> Vec<SubgraphEntry> {
-    //     self.cache.iter().map(|e| e.entry.clone()).collect()
-    // }
 }

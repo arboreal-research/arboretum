@@ -1,3 +1,7 @@
+/// An implementation which can obtain information about the available system memory.
+///
+/// This is used by [MmapGraph][crate::MmapGraph] to unmap subgraphs which have not been
+/// used recently.
 pub trait MemoryInfo {
     fn available_virtual_memory(&self) -> Result<u64, String>;
     fn total_virtual_memory(&self) -> Result<u64, String>;

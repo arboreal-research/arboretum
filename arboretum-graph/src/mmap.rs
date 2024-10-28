@@ -17,14 +17,23 @@ pub use iter::MmapGraphRangeIter;
 mod inner;
 use inner::*;
 
+/// The order of edges.
 #[derive(Debug)]
 enum EdgeOrder {
+    // Subject, Predicate, Object
     SPO,
+
+    // Predicate, Object, Subject
     POS,
+
+    // Object, Subject, Predicate
     OSP,
 }
 
-/// A graph which can be loaded via mmap in a zero-copy fashion.
+/// A graph which can be loaded via mmap via zero-copy deserialization.
+///
+/// Currently, the indexes are loaded via copy deserialization because the
+/// rkyv BTreeMap does not (yet) support range iteration.
 pub struct MmapGraph<Id, NodeProps, EdgeProps>
 where
     Id: IdType,
@@ -113,25 +122,23 @@ where
     EdgeProps: PropsType,
     EdgeProps::Archived: Debug,
 {
-    pub fn min_value(&self) -> Id {
-        Id::min_value()
-    }
-
-    pub fn max_value(&self) -> Id {
-        Id::max_value()
-    }
-
+    /// Return the number of bytes in the mmap'd file.
     pub fn get_memory_usage(&self) -> Result<usize, Error> {
         Ok(self.inner.mmap.len())
     }
 
+    /// Constructs a range iterator according to `edge_order`.
+    ///
+    /// `index` are positions in the overall edge list which have been marked to find a rough start position.
+    /// `prefix` are the components of the edges which are specified by the query.
     fn make_range_iter(
         &self,
         edge_order: EdgeOrder,
         index: &BTreeMap<(Id::Archived, Id::Archived, Id::Archived), Id::Archived>,
-        default_end: Id::Archived,
         prefix: Prefix<Id::Archived>,
     ) -> MmapGraphRangeIter<'static, Id, NodeProps, EdgeProps> {
+        let default_end = self.inner.get_default_end(&edge_order);
+
         let (start_bound, end_bound) = {
             let min = Id::Archived::min_value();
             let max = Id::Archived::max_value();
@@ -316,12 +323,7 @@ where
         &self,
         prefix: Prefix<Id::Archived>,
     ) -> MmapGraphRangeIter<'static, Id, NodeProps, EdgeProps> {
-        self.make_range_iter(
-            EdgeOrder::SPO,
-            &self.inner.spo_index,
-            <Id::Archived as NumCast>::from(self.inner.archive.spo.len()).unwrap(),
-            prefix,
-        )
+        self.make_range_iter(EdgeOrder::SPO, &self.inner.spo_index, prefix)
     }
 
     /// Parallel iterator through all edges in the specified range in SPO order.
@@ -340,12 +342,7 @@ where
         NodeProps::Archived: Send + Sync,
         EdgeProps::Archived: Send + Sync,
     {
-        let range_iter = self.make_range_iter(
-            EdgeOrder::SPO,
-            &self.inner.spo_index,
-            <Id::Archived as NumCast>::from(self.inner.archive.spo.len()).unwrap(),
-            prefix,
-        );
+        let range_iter = self.make_range_iter(EdgeOrder::SPO, &self.inner.spo_index, prefix);
 
         self.inner
             .par_iter_range_spo(range_iter.start_cur, range_iter.end_cur)
@@ -420,12 +417,7 @@ where
         &self,
         prefix: Prefix<Id::Archived>,
     ) -> MmapGraphRangeIter<'_, Id, NodeProps, EdgeProps> {
-        self.make_range_iter(
-            EdgeOrder::POS,
-            &self.inner.pos_index,
-            <Id::Archived as NumCast>::from(self.inner.archive.pos.len()).unwrap(),
-            prefix,
-        )
+        self.make_range_iter(EdgeOrder::POS, &self.inner.pos_index, prefix)
     }
 
     /// Parallel iterator through all edges in the specified range in POS order.
@@ -444,12 +436,7 @@ where
         NodeProps::Archived: Send + Sync,
         EdgeProps::Archived: Send + Sync,
     {
-        let range_iter = self.make_range_iter(
-            EdgeOrder::POS,
-            &self.inner.pos_index,
-            <Id::Archived as NumCast>::from(self.inner.archive.pos.len()).unwrap(),
-            prefix,
-        );
+        let range_iter = self.make_range_iter(EdgeOrder::POS, &self.inner.pos_index, prefix);
 
         self.inner
             .par_iter_range_pos(range_iter.start_cur, range_iter.end_cur)
@@ -524,12 +511,7 @@ where
         &self,
         prefix: Prefix<Id::Archived>,
     ) -> MmapGraphRangeIter<Id, NodeProps, EdgeProps> {
-        self.make_range_iter(
-            EdgeOrder::OSP,
-            &self.inner.osp_index,
-            <Id::Archived as NumCast>::from(self.inner.archive.osp.len()).unwrap(),
-            prefix,
-        )
+        self.make_range_iter(EdgeOrder::OSP, &self.inner.osp_index, prefix)
     }
 
     /// Parallel iterator through all edges in the specified range in OSP order.
@@ -548,12 +530,7 @@ where
         NodeProps::Archived: Send + Sync,
         EdgeProps::Archived: Send + Sync,
     {
-        let range_iter = self.make_range_iter(
-            EdgeOrder::OSP,
-            &self.inner.osp_index,
-            <Id::Archived as NumCast>::from(self.inner.archive.osp.len()).unwrap(),
-            prefix,
-        );
+        let range_iter = self.make_range_iter(EdgeOrder::OSP, &self.inner.osp_index, prefix);
 
         self.inner
             .par_iter_range_osp(range_iter.start_cur, range_iter.end_cur)

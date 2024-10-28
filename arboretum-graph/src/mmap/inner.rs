@@ -1,7 +1,7 @@
 use std::{collections::BTreeMap, path::PathBuf};
 
 use memmap2::Mmap;
-use num::{ToPrimitive, Zero};
+use num::{NumCast, ToPrimitive, Zero};
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
 
 use crate::{
@@ -43,7 +43,7 @@ where
     EdgeProps: PropsType,
     EdgeProps::Archived: std::fmt::Debug,
 {
-    // Returns an edge by index in the order specified by edge_order.
+    /// Returns an edge by index in the order specified by `edge_order`.
     pub(crate) fn get_ordered_edge(
         &self,
         edge_order: &EdgeOrder,
@@ -71,6 +71,15 @@ where
                 },
             )
         })
+    }
+
+    /// Get the end position for a given order
+    pub(crate) fn get_default_end(&self, edge_order: &EdgeOrder) -> Id::Archived {
+        match edge_order {
+            EdgeOrder::SPO => <Id::Archived as NumCast>::from(self.archive.spo.len()).unwrap(),
+            EdgeOrder::POS => <Id::Archived as NumCast>::from(self.archive.pos.len()).unwrap(),
+            EdgeOrder::OSP => <Id::Archived as NumCast>::from(self.archive.osp.len()).unwrap(),
+        }
     }
 
     // Returns an edge by index in the order specified by edge_order, but with the result fields reordered into SPO.

@@ -1,8 +1,7 @@
 use rkyv::Archive;
 
-pub mod constant;
-
 mod cache;
+mod constant;
 mod domain;
 mod error;
 mod graph_buffer;
@@ -20,6 +19,7 @@ mod types;
 
 pub use crate::sled::{graph::SledGraph, string_storage::SledStringStorage};
 pub use cache::SubgraphCacheStrategy;
+pub use constant::LOCAL_GRAPH_ID;
 pub use domain::Domain;
 pub use error::Error;
 pub use graph_buffer::GraphBuffer;
@@ -31,6 +31,9 @@ pub use subgraph::Subgraph;
 pub use subgraph_config::SubgraphConfig;
 pub use types::{IdType, PropsType};
 
+/// Data which can be stored as props for a node or an edge.
+///
+/// See also [ArchivedValue]
 #[derive(
     Clone, Debug, Archive, rkyv::Serialize, rkyv::Deserialize, serde::Serialize, serde::Deserialize,
 )]

@@ -1,5 +1,23 @@
 use crate::map_id::MapId;
 
+/// The set of subgraph ids which are present within a particular subgraph.
+///
+/// Each subgraph within the overall graph can only contain edges which are part of its domain.
+///
+/// For example,
+///   * If the domain of graph #3 is Single(3), then it can only contain edges between nodes
+///     in graph #3 using edges in graph #3.
+///
+///   * If the domain of graph #3 is Double(4, 5), then it can only contain edges between nodes
+///     in graph #4 or #5 using edges in graph #4 or #5.
+///
+///   * If the domain is Triple(6, 7, 8), then it can only contain edges between nodes in graph
+///     #6, #7, or #8 using edges in graph #6, #7, #8.
+///
+/// In practice the edges used will belong to a graph which represents a schema, so the typical
+/// setup is:
+///    * Graph #N:   Single(N) Contains only nodes
+///    * Graph #N+1: Double(S, N) Contains edges between nodes in N using schema edges in S.
 #[derive(Clone, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Domain {
     Single(u32),
