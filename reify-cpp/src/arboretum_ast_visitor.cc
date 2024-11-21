@@ -550,17 +550,47 @@ bool ArboretumASTVisitor::VisitTemplateTypeParmType(clang::TemplateTypeParmType*
 bool ArboretumASTVisitor::VisitType(clang::Type* D) {
   const Id* obj = context_.resolve(D);
   switch(D->getTypeClass()) {
-    case clang::Type::IncompleteArray: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IncompleteArrayType_);
+    case clang::Type::RValueReference: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RValueReferenceType_);
       break; 
-    case clang::Type::DependentSizedArray: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentSizedArrayType_);
+    case clang::Type::MemberPointer: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MemberPointerType_);
+      break; 
+    case clang::Type::Decayed: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DecayedType_);
+      break; 
+    case clang::Type::ConstantArray: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstantArrayType_);
+      break; 
+    case clang::Type::DependentAddressSpace: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentAddressSpaceType_);
       break; 
     case clang::Type::DependentSizedExtVector: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentSizedExtVectorType_);
       break; 
+    case clang::Type::Vector: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VectorType_);
+      break; 
+    case clang::Type::DependentVector: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentVectorType_);
+      break; 
     case clang::Type::ExtVector: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExtVectorType_);
+      break; 
+    case clang::Type::ConstantMatrix: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstantMatrixType_);
+      break; 
+    case clang::Type::DependentSizedMatrix: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentSizedMatrixType_);
+      break; 
+    case clang::Type::FunctionProto: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionProtoType_);
+      break; 
+    case clang::Type::Enum: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EnumType_);
+      break; 
+    case clang::Type::Adjusted: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AdjustedType_);
       break; 
     case clang::Type::UnresolvedUsing: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingType_);
@@ -568,14 +598,8 @@ bool ArboretumASTVisitor::VisitType(clang::Type* D) {
     case clang::Type::Using: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingType_);
       break; 
-    case clang::Type::DependentVector: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentVectorType_);
-      break; 
     case clang::Type::MacroQualified: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MacroQualifiedType_);
-      break; 
-    case clang::Type::TypeOfExpr: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeOfExprType_);
       break; 
     case clang::Type::FunctionNoProto: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionNoProtoType_);
@@ -583,80 +607,32 @@ bool ArboretumASTVisitor::VisitType(clang::Type* D) {
     case clang::Type::TypeOf: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeOfType_);
       break; 
-    case clang::Type::RValueReference: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RValueReferenceType_);
-      break; 
-    case clang::Type::SubstTemplateTypeParmPack: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstTemplateTypeParmPackType_);
-      break; 
-    case clang::Type::DependentTemplateSpecialization: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentTemplateSpecializationType_);
-      break; 
-    case clang::Type::DeducedTemplateSpecialization: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DeducedTemplateSpecializationType_);
-      break; 
-    case clang::Type::BlockPointer: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BlockPointerType_);
-      break; 
-    case clang::Type::DependentSizedMatrix: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentSizedMatrixType_);
+    case clang::Type::ObjCTypeParam: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCTypeParamType_);
       break; 
     case clang::Type::PackExpansion: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PackExpansionType_);
       break; 
-    case clang::Type::ObjCTypeParam: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCTypeParamType_);
+    case clang::Type::DependentName: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentNameType_);
       break; 
-    case clang::Type::TemplateTypeParm: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateTypeParmType_);
+    case clang::Type::Elaborated: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ElaboratedType_);
       break; 
-    case clang::Type::VariableArray: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VariableArrayType_);
-      break; 
-    case clang::Type::Pointer: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PointerType_);
-      break; 
-    case clang::Type::SubstTemplateTypeParm: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstTemplateTypeParmType_);
-      break; 
-    case clang::Type::TemplateSpecialization: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateSpecializationType_);
-      break; 
-    case clang::Type::BitInt: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BitIntType_);
-      break; 
-    case clang::Type::Attributed: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AttributedType_);
-      break; 
-    case clang::Type::ConstantArray: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstantArrayType_);
+    case clang::Type::Decltype: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DecltypeType_);
       break; 
     case clang::Type::BTFTagAttributed: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BTFTagAttributedType_);
       break; 
-    case clang::Type::MemberPointer: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MemberPointerType_);
-      break; 
-    case clang::Type::ConstantMatrix: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstantMatrixType_);
-      break; 
-    case clang::Type::UnaryTransform: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnaryTransformType_);
-      break; 
-    case clang::Type::FunctionProto: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionProtoType_);
+    case clang::Type::DependentSizedArray: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentSizedArrayType_);
       break; 
     case clang::Type::Builtin: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BuiltinType_);
       break; 
-    case clang::Type::Decayed: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DecayedType_);
-      break; 
-    case clang::Type::Vector: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VectorType_);
-      break; 
-    case clang::Type::DependentName: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentNameType_);
+    case clang::Type::ObjCObject: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCObjectType_);
       break; 
     case clang::Type::Paren: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParenType_);
@@ -664,53 +640,77 @@ bool ArboretumASTVisitor::VisitType(clang::Type* D) {
     case clang::Type::Complex: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ComplexType_);
       break; 
-    case clang::Type::ObjCInterface: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCInterfaceType_);
+    case clang::Type::TemplateTypeParm: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateTypeParmType_);
       break; 
-    case clang::Type::Auto: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AutoType_);
+    case clang::Type::DependentTemplateSpecialization: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentTemplateSpecializationType_);
       break; 
-    case clang::Type::DependentBitInt: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentBitIntType_);
+    case clang::Type::Pointer: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PointerType_);
       break; 
-    case clang::Type::Enum: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EnumType_);
-      break; 
-    case clang::Type::LValueReference: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LValueReferenceType_);
-      break; 
-    case clang::Type::Pipe: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PipeType_);
-      break; 
-    case clang::Type::Typedef: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypedefType_);
-      break; 
-    case clang::Type::InjectedClassName: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_InjectedClassNameType_);
-      break; 
-    case clang::Type::Atomic: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AtomicType_);
-      break; 
-    case clang::Type::Elaborated: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ElaboratedType_);
-      break; 
-    case clang::Type::DependentAddressSpace: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentAddressSpaceType_);
-      break; 
-    case clang::Type::ObjCObject: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCObjectType_);
-      break; 
-    case clang::Type::Adjusted: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AdjustedType_);
-      break; 
-    case clang::Type::Decltype: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DecltypeType_);
+    case clang::Type::DeducedTemplateSpecialization: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DeducedTemplateSpecializationType_);
       break; 
     case clang::Type::Record: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RecordType_);
       break; 
+    case clang::Type::ObjCInterface: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCInterfaceType_);
+      break; 
+    case clang::Type::Typedef: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypedefType_);
+      break; 
+    case clang::Type::DependentBitInt: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentBitIntType_);
+      break; 
+    case clang::Type::IncompleteArray: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IncompleteArrayType_);
+      break; 
+    case clang::Type::TypeOfExpr: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeOfExprType_);
+      break; 
+    case clang::Type::SubstTemplateTypeParmPack: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstTemplateTypeParmPackType_);
+      break; 
+    case clang::Type::InjectedClassName: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_InjectedClassNameType_);
+      break; 
+    case clang::Type::SubstTemplateTypeParm: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstTemplateTypeParmType_);
+      break; 
+    case clang::Type::Auto: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AutoType_);
+      break; 
+    case clang::Type::UnaryTransform: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnaryTransformType_);
+      break; 
+    case clang::Type::TemplateSpecialization: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateSpecializationType_);
+      break; 
     case clang::Type::ObjCObjectPointer: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCObjectPointerType_);
+      break; 
+    case clang::Type::VariableArray: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VariableArrayType_);
+      break; 
+    case clang::Type::Atomic: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AtomicType_);
+      break; 
+    case clang::Type::Attributed: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AttributedType_);
+      break; 
+    case clang::Type::BlockPointer: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BlockPointerType_);
+      break; 
+    case clang::Type::BitInt: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BitIntType_);
+      break; 
+    case clang::Type::Pipe: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PipeType_);
+      break; 
+    case clang::Type::LValueReference: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LValueReferenceType_);
       break; 
     default: break;
   }
@@ -1503,35 +1503,38 @@ bool ArboretumASTVisitor::VisitConstructorUsingShadowDecl(clang::ConstructorUsin
 bool ArboretumASTVisitor::VisitDecl(clang::Decl* D) {
   const Id* obj = context_.resolve(D);
   switch(D->getKind()) {
-    case clang::Decl::UnresolvedUsingTypename: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingTypenameDecl_);
-      break; 
-    case clang::Decl::HLSLBuffer: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_HLSLBufferDecl_);
-      break; 
-    case clang::Decl::CXXMethod: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXMethodDecl_);
-      break; 
-    case clang::Decl::UsingDirective: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingDirectiveDecl_);
-      break; 
-    case clang::Decl::NamespaceAlias: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NamespaceAliasDecl_);
+    case clang::Decl::CXXRecord: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXRecordDecl_);
       break; 
     case clang::Decl::Using: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingDecl_);
       break; 
-    case clang::Decl::TemplateTypeParm: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateTypeParmDecl_);
+    case clang::Decl::HLSLBuffer: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_HLSLBufferDecl_);
       break; 
-    case clang::Decl::UnresolvedUsingIfExists: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingIfExistsDecl_);
+    case clang::Decl::ClassTemplateSpecialization: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplateSpecializationDecl_);
       break; 
-    case clang::Decl::AccessSpec: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AccessSpecDecl_);
+    case clang::Decl::NamespaceAlias: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NamespaceAliasDecl_);
+      break; 
+    case clang::Decl::TemplateParamObject: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateParamObjectDecl_);
+      break; 
+    case clang::Decl::MSProperty: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertyDecl_);
+      break; 
+    case clang::Decl::ConstructorUsingShadow: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstructorUsingShadowDecl_);
+      break; 
+    case clang::Decl::UsingShadow: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingShadowDecl_);
       break; 
     case clang::Decl::UsingEnum: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingEnumDecl_);
+      break; 
+    case clang::Decl::Function: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionDecl_);
       break; 
     case clang::Decl::ClassTemplate: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplateDecl_);
@@ -1539,41 +1542,11 @@ bool ArboretumASTVisitor::VisitDecl(clang::Decl* D) {
     case clang::Decl::ObjCTypeParam: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCTypeParamDecl_);
       break; 
-    case clang::Decl::Field: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FieldDecl_);
-      break; 
-    case clang::Decl::VarTemplateSpecialization: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplateSpecializationDecl_);
-      break; 
-    case clang::Decl::Record: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RecordDecl_);
-      break; 
-    case clang::Decl::OMPThreadPrivate: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPThreadPrivateDecl_);
-      break; 
-    case clang::Decl::VarTemplate: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplateDecl_);
-      break; 
-    case clang::Decl::ClassTemplatePartialSpecialization: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplatePartialSpecializationDecl_);
-      break; 
-    case clang::Decl::LinkageSpec: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LinkageSpecDecl_);
-      break; 
-    case clang::Decl::UnnamedGlobalConstant: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnnamedGlobalConstantDecl_);
+    case clang::Decl::TemplateTemplateParm: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateTemplateParmDecl_);
       break; 
     case clang::Decl::Concept: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConceptDecl_);
-      break; 
-    case clang::Decl::Captured: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CapturedDecl_);
-      break; 
-    case clang::Decl::UsingShadow: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingShadowDecl_);
-      break; 
-    case clang::Decl::FunctionTemplate: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionTemplateDecl_);
       break; 
     case clang::Decl::ObjCMethod: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCMethodDecl_);
@@ -1581,137 +1554,11 @@ bool ArboretumASTVisitor::VisitDecl(clang::Decl* D) {
     case clang::Decl::ObjCProperty: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyDecl_);
       break; 
-    case clang::Decl::ObjCCompatibleAlias: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCompatibleAliasDecl_);
-      break; 
-    case clang::Decl::MSGuid: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSGuidDecl_);
-      break; 
-    case clang::Decl::Function: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionDecl_);
-      break; 
-    case clang::Decl::ImplicitConceptSpecialization: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitConceptSpecializationDecl_);
-      break; 
-    case clang::Decl::Enum: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EnumDecl_);
-      break; 
-    case clang::Decl::Namespace: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NamespaceDecl_);
-      break; 
-    case clang::Decl::PragmaComment: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PragmaCommentDecl_);
-      break; 
-    case clang::Decl::TypeAlias: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeAliasDecl_);
-      break; 
-    case clang::Decl::VarTemplatePartialSpecialization: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplatePartialSpecializationDecl_);
-      break; 
-    case clang::Decl::CXXDeductionGuide: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDeductionGuideDecl_);
-      break; 
-    case clang::Decl::Binding: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BindingDecl_);
-      break; 
-    case clang::Decl::ObjCImplementation: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCImplementationDecl_);
-      break; 
-    case clang::Decl::OMPDeclareReduction: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDeclareReductionDecl_);
-      break; 
-    case clang::Decl::OMPDeclareMapper: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDeclareMapperDecl_);
-      break; 
-    case clang::Decl::ObjCCategory: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCategoryDecl_);
-      break; 
-    case clang::Decl::ConstructorUsingShadow: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstructorUsingShadowDecl_);
-      break; 
-    case clang::Decl::IndirectField: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IndirectFieldDecl_);
-      break; 
-    case clang::Decl::EnumConstant: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EnumConstantDecl_);
-      break; 
-    case clang::Decl::MSProperty: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertyDecl_);
+    case clang::Decl::UnresolvedUsingIfExists: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingIfExistsDecl_);
       break; 
     case clang::Decl::ObjCProtocol: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCProtocolDecl_);
-      break; 
-    case clang::Decl::ObjCIvar: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIvarDecl_);
-      break; 
-    case clang::Decl::UnresolvedUsingValue: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingValueDecl_);
-      break; 
-    case clang::Decl::Label: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LabelDecl_);
-      break; 
-    case clang::Decl::ObjCAtDefsField: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtDefsFieldDecl_);
-      break; 
-    case clang::Decl::ObjCPropertyImpl: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyImplDecl_);
-      break; 
-    case clang::Decl::Decomposition: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DecompositionDecl_);
-      break; 
-    case clang::Decl::NonTypeTemplateParm: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NonTypeTemplateParmDecl_);
-      break; 
-    case clang::Decl::PragmaDetectMismatch: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PragmaDetectMismatchDecl_);
-      break; 
-    case clang::Decl::BuiltinTemplate: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BuiltinTemplateDecl_);
-      break; 
-    case clang::Decl::OMPCapturedExpr: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCapturedExprDecl_);
-      break; 
-    case clang::Decl::ImplicitParam: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitParamDecl_);
-      break; 
-    case clang::Decl::CXXDestructor: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDestructorDecl_);
-      break; 
-    case clang::Decl::Export: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExportDecl_);
-      break; 
-    case clang::Decl::CXXConstructor: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstructorDecl_);
-      break; 
-    case clang::Decl::CXXConversion: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConversionDecl_);
-      break; 
-    case clang::Decl::Var: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarDecl_);
-      break; 
-    case clang::Decl::TranslationUnit: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TranslationUnitDecl_);
-      break; 
-    case clang::Decl::FileScopeAsm: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FileScopeAsmDecl_);
-      break; 
-    case clang::Decl::TopLevelStmt: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TopLevelStmtDecl_);
-      break; 
-    case clang::Decl::Import: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImportDecl_);
-      break; 
-    case clang::Decl::TemplateTemplateParm: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateTemplateParmDecl_);
-      break; 
-    case clang::Decl::Empty: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EmptyDecl_);
-      break; 
-    case clang::Decl::TypeAliasTemplate: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeAliasTemplateDecl_);
-      break; 
-    case clang::Decl::CXXRecord: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXRecordDecl_);
       break; 
     case clang::Decl::OMPAllocate: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPAllocateDecl_);
@@ -1722,44 +1569,197 @@ bool ArboretumASTVisitor::VisitDecl(clang::Decl* D) {
     case clang::Decl::StaticAssert: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StaticAssertDecl_);
       break; 
-    case clang::Decl::Typedef: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypedefDecl_);
+    case clang::Decl::TopLevelStmt: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TopLevelStmtDecl_);
       break; 
-    case clang::Decl::OMPRequires: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPRequiresDecl_);
+    case clang::Decl::ObjCPropertyImpl: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyImplDecl_);
       break; 
-    case clang::Decl::RequiresExprBody: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RequiresExprBodyDecl_);
+    case clang::Decl::CXXMethod: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXMethodDecl_);
       break; 
-    case clang::Decl::Block: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BlockDecl_);
+    case clang::Decl::Captured: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CapturedDecl_);
+      break; 
+    case clang::Decl::CXXDeductionGuide: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDeductionGuideDecl_);
       break; 
     case clang::Decl::ObjCCategoryImpl: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCategoryImplDecl_);
       break; 
-    case clang::Decl::ExternCContext: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExternCContextDecl_);
+    case clang::Decl::BuiltinTemplate: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BuiltinTemplateDecl_);
       break; 
-    case clang::Decl::Friend: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FriendDecl_);
-      break; 
-    case clang::Decl::ClassTemplateSpecialization: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplateSpecializationDecl_);
-      break; 
-    case clang::Decl::LifetimeExtendedTemporary: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LifetimeExtendedTemporaryDecl_);
-      break; 
-    case clang::Decl::TemplateParamObject: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateParamObjectDecl_);
-      break; 
-    case clang::Decl::ParmVar: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParmVarDecl_);
+    case clang::Decl::OMPDeclareReduction: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDeclareReductionDecl_);
       break; 
     case clang::Decl::UsingPack: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingPackDecl_);
       break; 
+    case clang::Decl::TypeAliasTemplate: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeAliasTemplateDecl_);
+      break; 
+    case clang::Decl::Namespace: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NamespaceDecl_);
+      break; 
+    case clang::Decl::OMPDeclareMapper: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDeclareMapperDecl_);
+      break; 
+    case clang::Decl::UnnamedGlobalConstant: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnnamedGlobalConstantDecl_);
+      break; 
+    case clang::Decl::UnresolvedUsingValue: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingValueDecl_);
+      break; 
+    case clang::Decl::CXXConstructor: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstructorDecl_);
+      break; 
+    case clang::Decl::OMPCapturedExpr: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCapturedExprDecl_);
+      break; 
+    case clang::Decl::ClassTemplatePartialSpecialization: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ClassTemplatePartialSpecializationDecl_);
+      break; 
+    case clang::Decl::Decomposition: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DecompositionDecl_);
+      break; 
+    case clang::Decl::IndirectField: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IndirectFieldDecl_);
+      break; 
+    case clang::Decl::EnumConstant: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EnumConstantDecl_);
+      break; 
+    case clang::Decl::TypeAlias: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeAliasDecl_);
+      break; 
+    case clang::Decl::CXXDestructor: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDestructorDecl_);
+      break; 
+    case clang::Decl::ExternCContext: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExternCContextDecl_);
+      break; 
+    case clang::Decl::VarTemplatePartialSpecialization: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplatePartialSpecializationDecl_);
+      break; 
+    case clang::Decl::NonTypeTemplateParm: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NonTypeTemplateParmDecl_);
+      break; 
+    case clang::Decl::ObjCIvar: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIvarDecl_);
+      break; 
+    case clang::Decl::OMPRequires: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPRequiresDecl_);
+      break; 
+    case clang::Decl::Enum: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EnumDecl_);
+      break; 
+    case clang::Decl::ObjCAtDefsField: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtDefsFieldDecl_);
+      break; 
+    case clang::Decl::ImplicitParam: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitParamDecl_);
+      break; 
+    case clang::Decl::ParmVar: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParmVarDecl_);
+      break; 
+    case clang::Decl::PragmaComment: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PragmaCommentDecl_);
+      break; 
+    case clang::Decl::CXXConversion: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConversionDecl_);
+      break; 
+    case clang::Decl::PragmaDetectMismatch: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PragmaDetectMismatchDecl_);
+      break; 
+    case clang::Decl::Field: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FieldDecl_);
+      break; 
+    case clang::Decl::ObjCCompatibleAlias: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCompatibleAliasDecl_);
+      break; 
+    case clang::Decl::ImplicitConceptSpecialization: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitConceptSpecializationDecl_);
+      break; 
+    case clang::Decl::VarTemplateSpecialization: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplateSpecializationDecl_);
+      break; 
+    case clang::Decl::Var: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarDecl_);
+      break; 
+    case clang::Decl::FileScopeAsm: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FileScopeAsmDecl_);
+      break; 
+    case clang::Decl::VarTemplate: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VarTemplateDecl_);
+      break; 
+    case clang::Decl::Block: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BlockDecl_);
+      break; 
+    case clang::Decl::Friend: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FriendDecl_);
+      break; 
+    case clang::Decl::RequiresExprBody: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RequiresExprBodyDecl_);
+      break; 
+    case clang::Decl::Export: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExportDecl_);
+      break; 
+    case clang::Decl::TranslationUnit: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TranslationUnitDecl_);
+      break; 
+    case clang::Decl::Import: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImportDecl_);
+      break; 
+    case clang::Decl::MSGuid: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSGuidDecl_);
+      break; 
+    case clang::Decl::Empty: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_EmptyDecl_);
+      break; 
+    case clang::Decl::LinkageSpec: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LinkageSpecDecl_);
+      break; 
+    case clang::Decl::ObjCImplementation: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCImplementationDecl_);
+      break; 
+    case clang::Decl::UnresolvedUsingTypename: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedUsingTypenameDecl_);
+      break; 
+    case clang::Decl::Record: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RecordDecl_);
+      break; 
+    case clang::Decl::Typedef: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypedefDecl_);
+      break; 
+    case clang::Decl::LifetimeExtendedTemporary: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LifetimeExtendedTemporaryDecl_);
+      break; 
+    case clang::Decl::AccessSpec: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AccessSpecDecl_);
+      break; 
+    case clang::Decl::FunctionTemplate: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionTemplateDecl_);
+      break; 
+    case clang::Decl::TemplateTypeParm: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TemplateTypeParmDecl_);
+      break; 
+    case clang::Decl::UsingDirective: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UsingDirectiveDecl_);
+      break; 
+    case clang::Decl::ObjCCategory: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCCategoryDecl_);
+      break; 
+    case clang::Decl::Label: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LabelDecl_);
+      break; 
     case clang::Decl::FriendTemplate: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FriendTemplateDecl_);
+      break; 
+    case clang::Decl::OMPThreadPrivate: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPThreadPrivateDecl_);
+      break; 
+    case clang::Decl::Binding: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BindingDecl_);
       break; 
     default: break;
   }
@@ -5256,194 +5256,179 @@ bool ArboretumASTVisitor::VisitSourceLocExpr(clang::SourceLocExpr* D) {
 bool ArboretumASTVisitor::VisitStmt(clang::Stmt* D) {
   const Id* obj = context_.resolve(D);
   switch(D->getStmtClass()) {
-    case clang::Stmt::ObjCBoxedExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBoxedExpr_);
+    case clang::Stmt::ObjCArrayLiteralClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCArrayLiteral_);
       break; 
-    case clang::Stmt::OMPTargetTeamsDistributeDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeDirective_);
+    case clang::Stmt::CXXStdInitializerListExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXStdInitializerListExpr_);
       break; 
-    case clang::Stmt::ObjCSelectorExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCSelectorExpr_);
+    case clang::Stmt::ImplicitCastExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitCastExpr_);
       break; 
     case clang::Stmt::ObjCProtocolExprClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCProtocolExpr_);
       break; 
-    case clang::Stmt::CoawaitExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoawaitExpr_);
+    case clang::Stmt::CXXTypeidExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTypeidExpr_);
       break; 
-    case clang::Stmt::ObjCSubscriptRefExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCSubscriptRefExpr_);
-      break; 
-    case clang::Stmt::UnaryOperatorClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnaryOperator_);
-      break; 
-    case clang::Stmt::ObjCMessageExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCMessageExpr_);
-      break; 
-    case clang::Stmt::OMPMasterTaskLoopSimdDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterTaskLoopSimdDirective_);
-      break; 
-    case clang::Stmt::ObjCIsaExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIsaExpr_);
-      break; 
-    case clang::Stmt::ObjCAvailabilityCheckExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAvailabilityCheckExpr_);
-      break; 
-    case clang::Stmt::OMPArraySectionExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPArraySectionExpr_);
-      break; 
-    case clang::Stmt::OMPParallelDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelDirective_);
-      break; 
-    case clang::Stmt::OMPArrayShapingExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPArrayShapingExpr_);
-      break; 
-    case clang::Stmt::CXXCatchStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXCatchStmt_);
-      break; 
-    case clang::Stmt::TypeTraitExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeTraitExpr_);
-      break; 
-    case clang::Stmt::SwitchStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SwitchStmt_);
-      break; 
-    case clang::Stmt::GCCAsmStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GCCAsmStmt_);
-      break; 
-    case clang::Stmt::OMPTargetParallelGenericLoopDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelGenericLoopDirective_);
-      break; 
-    case clang::Stmt::OMPParallelMasterDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterDirective_);
-      break; 
-    case clang::Stmt::GotoStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GotoStmt_);
-      break; 
-    case clang::Stmt::OMPParallelMasterTaskLoopSimdDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterTaskLoopSimdDirective_);
-      break; 
-    case clang::Stmt::OMPMasterTaskLoopDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterTaskLoopDirective_);
-      break; 
-    case clang::Stmt::BreakStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BreakStmt_);
-      break; 
-    case clang::Stmt::MSAsmStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSAsmStmt_);
-      break; 
-    case clang::Stmt::OMPErrorDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPErrorDirective_);
+    case clang::Stmt::ObjCPropertyRefExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyRefExpr_);
       break; 
     case clang::Stmt::OMPTargetTeamsDistributeSimdDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeSimdDirective_);
       break; 
-    case clang::Stmt::ConceptSpecializationExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConceptSpecializationExpr_);
-      break; 
-    case clang::Stmt::ChooseExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ChooseExpr_);
-      break; 
-    case clang::Stmt::SEHExceptStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHExceptStmt_);
-      break; 
-    case clang::Stmt::BlockExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BlockExpr_);
-      break; 
-    case clang::Stmt::SEHLeaveStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHLeaveStmt_);
-      break; 
-    case clang::Stmt::ObjCIvarRefExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIvarRefExpr_);
-      break; 
-    case clang::Stmt::CapturedStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CapturedStmt_);
-      break; 
-    case clang::Stmt::CXXTryStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTryStmt_);
-      break; 
-    case clang::Stmt::CXXUuidofExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXUuidofExpr_);
-      break; 
-    case clang::Stmt::CXXForRangeStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXForRangeStmt_);
-      break; 
-    case clang::Stmt::MSDependentExistsStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSDependentExistsStmt_);
-      break; 
-    case clang::Stmt::MaterializeTemporaryExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MaterializeTemporaryExpr_);
-      break; 
-    case clang::Stmt::CXXBoolLiteralExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXBoolLiteralExpr_);
-      break; 
-    case clang::Stmt::WhileStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_WhileStmt_);
-      break; 
-    case clang::Stmt::OMPCriticalDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCriticalDirective_);
-      break; 
-    case clang::Stmt::ObjCForCollectionStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCForCollectionStmt_);
+    case clang::Stmt::ObjCMessageExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCMessageExpr_);
       break; 
     case clang::Stmt::CXXParenListInitExprClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXParenListInitExpr_);
       break; 
-    case clang::Stmt::ObjCAtCatchStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtCatchStmt_);
+    case clang::Stmt::ObjCIsaExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIsaExpr_);
       break; 
-    case clang::Stmt::ObjCAtFinallyStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtFinallyStmt_);
+    case clang::Stmt::ObjCBoolLiteralExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBoolLiteralExpr_);
       break; 
-    case clang::Stmt::OMPIteratorExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPIteratorExpr_);
+    case clang::Stmt::WhileStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_WhileStmt_);
       break; 
-    case clang::Stmt::OMPParallelMaskedDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedDirective_);
+    case clang::Stmt::OMPParallelMaskedTaskLoopDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedTaskLoopDirective_);
       break; 
-    case clang::Stmt::DoStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DoStmt_);
+    case clang::Stmt::GotoStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GotoStmt_);
       break; 
-    case clang::Stmt::OMPTargetTeamsDistributeParallelForDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeParallelForDirective_);
+    case clang::Stmt::ContinueStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ContinueStmt_);
       break; 
-    case clang::Stmt::OMPCanonicalLoopClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCanonicalLoop_);
+    case clang::Stmt::BreakStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BreakStmt_);
       break; 
-    case clang::Stmt::ObjCAutoreleasePoolStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAutoreleasePoolStmt_);
+    case clang::Stmt::ReturnStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ReturnStmt_);
       break; 
-    case clang::Stmt::OMPTileDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTileDirective_);
+    case clang::Stmt::ObjCSelectorExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCSelectorExpr_);
       break; 
-    case clang::Stmt::ArrayInitLoopExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayInitLoopExpr_);
+    case clang::Stmt::ObjCAtTryStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtTryStmt_);
+      break; 
+    case clang::Stmt::SwitchStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SwitchStmt_);
+      break; 
+    case clang::Stmt::PseudoObjectExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PseudoObjectExpr_);
+      break; 
+    case clang::Stmt::ParenExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParenExpr_);
+      break; 
+    case clang::Stmt::MSAsmStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSAsmStmt_);
+      break; 
+    case clang::Stmt::ExpressionTraitExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExpressionTraitExpr_);
+      break; 
+    case clang::Stmt::SEHExceptStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHExceptStmt_);
+      break; 
+    case clang::Stmt::SEHTryStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHTryStmt_);
+      break; 
+    case clang::Stmt::SEHLeaveStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHLeaveStmt_);
+      break; 
+    case clang::Stmt::UnaryExprOrTypeTraitExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnaryExprOrTypeTraitExpr_);
+      break; 
+    case clang::Stmt::CXXForRangeStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXForRangeStmt_);
+      break; 
+    case clang::Stmt::ObjCEncodeExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCEncodeExpr_);
+      break; 
+    case clang::Stmt::SubstNonTypeTemplateParmExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstNonTypeTemplateParmExpr_);
+      break; 
+    case clang::Stmt::ObjCIndirectCopyRestoreExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIndirectCopyRestoreExpr_);
+      break; 
+    case clang::Stmt::CoroutineBodyStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoroutineBodyStmt_);
       break; 
     case clang::Stmt::CoreturnStmtClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoreturnStmt_);
       break; 
-    case clang::Stmt::MSPropertySubscriptExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertySubscriptExpr_);
+    case clang::Stmt::ArrayTypeTraitExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayTypeTraitExpr_);
+      break; 
+    case clang::Stmt::CXXUuidofExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXUuidofExpr_);
+      break; 
+    case clang::Stmt::ObjCForCollectionStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCForCollectionStmt_);
+      break; 
+    case clang::Stmt::ObjCAtCatchStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtCatchStmt_);
+      break; 
+    case clang::Stmt::ObjCAtSynchronizedStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtSynchronizedStmt_);
       break; 
     case clang::Stmt::ObjCAtThrowStmtClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtThrowStmt_);
       break; 
+    case clang::Stmt::OMPParallelMasterDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterDirective_);
+      break; 
+    case clang::Stmt::ImaginaryLiteralClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImaginaryLiteral_);
+      break; 
+    case clang::Stmt::ObjCAutoreleasePoolStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAutoreleasePoolStmt_);
+      break; 
+    case clang::Stmt::OMPCanonicalLoopClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCanonicalLoop_);
+      break; 
+    case clang::Stmt::OMPParallelDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelDirective_);
+      break; 
+    case clang::Stmt::OMPTileDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTileDirective_);
+      break; 
+    case clang::Stmt::MSPropertyRefExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertyRefExpr_);
+      break; 
+    case clang::Stmt::CaseStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CaseStmt_);
+      break; 
+    case clang::Stmt::ObjCDictionaryLiteralClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCDictionaryLiteral_);
+      break; 
+    case clang::Stmt::OMPInteropDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPInteropDirective_);
+      break; 
+    case clang::Stmt::ObjCSubscriptRefExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCSubscriptRefExpr_);
+      break; 
+    case clang::Stmt::CXXBoolLiteralExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXBoolLiteralExpr_);
+      break; 
+    case clang::Stmt::SYCLUniqueStableNameExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SYCLUniqueStableNameExpr_);
+      break; 
     case clang::Stmt::OMPSimdDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSimdDirective_);
-      break; 
-    case clang::Stmt::BinaryConditionalOperatorClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BinaryConditionalOperator_);
       break; 
     case clang::Stmt::OMPForSimdDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPForSimdDirective_);
       break; 
-    case clang::Stmt::MemberExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MemberExpr_);
+    case clang::Stmt::ObjCBoxedExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBoxedExpr_);
       break; 
-    case clang::Stmt::SEHFinallyStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHFinallyStmt_);
+    case clang::Stmt::OMPParallelSectionsDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelSectionsDirective_);
       break; 
-    case clang::Stmt::BinaryOperatorClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BinaryOperator_);
+    case clang::Stmt::ObjCAvailabilityCheckExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAvailabilityCheckExpr_);
       break; 
     case clang::Stmt::OMPParallelForDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelForDirective_);
@@ -5451,8 +5436,8 @@ bool ArboretumASTVisitor::VisitStmt(clang::Stmt* D) {
     case clang::Stmt::OMPTargetParallelForDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelForDirective_);
       break; 
-    case clang::Stmt::ObjCPropertyRefExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCPropertyRefExpr_);
+    case clang::Stmt::OMPErrorDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPErrorDirective_);
       break; 
     case clang::Stmt::OMPTaskLoopSimdDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskLoopSimdDirective_);
@@ -5460,44 +5445,59 @@ bool ArboretumASTVisitor::VisitStmt(clang::Stmt* D) {
     case clang::Stmt::OMPMaskedTaskLoopDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMaskedTaskLoopDirective_);
       break; 
+    case clang::Stmt::OMPMasterTaskLoopSimdDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterTaskLoopSimdDirective_);
+      break; 
+    case clang::Stmt::CXXTryStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTryStmt_);
+      break; 
+    case clang::Stmt::DefaultStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DefaultStmt_);
+      break; 
     case clang::Stmt::OMPMaskedTaskLoopSimdDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMaskedTaskLoopSimdDirective_);
+      break; 
+    case clang::Stmt::CompoundAssignOperatorClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundAssignOperator_);
+      break; 
+    case clang::Stmt::ObjCAtFinallyStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtFinallyStmt_);
       break; 
     case clang::Stmt::OMPParallelMasterTaskLoopDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterTaskLoopDirective_);
       break; 
-    case clang::Stmt::OMPParallelMaskedTaskLoopDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedTaskLoopDirective_);
+    case clang::Stmt::BlockExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BlockExpr_);
       break; 
-    case clang::Stmt::CXXDefaultInitExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDefaultInitExpr_);
+    case clang::Stmt::SEHFinallyStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHFinallyStmt_);
       break; 
-    case clang::Stmt::CStyleCastExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CStyleCastExpr_);
-      break; 
-    case clang::Stmt::OMPParallelForSimdDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelForSimdDirective_);
-      break; 
-    case clang::Stmt::CXXScalarValueInitExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXScalarValueInitExpr_);
-      break; 
-    case clang::Stmt::PseudoObjectExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PseudoObjectExpr_);
-      break; 
-    case clang::Stmt::CharacterLiteralClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CharacterLiteral_);
+    case clang::Stmt::OMPTargetDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetDirective_);
       break; 
     case clang::Stmt::OMPMasterDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterDirective_);
       break; 
-    case clang::Stmt::SYCLUniqueStableNameExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SYCLUniqueStableNameExpr_);
+    case clang::Stmt::CXXNoexceptExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNoexceptExpr_);
       break; 
     case clang::Stmt::OMPSingleDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSingleDirective_);
       break; 
-    case clang::Stmt::ContinueStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ContinueStmt_);
+    case clang::Stmt::ObjCIvarRefExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIvarRefExpr_);
+      break; 
+    case clang::Stmt::CUDAKernelCallExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CUDAKernelCallExpr_);
+      break; 
+    case clang::Stmt::OMPTaskyieldDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskyieldDirective_);
+      break; 
+    case clang::Stmt::OMPIteratorExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPIteratorExpr_);
+      break; 
+    case clang::Stmt::MSDependentExistsStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSDependentExistsStmt_);
       break; 
     case clang::Stmt::OMPTargetUpdateDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetUpdateDirective_);
@@ -5505,50 +5505,50 @@ bool ArboretumASTVisitor::VisitStmt(clang::Stmt* D) {
     case clang::Stmt::OMPCancelDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCancelDirective_);
       break; 
-    case clang::Stmt::ReturnStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ReturnStmt_);
+    case clang::Stmt::IfStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IfStmt_);
       break; 
-    case clang::Stmt::CXXFoldExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXFoldExpr_);
+    case clang::Stmt::RecoveryExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RecoveryExpr_);
       break; 
     case clang::Stmt::OMPDistributeParallelForDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeParallelForDirective_);
       break; 
-    case clang::Stmt::CXXUnresolvedConstructExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXUnresolvedConstructExpr_);
+    case clang::Stmt::OMPTaskwaitDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskwaitDirective_);
       break; 
-    case clang::Stmt::OMPBarrierDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPBarrierDirective_);
+    case clang::Stmt::OMPTargetParallelDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelDirective_);
       break; 
-    case clang::Stmt::OMPTaskLoopDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskLoopDirective_);
-      break; 
-    case clang::Stmt::OMPDistributeDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeDirective_);
+    case clang::Stmt::OMPCriticalDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCriticalDirective_);
       break; 
     case clang::Stmt::OMPForDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPForDirective_);
       break; 
-    case clang::Stmt::FixedPointLiteralClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FixedPointLiteral_);
-      break; 
     case clang::Stmt::OMPTargetSimdDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetSimdDirective_);
       break; 
-    case clang::Stmt::OMPParallelSectionsDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelSectionsDirective_);
+    case clang::Stmt::OMPDepobjDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDepobjDirective_);
       break; 
-    case clang::Stmt::CoroutineBodyStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoroutineBodyStmt_);
+    case clang::Stmt::ConstantExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstantExpr_);
       break; 
-    case clang::Stmt::OMPTargetDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetDirective_);
+    case clang::Stmt::OMPParallelForSimdDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelForSimdDirective_);
       break; 
-    case clang::Stmt::SEHTryStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SEHTryStmt_);
+    case clang::Stmt::OMPParallelMaskedDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedDirective_);
       break; 
-    case clang::Stmt::CXXThrowExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXThrowExpr_);
+    case clang::Stmt::InitListExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_InitListExpr_);
+      break; 
+    case clang::Stmt::OMPTargetTeamsGenericLoopDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsGenericLoopDirective_);
+      break; 
+    case clang::Stmt::CXXUnresolvedConstructExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXUnresolvedConstructExpr_);
       break; 
     case clang::Stmt::OMPTargetDataDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetDataDirective_);
@@ -5559,218 +5559,173 @@ bool ArboretumASTVisitor::VisitStmt(clang::Stmt* D) {
     case clang::Stmt::OMPTeamsDistributeDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeDirective_);
       break; 
-    case clang::Stmt::StringLiteralClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StringLiteral_);
-      break; 
     case clang::Stmt::OMPOrderedDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPOrderedDirective_);
       break; 
     case clang::Stmt::OMPTaskgroupDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskgroupDirective_);
       break; 
-    case clang::Stmt::OMPTaskyieldDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskyieldDirective_);
+    case clang::Stmt::OMPUnrollDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPUnrollDirective_);
       break; 
-    case clang::Stmt::OMPTeamsGenericLoopDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsGenericLoopDirective_);
-      break; 
-    case clang::Stmt::UnresolvedLookupExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedLookupExpr_);
-      break; 
-    case clang::Stmt::RecoveryExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RecoveryExpr_);
-      break; 
-    case clang::Stmt::OMPMaskedDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMaskedDirective_);
-      break; 
-    case clang::Stmt::ObjCEncodeExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCEncodeExpr_);
+    case clang::Stmt::FunctionParmPackExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionParmPackExpr_);
       break; 
     case clang::Stmt::CXXInheritedCtorInitExprClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXInheritedCtorInitExpr_);
       break; 
-    case clang::Stmt::CXXThisExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXThisExpr_);
+    case clang::Stmt::OMPTeamsDistributeParallelForDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeParallelForDirective_);
       break; 
-    case clang::Stmt::ObjCStringLiteralClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCStringLiteral_);
+    case clang::Stmt::CXXThrowExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXThrowExpr_);
       break; 
-    case clang::Stmt::ParenListExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParenListExpr_);
+    case clang::Stmt::MSPropertySubscriptExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertySubscriptExpr_);
       break; 
-    case clang::Stmt::SourceLocExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SourceLocExpr_);
+    case clang::Stmt::DesignatedInitExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DesignatedInitExpr_);
       break; 
-    case clang::Stmt::ArrayTypeTraitExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayTypeTraitExpr_);
-      break; 
-    case clang::Stmt::NullStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NullStmt_);
-      break; 
-    case clang::Stmt::CXXNullPtrLiteralExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNullPtrLiteralExpr_);
-      break; 
-    case clang::Stmt::OMPDistributeParallelForSimdDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeParallelForSimdDirective_);
-      break; 
-    case clang::Stmt::ObjCDictionaryLiteralClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCDictionaryLiteral_);
-      break; 
-    case clang::Stmt::VAArgExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VAArgExpr_);
-      break; 
-    case clang::Stmt::MSPropertyRefExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MSPropertyRefExpr_);
-      break; 
-    case clang::Stmt::TypoExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypoExpr_);
-      break; 
-    case clang::Stmt::ShuffleVectorExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ShuffleVectorExpr_);
-      break; 
-    case clang::Stmt::OMPParallelGenericLoopDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelGenericLoopDirective_);
-      break; 
-    case clang::Stmt::OMPSectionDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSectionDirective_);
-      break; 
-    case clang::Stmt::OpaqueValueExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OpaqueValueExpr_);
-      break; 
-    case clang::Stmt::CXXNoexceptExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNoexceptExpr_);
-      break; 
-    case clang::Stmt::LabelStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LabelStmt_);
-      break; 
-    case clang::Stmt::DependentScopeDeclRefExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentScopeDeclRefExpr_);
-      break; 
-    case clang::Stmt::CXXMemberCallExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXMemberCallExpr_);
-      break; 
-    case clang::Stmt::OMPTeamsDistributeParallelForSimdDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeParallelForSimdDirective_);
-      break; 
-    case clang::Stmt::UserDefinedLiteralClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UserDefinedLiteral_);
-      break; 
-    case clang::Stmt::CaseStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CaseStmt_);
-      break; 
-    case clang::Stmt::OMPDepobjDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDepobjDirective_);
-      break; 
-    case clang::Stmt::StmtExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StmtExpr_);
-      break; 
-    case clang::Stmt::ImplicitCastExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitCastExpr_);
-      break; 
-    case clang::Stmt::CUDAKernelCallExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CUDAKernelCallExpr_);
-      break; 
-    case clang::Stmt::LambdaExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LambdaExpr_);
-      break; 
-    case clang::Stmt::CXXDynamicCastExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDynamicCastExpr_);
-      break; 
-    case clang::Stmt::OffsetOfExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OffsetOfExpr_);
-      break; 
-    case clang::Stmt::FloatingLiteralClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FloatingLiteral_);
-      break; 
-    case clang::Stmt::ExtVectorElementExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExtVectorElementExpr_);
-      break; 
-    case clang::Stmt::CXXConstructExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstructExpr_);
-      break; 
-    case clang::Stmt::CallExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CallExpr_);
-      break; 
-    case clang::Stmt::ConstantExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConstantExpr_);
-      break; 
-    case clang::Stmt::CXXAddrspaceCastExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXAddrspaceCastExpr_);
-      break; 
-    case clang::Stmt::CXXBindTemporaryExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXBindTemporaryExpr_);
-      break; 
-    case clang::Stmt::PredefinedExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PredefinedExpr_);
-      break; 
-    case clang::Stmt::UnaryExprOrTypeTraitExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnaryExprOrTypeTraitExpr_);
-      break; 
-    case clang::Stmt::ImaginaryLiteralClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImaginaryLiteral_);
-      break; 
-    case clang::Stmt::AttributedStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AttributedStmt_);
-      break; 
-    case clang::Stmt::CoyieldExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoyieldExpr_);
-      break; 
-    case clang::Stmt::CXXPseudoDestructorExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXPseudoDestructorExpr_);
-      break; 
-    case clang::Stmt::MatrixSubscriptExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MatrixSubscriptExpr_);
-      break; 
-    case clang::Stmt::CXXOperatorCallExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXOperatorCallExpr_);
-      break; 
-    case clang::Stmt::OMPScopeDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPScopeDirective_);
-      break; 
-    case clang::Stmt::OMPTargetTeamsDistributeParallelForSimdDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeParallelForSimdDirective_);
-      break; 
-    case clang::Stmt::ParenExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParenExpr_);
-      break; 
-    case clang::Stmt::CompoundStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundStmt_);
-      break; 
-    case clang::Stmt::NoInitExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NoInitExpr_);
-      break; 
-    case clang::Stmt::CXXStaticCastExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXStaticCastExpr_);
-      break; 
-    case clang::Stmt::UnresolvedMemberExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedMemberExpr_);
-      break; 
-    case clang::Stmt::GenericSelectionExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GenericSelectionExpr_);
+    case clang::Stmt::ArraySubscriptExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArraySubscriptExpr_);
       break; 
     case clang::Stmt::AtomicExprClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AtomicExpr_);
       break; 
-    case clang::Stmt::CXXReinterpretCastExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXReinterpretCastExpr_);
+    case clang::Stmt::CXXOperatorCallExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXOperatorCallExpr_);
       break; 
-    case clang::Stmt::BuiltinBitCastExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BuiltinBitCastExpr_);
+    case clang::Stmt::CXXBindTemporaryExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXBindTemporaryExpr_);
       break; 
-    case clang::Stmt::CXXNewExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNewExpr_);
+    case clang::Stmt::CoyieldExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoyieldExpr_);
+      break; 
+    case clang::Stmt::VAArgExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_VAArgExpr_);
       break; 
     case clang::Stmt::AsTypeExprClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AsTypeExpr_);
       break; 
-    case clang::Stmt::CXXConstCastExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstCastExpr_);
+    case clang::Stmt::OMPFlushDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPFlushDirective_);
       break; 
-    case clang::Stmt::ConvertVectorExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConvertVectorExpr_);
+    case clang::Stmt::TypeTraitExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypeTraitExpr_);
+      break; 
+    case clang::Stmt::CXXNullPtrLiteralExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNullPtrLiteralExpr_);
+      break; 
+    case clang::Stmt::GenericSelectionExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GenericSelectionExpr_);
+      break; 
+    case clang::Stmt::OMPTeamsDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDirective_);
+      break; 
+    case clang::Stmt::ExtVectorElementExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExtVectorElementExpr_);
+      break; 
+    case clang::Stmt::ArrayInitIndexExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayInitIndexExpr_);
+      break; 
+    case clang::Stmt::ArrayInitLoopExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayInitLoopExpr_);
+      break; 
+    case clang::Stmt::CXXMemberCallExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXMemberCallExpr_);
+      break; 
+    case clang::Stmt::OffsetOfExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OffsetOfExpr_);
+      break; 
+    case clang::Stmt::CXXPseudoDestructorExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXPseudoDestructorExpr_);
+      break; 
+    case clang::Stmt::StringLiteralClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StringLiteral_);
       break; 
     case clang::Stmt::CXXFunctionalCastExprClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXFunctionalCastExpr_);
+      break; 
+    case clang::Stmt::UnaryOperatorClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnaryOperator_);
+      break; 
+    case clang::Stmt::OMPTargetTeamsDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDirective_);
+      break; 
+    case clang::Stmt::CXXReinterpretCastExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXReinterpretCastExpr_);
+      break; 
+    case clang::Stmt::CXXStaticCastExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXStaticCastExpr_);
+      break; 
+    case clang::Stmt::CharacterLiteralClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CharacterLiteral_);
+      break; 
+    case clang::Stmt::OMPParallelMaskedTaskLoopSimdDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedTaskLoopSimdDirective_);
+      break; 
+    case clang::Stmt::CXXDefaultArgExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDefaultArgExpr_);
+      break; 
+    case clang::Stmt::PredefinedExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PredefinedExpr_);
+      break; 
+    case clang::Stmt::IntegerLiteralClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IntegerLiteral_);
+      break; 
+    case clang::Stmt::CStyleCastExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CStyleCastExpr_);
+      break; 
+    case clang::Stmt::BinaryOperatorClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BinaryOperator_);
+      break; 
+    case clang::Stmt::CoawaitExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CoawaitExpr_);
+      break; 
+    case clang::Stmt::SourceLocExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SourceLocExpr_);
+      break; 
+    case clang::Stmt::CXXNewExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXNewExpr_);
+      break; 
+    case clang::Stmt::ParenListExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ParenListExpr_);
+      break; 
+    case clang::Stmt::BuiltinBitCastExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BuiltinBitCastExpr_);
+      break; 
+    case clang::Stmt::TypoExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_TypoExpr_);
+      break; 
+    case clang::Stmt::DesignatedInitUpdateExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DesignatedInitUpdateExpr_);
+      break; 
+    case clang::Stmt::OpaqueValueExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OpaqueValueExpr_);
+      break; 
+    case clang::Stmt::OMPTargetParallelGenericLoopDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelGenericLoopDirective_);
+      break; 
+    case clang::Stmt::CompoundLiteralExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundLiteralExpr_);
+      break; 
+    case clang::Stmt::CXXConstructExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstructExpr_);
+      break; 
+    case clang::Stmt::ExprWithCleanupsClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExprWithCleanups_);
+      break; 
+    case clang::Stmt::CXXScalarValueInitExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXScalarValueInitExpr_);
+      break; 
+    case clang::Stmt::CXXDeleteExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDeleteExpr_);
+      break; 
+    case clang::Stmt::FloatingLiteralClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FloatingLiteral_);
+      break; 
+    case clang::Stmt::LabelStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LabelStmt_);
       break; 
     case clang::Stmt::ObjCBridgedCastExprClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBridgedCastExpr_);
@@ -5778,68 +5733,110 @@ bool ArboretumASTVisitor::VisitStmt(clang::Stmt* D) {
     case clang::Stmt::DeclStmtClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DeclStmt_);
       break; 
-    case clang::Stmt::CXXRewrittenBinaryOperatorClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXRewrittenBinaryOperator_);
+    case clang::Stmt::CXXDynamicCastExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDynamicCastExpr_);
       break; 
-    case clang::Stmt::CompoundAssignOperatorClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundAssignOperator_);
+    case clang::Stmt::MemberExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MemberExpr_);
       break; 
-    case clang::Stmt::ConditionalOperatorClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConditionalOperator_);
+    case clang::Stmt::AttributedStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AttributedStmt_);
       break; 
-    case clang::Stmt::ExpressionTraitExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExpressionTraitExpr_);
-      break; 
-    case clang::Stmt::OMPTeamsDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDirective_);
-      break; 
-    case clang::Stmt::ArrayInitIndexExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArrayInitIndexExpr_);
+    case clang::Stmt::CXXConstCastExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXConstCastExpr_);
       break; 
     case clang::Stmt::ImplicitValueInitExprClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ImplicitValueInitExpr_);
       break; 
+    case clang::Stmt::NoInitExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NoInitExpr_);
+      break; 
+    case clang::Stmt::CompoundStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundStmt_);
+      break; 
+    case clang::Stmt::CallExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CallExpr_);
+      break; 
+    case clang::Stmt::OMPScopeDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPScopeDirective_);
+      break; 
+    case clang::Stmt::CapturedStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CapturedStmt_);
+      break; 
+    case clang::Stmt::ConditionalOperatorClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConditionalOperator_);
+      break; 
+    case clang::Stmt::StmtExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_StmtExpr_);
+      break; 
+    case clang::Stmt::MatrixSubscriptExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MatrixSubscriptExpr_);
+      break; 
+    case clang::Stmt::CXXRewrittenBinaryOperatorClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXRewrittenBinaryOperator_);
+      break; 
+    case clang::Stmt::NullStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_NullStmt_);
+      break; 
+    case clang::Stmt::OMPBarrierDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPBarrierDirective_);
+      break; 
+    case clang::Stmt::OMPScanDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPScanDirective_);
+      break; 
+    case clang::Stmt::ConvertVectorExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConvertVectorExpr_);
+      break; 
+    case clang::Stmt::UnresolvedMemberExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedMemberExpr_);
+      break; 
+    case clang::Stmt::DependentScopeDeclRefExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentScopeDeclRefExpr_);
+      break; 
     case clang::Stmt::CXXDependentScopeMemberExprClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDependentScopeMemberExpr_);
       break; 
-    case clang::Stmt::DesignatedInitUpdateExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DesignatedInitUpdateExpr_);
-      break; 
-    case clang::Stmt::CXXTemporaryObjectExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTemporaryObjectExpr_);
+    case clang::Stmt::CXXThisExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXThisExpr_);
       break; 
     case clang::Stmt::PackExpansionExprClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_PackExpansionExpr_);
       break; 
-    case clang::Stmt::SubstNonTypeTemplateParmPackExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstNonTypeTemplateParmPackExpr_);
+    case clang::Stmt::MaterializeTemporaryExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_MaterializeTemporaryExpr_);
       break; 
-    case clang::Stmt::ObjCBoolLiteralExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCBoolLiteralExpr_);
+    case clang::Stmt::CXXFoldExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXFoldExpr_);
       break; 
-    case clang::Stmt::SizeOfPackExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SizeOfPackExpr_);
-      break; 
-    case clang::Stmt::FunctionParmPackExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FunctionParmPackExpr_);
-      break; 
-    case clang::Stmt::InitListExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_InitListExpr_);
-      break; 
-    case clang::Stmt::SubstNonTypeTemplateParmExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstNonTypeTemplateParmExpr_);
-      break; 
-    case clang::Stmt::DefaultStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DefaultStmt_);
+    case clang::Stmt::LambdaExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_LambdaExpr_);
       break; 
     case clang::Stmt::DependentCoawaitExprClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DependentCoawaitExpr_);
       break; 
-    case clang::Stmt::OMPParallelMaskedTaskLoopSimdDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMaskedTaskLoopSimdDirective_);
+    case clang::Stmt::SizeOfPackExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SizeOfPackExpr_);
       break; 
-    case clang::Stmt::CompoundLiteralExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CompoundLiteralExpr_);
+    case clang::Stmt::RequiresExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RequiresExpr_);
+      break; 
+    case clang::Stmt::ObjCStringLiteralClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCStringLiteral_);
+      break; 
+    case clang::Stmt::OMPMetaDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMetaDirective_);
+      break; 
+    case clang::Stmt::OMPAtomicDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPAtomicDirective_);
+      break; 
+    case clang::Stmt::GNUNullExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GNUNullExpr_);
+      break; 
+    case clang::Stmt::AddrLabelExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AddrLabelExpr_);
+      break; 
+    case clang::Stmt::ConceptSpecializationExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ConceptSpecializationExpr_);
       break; 
     case clang::Stmt::OMPTargetParallelForSimdDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelForSimdDirective_);
@@ -5847,116 +5844,119 @@ bool ArboretumASTVisitor::VisitStmt(clang::Stmt* D) {
     case clang::Stmt::OMPTaskDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskDirective_);
       break; 
-    case clang::Stmt::ForStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ForStmt_);
+    case clang::Stmt::ShuffleVectorExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ShuffleVectorExpr_);
+      break; 
+    case clang::Stmt::BinaryConditionalOperatorClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_BinaryConditionalOperator_);
       break; 
     case clang::Stmt::OMPTeamsDistributeSimdDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeSimdDirective_);
       break; 
-    case clang::Stmt::ArraySubscriptExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ArraySubscriptExpr_);
+    case clang::Stmt::DoStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DoStmt_);
       break; 
-    case clang::Stmt::OMPTeamsDistributeParallelForDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeParallelForDirective_);
+    case clang::Stmt::OMPArrayShapingExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPArrayShapingExpr_);
       break; 
-    case clang::Stmt::OMPScanDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPScanDirective_);
+    case clang::Stmt::UnresolvedLookupExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UnresolvedLookupExpr_);
       break; 
-    case clang::Stmt::OMPMetaDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMetaDirective_);
+    case clang::Stmt::OMPTeamsDistributeParallelForSimdDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsDistributeParallelForSimdDirective_);
       break; 
-    case clang::Stmt::DesignatedInitExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DesignatedInitExpr_);
+    case clang::Stmt::OMPTargetTeamsDistributeParallelForSimdDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeParallelForSimdDirective_);
       break; 
-    case clang::Stmt::GNUNullExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GNUNullExpr_);
+    case clang::Stmt::CXXAddrspaceCastExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXAddrspaceCastExpr_);
       break; 
     case clang::Stmt::OMPGenericLoopDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPGenericLoopDirective_);
       break; 
-    case clang::Stmt::OMPTargetTeamsGenericLoopDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsGenericLoopDirective_);
-      break; 
-    case clang::Stmt::ExprWithCleanupsClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ExprWithCleanups_);
-      break; 
-    case clang::Stmt::IntegerLiteralClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IntegerLiteral_);
-      break; 
-    case clang::Stmt::OMPUnrollDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPUnrollDirective_);
-      break; 
-    case clang::Stmt::RequiresExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_RequiresExpr_);
-      break; 
-    case clang::Stmt::ObjCAtSynchronizedStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtSynchronizedStmt_);
-      break; 
-    case clang::Stmt::OMPSectionsDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSectionsDirective_);
-      break; 
-    case clang::Stmt::ObjCAtTryStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCAtTryStmt_);
-      break; 
-    case clang::Stmt::ObjCIndirectCopyRestoreExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCIndirectCopyRestoreExpr_);
-      break; 
-    case clang::Stmt::OMPDistributeSimdDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeSimdDirective_);
-      break; 
-    case clang::Stmt::ObjCArrayLiteralClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ObjCArrayLiteral_);
-      break; 
-    case clang::Stmt::OMPInteropDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPInteropDirective_);
-      break; 
-    case clang::Stmt::AddrLabelExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_AddrLabelExpr_);
-      break; 
-    case clang::Stmt::DeclRefExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DeclRefExpr_);
-      break; 
-    case clang::Stmt::OMPFlushDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPFlushDirective_);
-      break; 
-    case clang::Stmt::CXXTypeidExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTypeidExpr_);
-      break; 
-    case clang::Stmt::OMPTargetExitDataDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetExitDataDirective_);
-      break; 
-    case clang::Stmt::IndirectGotoStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IndirectGotoStmt_);
-      break; 
-    case clang::Stmt::CXXStdInitializerListExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXStdInitializerListExpr_);
-      break; 
-    case clang::Stmt::CXXDefaultArgExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDefaultArgExpr_);
-      break; 
-    case clang::Stmt::OMPCancellationPointDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCancellationPointDirective_);
+    case clang::Stmt::OMPDistributeParallelForSimdDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeParallelForSimdDirective_);
       break; 
     case clang::Stmt::OMPDispatchDirectiveClass: 
       arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDispatchDirective_);
       break; 
-    case clang::Stmt::CXXDeleteExprClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDeleteExpr_);
+    case clang::Stmt::OMPTargetTeamsDistributeParallelForDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeParallelForDirective_);
       break; 
-    case clang::Stmt::OMPTargetParallelDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetParallelDirective_);
+    case clang::Stmt::UserDefinedLiteralClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_UserDefinedLiteral_);
       break; 
-    case clang::Stmt::OMPTaskwaitDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskwaitDirective_);
+    case clang::Stmt::OMPMaskedDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMaskedDirective_);
       break; 
-    case clang::Stmt::OMPTargetTeamsDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDirective_);
+    case clang::Stmt::OMPTeamsGenericLoopDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTeamsGenericLoopDirective_);
       break; 
-    case clang::Stmt::OMPAtomicDirectiveClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPAtomicDirective_);
+    case clang::Stmt::OMPArraySectionExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPArraySectionExpr_);
       break; 
-    case clang::Stmt::IfStmtClass: 
-      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IfStmt_);
+    case clang::Stmt::OMPParallelGenericLoopDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelGenericLoopDirective_);
+      break; 
+    case clang::Stmt::CXXTemporaryObjectExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXTemporaryObjectExpr_);
+      break; 
+    case clang::Stmt::OMPSectionsDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSectionsDirective_);
+      break; 
+    case clang::Stmt::ChooseExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ChooseExpr_);
+      break; 
+    case clang::Stmt::OMPDistributeSimdDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeSimdDirective_);
+      break; 
+    case clang::Stmt::OMPParallelMasterTaskLoopSimdDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPParallelMasterTaskLoopSimdDirective_);
+      break; 
+    case clang::Stmt::OMPMasterTaskLoopDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPMasterTaskLoopDirective_);
+      break; 
+    case clang::Stmt::IndirectGotoStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_IndirectGotoStmt_);
+      break; 
+    case clang::Stmt::OMPSectionDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPSectionDirective_);
+      break; 
+    case clang::Stmt::CXXDefaultInitExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXDefaultInitExpr_);
+      break; 
+    case clang::Stmt::GCCAsmStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_GCCAsmStmt_);
+      break; 
+    case clang::Stmt::OMPTargetExitDataDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetExitDataDirective_);
+      break; 
+    case clang::Stmt::CXXCatchStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_CXXCatchStmt_);
+      break; 
+    case clang::Stmt::OMPDistributeDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPDistributeDirective_);
+      break; 
+    case clang::Stmt::OMPTaskLoopDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTaskLoopDirective_);
+      break; 
+    case clang::Stmt::FixedPointLiteralClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_FixedPointLiteral_);
+      break; 
+    case clang::Stmt::OMPCancellationPointDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPCancellationPointDirective_);
+      break; 
+    case clang::Stmt::ForStmtClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_ForStmt_);
+      break; 
+    case clang::Stmt::OMPTargetTeamsDistributeDirectiveClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_OMPTargetTeamsDistributeDirective_);
+      break; 
+    case clang::Stmt::SubstNonTypeTemplateParmPackExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_SubstNonTypeTemplateParmPackExpr_);
+      break; 
+    case clang::Stmt::DeclRefExprClass: 
+      arboretum_create_edge(obj, context_.data_model_.meta_class_, context_.data_model_.class_DeclRefExpr_);
       break; 
     default: break;
   }

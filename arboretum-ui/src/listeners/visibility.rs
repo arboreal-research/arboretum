@@ -21,7 +21,8 @@ pub(super) fn setup(
             .visibility_state()
             == VisibilityState::Visible
         {
-            state.last_frame_timestamp = web_sys::window().unwrap().performance().unwrap().now();
+            state.force_directed.last_frame_timestamp =
+                web_sys::window().unwrap().performance().unwrap().now();
         }
     }) as Box<dyn FnMut(Event)>);
 

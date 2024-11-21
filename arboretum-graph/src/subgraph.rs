@@ -1,12 +1,8 @@
-use std::{collections::HashMap, path::Path};
-
+use crate::{error::Error, mmap, SledGraph, SubgraphConfig};
+use arboretum_core::{constant::*, merge_u64, split_u64, ArchivedValue, Prefix, Value};
 use num::NumCast;
 use rkyv::{Deserialize, Infallible};
-
-use crate::{
-    constant::*, error::Error, merge_u64, mmap, split_u64, ArchivedValue, Prefix, SledGraph,
-    SubgraphConfig, Value,
-};
+use std::{collections::HashMap, path::Path};
 
 #[derive(Debug)]
 pub enum Subgraph {
@@ -180,11 +176,11 @@ impl Subgraph {
     ) -> Result<Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a>, Error> {
         Ok(match self {
             Subgraph::MmapGraph16 { graph_id, mmap } => Box::new(
-                mmap.prefix_edges_spo(TryInto::<Prefix<u16>>::try_into(prefix)?)
+                mmap.prefix_edges_spo(prefix.into())
                     .map(|edge| rebuild_edge(graph_id, edge)),
             ),
             Subgraph::MmapGraph32 { graph_id, mmap } => Box::new(
-                mmap.prefix_edges_spo(TryInto::<Prefix<u32>>::try_into(prefix)?)
+                mmap.prefix_edges_spo(prefix.into())
                     .map(|edge| rebuild_edge(graph_id, edge)),
             ),
             Subgraph::MmapGraph64 { mmap } => {
@@ -213,12 +209,12 @@ impl Subgraph {
     ) -> Result<Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a>, Error> {
         Ok(match self {
             Subgraph::MmapGraph16 { graph_id, mmap } => Box::new(
-                mmap.prefix_edges_pos(TryInto::<Prefix<u16>>::try_into(prefix)?)
+                mmap.prefix_edges_pos(prefix.into())
                     .map(|edge| rebuild_edge(graph_id, edge)),
             ),
 
             Subgraph::MmapGraph32 { graph_id, mmap } => Box::new(
-                mmap.prefix_edges_pos(TryInto::<Prefix<u32>>::try_into(prefix)?)
+                mmap.prefix_edges_pos(prefix.into())
                     .map(|edge| rebuild_edge(graph_id, edge)),
             ),
 
@@ -248,11 +244,11 @@ impl Subgraph {
     ) -> Result<Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a>, Error> {
         Ok(match self {
             Subgraph::MmapGraph16 { graph_id, mmap } => Box::new(
-                mmap.prefix_edges_osp(TryInto::<Prefix<u16>>::try_into(prefix)?)
+                mmap.prefix_edges_osp(prefix.into())
                     .map(|edge| rebuild_edge(graph_id, edge)),
             ),
             Subgraph::MmapGraph32 { graph_id, mmap } => Box::new(
-                mmap.prefix_edges_osp(TryInto::<Prefix<u32>>::try_into(prefix)?)
+                mmap.prefix_edges_osp(prefix.into())
                     .map(|edge| rebuild_edge(graph_id, edge)),
             ),
             Subgraph::MmapGraph64 { mmap } => {

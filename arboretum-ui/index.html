@@ -8,15 +8,100 @@
         body {
             margin: 0;
             overflow: hidden;
-            background-color: rgb(66, 84, 51); 
+            /* background-color: rgb(66, 84, 51);  */
         }
-        canvas {
+
+        #canvas {
             display: block;
+        }
+
+        #navbar {
+            position: absolute; 
+            max-height: 3rem; 
+            padding: 0.5rem;
+            min-width: 400px; 
+        }
+
+        #navbar-inner {
+            background-color: #363636;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .container {
+            padding: 0.5rem;
+        }
+
+        #params-header {
+            background-color: #363636;
+            color: white;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            margin: 0rem;
+        }
+
+        #params {
+            position: absolute; 
+            min-width: 400px; 
+            margin: 0.5rem;
+            margin-top: 3.5rem;
+            background-color: #a9a9a9;
+            border-radius: 5px;
+            display: hidden;
+        }
+
+
+        #params-files {
+            display: block;
+        }
+
+        #params-invocations {
+            display: none;
+        }
+
+        #params-control-flow {
+            display: none;
+        }
+
+        #params-data-flow {
+            display: none;
         }
     </style>
 </head>
-<body style="">
-    <canvas id="canvas" width="400" height="400"></canvas>
+<body>
+    <div>
+        <div id="navbar">
+            <div id="navbar-inner">
+                <button id="btnFiles">Files</button>
+                <button id="btnInvocations">Invocations</button>
+                <button id="btnControlFlow">Control Flow</button>
+                <button id="btnDataFlow">Data Flow</button>
+            </div>
+        </div>
+        <div id="params">
+            <div id="params-header">
+                <div class="container">
+                    <b>Options</b>
+                </div>
+            </div>
+            <div class="container">
+                <div id="params-files">
+                    <input id="chkShowSystem" type="checkbox"/><label for="chkShowSystem">Show System Files</label>
+                    <br/>
+                    <input id="chkShowHeader" type="checkbox"/><label for="chkShowHeader">Show Header Files</label>
+                    <br/>
+                    <input id="chkShowTU" type="checkbox"/><label for="chkShowTU">Show Translation Units</label>
+                </div>
+                <div id="params-invocations">
+                </div>
+                <div id="params-control-flow">
+                </div>
+                <div id="params-data-flow">
+                </div>
+            </div>
+        </div>
+        <canvas id="canvas" width="400" height="400"></canvas>
+    </div>
     <script type="module">
         import init from "./pkg/graph_view.js";
         init();

@@ -1,6 +1,6 @@
+use crate::{MmapGraphBuilder, MmapGraphBuilderOptions};
+use arboretum_core::{Domain, Value};
 use std::collections::HashMap;
-
-use crate::{Domain, MmapGraphBuilder, MmapGraphBuilderOptions, Value};
 
 pub enum SmartMmapBuilder {
     U16(MmapGraphBuilder<u16, Value, Value>),

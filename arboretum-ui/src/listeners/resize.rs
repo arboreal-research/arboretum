@@ -16,6 +16,7 @@ pub(super) fn setup(
     let window2 = window.clone();
     let closure = Closure::wrap(Box::new(move || {
         let mut state = state.borrow_mut();
+        let view_transform = state.view_transform_mut();
 
         let new_width = window.inner_width().unwrap().as_f64().unwrap();
         let new_height = window.inner_height().unwrap().as_f64().unwrap();
@@ -26,11 +27,11 @@ pub(super) fn setup(
         // Recalculate scale to maintain zoom level
         let scale_x = new_width / cur_width;
         let scale_y = new_height / cur_height;
-        state.scale *= (scale_x + scale_y) / 2.0; // Averaging scales for simplicity
+        view_transform.scale *= (scale_x + scale_y) / 2.0; // Averaging scales for simplicity
 
         // Adjust translate to keep the view centered
-        state.translate_x *= scale_x;
-        state.translate_y *= scale_y;
+        view_transform.translate_x *= scale_x;
+        view_transform.translate_y *= scale_y;
 
         set_canvas_size(&canvas, &window);
     }) as Box<dyn FnMut()>);

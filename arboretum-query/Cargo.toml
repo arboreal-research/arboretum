@@ -5,7 +5,8 @@ edition = "2021"
 
 [dependencies]
 serde = { version = "1.0.208", features = ["derive"] }
-arboretum-graph = {path="../arboretum-graph/"}
+arboretum-core = {path="../arboretum-core/"}
+arboretum-graph = {path="../arboretum-graph/", optional=true}
 reqwest = { version = "0.12.7", optional=true}
 tokio = { version = "1.39.3", optional=true}
 reqwasm = { version = "0.5.0", optional = true }
@@ -15,6 +16,8 @@ serde_json = { version = "1.0.127", optional = true }
 
 [features]
 default = []
+
+local = ["dep:arboretum-graph"]
 
 http_reqwest = ["dep:reqwest", "reqwest/json"]
 http_reqwest_async = ["http_reqwest", "dep:tokio"]

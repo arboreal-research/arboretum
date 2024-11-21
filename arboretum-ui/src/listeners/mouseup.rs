@@ -14,17 +14,19 @@ pub(super) fn setup(
     let canvas2 = canvas.clone();
     let closure = Closure::wrap(Box::new(move |event: MouseEvent| {
         let mut state_ref = state.borrow_mut();
-        state_ref.is_panning = false;
+        let view_transform = state_ref.view_transform_mut();
+
+        view_transform.is_panning = false;
 
         // Calculate the movement distance
-        let dx = event.client_x() as f64 - state_ref.pan_start_x;
-        let dy = event.client_y() as f64 - state_ref.pan_start_y;
+        let dx = event.client_x() as f64 - view_transform.pan_start_x;
+        let dy = event.client_y() as f64 - view_transform.pan_start_y;
         let distance = (dx * dx + dy * dy).sqrt();
 
         // Only consider it a click if the distance is below the threshold
         if distance < 5.0 {
-            let x = (event.offset_x() as f64 - state_ref.translate_x) / state_ref.scale;
-            let y = (event.offset_y() as f64 - state_ref.translate_y) / state_ref.scale;
+            let x = (event.offset_x() as f64 - view_transform.translate_x) / view_transform.scale;
+            let y = (event.offset_y() as f64 - view_transform.translate_y) / view_transform.scale;
 
             state_ref.last_click = Some((x, y));
         }

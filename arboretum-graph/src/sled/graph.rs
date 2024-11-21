@@ -1,12 +1,11 @@
+use crate::error::Error;
+use arboretum_core::{Prefix, PropsType};
+use rkyv::{AlignedVec, Deserialize, Infallible};
 use std::{
     collections::HashMap,
     ops::Bound,
     path::{Path, PathBuf},
 };
-
-use rkyv::{AlignedVec, Deserialize, Infallible};
-
-use crate::{error::Error, Prefix, PropsType};
 
 pub struct SledGraph<NodeProps, EdgeProps>
 where

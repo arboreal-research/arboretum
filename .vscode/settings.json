@@ -91,7 +91,8 @@
     "__debug": "cpp",
     "format": "cpp",
     "ranges": "cpp",
-    "typeindex": "cpp"
+    "typeindex": "cpp",
+    "__nullptr": "cpp"
   },
   "cmake.configureOnOpen": false,
   "C_Cpp.default.compilerPath": "/usr/bin/clang++",

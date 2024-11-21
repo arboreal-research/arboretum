@@ -1,7 +1,8 @@
 use std::sync::Arc;
 
 use ::futures::future;
-use arboretum_graph::{GraphBuffer, RootGraph};
+use arboretum_graph::{RootGraph};
+use arboretum_core::GraphBuffer;
 use clap::Parser;
 use tokio::{
     sync::{broadcast, mpsc},

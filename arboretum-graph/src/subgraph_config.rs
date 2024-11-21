@@ -1,6 +1,7 @@
 use std::path::{Path, PathBuf};
 
-use crate::{constant::*, error::Error};
+use crate::error::Error;
+use arboretum_core::constant::*;
 
 #[derive(Clone, Debug)]
 pub enum SubgraphConfig {

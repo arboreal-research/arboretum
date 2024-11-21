@@ -1,0 +1,1672 @@
+schema {
+  query: Query
+}
+
+type AbstractConditionalOperator {
+  id: ID!
+}
+
+type AccessSpecDecl {
+  id: ID!
+}
+
+type AddrLabelExpr {
+  id: ID!
+}
+
+type AdjustedType {
+  id: ID!
+}
+
+type ArrayInitIndexExpr {
+  id: ID!
+}
+
+type ArrayInitLoopExpr {
+  id: ID!
+}
+
+type ArraySubscriptExpr {
+  id: ID!
+}
+
+type ArrayType {
+  id: ID!
+}
+
+type ArrayTypeTraitExpr {
+  id: ID!
+}
+
+type AsTypeExpr {
+  id: ID!
+}
+
+type AsmStmt {
+  id: ID!
+}
+
+type AtomicExpr {
+  id: ID!
+}
+
+type AtomicType {
+  id: ID!
+}
+
+type AttributedStmt {
+  id: ID!
+}
+
+type AttributedType {
+  id: ID!
+}
+
+type AutoType {
+  id: ID!
+}
+
+type BTFTagAttributedType {
+  id: ID!
+}
+
+type BaseUsingDecl {
+  id: ID!
+}
+
+type BinaryConditionalOperator {
+  id: ID!
+}
+
+type BinaryOperator {
+  id: ID!
+}
+
+type BindingDecl {
+  id: ID!
+}
+
+type BitIntType {
+  id: ID!
+}
+
+type BlockDecl {
+  id: ID!
+}
+
+type BlockExpr {
+  id: ID!
+}
+
+type BlockPointerType {
+  id: ID!
+}
+
+type BreakStmt {
+  id: ID!
+}
+
+type BuiltinBitCastExpr {
+  id: ID!
+}
+
+type BuiltinTemplateDecl {
+  id: ID!
+}
+
+type BuiltinType {
+  id: ID!
+}
+
+type CStyleCastExpr {
+  id: ID!
+}
+
+type CUDAKernelCallExpr {
+  id: ID!
+}
+
+type CXXAddrspaceCastExpr {
+  id: ID!
+}
+
+type CXXBindTemporaryExpr {
+  id: ID!
+}
+
+type CXXBoolLiteralExpr {
+  id: ID!
+}
+
+type CXXCatchStmt {
+  id: ID!
+}
+
+type CXXConstCastExpr {
+  id: ID!
+}
+
+type CXXConstructExpr {
+  id: ID!
+}
+
+type CXXConstructorDecl {
+  id: ID!
+}
+
+type CXXConversionDecl {
+  id: ID!
+}
+
+type CXXDeductionGuideDecl {
+  id: ID!
+}
+
+type CXXDefaultArgExpr {
+  id: ID!
+}
+
+type CXXDefaultInitExpr {
+  id: ID!
+}
+
+type CXXDeleteExpr {
+  id: ID!
+}
+
+type CXXDependentScopeMemberExpr {
+  id: ID!
+}
+
+type CXXDestructorDecl {
+  id: ID!
+}
+
+type CXXDynamicCastExpr {
+  id: ID!
+}
+
+type CXXFoldExpr {
+  id: ID!
+}
+
+type CXXForRangeStmt {
+  id: ID!
+}
+
+type CXXFunctionalCastExpr {
+  id: ID!
+}
+
+type CXXInheritedCtorInitExpr {
+  id: ID!
+}
+
+type CXXMemberCallExpr {
+  id: ID!
+}
+
+type CXXMethodDecl {
+  id: ID!
+}
+
+type CXXNamedCastExpr {
+  id: ID!
+}
+
+type CXXNewExpr {
+  id: ID!
+}
+
+type CXXNoexceptExpr {
+  id: ID!
+}
+
+type CXXNullPtrLiteralExpr {
+  id: ID!
+}
+
+type CXXOperatorCallExpr {
+  id: ID!
+}
+
+type CXXParenListInitExpr {
+  id: ID!
+}
+
+type CXXPseudoDestructorExpr {
+  id: ID!
+}
+
+type CXXRecordDecl {
+  id: ID!
+}
+
+type CXXReinterpretCastExpr {
+  id: ID!
+}
+
+type CXXRewrittenBinaryOperator {
+  id: ID!
+}
+
+type CXXScalarValueInitExpr {
+  id: ID!
+}
+
+type CXXStaticCastExpr {
+  id: ID!
+}
+
+type CXXStdInitializerListExpr {
+  id: ID!
+}
+
+type CXXTemporaryObjectExpr {
+  id: ID!
+}
+
+type CXXThisExpr {
+  id: ID!
+}
+
+type CXXThrowExpr {
+  id: ID!
+}
+
+type CXXTryStmt {
+  id: ID!
+}
+
+type CXXTypeidExpr {
+  id: ID!
+}
+
+type CXXUnresolvedConstructExpr {
+  id: ID!
+}
+
+type CXXUuidofExpr {
+  id: ID!
+}
+
+type CallExpr {
+  id: ID!
+}
+
+type CapturedDecl {
+  id: ID!
+}
+
+type CapturedStmt {
+  id: ID!
+}
+
+type CaseStmt {
+  id: ID!
+}
+
+type CastExpr {
+  id: ID!
+}
+
+type CharacterLiteral {
+  id: ID!
+}
+
+type ChooseExpr {
+  id: ID!
+}
+
+type ClassTemplateDecl {
+  id: ID!
+}
+
+type ClassTemplatePartialSpecializationDecl {
+  id: ID!
+}
+
+type ClassTemplateSpecializationDecl {
+  id: ID!
+}
+
+type CoawaitExpr {
+  id: ID!
+}
+
+type ComplexType {
+  id: ID!
+}
+
+type CompoundAssignOperator {
+  id: ID!
+}
+
+type CompoundLiteralExpr {
+  id: ID!
+}
+
+type CompoundStmt {
+  id: ID!
+}
+
+type ConceptDecl {
+  id: ID!
+}
+
+type ConceptSpecializationExpr {
+  id: ID!
+}
+
+type ConditionalOperator {
+  id: ID!
+}
+
+type ConstantArrayType {
+  id: ID!
+}
+
+type ConstantExpr {
+  id: ID!
+}
+
+type ConstantMatrixType {
+  id: ID!
+}
+
+type ConstructorUsingShadowDecl {
+  id: ID!
+}
+
+type ContinueStmt {
+  id: ID!
+}
+
+type ConvertVectorExpr {
+  id: ID!
+}
+
+type CoreturnStmt {
+  id: ID!
+}
+
+type CoroutineBodyStmt {
+  id: ID!
+}
+
+type CoroutineSuspendExpr {
+  id: ID!
+}
+
+type CoyieldExpr {
+  id: ID!
+}
+
+type DecayedType {
+  id: ID!
+}
+
+type Decl {
+  id: ID!
+}
+
+type DeclRefExpr {
+  id: ID!
+}
+
+type DeclStmt {
+  id: ID!
+}
+
+type DeclaratorDecl {
+  id: ID!
+}
+
+type DecltypeType {
+  id: ID!
+}
+
+type DecompositionDecl {
+  id: ID!
+}
+
+type DeducedTemplateSpecializationType {
+  id: ID!
+}
+
+type DeducedType {
+  id: ID!
+}
+
+type DefaultStmt {
+  id: ID!
+}
+
+type DependentAddressSpaceType {
+  id: ID!
+}
+
+type DependentBitIntType {
+  id: ID!
+}
+
+type DependentCoawaitExpr {
+  id: ID!
+}
+
+type DependentDecltypeType {
+  id: ID!
+}
+
+type DependentNameType {
+  id: ID!
+}
+
+type DependentScopeDeclRefExpr {
+  id: ID!
+}
+
+type DependentSizedArrayType {
+  id: ID!
+}
+
+type DependentSizedExtVectorType {
+  id: ID!
+}
+
+type DependentSizedMatrixType {
+  id: ID!
+}
+
+type DependentTemplateSpecializationType {
+  id: ID!
+}
+
+type DependentTypeOfExprType {
+  id: ID!
+}
+
+type DependentUnaryTransformType {
+  id: ID!
+}
+
+type DependentVectorType {
+  id: ID!
+}
+
+type DesignatedInitExpr {
+  id: ID!
+}
+
+type DesignatedInitUpdateExpr {
+  id: ID!
+}
+
+type DoStmt {
+  id: ID!
+}
+
+type ElaboratedType {
+  id: ID!
+}
+
+type EmptyDecl {
+  id: ID!
+}
+
+type EnumConstantDecl {
+  id: ID!
+}
+
+type EnumDecl {
+  id: ID!
+}
+
+type EnumType {
+  id: ID!
+}
+
+type ExplicitCastExpr {
+  id: ID!
+}
+
+type ExportDecl {
+  id: ID!
+}
+
+type Expr {
+  id: ID!
+}
+
+type ExprWithCleanups {
+  id: ID!
+}
+
+type ExpressionTraitExpr {
+  id: ID!
+}
+
+type ExtVectorElementExpr {
+  id: ID!
+}
+
+type ExtVectorType {
+  id: ID!
+}
+
+type ExternCContextDecl {
+  id: ID!
+}
+
+type FieldDecl {
+  id: ID!
+}
+
+type FileScopeAsmDecl {
+  id: ID!
+}
+
+type FixedPointLiteral {
+  id: ID!
+}
+
+type FloatingLiteral {
+  id: ID!
+}
+
+type ForStmt {
+  id: ID!
+}
+
+type FriendDecl {
+  id: ID!
+}
+
+type FriendTemplateDecl {
+  id: ID!
+}
+
+type FullExpr {
+  id: ID!
+}
+
+type FunctionDecl {
+  id: ID!
+}
+
+type FunctionNoProtoType {
+  id: ID!
+}
+
+type FunctionParmPackExpr {
+  id: ID!
+}
+
+type FunctionProtoType {
+  id: ID!
+}
+
+type FunctionTemplateDecl {
+  id: ID!
+}
+
+type FunctionType {
+  id: ID!
+}
+
+type GCCAsmStmt {
+  id: ID!
+}
+
+type GNUNullExpr {
+  id: ID!
+}
+
+type GenericSelectionExpr {
+  id: ID!
+}
+
+type GotoStmt {
+  id: ID!
+}
+
+type HLSLBufferDecl {
+  id: ID!
+}
+
+type IfStmt {
+  id: ID!
+}
+
+type ImaginaryLiteral {
+  id: ID!
+}
+
+type ImplicitCastExpr {
+  id: ID!
+}
+
+type ImplicitConceptSpecializationDecl {
+  id: ID!
+}
+
+type ImplicitParamDecl {
+  id: ID!
+}
+
+type ImplicitValueInitExpr {
+  id: ID!
+}
+
+type ImportDecl {
+  id: ID!
+}
+
+type IncompleteArrayType {
+  id: ID!
+}
+
+type IndirectFieldDecl {
+  id: ID!
+}
+
+type IndirectGotoStmt {
+  id: ID!
+}
+
+type InitListExpr {
+  id: ID!
+}
+
+type InjectedClassNameType {
+  id: ID!
+}
+
+type IntegerLiteral {
+  id: ID!
+}
+
+type LValueReferenceType {
+  id: ID!
+}
+
+type LabelDecl {
+  id: ID!
+}
+
+type LabelStmt {
+  id: ID!
+}
+
+type LambdaExpr {
+  id: ID!
+}
+
+type LifetimeExtendedTemporaryDecl {
+  id: ID!
+}
+
+type LinkageSpecDecl {
+  id: ID!
+}
+
+type MSAsmStmt {
+  id: ID!
+}
+
+type MSDependentExistsStmt {
+  id: ID!
+}
+
+type MSGuidDecl {
+  id: ID!
+}
+
+type MSPropertyDecl {
+  id: ID!
+}
+
+type MSPropertyRefExpr {
+  id: ID!
+}
+
+type MSPropertySubscriptExpr {
+  id: ID!
+}
+
+type MacroQualifiedType {
+  id: ID!
+}
+
+type MaterializeTemporaryExpr {
+  id: ID!
+}
+
+type MatrixSubscriptExpr {
+  id: ID!
+}
+
+type MatrixType {
+  id: ID!
+}
+
+type MemberExpr {
+  id: ID!
+}
+
+type MemberPointerType {
+  id: ID!
+}
+
+type NamedDecl {
+  id: ID!
+}
+
+type NamespaceAliasDecl {
+  id: ID!
+}
+
+type NamespaceDecl {
+  id: ID!
+}
+
+type NoInitExpr {
+  id: ID!
+}
+
+type NonTypeTemplateParmDecl {
+  id: ID!
+}
+
+type NullStmt {
+  id: ID!
+}
+
+type OMPAllocateDecl {
+  id: ID!
+}
+
+type OMPArraySectionExpr {
+  id: ID!
+}
+
+type OMPArrayShapingExpr {
+  id: ID!
+}
+
+type OMPAtomicDirective {
+  id: ID!
+}
+
+type OMPBarrierDirective {
+  id: ID!
+}
+
+type OMPCancelDirective {
+  id: ID!
+}
+
+type OMPCancellationPointDirective {
+  id: ID!
+}
+
+type OMPCanonicalLoop {
+  id: ID!
+}
+
+type OMPCapturedExprDecl {
+  id: ID!
+}
+
+type OMPCriticalDirective {
+  id: ID!
+}
+
+type OMPDeclareMapperDecl {
+  id: ID!
+}
+
+type OMPDeclareReductionDecl {
+  id: ID!
+}
+
+type OMPDepobjDirective {
+  id: ID!
+}
+
+type OMPDispatchDirective {
+  id: ID!
+}
+
+type OMPDistributeDirective {
+  id: ID!
+}
+
+type OMPDistributeParallelForDirective {
+  id: ID!
+}
+
+type OMPDistributeParallelForSimdDirective {
+  id: ID!
+}
+
+type OMPDistributeSimdDirective {
+  id: ID!
+}
+
+type OMPErrorDirective {
+  id: ID!
+}
+
+type OMPExecutableDirective {
+  id: ID!
+}
+
+type OMPFlushDirective {
+  id: ID!
+}
+
+type OMPForDirective {
+  id: ID!
+}
+
+type OMPForSimdDirective {
+  id: ID!
+}
+
+type OMPGenericLoopDirective {
+  id: ID!
+}
+
+type OMPInteropDirective {
+  id: ID!
+}
+
+type OMPIteratorExpr {
+  id: ID!
+}
+
+type OMPLoopBasedDirective {
+  id: ID!
+}
+
+type OMPLoopDirective {
+  id: ID!
+}
+
+type OMPLoopTransformationDirective {
+  id: ID!
+}
+
+type OMPMaskedDirective {
+  id: ID!
+}
+
+type OMPMaskedTaskLoopDirective {
+  id: ID!
+}
+
+type OMPMaskedTaskLoopSimdDirective {
+  id: ID!
+}
+
+type OMPMasterDirective {
+  id: ID!
+}
+
+type OMPMasterTaskLoopDirective {
+  id: ID!
+}
+
+type OMPMasterTaskLoopSimdDirective {
+  id: ID!
+}
+
+type OMPMetaDirective {
+  id: ID!
+}
+
+type OMPOrderedDirective {
+  id: ID!
+}
+
+type OMPParallelDirective {
+  id: ID!
+}
+
+type OMPParallelForDirective {
+  id: ID!
+}
+
+type OMPParallelForSimdDirective {
+  id: ID!
+}
+
+type OMPParallelGenericLoopDirective {
+  id: ID!
+}
+
+type OMPParallelMaskedDirective {
+  id: ID!
+}
+
+type OMPParallelMaskedTaskLoopDirective {
+  id: ID!
+}
+
+type OMPParallelMaskedTaskLoopSimdDirective {
+  id: ID!
+}
+
+type OMPParallelMasterDirective {
+  id: ID!
+}
+
+type OMPParallelMasterTaskLoopDirective {
+  id: ID!
+}
+
+type OMPParallelMasterTaskLoopSimdDirective {
+  id: ID!
+}
+
+type OMPParallelSectionsDirective {
+  id: ID!
+}
+
+type OMPRequiresDecl {
+  id: ID!
+}
+
+type OMPScanDirective {
+  id: ID!
+}
+
+type OMPScopeDirective {
+  id: ID!
+}
+
+type OMPSectionDirective {
+  id: ID!
+}
+
+type OMPSectionsDirective {
+  id: ID!
+}
+
+type OMPSimdDirective {
+  id: ID!
+}
+
+type OMPSingleDirective {
+  id: ID!
+}
+
+type OMPTargetDataDirective {
+  id: ID!
+}
+
+type OMPTargetDirective {
+  id: ID!
+}
+
+type OMPTargetEnterDataDirective {
+  id: ID!
+}
+
+type OMPTargetExitDataDirective {
+  id: ID!
+}
+
+type OMPTargetParallelDirective {
+  id: ID!
+}
+
+type OMPTargetParallelForDirective {
+  id: ID!
+}
+
+type OMPTargetParallelForSimdDirective {
+  id: ID!
+}
+
+type OMPTargetParallelGenericLoopDirective {
+  id: ID!
+}
+
+type OMPTargetSimdDirective {
+  id: ID!
+}
+
+type OMPTargetTeamsDirective {
+  id: ID!
+}
+
+type OMPTargetTeamsDistributeDirective {
+  id: ID!
+}
+
+type OMPTargetTeamsDistributeParallelForDirective {
+  id: ID!
+}
+
+type OMPTargetTeamsDistributeParallelForSimdDirective {
+  id: ID!
+}
+
+type OMPTargetTeamsDistributeSimdDirective {
+  id: ID!
+}
+
+type OMPTargetTeamsGenericLoopDirective {
+  id: ID!
+}
+
+type OMPTargetUpdateDirective {
+  id: ID!
+}
+
+type OMPTaskDirective {
+  id: ID!
+}
+
+type OMPTaskLoopDirective {
+  id: ID!
+}
+
+type OMPTaskLoopSimdDirective {
+  id: ID!
+}
+
+type OMPTaskgroupDirective {
+  id: ID!
+}
+
+type OMPTaskwaitDirective {
+  id: ID!
+}
+
+type OMPTaskyieldDirective {
+  id: ID!
+}
+
+type OMPTeamsDirective {
+  id: ID!
+}
+
+type OMPTeamsDistributeDirective {
+  id: ID!
+}
+
+type OMPTeamsDistributeParallelForDirective {
+  id: ID!
+}
+
+type OMPTeamsDistributeParallelForSimdDirective {
+  id: ID!
+}
+
+type OMPTeamsDistributeSimdDirective {
+  id: ID!
+}
+
+type OMPTeamsGenericLoopDirective {
+  id: ID!
+}
+
+type OMPThreadPrivateDecl {
+  id: ID!
+}
+
+type OMPTileDirective {
+  id: ID!
+}
+
+type OMPUnrollDirective {
+  id: ID!
+}
+
+type ObjCArrayLiteral {
+  id: ID!
+}
+
+type ObjCAtCatchStmt {
+  id: ID!
+}
+
+type ObjCAtDefsFieldDecl {
+  id: ID!
+}
+
+type ObjCAtFinallyStmt {
+  id: ID!
+}
+
+type ObjCAtSynchronizedStmt {
+  id: ID!
+}
+
+type ObjCAtThrowStmt {
+  id: ID!
+}
+
+type ObjCAtTryStmt {
+  id: ID!
+}
+
+type ObjCAutoreleasePoolStmt {
+  id: ID!
+}
+
+type ObjCAvailabilityCheckExpr {
+  id: ID!
+}
+
+type ObjCBoolLiteralExpr {
+  id: ID!
+}
+
+type ObjCBoxedExpr {
+  id: ID!
+}
+
+type ObjCBridgedCastExpr {
+  id: ID!
+}
+
+type ObjCCategoryDecl {
+  id: ID!
+}
+
+type ObjCCategoryImplDecl {
+  id: ID!
+}
+
+type ObjCCompatibleAliasDecl {
+  id: ID!
+}
+
+type ObjCContainerDecl {
+  id: ID!
+}
+
+type ObjCDictionaryLiteral {
+  id: ID!
+}
+
+type ObjCEncodeExpr {
+  id: ID!
+}
+
+type ObjCForCollectionStmt {
+  id: ID!
+}
+
+type ObjCImplDecl {
+  id: ID!
+}
+
+type ObjCImplementationDecl {
+  id: ID!
+}
+
+type ObjCIndirectCopyRestoreExpr {
+  id: ID!
+}
+
+type ObjCInterfaceDecl {
+  id: ID!
+}
+
+type ObjCInterfaceType {
+  id: ID!
+}
+
+type ObjCIsaExpr {
+  id: ID!
+}
+
+type ObjCIvarDecl {
+  id: ID!
+}
+
+type ObjCIvarRefExpr {
+  id: ID!
+}
+
+type ObjCMessageExpr {
+  id: ID!
+}
+
+type ObjCMethodDecl {
+  id: ID!
+}
+
+type ObjCObjectPointerType {
+  id: ID!
+}
+
+type ObjCObjectType {
+  id: ID!
+}
+
+type ObjCObjectTypeImpl {
+  id: ID!
+}
+
+type ObjCPropertyDecl {
+  id: ID!
+}
+
+type ObjCPropertyImplDecl {
+  id: ID!
+}
+
+type ObjCPropertyRefExpr {
+  id: ID!
+}
+
+type ObjCProtocolDecl {
+  id: ID!
+}
+
+type ObjCProtocolExpr {
+  id: ID!
+}
+
+type ObjCSelectorExpr {
+  id: ID!
+}
+
+type ObjCStringLiteral {
+  id: ID!
+}
+
+type ObjCSubscriptRefExpr {
+  id: ID!
+}
+
+type ObjCTypeParamDecl {
+  id: ID!
+}
+
+type ObjCTypeParamType {
+  id: ID!
+}
+
+type OffsetOfExpr {
+  id: ID!
+}
+
+type OpaqueValueExpr {
+  id: ID!
+}
+
+type OverloadExpr {
+  id: ID!
+}
+
+type PackExpansionExpr {
+  id: ID!
+}
+
+type PackExpansionType {
+  id: ID!
+}
+
+type ParenExpr {
+  id: ID!
+}
+
+type ParenListExpr {
+  id: ID!
+}
+
+type ParenType {
+  id: ID!
+}
+
+type ParmVarDecl {
+  id: ID!
+}
+
+type PipeType {
+  id: ID!
+}
+
+type PointerType {
+  id: ID!
+}
+
+type PragmaCommentDecl {
+  id: ID!
+}
+
+type PragmaDetectMismatchDecl {
+  id: ID!
+}
+
+type PredefinedExpr {
+  id: ID!
+}
+
+type PseudoObjectExpr {
+  id: ID!
+}
+
+type Query {
+  type(id: ID!): TypeNode
+  decl(id: ID!): DeclNode
+  stmt(id: ID!): StmtNode
+}
+
+type RValueReferenceType {
+  id: ID!
+}
+
+type RecordDecl {
+  id: ID!
+}
+
+type RecordType {
+  id: ID!
+}
+
+type RecoveryExpr {
+  id: ID!
+}
+
+type RedeclarableTemplateDecl {
+  id: ID!
+}
+
+type ReferenceType {
+  id: ID!
+}
+
+type RequiresExpr {
+  id: ID!
+}
+
+type RequiresExprBodyDecl {
+  id: ID!
+}
+
+type ReturnStmt {
+  id: ID!
+}
+
+type SEHExceptStmt {
+  id: ID!
+}
+
+type SEHFinallyStmt {
+  id: ID!
+}
+
+type SEHLeaveStmt {
+  id: ID!
+}
+
+type SEHTryStmt {
+  id: ID!
+}
+
+type SYCLUniqueStableNameExpr {
+  id: ID!
+}
+
+type ShuffleVectorExpr {
+  id: ID!
+}
+
+type SizeOfPackExpr {
+  id: ID!
+}
+
+type SourceLocExpr {
+  id: ID!
+}
+
+type StaticAssertDecl {
+  id: ID!
+}
+
+type Stmt {
+  id: ID!
+}
+
+type StmtExpr {
+  id: ID!
+}
+
+type StringLiteral {
+  id: ID!
+}
+
+type SubstNonTypeTemplateParmExpr {
+  id: ID!
+}
+
+type SubstNonTypeTemplateParmPackExpr {
+  id: ID!
+}
+
+type SubstTemplateTypeParmPackType {
+  id: ID!
+}
+
+type SubstTemplateTypeParmType {
+  id: ID!
+}
+
+type SwitchCase {
+  id: ID!
+}
+
+type SwitchStmt {
+  id: ID!
+}
+
+type TagDecl {
+  id: ID!
+}
+
+type TagType {
+  id: ID!
+}
+
+type TemplateDecl {
+  id: ID!
+}
+
+type TemplateParamObjectDecl {
+  id: ID!
+}
+
+type TemplateSpecializationType {
+  id: ID!
+}
+
+type TemplateTemplateParmDecl {
+  id: ID!
+}
+
+type TemplateTypeParmDecl {
+  id: ID!
+}
+
+type TemplateTypeParmType {
+  id: ID!
+}
+
+type TopLevelStmtDecl {
+  id: ID!
+}
+
+type TranslationUnitDecl {
+  id: ID!
+}
+
+type Type {
+  id: ID!
+}
+
+type TypeAliasDecl {
+  id: ID!
+}
+
+type TypeAliasTemplateDecl {
+  id: ID!
+}
+
+type TypeDecl {
+  id: ID!
+}
+
+type TypeOfExprType {
+  id: ID!
+}
+
+type TypeOfType {
+  id: ID!
+}
+
+type TypeTraitExpr {
+  id: ID!
+}
+
+type TypeWithKeyword {
+  id: ID!
+}
+
+type TypedefDecl {
+  id: ID!
+}
+
+type TypedefNameDecl {
+  id: ID!
+}
+
+type TypedefType {
+  id: ID!
+}
+
+type TypoExpr {
+  id: ID!
+}
+
+type UnaryExprOrTypeTraitExpr {
+  id: ID!
+}
+
+type UnaryOperator {
+  id: ID!
+}
+
+type UnaryTransformType {
+  id: ID!
+}
+
+type UnnamedGlobalConstantDecl {
+  id: ID!
+}
+
+type UnresolvedLookupExpr {
+  id: ID!
+}
+
+type UnresolvedMemberExpr {
+  id: ID!
+}
+
+type UnresolvedUsingIfExistsDecl {
+  id: ID!
+}
+
+type UnresolvedUsingType {
+  id: ID!
+}
+
+type UnresolvedUsingTypenameDecl {
+  id: ID!
+}
+
+type UnresolvedUsingValueDecl {
+  id: ID!
+}
+
+type UserDefinedLiteral {
+  id: ID!
+}
+
+type UsingDecl {
+  id: ID!
+}
+
+type UsingDirectiveDecl {
+  id: ID!
+}
+
+type UsingEnumDecl {
+  id: ID!
+}
+
+type UsingPackDecl {
+  id: ID!
+}
+
+type UsingShadowDecl {
+  id: ID!
+}
+
+type UsingType {
+  id: ID!
+}
+
+type VAArgExpr {
+  id: ID!
+}
+
+type ValueDecl {
+  id: ID!
+}
+
+type ValueStmt {
+  id: ID!
+}
+
+type VarDecl {
+  id: ID!
+}
+
+type VarTemplateDecl {
+  id: ID!
+}
+
+type VarTemplatePartialSpecializationDecl {
+  id: ID!
+}
+
+type VarTemplateSpecializationDecl {
+  id: ID!
+}
+
+type VariableArrayType {
+  id: ID!
+}
+
+type VectorType {
+  id: ID!
+}
+
+type WhileStmt {
+  id: ID!
+}
+
+union DeclNode = Decl | AccessSpecDecl | BaseUsingDecl | BindingDecl | BlockDecl | BuiltinTemplateDecl | CXXConstructorDecl | CXXConversionDecl | CXXDeductionGuideDecl | CXXDestructorDecl | CXXMethodDecl | CXXRecordDecl | CapturedDecl | ClassTemplateDecl | ClassTemplatePartialSpecializationDecl | ClassTemplateSpecializationDecl | ConceptDecl | ConstructorUsingShadowDecl | DeclaratorDecl | DecompositionDecl | EmptyDecl | EnumConstantDecl | EnumDecl | ExportDecl | ExternCContextDecl | FieldDecl | FileScopeAsmDecl | FriendDecl | FriendTemplateDecl | FunctionDecl | FunctionTemplateDecl | HLSLBufferDecl | ImplicitConceptSpecializationDecl | ImplicitParamDecl | ImportDecl | IndirectFieldDecl | LabelDecl | LifetimeExtendedTemporaryDecl | LinkageSpecDecl | MSGuidDecl | MSPropertyDecl | NamedDecl | NamespaceAliasDecl | NamespaceDecl | NonTypeTemplateParmDecl | OMPAllocateDecl | OMPCapturedExprDecl | OMPDeclareMapperDecl | OMPDeclareReductionDecl | OMPRequiresDecl | OMPThreadPrivateDecl | ObjCAtDefsFieldDecl | ObjCCategoryDecl | ObjCCategoryImplDecl | ObjCCompatibleAliasDecl | ObjCContainerDecl | ObjCImplDecl | ObjCImplementationDecl | ObjCInterfaceDecl | ObjCIvarDecl | ObjCMethodDecl | ObjCPropertyDecl | ObjCPropertyImplDecl | ObjCProtocolDecl | ObjCTypeParamDecl | ParmVarDecl | PragmaCommentDecl | PragmaDetectMismatchDecl | RecordDecl | RedeclarableTemplateDecl | RequiresExprBodyDecl | StaticAssertDecl | TagDecl | TemplateDecl | TemplateParamObjectDecl | TemplateTemplateParmDecl | TemplateTypeParmDecl | TopLevelStmtDecl | TranslationUnitDecl | TypeAliasDecl | TypeAliasTemplateDecl | TypeDecl | TypedefDecl | TypedefNameDecl | UnnamedGlobalConstantDecl | UnresolvedUsingIfExistsDecl | UnresolvedUsingTypenameDecl | UnresolvedUsingValueDecl | UsingDecl | UsingDirectiveDecl | UsingEnumDecl | UsingPackDecl | UsingShadowDecl | ValueDecl | VarDecl | VarTemplateDecl | VarTemplatePartialSpecializationDecl | VarTemplateSpecializationDecl
+
+union StmtNode = Stmt | AbstractConditionalOperator | AddrLabelExpr | ArrayInitIndexExpr | ArrayInitLoopExpr | ArraySubscriptExpr | ArrayTypeTraitExpr | AsTypeExpr | AsmStmt | AtomicExpr | AttributedStmt | BinaryConditionalOperator | BinaryOperator | BlockExpr | BreakStmt | BuiltinBitCastExpr | CStyleCastExpr | CUDAKernelCallExpr | CXXAddrspaceCastExpr | CXXBindTemporaryExpr | CXXBoolLiteralExpr | CXXCatchStmt | CXXConstCastExpr | CXXConstructExpr | CXXDefaultArgExpr | CXXDefaultInitExpr | CXXDeleteExpr | CXXDependentScopeMemberExpr | CXXDynamicCastExpr | CXXFoldExpr | CXXForRangeStmt | CXXFunctionalCastExpr | CXXInheritedCtorInitExpr | CXXMemberCallExpr | CXXNamedCastExpr | CXXNewExpr | CXXNoexceptExpr | CXXNullPtrLiteralExpr | CXXOperatorCallExpr | CXXParenListInitExpr | CXXPseudoDestructorExpr | CXXReinterpretCastExpr | CXXRewrittenBinaryOperator | CXXScalarValueInitExpr | CXXStaticCastExpr | CXXStdInitializerListExpr | CXXTemporaryObjectExpr | CXXThisExpr | CXXThrowExpr | CXXTryStmt | CXXTypeidExpr | CXXUnresolvedConstructExpr | CXXUuidofExpr | CallExpr | CapturedStmt | CaseStmt | CastExpr | CharacterLiteral | ChooseExpr | CoawaitExpr | CompoundAssignOperator | CompoundLiteralExpr | CompoundStmt | ConceptSpecializationExpr | ConditionalOperator | ConstantExpr | ContinueStmt | ConvertVectorExpr | CoreturnStmt | CoroutineBodyStmt | CoroutineSuspendExpr | CoyieldExpr | DeclRefExpr | DeclStmt | DefaultStmt | DependentCoawaitExpr | DependentScopeDeclRefExpr | DesignatedInitExpr | DesignatedInitUpdateExpr | DoStmt | ExplicitCastExpr | Expr | ExprWithCleanups | ExpressionTraitExpr | ExtVectorElementExpr | FixedPointLiteral | FloatingLiteral | ForStmt | FullExpr | FunctionParmPackExpr | GCCAsmStmt | GNUNullExpr | GenericSelectionExpr | GotoStmt | IfStmt | ImaginaryLiteral | ImplicitCastExpr | ImplicitValueInitExpr | IndirectGotoStmt | InitListExpr | IntegerLiteral | LabelStmt | LambdaExpr | MSAsmStmt | MSDependentExistsStmt | MSPropertyRefExpr | MSPropertySubscriptExpr | MaterializeTemporaryExpr | MatrixSubscriptExpr | MemberExpr | NoInitExpr | NullStmt | OMPArraySectionExpr | OMPArrayShapingExpr | OMPAtomicDirective | OMPBarrierDirective | OMPCancelDirective | OMPCancellationPointDirective | OMPCanonicalLoop | OMPCriticalDirective | OMPDepobjDirective | OMPDispatchDirective | OMPDistributeDirective | OMPDistributeParallelForDirective | OMPDistributeParallelForSimdDirective | OMPDistributeSimdDirective | OMPErrorDirective | OMPExecutableDirective | OMPFlushDirective | OMPForDirective | OMPForSimdDirective | OMPGenericLoopDirective | OMPInteropDirective | OMPIteratorExpr | OMPLoopBasedDirective | OMPLoopDirective | OMPLoopTransformationDirective | OMPMaskedDirective | OMPMaskedTaskLoopDirective | OMPMaskedTaskLoopSimdDirective | OMPMasterDirective | OMPMasterTaskLoopDirective | OMPMasterTaskLoopSimdDirective | OMPMetaDirective | OMPOrderedDirective | OMPParallelDirective | OMPParallelForDirective | OMPParallelForSimdDirective | OMPParallelGenericLoopDirective | OMPParallelMaskedDirective | OMPParallelMaskedTaskLoopDirective | OMPParallelMaskedTaskLoopSimdDirective | OMPParallelMasterDirective | OMPParallelMasterTaskLoopDirective | OMPParallelMasterTaskLoopSimdDirective | OMPParallelSectionsDirective | OMPScanDirective | OMPScopeDirective | OMPSectionDirective | OMPSectionsDirective | OMPSimdDirective | OMPSingleDirective | OMPTargetDataDirective | OMPTargetDirective | OMPTargetEnterDataDirective | OMPTargetExitDataDirective | OMPTargetParallelDirective | OMPTargetParallelForDirective | OMPTargetParallelForSimdDirective | OMPTargetParallelGenericLoopDirective | OMPTargetSimdDirective | OMPTargetTeamsDirective | OMPTargetTeamsDistributeDirective | OMPTargetTeamsDistributeParallelForDirective | OMPTargetTeamsDistributeParallelForSimdDirective | OMPTargetTeamsDistributeSimdDirective | OMPTargetTeamsGenericLoopDirective | OMPTargetUpdateDirective | OMPTaskDirective | OMPTaskLoopDirective | OMPTaskLoopSimdDirective | OMPTaskgroupDirective | OMPTaskwaitDirective | OMPTaskyieldDirective | OMPTeamsDirective | OMPTeamsDistributeDirective | OMPTeamsDistributeParallelForDirective | OMPTeamsDistributeParallelForSimdDirective | OMPTeamsDistributeSimdDirective | OMPTeamsGenericLoopDirective | OMPTileDirective | OMPUnrollDirective | ObjCArrayLiteral | ObjCAtCatchStmt | ObjCAtFinallyStmt | ObjCAtSynchronizedStmt | ObjCAtThrowStmt | ObjCAtTryStmt | ObjCAutoreleasePoolStmt | ObjCAvailabilityCheckExpr | ObjCBoolLiteralExpr | ObjCBoxedExpr | ObjCBridgedCastExpr | ObjCDictionaryLiteral | ObjCEncodeExpr | ObjCForCollectionStmt | ObjCIndirectCopyRestoreExpr | ObjCIsaExpr | ObjCIvarRefExpr | ObjCMessageExpr | ObjCPropertyRefExpr | ObjCProtocolExpr | ObjCSelectorExpr | ObjCStringLiteral | ObjCSubscriptRefExpr | OffsetOfExpr | OpaqueValueExpr | OverloadExpr | PackExpansionExpr | ParenExpr | ParenListExpr | PredefinedExpr | PseudoObjectExpr | RecoveryExpr | RequiresExpr | ReturnStmt | SEHExceptStmt | SEHFinallyStmt | SEHLeaveStmt | SEHTryStmt | SYCLUniqueStableNameExpr | ShuffleVectorExpr | SizeOfPackExpr | SourceLocExpr | StmtExpr | StringLiteral | SubstNonTypeTemplateParmExpr | SubstNonTypeTemplateParmPackExpr | SwitchCase | SwitchStmt | TypeTraitExpr | TypoExpr | UnaryExprOrTypeTraitExpr | UnaryOperator | UnresolvedLookupExpr | UnresolvedMemberExpr | UserDefinedLiteral | VAArgExpr | ValueStmt | WhileStmt
+
+union TypeNode = Type | AdjustedType | ArrayType | AtomicType | AttributedType | AutoType | BTFTagAttributedType | BitIntType | BlockPointerType | BuiltinType | ComplexType | ConstantArrayType | ConstantMatrixType | DecayedType | DecltypeType | DeducedTemplateSpecializationType | DeducedType | DependentAddressSpaceType | DependentBitIntType | DependentDecltypeType | DependentNameType | DependentSizedArrayType | DependentSizedExtVectorType | DependentSizedMatrixType | DependentTemplateSpecializationType | DependentTypeOfExprType | DependentUnaryTransformType | DependentVectorType | ElaboratedType | EnumType | ExtVectorType | FunctionNoProtoType | FunctionProtoType | FunctionType | IncompleteArrayType | InjectedClassNameType | LValueReferenceType | MacroQualifiedType | MatrixType | MemberPointerType | ObjCInterfaceType | ObjCObjectPointerType | ObjCObjectType | ObjCObjectTypeImpl | ObjCTypeParamType | PackExpansionType | ParenType | PipeType | PointerType | RValueReferenceType | RecordType | ReferenceType | SubstTemplateTypeParmPackType | SubstTemplateTypeParmType | TagType | TemplateSpecializationType | TemplateTypeParmType | TypeOfExprType | TypeOfType | TypeWithKeyword | TypedefType | UnaryTransformType | UnresolvedUsingType | UsingType | VariableArrayType | VectorType
+

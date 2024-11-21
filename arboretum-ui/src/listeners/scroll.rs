@@ -16,6 +16,7 @@ pub(super) fn setup(
         {
             event.prevent_default();
             let mut state = state.borrow_mut();
+            let view_transform = state.view_transform_mut();
 
             // Get the mouse position relative to the canvas
             let rect = canvas.get_bounding_client_rect();
@@ -23,18 +24,18 @@ pub(super) fn setup(
             let mouse_y = event.client_y() as f64 - rect.top();
 
             let scale_factor = if event.delta_y() < 0.0 { 1.1 } else { 0.9 };
-            let new_scale = state.scale * scale_factor;
+            let new_scale = view_transform.scale * scale_factor;
 
             // Calculate the translation adjustments
-            let translate_x = mouse_x - mouse_x * new_scale / state.scale
-                + state.translate_x * new_scale / state.scale;
-            let translate_y = mouse_y - mouse_y * new_scale / state.scale
-                + state.translate_y * new_scale / state.scale;
+            let translate_x = mouse_x - mouse_x * new_scale / view_transform.scale
+                + view_transform.translate_x * new_scale / view_transform.scale;
+            let translate_y = mouse_y - mouse_y * new_scale / view_transform.scale
+                + view_transform.translate_y * new_scale / view_transform.scale;
 
             // Update the state with the new scale and translation
-            state.scale = new_scale;
-            state.translate_x = translate_x;
-            state.translate_y = translate_y;
+            view_transform.scale = new_scale;
+            view_transform.translate_x = translate_x;
+            view_transform.translate_y = translate_y;
         }
 
         render_frame(

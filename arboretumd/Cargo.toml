@@ -8,9 +8,10 @@ actix = "0.13.5"
 actix-server = "2.5.0"
 actix-service = "2.0.2"
 clap = { version = "4.5.13", features = ["derive"] }
+arboretum-core = {path="../arboretum-core/"}
 arboretum-graph = {path="../arboretum-graph/"}
 arboretum-ffi = {path="../arboretum-ffi/"}
-arboretum-query = {path="../arboretum-query/"}
+arboretum-query = {path="../arboretum-query/", features=["local"]}
 reify-rs = {path="../reify-rs/"}
 tokio = { version = "1.39.2", features = ["rt-multi-thread"] }
 tracing = "0.1.40"

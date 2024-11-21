@@ -1,22 +1,20 @@
+use crate::{
+    cache::{LruSubgraphCache, SubgraphCache, SubgraphCacheStrategy},
+    error::Error,
+    query,
+    smart_mmap_builder::SmartMmapBuilder,
+    subgraph_entry::SubgraphEntry,
+    SledGraph, SledStringStorage, Subgraph, SubgraphConfig,
+};
+use arboretum_core::{constant::*, split_u64, Domain, GraphBuffer, Prefix, Value};
+use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
+use std::sync::RwLock;
 use std::{
     collections::{HashMap, HashSet},
     path::{Path, PathBuf},
     sync::{Arc, Mutex},
 };
-
-use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
-use std::sync::RwLock;
 use tracing::{error, trace};
-
-use crate::{
-    cache::{LruSubgraphCache, SubgraphCache, SubgraphCacheStrategy},
-    constant::*,
-    error::Error,
-    query,
-    smart_mmap_builder::SmartMmapBuilder,
-    subgraph_entry::SubgraphEntry,
-    Domain, GraphBuffer, Prefix, SledGraph, SledStringStorage, Subgraph, SubgraphConfig, Value,
-};
 
 #[derive(Debug)]
 pub struct GraphOptions {
@@ -45,7 +43,7 @@ struct RootGraphInner {
     name_assoc: SledStringStorage,
     subgraph_by_id: HashMap<u32, SubgraphEntry>,
     subgraph_by_domain: HashMap<Domain, SubgraphEntry>,
-    domain_by_graph_id: HashMap<u32, Vec<Domain>>,
+    domain_by_graph_id: HashMap<u32, HashSet<Domain>>,
     subgraphs_path: PathBuf,
     entry_cache: Arc<Mutex<dyn SubgraphCache>>,
 }
@@ -105,6 +103,8 @@ impl RootGraph {
 
         // Construct the string storage
         let name_assoc = SledStringStorage::from_folder(strings_path)?;
+
+        name_assoc.dump();
 
         let result = Self {
             inner: Arc::new(RwLock::new(RootGraphInner {
@@ -427,7 +427,10 @@ impl RootGraph {
         Ok(lock.subgraph_by_domain.get(&domain).cloned())
     }
 
-    pub fn find_associated_domains(&self, subgraph_id: u32) -> Result<Option<Vec<Domain>>, Error> {
+    pub fn find_associated_domains(
+        &self,
+        subgraph_id: u32,
+    ) -> Result<Option<HashSet<Domain>>, Error> {
         let lock = self.inner.read()?;
         Ok(lock.domain_by_graph_id.get(&subgraph_id).cloned())
     }
@@ -456,27 +459,76 @@ impl RootGraph {
         &self,
         prefix: Prefix<u64>,
     ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
-        self.prefix_edges_spo_with_extra_domains([], prefix)
+        self.prefix_edges_spo_with_extra_domains(prefix, [])
     }
 
     pub fn prefix_edges_pos(
         &self,
         prefix: Prefix<u64>,
     ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
-        self.prefix_edges_pos_with_extra_domains([], prefix)
+        self.prefix_edges_pos_with_extra_domains(prefix, [])
     }
 
     pub fn prefix_edges_osp(
         &self,
         prefix: Prefix<u64>,
     ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
-        self.prefix_edges_osp_with_extra_domains([], prefix)
+        self.prefix_edges_osp_with_extra_domains(prefix, [])
+    }
+
+    pub fn prefix_edges_spo_global(
+        &self,
+        prefix: Prefix<u64>,
+    ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
+        let lock = self.inner.read()?;
+        let mut extra_domains = HashSet::new();
+        prefix.apply(|id| {
+            lock.domain_by_graph_id
+                .get(&split_u64(id).0)
+                .map(|id_domains| extra_domains.extend(id_domains.clone()));
+        });
+
+        self.prefix_edges_spo_with_extra_domains(prefix, extra_domains)
+    }
+
+    pub fn prefix_edges_pos_global(
+        &self,
+        prefix: Prefix<u64>,
+    ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
+        let lock = self.inner.read()?;
+        let mut extra_domains = HashSet::new();
+        prefix.apply(|id| {
+            let graph_id = split_u64(id).0;
+            error!(graph_id);
+            let id_domains = lock.domain_by_graph_id.get(&graph_id);
+            error!(?id_domains);
+
+            id_domains.map(|id_domains| extra_domains.extend(id_domains.clone()));
+        });
+        error!(?extra_domains);
+
+        self.prefix_edges_pos_with_extra_domains(prefix, extra_domains)
+    }
+
+    pub fn prefix_edges_osp_global(
+        &self,
+        prefix: Prefix<u64>,
+    ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
+        let lock = self.inner.read()?;
+        let mut extra_domains = HashSet::new();
+        prefix.apply(|id| {
+            lock.domain_by_graph_id
+                .get(&split_u64(id).0)
+                .map(|id_domains| extra_domains.extend(id_domains.clone()));
+        });
+
+        self.prefix_edges_osp_with_extra_domains(prefix, extra_domains)
     }
 
     pub fn prefix_edges_spo_with_extra_domains<I>(
         &self,
-        extra_domains: I,
         prefix: Prefix<u64>,
+        extra_domains: I,
     ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error>
     where
         I: IntoIterator<Item = Domain>,
@@ -512,8 +564,8 @@ impl RootGraph {
 
     pub fn prefix_edges_pos_with_extra_domains<I>(
         &self,
-        extra_domains: I,
         prefix: Prefix<u64>,
+        extra_domains: I,
     ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error>
     where
         I: IntoIterator<Item = Domain>,
@@ -551,8 +603,8 @@ impl RootGraph {
 
     pub fn prefix_edges_osp_with_extra_domains<I>(
         &self,
-        extra_domains: I,
         prefix: Prefix<u64>,
+        extra_domains: I,
     ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error>
     where
         I: IntoIterator<Item = Domain>,
@@ -623,9 +675,37 @@ impl RootGraphInner {
 
         self.subgraph_by_id
             .insert(subgraph_id, subgraph_ref.clone());
+
+        match domain {
+            Domain::Single(a) => {
+                self.associate_graph_with_domain(a, domain.clone());
+            }
+            Domain::Double(a, b) => {
+                self.associate_graph_with_domain(a, domain.clone());
+                self.associate_graph_with_domain(b, domain.clone());
+            }
+            Domain::Triple(a, b, c) => {
+                self.associate_graph_with_domain(a, domain.clone());
+                self.associate_graph_with_domain(b, domain.clone());
+                self.associate_graph_with_domain(c, domain.clone());
+            }
+        }
+
         self.subgraph_by_domain.insert(domain, subgraph_ref.clone());
 
         subgraph_ref
+    }
+
+    fn associate_graph_with_domain(&mut self, graph_id: u32, domain: Domain) {
+        match self.domain_by_graph_id.entry(graph_id) {
+            std::collections::hash_map::Entry::Occupied(mut o) => {
+                o.get_mut().insert(domain);
+            }
+            std::collections::hash_map::Entry::Vacant(v) => {
+                v.insert(HashSet::from([domain]));
+            }
+        }
+        error!(?self.domain_by_graph_id);
     }
 
     #[tracing::instrument(level = "trace", skip(self))]
@@ -659,13 +739,14 @@ impl RootGraphInner {
                 .add_node_with_props(Value::String(rel_path.to_string_lossy().to_string()))?,
         ))?;
 
-        let emit_domain_component = |g: u32| -> Result<_, Error> {
+        let mut emit_domain_component = |g: u32| -> Result<_, Error> {
             self.root_subgraph.add_edge((
                 graph_node,
                 SUBGRAPH_DOMAIN,
                 self.root_subgraph
                     .add_node_with_props(Value::Unsigned(g as u64))?,
             ))?;
+
             Ok(())
         };
         match domain {
@@ -736,7 +817,7 @@ fn prefix_domain(prefix: Prefix<u64>) -> impl Iterator<Item = Domain> {
 
 #[cfg(test)]
 mod test {
-    use crate::{GraphBuffer, Value};
+    use arboretum_core::{GraphBuffer, Value};
 
     use super::RootGraph;
 

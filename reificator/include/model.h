@@ -23,7 +23,11 @@ struct Model {
 
   clang::ASTContext &ast_ctx;
 
+  /////////////////////////////////////////////////////////////////////////////
+
   Index index;
+
+  /////////////////////////////////////////////////////////////////////////////
 
   size_t name_idx = 0;
 
@@ -38,6 +42,12 @@ struct Model {
 
   EntityNameMap<const clang::EnumConstantDecl *> enum_constant_entity_map;
   std::string entity_name(const clang::EnumConstantDecl *cls);
+
+  /////////////////////////////////////////////////////////////////////////////
+
+  ///
+
+  std::vector<std::pair<std::string, std::string>> meta_data_model;
 };
 
 }  // namespace arboretum

@@ -4,7 +4,8 @@ use std::{
     sync::{Arc, Mutex},
 };
 
-use crate::{Domain, Error, Subgraph, SubgraphConfig};
+use crate::{Error, Subgraph, SubgraphConfig};
+use arboretum_core::Domain;
 
 #[derive(Clone)]
 pub struct SubgraphEntry {

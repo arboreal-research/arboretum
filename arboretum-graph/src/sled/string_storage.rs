@@ -1,5 +1,8 @@
 use std::path::Path;
 
+use arboretum_core::split_u64;
+use tracing::error;
+
 use crate::Error;
 
 /// A sled based association of strings to ids.
@@ -22,6 +25,24 @@ impl SledStringStorage {
             str_to_id,
             id_to_str,
         })
+    }
+
+    pub fn dump(&self) {
+        for r in self.id_to_str.iter() {
+            let (k, v) = r.expect("ok");
+            let k = u64::from_be_bytes(k.as_ref().try_into().unwrap());
+            let v = String::from_utf8_lossy(v.as_ref()).into_owned();
+
+            let (k_hi, k_low) = split_u64(k);
+
+            if k_low > 289070 && k_low < 289090 {
+                if v.len() > 75 {
+                    println!("({}, {}) -> <{} bytes>", k_hi, k_low, v.len());
+                } else {
+                    println!("({}, {}) -> '{}'", k_hi, k_low, v);
+                }
+            }
+        }
     }
 
     /// Associates `name` with `id`.

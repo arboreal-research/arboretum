@@ -1,13 +1,10 @@
-use std::{collections::BTreeMap, path::PathBuf};
-
+use arboretum_core::{IdType, PropsType};
 use memmap2::Mmap;
 use num::{NumCast, ToPrimitive, Zero};
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
+use std::{collections::BTreeMap, path::PathBuf};
 
-use crate::{
-    mmap::{builder::MmapGraphArchive, EdgeOrder},
-    IdType, PropsType,
-};
+use crate::mmap::{builder::MmapGraphArchive, EdgeOrder};
 
 #[derive(Debug)]
 pub(super) struct MmapGraphInner<Id, NodeProps, EdgeProps>

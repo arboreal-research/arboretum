@@ -1,3 +1,4 @@
+use arboretum_core::{IdType, PropsType};
 use memmap2::MmapMut;
 use num::{Integer, Unsigned};
 use rayon::iter::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator};
@@ -16,7 +17,7 @@ use std::{
     path::Path,
 };
 
-use crate::{error::Error, mmap::MmapGraph, IdType, PropsType};
+use crate::{error::Error, mmap::MmapGraph};
 
 /// Options which are used by [MmapGraphBuilder].
 ///

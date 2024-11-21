@@ -286,4 +286,196 @@ Index IndexBuilder::Build() && {
   return std::move(data);
 }
 
+std::unordered_map<const clang::CXXRecordDecl *, std::vector<const clang::CXXRecordDecl *>>
+InheritanceHierarchy::supers_star() const {
+  std::unordered_map<const clang::CXXRecordDecl *, std::vector<const clang::CXXRecordDecl *>> result;
+
+  std::stack<const clang::CXXRecordDecl *> stack;
+  for (const auto &[cur, _] : this->supers) {
+    stack.push(cur);
+  }
+
+  while (!stack.empty()) {
+    auto top = stack.top();
+
+    // If the result is already calculcated, move on.
+    if (result.contains(top)) {
+      stack.pop();
+      continue;
+    }
+
+    // If there are no supers, record that and move on.
+    auto top_supers_itr = this->supers.find(top);
+    if (top_supers_itr == this->supers.end()) {
+      result.emplace(top, std::vector<const clang::CXXRecordDecl *>{});
+      stack.pop();
+      continue;
+    }
+
+    // Make sure that the result for all the direct supers have been calculcated already.
+    bool found_missing = false;
+    for (auto super : top_supers_itr->second) {
+      if (!result.contains(super)) {
+        stack.push(super);
+        found_missing = true;
+      }
+    }
+
+    // If we found at least one element which wasn't previously calculcated, then we need to come back to this later.
+    if (found_missing) continue;
+
+    // Build the result for this element since all supers are calculcated.
+    std::unordered_set<const clang::CXXRecordDecl *> supers;
+    for (auto super : top_supers_itr->second) {
+      auto super_supers = result.find(super);
+      assert(super_supers != result.end());
+      supers.insert(super);
+      supers.insert(super_supers->second.begin(), super_supers->second.end());
+    }
+
+    // Record the results and move on.
+    result.emplace(top, std::vector<const clang::CXXRecordDecl *>(supers.begin(), supers.end()));
+    stack.pop();
+  }
+
+  return result;
+}
+
+std::unordered_map<const clang::CXXRecordDecl *, std::vector<const clang::CXXRecordDecl *>>
+InheritanceHierarchy::subs_star() const {
+  std::unordered_map<const clang::CXXRecordDecl *, std::vector<const clang::CXXRecordDecl *>> result;
+
+  std::stack<const clang::CXXRecordDecl *> stack;
+  for (const auto &[cur, _] : this->subs) {
+    stack.push(cur);
+  }
+
+  while (!stack.empty()) {
+    auto top = stack.top();
+
+    // If the result is already calculcated, move on.
+    if (result.contains(top)) {
+      stack.pop();
+      continue;
+    }
+
+    // If there are no subs, record that and move on.
+    auto top_subs_itr = this->subs.find(top);
+    if (top_subs_itr == this->subs.end()) {
+      result.emplace(top, std::vector<const clang::CXXRecordDecl *>{});
+      stack.pop();
+      continue;
+    }
+
+    // Make sure that the result for all the direct subs have been calculcated already.
+    bool found_missing = false;
+    for (auto super : top_subs_itr->second) {
+      if (!result.contains(super)) {
+        stack.push(super);
+        found_missing = true;
+      }
+    }
+
+    // If we found at least one element which wasn't previously calculcated, then we need to come back to this later.
+    if (found_missing) continue;
+
+    // Build the result for this element since all subs are calculcated.
+    std::unordered_set<const clang::CXXRecordDecl *> subs;
+    for (auto sub : top_subs_itr->second) {
+      auto sub_subs = result.find(sub);
+      assert(sub_subs != result.end());
+      subs.insert(sub);
+      subs.insert(sub_subs->second.begin(), sub_subs->second.end());
+    }
+
+    // Record the results and move on.
+    result.emplace(top, std::vector<const clang::CXXRecordDecl *>(subs.begin(), subs.end()));
+    stack.pop();
+  }
+
+  return result;
+}
+
+InheritanceTree InheritanceHierarchy::as_tree() {
+  std::unordered_map<const clang::CXXRecordDecl *, std::unique_ptr<InheritanceNode>> nodes;
+
+  auto get_node = [&](const clang::CXXRecordDecl *decl) -> InheritanceNode * {
+    auto find_itr = nodes.find(decl);
+    if (find_itr != nodes.end()) {
+      return find_itr->second.get();
+    }
+
+    auto node = std::make_unique<InheritanceNode>();
+    auto result = node.get();
+    node->decl = decl;
+    nodes.emplace(decl, std::move(node));
+    return result;
+  };
+
+  for (auto &[decl, decl_subs] : this->subs) {
+    auto decl_node = get_node(decl);
+    for (auto sub : decl_subs) {
+      auto sub_node = get_node(sub);
+
+      decl_node->subs.push_back(sub_node);
+      sub_node->supers.push_back(decl_node);
+    }
+  }
+
+  // Move the built nodes
+  InheritanceTree result;
+  for (auto &[_, node] : nodes) {
+    result.nodes.push_back(std::move(node));
+  }
+  return result;
+}
+
+std::vector<InheritanceNode *> InheritanceTree::roots() const {
+  std::vector<InheritanceNode *> result;
+  for (auto &node : nodes) {
+    if (node->supers.empty()) {
+      result.push_back(node.get());
+    }
+  }
+  return result;
+}
+
+std::vector<InheritanceNode *> InheritanceTree::leaves() const {
+  std::vector<InheritanceNode *> result;
+  for (auto &node : nodes) {
+    if (node->subs.empty()) {
+      result.push_back(node.get());
+    }
+  }
+  return result;
+}
+
+void InheritanceTree::filter(std::function<bool(const clang::CXXRecordDecl *)> f) {
+  std::unordered_set<InheritanceNode *> pruned_nodes;
+
+  // Walk backwards through the vector pruning as we go.
+  for (size_t i = nodes.size(); i > 0; --i) {
+    InheritanceNode *node = nodes[i - 1].get();
+    if (!f(node->decl)) {
+      pruned_nodes.insert(node);
+      nodes.erase(nodes.begin() + (i - 1));
+    }
+  }
+
+  // Walk through the vector again removing references to pruned elements.
+  for (auto &node : nodes) {
+    for (size_t i = node->supers.size(); i > 0; --i) {
+      if (pruned_nodes.contains(node->supers[i - 1])) {
+        node->supers.erase(node->supers.begin() + (i - 1));
+      }
+    }
+
+    for (size_t i = node->subs.size(); i > 0; --i) {
+      if (pruned_nodes.contains(node->subs[i - 1])) {
+        node->subs.erase(node->subs.begin() + (i - 1));
+      }
+    }
+  }
+}
+
 }  // namespace arboretum

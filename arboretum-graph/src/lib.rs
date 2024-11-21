@@ -1,54 +1,27 @@
-use rkyv::Archive;
-
 mod cache;
-mod constant;
-mod domain;
 mod error;
-mod graph_buffer;
-mod map_id;
 mod memory_info;
 mod mmap;
-mod prefix;
 mod root_graph;
 mod sled;
 mod smart_mmap_builder;
 mod subgraph;
 mod subgraph_config;
 mod subgraph_entry;
-mod types;
 
 pub use crate::sled::{graph::SledGraph, string_storage::SledStringStorage};
 pub use cache::SubgraphCacheStrategy;
-pub use constant::LOCAL_GRAPH_ID;
-pub use domain::Domain;
 pub use error::Error;
-pub use graph_buffer::GraphBuffer;
 pub use memory_info::{get_memory_info, MemoryInfo};
 pub use mmap::{MmapGraph, MmapGraphBuilder, MmapGraphBuilderOptions, MmapGraphRangeIter};
-pub use prefix::Prefix;
 pub use root_graph::{GraphOptions, RootGraph};
 pub use subgraph::Subgraph;
 pub use subgraph_config::SubgraphConfig;
-pub use types::{IdType, PropsType};
-
-/// Data which can be stored as props for a node or an edge.
-///
-/// See also [ArchivedValue]
-#[derive(
-    Clone, Debug, Archive, rkyv::Serialize, rkyv::Deserialize, serde::Serialize, serde::Deserialize,
-)]
-#[archive_attr(derive(Debug))]
-pub enum Value {
-    Unsigned(u64),
-    Signed(i64),
-    Double(f64),
-    String(String),
-}
 
 #[macro_export]
 macro_rules! query {
     ($mmap:expr, $sub:tt -?-> ?) => {{
-        use $crate::Prefix;
+        use arboretum_core::Prefix;
         $mmap.prefix_edges_spo(Prefix::One($sub))
     }};
 
@@ -105,7 +78,7 @@ macro_rules! query {
 #[macro_export]
 macro_rules! par_query {
     ($mmap:expr, $sub:tt -?-> ?) => {{
-        use $crate::Prefix;
+        use arboretum_core::Prefix;
         $mmap.par_prefix_edges_spo(Prefix::One($sub))
     }};
 
@@ -158,14 +131,4 @@ macro_rules! par_query {
     ($mmap:expr, $domains:expr, $sub:tt -?-> $obj:tt) => {{
         $mmap.par_prefix_edges_osp_with_extra_domains(($obj, Some(($sub, None))))
     }};
-}
-
-pub(crate) fn split_u64(value: u64) -> (u32, u32) {
-    let high = (value >> 32) as u32;
-    let low = value as u32;
-    (high, low)
-}
-
-pub(crate) fn merge_u64(high: u32, low: u32) -> u64 {
-    ((high as u64) << 32) + (low as u64)
 }

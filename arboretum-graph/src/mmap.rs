@@ -1,5 +1,5 @@
 use crate::error::Error;
-use crate::{IdType, Prefix, PropsType};
+use arboretum_core::{IdType, Prefix, PropsType};
 use memmap2::{Mmap, MmapOptions};
 use num::{Bounded, CheckedAdd, Integer, NumCast, ToPrimitive, Zero};
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
@@ -192,6 +192,9 @@ where
                     && start_bound > (cur.0.clone(), cur.1.clone(), cur.2.clone())
                 {
                     start_cur.inc();
+                    if start_cur == default_end {
+                        break;
+                    }
                     cur = self
                         .inner
                         .get_ordered_edge(&edge_order, start_cur.to_usize().unwrap())

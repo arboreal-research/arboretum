@@ -1,9 +1,6 @@
+use crate::mmap::{EdgeOrder, MmapGraphInner};
+use arboretum_core::{IdType, PropsType};
 use std::sync::Arc;
-
-use crate::{
-    mmap::{EdgeOrder, MmapGraphInner},
-    IdType, PropsType,
-};
 
 /// Range Iterator for edges in a [MmapGraph][crate::MmapGraph].
 pub struct MmapGraphRangeIter<'a, Id, NodeProps, EdgeProps>

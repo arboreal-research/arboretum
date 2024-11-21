@@ -22,4 +22,8 @@ std::vector<T> Sorted(const std::unordered_set<T> &s, bool (*cmp)(T, T)) {
   return v;
 }
 
-} // namespace arboretum
+std::string to_upper(const std::string &s);
+
+std::string to_snake_case(const std::string &input);
+
+}  // namespace arboretum

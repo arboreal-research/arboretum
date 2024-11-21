@@ -6,6 +6,7 @@ use actix_web::{
     App, HttpServer, Responder,
 };
 use arboretum_query::{GraphQuery, GraphQueryExecutor};
+use tracing::error;
 
 #[derive(Clone)]
 pub struct ApiServerState {
@@ -23,8 +24,10 @@ async fn api_query(
     request: web::Json<GraphQuery>,
     executor: web::Data<ApiServerState>,
 ) -> impl Responder {
-    let r =
-        tokio::task::spawn_blocking(move || executor.query_executor.run_blocking(&request.0)).await;
+    let data = request.0;
+
+    error!(?data);
+    let r = tokio::task::spawn_blocking(move || executor.query_executor.run_blocking(&data)).await;
 
     match r {
         Ok(r) => web::Json(r),

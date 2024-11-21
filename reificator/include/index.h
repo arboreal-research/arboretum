@@ -8,9 +8,31 @@
 
 namespace arboretum {
 
+struct InheritanceNode {
+  const clang::CXXRecordDecl *decl;
+
+  std::vector<InheritanceNode *> supers;
+  std::vector<InheritanceNode *> subs;
+};
+
+struct InheritanceTree {
+  std::vector<std::unique_ptr<InheritanceNode>> nodes;
+
+  std::vector<InheritanceNode *> roots() const;
+  std::vector<InheritanceNode *> leaves() const;
+
+  // Prune entries which return false
+  void filter(std::function<bool(const clang::CXXRecordDecl *)> f);
+};
+
 struct InheritanceHierarchy {
   std::unordered_map<const clang::CXXRecordDecl *, std::vector<const clang::CXXRecordDecl *>> supers;
   std::unordered_map<const clang::CXXRecordDecl *, std::vector<const clang::CXXRecordDecl *>> subs;
+
+  std::unordered_map<const clang::CXXRecordDecl *, std::vector<const clang::CXXRecordDecl *>> supers_star() const;
+  std::unordered_map<const clang::CXXRecordDecl *, std::vector<const clang::CXXRecordDecl *>> subs_star() const;
+
+  InheritanceTree as_tree();
 };
 
 struct StdLibrary {

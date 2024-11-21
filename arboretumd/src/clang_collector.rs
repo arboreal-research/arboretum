@@ -3,7 +3,7 @@ use std::net::ToSocketAddrs;
 use actix_server::Server;
 use actix_service::{fn_service, ServiceFactoryExt as _};
 use arboretum_ffi::tcp_client::{ClangPluginClientMessage, FfiValue};
-use arboretum_graph::{GraphBuffer, Value};
+use arboretum_core::{GraphBuffer, Value};
 use tokio::{io::AsyncReadExt, net::TcpStream, sync::mpsc::Sender};
 
 fn to_value(ffi_value: FfiValue) -> Value {

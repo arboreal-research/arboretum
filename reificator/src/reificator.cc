@@ -4,7 +4,9 @@
 #include <fstream>
 #include <regex>
 
+#include "emit_graphql_model.h"
 #include "emit_reify_cpp.h"
+#include "emit_reify_rs.h"
 #include "get_usr.h"
 #include "index_builder.h"
 #include "model.h"
@@ -21,6 +23,7 @@ std::vector<std::string> split_tab(const std::string &s) {
 struct CommandArgs {
   std::string reify_cpp_dir = "./reify-cpp/";
   std::string reify_rs_dir = "./reify-rs/";
+  std::string arboretum_graphql_dir = "./arboretum-graphql/";
 
   std::string property_table = "./reificator/properties.csv";
 };
@@ -37,7 +40,9 @@ class ReificatorASTConsumer : public clang::ASTConsumer {
     auto property_table = ReadPropertyTable();
     UpdatePropertyTable(property_table, model);
 
-    EmitReifyCpp(model, property_table, args_.reify_cpp_dir, args_.reify_rs_dir);
+    auto emit_reify_cpp_result = EmitReifyCpp(model, property_table, args_.reify_cpp_dir);
+    EmitReifyRs(model, property_table, args_.reify_rs_dir, emit_reify_cpp_result.name_registry, emit_reify_cpp_result.enums_to_emit);
+    EmitGraphqlModel(model, property_table, args_.arboretum_graphql_dir);
   }
 
   std::map<std::string, bool> ReadPropertyTable() {
