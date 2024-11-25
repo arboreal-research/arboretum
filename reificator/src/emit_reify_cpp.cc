@@ -15,23 +15,31 @@
 
 namespace arboretum {
 
-bool AlphabetizeCXXRecordDecl(const clang::CXXRecordDecl *a, const clang::CXXRecordDecl *b) {
+bool AlphabetizeCXXRecordDecl(const clang::CXXRecordDecl *a,
+                              const clang::CXXRecordDecl *b) {
   return a->getNameAsString() < b->getNameAsString();
 }
 
 struct HandlerFragment {
-  HandlerFragment(std::function<std::string(const std::string &)> simple_handler)
-      : handler_([=](size_t indent, const std::string &input) -> std::pair<std::vector<std::string>, std::string> {
+  HandlerFragment(
+      std::function<std::string(const std::string &)> simple_handler)
+      : handler_([=](size_t indent, const std::string &input)
+                     -> std::pair<std::vector<std::string>, std::string> {
           std::vector<std::string> stmts;
           return std::make_pair(stmts, simple_handler(input));
         }) {}
 
-  HandlerFragment(std::function<std::pair<std::vector<std::string>, std::string>(size_t, const std::string &)> handler)
+  HandlerFragment(
+      std::function<std::pair<std::vector<std::string>, std::string>(
+          size_t, const std::string &)>
+          handler)
       : handler_(handler) {}
 
-  std::string operator()(size_t indent,
-                         std::function<std::string(size_t indent, const std::string &)> final_stmt_builder,
-                         const std::string &input_expr) {
+  std::string operator()(
+      size_t indent,
+      std::function<std::string(size_t indent, const std::string &)>
+          final_stmt_builder,
+      const std::string &input_expr) {
     auto [stmts, expr] = handler_(indent, input_expr);
     std::stringstream out;
     if (stmts.size() == 0) {
@@ -49,23 +57,31 @@ struct HandlerFragment {
     return out.str();
   }
 
-  std::function<std::pair<std::vector<std::string>, std::string>(size_t, const std::string &)> handler_;
+  std::function<std::pair<std::vector<std::string>, std::string>(
+      size_t, const std::string &)>
+      handler_;
 };
 
-std::optional<std::string> class_for(Model &model, clang::QualType type,
-                                     std::map<std::string, const clang::EnumDecl *> &enums_to_emit) {
+std::optional<std::string> class_for(
+    Model &model, clang::QualType type,
+    std::map<std::string, const clang::EnumDecl *> &enums_to_emit) {
   if (type->isEnumeralType()) {
-    const clang::EnumDecl *decl = llvm::dyn_cast<clang::EnumDecl>(type->getAsTagDecl());
+    const clang::EnumDecl *decl =
+        llvm::dyn_cast<clang::EnumDecl>(type->getAsTagDecl());
     const clang::EnumDecl *decl_def = decl->getDefinition();
-    if (decl_def == nullptr) llvm::errs() << "Missing definition for " << decl->getQualifiedNameAsString() << "!\n";
-    enums_to_emit.insert(std::make_pair(decl->getQualifiedNameAsString(), decl));
+    if (decl_def == nullptr)
+      llvm::errs() << "Missing definition for "
+                   << decl->getQualifiedNameAsString() << "!\n";
+    enums_to_emit.insert(
+        std::make_pair(decl->getQualifiedNameAsString(), decl));
     return model.entity_name(decl);
   } else if (type->isPointerType()) {
     auto pointer_type = type->getAs<clang::PointerType>();
     auto pointee_type = pointer_type->getPointeeType();
     if (pointee_type->isRecordType()) {
       auto record_type = pointee_type->getAs<clang::RecordType>();
-      auto record_decl = llvm::dyn_cast<clang::CXXRecordDecl>(record_type->getDecl());
+      auto record_decl =
+          llvm::dyn_cast<clang::CXXRecordDecl>(record_type->getDecl());
       if (model.index.clang.all_decls.contains(record_decl)) {
         return model.entity_name(record_decl);
       }
@@ -100,7 +116,8 @@ std::optional<std::string> class_for(Model &model, clang::QualType type,
     }
   } else if (type->isRecordType()) {
     auto record_type = type->getAs<clang::RecordType>();
-    auto record_decl = llvm::dyn_cast<clang::CXXRecordDecl>(record_type->getDecl());
+    auto record_decl =
+        llvm::dyn_cast<clang::CXXRecordDecl>(record_type->getDecl());
     auto fqn = record_decl->getQualifiedNameAsString();
     if (fqn == "clang::QualType") {
       return std::string("qualtype_class");
@@ -122,17 +139,21 @@ std::optional<std::string> class_for(Model &model, clang::QualType type,
   return std::nullopt;
 }
 
-std::optional<HandlerFragment> handler_for(Model &model, clang::QualType return_type,
-                                           std::map<std::string, const clang::EnumDecl *> &enums_to_emit);
+std::optional<HandlerFragment> handler_for(
+    Model &model, clang::QualType return_type,
+    std::map<std::string, const clang::EnumDecl *> &enums_to_emit);
 
-std::optional<HandlerFragment> list_handler_for(Model &model, clang::QualType element_type,
-                                                std::map<std::string, const clang::EnumDecl *> &enums_to_emit) {
-  std::optional<HandlerFragment> eh = handler_for(model, element_type, enums_to_emit);
-  std::optional<std::string> entity_name = class_for(model, element_type, enums_to_emit);
+std::optional<HandlerFragment> list_handler_for(
+    Model &model, clang::QualType element_type,
+    std::map<std::string, const clang::EnumDecl *> &enums_to_emit) {
+  std::optional<HandlerFragment> eh =
+      handler_for(model, element_type, enums_to_emit);
+  std::optional<std::string> entity_name =
+      class_for(model, element_type, enums_to_emit);
   if (eh.has_value() && entity_name.has_value()) {
     return HandlerFragment{
-        [eh, entity_name](size_t indent,
-                          const std::string &input_expr) -> std::pair<std::vector<std::string>, std::string> {
+        [eh, entity_name](size_t indent, const std::string &input_expr)
+            -> std::pair<std::vector<std::string>, std::string> {
           HandlerFragment element_handler = *eh;
 
           std::vector<std::string> stmts;
@@ -160,38 +181,49 @@ std::optional<HandlerFragment> list_handler_for(Model &model, clang::QualType el
               "(*itr)"));
 
           std::stringstream out;
-          out << "context_.data_model_.arboretum_node_for(context_.data_model_." << *entity_name << "_, element_ids)";
+          out << "context_.data_model_.arboretum_node_for(context_.data_model_."
+              << *entity_name << "_, element_ids)";
           return std::make_pair(stmts, out.str());
         }};
   }
   return std::nullopt;
 }
 
-std::optional<HandlerFragment> handler_for(Model &model, clang::QualType return_type,
-                                           std::map<std::string, const clang::EnumDecl *> &enums_to_emit) {
+std::optional<HandlerFragment> handler_for(
+    Model &model, clang::QualType return_type,
+    std::map<std::string, const clang::EnumDecl *> &enums_to_emit) {
   if (return_type->isEnumeralType()) {
-    const clang::EnumDecl *decl = llvm::dyn_cast<clang::EnumDecl>(return_type->getAsTagDecl());
+    const clang::EnumDecl *decl =
+        llvm::dyn_cast<clang::EnumDecl>(return_type->getAsTagDecl());
 
     const clang::EnumDecl *decl_def = decl->getDefinition();
-    if (decl_def == nullptr) llvm::errs() << "Missing definition for " << decl->getQualifiedNameAsString() << "!\n";
+    if (decl_def == nullptr)
+      llvm::errs() << "Missing definition for "
+                   << decl->getQualifiedNameAsString() << "!\n";
 
     std::optional<std::string> enum_usr = getUSR(model.ast_ctx, decl);
     if (enum_usr.has_value()) {
-      enums_to_emit.insert(std::make_pair(decl->getQualifiedNameAsString(), decl));
+      enums_to_emit.insert(
+          std::make_pair(decl->getQualifiedNameAsString(), decl));
 
-      return HandlerFragment{
-          [](const std::string &hole) { return std::string("context_.data_model_.resolve(") + hole + ")"; }};
+      return HandlerFragment{[](const std::string &hole) {
+        return std::string("context_.data_model_.resolve(") + hole + ")";
+      }};
     } else {
-      llvm::errs() << "Failed to generator USR for " << decl->getQualifiedNameAsString() << "!\n";
+      llvm::errs() << "Failed to generator USR for "
+                   << decl->getQualifiedNameAsString() << "!\n";
     }
   } else if (return_type->isPointerType()) {
     auto pointer_type = return_type->getAs<clang::PointerType>();
     auto pointee_type = pointer_type->getPointeeType();
     if (pointee_type->isRecordType()) {
       auto record_type = pointee_type->getAs<clang::RecordType>();
-      auto record_decl = llvm::dyn_cast<clang::CXXRecordDecl>(record_type->getDecl());
+      auto record_decl =
+          llvm::dyn_cast<clang::CXXRecordDecl>(record_type->getDecl());
       if (model.index.clang.all_decls.contains(record_decl)) {
-        return HandlerFragment{[](const std::string &hole) { return std::string("context_.resolve(") + hole + ")"; }};
+        return HandlerFragment{[](const std::string &hole) {
+          return std::string("context_.resolve(") + hole + ")";
+        }};
       }
     }
   } else if (return_type->isBuiltinType()) {
@@ -199,7 +231,8 @@ std::optional<HandlerFragment> handler_for(Model &model, clang::QualType return_
     switch (builtin_type->getKind()) {
       case clang::BuiltinType::Bool: {
         return HandlerFragment{[](const std::string &hole) {
-          return std::string("context_.data_model_.arboretum_node_for(") + hole + ")";
+          return std::string("context_.data_model_.arboretum_node_for(") +
+                 hole + ")";
         }};
       } break;
       case clang::BuiltinType::UChar:
@@ -230,40 +263,53 @@ std::optional<HandlerFragment> handler_for(Model &model, clang::QualType return_
       } break;
       case clang::BuiltinType::Double: {
         return HandlerFragment{[](const std::string &hole) {
-          return std::string("context_.data_model_.arboretum_node_for(") + hole + ")";
+          return std::string("context_.data_model_.arboretum_node_for(") +
+                 hole + ")";
         }};
       } break;
       default:
         break;
     }
   } else if (return_type->isRecordType()) {
-    auto record_type = return_type.getCanonicalType()->getAs<clang::RecordType>();
-    auto record_decl = llvm::dyn_cast<clang::CXXRecordDecl>(record_type->getDecl());
+    auto record_type =
+        return_type.getCanonicalType()->getAs<clang::RecordType>();
+    auto record_decl =
+        llvm::dyn_cast<clang::CXXRecordDecl>(record_type->getDecl());
     auto fqn = record_decl->getQualifiedNameAsString();
     if (fqn == "clang::QualType") {
-      return HandlerFragment{[](const std::string &hole) { return std::string("context_.resolve(") + hole + ")"; }};
+      return HandlerFragment{[](const std::string &hole) {
+        return std::string("context_.resolve(") + hole + ")";
+      }};
     } else if (fqn == "clang::SourceLocation") {
-      return HandlerFragment{
-          [](const std::string &hole) { return std::string("context_.source_model_.resolve(") + hole + ")"; }};
+      return HandlerFragment{[](const std::string &hole) {
+        return std::string("context_.source_model_.resolve(") + hole + ")";
+      }};
     } else if (fqn == "clang::SourceRange") {
-      return HandlerFragment{
-          [](const std::string &hole) { return std::string("context_.source_model_.resolve(") + hole + ")"; }};
+      return HandlerFragment{[](const std::string &hole) {
+        return std::string("context_.source_model_.resolve(") + hole + ")";
+      }};
     } else if (fqn == "llvm::StringRef") {
       return HandlerFragment{[](const std::string &hole) {
-        return std::string("context_.data_model_.arboretum_node_for(") + hole + ".str())";
+        return std::string("context_.data_model_.arboretum_node_for(") + hole +
+               ".str())";
       }};
     } else if (fqn == "std::basic_string") {
-      return HandlerFragment{
-          [](const std::string &hole) { return std::string("context_.data_model_.arboretum_node_for(") + hole + ")"; }};
+      return HandlerFragment{[](const std::string &hole) {
+        return std::string("context_.data_model_.arboretum_node_for(") + hole +
+               ")";
+      }};
     } else if (fqn == "llvm::ArrayRef") {
-      auto tmpl_record_decl = llvm::dyn_cast_or_null<clang::ClassTemplateSpecializationDecl>(record_decl);
+      auto tmpl_record_decl =
+          llvm::dyn_cast_or_null<clang::ClassTemplateSpecializationDecl>(
+              record_decl);
       auto element_type = tmpl_record_decl->getTemplateArgs()[0].getAsType();
       return list_handler_for(model, element_type, enums_to_emit);
     } else if (fqn == "llvm::iterator_range") {
-      auto iterator_range_arg = return_type->getAs<clang::TemplateSpecializationType>()
-                                    ->template_arguments()[0]
-                                    .getAsType()
-                                    .getCanonicalType();
+      auto iterator_range_arg =
+          return_type->getAs<clang::TemplateSpecializationType>()
+              ->template_arguments()[0]
+              .getAsType()
+              .getCanonicalType();
 
       if (iterator_range_arg->isPointerType()) {
         auto element_type = iterator_range_arg->getPointeeType();
@@ -271,12 +317,15 @@ std::optional<HandlerFragment> handler_for(Model &model, clang::QualType return_
       } else if (iterator_range_arg->isRecordType()) {
         auto iterator_decl = iterator_range_arg->getAsCXXRecordDecl();
         if (iterator_decl != nullptr) {
-          clang::DeclarationName name = &iterator_decl->getASTContext().Idents.get("value_type");
+          clang::DeclarationName name =
+              &iterator_decl->getASTContext().Idents.get("value_type");
           auto lookup = iterator_decl->lookup(name);
           if (lookup.isSingleResult()) {
-            auto typedef_name_decl = llvm::dyn_cast_or_null<clang::TypedefNameDecl>(*lookup.begin());
+            auto typedef_name_decl =
+                llvm::dyn_cast_or_null<clang::TypedefNameDecl>(*lookup.begin());
             if (typedef_name_decl != nullptr) {
-              auto element_type = typedef_name_decl->getUnderlyingType().getCanonicalType();
+              auto element_type =
+                  typedef_name_decl->getUnderlyingType().getCanonicalType();
               return list_handler_for(model, element_type, enums_to_emit);
             }
           }
@@ -288,54 +337,68 @@ std::optional<HandlerFragment> handler_for(Model &model, clang::QualType return_
   return std::nullopt;
 }
 
-EmitReifyCppResult EmitReifyCpp(Model &model, std::map<std::string, bool> property_table,
+EmitReifyCppResult EmitReifyCpp(Model &model,
+                                std::map<std::string, bool> property_table,
                                 const std::string &reify_cpp_dir) {
   EmitReifyCppResult result;
 
   std::filesystem::path reify_cpp_dir_path(reify_cpp_dir);
 
   assert(model.index.clang.cfg_terminator_kind != nullptr);
-  result.enums_to_emit.insert(std::make_pair(model.index.clang.cfg_terminator_kind->getQualifiedNameAsString(),
-                                             model.index.clang.cfg_terminator_kind));
+  result.enums_to_emit.insert(std::make_pair(
+      model.index.clang.cfg_terminator_kind->getQualifiedNameAsString(),
+      model.index.clang.cfg_terminator_kind));
 
   /////////////////////////////////////////////////////////////////////////////
 
-  auto ast_visitor_h = PartiallyGeneratedFile::Read(reify_cpp_dir_path / "include" / "arboretum_ast_visitor.h");
+  auto ast_visitor_h = PartiallyGeneratedFile::Read(
+      reify_cpp_dir_path / "include" / "arboretum_ast_visitor.h");
   assert(ast_visitor_h.Write([&](std::ostream &out) -> bool {
     out << "  // Types\n";
-    for (const auto *type_decl : Sorted(model.index.clang.type_decls, AlphabetizeCXXRecordDecl)) {
+    for (const auto *type_decl :
+         Sorted(model.index.clang.type_decls, AlphabetizeCXXRecordDecl)) {
       std::string decl_name = type_decl->getNameAsString();
-      out << "  bool Visit" << decl_name << "(clang::" << decl_name << "* T);\n";
+      out << "  bool Visit" << decl_name << "(clang::" << decl_name
+          << "* T);\n";
     }
 
     out << "\n  // TypeLocs\n";
-    for (const auto *typeloc_decl : Sorted(model.index.clang.typeloc_decls, AlphabetizeCXXRecordDecl)) {
+    for (const auto *typeloc_decl :
+         Sorted(model.index.clang.typeloc_decls, AlphabetizeCXXRecordDecl)) {
       std::string decl_name = typeloc_decl->getNameAsString();
-      out << "  bool Visit" << decl_name << "(clang::" << decl_name << " TL);\n ";
+      out << "  bool Visit" << decl_name << "(clang::" << decl_name
+          << " TL);\n ";
     }
 
     out << "\n  // Decls\n";
-    for (const auto *decl_decl : Sorted(model.index.clang.decl_decls, AlphabetizeCXXRecordDecl)) {
+    for (const auto *decl_decl :
+         Sorted(model.index.clang.decl_decls, AlphabetizeCXXRecordDecl)) {
       std::string decl_name = decl_decl->getNameAsString();
-      out << "  bool Visit" << decl_name << "(clang::" << decl_name << "* D);\n";
+      out << "  bool Visit" << decl_name << "(clang::" << decl_name
+          << "* D);\n";
     }
 
     out << "\n  // Stmts\n";
-    for (const auto *stmt_decl : Sorted(model.index.clang.stmt_decls, AlphabetizeCXXRecordDecl)) {
+    for (const auto *stmt_decl :
+         Sorted(model.index.clang.stmt_decls, AlphabetizeCXXRecordDecl)) {
       std::string decl_name = stmt_decl->getNameAsString();
-      out << "  bool Visit" << decl_name << "(clang::" << decl_name << "* S);\n";
+      out << "  bool Visit" << decl_name << "(clang::" << decl_name
+          << "* S);\n";
     }
     return true;
   }));
 
   /////////////////////////////////////////////////////////////////////////////
 
-  auto ast_visitor_cc = PartiallyGeneratedFile::Read(reify_cpp_dir_path / "src" / "arboretum_ast_visitor.cc");
+  auto ast_visitor_cc = PartiallyGeneratedFile::Read(
+      reify_cpp_dir_path / "src" / "arboretum_ast_visitor.cc");
   ast_visitor_cc.Write([&](std::ostream &out) -> bool {
-    auto emit_methods = [&](const clang::CXXRecordDecl *decl, const std::string &decl_name) {
+    auto emit_methods = [&](const clang::CXXRecordDecl *decl,
+                            const std::string &decl_name) {
       for (const auto &method_decl : decl->methods()) {
         std::string method_name = method_decl->getNameAsString();
-        std::optional<std::string> method_usr = getUSR(model.ast_ctx, method_decl);
+        std::optional<std::string> method_usr =
+            getUSR(model.ast_ctx, method_decl);
         if (!method_usr.has_value()) continue;
 
         {
@@ -346,33 +409,39 @@ EmitReifyCppResult EmitReifyCpp(Model &model, std::map<std::string, bool> proper
         std::string method_decl_Id = model.entity_name(method_decl);
 
         auto return_type = method_decl->getReturnType();
-        std::optional<HandlerFragment> handler_opt = handler_for(model, return_type, result.enums_to_emit);
+        std::optional<HandlerFragment> handler_opt =
+            handler_for(model, return_type, result.enums_to_emit);
         if (handler_opt.has_value()) {
           out << (*handler_opt)(
               2,
               [&](size_t indent, const std::string &e) {
                 std::stringstream out;
                 for (size_t i = 0; i < indent; ++i) out << " ";
-                out << "arboretum_create_edge(obj, context_.data_model_." + method_decl_Id + "_, " + e + ");\n";
+                out << "arboretum_create_edge(obj, context_.data_model_." +
+                           method_decl_Id + "_, " + e + ");\n";
                 return out.str();
               },
               std::string("D->") + method_name + "()");
         } else {
-          out << "  // " << method_name << " ( " << return_type.getCanonicalType().getAsString() << " )\n";
+          out << "  // " << method_name << " ( "
+              << return_type.getCanonicalType().getAsString() << " )\n";
         }
       }
     };
 
     out << "// Types\n";
-    for (const auto *type_decl : Sorted(model.index.clang.type_decls, AlphabetizeCXXRecordDecl)) {
+    for (const auto *type_decl :
+         Sorted(model.index.clang.type_decls, AlphabetizeCXXRecordDecl)) {
       std::string decl_name = type_decl->getNameAsString();
-      out << "bool ArboretumASTVisitor::Visit" << decl_name << "(clang::" << decl_name << "* D) {\n";
+      out << "bool ArboretumASTVisitor::Visit" << decl_name
+          << "(clang::" << decl_name << "* D) {\n";
 
       out << "  const Id* obj = context_.resolve(D);\n";
 
       if (type_decl == model.index.clang.type_decl) {
         out << "  switch(D->getTypeClass()) {\n";
-        for (auto [decl, enum_decl] : model.index.clang.typeclass_enum_by_decl) {
+        for (auto [decl, enum_decl] :
+             model.index.clang.typeclass_enum_by_decl) {
           std::string decl_Id = model.entity_name(decl);
 
           out << "    case " << enum_decl->getQualifiedNameAsString() << ": \n";
@@ -390,22 +459,30 @@ EmitReifyCppResult EmitReifyCpp(Model &model, std::map<std::string, bool> proper
     }
 
     out << "\n// TypeLocs\n";
-    for (const auto *typeloc_decl : Sorted(model.index.clang.typeloc_decls, AlphabetizeCXXRecordDecl)) {
+    for (const auto *typeloc_decl :
+         Sorted(model.index.clang.typeloc_decls, AlphabetizeCXXRecordDecl)) {
       std::string decl_name = typeloc_decl->getNameAsString();
-      out << "bool ArboretumASTVisitor::Visit" << decl_name << "(clang::" << decl_name << " D) {\n";
+      out << "bool ArboretumASTVisitor::Visit" << decl_name
+          << "(clang::" << decl_name << " D) {\n";
       out << "  return true;\n";
       out << "}\n\n";
     }
 
     out << "\n// Decls\n";
-    for (const auto *decl_decl : Sorted(model.index.clang.decl_decls, AlphabetizeCXXRecordDecl)) {
+    for (const auto *decl_decl :
+         Sorted(model.index.clang.decl_decls, AlphabetizeCXXRecordDecl)) {
       std::string decl_name = decl_decl->getNameAsString();
-      out << "bool ArboretumASTVisitor::Visit" << decl_name << "(clang::" << decl_name << "* D) {\n";
+      out << "bool ArboretumASTVisitor::Visit" << decl_name
+          << "(clang::" << decl_name << "* D) {\n";
 
-      if (decl_name == "FunctionDecl" || decl_name == "CXXMethodDecl" || decl_name == "CXXConstructorDecl" ||
-          decl_name == "CXXConversionDecl" || decl_name == "CXXDestructorDecl" || decl_name == "TagDecl" ||
-          decl_name == "EnumDecl" || decl_name == "RecordDecl" || decl_name == "CXXRecordDecl" ||
-          decl_name == "ClassTemplateSpecializationDecl" || decl_name == "ClassTemplatePartialSpecializationDecl") {
+      if (decl_name == "FunctionDecl" || decl_name == "CXXMethodDecl" ||
+          decl_name == "CXXConstructorDecl" ||
+          decl_name == "CXXConversionDecl" ||
+          decl_name == "CXXDestructorDecl" || decl_name == "TagDecl" ||
+          decl_name == "EnumDecl" || decl_name == "RecordDecl" ||
+          decl_name == "CXXRecordDecl" ||
+          decl_name == "ClassTemplateSpecializationDecl" ||
+          decl_name == "ClassTemplatePartialSpecializationDecl") {
         out << "  if (!D->isThisDeclarationADefinition()) return true;\n\n";
       }
 
@@ -431,15 +508,18 @@ EmitReifyCppResult EmitReifyCpp(Model &model, std::map<std::string, bool> proper
     }
 
     out << "\n// Stmts\n";
-    for (const auto *stmt_decl : Sorted(model.index.clang.stmt_decls, AlphabetizeCXXRecordDecl)) {
+    for (const auto *stmt_decl :
+         Sorted(model.index.clang.stmt_decls, AlphabetizeCXXRecordDecl)) {
       std::string decl_name = stmt_decl->getNameAsString();
-      out << "bool ArboretumASTVisitor::Visit" << decl_name << "(clang::" << decl_name << "* D) {\n";
+      out << "bool ArboretumASTVisitor::Visit" << decl_name
+          << "(clang::" << decl_name << "* D) {\n";
 
       out << "  const Id* obj = context_.resolve(D);\n";
 
       if (stmt_decl == model.index.clang.stmt_decl) {
         out << "  switch(D->getStmtClass()) {\n";
-        for (auto [decl, enum_decl] : model.index.clang.stmtclass_enum_by_decl) {
+        for (auto [decl, enum_decl] :
+             model.index.clang.stmtclass_enum_by_decl) {
           std::string decl_Id = model.entity_name(decl);
 
           out << "    case " << enum_decl->getQualifiedNameAsString() << ": \n";
@@ -461,7 +541,8 @@ EmitReifyCppResult EmitReifyCpp(Model &model, std::map<std::string, bool> proper
 
   /////////////////////////////////////////////////////////////////////////////
 
-  auto data_model_h = PartiallyGeneratedFile::Read(reify_cpp_dir_path / "include" / "arboretum_data_model.h");
+  auto data_model_h = PartiallyGeneratedFile::Read(
+      reify_cpp_dir_path / "include" / "arboretum_data_model.h");
   assert(data_model_h.Write([&](std::ostream &out) -> bool {
     out << "  DataModel();\n";
 
@@ -472,8 +553,10 @@ EmitReifyCppResult EmitReifyCpp(Model &model, std::map<std::string, bool> proper
     for (auto &decl_decl : model.index.clang.all_decls) {
       out << "  Id* " << model.entity_name(decl_decl) << "_ = nullptr;\n";
       for (auto method_decl : decl_decl->methods()) {
-        std::optional<std::string> method_decl_usr = getUSR(model.ast_ctx, method_decl);
-        if (!method_decl_usr.has_value() || !property_table.contains(*method_decl_usr)) {
+        std::optional<std::string> method_decl_usr =
+            getUSR(model.ast_ctx, method_decl);
+        if (!method_decl_usr.has_value() ||
+            !property_table.contains(*method_decl_usr)) {
           continue;
         }
 
@@ -485,7 +568,8 @@ EmitReifyCppResult EmitReifyCpp(Model &model, std::map<std::string, bool> proper
       out << "  Id* resolve(" << enum_name << " e);\n";
       out << "  Id* " << model.entity_name(enum_decl) << "_ = nullptr;\n";
       for (const auto &enum_value_decl : enum_decl->enumerators()) {
-        out << "  Id* " << model.entity_name(enum_value_decl) << "_ = nullptr;\n";
+        out << "  Id* " << model.entity_name(enum_value_decl)
+            << "_ = nullptr;\n";
       }
     }
 
@@ -494,12 +578,13 @@ EmitReifyCppResult EmitReifyCpp(Model &model, std::map<std::string, bool> proper
 
   /////////////////////////////////////////////////////////////////////////////
 
-  auto data_model_cc = PartiallyGeneratedFile::Read(reify_cpp_dir_path / "src" / "arboretum_data_model.cc");
+  auto data_model_cc = PartiallyGeneratedFile::Read(reify_cpp_dir_path / "src" /
+                                                    "arboretum_data_model.cc");
   assert(data_model_cc.Write([&](std::ostream &out) -> bool {
     out << "DataModel::DataModel() {\n";
     for (const auto &[var, name] : model.meta_data_model) {
-      out << "  " << var << "_ = arboretum_create_nameless_node_with_id(" << result.name_registry.fqn_to_id(1, name)
-          << ");\n";
+      out << "  " << var << "_ = arboretum_create_nameless_node_with_id("
+          << result.name_registry.fqn_to_id(1, name) << ");\n";
     }
     out << "}\n\n";
 
@@ -510,20 +595,26 @@ EmitReifyCppResult EmitReifyCpp(Model &model, std::map<std::string, bool> proper
     for (auto &decl_decl : model.index.clang.all_decls) {
       std::string decl_decl_Id = model.entity_name(decl_decl);
 
-      out << "  data_model." << decl_decl_Id << "_ = arboretum_create_nameless_node_with_id("
-          << result.name_registry.fqn_to_id(1, decl_decl->getQualifiedNameAsString()) << ");\n";
+      out << "  data_model." << decl_decl_Id
+          << "_ = arboretum_create_nameless_node_with_id("
+          << result.name_registry.fqn_to_id(
+                 1, decl_decl->getQualifiedNameAsString())
+          << ");\n";
 
       // Emit the methods
       for (auto method_decl : decl_decl->methods()) {
-        std::optional<std::string> method_decl_usr = getUSR(model.ast_ctx, method_decl);
-        if (!method_decl_usr.has_value() || !property_table.contains(*method_decl_usr)) {
+        std::optional<std::string> method_decl_usr =
+            getUSR(model.ast_ctx, method_decl);
+        if (!method_decl_usr.has_value() ||
+            !property_table.contains(*method_decl_usr)) {
           continue;
         }
 
         std::string method_decl_fqn = method_decl->getQualifiedNameAsString();
         std::string method_decl_Id = model.entity_name(method_decl);
 
-        out << "  data_model." << method_decl_Id << "_ = arboretum_create_nameless_node_with_id("
+        out << "  data_model." << method_decl_Id
+            << "_ = arboretum_create_nameless_node_with_id("
             << result.name_registry.fqn_to_id(1, method_decl_fqn) << ");\n";
       }
     }
@@ -532,14 +623,17 @@ EmitReifyCppResult EmitReifyCpp(Model &model, std::map<std::string, bool> proper
       std::string enum_decl_fqn = enum_decl->getQualifiedNameAsString();
       std::string enum_decl_Id = model.entity_name(enum_decl);
 
-      out << "  data_model." << enum_decl_Id << "_ = arboretum_create_nameless_node_with_id("
+      out << "  data_model." << enum_decl_Id
+          << "_ = arboretum_create_nameless_node_with_id("
           << result.name_registry.fqn_to_id(1, enum_decl_fqn) << ");\n";
 
       for (const auto &enum_value_decl : enum_decl->enumerators()) {
-        std::string enum_value_decl_fqn = enum_value_decl->getQualifiedNameAsString();
+        std::string enum_value_decl_fqn =
+            enum_value_decl->getQualifiedNameAsString();
         std::string enum_value_decl_Id = model.entity_name(enum_value_decl);
 
-        out << "  data_model." << enum_value_decl_Id << "_ = arboretum_create_nameless_node_with_id("
+        out << "  data_model." << enum_value_decl_Id
+            << "_ = arboretum_create_nameless_node_with_id("
             << result.name_registry.fqn_to_id(1, enum_value_decl_fqn) << ");\n";
       }
     }
@@ -552,7 +646,8 @@ EmitReifyCppResult EmitReifyCpp(Model &model, std::map<std::string, bool> proper
 
       std::set<llvm::APSInt> seen_values;
       for (const auto &enum_value_decl : enum_decl->enumerators()) {
-        std::string enum_value_name = enum_value_decl->getQualifiedNameAsString();
+        std::string enum_value_name =
+            enum_value_decl->getQualifiedNameAsString();
 
         llvm::APSInt enum_value = enum_value_decl->getInitVal();
 
@@ -560,7 +655,8 @@ EmitReifyCppResult EmitReifyCpp(Model &model, std::map<std::string, bool> proper
         if (find_itr != seen_values.end()) continue;
         seen_values.insert(enum_value);
 
-        out << "    case " << enum_value_name << ": return " << model.entity_name(enum_value_decl) << "_;\n";
+        out << "    case " << enum_value_name << ": return "
+            << model.entity_name(enum_value_decl) << "_;\n";
       }
 
       std::string enum_type = enum_decl->getIntegerType().getAsString();

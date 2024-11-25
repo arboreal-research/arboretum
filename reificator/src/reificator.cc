@@ -4,7 +4,6 @@
 #include <fstream>
 #include <regex>
 
-#include "emit_graphql_model.h"
 #include "emit_reify_cpp.h"
 #include "emit_reify_rs.h"
 #include "get_usr.h"
@@ -23,8 +22,6 @@ std::vector<std::string> split_tab(const std::string &s) {
 struct CommandArgs {
   std::string reify_cpp_dir = "./reify-cpp/";
   std::string reify_rs_dir = "./reify-rs/";
-  std::string arboretum_graphql_dir = "./arboretum-graphql/";
-
   std::string property_table = "./reificator/properties.csv";
 };
 
@@ -40,9 +37,11 @@ class ReificatorASTConsumer : public clang::ASTConsumer {
     auto property_table = ReadPropertyTable();
     UpdatePropertyTable(property_table, model);
 
-    auto emit_reify_cpp_result = EmitReifyCpp(model, property_table, args_.reify_cpp_dir);
-    EmitReifyRs(model, property_table, args_.reify_rs_dir, emit_reify_cpp_result.name_registry, emit_reify_cpp_result.enums_to_emit);
-    EmitGraphqlModel(model, property_table, args_.arboretum_graphql_dir);
+    auto emit_reify_cpp_result =
+        EmitReifyCpp(model, property_table, args_.reify_cpp_dir);
+    EmitReifyRs(model, property_table, args_.reify_rs_dir,
+                emit_reify_cpp_result.name_registry,
+                emit_reify_cpp_result.enums_to_emit);
   }
 
   std::map<std::string, bool> ReadPropertyTable() {
@@ -59,7 +58,8 @@ class ReificatorASTConsumer : public clang::ASTConsumer {
     return property_table;
   }
 
-  void UpdatePropertyTable(std::map<std::string, bool> &original_property_table, Model &model) {
+  void UpdatePropertyTable(std::map<std::string, bool> &original_property_table,
+                           Model &model) {
     std::ofstream out(args_.property_table);
 
     out << "Type\tPredicate\tEnabled\n";
@@ -78,16 +78,18 @@ class ReificatorASTConsumer : public clang::ASTConsumer {
         if (method_decl->getReturnType()->isVoidType()) continue;
 
         std::string method_name = method_decl->getNameAsString();
-        std::optional<std::string> method_usr = getUSR(model.ast_ctx, method_decl);
+        std::optional<std::string> method_usr =
+            getUSR(model.ast_ctx, method_decl);
         if (!method_usr.has_value()) continue;
         if (method_name == "operator bool") continue;
 
         bool enabled = false;
         auto find_itr = original_property_table.find(*method_usr);
-        if (find_itr != original_property_table.end()) enabled = find_itr->second;
+        if (find_itr != original_property_table.end())
+          enabled = find_itr->second;
 
-        out << method_decl->getReturnType().getCanonicalType().getAsString() << "\t" << *method_usr << "\t"
-            << (enabled ? "1" : "0") << "\n";
+        out << method_decl->getReturnType().getCanonicalType().getAsString()
+            << "\t" << *method_usr << "\t" << (enabled ? "1" : "0") << "\n";
       }
     }
   }
@@ -105,11 +107,13 @@ class Reificator : public clang::PluginASTAction {
  public:
   virtual ~Reificator() {}
 
-  std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef InFile) override {
+  std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
+      clang::CompilerInstance &CI, llvm::StringRef InFile) override {
     return std::make_unique<ReificatorASTConsumer>(args_);
   }
 
-  bool ParseArgs(const clang::CompilerInstance &CI, const std::vector<std::string> &arg) override {
+  bool ParseArgs(const clang::CompilerInstance &CI,
+                 const std::vector<std::string> &arg) override {
     for (size_t i = 0, e = arg.size(); i < e; ++i) {
       // TODO add args
     }
