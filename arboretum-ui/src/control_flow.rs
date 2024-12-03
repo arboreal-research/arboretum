@@ -1,5 +1,5 @@
 use wasm_bindgen::JsValue;
-use web_sys::{CanvasRenderingContext2d, Window};
+use web_sys::CanvasRenderingContext2d;
 
 use crate::ViewTransform;
 

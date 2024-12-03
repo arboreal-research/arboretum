@@ -1,5 +1,5 @@
 use wasm_bindgen::JsValue;
-use web_sys::{CanvasRenderingContext2d, Window};
+use web_sys::CanvasRenderingContext2d;
 
 use crate::ViewTransform;
 
@@ -21,9 +21,9 @@ impl DataFlowViewMode {
     pub fn render(
         &mut self,
         _dt: f64,
-        mouse_position: Option<(f64, f64)>,
-        last_click: Option<(f64, f64)>,
-        ctx: &CanvasRenderingContext2d,
+        _mouse_position: Option<(f64, f64)>,
+        _last_click: Option<(f64, f64)>,
+        _ctx: &CanvasRenderingContext2d,
     ) -> Result<(), JsValue> {
         Ok(())
     }

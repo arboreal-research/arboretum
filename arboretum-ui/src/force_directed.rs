@@ -150,8 +150,8 @@ impl ForceDirectedViewMode {
     pub fn render(
         &mut self,
         _dt: f64,
-        mouse_position: Option<(f64, f64)>,
-        last_click: Option<(f64, f64)>,
+        _mouse_position: Option<(f64, f64)>,
+        _last_click: Option<(f64, f64)>,
         ctx: &CanvasRenderingContext2d,
     ) -> Result<(), JsValue> {
         ctx.set_line_width(5.0);

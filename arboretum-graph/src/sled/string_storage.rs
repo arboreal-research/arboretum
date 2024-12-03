@@ -1,7 +1,6 @@
 use std::path::Path;
 
 use arboretum_core::split_u64;
-use tracing::error;
 
 use crate::Error;
 

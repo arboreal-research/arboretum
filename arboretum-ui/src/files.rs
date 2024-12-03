@@ -1,7 +1,7 @@
 use std::{cell::RefCell, rc::Rc};
 
 use arboretum_core::{merge_u64, split_u64, Prefix, Value};
-use arboretum_query::{http_reqwasm::HttpGraphQueryExecutor, GraphQuery, GraphQueryResponse};
+use arboretum_query::{http_reqwasm::HttpGraphQueryExecutor, GraphQueryResponse};
 use wasm_bindgen::{prelude::Closure, JsCast, JsValue};
 use web_sys::{CanvasRenderingContext2d, Event, HtmlInputElement, Window};
 
@@ -135,7 +135,7 @@ impl FilesViewMode {
         let mut y_pos = initial_y;
 
         let box_padding = 5.0;
-        let box_height = 16.0 * 3.0;
+        let _box_height = 16.0 * 3.0;
         let y_gap = 16.0;
 
         let loading = self.system_files.is_none()
@@ -146,7 +146,7 @@ impl FilesViewMode {
         let red = JsValue::from_str("rgb(255,192,192)");
         let green = JsValue::from_str("rgb(192,255,192)");
         let blue = JsValue::from_str("rgb(192,192,255)");
-        let yellow = JsValue::from_str("rgb(255, 255, 192)");
+        let _yellow = JsValue::from_str("rgb(255, 255, 192)");
 
         ctx.set_fill_style(&black);
 

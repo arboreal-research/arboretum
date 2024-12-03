@@ -1,7 +1,6 @@
 use std::cell::RefCell;
 use std::rc::Rc;
 
-use wasm_bindgen::JsValue;
 use web_sys::{CanvasRenderingContext2d, Window};
 
 use crate::control_flow::ControlFlowViewMode;

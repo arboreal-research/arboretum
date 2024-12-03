@@ -1,4 +1,4 @@
-use std::{fmt::Debug, num::TryFromIntError};
+use std::fmt::Debug;
 
 use crate::{split_u64, types::IdType};
 

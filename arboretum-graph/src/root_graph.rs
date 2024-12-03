@@ -739,7 +739,7 @@ impl RootGraphInner {
                 .add_node_with_props(Value::String(rel_path.to_string_lossy().to_string()))?,
         ))?;
 
-        let mut emit_domain_component = |g: u32| -> Result<_, Error> {
+        let emit_domain_component = |g: u32| -> Result<_, Error> {
             self.root_subgraph.add_edge((
                 graph_node,
                 SUBGRAPH_DOMAIN,
