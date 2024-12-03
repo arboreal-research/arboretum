@@ -71,8 +71,6 @@ impl GraphQueryExecutor for LocalGraphQueryExecutor {
             GraphQuery::NodeId(name) => {
                 GraphQueryResponse::NodeId(self.graph.get_named_node(name)?)
             }
-
-            GraphQuery::RegularPathQuery(regular_path_query) => todo!(),
         })
     }
 }

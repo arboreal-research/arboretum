@@ -1,9 +1,6 @@
 use arboretum_core::{Domain, Prefix, Value};
 use serde::{Deserialize, Serialize};
 
-mod path;
-pub use path::*;
-
 #[cfg(feature = "http_reqwest")]
 pub mod http_reqwest;
 
@@ -34,8 +31,6 @@ pub enum GraphQuery {
     NodeProps(u64),
     NodeName(u64),
     NodeId(String),
-
-    RegularPathQuery(Path),
 }
 
 #[derive(Serialize, Deserialize, Debug)]
