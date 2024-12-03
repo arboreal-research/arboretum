@@ -5,13 +5,13 @@ use wasm_bindgen::JsValue;
 use web_sys::{js_sys::Math::random, CanvasRenderingContext2d, Window};
 
 pub struct NodeProps {
-    pub color: JsValue,
+    pub color: String,
     pub radius: f64,
     pub name: String,
 }
 
 pub struct EdgeProps {
-    pub color: JsValue,
+    pub color: String,
     pub name: String,
 }
 
@@ -24,19 +24,19 @@ pub struct ForceDirectedViewMode {
 
     // Node Selection
     pub highlight_node: Option<DefaultNodeIdx>,
-    pub highlight_color: JsValue,
+    pub highlight_color: String,
 }
 
 impl ForceDirectedViewMode {
     pub fn setup(&mut self, window: &Window) {
         self.last_frame_timestamp = window.performance().unwrap().now();
 
-        let light_green = JsValue::from_str("rgb(114, 151, 98)");
-        let dark_green = JsValue::from_str("rgb(50, 64, 38)");
+        let light_green = "rgb(114, 151, 98)";
+        let dark_green = "rgb(50, 64, 38)";
         let a = self.add_node(
             100.0,
             NodeProps {
-                color: light_green.clone(),
+                color: light_green.to_string(),
                 radius: 25.0,
                 name: "A".into(),
             },
@@ -45,7 +45,7 @@ impl ForceDirectedViewMode {
         let b = self.add_node(
             100.0,
             NodeProps {
-                color: light_green.clone(),
+                color: light_green.to_string(),
                 radius: 25.0,
                 name: "B".into(),
             },
@@ -54,7 +54,7 @@ impl ForceDirectedViewMode {
         let c = self.add_node(
             100.0,
             NodeProps {
-                color: light_green.clone(),
+                color: light_green.to_string(),
                 radius: 25.0,
                 name: "C".into(),
             },
@@ -64,7 +64,7 @@ impl ForceDirectedViewMode {
             a,
             b,
             EdgeProps {
-                color: dark_green.clone(),
+                color: dark_green.to_string(),
                 name: "".into(),
             },
         );
@@ -73,7 +73,7 @@ impl ForceDirectedViewMode {
             b,
             c,
             EdgeProps {
-                color: dark_green.clone(),
+                color: dark_green.to_string(),
                 name: "".into(),
             },
         );
@@ -81,7 +81,7 @@ impl ForceDirectedViewMode {
             c,
             a,
             EdgeProps {
-                color: dark_green.clone(),
+                color: dark_green.to_string(),
                 name: "".into(),
             },
         );
@@ -98,7 +98,7 @@ impl ForceDirectedViewMode {
                 node_speed: 500.0,
                 damping_factor: 0.98,
             }),
-            highlight_color: JsValue::from_str("rgb(231, 240, 220)"),
+            highlight_color: "rgb(231, 240, 220)".to_string(),
             last_frame_timestamp: 0.0,
         }
     }
@@ -157,7 +157,7 @@ impl ForceDirectedViewMode {
         ctx.set_line_width(5.0);
 
         self.graph.visit_edges(|node1, node2, edge| {
-            ctx.set_stroke_style(&edge.user_data.color);
+            ctx.set_stroke_style_str(&edge.user_data.color);
 
             let x1 = node1.x() as f64;
             let y1 = node1.y() as f64;
@@ -183,7 +183,7 @@ impl ForceDirectedViewMode {
         });
 
         self.graph.visit_nodes(|node| {
-            ctx.set_fill_style(&node.data.user_data.color);
+            ctx.set_fill_style_str(&node.data.user_data.color);
 
             // Draw the node circle
             ctx.begin_path();
@@ -198,7 +198,7 @@ impl ForceDirectedViewMode {
             ctx.fill();
 
             // Draw the label nearby
-            ctx.set_fill_style(&self.highlight_color);
+            ctx.set_fill_style_str(&self.highlight_color);
             let text_measurements = ctx.measure_text(&node.data.user_data.name).unwrap();
             ctx.fill_text(
                 &node.data.user_data.name,
@@ -210,7 +210,7 @@ impl ForceDirectedViewMode {
             // Draw a highlight around the node if it has been clicked
             if let Some(node_idx) = self.highlight_node {
                 if node_idx == node.index() {
-                    ctx.set_stroke_style(&self.highlight_color);
+                    ctx.set_stroke_style_str(&self.highlight_color);
                     ctx.begin_path();
                     ctx.arc(
                         node.x() as f64,

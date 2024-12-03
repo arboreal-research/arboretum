@@ -142,13 +142,13 @@ impl FilesViewMode {
             || self.header_files.is_none()
             || self.translation_units.is_none();
 
-        let black = JsValue::from_str("rgb(0,0,0)");
-        let red = JsValue::from_str("rgb(255,192,192)");
-        let green = JsValue::from_str("rgb(192,255,192)");
-        let blue = JsValue::from_str("rgb(192,192,255)");
-        let _yellow = JsValue::from_str("rgb(255, 255, 192)");
+        let black = "rgb(0,0,0)";
+        let red = "rgb(255,192,192)";
+        let green = "rgb(192,255,192)";
+        let blue = "rgb(192,192,255)";
+        let _yellow = "rgb(255, 255, 192)";
 
-        ctx.set_fill_style(&black);
+        ctx.set_fill_style_str(black);
 
         if loading {
             ctx.set_font("bold 16pt Courier");
@@ -157,7 +157,7 @@ impl FilesViewMode {
             let mut max_width = 0.0;
 
             if self.show_system_files {
-                ctx.set_fill_style(&black);
+                ctx.set_fill_style_str(black);
                 ctx.set_font("bold 16pt Courier");
                 ctx.fill_text("System Headers", x_pos, y_pos)?;
 
@@ -169,7 +169,7 @@ impl FilesViewMode {
                         max_width = text_width;
                     }
 
-                    ctx.set_fill_style(&red);
+                    ctx.set_fill_style_str(red);
                     ctx.fill_rect(
                         x_pos,
                         y_pos - box_padding,
@@ -177,7 +177,7 @@ impl FilesViewMode {
                         2.0 * box_padding + 16.0,
                     );
 
-                    ctx.set_fill_style(&black);
+                    ctx.set_fill_style_str(black);
                     ctx.set_font("16pt Courier");
                     ctx.fill_text(&name, x_pos + box_padding, y_pos + box_padding + 8.0)?;
                     y_pos += 16.0 + y_gap;
@@ -201,7 +201,7 @@ impl FilesViewMode {
                         max_width = text_width;
                     }
 
-                    ctx.set_fill_style(&green);
+                    ctx.set_fill_style_str(green);
                     ctx.fill_rect(
                         x_pos,
                         y_pos - box_padding,
@@ -209,7 +209,7 @@ impl FilesViewMode {
                         2.0 * box_padding + 16.0,
                     );
 
-                    ctx.set_fill_style(&black);
+                    ctx.set_fill_style_str(black);
                     ctx.set_font("16pt Courier");
                     ctx.fill_text(&name, x_pos + box_padding, y_pos + box_padding + 8.0)?;
                     y_pos += 16.0 + y_gap;
@@ -233,7 +233,7 @@ impl FilesViewMode {
                         max_width = text_width;
                     }
 
-                    ctx.set_fill_style(&blue);
+                    ctx.set_fill_style_str(blue);
                     ctx.fill_rect(
                         x_pos,
                         y_pos - box_padding,
@@ -241,7 +241,7 @@ impl FilesViewMode {
                         2.0 * box_padding + 16.0,
                     );
 
-                    ctx.set_fill_style(&black);
+                    ctx.set_fill_style_str(black);
                     ctx.set_font("16pt Courier");
                     ctx.fill_text(&name, x_pos + box_padding, y_pos + box_padding + 8.0)?;
                     y_pos += 16.0 + y_gap;
