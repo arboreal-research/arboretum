@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+anyhow = "1.0.93"
 arboretum-core = {path="../arboretum-core/"}
 memmap2 = "0.9.4"
 num = "0.4.3"

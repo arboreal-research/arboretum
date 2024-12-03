@@ -4,7 +4,7 @@ use std::{
     sync::{Arc, Mutex},
 };
 
-use crate::{Error, Subgraph, SubgraphConfig};
+use crate::{Subgraph, SubgraphConfig};
 use arboretum_core::Domain;
 
 #[derive(Clone)]
@@ -53,8 +53,8 @@ impl SubgraphEntry {
         &self.inner.config
     }
 
-    pub fn size(&self, subgraphs_path: &Path) -> Result<usize, Error> {
-        let lock = self.inner.graph.lock()?;
+    pub fn size(&self, subgraphs_path: &Path) -> anyhow::Result<usize> {
+        let lock = self.inner.graph.lock().unwrap();
 
         if let Some(subgraph) = lock.as_ref() {
             subgraph.get_memory_usage()
@@ -67,8 +67,8 @@ impl SubgraphEntry {
         self.inner.config.is_mutable()
     }
 
-    pub fn load<P: AsRef<Path>>(&self, subgraphs_path: P) -> Result<Arc<Subgraph>, Error> {
-        let mut lock = self.inner.graph.lock()?;
+    pub fn load<P: AsRef<Path>>(&self, subgraphs_path: P) -> anyhow::Result<Arc<Subgraph>> {
+        let mut lock = self.inner.graph.lock().unwrap();
 
         match lock.as_ref() {
             Some(subgraph) => Ok(subgraph.clone()),
@@ -83,8 +83,8 @@ impl SubgraphEntry {
         }
     }
 
-    pub fn evict(&self) -> Result<(), Error> {
-        self.inner.graph.lock()?.take();
+    pub fn evict(&self) -> anyhow::Result<()> {
+        self.inner.graph.lock().unwrap().take();
         Ok(())
     }
 }

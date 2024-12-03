@@ -19,8 +19,6 @@ impl ApiServerState {
     }
 }
 
-
-
 #[post("/api/query/")]
 async fn api_query(
     request: web::Json<GraphQuery>,
@@ -32,8 +30,8 @@ async fn api_query(
     let r = tokio::task::spawn_blocking(move || executor.query_executor.run_blocking(&data)).await;
 
     match r {
-        Ok(r) => web::Json(r),
-        Err(e) => web::Json(Err(arboretum_query::Error::Message(e.to_string()))),
+        Ok(r) => web::Json(r.map_err(|e| e.to_string())),
+        Err(e) => web::Json(Err(e.to_string())),
     }
 }
 

@@ -17,7 +17,7 @@ use std::{
     path::Path,
 };
 
-use crate::{error::Error, mmap::MmapGraph};
+use crate::mmap::MmapGraph;
 
 /// Options which are used by [MmapGraphBuilder].
 ///
@@ -99,7 +99,7 @@ where
     pub fn build<P: AsRef<Path>>(
         self,
         path: P,
-    ) -> Result<MmapGraph<Id, NodeProps, EdgeProps>, Error> {
+    ) -> anyhow::Result<MmapGraph<Id, NodeProps, EdgeProps>> {
         let bytes = rkyv::to_bytes::<_, 1024>(&self)?;
 
         let file = OpenOptions::new()

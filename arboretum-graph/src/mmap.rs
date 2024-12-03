@@ -1,4 +1,3 @@
-use crate::error::Error;
 use arboretum_core::{IdType, Prefix, PropsType};
 use memmap2::{Mmap, MmapOptions};
 use num::{Bounded, CheckedAdd, Integer, NumCast, ToPrimitive, Zero};
@@ -123,7 +122,7 @@ where
     EdgeProps::Archived: Debug,
 {
     /// Return the number of bytes in the mmap'd file.
-    pub fn get_memory_usage(&self) -> Result<usize, Error> {
+    pub fn get_memory_usage(&self) -> anyhow::Result<usize> {
         Ok(self.inner.mmap.len())
     }
 
@@ -540,14 +539,14 @@ where
     }
 
     /// Load an MmapGraph from a specified file on disk.
-    pub fn from_file<P: AsRef<Path>>(path: P) -> Result<Self, Error> {
+    pub fn from_file<P: AsRef<Path>>(path: P) -> anyhow::Result<Self> {
         let file = File::open(path.as_ref())?;
         let mmap = unsafe { MmapOptions::new().map(&file)? };
         Self::from_mmap(path, mmap)
     }
 
     /// Load an MmapGraph from an already existing [memmap2::Mmap]
-    pub fn from_mmap<P: AsRef<Path>>(path: P, mmap: Mmap) -> Result<Self, Error> {
+    pub fn from_mmap<P: AsRef<Path>>(path: P, mmap: Mmap) -> anyhow::Result<Self> {
         let archive_ptr: *const [u8] = &mmap[..];
 
         let archive = unsafe {

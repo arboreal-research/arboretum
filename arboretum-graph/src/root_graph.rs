@@ -1,6 +1,5 @@
 use crate::{
     cache::{LruSubgraphCache, SubgraphCache, SubgraphCacheStrategy},
-    error::Error,
     query,
     smart_mmap_builder::SmartMmapBuilder,
     subgraph_entry::SubgraphEntry,
@@ -61,7 +60,7 @@ impl RootGraph {
     /// If subgraphs does not exist, or the root graph does not exist this will
     /// prepare the root subgraph for organizing information about subgraphs.
     #[tracing::instrument(level = "trace", skip(path))]
-    pub fn from_folder<P: AsRef<Path>>(path: P, opts: GraphOptions) -> Result<RootGraph, Error> {
+    pub fn from_folder<P: AsRef<Path>>(path: P, opts: GraphOptions) -> anyhow::Result<RootGraph> {
         trace!("path={:?}", path.as_ref());
 
         let mut initialize = false;
@@ -119,7 +118,7 @@ impl RootGraph {
         };
 
         {
-            let mut inner = result.inner.write()?;
+            let mut inner = result.inner.write().unwrap();
 
             for (_, _, subgraph_node, _) in
                 query! {inner.root_subgraph, SUBGRAPHS_SET_NODE -SET_ITEM-> ?}?
@@ -144,8 +143,12 @@ impl RootGraph {
                         }
                     })
                     .next()
-                    .ok_or_else(|| Error::MalformedSubgraphConfig(subgraph_node as u32))?
-                    as u32;
+                    .ok_or_else(|| {
+                        anyhow::anyhow!(
+                            "Malformed Subgraph {} due to SUBGRAPH_ID",
+                            subgraph_node as u32
+                        )
+                    })? as u32;
 
                 let subgraph_path =
                     query! {inner.root_subgraph, subgraph_node -SUBGRAPH_PATH-> ? }?
@@ -167,7 +170,12 @@ impl RootGraph {
                             }
                         })
                         .next()
-                        .ok_or_else(|| Error::MalformedSubgraphConfig(subgraph_node as u32))?;
+                        .ok_or_else(|| {
+                            anyhow::anyhow!(
+                                "Malformed Subgraph {} due to SUBGRAPH_PATH",
+                                subgraph_node as u32
+                            )
+                        })?;
 
                 let subgraph_impl =
                     query! {inner.root_subgraph, subgraph_node -SUBGRAPH_IMPL-> ? }?
@@ -189,7 +197,12 @@ impl RootGraph {
                             }
                         })
                         .next()
-                        .ok_or_else(|| Error::MalformedSubgraphConfig(subgraph_node as u32))?;
+                        .ok_or_else(|| {
+                            anyhow::anyhow!(
+                                "Malformed Subgraph {} due to SUBGRAPH_IMPL",
+                                subgraph_node as u32
+                            )
+                        })?;
 
                 let subgraph_domain = Domain::from_iter(
                     query! {inner.root_subgraph, subgraph_node -SUBGRAPH_DOMAIN-> ? }?
@@ -213,7 +226,12 @@ impl RootGraph {
                             }
                         }),
                 )
-                .ok_or_else(|| Error::MalformedSubgraphConfig(subgraph_node as u32))?;
+                .ok_or_else(|| {
+                    anyhow::anyhow!(
+                        "Malformed Subgraph {} due to SUBGRAPH_DOMAIN",
+                        subgraph_node as u32
+                    )
+                })?;
 
                 inner.add_subgraph(
                     subgraph_id,
@@ -223,7 +241,13 @@ impl RootGraph {
                         subgraph_id,
                         subgraph_path.into(),
                     )
-                    .ok_or_else(|| Error::MalformedSubgraphConfig(subgraph_node as u32))?,
+                    .ok_or_else(|| {
+                        anyhow::anyhow!(
+                            "Malformed Subgraph {} due to SUBGRAPH_IMPL with unknown value '{}'",
+                            subgraph_node as u32,
+                            subgraph_impl
+                        )
+                    })?,
                 );
             }
 
@@ -244,25 +268,25 @@ impl RootGraph {
         Ok(result)
     }
 
-    pub fn get_node_name(&self, id: u64) -> Result<Option<String>, Error> {
-        self.inner.read()?.name_assoc.get_str(id)
+    pub fn get_node_name(&self, id: u64) -> anyhow::Result<Option<String>> {
+        self.inner.read().unwrap().name_assoc.get_str(id)
     }
 
-    pub fn get_named_node<S>(&self, name: S) -> Result<Option<u64>, Error>
+    pub fn get_named_node<S>(&self, name: S) -> anyhow::Result<Option<u64>>
     where
         S: AsRef<str>,
     {
-        self.inner.read()?.name_assoc.get_id(name.as_ref())
+        self.inner.read().unwrap().name_assoc.get_id(name.as_ref())
     }
 
     #[tracing::instrument(level = "trace", skip(self, buffer))]
     pub fn add_graph_buffer(
         &self,
         mut buffer: GraphBuffer,
-    ) -> Result<(Vec<u32>, GraphBuffer), Error> {
+    ) -> anyhow::Result<(Vec<u32>, GraphBuffer)> {
         let mut graph_ids = Vec::new();
 
-        let mut inner = self.inner.write()?;
+        let mut inner = self.inner.write().unwrap();
 
         // First, allocate a new graph for any nodes with the local graph_id (i.e. 0).
         if buffer.uses_local_graph_id() {
@@ -291,7 +315,7 @@ impl RootGraph {
                     Err(e) => Some(Err(e)),
                 }
             })
-            .collect::<Result<HashMap<u64, u64>, Error>>()?;
+            .collect::<anyhow::Result<HashMap<u64, u64>>>()?;
         trace!("# subst {}", subst.len());
         if subst.len() > 0 {
             buffer = buffer.substitute_id(subst);
@@ -371,14 +395,14 @@ impl RootGraph {
     }
 
     #[tracing::instrument(level = "trace", skip(self))]
-    pub fn add_sled64_subgraph(&self) -> Result<SubgraphEntry, Error> {
-        let mut inner = self.inner.write()?;
+    pub fn add_sled64_subgraph(&self) -> anyhow::Result<SubgraphEntry> {
+        let mut inner = self.inner.write().unwrap();
 
         // First, assign a fresh id.
         let graph_id = inner.fresh_graph_id()?;
         trace!(graph_id);
 
-        std::fs::create_dir(self.subgraphs_path()?.join(graph_id.to_string()))?;
+        std::fs::create_dir(inner.subgraphs_path.join(graph_id.to_string()))?;
 
         inner.add_subgraph_internal(
             graph_id,
@@ -389,15 +413,15 @@ impl RootGraph {
     }
 
     #[tracing::instrument(level = "trace", skip(self))]
-    pub fn add_sled64_subgraph_with_domain(&self, domain: Domain) -> Result<SubgraphEntry, Error> {
-        let mut inner = self.inner.write()?;
+    pub fn add_sled64_subgraph_with_domain(&self, domain: Domain) -> anyhow::Result<SubgraphEntry> {
+        let mut inner = self.inner.write().unwrap();
 
         // First, assign a fresh id.
         let graph_id = inner.fresh_graph_id()?;
         trace!(graph_id);
 
         // Create the folder for this new graph.
-        std::fs::create_dir(self.subgraphs_path()?.join(graph_id.to_string()))?;
+        std::fs::create_dir(inner.subgraphs_path.join(graph_id.to_string()))?;
 
         inner.add_subgraph_internal(
             graph_id,
@@ -407,49 +431,55 @@ impl RootGraph {
         )
     }
 
-    pub fn subgraphs_path(&self) -> Result<PathBuf, Error> {
-        let lock = self.inner.read()?;
+    pub fn subgraphs_path(&self) -> anyhow::Result<PathBuf> {
+        let lock = self.inner.read().unwrap();
         Ok(lock.subgraphs_path.clone())
     }
 
-    pub fn subgraphs(&self) -> Result<Vec<SubgraphEntry>, Error> {
-        let lock = self.inner.read()?;
+    pub fn subgraphs(&self) -> anyhow::Result<Vec<SubgraphEntry>> {
+        let lock = self.inner.read().unwrap();
         Ok(lock.subgraph_by_id.values().map(|v| v.clone()).collect())
     }
 
-    pub fn get_subgraph_by_id(&self, subgraph_id: u32) -> Result<Option<SubgraphEntry>, Error> {
-        let lock = self.inner.read()?;
+    pub fn get_subgraph_by_id(&self, subgraph_id: u32) -> anyhow::Result<Option<SubgraphEntry>> {
+        let lock = self.inner.read().unwrap();
         Ok(lock.subgraph_by_id.get(&subgraph_id).cloned())
     }
 
-    pub fn get_subgraph_by_domain(&self, domain: Domain) -> Result<Option<SubgraphEntry>, Error> {
-        let lock = self.inner.read()?;
+    pub fn get_subgraph_by_domain(&self, domain: Domain) -> anyhow::Result<Option<SubgraphEntry>> {
+        let lock = self.inner.read().unwrap();
         Ok(lock.subgraph_by_domain.get(&domain).cloned())
     }
 
     pub fn find_associated_domains(
         &self,
         subgraph_id: u32,
-    ) -> Result<Option<HashSet<Domain>>, Error> {
-        let lock = self.inner.read()?;
+    ) -> anyhow::Result<Option<HashSet<Domain>>> {
+        let lock = self.inner.read().unwrap();
         Ok(lock.domain_by_graph_id.get(&subgraph_id).cloned())
     }
 }
 
 impl RootGraph {
-    pub fn get_node_props(&self, id: u64) -> Result<Option<Value>, Error> {
+    pub fn get_node_props(&self, id: u64) -> anyhow::Result<Option<Value>> {
         let graph_id = (id >> 32) as u32;
 
         let subgraph = self
             .inner
-            .read()?
+            .read()
+            .unwrap()
             .subgraph_by_domain
             .get(&Domain::Single(graph_id))
             .cloned();
 
         Ok(subgraph
-            .map(|subgraph| -> Result<Option<Value>, Error> {
-                Ok(self.inner.read()?.load(&subgraph)?.get_node_props(id)?)
+            .map(|subgraph| -> anyhow::Result<Option<Value>> {
+                Ok(self
+                    .inner
+                    .read()
+                    .unwrap()
+                    .load(&subgraph)?
+                    .get_node_props(id)?)
             })
             .transpose()?
             .flatten())
@@ -458,29 +488,29 @@ impl RootGraph {
     pub fn prefix_edges_spo(
         &self,
         prefix: Prefix<u64>,
-    ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
+    ) -> anyhow::Result<Vec<(u64, u64, u64, Option<Value>)>> {
         self.prefix_edges_spo_with_extra_domains(prefix, [])
     }
 
     pub fn prefix_edges_pos(
         &self,
         prefix: Prefix<u64>,
-    ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
+    ) -> anyhow::Result<Vec<(u64, u64, u64, Option<Value>)>> {
         self.prefix_edges_pos_with_extra_domains(prefix, [])
     }
 
     pub fn prefix_edges_osp(
         &self,
         prefix: Prefix<u64>,
-    ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
+    ) -> anyhow::Result<Vec<(u64, u64, u64, Option<Value>)>> {
         self.prefix_edges_osp_with_extra_domains(prefix, [])
     }
 
     pub fn prefix_edges_spo_global(
         &self,
         prefix: Prefix<u64>,
-    ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
-        let lock = self.inner.read()?;
+    ) -> anyhow::Result<Vec<(u64, u64, u64, Option<Value>)>> {
+        let lock = self.inner.read().unwrap();
         let mut extra_domains = HashSet::new();
         prefix.apply(|id| {
             lock.domain_by_graph_id
@@ -494,8 +524,8 @@ impl RootGraph {
     pub fn prefix_edges_pos_global(
         &self,
         prefix: Prefix<u64>,
-    ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
-        let lock = self.inner.read()?;
+    ) -> anyhow::Result<Vec<(u64, u64, u64, Option<Value>)>> {
+        let lock = self.inner.read().unwrap();
         let mut extra_domains = HashSet::new();
         prefix.apply(|id| {
             let graph_id = split_u64(id).0;
@@ -513,8 +543,8 @@ impl RootGraph {
     pub fn prefix_edges_osp_global(
         &self,
         prefix: Prefix<u64>,
-    ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
-        let lock = self.inner.read()?;
+    ) -> anyhow::Result<Vec<(u64, u64, u64, Option<Value>)>> {
+        let lock = self.inner.read().unwrap();
         let mut extra_domains = HashSet::new();
         prefix.apply(|id| {
             lock.domain_by_graph_id
@@ -529,7 +559,7 @@ impl RootGraph {
         &self,
         prefix: Prefix<u64>,
         extra_domains: I,
-    ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error>
+    ) -> anyhow::Result<Vec<(u64, u64, u64, Option<Value>)>>
     where
         I: IntoIterator<Item = Domain>,
     {
@@ -537,7 +567,7 @@ impl RootGraph {
 
         let subgraphs;
         {
-            let lock = self.inner.read()?;
+            let lock = self.inner.read().unwrap();
             subgraphs = domains
                 .filter_map(|domain| lock.subgraph_by_domain.get(&domain).cloned())
                 .collect::<Vec<_>>();
@@ -546,9 +576,10 @@ impl RootGraph {
         let inner_clone = self.inner.clone();
         Ok(subgraphs
             .par_iter()
-            .map(move |subgraph| -> Result<_, Error> {
+            .map(move |subgraph| -> anyhow::Result<_> {
                 Ok(inner_clone
-                    .read()?
+                    .read()
+                    .unwrap()
                     .load(subgraph)?
                     .prefix_edges_spo(prefix.clone())?
                     .collect::<Vec<_>>())
@@ -566,7 +597,7 @@ impl RootGraph {
         &self,
         prefix: Prefix<u64>,
         extra_domains: I,
-    ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error>
+    ) -> anyhow::Result<Vec<(u64, u64, u64, Option<Value>)>>
     where
         I: IntoIterator<Item = Domain>,
     {
@@ -574,7 +605,7 @@ impl RootGraph {
 
         let subgraphs;
         {
-            let lock = self.inner.read()?;
+            let lock = self.inner.read().unwrap();
             subgraphs = domains
                 .filter_map(|domain| lock.subgraph_by_domain.get(&domain).cloned())
                 .collect::<Vec<_>>();
@@ -584,9 +615,10 @@ impl RootGraph {
         Ok(subgraphs
             .par_iter()
             .map(
-                |subgraph| -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
+                |subgraph| -> anyhow::Result<Vec<(u64, u64, u64, Option<Value>)>> {
                     Ok(inner_clone
-                        .read()?
+                        .read()
+                        .unwrap()
                         .load(subgraph)?
                         .prefix_edges_pos(prefix.clone())?
                         .collect::<Vec<_>>())
@@ -605,7 +637,7 @@ impl RootGraph {
         &self,
         prefix: Prefix<u64>,
         extra_domains: I,
-    ) -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error>
+    ) -> anyhow::Result<Vec<(u64, u64, u64, Option<Value>)>>
     where
         I: IntoIterator<Item = Domain>,
     {
@@ -613,7 +645,7 @@ impl RootGraph {
 
         let subgraphs;
         {
-            let lock = self.inner.read()?;
+            let lock = self.inner.read().unwrap();
             subgraphs = domains
                 .filter_map(|domain| lock.subgraph_by_domain.get(&domain).cloned())
                 .collect::<Vec<_>>();
@@ -623,9 +655,10 @@ impl RootGraph {
         Ok(subgraphs
             .par_iter()
             .map(
-                move |subgraph| -> Result<Vec<(u64, u64, u64, Option<Value>)>, Error> {
+                move |subgraph| -> anyhow::Result<Vec<(u64, u64, u64, Option<Value>)>> {
                     Ok(inner_clone
-                        .read()?
+                        .read()
+                        .unwrap()
                         .load(subgraph)?
                         .prefix_edges_osp(prefix.clone())?
                         .collect::<Vec<_>>())
@@ -642,7 +675,7 @@ impl RootGraph {
 }
 
 impl RootGraphInner {
-    fn fresh_graph_id(&self) -> Result<u32, Error> {
+    fn fresh_graph_id(&self) -> anyhow::Result<u32> {
         Ok(match self.root_subgraph.fetch_and_update_node_props(
             NEXT_GRAPH_ID_NODE,
             |old| match old {
@@ -661,7 +694,9 @@ impl RootGraphInner {
             },
         )? {
             Some(Value::Unsigned(u)) => u,
-            _ => Err(Error::MalformedRootGraphNextSubgraphId)?,
+            _ => Err(anyhow::anyhow!(
+                "Malformed root graph due to next_graph_id."
+            ))?,
         } as u32)
     }
 
@@ -715,7 +750,7 @@ impl RootGraphInner {
         rel_path: PathBuf,
         impl_name: &str,
         domain: Domain,
-    ) -> Result<SubgraphEntry, Error> {
+    ) -> anyhow::Result<SubgraphEntry> {
         // Add it to the root graph.
         let graph_node = self.root_subgraph.add_node()?;
         trace!(graph_node);
@@ -739,7 +774,7 @@ impl RootGraphInner {
                 .add_node_with_props(Value::String(rel_path.to_string_lossy().to_string()))?,
         ))?;
 
-        let emit_domain_component = |g: u32| -> Result<_, Error> {
+        let emit_domain_component = |g: u32| -> anyhow::Result<_> {
             self.root_subgraph.add_edge((
                 graph_node,
                 SUBGRAPH_DOMAIN,
@@ -775,9 +810,12 @@ impl RootGraphInner {
         ))
     }
 
-    pub(crate) fn load(&self, entry: &SubgraphEntry) -> Result<Arc<Subgraph>, Error> {
+    pub(crate) fn load(&self, entry: &SubgraphEntry) -> anyhow::Result<Arc<Subgraph>> {
         // Notify the cache of our intent.
-        self.entry_cache.lock()?.notify_used(entry.clone())?;
+        self.entry_cache
+            .lock()
+            .unwrap()
+            .notify_used(entry.clone())?;
         Ok(entry.load(self.subgraphs_path.clone())?)
     }
 }

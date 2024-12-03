@@ -11,7 +11,7 @@ pub mod http_reqwasm;
 pub mod local;
 
 pub trait GraphQueryExecutor: Send + Sync {
-    fn run_blocking(&self, query: &GraphQuery) -> Result<GraphQueryResponse, Error>;
+    fn run_blocking(&self, query: &GraphQuery) -> anyhow::Result<GraphQueryResponse>;
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -39,9 +39,4 @@ pub enum GraphQueryResponse {
     NodeProps(Option<Value>),
     NodeName(Option<String>),
     NodeId(Option<u64>),
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub enum Error {
-    Message(String),
 }

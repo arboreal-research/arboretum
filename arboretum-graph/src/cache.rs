@@ -5,7 +5,7 @@ use std::{
     time::Instant,
 };
 
-use crate::{subgraph_entry::SubgraphEntry, Error};
+use crate::subgraph_entry::SubgraphEntry;
 
 /// The strategy and parameters used to cache subgraphs.
 #[derive(Clone, Debug)]
@@ -16,7 +16,7 @@ pub enum SubgraphCacheStrategy {
 
 pub(crate) trait SubgraphCache: Send + Sync {
     // Marks entry as having been used at std::time::Instant::now().
-    fn notify_used(&mut self, entry: SubgraphEntry) -> Result<(), Error>;
+    fn notify_used(&mut self, entry: SubgraphEntry) -> anyhow::Result<()>;
 
     // Returns the list of SubgraphEntries which are in use.
     // fn entries_in_use(&mut self) -> Vec<SubgraphEntry>;
@@ -86,7 +86,7 @@ impl SubgraphCache for LruSubgraphCache {
     /// Notifies the cache that a particular subgraph entry has been used by some operation
     ///
     /// The cache may respond by evicting other entries to maintain the configured amount of available system memory.
-    fn notify_used(&mut self, entry: SubgraphEntry) -> Result<(), Error> {
+    fn notify_used(&mut self, entry: SubgraphEntry) -> anyhow::Result<()> {
         let entry_size = entry.size(self.subgraphs_path.as_path())?;
 
         let mut new_used_size = self.cur_usage + entry_size;

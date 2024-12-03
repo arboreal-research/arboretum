@@ -1,4 +1,4 @@
-use crate::{error::Error, mmap, SledGraph, SubgraphConfig};
+use crate::{mmap, SledGraph, SubgraphConfig};
 use arboretum_core::{constant::*, merge_u64, split_u64, ArchivedValue, Prefix, Value};
 use num::NumCast;
 use rkyv::{Deserialize, Infallible};
@@ -23,7 +23,7 @@ pub enum Subgraph {
 }
 
 impl Subgraph {
-    pub fn get_memory_usage(&self) -> Result<usize, Error> {
+    pub fn get_memory_usage(&self) -> anyhow::Result<usize> {
         match self {
             Subgraph::MmapGraph16 { mmap, .. } => mmap.get_memory_usage(),
             Subgraph::MmapGraph32 { mmap, .. } => mmap.get_memory_usage(),
@@ -32,7 +32,7 @@ impl Subgraph {
         }
     }
 
-    pub fn from_config(subgraph_path: &Path, config: &SubgraphConfig) -> Result<Self, Error> {
+    pub fn from_config(subgraph_path: &Path, config: &SubgraphConfig) -> anyhow::Result<Self> {
         Ok(match config {
             SubgraphConfig::MmapGraph16 {
                 subgraph_id: graph_id,
@@ -60,7 +60,7 @@ impl Subgraph {
     pub fn extend_with(
         &self,
         data: (HashMap<u64, Value>, HashMap<(u64, u64, u64), Option<Value>>),
-    ) -> Result<bool, Error> {
+    ) -> anyhow::Result<bool> {
         Ok(match self {
             Subgraph::SledGraph64 { g } => {
                 g.extend_with(data)?;
@@ -79,7 +79,7 @@ impl Subgraph {
         }
     }
 
-    pub fn get_node_props(&self, id: u64) -> Result<Option<Value>, Error> {
+    pub fn get_node_props(&self, id: u64) -> anyhow::Result<Option<Value>> {
         let (high_id, low_id) = split_u64(id);
         Ok(match self {
             Subgraph::MmapGraph16 { graph_id, mmap } => {
@@ -128,7 +128,7 @@ impl Subgraph {
 
     pub fn iter_node_props<'a>(
         &'a self,
-    ) -> Result<Box<dyn Iterator<Item = (u64, Value)> + 'a>, Error> {
+    ) -> anyhow::Result<Box<dyn Iterator<Item = (u64, Value)> + 'a>> {
         Ok(match self {
             Subgraph::MmapGraph16 { graph_id, mmap } => {
                 Box::new(mmap.iter_node_props().map(|(low_id, props)| {
@@ -173,7 +173,7 @@ impl Subgraph {
     pub fn prefix_edges_spo<'a>(
         &'a self,
         prefix: Prefix<u64>,
-    ) -> Result<Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a>, Error> {
+    ) -> anyhow::Result<Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a>> {
         Ok(match self {
             Subgraph::MmapGraph16 { graph_id, mmap } => Box::new(
                 mmap.prefix_edges_spo(prefix.into())
@@ -206,7 +206,7 @@ impl Subgraph {
     pub fn prefix_edges_pos<'a>(
         &'a self,
         prefix: Prefix<u64>,
-    ) -> Result<Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a>, Error> {
+    ) -> anyhow::Result<Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a>> {
         Ok(match self {
             Subgraph::MmapGraph16 { graph_id, mmap } => Box::new(
                 mmap.prefix_edges_pos(prefix.into())
@@ -241,7 +241,7 @@ impl Subgraph {
     pub fn prefix_edges_osp<'a>(
         &'a self,
         prefix: Prefix<u64>,
-    ) -> Result<Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a>, Error> {
+    ) -> anyhow::Result<Box<dyn Iterator<Item = (u64, u64, u64, Option<Value>)> + 'a>> {
         Ok(match self {
             Subgraph::MmapGraph16 { graph_id, mmap } => Box::new(
                 mmap.prefix_edges_osp(prefix.into())
@@ -285,25 +285,4 @@ fn rebuild_edge<I: NumCast>(
                 .unwrap()
         }),
     )
-}
-
-#[cfg(test)]
-mod test {
-    use std::path::PathBuf;
-
-    use crate::{Subgraph, SubgraphConfig};
-
-    #[test]
-    fn create() {
-        let path = PathBuf::new().join("/home/rcythr/test/");
-
-        let _subgraph = Subgraph::from_config(
-            path.as_path(),
-            &SubgraphConfig::MmapGraph16 {
-                subgraph_id: 1,
-                rel_path: "/home/rcythr/test/test".into(),
-            },
-        )
-        .unwrap();
-    }
 }

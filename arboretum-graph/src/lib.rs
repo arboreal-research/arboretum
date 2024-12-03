@@ -1,5 +1,5 @@
 mod cache;
-mod error;
+
 mod memory_info;
 mod mmap;
 mod root_graph;
@@ -11,7 +11,6 @@ mod subgraph_entry;
 
 pub use crate::sled::{graph::SledGraph, string_storage::SledStringStorage};
 pub use cache::SubgraphCacheStrategy;
-pub use error::Error;
 pub use memory_info::{get_memory_info, MemoryInfo};
 pub use mmap::{MmapGraph, MmapGraphBuilder, MmapGraphBuilderOptions, MmapGraphRangeIter};
 pub use root_graph::{GraphOptions, RootGraph};

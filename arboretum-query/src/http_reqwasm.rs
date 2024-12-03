@@ -1,4 +1,3 @@
-use crate::Error;
 use reqwasm::http::Request;
 
 pub struct HttpGraphQueryExecutor {
@@ -10,25 +9,22 @@ impl HttpGraphQueryExecutor {
         Self { endpoint }
     }
 
-    pub async fn run(&self, query: &crate::GraphQuery) -> Result<crate::GraphQueryResponse, Error> {
+    pub async fn run(
+        &self,
+        query: &crate::GraphQuery,
+    ) -> anyhow::Result<crate::GraphQueryResponse> {
         let response = Request::post(&self.endpoint)
             .header("Content-Type", "application/json")
             .body(serde_json::to_string(&query).unwrap())
             .send()
             .await;
 
-        let response: Result<Result<crate::GraphQueryResponse, Error>, reqwasm::Error> =
+        let response: anyhow::Result<Result<crate::GraphQueryResponse, String>, reqwasm::Error> =
             response?.json().await;
 
         match response {
-            Ok(r) => r,
-            Err(e) => Err(Error::Message(e.to_string())),
+            Ok(r) => r.map_err(|e| anyhow::anyhow!(e)),
+            Err(e) => Err(anyhow::anyhow!(e)),
         }
-    }
-}
-
-impl From<reqwasm::Error> for Error {
-    fn from(e: reqwasm::Error) -> Self {
-        Error::Message(e.to_string())
     }
 }

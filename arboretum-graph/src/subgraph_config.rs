@@ -1,6 +1,5 @@
 use std::path::{Path, PathBuf};
 
-use crate::error::Error;
 use arboretum_core::constant::*;
 
 #[derive(Clone, Debug)]
@@ -12,7 +11,7 @@ pub enum SubgraphConfig {
 }
 
 impl SubgraphConfig {
-    pub fn get_memory_estimate(&self, subgraphs_path: &Path) -> Result<usize, Error> {
+    pub fn get_memory_estimate(&self, subgraphs_path: &Path) -> anyhow::Result<usize> {
         Ok(match self {
             SubgraphConfig::MmapGraph16 { rel_path, .. } => {
                 get_size(subgraphs_path.join(rel_path))?

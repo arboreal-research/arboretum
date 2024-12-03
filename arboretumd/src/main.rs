@@ -1,13 +1,10 @@
 use std::sync::Arc;
 
 use ::futures::future;
-use arboretum_graph::{RootGraph};
 use arboretum_core::GraphBuffer;
+use arboretum_graph::RootGraph;
 use clap::Parser;
-use tokio::{
-    sync::{broadcast, mpsc},
-    task::JoinError,
-};
+use tokio::sync::{broadcast, mpsc};
 use tracing::info;
 
 mod api;
@@ -27,28 +24,6 @@ struct Args {
 
     #[arg(long, default_value = "localhost:3232")]
     collector_bind_addr: String,
-}
-
-#[derive(Debug)]
-pub enum ArboretumError {
-    GraphError(arboretum_graph::Error),
-    JoinError(JoinError),
-    IoError(std::io::Error),
-}
-impl From<arboretum_graph::Error> for ArboretumError {
-    fn from(e: arboretum_graph::Error) -> Self {
-        ArboretumError::GraphError(e)
-    }
-}
-impl From<JoinError> for ArboretumError {
-    fn from(e: JoinError) -> Self {
-        ArboretumError::JoinError(e)
-    }
-}
-impl From<std::io::Error> for ArboretumError {
-    fn from(e: std::io::Error) -> Self {
-        ArboretumError::IoError(e)
-    }
 }
 
 async fn canonical_view_extraction(
@@ -94,7 +69,7 @@ async fn graph_buffer_loader(
 }
 
 #[tokio::main]
-async fn main() -> Result<(), ArboretumError> {
+async fn main() -> anyhow::Result<()> {
     tracing_subscriber::fmt::init();
 
     // Process command line flags.

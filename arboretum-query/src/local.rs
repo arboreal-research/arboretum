@@ -1,4 +1,4 @@
-use crate::{Error, GraphQuery, GraphQueryExecutor, GraphQueryResponse};
+use crate::{GraphQuery, GraphQueryExecutor, GraphQueryResponse};
 use arboretum_core::Value;
 use arboretum_graph::RootGraph;
 
@@ -21,7 +21,7 @@ fn rewrite_edges(v: Vec<(u64, u64, u64, Option<Value>)>) -> GraphQueryResponse {
 }
 
 impl GraphQueryExecutor for LocalGraphQueryExecutor {
-    fn run_blocking(&self, query: &GraphQuery) -> Result<GraphQueryResponse, Error> {
+    fn run_blocking(&self, query: &GraphQuery) -> anyhow::Result<GraphQueryResponse> {
         Ok(match query {
             GraphQuery::SPO(prefix) => self
                 .graph
@@ -72,11 +72,5 @@ impl GraphQueryExecutor for LocalGraphQueryExecutor {
                 GraphQueryResponse::NodeId(self.graph.get_named_node(name)?)
             }
         })
-    }
-}
-
-impl From<arboretum_graph::Error> for Error {
-    fn from(e: arboretum_graph::Error) -> Self {
-        Error::Message(format!("{:?}", e))
     }
 }

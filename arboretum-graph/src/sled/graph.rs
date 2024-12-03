@@ -1,4 +1,3 @@
-use crate::error::Error;
 use arboretum_core::{Prefix, PropsType};
 use rkyv::{AlignedVec, Deserialize, Infallible};
 use std::{
@@ -37,11 +36,11 @@ where
         u64::MAX
     }
 
-    pub fn get_memory_usage(&self) -> Result<usize, Error> {
+    pub fn get_memory_usage(&self) -> anyhow::Result<usize> {
         Ok(0)
     }
 
-    fn next_node_id(&self) -> Result<u64, Error> {
+    fn next_node_id(&self) -> anyhow::Result<u64> {
         let mut result = None;
         self.db.fetch_and_update(b"next_node_id", |old| {
             let number = match old {
@@ -57,10 +56,10 @@ where
             Some(number.to_be_bytes().to_vec())
         })?;
 
-        result.ok_or(Error::SledDbMissingNextNode)
+        result.ok_or_else(|| anyhow::anyhow!("Sled DB is missing next_node_id."))
     }
 
-    fn next_edge_id(&self) -> Result<u64, Error> {
+    fn next_edge_id(&self) -> anyhow::Result<u64> {
         let mut result = None;
         self.db.fetch_and_update(b"next_edge_id", |old| {
             let number = match old {
@@ -76,12 +75,12 @@ where
             Some(number.to_be_bytes().to_vec())
         })?;
 
-        result.ok_or(Error::SledDbMissingNextNode)
+        result.ok_or_else(|| anyhow::anyhow!("Sled DB is missing next_edge_id."))
     }
 
     pub fn from_file<'a, P: AsRef<Path>>(
         path: P,
-    ) -> Result<SledGraph<NodeProps, EdgeProps>, Error> {
+    ) -> anyhow::Result<SledGraph<NodeProps, EdgeProps>> {
         let db = sled::open(path.as_ref())?;
 
         let node_props = db.open_tree("node_props")?;
@@ -118,7 +117,7 @@ where
         &self,
         key: u64,
         mut f: F,
-    ) -> Result<Option<NodeProps>, Error>
+    ) -> anyhow::Result<Option<NodeProps>>
     where
         F: FnMut(Option<&NodeProps>) -> Option<NodeProps>,
     {
@@ -142,24 +141,24 @@ where
         Ok(result)
     }
 
-    pub fn add_node(&self) -> Result<u64, Error> {
+    pub fn add_node(&self) -> anyhow::Result<u64> {
         Ok(self.next_node_id()?)
     }
 
-    pub fn add_node_with_props(&self, props: NodeProps) -> Result<u64, Error> {
+    pub fn add_node_with_props(&self, props: NodeProps) -> anyhow::Result<u64> {
         let id = self.next_node_id()?;
         self.node_props
             .insert(id.to_be_bytes(), rkyv::to_bytes(&props)?.as_ref())?;
         Ok(id)
     }
 
-    pub fn set_node_props(&self, id: u64, props: NodeProps) -> Result<(), Error> {
+    pub fn set_node_props(&self, id: u64, props: NodeProps) -> anyhow::Result<()> {
         self.node_props
             .insert(id.to_be_bytes(), rkyv::to_bytes(&props)?.as_ref())?;
         Ok(())
     }
 
-    pub fn add_edge(&self, (s, p, o): (u64, u64, u64)) -> Result<(), Error> {
+    pub fn add_edge(&self, (s, p, o): (u64, u64, u64)) -> anyhow::Result<()> {
         let mut triple_bytes = [0u8; 24];
         let zero = 0u64.to_be_bytes();
 
@@ -182,7 +181,7 @@ where
         &self,
         (s, p, o): (u64, u64, u64),
         props: EdgeProps,
-    ) -> Result<(), Error> {
+    ) -> anyhow::Result<()> {
         let id = self.next_edge_id()?;
         self.edge_props
             .insert(id.to_be_bytes(), rkyv::to_bytes(&props)?.as_ref())?;
@@ -205,7 +204,7 @@ where
         Ok(())
     }
 
-    pub fn get_node_props(&self, id: u64) -> Result<Option<NodeProps>, Error> {
+    pub fn get_node_props(&self, id: u64) -> anyhow::Result<Option<NodeProps>> {
         Ok(self.node_props.get(&id.to_be_bytes())?.map(|bytes| {
             let mut aligned = AlignedVec::with_capacity(bytes.len());
             aligned.extend_from_slice(bytes.as_ref());
@@ -218,11 +217,11 @@ where
         }))
     }
 
-    pub fn iter_node_props(&self) -> Result<impl Iterator<Item = (u64, NodeProps)>, Error> {
+    pub fn iter_node_props(&self) -> anyhow::Result<impl Iterator<Item = (u64, NodeProps)>> {
         let v = self
             .node_props
             .iter()
-            .map(|r| -> Result<(u64, NodeProps), Error> {
+            .map(|r| -> anyhow::Result<(u64, NodeProps)> {
                 let (k, v) = r?;
 
                 let k = u64::from_be_bytes(k.as_ref().try_into()?);
@@ -237,7 +236,7 @@ where
 
                 Ok((k, v))
             })
-            .collect::<Result<Vec<_>, Error>>()?;
+            .collect::<anyhow::Result<Vec<_>>>()?;
 
         Ok(v.into_iter())
     }
@@ -245,7 +244,7 @@ where
     pub fn prefix_edges_spo(
         &self,
         prefix: Prefix<u64>,
-    ) -> Result<impl Iterator<Item = (u64, u64, u64, Option<EdgeProps>)>, Error> {
+    ) -> anyhow::Result<impl Iterator<Item = (u64, u64, u64, Option<EdgeProps>)>> {
         let (start_bound, end_bound) = {
             match prefix {
                 Prefix::One(a) => (
@@ -290,7 +289,7 @@ where
     pub fn prefix_edges_pos(
         &self,
         prefix: Prefix<u64>,
-    ) -> Result<impl Iterator<Item = (u64, u64, u64, Option<EdgeProps>)>, Error> {
+    ) -> anyhow::Result<impl Iterator<Item = (u64, u64, u64, Option<EdgeProps>)>> {
         let (start_bound, end_bound) = {
             match prefix {
                 Prefix::One(a) => (
@@ -335,7 +334,7 @@ where
     pub fn prefix_edges_osp(
         &self,
         prefix: Prefix<u64>,
-    ) -> Result<impl Iterator<Item = (u64, u64, u64, Option<EdgeProps>)>, Error> {
+    ) -> anyhow::Result<impl Iterator<Item = (u64, u64, u64, Option<EdgeProps>)>> {
         let (start_bound, end_bound) = {
             match prefix {
                 Prefix::One(a) => (
@@ -383,7 +382,7 @@ where
             HashMap<u64, NodeProps>,
             HashMap<(u64, u64, u64), Option<EdgeProps>>,
         ),
-    ) -> Result<(), Error> {
+    ) -> anyhow::Result<()> {
         for (id, value) in node_props {
             self.set_node_props(id, value)?;
         }
