@@ -1,55 +1,89 @@
-use std::net::ToSocketAddrs;
+use std::{net::ToSocketAddrs, sync::Arc};
 
 use actix_server::Server;
 use actix_service::{fn_service, ServiceFactoryExt as _};
-use arboretum_ffi::tcp_client::{ClangPluginClientMessage, FfiValue};
-use arboretum_core::{GraphBuffer, Value};
-use tokio::{io::AsyncReadExt, net::TcpStream, sync::mpsc::Sender};
+use reify_rs::ffi::Record;
+use tokio::{
+    io::{AsyncReadExt, AsyncWriteExt},
+    net::TcpStream,
+    sync::{mpsc::Sender, Mutex},
+};
 
-fn to_value(ffi_value: FfiValue) -> Value {
-    match ffi_value {
-        FfiValue::Unsigned(u) => Value::Unsigned(u),
-        FfiValue::Signed(s) => Value::Signed(s),
-        FfiValue::Double(d) => Value::Double(d),
-        FfiValue::String(s) => Value::String(s),
-    }
+pub enum CollectorSessionMessage {
+    Open(u32),
+    Record(u32, Record),
+    OkClose(u32),
+    ErrClose(u32),
 }
 
-pub async fn clang_collector<U>(tx: Sender<GraphBuffer>, bind_addr: U) -> Result<(), std::io::Error>
+pub async fn clang_collector<U>(
+    next_subgraph_id: Arc<Mutex<u32>>,
+    tx: Sender<CollectorSessionMessage>,
+    bind_addr: U,
+) -> Result<(), std::io::Error>
 where
     U: ToSocketAddrs,
 {
     Server::build()
         .bind("clang-collector", bind_addr, move || {
             let tx = tx.clone();
+            let next_subgraph_id = next_subgraph_id.clone();
             fn_service(move |stream: TcpStream| {
                 tracing::info!("Accepted connection from {}", stream.peer_addr().unwrap());
 
                 let mut stream = tokio::io::BufReader::new(stream);
 
                 let tx = tx.clone();
+                let next_subgraph_id = next_subgraph_id.clone();
                 async move {
+                    let subgraph_id;
+                    {
+                        let mut next_subgraph_id = next_subgraph_id.lock().await;
+                        subgraph_id = *next_subgraph_id;
+                        *next_subgraph_id += 1;
+                    }
+                    if let Err(e) = tx.send(CollectorSessionMessage::Open(subgraph_id)).await {
+                        tracing::error!("Failed to send Open message: {:?}", e);
+                        return Err::<(), ()>(());
+                    }
+
                     let mut size_buf = [0u8; 8];
 
-                    let mut buf = GraphBuffer::new();
-
                     loop {
+                        // Write the subgraph id.
+                        if let Err(e) = stream.write_all(&subgraph_id.to_le_bytes()).await {
+                            tracing::error!("Stream Error writing subgraph id: {:?}", e);
+                            if let Err(e) = tx
+                                .send(CollectorSessionMessage::ErrClose(subgraph_id))
+                                .await
+                            {
+                                tracing::error!("Failed to send ErrClose message: {:?}", e);
+                            }
+                            return Err(());
+                        }
+
                         // Read the size byte.
                         let size = match stream.read_exact(&mut size_buf).await {
                             Ok(_) => u64::from_le_bytes(size_buf),
 
                             Err(e) => {
                                 tracing::error!("Stream Error reading size: {:?}", e);
-                                return Err::<(), ()>(());
+                                if let Err(e) = tx
+                                    .send(CollectorSessionMessage::ErrClose(subgraph_id))
+                                    .await
+                                {
+                                    tracing::error!("Failed to send ErrClose message: {:?}", e);
+                                }
+                                return Err(());
                             }
                         };
 
                         // If we get a size 0 object, we're done.
                         if size == 0 {
-                            tracing::info!("Finished reading GraphBuffer, sending it downstream.");
-                            if let Err(e) = tx.send(buf).await {
-                                tracing::error!("Send Error: {:?}", e);
-                                return Err(());
+                            if let Err(e) =
+                                tx.send(CollectorSessionMessage::OkClose(subgraph_id)).await
+                            {
+                                tracing::error!("Failed to send OkClose message: {:?}", e);
                             }
                             return Ok(());
                         }
@@ -59,36 +93,40 @@ where
 
                         if let Err(e) = stream.read_exact(&mut data_buf).await {
                             tracing::error!("Stream Error reading data: {:?}", e);
+                            if let Err(e) = tx
+                                .send(CollectorSessionMessage::ErrClose(subgraph_id))
+                                .await
+                            {
+                                tracing::error!("Failed to send ErrClose message: {:?}", e);
+                            }
                             return Err(());
                         }
 
                         match bincode::deserialize(&data_buf) {
-                            Ok(ClangPluginClientMessage::NewNodeWithProps(id, props)) => {
-                                buf.add_node_with_props(id, to_value(props))
-                            }
-
-                            Ok(ClangPluginClientMessage::NewNamedNode(name, id)) => {
-                                buf.add_named_node(id, name);
-                            }
-
-                            Ok(ClangPluginClientMessage::NewNamedNodeWithProps(
-                                name,
-                                id,
-                                props,
-                            )) => {
-                                buf.add_named_node_with_props(id, name, to_value(props));
-                            }
-
-                            Ok(ClangPluginClientMessage::NewEdge(s, p, o)) => {
-                                buf.add_edge((s, p, o));
-                            }
-
-                            Ok(ClangPluginClientMessage::NewEdgeWithProps(s, p, o, props)) => {
-                                buf.add_edge_with_props((s, p, o), to_value(props));
+                            Ok(message) => {
+                                if let Err(e) = tx
+                                    .send(CollectorSessionMessage::Record(subgraph_id, message))
+                                    .await
+                                {
+                                    tracing::error!("Failed to send rows to consumer: {:?}", e);
+                                    if let Err(e) = tx
+                                        .send(CollectorSessionMessage::ErrClose(subgraph_id))
+                                        .await
+                                    {
+                                        tracing::error!("Failed to send ErrClose message: {:?}", e);
+                                    }
+                                    return Err(());
+                                }
                             }
 
                             Err(e) => {
                                 tracing::error!("Deserialization Error: {:?}", e);
+                                if let Err(e) = tx
+                                    .send(CollectorSessionMessage::ErrClose(subgraph_id))
+                                    .await
+                                {
+                                    tracing::error!("Failed to send ErrClose message: {:?}", e);
+                                }
                                 return Err(());
                             }
                         };

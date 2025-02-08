@@ -1,9 +1,0 @@
-[package]
-name = "arboretum-core"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-rkyv = { version = "0.7.44"}
-serde = { version = "1.0.209", features = ["derive"] }
-num = "0.4.3"

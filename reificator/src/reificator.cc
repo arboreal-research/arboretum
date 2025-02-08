@@ -4,6 +4,7 @@
 #include <fstream>
 #include <regex>
 
+#include "emit_ffi.h"
 #include "emit_reify_cpp.h"
 #include "emit_reify_rs.h"
 #include "get_usr.h"
@@ -20,6 +21,7 @@ std::vector<std::string> split_tab(const std::string &s) {
 }
 
 struct CommandArgs {
+  std::string arboretum_ffi_dir = "./arboretum-ffi/";
   std::string reify_cpp_dir = "./reify-cpp/";
   std::string reify_rs_dir = "./reify-rs/";
   std::string property_table = "./reificator/properties.csv";
@@ -32,13 +34,21 @@ class ReificatorASTConsumer : public clang::ASTConsumer {
   ReificatorASTConsumer(CommandArgs args) : args_(std::move(args)) {}
 
   void HandleTranslationUnit(clang::ASTContext &ctx) override {
-    Model model(ctx, LocateClangClasses(ctx));
+    Index index = LocateClangClasses(ctx);
 
     auto property_table = ReadPropertyTable();
-    UpdatePropertyTable(property_table, model);
+    UpdatePropertyTable(ctx, index, property_table);
+
+    Model model(ctx, index);
+    model.PopulateMetaTables();
+    model.PopulateClangTables(property_table);
+
+    emit_ffi(model, args_.arboretum_ffi_dir, args_.reify_rs_dir);
+    emit_io(model, args_.reify_rs_dir);
 
     auto emit_reify_cpp_result =
         EmitReifyCpp(model, property_table, args_.reify_cpp_dir);
+
     EmitReifyRs(model, property_table, args_.reify_rs_dir,
                 emit_reify_cpp_result.name_registry,
                 emit_reify_cpp_result.enums_to_emit);
@@ -58,13 +68,14 @@ class ReificatorASTConsumer : public clang::ASTConsumer {
     return property_table;
   }
 
-  void UpdatePropertyTable(std::map<std::string, bool> &original_property_table,
-                           Model &model) {
+  void UpdatePropertyTable(
+      clang::ASTContext &ast_ctx, Index &index,
+      std::map<std::string, bool> &original_property_table) {
     std::ofstream out(args_.property_table);
 
     out << "Type\tPredicate\tEnabled\n";
 
-    for (auto &decl : model.index.clang.all_decls) {
+    for (auto &decl : index.clang.all_decls) {
       std::string decl_name = decl->getNameAsString();
 
       if (decl_name.find("OMP") == 0 || decl_name.find("ObjC") == 0) continue;
@@ -78,8 +89,7 @@ class ReificatorASTConsumer : public clang::ASTConsumer {
         if (method_decl->getReturnType()->isVoidType()) continue;
 
         std::string method_name = method_decl->getNameAsString();
-        std::optional<std::string> method_usr =
-            getUSR(model.ast_ctx, method_decl);
+        std::optional<std::string> method_usr = getUSR(ast_ctx, method_decl);
         if (!method_usr.has_value()) continue;
         if (method_name == "operator bool") continue;
 

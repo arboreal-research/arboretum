@@ -8,12 +8,8 @@ actix = "0.13.5"
 actix-server = "2.5.0"
 actix-service = "2.0.2"
 clap = { version = "4.5.13", features = ["derive"] }
-arboretum-core = {path="../arboretum-core/"}
-arboretum-graph = {path="../arboretum-graph/"}
 arboretum-ffi = {path="../arboretum-ffi/"}
-arboretum-query = {path="../arboretum-query/", features=["local"]}
-reify-rs = {path="../reify-rs/"}
-tokio = { version = "1.39.2", features = ["rt-multi-thread"] }
+tokio = { version = "1.39.2", features = ["rt-multi-thread", "macros"] }
 tracing = "0.1.40"
 bincode = "1.3.3"
 tracing-subscriber = "0.3.18"
@@ -23,6 +19,7 @@ serde = "1.0.208"
 serde_json = "1.0.125"
 futures = "0.3.30"
 anyhow = "1.0.93"
+reify-rs = { path = "../reify-rs"}
 
 [dev-dependencies]
 tempdir = "0.3.7"

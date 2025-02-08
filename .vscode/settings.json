@@ -92,7 +92,14 @@
     "format": "cpp",
     "ranges": "cpp",
     "typeindex": "cpp",
-    "__nullptr": "cpp"
+    "__nullptr": "cpp",
+    "codecvt": "cpp",
+    "iomanip": "cpp",
+    "__errc": "cpp",
+    "__mutex_base": "cpp",
+    "__bits": "cpp",
+    "__string": "cpp",
+    "__tuple": "cpp"
   },
   "cmake.configureOnOpen": false,
   "C_Cpp.default.compilerPath": "/usr/bin/clang++",

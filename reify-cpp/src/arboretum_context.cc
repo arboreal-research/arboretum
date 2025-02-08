@@ -5,33 +5,33 @@
 
 namespace arboretum {
 
-Id *ArboretumContext::resolve(const clang::Attr *attr) {
-  if (attr == nullptr) return nullptr;
+uint64_t ArboretumContext::resolve(const clang::Attr *attr) {
+  if (attr == nullptr) return 0;
 
   auto find_itr = attrs.find(attr);
   if (find_itr != attrs.end()) {
     return find_itr->second;
   }
-  Id *result = arboretum_create_nameless_node();
+  uint64_t result = data_model_.next_id();
   attrs.insert(std::make_pair(attr, result));
   return result;
 }
 
-Id *ArboretumContext::resolve(const clang::Decl *decl) {
-  if (decl == nullptr) return nullptr;
+uint64_t ArboretumContext::resolve(const clang::Decl *decl) {
+  if (decl == nullptr) return 0;
 
   auto find_itr = decls.find(decl);
   if (find_itr != decls.end()) {
     return find_itr->second;
   }
-  Id *result = arboretum_create_nameless_node();
+  uint64_t result = data_model_.next_id();
 
   // Extract USR (if applicable)
   {
     llvm::SmallVector<char, 512> buf;
     if (!clang::index::generateUSRForDecl(decl, buf)) {
-      arboretum_create_edge(result, data_model_.usr_,
-                            data_model_.arboretum_node_for(std::string(buf.data(), buf.size())));
+      arboretum_emit_Decl_usr(result,
+                              std::string(buf.data(), buf.size()).c_str());
     }
   }
 
@@ -56,8 +56,9 @@ Id *ArboretumContext::resolve(const clang::Decl *decl) {
       bo.AddVirtualBaseBranches = true;
       bo.OmitImplicitValueInitializers = false;
 
-      arboretum_create_edge(result, data_model_.cfg_,
-                            emit_cfg(clang::CFG::buildCFG(func_decl, func_decl->getBody(), &ast_ctx_, bo)));
+      auto cfg = emit_cfg(
+          clang::CFG::buildCFG(func_decl, func_decl->getBody(), &ast_ctx_, bo));
+      arboretum_emit_FunctionDecl_cfg(result, cfg);
     }
   }
 
@@ -65,33 +66,33 @@ Id *ArboretumContext::resolve(const clang::Decl *decl) {
   return result;
 }
 
-Id *ArboretumContext::resolve(const clang::Type *type) {
-  if (type == nullptr) return nullptr;
+uint64_t ArboretumContext::resolve(const clang::Type *type) {
+  if (type == nullptr) return 0;
 
   auto find_itr = types.find(type);
   if (find_itr != types.end()) {
     return find_itr->second;
   }
-  Id *result = arboretum_create_nameless_node();
+  uint64_t result = data_model_.next_id();
   types.insert(std::make_pair(type, result));
   return result;
 }
 
-Id *ArboretumContext::resolve(const clang::Stmt *stmt) {
-  if (stmt == nullptr) return nullptr;
+uint64_t ArboretumContext::resolve(const clang::Stmt *stmt) {
+  if (stmt == nullptr) return 0;
 
   auto find_itr = stmts.find(stmt);
   if (find_itr != stmts.end()) {
     return find_itr->second;
   }
-  Id *result = arboretum_create_nameless_node();
+  uint64_t result = data_model_.next_id();
   stmts.insert(std::make_pair(stmt, result));
   return result;
 }
 
-Id *ArboretumContext::resolve(clang::QualType qt) {
+uint64_t ArboretumContext::resolve(clang::QualType qt) {
   const clang::Type *type_ptr = qt.getTypePtrOrNull();
-  if (type_ptr == nullptr) return nullptr;
+  if (type_ptr == nullptr) return 0;
 
   auto key = std::make_pair(qt.getTypePtr(), qt.getLocalFastQualifiers());
   auto find_itr = qualtypes.find(key);
@@ -99,32 +100,29 @@ Id *ArboretumContext::resolve(clang::QualType qt) {
     return find_itr->second;
   }
 
-  Id *result = arboretum_create_nameless_node();
-  arboretum_create_edge(result, data_model_.meta_class_, data_model_.qualtype_class_);
-  arboretum_create_edge(result, data_model_.qualtype_is_const_, data_model_.arboretum_node_for(qt.isConstQualified()));
-  arboretum_create_edge(result, data_model_.qualtype_is_restrict_,
-                        data_model_.arboretum_node_for(qt.isRestrictQualified()));
-  arboretum_create_edge(result, data_model_.qualtype_is_volatile_,
-                        data_model_.arboretum_node_for(qt.isVolatileQualified()));
+  uint64_t result = data_model_.next_id();
 
   {
     llvm::SmallVector<char, 512> buf;
     if (!clang::index::generateUSRForType(qt, ast_ctx_, buf)) {
-      arboretum_create_edge(result, data_model_.usr_,
-                            data_model_.arboretum_node_for(std::string(buf.data(), buf.size())));
+      arboretum_emit_QualType_usr(result,
+                                  std::string(buf.data(), buf.size()).c_str());
     }
   }
 
-  Id *ty = resolve(qt.getTypePtr());
-  arboretum_create_edge(result, data_model_.qualtype_type_, ty);
+  uint64_t ty = resolve(qt.getTypePtr());
+
+  arboretum_emit_QualType(result, ty, qt.isConstQualified(),
+                          qt.isVolatileQualified(), qt.isRestrictQualified());
 
   qualtypes.insert(std::make_pair(key, result));
   return result;
 }
 
-Id *ArboretumContext::emit_cfg_block(std::unordered_map<const clang::CFGBlock *, Id *> &blocks, Id *cfg_id,
-                                     const clang::CFGBlock *block) {
-  if (block == nullptr) return nullptr;
+uint64_t ArboretumContext::emit_cfg_block(
+    std::unordered_map<const clang::CFGBlock *, uint64_t> &blocks,
+    uint64_t cfg_id, const clang::CFGBlock *block) {
+  if (block == nullptr) return 0;
 
   // Do not emit blocks more than once.
   auto find_itr = blocks.find(block);
@@ -132,216 +130,184 @@ Id *ArboretumContext::emit_cfg_block(std::unordered_map<const clang::CFGBlock *,
     return find_itr->second;
   }
 
-  Id *block_id = arboretum_create_nameless_node();
+  uint64_t block_id = data_model_.next_id();
   blocks.insert(std::make_pair(block, block_id));
-  arboretum_create_edge(block_id, data_model_.cfg_block_parent_, cfg_id);
 
-  // getTerminator
+  uint64_t terminator_stmt = 0;
+  uint64_t terminator_kind = 0;
+  uint64_t terminator_cond = 0;
+
   auto terminator = block->getTerminator();
   if (terminator.isValid()) {
-    arboretum_create_edge(block_id, data_model_.cfg_block_terminator_stmt_, resolve(terminator.getStmt()));
-    arboretum_create_edge(block_id, data_model_.cfg_block_terminator_kind_, data_model_.resolve(terminator.getKind()));
-    arboretum_create_edge(block_id, data_model_.cfg_block_terminator_condition_,
-                          resolve(block->getTerminatorCondition()));
+    terminator_stmt = resolve(terminator.getStmt());
+    terminator_kind = data_model_.resolve(terminator.getKind());
+    terminator_cond = resolve(block->getTerminatorCondition());
   }
 
-  arboretum_create_edge(block_id, data_model_.cfg_block_label_, resolve(block->getLabel()));
-  arboretum_create_edge(block_id, data_model_.cfg_block_loop_target_, resolve(block->getLoopTarget()));
-  arboretum_create_edge(block_id, data_model_.cfg_block_has_no_return_element_,
-                        data_model_.arboretum_node_for(block->hasNoReturnElement()));
+  uint64_t label_stmt = resolve(block->getLabel());
+  uint64_t loop_target = resolve(block->getLoopTarget());
+  bool has_no_return_element = block->hasNoReturnElement();
 
-  // succs
-  {
-    std::vector<Id *> succs;
-    for (const auto succ : block->succs()) {
-      auto *succ_block_id = emit_cfg_block(blocks, cfg_id, succ);
-      if (succ_block_id != nullptr) {
-        succs.push_back(succ_block_id);
-      }
+  arboretum_emit_CFGBlock(block_id, terminator_stmt, terminator_kind,
+                          terminator_cond, label_stmt, loop_target,
+                          has_no_return_element);
+  arboretum_emit_CFG_blocks(cfg_id, block_id);
+
+  for (const auto succ : block->succs()) {
+    auto succ_block_id = emit_cfg_block(blocks, cfg_id, succ);
+    if (succ_block_id != 0) {
+      arboretum_emit_CFG_edges(block_id, succ_block_id);
     }
-    arboretum_create_edge(block_id, data_model_.cfg_block_succs_,
-                          data_model_.arboretum_node_for(data_model_.class_CFGBlock_, succs));
   }
 
-  // preds
-  {
-    std::unordered_set<Id *> preds;
-    for (const auto pred : block->preds()) {
-      auto *pred_block_id = emit_cfg_block(blocks, cfg_id, pred);
-      if (pred_block_id != nullptr) {
-        preds.insert(pred_block_id);
-      }
+  for (const auto pred : block->preds()) {
+    auto pred_block_id = emit_cfg_block(blocks, cfg_id, pred);
+    if (pred_block_id != 0) {
+      arboretum_emit_CFG_edges(pred_block_id, block_id);
     }
-    arboretum_create_edge(block_id, data_model_.cfg_block_preds_,
-                          data_model_.arboretum_node_for(data_model_.class_CFGBlock_, preds));
   }
 
-  // elements
-  {
-    std::vector<Id *> elements;
-    for (const auto &element : block->refs()) {
-      auto *element_id = emit_cfg_element(*element);
-      if (element_id != nullptr) {
-        elements.push_back(element_id);
-      }
+  for (const auto &element : block->refs()) {
+    auto element_id = emit_cfg_element(*element);
+    if (element_id != 0) {
+      arboretum_emit_CFGBlock_elements(block_id, element_id);
     }
-    arboretum_create_edge(block_id, data_model_.cfg_block_preds_,
-                          data_model_.arboretum_node_for(data_model_.class_CFGElement_, elements));
   }
 
   return block_id;
 }
 
-Id *ArboretumContext::emit_cfg(std::unique_ptr<clang::CFG> cfg) {
-  if (cfg == nullptr) return nullptr;
-  std::unordered_map<const clang::CFGBlock *, Id *> blocks;
+uint64_t ArboretumContext::emit_cfg(std::unique_ptr<clang::CFG> cfg) {
+  if (cfg == nullptr) return 0;
+  std::unordered_map<const clang::CFGBlock *, uint64_t> blocks;
 
-  Id *cfg_id = arboretum_create_nameless_node();
-  arboretum_create_edge(cfg_id, data_model_.meta_class_, data_model_.class_CFG_);
+  uint64_t cfg_id = data_model_.next_id();
 
-  // nodes
-  {
-    std::vector<Id *> nodes;
-    for (const auto *block : cfg->nodes()) {
-      auto *block_id = emit_cfg_block(blocks, cfg_id, block);
-      if (block_id != nullptr) {
-        nodes.push_back(block_id);
-      }
+  uint64_t entry_block_id = emit_cfg_block(blocks, cfg_id, &cfg->getEntry());
+  uint64_t exit_block_id = emit_cfg_block(blocks, cfg_id, &cfg->getExit());
+
+  uint64_t indirect_goto =
+      emit_cfg_block(blocks, cfg_id, cfg->getIndirectGotoBlock());
+
+  bool is_linear = cfg->isLinear();
+
+  arboretum_emit_CFG(cfg_id, entry_block_id, exit_block_id, is_linear,
+                     indirect_goto);
+
+  for (const auto *block : cfg->nodes()) {
+    auto block_id = emit_cfg_block(blocks, cfg_id, block);
+    if (block_id != 0) {
+      arboretum_emit_CFG_blocks(cfg_id, block_id);
     }
-    arboretum_create_edge(cfg_id, data_model_.cfg_nodes_,
-                          data_model_.arboretum_node_for(data_model_.class_CFGBlock_, nodes));
   }
 
-  // getEntry
-  arboretum_create_edge(cfg_id, data_model_.cfg_entry_, emit_cfg_block(blocks, cfg_id, &cfg->getEntry()));
-
-  // getExit
-  arboretum_create_edge(cfg_id, data_model_.cfg_exit_, emit_cfg_block(blocks, cfg_id, &cfg->getExit()));
-
-  // getIndirectGotoBlock
-  arboretum_create_edge(cfg_id, data_model_.cfg_indirect_goto_block_,
-                        emit_cfg_block(blocks, cfg_id, cfg->getIndirectGotoBlock()));
-
-  // try_blocks
-  {
-    std::vector<Id *> try_blocks;
-    for (const auto *block : cfg->try_blocks()) {
-      auto *block_id = emit_cfg_block(blocks, cfg_id, block);
-      if (block_id != nullptr) {
-        try_blocks.push_back(block_id);
-      }
+  for (const auto *block : cfg->try_blocks()) {
+    auto block_id = emit_cfg_block(blocks, cfg_id, block);
+    if (block_id != 0) {
+      arboretum_emit_CFG_try_blocks(cfg_id, block_id);
     }
-    arboretum_create_edge(cfg_id, data_model_.cfg_try_blocks_,
-                          data_model_.arboretum_node_for(data_model_.class_CFGBlock_, try_blocks));
   }
-
-  // isLinear
-  arboretum_create_edge(cfg_id, data_model_.cfg_is_linear_, data_model_.arboretum_node_for(cfg->isLinear()));
 
   return cfg_id;
 }
 
-Id *ArboretumContext::emit_cfg_element(const clang::CFGElement &element) {
-  Id *element_id = arboretum_create_nameless_node();
+uint64_t ArboretumContext::emit_cfg_element(const clang::CFGElement &element) {
+  auto element_id = data_model_.next_id();
+  arboretum_emit_CFGElement(element_id, data_model_.resolve(element.getKind()));
 
   switch (element.getKind()) {
     case clang::CFGElement::Kind::Initializer: {
       auto e = element.castAs<clang::CFGInitializer>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGInitializer_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_init_, resolve(e.getInitializer()));
+      arboretum_emit_CFGInitializer(element_id, resolve(e.getInitializer()));
     } break;
     case clang::CFGElement::Kind::ScopeBegin: {
       auto e = element.castAs<clang::CFGScopeBegin>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGScopeBegin_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_trigger_stmt_, resolve(e.getTriggerStmt()));
-      arboretum_create_edge(element_id, data_model_.cfg_element_var_decl_, resolve(e.getVarDecl()));
+      arboretum_emit_CFGScopeBegin(element_id, resolve(e.getTriggerStmt()),
+                                   resolve(e.getVarDecl()));
     } break;
     case clang::CFGElement::Kind::ScopeEnd: {
       auto e = element.castAs<clang::CFGScopeEnd>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGScopeEnd_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_trigger_stmt_, resolve(e.getTriggerStmt()));
-      arboretum_create_edge(element_id, data_model_.cfg_element_var_decl_, resolve(e.getVarDecl()));
+      arboretum_emit_CFGScopeEnd(element_id, resolve(e.getTriggerStmt()),
+                                 resolve(e.getVarDecl()));
     } break;
     case clang::CFGElement::Kind::NewAllocator: {
       auto e = element.castAs<clang::CFGNewAllocator>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGNewAllocator_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_alloc_expr_, resolve(e.getAllocatorExpr()));
+      arboretum_emit_CFGNewAllocator(element_id, resolve(e.getAllocatorExpr()));
     } break;
     case clang::CFGElement::Kind::LifetimeEnds: {
       auto e = element.castAs<clang::CFGLifetimeEnds>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGLifetimeEnds_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_trigger_stmt_, resolve(e.getTriggerStmt()));
-      arboretum_create_edge(element_id, data_model_.cfg_element_var_decl_, resolve(e.getVarDecl()));
+      arboretum_emit_CFGLifetimeEnds(element_id, resolve(e.getTriggerStmt()),
+                                     resolve(e.getVarDecl()));
     } break;
     case clang::CFGElement::Kind::LoopExit: {
       auto e = element.castAs<clang::CFGLoopExit>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGLoopExit_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_loop_stmt_, resolve(e.getLoopStmt()));
+      arboretum_emit_CFGLoopExit(element_id, resolve(e.getLoopStmt()));
     } break;
     case clang::CFGElement::Kind::Statement: {
       auto e = element.castAs<clang::CFGStmt>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGStmt_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_stmt_, resolve(e.getStmt()));
+      arboretum_emit_CFGLoopExit(element_id, resolve(e.getStmt()));
     } break;
     case clang::CFGElement::Kind::Constructor: {
       auto e = element.castAs<clang::CFGConstructor>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGConstructor_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_stmt_, resolve(e.getStmt()));
-      arboretum_create_edge(element_id, data_model_.cfg_element_ctor_context_, resolve(e.getConstructionContext()));
+      arboretum_emit_CFGConstructor(element_id, resolve(e.getStmt()),
+                                    resolve(e.getConstructionContext()));
     } break;
     case clang::CFGElement::Kind::CXXRecordTypedCall: {
       auto e = element.castAs<clang::CFGCXXRecordTypedCall>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGCXXRecordTypedCall_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_stmt_, resolve(e.getStmt()));
-      arboretum_create_edge(element_id, data_model_.cfg_element_ctor_context_, resolve(e.getConstructionContext()));
+      arboretum_emit_CFGCXXRecordTypedCall(element_id, resolve(e.getStmt()),
+                                           resolve(e.getConstructionContext()));
     } break;
     case clang::CFGElement::Kind::AutomaticObjectDtor: {
       auto e = element.castAs<clang::CFGAutomaticObjDtor>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGAutomaticObjDtor_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_dtor_decl_, resolve(e.getDestructorDecl(ast_ctx_)));
-      arboretum_create_edge(element_id, data_model_.cfg_element_trigger_stmt_, resolve(e.getTriggerStmt()));
-      arboretum_create_edge(element_id, data_model_.cfg_element_var_decl_, resolve(e.getVarDecl()));
+      arboretum_emit_CFGAutomaticObjDtor(
+          element_id, resolve(e.getDestructorDecl(ast_ctx_)),
+          resolve(e.getTriggerStmt()), resolve(e.getVarDecl()));
     } break;
     case clang::CFGElement::Kind::DeleteDtor: {
       auto e = element.castAs<clang::CFGDeleteDtor>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGDeleteDtor_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_dtor_decl_, resolve(e.getDestructorDecl(ast_ctx_)));
-      arboretum_create_edge(element_id, data_model_.cfg_element_cxx_record_decl_, resolve(e.getCXXRecordDecl()));
-      arboretum_create_edge(element_id, data_model_.cfg_element_delete_expr_, resolve(e.getDeleteExpr()));
+      arboretum_emit_CFGDeleteDtor(
+          element_id, resolve(e.getDestructorDecl(ast_ctx_)),
+          resolve(e.getCXXRecordDecl()), resolve(e.getDeleteExpr()));
     } break;
     case clang::CFGElement::Kind::BaseDtor: {
       auto e = element.castAs<clang::CFGBaseDtor>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGBaseDtor_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_dtor_decl_, resolve(e.getDestructorDecl(ast_ctx_)));
-      arboretum_create_edge(element_id, data_model_.cfg_element_base_specifier_, resolve(e.getBaseSpecifier()));
+      arboretum_emit_CFGBaseDtor(element_id,
+                                 resolve(e.getDestructorDecl(ast_ctx_)),
+                                 resolve(e.getBaseSpecifier()));
     } break;
     case clang::CFGElement::Kind::MemberDtor: {
       auto e = element.castAs<clang::CFGMemberDtor>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGMemberDtor_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_dtor_decl_, resolve(e.getDestructorDecl(ast_ctx_)));
-      arboretum_create_edge(element_id, data_model_.cfg_element_field_decl_, resolve(e.getFieldDecl()));
+      arboretum_emit_CFGMemberDtor(element_id,
+                                   resolve(e.getDestructorDecl(ast_ctx_)),
+                                   resolve(e.getFieldDecl()));
     } break;
     case clang::CFGElement::Kind::TemporaryDtor: {
       auto e = element.castAs<clang::CFGTemporaryDtor>();
-      arboretum_create_edge(element_id, data_model_.meta_class_, data_model_.class_CFGTemporaryDtor_);
-      arboretum_create_edge(element_id, data_model_.cfg_element_dtor_decl_, resolve(e.getDestructorDecl(ast_ctx_)));
-      arboretum_create_edge(element_id, data_model_.cfg_element_bind_temporary_expr_,
-                            resolve(e.getBindTemporaryExpr()));
+      arboretum_emit_CFGTemporaryDtor(element_id,
+                                      resolve(e.getDestructorDecl(ast_ctx_)),
+                                      resolve(e.getBindTemporaryExpr()));
     } break;
     case clang::CFGElement::Kind::CleanupFunction: {
       auto e = element.castAs<clang::CFGCleanupFunction>();
-      arboretum_create_edge(element_id, data_model_.cfg_element_var_decl_, resolve(e.getVarDecl()));
-      arboretum_create_edge(element_id, data_model_.cfg_element_function_decl_, resolve(e.getFunctionDecl()));
+      arboretum_emit_CFGCleanupFunction(element_id, resolve(e.getVarDecl()),
+                                        resolve(e.getFunctionDecl()));
     }
   }
 
   return element_id;
 }
 
-Id *ArboretumContext::resolve(const clang::CXXCtorInitializer *ctor_init) { return nullptr; }
+uint64_t ArboretumContext::resolve(const clang::CXXCtorInitializer *ctor_init) {
+  return 0;
+}
 
-Id *ArboretumContext::resolve(const clang::ConstructionContext *ctor_ctx) { return nullptr; }
+uint64_t ArboretumContext::resolve(const clang::ConstructionContext *ctor_ctx) {
+  return 0;
+}
 
-Id *ArboretumContext::resolve(const clang::CXXBaseSpecifier *base_specifier) { return nullptr; }
+uint64_t ArboretumContext::resolve(
+    const clang::CXXBaseSpecifier *base_specifier) {
+  return 0;
+}
 
 }  // namespace arboretum

@@ -4,173 +4,505 @@
 #include <sstream>
 #include <stack>
 
+#include "get_usr.h"
+
 namespace arboretum {
 
-namespace {
+Model::Model(clang::ASTContext &ctx_, Index &index_)
+    : ast_ctx(ctx_), index(index_) {}
 
-template <typename T>
-std::string build_fresh_name(EntityNameMap<T> &entity_map, const char *prefix, std::string &&root) {
-  auto find_itr = entity_map.name_count.find(root);
-  size_t name_idx;
-  if (find_itr != entity_map.name_count.end()) {
-    name_idx = find_itr->second++;
-  } else {
-    name_idx = 0;
-    entity_map.name_count.insert(std::pair(root, name_idx + 1));
+void Model::PopulateMetaTables() {
+  tables.push_back(std::make_shared<Table>(
+      "file", std::vector<Field>{Field("id", DataType::U64),
+                                 Field("filename", DataType::STRING),
+                                 Field("content", DataType::STRING)}));
+
+  tables.push_back(std::make_shared<Table>(
+      "source_loc", std::vector<Field>{Field("id", DataType::U64),
+                                       Field("file_id", DataType::U64),
+                                       Field("line", DataType::U64),
+                                       Field("col", DataType::U64),
+                                       Field("expansion_loc", DataType::U64),
+                                       Field("spelling_loc", DataType::U64)}));
+
+  tables.push_back(std::make_shared<Table>(
+      "source_range", std::vector<Field>{Field("id", DataType::U64),
+                                         Field("begin", DataType::U64),
+                                         Field("end", DataType::U64)}));
+
+  tables.push_back(
+      std::make_shared<Table>("enum", std::vector<Field>{
+                                          Field("id", DataType::U64),
+                                          Field("name", DataType::STRING),
+                                      }));
+
+  tables.push_back(
+      std::make_shared<Table>("enum_value", std::vector<Field>{
+                                                Field("id", DataType::U64),
+                                                Field("enum_id", DataType::U64),
+                                                Field("name", DataType::STRING),
+                                            }));
+
+  tables.push_back(std::make_shared<Table>(
+      "QualType", std::vector<Field>{
+                      Field("id", DataType::U64),
+                      Field("Type_id", DataType::U64),
+                      Field("is_const", DataType::BOOL),
+                      Field("is_volatile", DataType::BOOL),
+                      Field("is_restrict", DataType::BOOL),
+                  }));
+
+  tables.push_back(
+      std::make_shared<Table>("CFG", std::vector<Field>{
+                                         Field("id", DataType::U64),
+                                         Field("entry_block_id", DataType::U64),
+                                         Field("exit_block_id", DataType::U64),
+                                         Field("is_linear", DataType::BOOL),
+                                         Field("indirect_goto", DataType::U64),
+                                     }));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFG_blocks", std::vector<Field>{Field("CFG_id", DataType::U64),
+                                       Field("CFGBlock_id", DataType::U64)}));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFG_try_blocks",
+      std::vector<Field>{Field("CFG_id", DataType::U64),
+                         Field("CFGBlock_id", DataType::U64)}));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFG_edges", std::vector<Field>{Field("CFGBlock_src", DataType::U64),
+                                      Field("CFGBlock_dst", DataType::U64)}));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGBlock", std::vector<Field>{
+                      Field("id", DataType::U64),
+                      Field("terminator_stmt", DataType::U64),
+                      Field("terminator_kind", DataType::U64),
+                      Field("terminator_cond", DataType::U64),
+                      Field("label_stmt", DataType::U64),
+                      Field("loop_target", DataType::U64),
+                      Field("has_no_return_element", DataType::BOOL),
+                  }));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGBlock_elements",
+      std::vector<Field>{Field("CFGBlock_id", DataType::U64),
+                         Field("CFGElement_id", DataType::U64)}));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGElement", std::vector<Field>{Field("id", DataType::U64),
+                                       Field("kind", DataType::U64)}));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGInitializer", std::vector<Field>{
+                            Field("id", DataType::U64),
+                            Field("getInitializer", DataType::U64),
+                        }));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGScopeBegin", std::vector<Field>{
+                           Field("id", DataType::U64),
+                           Field("getTriggerStmt", DataType::U64),
+                           Field("getVarDecl", DataType::U64),
+                       }));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGScopeEnd", std::vector<Field>{
+                         Field("id", DataType::U64),
+                         Field("getTriggerStmt", DataType::U64),
+                         Field("getVarDecl", DataType::U64),
+                     }));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGNewAllocator", std::vector<Field>{
+                             Field("id", DataType::U64),
+                             Field("getAllocatorExpr", DataType::U64),
+                         }));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGLifetimeEnds", std::vector<Field>{
+                             Field("id", DataType::U64),
+                             Field("getTriggerStmt", DataType::U64),
+                             Field("getVarDecl", DataType::U64),
+                         }));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGLoopExit", std::vector<Field>{
+                         Field("id", DataType::U64),
+                         Field("getLoopStmt", DataType::U64),
+                     }));
+
+  tables.push_back(
+      std::make_shared<Table>("CFGStmt", std::vector<Field>{
+                                             Field("id", DataType::U64),
+                                             Field("getStmt", DataType::U64),
+                                         }));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGConstructor", std::vector<Field>{
+                            Field("id", DataType::U64),
+                            Field("getStmt", DataType::U64),
+                            Field("getConstructionContext", DataType::U64),
+                        }));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGCXXRecordTypedCall",
+      std::vector<Field>{
+          Field("id", DataType::U64),
+          Field("getStmt", DataType::U64),
+          Field("getConstructionContext", DataType::U64),
+      }));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGAutomaticObjDtor",
+      std::vector<Field>{Field("id", DataType::U64),
+                         Field("getDestructorDecl", DataType::U64),
+                         Field("getTriggerStmt", DataType::U64),
+                         Field("getVarDecl", DataType::U64)}));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGDeleteDtor",
+      std::vector<Field>{Field("id", DataType::U64),
+                         Field("getDestructorDecl", DataType::U64),
+                         Field("getCXXRecordDecl", DataType::U64),
+                         Field("getDeleteExpr", DataType::U64)}));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGBaseDtor",
+      std::vector<Field>{Field("id", DataType::U64),
+                         Field("getDestructorDecl", DataType::U64),
+                         Field("getBaseSpecifier", DataType::U64)}));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGMemberDtor",
+      std::vector<Field>{Field("id", DataType::U64),
+                         Field("getDestructorDecl", DataType::U64),
+                         Field("getFieldDecl", DataType::U64)}));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGTemporaryDtor", std::vector<Field>{
+                              Field("id", DataType::U64),
+                              Field("getDestructorDecl", DataType::U64),
+                              Field("getBindTemporaryExpr", DataType::U64),
+                          }));
+
+  tables.push_back(std::make_shared<Table>(
+      "CFGCleanupFunction", std::vector<Field>{
+                                Field("id", DataType::U64),
+                                Field("getVarDecl", DataType::U64),
+                                Field("getFunctionDecl", DataType::U64),
+                            }));
+  tables.push_back(std::make_shared<Table>(
+      "Decl_usr", std::vector<Field>{Field("id", DataType::U64),
+                                     Field("usr", DataType::STRING)}));
+
+  tables.push_back(std::make_shared<Table>(
+      "QualType_usr", std::vector<Field>{Field("id", DataType::U64),
+                                         Field("usr", DataType::STRING)}));
+
+  tables.push_back(std::make_shared<Table>("FunctionDecl_cfg",
+                                           std::vector<Field>{
+                                               Field("id", DataType::U64),
+                                               Field("cfg", DataType::U64),
+                                           }));
+
+  assert(index.clang.cfg_terminator_kind != nullptr);
+  MarkEnumUsed(index.clang.cfg_terminator_kind);
+
+  assert(index.clang.cfg_element_kind != nullptr);
+  MarkEnumUsed(index.clang.cfg_element_kind);
+}
+
+bool Model::MarkEnumUsed(const clang::EnumDecl *decl) {
+  std::optional<std::string> enum_usr = getUSR(ast_ctx, decl);
+  if (enum_usr.has_value()) {
+    auto inserted = enums.insert(std::make_pair(*enum_usr, decl)).second;
+    if (inserted) {
+      std::unordered_set<int64_t> values;
+      for (const auto &enumerator : decl->enumerators()) {
+        std::string enumerator_name = enumerator->getNameAsString();
+
+        if (values.insert(enumerator->getInitVal().getExtValue()).second) {
+          std::optional<std::string> enum_constant_usr =
+              getUSR(ast_ctx, enumerator);
+          if (enum_constant_usr.has_value()) {
+            enum_constants.insert(
+                std::make_pair(*enum_constant_usr, enumerator));
+          }
+        }
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
+std::unique_ptr<MethodHandler> Model::HandlerForType(
+    clang::QualType return_type, const clang::CXXMethodDecl *method_decl) {
+  if (return_type->isEnumeralType()) {
+    const clang::EnumDecl *decl =
+        llvm::dyn_cast<clang::EnumDecl>(return_type->getAsTagDecl());
+
+    const clang::EnumDecl *decl_def = decl->getDefinition();
+    if (decl_def == nullptr)
+      llvm::errs() << "Missing definition for "
+                   << decl->getQualifiedNameAsString() << "!\n";
+
+    if (MarkEnumUsed(decl_def)) {
+      return std::make_unique<EnumMethodHandler>(method_decl, decl_def);
+    } else {
+      llvm::errs() << "Failed to generate USR for "
+                   << decl->getQualifiedNameAsString() << "!\n";
+    }
+  } else if (return_type->isPointerType()) {
+    auto pointer_type = return_type->getAs<clang::PointerType>();
+    auto pointee_type = pointer_type->getPointeeType();
+    if (pointee_type->isRecordType()) {
+      auto record_type = pointee_type->getAs<clang::RecordType>();
+      auto record_decl =
+          llvm::dyn_cast<clang::CXXRecordDecl>(record_type->getDecl());
+      if (index.clang.all_decls.contains(record_decl)) {
+        return std::make_unique<ClangPointerMethodHandler>(method_decl,
+                                                           record_decl);
+      }
+    }
+  } else if (return_type->isBuiltinType()) {
+    auto builtin_type = return_type->getAs<clang::BuiltinType>();
+    switch (builtin_type->getKind()) {
+      case clang::BuiltinType::Bool:
+        return std::make_unique<IdentityMethodHandler>(method_decl,
+                                                       DataType::BOOL);
+      case clang::BuiltinType::UChar:
+      case clang::BuiltinType::Char_U:
+        return std::make_unique<IdentityMethodHandler>(method_decl,
+                                                       DataType::U8);
+      case clang::BuiltinType::UShort:
+        return std::make_unique<IdentityMethodHandler>(method_decl,
+                                                       DataType::U16);
+      case clang::BuiltinType::UInt:
+        return std::make_unique<IdentityMethodHandler>(method_decl,
+                                                       DataType::U32);
+      case clang::BuiltinType::ULong:
+        return std::make_unique<IdentityMethodHandler>(method_decl,
+                                                       DataType::U64);
+      case clang::BuiltinType::ULongLong:
+        return std::make_unique<IdentityMethodHandler>(method_decl,
+                                                       DataType::U64);
+      case clang::BuiltinType::SChar:
+      case clang::BuiltinType::Char_S:
+        return std::make_unique<IdentityMethodHandler>(method_decl,
+                                                       DataType::I8);
+      case clang::BuiltinType::Short:
+        return std::make_unique<IdentityMethodHandler>(method_decl,
+                                                       DataType::I16);
+      case clang::BuiltinType::Int:
+        return std::make_unique<IdentityMethodHandler>(method_decl,
+                                                       DataType::I32);
+      case clang::BuiltinType::Long:
+        return std::make_unique<IdentityMethodHandler>(method_decl,
+                                                       DataType::I64);
+      case clang::BuiltinType::LongLong:
+        return std::make_unique<IdentityMethodHandler>(method_decl,
+                                                       DataType::I64);
+      case clang::BuiltinType::Float:
+        return std::make_unique<IdentityMethodHandler>(method_decl,
+                                                       DataType::F32);
+      case clang::BuiltinType::Double:
+        return std::make_unique<IdentityMethodHandler>(method_decl,
+                                                       DataType::F64);
+      default:
+        break;
+    }
+  } else if (return_type->isRecordType()) {
+    auto record_type =
+        return_type.getCanonicalType()->getAs<clang::RecordType>();
+    auto record_decl =
+        llvm::dyn_cast<clang::CXXRecordDecl>(record_type->getDecl());
+    auto fqn = record_decl->getQualifiedNameAsString();
+    if (fqn == "clang::QualType") {
+      return std::make_unique<QualTypeMethodHandler>(method_decl);
+    } else if (fqn == "clang::SourceLocation") {
+      return std::make_unique<SourceLocationMethodHandler>(method_decl);
+    } else if (fqn == "clang::SourceRange") {
+      return std::make_unique<SourceRangeMethodHandler>(method_decl);
+    } else if (fqn == "llvm::StringRef") {
+      return std::make_unique<StringRefMethodHandler>(method_decl);
+    } else if (fqn == "std::basic_string") {
+      return std::make_unique<BasicStringMethodHandler>(method_decl);
+    }
   }
 
-  std::stringstream ss;
-  ss << prefix << '_' << root;
-  if (name_idx != 0) {
-    ss << '_' << name_idx;
+  return nullptr;
+}
+
+std::unique_ptr<MethodHandler> Model::HandlerForMethod(
+    const clang::CXXRecordDecl *decl, const clang::CXXMethodDecl *method_decl) {
+  auto return_type = method_decl->getReturnType();
+
+  if (return_type->isRecordType()) {
+    auto record_type =
+        return_type.getCanonicalType()->getAs<clang::RecordType>();
+    auto record_decl =
+        llvm::dyn_cast<clang::CXXRecordDecl>(record_type->getDecl());
+    auto fqn = record_decl->getQualifiedNameAsString();
+    if (fqn == "llvm::ArrayRef") {
+      auto tmpl_record_decl =
+          llvm::dyn_cast_or_null<clang::ClassTemplateSpecializationDecl>(
+              record_decl);
+      auto element_type = tmpl_record_decl->getTemplateArgs()[0].getAsType();
+
+      auto element_adapter = HandlerForType(element_type, method_decl);
+      if (element_adapter != nullptr) {
+        std::string table_name =
+            decl->getNameAsString() + "_" + method_decl->getNameAsString();
+        auto table = std::make_shared<Table>(
+            table_name,
+            std::vector<Field>{Field("id", DataType::U64),
+                               Field("idx", DataType::U64),
+                               Field("element", *element_adapter->Datatype())});
+        tables.push_back(table);
+
+        return std::make_unique<ArrayRefMethodHandler>(
+            method_decl, table, std::move(element_adapter));
+      }
+    } else if (fqn == "llvm::iterator_range") {
+      auto iterator_range_arg =
+          return_type->getAs<clang::TemplateSpecializationType>()
+              ->template_arguments()[0]
+              .getAsType()
+              .getCanonicalType();
+
+      if (iterator_range_arg->isPointerType()) {
+        auto element_type = iterator_range_arg->getPointeeType();
+        auto element_adapter = HandlerForType(element_type, method_decl);
+        if (element_adapter != nullptr) {
+          std::string table_name =
+              decl->getNameAsString() + "_" + method_decl->getNameAsString();
+          auto table = std::make_shared<Table>(
+              table_name,
+              std::vector<Field>{
+                  Field("id", DataType::U64), Field("idx", DataType::U64),
+                  Field("element", *element_adapter->Datatype())});
+          tables.push_back(table);
+
+          return std::make_unique<IteratorRangeMethodHandler>(
+              method_decl, table, std::move(element_adapter));
+        }
+      } else if (iterator_range_arg->isRecordType()) {
+        auto iterator_decl = iterator_range_arg->getAsCXXRecordDecl();
+        if (iterator_decl != nullptr) {
+          clang::DeclarationName name =
+              &iterator_decl->getASTContext().Idents.get("value_type");
+          auto lookup = iterator_decl->lookup(name);
+          if (lookup.isSingleResult()) {
+            auto typedef_name_decl =
+                llvm::dyn_cast_or_null<clang::TypedefNameDecl>(*lookup.begin());
+            if (typedef_name_decl != nullptr) {
+              auto element_type =
+                  typedef_name_decl->getUnderlyingType().getCanonicalType();
+              auto element_adapter = HandlerForType(element_type, method_decl);
+              if (element_adapter != nullptr) {
+                std::string table_name = decl->getNameAsString() + "_" +
+                                         method_decl->getNameAsString();
+                auto table = std::make_shared<Table>(
+                    table_name,
+                    std::vector<Field>{
+                        Field("id", DataType::U64), Field("idx", DataType::U64),
+                        Field("element", *element_adapter->Datatype())});
+                tables.push_back(table);
+
+                return std::make_unique<IteratorRangeMethodHandler>(
+                    method_decl, table, std::move(element_adapter));
+              }
+            }
+          }
+        }
+      }
+    }
   }
-  return ss.str();
+
+  return HandlerForType(return_type, method_decl);
 }
 
-template <typename T>
-std::string entity_name_impl(const char *prefix, EntityNameMap<T> &entity_map, T t) {
-  std::string name = t->getNameAsString();
-  auto find_itr = entity_map.entity_map.find(t);
-  if (find_itr != entity_map.entity_map.end()) {
-    return find_itr->second;
-  } else {
-    name = build_fresh_name(entity_map, prefix, std::move(name));
-    entity_map.entity_map.insert(std::pair(t, name));
-    return name;
+void Model::PopulateClangTable(
+    const std::map<std::string, bool> &allowed_properties,
+    const clang::CXXRecordDecl *decl) {
+  std::string decl_name = decl->getNameAsString();
+  std::vector<Field> fields;
+  std::vector<std::unique_ptr<MethodHandler>> data_handlers;
+  std::vector<std::unique_ptr<MethodHandler>> assoc_handlers;
+
+  if (decl_name.starts_with("ObjC") || decl_name.starts_with("OMP")) return;
+
+  // Populate fields and handlers
+  fields.push_back(Field("id", DataType::U64));
+  for (const auto &method_decl : decl->methods()) {
+    std::string method_name = method_decl->getNameAsString();
+    std::optional<std::string> method_usr = getUSR(ast_ctx, method_decl);
+    if (!method_usr.has_value()) continue;
+
+    {
+      auto find_itr = allowed_properties.find(*method_usr);
+      if (find_itr == allowed_properties.end() || !find_itr->second) continue;
+    }
+
+    auto method_handler = HandlerForMethod(decl, method_decl);
+    if (method_handler == nullptr) continue;
+
+    std::optional<DataType> datatype = method_handler->Datatype();
+    if (datatype.has_value()) {
+      fields.push_back(Field(method_name, *datatype));
+      data_handlers.push_back(std::move(method_handler));
+    } else {
+      assoc_handlers.push_back(std::move(method_handler));
+    }
+  }
+
+  // Record the table and construct the handler.
+  auto table = std::make_shared<Table>(decl_name, fields);
+  tables.push_back(table);
+
+  handler_by_decl.emplace(decl, DeclHandler(table, std::move(data_handlers),
+                                            std::move(assoc_handlers)));
+}
+
+void Model::PopulateClangTables(
+    const std::map<std::string, bool> &allowed_properties) {
+  for (auto decl : index.clang.type_decls) {
+    PopulateClangTable(allowed_properties, decl);
+  }
+
+  for (auto decl : index.clang.decl_decls) {
+    PopulateClangTable(allowed_properties, decl);
+  }
+
+  for (auto decl : index.clang.stmt_decls) {
+    PopulateClangTable(allowed_properties, decl);
   }
 }
 
-std::vector<std::pair<std::string, std::string>> build_meta_data_model() {
-  std::vector<std::pair<std::string, std::string>> meta_data_model;
+std::unordered_map<const clang::EnumDecl *, uint64_t> Model::GetEnumToIndex() {
+  std::unordered_map<const clang::EnumDecl *, uint64_t> result;
 
-  meta_data_model.push_back(std::pair("true_", "true"));
-  meta_data_model.push_back(std::pair("false_", "false"));
+  uint64_t idx = 0;
+  for (const auto &[_, decl] : enums) {
+    result[decl] = idx++;
+  }
 
-  meta_data_model.push_back(std::pair("meta_class", "/meta/class"));
-  meta_data_model.push_back(std::pair("meta_subclass", "/meta/subclass"));
-  meta_data_model.push_back(std::pair("meta_method", "/meta/method"));
-  meta_data_model.push_back(std::pair("meta_domain", "/meta/domain"));
-  meta_data_model.push_back(std::pair("meta_range", "/meta/range"));
-
-  meta_data_model.push_back(std::pair("meta_clang_ast_node", "/meta/clang_ast/node"));
-  meta_data_model.push_back(std::pair("meta_clang_ast_method", "/meta/clang_ast/method"));
-  meta_data_model.push_back(std::pair("meta_clang_ast_enum", "/meta/clang_ast/enum"));
-  meta_data_model.push_back(std::pair("meta_clang_ast_enum_enumerators", "/meta/clang_ast/enum/enumerators"));
-  meta_data_model.push_back(std::pair("meta_clang_ast_enum_constant", "/meta/clang_ast/enum_constant"));
-
-  meta_data_model.push_back(std::pair("builtin_string_class", "/builtin/string"));
-  meta_data_model.push_back(std::pair("builtin_u64_class", "/builtin/u64"));
-  meta_data_model.push_back(std::pair("builtin_i64_class", "/builtin/i64"));
-  meta_data_model.push_back(std::pair("builtin_double_class", "/builtin/dbl"));
-  meta_data_model.push_back(std::pair("builtin_list_class", "/builtin/list"));
-  meta_data_model.push_back(std::pair("builtin_list_size", "/builtin/list/size"));
-  meta_data_model.push_back(std::pair("builtin_list_item_class", "/builtin/list/item_class"));
-  meta_data_model.push_back(std::pair("builtin_set_class", "/builtin/set"));
-  meta_data_model.push_back(std::pair("builtin_set_size", "/builtin/set/size"));
-  meta_data_model.push_back(std::pair("builtin_set_item", "/builtin/set/item"));
-  meta_data_model.push_back(std::pair("builtin_set_item_class", "/builtin/set/item_class"));
-
-  meta_data_model.push_back(std::pair("invalid_file", "/invalid/file"));
-  meta_data_model.push_back(std::pair("invalid_source_location", "/invalid/clang/SourceLocation"));
-
-  meta_data_model.push_back(std::pair("file_class", "/file"));
-  meta_data_model.push_back(std::pair("file_name", "/file/name"));
-  meta_data_model.push_back(std::pair("file_content", "/file/content"));
-
-  meta_data_model.push_back(std::pair("source_location_class", "/clang/SourceLocation"));
-  meta_data_model.push_back(std::pair("source_location_is_file", "/clang/SourceLocation/is_file"));
-  meta_data_model.push_back(std::pair("source_location_file", "/clang/SourceLocation/file"));
-  meta_data_model.push_back(std::pair("source_location_line", "/clang/SourceLocation/line"));
-  meta_data_model.push_back(std::pair("source_location_column", "/clang/SourceLocation/column"));
-  meta_data_model.push_back(std::pair("source_location_expansion_loc", "/clang/SourceLocation/expansion_loc"));
-  meta_data_model.push_back(std::pair("source_location_spelling_loc", "/clang/SourceLocation/spelling_loc"));
-
-  meta_data_model.push_back(std::pair("source_range_class", "/clang/SourceRange"));
-  meta_data_model.push_back(std::pair("source_range_begin", "/clang/SourceRange/begin"));
-  meta_data_model.push_back(std::pair("source_range_end", "/clang/SourceLocation/end"));
-
-  meta_data_model.push_back(std::pair("qualtype_class", "/clang/QualType"));
-  meta_data_model.push_back(std::pair("qualtype_is_const", "/clang/QualType/is_const"));
-  meta_data_model.push_back(std::pair("qualtype_is_volatile", "/clang/QualType/is_volatile"));
-  meta_data_model.push_back(std::pair("qualtype_is_restrict", "/clang/QualType/is_restrict"));
-  meta_data_model.push_back(std::pair("qualtype_type", "/clang/Qualtype/type"));
-
-  meta_data_model.push_back(std::pair("usr", "/clang/usr"));
-
-  meta_data_model.push_back(std::pair("class_CFG", "clang::CFG"));
-  meta_data_model.push_back(std::pair("cfg", "/clang/cfg"));
-  meta_data_model.push_back(std::pair("cfg_nodes", "/clang/cfg/nodes"));
-  meta_data_model.push_back(std::pair("cfg_entry", "/clang/cfg/entry"));
-  meta_data_model.push_back(std::pair("cfg_exit", "/clang/cfg/exit"));
-  meta_data_model.push_back(std::pair("cfg_indirect_goto_block", "/clang/cfg/indirect_goto_block"));
-  meta_data_model.push_back(std::pair("cfg_try_blocks", "/clang/cfg/try_blocks"));
-  meta_data_model.push_back(std::pair("cfg_is_linear", "/clang/cfg/is_linear"));
-
-  meta_data_model.push_back(std::pair("class_CFGBlock", "clang:CFGBlock"));
-  meta_data_model.push_back(std::pair("cfg_block_parent", "/clang/cfg_block/parents"));
-  meta_data_model.push_back(std::pair("cfg_block_succs", "/clang/cfg_block/succs"));
-  meta_data_model.push_back(std::pair("cfg_block_preds", "/clang/cfg_block/preds"));
-  meta_data_model.push_back(std::pair("cfg_block_label", "/clang/cfg_block/label"));
-  meta_data_model.push_back(std::pair("cfg_block_terminator_stmt", "/clang/cfg_block/terminator_stmt"));
-  meta_data_model.push_back(std::pair("cfg_block_terminator_kind", "/clang/cfg_block/terminator_kind"));
-  meta_data_model.push_back(std::pair("cfg_block_terminator_condition", "/clang/cfg_block/terminator_condition"));
-  meta_data_model.push_back(std::pair("cfg_block_loop_target", "/clang/cfg_block/loop_target"));
-  meta_data_model.push_back(std::pair("cfg_block_has_no_return_element", "/clang/cfg_block/has_no_return_element"));
-
-  meta_data_model.push_back(std::pair("class_CFGElement", "clang::CFGElement"));
-  meta_data_model.push_back(std::pair("class_CFGCleanupFunction", "clang::CFGCleanupFunction"));
-  meta_data_model.push_back(std::pair("class_CFGImplicitDtor", "clang::CFGImplicitDtor"));
-  meta_data_model.push_back(std::pair("class_CFGInitializer", "clang::CFGInitializer"));
-  meta_data_model.push_back(std::pair("class_CFGLifetimeEnds", "clang::CFGLifetimeEnds"));
-  meta_data_model.push_back(std::pair("class_CFGLoopExit", "clang::CFGLoopExit"));
-  meta_data_model.push_back(std::pair("class_CFGNewAllocator", "clang::CFGNewAllocator"));
-  meta_data_model.push_back(std::pair("class_CFGScopeBegin", "clang::CFGScopeBegin"));
-  meta_data_model.push_back(std::pair("class_CFGScopeEnd", "clang::CFGScopeEnd"));
-  meta_data_model.push_back(std::pair("class_CFGStmt", "clang::CFGStmt"));
-  meta_data_model.push_back(std::pair("class_CFGAutomaticObjDtor", "clang::CFGAutomaticObjDtor"));
-  meta_data_model.push_back(std::pair("class_CFGBaseDtor", "clang::CFGBaseDtor"));
-  meta_data_model.push_back(std::pair("class_CFGDeleteDtor", "clang::CFGDeleteDtor"));
-  meta_data_model.push_back(std::pair("class_CFGMemberDtor", "clang::CFGMemberDtor"));
-  meta_data_model.push_back(std::pair("class_CFGTemporaryDtor", "clang::CFGTemporaryDtor"));
-  meta_data_model.push_back(std::pair("class_CFGCXXRecordTypedCall", "clang::CFGCXXRecordTypedCall"));
-  meta_data_model.push_back(std::pair("class_CFGConstructor", "clang::CFGConstructor"));
-
-  meta_data_model.push_back(std::pair("cfg_element_trigger_stmt", "/clang/cfg_element/trigger_stmt"));
-  meta_data_model.push_back(std::pair("cfg_element_var_decl", "/clang/cfg_element/var_decl"));
-  meta_data_model.push_back(std::pair("cfg_element_alloc_expr", "/clang/cfg_element/alloc_expr"));
-  meta_data_model.push_back(std::pair("cfg_element_loop_stmt", "/clang/cfg_element/loop_stmt"));
-  meta_data_model.push_back(std::pair("cfg_element_stmt", "/clang/cfg_element/stmt"));
-  meta_data_model.push_back(std::pair("cfg_element_ctor_context", "/clang/cfg_element/ctor_context"));
-  meta_data_model.push_back(std::pair("cfg_element_dtor_decl", "/clang/cfg_element/dtor_decl"));
-  meta_data_model.push_back(std::pair("cfg_element_is_no_return", "/clang/cfg_element/is_no_return"));
-  meta_data_model.push_back(std::pair("cfg_element_init", "/clang/cfg_element/init"));
-  meta_data_model.push_back(std::pair("cfg_element_cxx_record_decl", "/clang/cfg_element/cxx_record_decl"));
-  meta_data_model.push_back(std::pair("cfg_element_delete_expr", "/clang/cfg_element/delete_expr"));
-  meta_data_model.push_back(std::pair("cfg_element_base_specifier", "/clang/cfg_element/base_specifier"));
-  meta_data_model.push_back(std::pair("cfg_element_field_decl", "/clang/cfg_element/field_decl"));
-  meta_data_model.push_back(std::pair("cfg_element_bind_temporary_expr", "/clang/cfg_element/bind_temporary_expr"));
-  meta_data_model.push_back(std::pair("cfg_element_function_decl", "/clang/cfg_element/function_decl"));
-
-  return meta_data_model;
+  return result;
 }
 
-}  // namespace
+std::unordered_map<const clang::EnumConstantDecl *, uint64_t>
+Model::GetEnumConstantToIndex() {
+  std::unordered_map<const clang::EnumConstantDecl *, uint64_t> result;
 
-Model::Model(clang::ASTContext &ctx_, Index &&index_)
-    : ast_ctx(ctx_), index(std::move(index_)), meta_data_model(build_meta_data_model()) {}
+  uint64_t idx = 0;
+  for (const auto &[_, enum_constant] : enum_constants) {
+    result[enum_constant] = idx++;
+  }
 
-std::string Model::entity_name(const clang::CXXMethodDecl *decl) {
-  return entity_name_impl("method", method_entity_map, decl);
-}
-
-std::string Model::entity_name(const clang::CXXRecordDecl *decl) {
-  return entity_name_impl("class", class_entity_map, decl);
-}
-
-std::string Model::entity_name(const clang::EnumDecl *decl) { return entity_name_impl("enum", enum_entity_map, decl); }
-
-std::string Model::entity_name(const clang::EnumConstantDecl *decl) {
-  return entity_name_impl("enum_constant", enum_constant_entity_map, decl);
+  return result;
 }
 
 }  // namespace arboretum

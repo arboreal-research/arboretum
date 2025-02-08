@@ -1,72 +1,368 @@
 #pragma once
 
 #include <cstdint>
-
-struct Id;
-struct Value;
+#include <vector>
 
 extern "C" {
+bool arboretum_connect(const char* addr);
+uint64_t arboretum_subgraph_id();
+bool arboretum_finalize();
 
-/*
-  _____      _
- /  ___|    | |
- \ `--.  ___| |_ _   _ _ __
-  `--. \/ _ \ __| | | | '_ \
- /\__/ /  __/ |_| |_| | |_) |
- \____/ \___|\__|\__,_| .__/
-                      | |
-                      |_|
-*/
-
-uint8_t arboretum_connect(const char *addr);
-
-void arboretum_stop();
-
-/*
-  _   _           _
- | \ | |         | |
- |  \| | ___   __| | ___
- | . ` |/ _ \ / _` |/ _ \
- | |\  | (_) | (_| |  __/
- \_| \_/\___/ \__,_|\___|
-
-*/
-
-void arboretum_destroy_id(Id *ulid);
-
-Value *arboretum_create_value_unsigned(uint64_t v);
-Value *arboretum_create_value_signed(int64_t v);
-Value *arboretum_create_value_double(double d);
-Value *arboretum_create_value_string(const char *s);
-
-Id *arboretum_create_named_node(const char *name);
-Id *arboretum_create_named_node_with_props(const char *name, Value *props);
-
-Id *arboretum_create_named_node_with_id(const char *name, uint64_t id);
-Id *arboretum_create_named_node_with_id_props(const char *name, uint64_t id,
-                                              Value *props);
-
-Id *arboretum_create_nameless_node();
-Id *arboretum_create_nameless_node_with_props(Value *props);
-
-Id *arboretum_create_nameless_node_with_id(uint64_t id);
-Id *arboretum_create_nameless_node_with_id_props(uint64_t id, Value *props);
-
-// Ulid *arboretum_get_named_node(const char *name);
-
-/*
-
-  _____    _
- |  ___|  | |
- | |__  __| | __ _  ___
- |  __|/ _` |/ _` |/ _ \
- | |__| (_| | (_| |  __/
- \____/\__,_|\__, |\___|
-              __/ |
-             |___/
-*/
-
-void arboretum_create_edge(const Id *sub, const Id *pred, const Id *obj);
-void arboretum_create_edge_with_props(const Id *sub, const Id *pred,
-                                      const Id *obj, Value *props);
+//// BEGIN ARBORETUM GENERATED CODE ////
+void arboretum_emit_AbstractConditionalOperator(uint64_t id, uint64_t getCond, uint64_t getTrueExpr, uint64_t getFalseExpr, uint64_t getQuestionLoc, uint64_t getColonLoc);
+void arboretum_emit_AccessSpecDecl(uint64_t id, uint64_t getAccessSpecifierLoc, uint64_t getColonLoc, uint64_t getSourceRange);
+void arboretum_emit_AddrLabelExpr(uint64_t id, uint64_t getAmpAmpLoc, uint64_t getLabelLoc, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getLabel);
+void arboretum_emit_AdjustedType(uint64_t id, uint64_t getOriginalType, uint64_t getAdjustedType, bool isSugared, uint64_t desugar);
+void arboretum_emit_ArrayInitIndexExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_ArrayInitLoopExpr(uint64_t id, uint64_t getCommonExpr, uint64_t getSubExpr, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_ArraySubscriptExpr(uint64_t id, uint64_t getLHS, uint64_t getRHS, uint64_t getBase, uint64_t getIdx, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getRBracketLoc, uint64_t getExprLoc);
+void arboretum_emit_ArrayType(uint64_t id, uint64_t getElementType, uint64_t getSizeModifier, uint32_t getIndexTypeCVRQualifiers);
+void arboretum_emit_ArrayTypeTraitExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getTrait, uint64_t getQueriedType, uint64_t getDimensionExpression);
+void arboretum_emit_AsTypeExpr(uint64_t id, uint64_t getSrcExpr, uint64_t getBuiltinLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_AsmStmt(uint64_t id, uint64_t getAsmLoc, bool isSimple, bool isVolatile, uint64_t getBeginLoc, uint64_t getEndLoc, uint32_t getNumOutputs, uint32_t getNumPlusOperands, uint32_t getNumInputs, uint32_t getNumClobbers);
+void arboretum_emit_AtomicExpr(uint64_t id, uint64_t getPtr, uint64_t getOrder, uint64_t getScope, uint64_t getVal1, uint64_t getOrderFail, uint64_t getVal2, uint64_t getWeak, uint64_t getValueType, uint64_t getOp, const char* getOpAsString, uint32_t getNumSubExprs, bool isVolatile, bool isCmpXChg, bool isOpenCL, uint64_t getBuiltinLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_AtomicType(uint64_t id, uint64_t getValueType, bool isSugared, uint64_t desugar);
+void arboretum_emit_AttributedStmt(uint64_t id, uint64_t getAttrLoc, uint64_t getSubStmt, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_AttributedStmt_getAttrs(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_AttributedType(uint64_t id, uint64_t getAttrKind, uint64_t getModifiedType, uint64_t getEquivalentType, bool isSugared, uint64_t desugar, bool isQualifier, bool isMSTypeSpec, bool isWebAssemblyFuncrefSpec, bool isCallingConv);
+void arboretum_emit_AutoType(uint64_t id, uint64_t getTypeConstraintConcept, bool isConstrained, bool isDecltypeAuto, bool isGNUAutoType, uint64_t getKeyword);
+void arboretum_emit_BTFTagAttributedType(uint64_t id, uint64_t getWrappedType, uint64_t getAttr, bool isSugared, uint64_t desugar);
+void arboretum_emit_BaseUsingDecl(uint64_t id, uint32_t shadow_size);
+void arboretum_emit_BaseUsingDecl_shadows(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_BinaryConditionalOperator(uint64_t id, uint64_t getCommon, uint64_t getOpaqueValue, uint64_t getCond, uint64_t getTrueExpr, uint64_t getFalseExpr, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_BinaryOperator(uint64_t id, uint64_t getExprLoc, uint64_t getOperatorLoc, uint64_t getOpcode, uint64_t getLHS, uint64_t getRHS, uint64_t getBeginLoc, uint64_t getEndLoc, const char* getOpcodeStr, bool isPtrMemOp, bool isMultiplicativeOp, bool isAdditiveOp, bool isShiftOp, bool isBitwiseOp, bool isRelationalOp, bool isEqualityOp, bool isComparisonOp, bool isCommaOp, bool isLogicalOp, bool isAssignmentOp, bool isCompoundAssignmentOp, bool isShiftAssignOp, bool hasStoredFPFeatures);
+void arboretum_emit_BindingDecl(uint64_t id, uint64_t getBinding, uint64_t getDecomposedDecl, uint64_t getHoldingVar);
+void arboretum_emit_BitIntType(uint64_t id, bool isUnsigned, bool isSigned, uint32_t getNumBits, bool isSugared, uint64_t desugar);
+void arboretum_emit_BlockDecl(uint64_t id, uint64_t getCaretLocation, bool isVariadic, uint64_t getCompoundBody, uint64_t getBody, bool param_empty, uint64_t param_size, uint32_t getNumParams, bool hasCaptures, uint32_t getNumCaptures, bool capturesCXXThis, bool blockMissingReturnType, bool isConversionFromLambda, bool doesNotEscape, bool canAvoidCopyToHeap, uint32_t getBlockManglingNumber, uint64_t getBlockManglingContextDecl, uint64_t getSourceRange);
+void arboretum_emit_BlockDecl_parameters(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_BlockExpr(uint64_t id, uint64_t getBlockDecl, uint64_t getCaretLocation, uint64_t getBody, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getFunctionType);
+void arboretum_emit_BlockPointerType(uint64_t id, uint64_t getPointeeType, bool isSugared, uint64_t desugar);
+void arboretum_emit_BreakStmt(uint64_t id, uint64_t getBreakLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_BuiltinBitCastExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_BuiltinTemplateDecl(uint64_t id, uint64_t getSourceRange, uint64_t getBuiltinTemplateKind);
+void arboretum_emit_BuiltinType(uint64_t id, uint64_t getKind, bool isSugared, uint64_t desugar, bool isInteger, bool isSignedInteger, bool isUnsignedInteger, bool isFloatingPoint, bool isSVEBool, bool isSVECount, bool isPlaceholderType, bool isNonOverloadPlaceholderType);
+void arboretum_emit_CFG(uint64_t id, uint64_t entry_block_id, uint64_t exit_block_id, bool is_linear, uint64_t indirect_goto);
+void arboretum_emit_CFGAutomaticObjDtor(uint64_t id, uint64_t getDestructorDecl, uint64_t getTriggerStmt, uint64_t getVarDecl);
+void arboretum_emit_CFGBaseDtor(uint64_t id, uint64_t getDestructorDecl, uint64_t getBaseSpecifier);
+void arboretum_emit_CFGBlock(uint64_t id, uint64_t terminator_stmt, uint64_t terminator_kind, uint64_t terminator_cond, uint64_t label_stmt, uint64_t loop_target, bool has_no_return_element);
+void arboretum_emit_CFGBlock_elements(uint64_t CFGBlock_id, uint64_t CFGElement_id);
+void arboretum_emit_CFGCXXRecordTypedCall(uint64_t id, uint64_t getStmt, uint64_t getConstructionContext);
+void arboretum_emit_CFGCleanupFunction(uint64_t id, uint64_t getVarDecl, uint64_t getFunctionDecl);
+void arboretum_emit_CFGConstructor(uint64_t id, uint64_t getStmt, uint64_t getConstructionContext);
+void arboretum_emit_CFGDeleteDtor(uint64_t id, uint64_t getDestructorDecl, uint64_t getCXXRecordDecl, uint64_t getDeleteExpr);
+void arboretum_emit_CFGElement(uint64_t id, uint64_t kind);
+void arboretum_emit_CFGInitializer(uint64_t id, uint64_t getInitializer);
+void arboretum_emit_CFGLifetimeEnds(uint64_t id, uint64_t getTriggerStmt, uint64_t getVarDecl);
+void arboretum_emit_CFGLoopExit(uint64_t id, uint64_t getLoopStmt);
+void arboretum_emit_CFGMemberDtor(uint64_t id, uint64_t getDestructorDecl, uint64_t getFieldDecl);
+void arboretum_emit_CFGNewAllocator(uint64_t id, uint64_t getAllocatorExpr);
+void arboretum_emit_CFGScopeBegin(uint64_t id, uint64_t getTriggerStmt, uint64_t getVarDecl);
+void arboretum_emit_CFGScopeEnd(uint64_t id, uint64_t getTriggerStmt, uint64_t getVarDecl);
+void arboretum_emit_CFGStmt(uint64_t id, uint64_t getStmt);
+void arboretum_emit_CFGTemporaryDtor(uint64_t id, uint64_t getDestructorDecl, uint64_t getBindTemporaryExpr);
+void arboretum_emit_CFG_blocks(uint64_t CFG_id, uint64_t CFGBlock_id);
+void arboretum_emit_CFG_edges(uint64_t CFGBlock_src, uint64_t CFGBlock_dst);
+void arboretum_emit_CFG_try_blocks(uint64_t CFG_id, uint64_t CFGBlock_id);
+void arboretum_emit_CStyleCastExpr(uint64_t id, uint64_t getLParenLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CUDAKernelCallExpr(uint64_t id, uint64_t getConfig);
+void arboretum_emit_CXXAddrspaceCastExpr(uint64_t id);
+void arboretum_emit_CXXBindTemporaryExpr(uint64_t id, uint64_t getSubExpr, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CXXBoolLiteralExpr(uint64_t id, bool getValue, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getLocation);
+void arboretum_emit_CXXCatchStmt(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getCatchLoc, uint64_t getExceptionDecl, uint64_t getCaughtType, uint64_t getHandlerBlock);
+void arboretum_emit_CXXConstCastExpr(uint64_t id);
+void arboretum_emit_CXXConstructExpr(uint64_t id, uint64_t getConstructor, uint64_t getLocation, bool isElidable, bool hadMultipleCandidates, bool isListInitialization, bool isStdInitListInitialization, bool requiresZeroInitialization, uint64_t getConstructionKind, uint32_t getNumArgs, bool isImmediateEscalating, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getParenOrBraceRange);
+void arboretum_emit_CXXConstructorDecl(uint64_t id, bool isExplicit, uint32_t getNumCtorInitializers, bool isDelegatingConstructor, bool isDefaultConstructor, bool isCopyConstructor, bool isMoveConstructor, bool isCopyOrMoveConstructor, bool isSpecializationCopyingObject, bool isInheritingConstructor, uint64_t getCanonicalDecl);
+void arboretum_emit_CXXConversionDecl(uint64_t id, bool isExplicit, uint64_t getConversionType, bool isLambdaToBlockPointerConversion, uint64_t getCanonicalDecl);
+void arboretum_emit_CXXDeductionGuideDecl(uint64_t id, bool isExplicit, uint64_t getDeducedTemplate, uint64_t getCorrespondingConstructor, uint64_t getDeductionCandidateKind);
+void arboretum_emit_CXXDefaultArgExpr(uint64_t id, uint64_t getParam, bool hasRewrittenInit, uint64_t getExpr, uint64_t getRewrittenExpr, uint64_t getAdjustedRewrittenExpr, uint64_t getUsedLocation, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getExprLoc);
+void arboretum_emit_CXXDefaultInitExpr(uint64_t id, bool hasRewrittenInit, uint64_t getField, uint64_t getExpr, uint64_t getRewrittenExpr, uint64_t getUsedLocation, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CXXDeleteExpr(uint64_t id, bool isGlobalDelete, bool isArrayForm, bool isArrayFormAsWritten, bool doesUsualArrayDeleteWantSize, uint64_t getOperatorDelete, uint64_t getArgument, uint64_t getDestroyedType, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CXXDependentScopeMemberExpr(uint64_t id, bool isImplicitAccess, uint64_t getBaseType, bool isArrow, uint64_t getOperatorLoc, uint64_t getFirstQualifierFoundInScope, uint64_t getMemberLoc, uint64_t getTemplateKeywordLoc, uint64_t getLAngleLoc, uint64_t getRAngleLoc, bool hasTemplateKeyword, bool hasExplicitTemplateArgs, uint32_t getNumTemplateArgs, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CXXDestructorDecl(uint64_t id, uint64_t getOperatorDelete, uint64_t getOperatorDeleteThisArg, uint64_t getCanonicalDecl);
+void arboretum_emit_CXXDynamicCastExpr(uint64_t id, bool isAlwaysNull);
+void arboretum_emit_CXXFoldExpr(uint64_t id, uint64_t getCallee, uint64_t getLHS, uint64_t getRHS, bool isRightFold, bool isLeftFold, uint64_t getPattern, uint64_t getInit, uint64_t getLParenLoc, uint64_t getRParenLoc, uint64_t getEllipsisLoc, uint64_t getOperator, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CXXForRangeStmt(uint64_t id, uint64_t getInit, uint64_t getLoopVariable, uint64_t getRangeInit, uint64_t getRangeStmt, uint64_t getBeginStmt, uint64_t getEndStmt, uint64_t getCond, uint64_t getInc, uint64_t getLoopVarStmt, uint64_t getBody, uint64_t getForLoc, uint64_t getCoawaitLoc, uint64_t getColonLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CXXFunctionalCastExpr(uint64_t id, uint64_t getLParenLoc, uint64_t getRParenLoc, bool isListInitialization, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CXXInheritedCtorInitExpr(uint64_t id, uint64_t getConstructor, bool constructsVBase, uint64_t getConstructionKind, bool inheritedFromVBase, uint64_t getLocation, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CXXMemberCallExpr(uint64_t id, uint64_t getImplicitObjectArgument, uint64_t getObjectType, uint64_t getMethodDecl, uint64_t getRecordDecl, uint64_t getExprLoc);
+void arboretum_emit_CXXMethodDecl(uint64_t id, bool isStatic, bool isInstance, bool isExplicitObjectMemberFunction, bool isImplicitObjectMemberFunction, bool isConst, bool isVolatile, bool isVirtual, bool isCopyAssignmentOperator, bool isMoveAssignmentOperator, uint64_t getCanonicalDecl, uint64_t getMostRecentDecl, uint32_t size_overridden_methods, uint64_t getParent, uint64_t getThisType, uint64_t getFunctionObjectParameterReferenceType, uint64_t getFunctionObjectParameterType, uint32_t getNumExplicitParams, uint64_t getRefQualifier, bool hasInlineBody, bool isLambdaStaticInvoker);
+void arboretum_emit_CXXMethodDecl_overridden_methods(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_CXXNamedCastExpr(uint64_t id, uint64_t getOperatorLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getAngleBrackets);
+void arboretum_emit_CXXNewExpr(uint64_t id, uint64_t getAllocatedType, uint64_t getOperatorNew, uint64_t getOperatorDelete, bool isArray, uint32_t getNumPlacementArgs, bool isParenTypeId, uint64_t getTypeIdParens, bool isGlobalNew, bool hasInitializer, uint64_t getInitializationStyle, uint64_t getInitializer, uint64_t getConstructExpr, bool passAlignment, bool doesUsualArrayDeleteWantSize, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getDirectInitRange, uint64_t getSourceRange);
+void arboretum_emit_CXXNoexceptExpr(uint64_t id, uint64_t getOperand, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getSourceRange, bool getValue);
+void arboretum_emit_CXXNullPtrLiteralExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getLocation);
+void arboretum_emit_CXXOperatorCallExpr(uint64_t id, uint64_t getOperator, bool isAssignmentOp, bool isComparisonOp, bool isInfixBinaryOp, uint64_t getOperatorLoc, uint64_t getExprLoc, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getSourceRange);
+void arboretum_emit_CXXParenListInitExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getInitLoc, uint64_t getSourceRange, uint64_t getArrayFiller, uint64_t getInitializedFieldInUnion);
+void arboretum_emit_CXXParenListInitExpr_getInitExprs(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_CXXParenListInitExpr_getUserSpecifiedInitExprs(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_CXXPseudoDestructorExpr(uint64_t id, uint64_t getBase, bool hasQualifier, bool isArrow, uint64_t getOperatorLoc, uint64_t getColonColonLoc, uint64_t getTildeLoc, uint64_t getDestroyedType, uint64_t getDestroyedTypeLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CXXRecordDecl(uint64_t id, uint64_t getCanonicalDecl, uint64_t getPreviousDecl, uint64_t getMostRecentDecl, uint64_t getDefinition, bool hasDefinition, bool isDynamicClass, bool mayBeDynamicClass, bool mayBeNonDynamicClass, bool isParsingBaseSpecifiers, uint32_t getODRHash, uint32_t getNumBases, uint32_t getNumVBases, bool hasAnyDependentBases, bool hasFriends, bool hasSimpleCopyConstructor, bool hasSimpleMoveConstructor, bool hasSimpleCopyAssignment, bool hasSimpleMoveAssignment, bool hasSimpleDestructor, bool hasDefaultConstructor, bool needsImplicitDefaultConstructor, bool hasUserDeclaredConstructor, bool hasUserProvidedDefaultConstructor, bool hasUserDeclaredCopyConstructor, bool needsImplicitCopyConstructor, bool needsOverloadResolutionForCopyConstructor, bool implicitCopyConstructorHasConstParam, bool hasCopyConstructorWithConstParam, bool hasUserDeclaredMoveOperation, bool hasUserDeclaredMoveConstructor, bool hasMoveConstructor, bool needsImplicitMoveConstructor, bool needsOverloadResolutionForMoveConstructor, bool hasUserDeclaredCopyAssignment, bool needsImplicitCopyAssignment, bool needsOverloadResolutionForCopyAssignment, bool implicitCopyAssignmentHasConstParam, bool hasCopyAssignmentWithConstParam, bool hasUserDeclaredMoveAssignment, bool hasMoveAssignment, bool needsImplicitMoveAssignment, bool needsOverloadResolutionForMoveAssignment, bool hasUserDeclaredDestructor, bool needsImplicitDestructor, bool needsOverloadResolutionForDestructor, bool isLambda, bool isGenericLambda, bool lambdaIsDefaultConstructibleAndAssignable, uint64_t getLambdaCallOperator, uint64_t getDependentLambdaCallOperator, bool isCapturelessLambda, bool isAggregate, bool hasInClassInitializer, bool hasUninitializedReferenceMember, bool isPOD, bool isCLike, bool isEmpty, bool hasInitMethod, bool hasPrivateFields, bool hasProtectedFields, bool hasDirectFields, bool isPolymorphic, bool isAbstract, bool isStandardLayout, bool isCXX11StandardLayout, bool hasMutableFields, bool hasVariantMembers, bool hasTrivialDefaultConstructor, bool hasNonTrivialDefaultConstructor, bool hasConstexprNonCopyMoveConstructor, bool defaultedDefaultConstructorIsConstexpr, bool hasConstexprDefaultConstructor, bool hasTrivialCopyConstructor, bool hasTrivialCopyConstructorForCall, bool hasNonTrivialCopyConstructor, bool hasNonTrivialCopyConstructorForCall, bool hasTrivialMoveConstructor, bool hasTrivialMoveConstructorForCall, bool hasNonTrivialMoveConstructor, bool hasNonTrivialMoveConstructorForCall, bool hasTrivialCopyAssignment, bool hasNonTrivialCopyAssignment, bool hasTrivialMoveAssignment, bool hasNonTrivialMoveAssignment, bool defaultedDestructorIsConstexpr, bool hasConstexprDestructor, bool hasTrivialDestructor, bool hasTrivialDestructorForCall, bool hasNonTrivialDestructor, bool hasNonTrivialDestructorForCall, bool allowConstDefaultInit, bool hasIrrelevantDestructor, bool hasNonLiteralTypeFieldsOrBases, bool hasInheritedConstructor, bool hasInheritedAssignment, bool isTriviallyCopyable, bool isTriviallyCopyConstructible, bool isTrivial, bool isLiteral, bool isStructural, uint64_t getInstantiatedFromMemberClass, uint64_t getDescribedClassTemplate, uint64_t getTemplateSpecializationKind, uint64_t getTemplateInstantiationPattern, uint64_t getDestructor, bool isAnyDestructorNoReturn, uint64_t isLocalClass, bool mayBeAbstract, bool isEffectivelyFinal, uint32_t getDeviceLambdaManglingNumber, uint64_t getMSVtorDispMode, bool isDependentLambda, bool isNeverDependentLambda, uint32_t getLambdaDependencyKind);
+void arboretum_emit_CXXRecordDecl_ctors(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_CXXRecordDecl_friends(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_CXXRecordDecl_getLambdaExplicitTemplateParameters(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_CXXRecordDecl_methods(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_CXXReinterpretCastExpr(uint64_t id);
+void arboretum_emit_CXXRewrittenBinaryOperator(uint64_t id, uint64_t getSemanticForm, bool isReversed, uint64_t getOperator, uint64_t getOpcode, const char* getOpcodeStr, bool isComparisonOp, bool isAssignmentOp, uint64_t getLHS, uint64_t getRHS, uint64_t getOperatorLoc, uint64_t getExprLoc, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getSourceRange);
+void arboretum_emit_CXXScalarValueInitExpr(uint64_t id, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CXXStaticCastExpr(uint64_t id);
+void arboretum_emit_CXXStdInitializerListExpr(uint64_t id, uint64_t getSubExpr, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getSourceRange);
+void arboretum_emit_CXXTemporaryObjectExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CXXThisExpr(uint64_t id, uint64_t getLocation, uint64_t getBeginLoc, uint64_t getEndLoc, bool isImplicit);
+void arboretum_emit_CXXThrowExpr(uint64_t id, uint64_t getSubExpr, uint64_t getThrowLoc, bool isThrownVariableInScope, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CXXTryStmt(uint64_t id, uint64_t getBeginLoc, uint64_t getTryLoc, uint64_t getEndLoc, uint64_t getTryBlock, uint32_t getNumHandlers);
+void arboretum_emit_CXXTypeidExpr(uint64_t id, bool isPotentiallyEvaluated, bool isTypeOperand, uint64_t getExprOperand, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getSourceRange);
+void arboretum_emit_CXXUnresolvedConstructExpr(uint64_t id, uint64_t getTypeAsWritten, uint64_t getLParenLoc, uint64_t getRParenLoc, bool isListInitialization, uint32_t getNumArgs, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CXXUnresolvedConstructExpr_arguments(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_CXXUuidofExpr(uint64_t id, bool isTypeOperand, uint64_t getExprOperand, uint64_t getGuidDecl, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getSourceRange);
+void arboretum_emit_CallExpr(uint64_t id, uint64_t getCallee, uint64_t getADLCallKind, bool usesADL, bool hasStoredFPFeatures, uint64_t getCalleeDecl, uint64_t getDirectCallee, uint32_t getNumArgs, uint32_t getBuiltinCallee, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc, bool isCallToStdMove);
+void arboretum_emit_CapturedDecl(uint64_t id, uint64_t getBody, bool isNothrow, uint32_t getNumParams, uint64_t getContextParam, uint32_t getContextParamPosition);
+void arboretum_emit_CapturedDecl_parameters(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_CapturedStmt(uint64_t id, uint64_t getCapturedStmt, uint64_t getCapturedDecl, uint64_t getCapturedRegionKind, uint64_t getCapturedRecordDecl, uint32_t capture_size, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getSourceRange);
+void arboretum_emit_CapturedStmt_capture_inits(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_CaseStmt(uint64_t id, bool caseStmtIsGNURange, uint64_t getCaseLoc, uint64_t getEllipsisLoc, uint64_t getLHS, uint64_t getRHS, uint64_t getSubStmt, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CastExpr(uint64_t id, uint64_t getCastKind, uint64_t getSubExpr, uint64_t getSubExprAsWritten, uint64_t getConversionFunction, bool path_empty, uint32_t path_size, bool hasStoredFPFeatures, bool changesVolatileQualification);
+void arboretum_emit_CharacterLiteral(uint64_t id, uint64_t getLocation, uint64_t getKind, uint64_t getBeginLoc, uint64_t getEndLoc, uint32_t getValue);
+void arboretum_emit_ChooseExpr(uint64_t id, bool isConditionTrue, bool isConditionDependent, uint64_t getChosenSubExpr, uint64_t getCond, uint64_t getLHS, uint64_t getRHS, uint64_t getBuiltinLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_ClassTemplateDecl(uint64_t id, uint64_t getTemplatedDecl, bool isThisDeclarationADefinition, uint64_t getCanonicalDecl, uint64_t getPreviousDecl, uint64_t getMostRecentDecl, uint64_t getInstantiatedFromMemberTemplate);
+void arboretum_emit_ClassTemplatePartialSpecializationDecl(uint64_t id, bool hasAssociatedConstraints, uint64_t getInstantiatedFromMember, uint64_t getInstantiatedFromMemberTemplate, uint64_t getInjectedSpecializationType);
+void arboretum_emit_ClassTemplateSpecializationDecl(uint64_t id, uint64_t getSpecializedTemplate, uint64_t getSpecializationKind, bool isExplicitSpecialization, bool isClassScopeExplicitSpecialization, bool isExplicitInstantiationOrSpecialization, uint64_t getPointOfInstantiation, uint64_t getExternLoc, uint64_t getTemplateKeywordLoc, uint64_t getSourceRange);
+void arboretum_emit_CoawaitExpr(uint64_t id, bool isImplicit);
+void arboretum_emit_ComplexType(uint64_t id, uint64_t getElementType, bool isSugared, uint64_t desugar);
+void arboretum_emit_CompoundAssignOperator(uint64_t id, uint64_t getComputationLHSType, uint64_t getComputationResultType);
+void arboretum_emit_CompoundLiteralExpr(uint64_t id, uint64_t getInitializer, bool isFileScope, uint64_t getLParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CompoundStmt(uint64_t id, bool body_empty, uint32_t size, bool hasStoredFPFeatures, uint64_t body_front, uint64_t body_back, uint64_t getStmtExprResult, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getLBracLoc, uint64_t getRBracLoc);
+void arboretum_emit_CompoundStmt_body(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_ConceptDecl(uint64_t id, uint64_t getConstraintExpr, uint64_t getSourceRange, bool isTypeConcept, uint64_t getCanonicalDecl);
+void arboretum_emit_ConceptSpecializationExpr(uint64_t id, uint64_t getNamedConcept, bool hasExplicitTemplateArgs, uint64_t getConceptNameLoc, uint64_t getTemplateKWLoc, uint64_t getFoundDecl, uint64_t getSpecializationDecl, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getExprLoc);
+void arboretum_emit_ConditionalOperator(uint64_t id, uint64_t getCond, uint64_t getTrueExpr, uint64_t getFalseExpr, uint64_t getLHS, uint64_t getRHS, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_ConstantArrayType(uint64_t id, uint64_t getSizeExpr, bool isSugared, uint64_t desugar);
+void arboretum_emit_ConstantExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getResultAPValueKind, uint64_t getResultStorageKind, bool isImmediateInvocation, bool hasAPValueResult);
+void arboretum_emit_ConstantMatrixType(uint64_t id, uint32_t getNumRows, uint32_t getNumColumns, uint32_t getNumElementsFlattened);
+void arboretum_emit_ConstructorUsingShadowDecl(uint64_t id, uint64_t getIntroducer, uint64_t getParent, uint64_t getNominatedBaseClassShadowDecl, uint64_t getConstructedBaseClassShadowDecl, uint64_t getNominatedBaseClass, uint64_t getConstructedBaseClass, bool constructsVirtualBase);
+void arboretum_emit_ContinueStmt(uint64_t id, uint64_t getContinueLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_ConvertVectorExpr(uint64_t id, uint64_t getSrcExpr, uint64_t getBuiltinLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CoreturnStmt(uint64_t id, uint64_t getKeywordLoc, uint64_t getOperand, uint64_t getPromiseCall, bool isImplicit, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CoroutineBodyStmt(uint64_t id, bool hasDependentPromiseType, uint64_t getBody, uint64_t getPromiseDeclStmt, uint64_t getPromiseDecl, uint64_t getInitSuspendStmt, uint64_t getFinalSuspendStmt, uint64_t getExceptionHandler, uint64_t getFallthroughHandler, uint64_t getAllocate, uint64_t getDeallocate, uint64_t getResultDecl, uint64_t getReturnValueInit, uint64_t getReturnValue, uint64_t getReturnStmt, uint64_t getReturnStmtOnAllocFailure, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CoroutineBodyStmt_getParamMoves(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_CoroutineSuspendExpr(uint64_t id, uint64_t getCommonExpr, uint64_t getOpaqueValue, uint64_t getReadyExpr, uint64_t getSuspendExpr, uint64_t getResumeExpr, uint64_t getOperand, uint64_t getKeywordLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_CoyieldExpr(uint64_t id);
+void arboretum_emit_DecayedType(uint64_t id, uint64_t getDecayedType, uint64_t getPointeeType);
+void arboretum_emit_Decl(uint64_t id, uint64_t getSourceRange, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getLocation, uint64_t getNextDeclInContext, uint64_t getNonClosureContext, uint64_t getTranslationUnitDecl, bool isInAnonymousNamespace, bool isInStdNamespace, bool isFileContextDecl, uint64_t getAccess, uint64_t getAccessUnsafe, bool hasAttrs, bool isInvalidDecl, bool isImplicit, bool isReferenced, bool isThisDeclarationReferenced, bool isTopLevelDeclInObjCContainer, bool isModulePrivate, bool isInExportDeclContext, bool isInvisibleOutsideTheOwningModule, bool isInAnotherModuleUnit, bool isDiscardedInGlobalModuleFragment, bool shouldSkipCheckingODR, bool hasDefiningAttr, uint64_t getDefiningAttr, bool isWeakImported, bool isFromASTFile, uint32_t getGlobalID, uint32_t getOwningModuleID, bool hasOwningModule, bool isUnconditionallyVisible, bool isReachable, uint64_t getModuleOwnershipKind, uint32_t getIdentifierNamespace, bool hasTagIdentifierNamespace, bool isOutOfLine, bool isTemplated, uint32_t getTemplateDepth, bool isDefinedOutsideFunctionOrMethod, uint64_t getCanonicalDecl, bool isCanonicalDecl, uint64_t getPreviousDecl, bool isFirstDecl, uint64_t getMostRecentDecl, uint64_t getBody, bool hasBody, uint64_t getBodyRBrace, bool isTemplateParameter, bool isTemplateParameterPack, bool isParameterPack, bool isTemplateDecl, bool isFunctionOrFunctionTemplate, uint64_t getDescribedTemplate, uint64_t getAsFunction, bool isLocalExternDecl, uint64_t getFriendObjectKind, int64_t getID, bool isFunctionPointerType);
+void arboretum_emit_DeclRefExpr(uint64_t id, uint64_t getDecl, uint64_t getLocation, uint64_t getBeginLoc, uint64_t getEndLoc, bool hasQualifier, uint64_t getFoundDecl, bool hasTemplateKWAndArgsInfo, uint64_t getTemplateKeywordLoc, uint64_t getLAngleLoc, uint64_t getRAngleLoc, bool hasTemplateKeyword, bool hasExplicitTemplateArgs, uint32_t getNumTemplateArgs, bool hadMultipleCandidates, uint64_t isNonOdrUse, bool refersToEnclosingVariableOrCapture, bool isImmediateEscalating, bool isCapturedByCopyInLambdaWithExplicitObjectParameter);
+void arboretum_emit_DeclStmt(uint64_t id, bool isSingleDecl, uint64_t getEndLoc, uint64_t getBeginLoc);
+void arboretum_emit_DeclStmt_decls(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_Decl_attrs(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_Decl_redecls(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_Decl_usr(uint64_t id, const char* usr);
+void arboretum_emit_DeclaratorDecl(uint64_t id, uint64_t getInnerLocStart, uint64_t getOuterLocStart, uint64_t getSourceRange, uint64_t getBeginLoc, uint64_t getTrailingRequiresClause, uint32_t getNumTemplateParameterLists, uint64_t getTypeSpecStartLoc, uint64_t getTypeSpecEndLoc);
+void arboretum_emit_DecltypeType(uint64_t id, uint64_t getUnderlyingExpr, uint64_t getUnderlyingType, uint64_t desugar, bool isSugared);
+void arboretum_emit_DecompositionDecl(uint64_t id);
+void arboretum_emit_DecompositionDecl_bindings(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_DeducedTemplateSpecializationType(uint64_t id);
+void arboretum_emit_DeducedType(uint64_t id, bool isSugared, uint64_t desugar, uint64_t getDeducedType, bool isDeduced);
+void arboretum_emit_DefaultStmt(uint64_t id, uint64_t getSubStmt, uint64_t getDefaultLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_DependentAddressSpaceType(uint64_t id, uint64_t getAddrSpaceExpr, uint64_t getPointeeType, uint64_t getAttributeLoc, bool isSugared, uint64_t desugar);
+void arboretum_emit_DependentBitIntType(uint64_t id, bool isUnsigned, bool isSigned, uint64_t getNumBitsExpr, bool isSugared, uint64_t desugar);
+void arboretum_emit_DependentCoawaitExpr(uint64_t id, uint64_t getOperand, uint64_t getOperatorCoawaitLookup, uint64_t getKeywordLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_DependentDecltypeType(uint64_t id);
+void arboretum_emit_DependentNameType(uint64_t id, bool isSugared, uint64_t desugar);
+void arboretum_emit_DependentScopeDeclRefExpr(uint64_t id, uint64_t getLocation, uint64_t getTemplateKeywordLoc, uint64_t getLAngleLoc, uint64_t getRAngleLoc, bool hasTemplateKeyword, bool hasExplicitTemplateArgs, uint32_t getNumTemplateArgs, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_DependentSizedArrayType(uint64_t id, uint64_t getSizeExpr, uint64_t getBracketsRange, uint64_t getLBracketLoc, uint64_t getRBracketLoc, bool isSugared, uint64_t desugar);
+void arboretum_emit_DependentSizedExtVectorType(uint64_t id, uint64_t getSizeExpr, uint64_t getElementType, uint64_t getAttributeLoc, bool isSugared, uint64_t desugar);
+void arboretum_emit_DependentSizedMatrixType(uint64_t id, uint64_t getRowExpr, uint64_t getColumnExpr, uint64_t getAttributeLoc);
+void arboretum_emit_DependentTemplateSpecializationType(uint64_t id, bool isSugared, uint64_t desugar);
+void arboretum_emit_DependentTypeOfExprType(uint64_t id);
+void arboretum_emit_DependentUnaryTransformType(uint64_t id);
+void arboretum_emit_DependentVectorType(uint64_t id, uint64_t getSizeExpr, uint64_t getElementType, uint64_t getAttributeLoc, uint64_t getVectorKind, bool isSugared, uint64_t desugar);
+void arboretum_emit_DesignatedInitExpr(uint64_t id, uint32_t size, uint64_t getEqualOrColonLoc, bool isDirectInit, bool usesGNUSyntax, uint64_t getInit, uint32_t getNumSubExprs, uint64_t getDesignatorsSourceRange, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_DesignatedInitUpdateExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getBase, uint64_t getUpdater);
+void arboretum_emit_DoStmt(uint64_t id, uint64_t getCond, uint64_t getBody, uint64_t getDoLoc, uint64_t getWhileLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_ElaboratedType(uint64_t id, uint64_t getNamedType, uint64_t desugar, bool isSugared, uint64_t getOwnedTagDecl);
+void arboretum_emit_EmptyDecl(uint64_t id);
+void arboretum_emit_EnumConstantDecl(uint64_t id, uint64_t getInitExpr, uint64_t getSourceRange, uint64_t getCanonicalDecl);
+void arboretum_emit_EnumDecl(uint64_t id, uint64_t getCanonicalDecl, uint64_t getPreviousDecl, uint64_t getMostRecentDecl, uint64_t getDefinition, uint64_t getSourceRange, uint64_t getPromotionType, uint64_t getIntegerType, uint64_t getIntegerTypeRange, uint32_t getNumPositiveBits, uint32_t getNumNegativeBits, bool isScoped, bool isScopedUsingClassTag, bool isFixed, bool isComplete, bool isClosed, bool isClosedFlag, bool isClosedNonFlag, uint64_t getTemplateInstantiationPattern, uint64_t getInstantiatedFromMemberEnum, uint64_t getTemplateSpecializationKind);
+void arboretum_emit_EnumDecl_enumerators(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_EnumType(uint64_t id, uint64_t getDecl, bool isSugared, uint64_t desugar);
+void arboretum_emit_ExplicitCastExpr(uint64_t id, uint64_t getTypeAsWritten);
+void arboretum_emit_ExportDecl(uint64_t id, uint64_t getExportLoc, uint64_t getRBraceLoc, bool hasBraces, uint64_t getEndLoc, uint64_t getSourceRange);
+void arboretum_emit_Expr(uint64_t id, uint64_t getType, uint64_t getDependence, bool isValueDependent, bool isTypeDependent, bool isInstantiationDependent, bool containsUnexpandedParameterPack, bool containsErrors, bool isLValue, bool isPRValue, bool isXValue, bool isGLValue, uint64_t getValueKind, uint64_t getObjectKind, bool isOrdinaryOrBitFieldObject, bool refersToBitField, uint64_t getSourceBitField, uint64_t getReferencedDeclOfCallee, uint64_t getObjCProperty, bool isObjCSelfExpr, bool refersToVectorElement, bool refersToMatrixElement, bool refersToGlobalRegisterVar, uint64_t IgnoreImpCasts, uint64_t IgnoreCasts, uint64_t IgnoreImplicit, uint64_t IgnoreImplicitAsWritten, uint64_t IgnoreParens, uint64_t IgnoreParenImpCasts, uint64_t IgnoreParenCasts, uint64_t IgnoreConversionOperatorSingleStep, uint64_t IgnoreParenLValueCasts, uint64_t IgnoreParenBaseCasts, bool isDefaultArgument, bool isImplicitCXXThis, uint64_t skipRValueSubobjectAdjustments);
+void arboretum_emit_ExprWithCleanups(uint64_t id, uint32_t getNumObjects, bool cleanupsHaveSideEffects, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_ExpressionTraitExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getTrait, uint64_t getQueriedExpression, bool getValue);
+void arboretum_emit_ExtVectorElementExpr(uint64_t id, uint64_t getBase, uint64_t getAccessorLoc, uint32_t getNumElements, bool containsDuplicateElements, uint64_t getBeginLoc, uint64_t getEndLoc, bool isArrow);
+void arboretum_emit_ExtVectorType(uint64_t id, bool isSugared, uint64_t desugar);
+void arboretum_emit_ExternCContextDecl(uint64_t id);
+void arboretum_emit_FieldDecl(uint64_t id, uint32_t getFieldIndex, bool isMutable, bool isBitField, bool isUnnamedBitfield, bool isAnonymousStructOrUnion, uint64_t getBitWidth, bool isPotentiallyOverlapping, uint64_t getInClassInitStyle, bool hasInClassInitializer, bool hasNonNullInClassInitializer, uint64_t getInClassInitializer, bool hasCapturedVLAType, uint64_t getCapturedVLAType, uint64_t getParent, uint64_t getSourceRange, uint64_t getCanonicalDecl);
+void arboretum_emit_FileScopeAsmDecl(uint64_t id, uint64_t getAsmLoc, uint64_t getRParenLoc, uint64_t getSourceRange, uint64_t getAsmString);
+void arboretum_emit_FixedPointLiteral(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getLocation, uint32_t getScale);
+void arboretum_emit_FloatingLiteral(uint64_t id, uint64_t getRawSemantics, bool isExact, double getValueAsApproximateDouble, uint64_t getLocation, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_ForStmt(uint64_t id, uint64_t getConditionVariable, uint64_t getConditionVariableDeclStmt, uint64_t getInit, uint64_t getCond, uint64_t getInc, uint64_t getBody, uint64_t getForLoc, uint64_t getLParenLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_FriendDecl(uint64_t id, uint32_t getFriendTypeNumTemplateParameterLists, uint64_t getFriendDecl, uint64_t getFriendLoc, uint64_t getSourceRange, bool isUnsupportedFriend);
+void arboretum_emit_FriendTemplateDecl(uint64_t id, uint64_t getFriendDecl, uint64_t getFriendLoc, uint32_t getNumTemplateParameters);
+void arboretum_emit_FullExpr(uint64_t id, uint64_t getSubExpr);
+void arboretum_emit_FunctionDecl(uint64_t id, uint64_t getEllipsisLoc, uint64_t getSourceRange, bool hasBody, bool hasTrivialBody, bool isDefined, uint64_t getDefinition, uint64_t getBody, bool isThisDeclarationADefinition, bool isThisDeclarationInstantiatedFromAFriendDefinition, bool doesThisDeclarationHaveABody, bool isVariadic, bool isVirtualAsWritten, bool isPureVirtual, bool isLateTemplateParsed, bool isTrivial, bool isTrivialForCall, bool isDefaulted, bool isExplicitlyDefaulted, uint64_t getDefaultLoc, bool isUserProvided, bool isIneligibleOrNotSelected, bool hasImplicitReturnZero, bool hasPrototype, bool hasWrittenPrototype, bool hasInheritedPrototype, bool isConstexpr, uint64_t getConstexprKind, bool isConstexprSpecified, bool isConsteval, bool BodyContainsImmediateEscalatingExpressions, bool isImmediateEscalating, bool isImmediateFunction, bool instantiationIsPending, bool usesSEHTry, bool isDeleted, bool isDeletedAsWritten, bool isMain, bool isMSVCRTEntryPoint, bool isReservedGlobalPlacementOperator, bool isInlineBuiltinDeclaration, bool isDestroyingOperatorDelete, uint64_t getLanguageLinkage, bool isExternC, bool isInExternCContext, bool isInExternCXXContext, bool isGlobal, bool isNoReturn, bool hasSkippedBody, bool willHaveBody, bool isMultiVersion, bool FriendConstraintRefersToEnclosingTemplate, bool isMemberLikeConstrainedFriend, uint64_t getMultiVersionKind, bool isCPUDispatchMultiVersion, bool isCPUSpecificMultiVersion, bool isTargetMultiVersion, bool isTargetClonesMultiVersion, uint64_t getCanonicalDecl, bool param_empty, uint64_t param_size, uint32_t getNumParams, uint32_t getMinRequiredArguments, uint32_t getMinRequiredExplicitArguments, bool hasCXXExplicitFunctionObjectParameter, uint32_t getNumNonObjectParams, bool hasOneParamOrDefaultArgs, uint64_t getReturnType, uint64_t getReturnTypeSourceRange, uint64_t getParametersSourceRange, uint64_t getDeclaredReturnType, uint64_t getExceptionSpecType, uint64_t getExceptionSpecSourceRange, uint64_t getCallResultType, uint64_t getStorageClass, bool isInlineSpecified, bool UsesFPIntrin, bool isInlined, bool isInlineDefinitionExternallyVisible, bool isMSExternInline, bool doesDeclarationForceExternallyVisibleDefinition, bool isStatic, bool isOverloadedOperator, uint64_t getOverloadedOperator, uint64_t getInstantiatedFromMemberFunction, uint64_t getTemplatedKind, uint64_t getInstantiatedFromDecl, uint64_t getDescribedFunctionTemplate, bool isFunctionTemplateSpecialization, bool isImplicitlyInstantiable, bool isTemplateInstantiation, uint64_t getPrimaryTemplate, uint64_t getTemplateSpecializationKind, uint64_t getTemplateSpecializationKindForInstantiation, uint64_t getPointOfInstantiation, bool isOutOfLine, uint32_t getMemoryFunctionKind, uint32_t getODRHash);
+void arboretum_emit_FunctionDecl_cfg(uint64_t id, uint64_t cfg);
+void arboretum_emit_FunctionDecl_parameters(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_FunctionNoProtoType(uint64_t id, bool isSugared, uint64_t desugar);
+void arboretum_emit_FunctionParmPackExpr(uint64_t id, uint64_t getParameterPack, uint64_t getParameterPackLocation, uint32_t getNumExpansions, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_FunctionProtoType(uint64_t id, uint32_t getNumParams, uint64_t getExceptionSpecType, bool hasExceptionSpec, bool hasDynamicExceptionSpec, bool hasNoexceptExceptionSpec, bool hasDependentExceptionSpec, bool hasInstantiationDependentExceptionSpec, uint32_t getNumExceptions, uint64_t getNoexceptExpr, uint64_t getExceptionSpecDecl, uint64_t getExceptionSpecTemplate, uint64_t canThrow, bool isVariadic, uint64_t getEllipsisLoc, bool isTemplateVariadic, bool hasTrailingReturn, uint64_t getRefQualifier, bool hasExtParameterInfos, uint32_t getAArch64SMEAttributes, bool isSugared, uint64_t desugar);
+void arboretum_emit_FunctionProtoType_exceptions(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_FunctionProtoType_getParamTypes(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_FunctionProtoType_param_types(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_FunctionTemplateDecl(uint64_t id, uint64_t getTemplatedDecl, bool isThisDeclarationADefinition, uint64_t getCanonicalDecl, uint64_t getPreviousDecl, uint64_t getMostRecentDecl, uint64_t getInstantiatedFromMemberTemplate, bool isAbbreviated);
+void arboretum_emit_FunctionType(uint64_t id, uint64_t getReturnType, bool getHasRegParm, uint32_t getRegParmType, bool getNoReturnAttr, bool getCmseNSCallAttr, uint64_t getCallConv, bool isConst, bool isVolatile, bool isRestrict);
+void arboretum_emit_GCCAsmStmt(uint64_t id, uint64_t getRParenLoc, uint64_t getAsmString, bool isAsmGoto, uint32_t getNumLabels, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_GNUNullExpr(uint64_t id, uint64_t getTokenLocation, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_GenericSelectionExpr(uint64_t id, uint32_t getNumAssocs, uint32_t getResultIndex, bool isResultDependent, bool isExprPredicate, bool isTypePredicate, uint64_t getControllingExpr, uint64_t getResultExpr, uint64_t getGenericLoc, uint64_t getDefaultLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_GenericSelectionExpr_getAssocExprs(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_GotoStmt(uint64_t id, uint64_t getLabel, uint64_t getGotoLoc, uint64_t getLabelLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_HLSLBufferDecl(uint64_t id, uint64_t getSourceRange, uint64_t getLocStart, uint64_t getLBraceLoc, uint64_t getRBraceLoc, bool isCBuffer);
+void arboretum_emit_IfStmt(uint64_t id, bool hasInitStorage, bool hasVarStorage, bool hasElseStorage, uint64_t getCond, uint64_t getThen, uint64_t getElse, uint64_t getConditionVariable, uint64_t getConditionVariableDeclStmt, uint64_t getInit, uint64_t getIfLoc, uint64_t getElseLoc, bool isConsteval, bool isNonNegatedConsteval, bool isNegatedConsteval, bool isConstexpr, uint64_t getStatementKind, bool isObjCAvailabilityCheck, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getLParenLoc, uint64_t getRParenLoc);
+void arboretum_emit_ImaginaryLiteral(uint64_t id, uint64_t getSubExpr, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_ImplicitCastExpr(uint64_t id, bool isPartOfExplicitCast, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_ImplicitConceptSpecializationDecl(uint64_t id);
+void arboretum_emit_ImplicitParamDecl(uint64_t id, uint64_t getParameterKind);
+void arboretum_emit_ImplicitValueInitExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_ImportDecl(uint64_t id, uint64_t getSourceRange);
+void arboretum_emit_ImportDecl_getIdentifierLocs(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_IncompleteArrayType(uint64_t id, bool isSugared, uint64_t desugar);
+void arboretum_emit_IndirectFieldDecl(uint64_t id, uint32_t getChainingSize, uint64_t getAnonField, uint64_t getVarDecl, uint64_t getCanonicalDecl);
+void arboretum_emit_IndirectFieldDecl_chain(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_IndirectGotoStmt(uint64_t id, uint64_t getGotoLoc, uint64_t getStarLoc, uint64_t getTarget, uint64_t getConstantTarget, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_InitListExpr(uint64_t id, uint32_t getNumInits, uint64_t getArrayFiller, bool hasArrayFiller, bool hasDesignatedInit, uint64_t getInitializedFieldInUnion, bool isExplicit, bool isStringLiteralInit, bool isTransparent, uint64_t getLBraceLoc, uint64_t getRBraceLoc, bool isSemanticForm, uint64_t getSemanticForm, bool isSyntacticForm, uint64_t getSyntacticForm, bool hadArrayRangeDesignator, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_InitListExpr_inits(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_InjectedClassNameType(uint64_t id, uint64_t getInjectedSpecializationType, uint64_t getInjectedTST, uint64_t getDecl, bool isSugared, uint64_t desugar);
+void arboretum_emit_IntegerLiteral(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getLocation);
+void arboretum_emit_LValueReferenceType(uint64_t id, bool isSugared, uint64_t desugar);
+void arboretum_emit_LabelDecl(uint64_t id, uint64_t getStmt, bool isGnuLocal, uint64_t getSourceRange, bool isMSAsmLabel, bool isResolvedMSAsmLabel, const char* getMSAsmLabel);
+void arboretum_emit_LabelStmt(uint64_t id, uint64_t getIdentLoc, uint64_t getDecl, uint64_t getSubStmt, uint64_t getBeginLoc, uint64_t getEndLoc, bool isSideEntry);
+void arboretum_emit_LambdaExpr(uint64_t id, uint64_t getCaptureDefault, uint64_t getCaptureDefaultLoc, uint32_t capture_size, uint64_t getIntroducerRange, uint64_t getLambdaClass, uint64_t getCallOperator, uint64_t getDependentCallOperator, uint64_t getTrailingRequiresClause, bool isGenericLambda, uint64_t getBody, uint64_t getCompoundStmtBody, bool isMutable, bool hasExplicitParameters, bool hasExplicitResultType, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_LambdaExpr_capture_inits(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_LambdaExpr_getExplicitTemplateParameters(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_LifetimeExtendedTemporaryDecl(uint64_t id, uint64_t getExtendingDecl, uint64_t getStorageDuration, uint64_t getTemporaryExpr, uint32_t getManglingNumber);
+void arboretum_emit_LinkageSpecDecl(uint64_t id, uint64_t getLanguage, bool hasBraces, uint64_t getExternLoc, uint64_t getRBraceLoc, uint64_t getEndLoc, uint64_t getSourceRange);
+void arboretum_emit_MSAsmStmt(uint64_t id, uint64_t getLBraceLoc, uint64_t getEndLoc, bool hasBraces, const char* getAsmString, uint64_t getBeginLoc);
+void arboretum_emit_MSAsmStmt_getAllConstraints(uint64_t id, uint64_t idx, const char* element);
+void arboretum_emit_MSAsmStmt_getAllExprs(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_MSAsmStmt_getClobbers(uint64_t id, uint64_t idx, const char* element);
+void arboretum_emit_MSDependentExistsStmt(uint64_t id, uint64_t getKeywordLoc, bool isIfExists, bool isIfNotExists, uint64_t getSubStmt, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_MSGuidDecl(uint64_t id);
+void arboretum_emit_MSPropertyDecl(uint64_t id, bool hasGetter, bool hasSetter);
+void arboretum_emit_MSPropertyRefExpr(uint64_t id, uint64_t getSourceRange, bool isImplicitAccess, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getBaseExpr, uint64_t getPropertyDecl, bool isArrow, uint64_t getMemberLoc);
+void arboretum_emit_MSPropertySubscriptExpr(uint64_t id, uint64_t getBase, uint64_t getIdx, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getRBracketLoc, uint64_t getExprLoc);
+void arboretum_emit_MacroQualifiedType(uint64_t id, uint64_t getUnderlyingType, uint64_t getModifiedType, bool isSugared, uint64_t desugar);
+void arboretum_emit_MaterializeTemporaryExpr(uint64_t id, uint64_t getSubExpr, uint64_t getStorageDuration, uint64_t getLifetimeExtendedTemporaryDecl, uint64_t getExtendingDecl, uint32_t getManglingNumber, bool isBoundToLvalueReference, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_MatrixSubscriptExpr(uint64_t id, bool isIncomplete, uint64_t getBase, uint64_t getRowIdx, uint64_t getColumnIdx, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getExprLoc, uint64_t getRBracketLoc);
+void arboretum_emit_MatrixType(uint64_t id, uint64_t getElementType, bool isSugared, uint64_t desugar);
+void arboretum_emit_MemberExpr(uint64_t id, uint64_t getBase, uint64_t getMemberDecl, bool hasQualifier, uint64_t getTemplateKeywordLoc, uint64_t getLAngleLoc, uint64_t getRAngleLoc, bool hasTemplateKeyword, bool hasExplicitTemplateArgs, uint32_t getNumTemplateArgs, uint64_t getOperatorLoc, bool isArrow, uint64_t getMemberLoc, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getExprLoc, bool isImplicitAccess, bool hadMultipleCandidates, uint64_t isNonOdrUse);
+void arboretum_emit_MemberPointerType(uint64_t id, uint64_t getPointeeType, bool isMemberFunctionPointer, bool isMemberDataPointer, uint64_t getClass, bool isSugared, uint64_t desugar);
+void arboretum_emit_NamedDecl(uint64_t id, const char* getNameAsString, const char* getQualifiedNameAsString, bool hasLinkage, bool isCXXClassMember, bool isCXXInstanceMember, uint64_t getLinkageInternal, uint64_t getFormalLinkage, bool hasExternalFormalLinkage, bool isExternallyVisible, bool isExternallyDeclarable, bool isLinkageValid, bool hasLinkageBeenComputed, uint64_t getUnderlyingDecl, uint64_t getMostRecentDecl, uint64_t getObjCFStringFormattingFamily);
+void arboretum_emit_NamespaceAliasDecl(uint64_t id, uint64_t getCanonicalDecl, uint64_t getNamespace, uint64_t getAliasLoc, uint64_t getNamespaceLoc, uint64_t getTargetNameLoc, uint64_t getAliasedNamespace, uint64_t getSourceRange);
+void arboretum_emit_NamespaceDecl(uint64_t id, bool isAnonymousNamespace, bool isInline, bool isNested, uint64_t getOriginalNamespace, bool isOriginalNamespace, uint64_t getAnonymousNamespace, uint64_t getCanonicalDecl, uint64_t getSourceRange, uint64_t getBeginLoc, uint64_t getRBraceLoc);
+void arboretum_emit_NoInitExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_NonTypeTemplateParmDecl(uint64_t id, uint64_t getSourceRange, bool hasDefaultArgument, uint64_t getDefaultArgument, uint64_t getDefaultArgumentLoc, bool defaultArgumentWasInherited, bool isParameterPack, bool isPackExpansion, bool isExpandedParameterPack, uint64_t getPlaceholderTypeConstraint, bool hasPlaceholderTypeConstraint);
+void arboretum_emit_NullStmt(uint64_t id, uint64_t getSemiLoc, bool hasLeadingEmptyMacro, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_OffsetOfExpr(uint64_t id, uint64_t getOperatorLoc, uint64_t getRParenLoc, uint32_t getNumComponents, uint32_t getNumExpressions, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_OpaqueValueExpr(uint64_t id, uint64_t getLocation, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getExprLoc, uint64_t getSourceExpr, bool isUnique);
+void arboretum_emit_OverloadExpr(uint64_t id, uint64_t getNamingClass, uint32_t getNumDecls, uint64_t getNameLoc, uint64_t getTemplateKeywordLoc, uint64_t getLAngleLoc, uint64_t getRAngleLoc, bool hasTemplateKeyword, bool hasExplicitTemplateArgs, uint32_t getNumTemplateArgs);
+void arboretum_emit_PackExpansionExpr(uint64_t id, uint64_t getPattern, uint64_t getEllipsisLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_PackExpansionType(uint64_t id, uint64_t getPattern, bool isSugared, uint64_t desugar);
+void arboretum_emit_ParenExpr(uint64_t id, uint64_t getSubExpr, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getLParen, uint64_t getRParen);
+void arboretum_emit_ParenListExpr(uint64_t id, uint32_t getNumExprs, uint64_t getLParenLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_ParenType(uint64_t id, uint64_t getInnerType, bool isSugared, uint64_t desugar);
+void arboretum_emit_ParmVarDecl(uint64_t id, uint64_t getSourceRange, bool isObjCMethodParameter, bool isDestroyedInCallee, uint32_t getFunctionScopeDepth, uint32_t getFunctionScopeIndex, uint64_t getObjCDeclQualifier, bool isKNRPromoted, bool isExplicitObjectParameter, uint64_t getExplicitObjectParamThisLoc, uint64_t getDefaultArg, uint64_t getDefaultArgRange, uint64_t getUninstantiatedDefaultArg, bool hasDefaultArg, bool hasUnparsedDefaultArg, bool hasUninstantiatedDefaultArg, bool hasInheritedDefaultArg, uint64_t getOriginalType);
+void arboretum_emit_PipeType(uint64_t id, uint64_t getElementType, bool isSugared, uint64_t desugar, bool isReadOnly);
+void arboretum_emit_PointerType(uint64_t id, uint64_t getPointeeType, bool isSugared, uint64_t desugar);
+void arboretum_emit_PragmaCommentDecl(uint64_t id, uint64_t getCommentKind, const char* getArg);
+void arboretum_emit_PragmaDetectMismatchDecl(uint64_t id, const char* getName, const char* getValue);
+void arboretum_emit_PredefinedExpr(uint64_t id, uint64_t getIdentKind, bool isTransparent, uint64_t getLocation, uint64_t getFunctionName, const char* getIdentKindName, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_PseudoObjectExpr(uint64_t id, uint64_t getSyntacticForm, uint32_t getResultExprIndex, uint64_t getResultExpr, uint32_t getNumSemanticExprs, uint64_t getExprLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_PseudoObjectExpr_semantics(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_QualType(uint64_t id, uint64_t Type_id, bool is_const, bool is_volatile, bool is_restrict);
+void arboretum_emit_QualType_usr(uint64_t id, const char* usr);
+void arboretum_emit_RValueReferenceType(uint64_t id, bool isSugared, uint64_t desugar);
+void arboretum_emit_RecordDecl(uint64_t id, uint64_t getPreviousDecl, uint64_t getMostRecentDecl, bool hasFlexibleArrayMember, bool isAnonymousStructOrUnion, bool hasObjectMember, bool hasVolatileMember, bool hasLoadedFieldsFromExternalStorage, bool isNonTrivialToPrimitiveDefaultInitialize, bool isNonTrivialToPrimitiveCopy, bool isNonTrivialToPrimitiveDestroy, bool hasNonTrivialToPrimitiveDefaultInitializeCUnion, bool hasNonTrivialToPrimitiveDestructCUnion, bool hasNonTrivialToPrimitiveCopyCUnion, bool canPassInRegisters, uint64_t getArgPassingRestrictions, bool isParamDestroyedInCallee, bool isRandomized, bool isInjectedClassName, bool isLambda, bool isCapturedRecord, uint64_t getDefinition, bool isOrContainsUnion, bool field_empty, uint64_t findFirstNamedDataMember);
+void arboretum_emit_RecordDecl_fields(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_RecordType(uint64_t id, uint64_t getDecl, bool hasConstFields, bool isSugared, uint64_t desugar);
+void arboretum_emit_RecoveryExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_RecoveryExpr_subExpressions(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_RedeclarableTemplateDecl(uint64_t id, uint64_t getCanonicalDecl, bool isMemberSpecialization, uint64_t getInstantiatedFromMemberTemplate);
+void arboretum_emit_ReferenceType(uint64_t id, bool isSpelledAsLValue, bool isInnerRef, uint64_t getPointeeTypeAsWritten, uint64_t getPointeeType);
+void arboretum_emit_RequiresExpr(uint64_t id, uint64_t getBody, uint64_t getRequiresKWLoc, uint64_t getLParenLoc, uint64_t getRParenLoc, uint64_t getRBraceLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_RequiresExprBodyDecl(uint64_t id);
+void arboretum_emit_RequiresExpr_getLocalParameters(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_ReturnStmt(uint64_t id, uint64_t getRetValue, uint64_t getNRVOCandidate, uint64_t getReturnLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_SEHExceptStmt(uint64_t id, uint64_t getBeginLoc, uint64_t getExceptLoc, uint64_t getEndLoc, uint64_t getFilterExpr, uint64_t getBlock);
+void arboretum_emit_SEHFinallyStmt(uint64_t id, uint64_t getBeginLoc, uint64_t getFinallyLoc, uint64_t getEndLoc, uint64_t getBlock);
+void arboretum_emit_SEHLeaveStmt(uint64_t id, uint64_t getLeaveLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_SEHTryStmt(uint64_t id, uint64_t getBeginLoc, uint64_t getTryLoc, uint64_t getEndLoc, bool getIsCXXTry, uint64_t getTryBlock, uint64_t getHandler, uint64_t getExceptHandler, uint64_t getFinallyHandler);
+void arboretum_emit_SYCLUniqueStableNameExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getLocation, uint64_t getLParenLocation, uint64_t getRParenLocation);
+void arboretum_emit_ShuffleVectorExpr(uint64_t id, uint64_t getBuiltinLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc, uint32_t getNumSubExprs);
+void arboretum_emit_SizeOfPackExpr(uint64_t id, uint64_t getOperatorLoc, uint64_t getPackLoc, uint64_t getRParenLoc, uint64_t getPack, bool isPartiallySubstituted, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_SourceLocExpr(uint64_t id, const char* getBuiltinStr, uint64_t getIdentKind, bool isIntType, uint64_t getLocation, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_StaticAssertDecl(uint64_t id, uint64_t getAssertExpr, uint64_t getMessage, bool isFailed, uint64_t getRParenLoc, uint64_t getSourceRange);
+void arboretum_emit_Stmt(uint64_t id, uint64_t stripLabelLikeStatements);
+void arboretum_emit_StmtExpr(uint64_t id, uint64_t getSubStmt, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getLParenLoc, uint64_t getRParenLoc, uint32_t getTemplateDepth);
+void arboretum_emit_StringLiteral(uint64_t id, const char* getString, const char* getBytes, uint32_t getByteLength, uint32_t getLength, uint32_t getCharByteWidth, uint64_t getKind, bool isOrdinary, bool isWide, bool isUTF8, bool isUTF16, bool isUTF32, bool isUnevaluated, bool isPascal, bool containsNonAscii, bool containsNonAsciiOrNull, uint32_t getNumConcatenated, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_SubstNonTypeTemplateParmExpr(uint64_t id, uint64_t getNameLoc, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getReplacement, uint64_t getAssociatedDecl, uint32_t getIndex, uint64_t getParameter, bool isReferenceParameter);
+void arboretum_emit_SubstNonTypeTemplateParmPackExpr(uint64_t id, uint64_t getAssociatedDecl, uint32_t getIndex, uint64_t getParameterPack, uint64_t getParameterPackLocation, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_SubstTemplateTypeParmPackType(uint64_t id, uint64_t getAssociatedDecl, uint64_t getReplacedParameter, uint32_t getIndex, bool getFinal, uint32_t getNumArgs, bool isSugared, uint64_t desugar);
+void arboretum_emit_SubstTemplateTypeParmType(uint64_t id, uint64_t getReplacementType, uint64_t getAssociatedDecl, uint64_t getReplacedParameter, uint32_t getIndex, bool isSugared, uint64_t desugar);
+void arboretum_emit_SwitchCase(uint64_t id, uint64_t getNextSwitchCase, uint64_t getKeywordLoc, uint64_t getColonLoc, uint64_t getSubStmt, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_SwitchStmt(uint64_t id, bool hasInitStorage, bool hasVarStorage, uint64_t getCond, uint64_t getBody, uint64_t getInit, uint64_t getConditionVariable, uint64_t getConditionVariableDeclStmt, uint64_t getSwitchCaseList, uint64_t getSwitchLoc, uint64_t getLParenLoc, uint64_t getRParenLoc, bool isAllEnumCasesCovered, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_TagDecl(uint64_t id, uint64_t getBraceRange, uint64_t getInnerLocStart, uint64_t getOuterLocStart, uint64_t getSourceRange, uint64_t getCanonicalDecl, bool isThisDeclarationADefinition, bool isCompleteDefinition, bool isCompleteDefinitionRequired, bool isBeingDefined, bool isEmbeddedInDeclarator, bool isFreeStanding, bool mayHaveOutOfDateDef, bool isDependentType, bool isThisDeclarationADemotedDefinition, uint64_t getDefinition, const char* getKindName, uint64_t getTagKind, bool isStruct, bool isInterface, bool isClass, bool isUnion, bool isEnum, bool hasNameForLinkage, uint64_t getTypedefNameForAnonDecl, uint32_t getNumTemplateParameterLists);
+void arboretum_emit_TagType(uint64_t id, uint64_t getDecl, bool isBeingDefined);
+void arboretum_emit_TemplateDecl(uint64_t id, bool hasAssociatedConstraints, uint64_t getTemplatedDecl, bool isTypeAlias, uint64_t getSourceRange);
+void arboretum_emit_TemplateParamObjectDecl(uint64_t id, uint64_t getCanonicalDecl);
+void arboretum_emit_TemplateSpecializationType(uint64_t id, bool isCurrentInstantiation, bool isTypeAlias, bool isSugared, uint64_t desugar);
+void arboretum_emit_TemplateTemplateParmDecl(uint64_t id, bool isParameterPack, bool isPackExpansion, bool isExpandedParameterPack, bool hasDefaultArgument, uint64_t getDefaultArgumentLoc, bool defaultArgumentWasInherited, uint64_t getSourceRange);
+void arboretum_emit_TemplateTypeParmDecl(uint64_t id, bool wasDeclaredWithTypename, bool hasDefaultArgument, uint64_t getDefaultArgumentLoc, bool defaultArgumentWasInherited, uint32_t getDepth, uint32_t getIndex, bool isParameterPack, bool isPackExpansion, bool isExpandedParameterPack, bool hasTypeConstraint, uint64_t getSourceRange);
+void arboretum_emit_TemplateTypeParmType(uint64_t id, uint32_t getDepth, uint32_t getIndex, bool isParameterPack, uint64_t getDecl, bool isSugared, uint64_t desugar);
+void arboretum_emit_TopLevelStmtDecl(uint64_t id, uint64_t getSourceRange, uint64_t getStmt, bool isSemiMissing);
+void arboretum_emit_TranslationUnitDecl(uint64_t id, uint64_t getAnonymousNamespace);
+void arboretum_emit_Type(uint64_t id, bool containsUnexpandedParameterPack, uint64_t getLocallyUnqualifiedSingleStepDesugaredType, uint64_t getAsPlaceholderType, uint64_t getObjCARCImplicitLifetime, uint64_t getDependence, bool containsErrors, bool hasSizedVLAType, bool hasUnnamedOrLocalType, bool canDecayToPointerType, bool hasPointerRepresentation, bool hasObjCPointerRepresentation, bool hasIntegerRepresentation, bool hasSignedIntegerRepresentation, bool hasUnsignedIntegerRepresentation, bool hasFloatingRepresentation, uint64_t getAsStructureType, uint64_t getAsUnionType, uint64_t getAsComplexIntegerType, uint64_t getAsObjCInterfaceType, uint64_t getAsObjCInterfacePointerType, uint64_t getAsObjCQualifiedIdType, uint64_t getAsObjCQualifiedClassType, uint64_t getAsObjCQualifiedInterfaceType, uint64_t getAsCXXRecordDecl, uint64_t getAsRecordDecl, uint64_t getAsTagDecl, uint64_t getPointeeCXXRecordDecl, uint64_t getBaseElementTypeUnsafe, uint64_t getArrayElementTypeNoTypeQual, uint64_t getPointeeOrArrayElementType, uint64_t getLinkage, uint64_t getVisibility, bool acceptsObjCTypeParams, uint64_t getCanonicalTypeInternal);
+void arboretum_emit_TypeAliasDecl(uint64_t id, uint64_t getSourceRange, uint64_t getDescribedAliasTemplate);
+void arboretum_emit_TypeAliasTemplateDecl(uint64_t id, uint64_t getTemplatedDecl, uint64_t getCanonicalDecl, uint64_t getPreviousDecl, uint64_t getInstantiatedFromMemberTemplate);
+void arboretum_emit_TypeDecl(uint64_t id, uint64_t getTypeForDecl, uint64_t getBeginLoc, uint64_t getSourceRange);
+void arboretum_emit_TypeOfExprType(uint64_t id, uint64_t getUnderlyingExpr, uint64_t getKind, uint64_t desugar, bool isSugared);
+void arboretum_emit_TypeOfType(uint64_t id, uint64_t getUnmodifiedType, uint64_t desugar, bool isSugared, uint64_t getKind);
+void arboretum_emit_TypeTraitExpr(uint64_t id, uint64_t getTrait, uint32_t getNumArgs, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_TypeWithKeyword(uint64_t id, uint64_t getKeyword);
+void arboretum_emit_TypedefDecl(uint64_t id, uint64_t getSourceRange);
+void arboretum_emit_TypedefNameDecl(uint64_t id, bool isModed, uint64_t getUnderlyingType, uint64_t getCanonicalDecl, bool isTransparentTag);
+void arboretum_emit_TypedefType(uint64_t id, uint64_t getDecl, bool isSugared, uint64_t desugar, bool typeMatchesDecl);
+void arboretum_emit_TypoExpr(uint64_t id, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_UnaryExprOrTypeTraitExpr(uint64_t id, uint64_t getKind, bool isArgumentType, uint64_t getTypeOfArgument, uint64_t getOperatorLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_UnaryOperator(uint64_t id, uint64_t getOpcode, uint64_t getSubExpr, uint64_t getOperatorLoc, bool canOverflow, bool isPrefix, bool isPostfix, bool isIncrementOp, bool isDecrementOp, bool isIncrementDecrementOp, bool isArithmeticOp, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getExprLoc, bool hasStoredFPFeatures);
+void arboretum_emit_UnaryTransformType(uint64_t id, bool isSugared, uint64_t desugar, uint64_t getUnderlyingType, uint64_t getBaseType, uint64_t getUTTKind);
+void arboretum_emit_UnnamedGlobalConstantDecl(uint64_t id);
+void arboretum_emit_UnresolvedLookupExpr(uint64_t id, bool requiresADL, bool isOverloaded, uint64_t getNamingClass, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_UnresolvedMemberExpr(uint64_t id, bool isImplicitAccess, uint64_t getBaseType, bool hasUnresolvedUsing, bool isArrow, uint64_t getOperatorLoc, uint64_t getNamingClass, uint64_t getMemberLoc, uint64_t getExprLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_UnresolvedUsingIfExistsDecl(uint64_t id);
+void arboretum_emit_UnresolvedUsingType(uint64_t id, uint64_t getDecl, bool isSugared, uint64_t desugar);
+void arboretum_emit_UnresolvedUsingTypenameDecl(uint64_t id, uint64_t getUsingLoc, uint64_t getTypenameLoc, bool isPackExpansion, uint64_t getEllipsisLoc, uint64_t getCanonicalDecl);
+void arboretum_emit_UnresolvedUsingValueDecl(uint64_t id, uint64_t getUsingLoc, bool isAccessDeclaration, bool isPackExpansion, uint64_t getEllipsisLoc, uint64_t getSourceRange, uint64_t getCanonicalDecl);
+void arboretum_emit_UserDefinedLiteral(uint64_t id, uint64_t getLiteralOperatorKind, uint64_t getCookedLiteral, uint64_t getBeginLoc, uint64_t getEndLoc, uint64_t getUDSuffixLoc);
+void arboretum_emit_UsingDecl(uint64_t id, uint64_t getUsingLoc, bool isAccessDeclaration, bool hasTypename, uint64_t getSourceRange, uint64_t getCanonicalDecl);
+void arboretum_emit_UsingDirectiveDecl(uint64_t id, uint64_t getNominatedNamespaceAsWritten, uint64_t getNominatedNamespace, uint64_t getUsingLoc, uint64_t getNamespaceKeyLocation, uint64_t getIdentLocation, uint64_t getSourceRange);
+void arboretum_emit_UsingEnumDecl(uint64_t id, uint64_t getUsingLoc, uint64_t getEnumLoc, uint64_t getEnumDecl, uint64_t getSourceRange, uint64_t getCanonicalDecl);
+void arboretum_emit_UsingPackDecl(uint64_t id, uint64_t getInstantiatedFromUsingDecl, uint64_t getSourceRange, uint64_t getCanonicalDecl);
+void arboretum_emit_UsingPackDecl_expansions(uint64_t id, uint64_t idx, uint64_t element);
+void arboretum_emit_UsingShadowDecl(uint64_t id, uint64_t getCanonicalDecl, uint64_t getTargetDecl, uint64_t getIntroducer, uint64_t getNextUsingShadowDecl);
+void arboretum_emit_UsingType(uint64_t id, uint64_t getFoundDecl, uint64_t getUnderlyingType, bool isSugared, uint64_t desugar, bool typeMatchesDecl);
+void arboretum_emit_VAArgExpr(uint64_t id, uint64_t getSubExpr, bool isMicrosoftABI, uint64_t getBuiltinLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_ValueDecl(uint64_t id, uint64_t getType, bool isWeak, bool isInitCapture, uint64_t getPotentiallyDecomposedVarDecl);
+void arboretum_emit_ValueStmt(uint64_t id, uint64_t getExprStmt);
+void arboretum_emit_VarDecl(uint64_t id, uint64_t getSourceRange, uint64_t getStorageClass, uint64_t getTSCSpec, uint64_t getTLSKind, bool hasLocalStorage, bool isStaticLocal, bool hasExternalStorage, bool hasGlobalStorage, uint64_t getStorageDuration, uint64_t getLanguageLinkage, bool isExternC, bool isInExternCContext, bool isInExternCXXContext, bool isLocalVarDecl, bool isLocalVarDeclOrParm, bool isFunctionOrMethodVarDecl, bool isStaticDataMember, uint64_t getCanonicalDecl, uint64_t isThisDeclarationADefinition, uint64_t hasDefinition, uint64_t getActingDefinition, uint64_t getDefinition, bool isOutOfLine, bool isFileVarDecl, uint64_t getAnyInitializer, bool hasInit, uint64_t getInit, uint64_t getInitializingDeclaration, bool hasConstantInitialization, uint64_t getInitStyle, bool isDirectInit, bool isThisDeclarationADemotedDefinition, bool isExceptionVariable, bool isNRVOVariable, bool isCXXForRangeDecl, bool isObjCForDecl, bool isARCPseudoStrong, bool isInline, bool isInlineSpecified, bool isConstexpr, bool isInitCapture, bool isParameterPack, bool isPreviousDeclInSameBlockScope, bool isEscapingByref, bool isNonEscapingByref, bool hasDependentAlignment, uint64_t getTemplateInstantiationPattern, uint64_t getInstantiatedFromStaticDataMember, uint64_t getTemplateSpecializationKind, uint64_t getTemplateSpecializationKindForInstantiation, uint64_t getPointOfInstantiation, uint64_t getDescribedVarTemplate, bool isKnownToBeDefined);
+void arboretum_emit_VarTemplateDecl(uint64_t id, uint64_t getTemplatedDecl, bool isThisDeclarationADefinition, uint64_t getCanonicalDecl, uint64_t getPreviousDecl, uint64_t getMostRecentDecl, uint64_t getInstantiatedFromMemberTemplate);
+void arboretum_emit_VarTemplatePartialSpecializationDecl(uint64_t id, bool hasAssociatedConstraints, uint64_t getInstantiatedFromMember, uint64_t getSourceRange);
+void arboretum_emit_VarTemplateSpecializationDecl(uint64_t id, uint64_t getSpecializedTemplate, uint64_t getSpecializationKind, bool isExplicitSpecialization, bool isClassScopeExplicitSpecialization, bool isExplicitInstantiationOrSpecialization, uint64_t getPointOfInstantiation, uint64_t getExternLoc, uint64_t getTemplateKeywordLoc, uint64_t getSourceRange);
+void arboretum_emit_VariableArrayType(uint64_t id, uint64_t getSizeExpr, uint64_t getBracketsRange, uint64_t getLBracketLoc, uint64_t getRBracketLoc, bool isSugared, uint64_t desugar);
+void arboretum_emit_VectorType(uint64_t id, uint64_t getElementType, uint32_t getNumElements, bool isSugared, uint64_t desugar, uint64_t getVectorKind);
+void arboretum_emit_WhileStmt(uint64_t id, bool hasVarStorage, uint64_t getCond, uint64_t getBody, uint64_t getConditionVariable, uint64_t getConditionVariableDeclStmt, uint64_t getWhileLoc, uint64_t getLParenLoc, uint64_t getRParenLoc, uint64_t getBeginLoc, uint64_t getEndLoc);
+void arboretum_emit_enum(uint64_t id, const char* name);
+void arboretum_emit_enum_value(uint64_t id, uint64_t enum_id, const char* name);
+void arboretum_emit_file(uint64_t id, const char* filename, const char* content);
+void arboretum_emit_source_loc(uint64_t id, uint64_t file_id, uint64_t line, uint64_t col, uint64_t expansion_loc, uint64_t spelling_loc);
+void arboretum_emit_source_range(uint64_t id, uint64_t begin, uint64_t end);
+////   END ARBORETUM GENERATED CODE ////
 }

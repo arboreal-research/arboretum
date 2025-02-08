@@ -6,8 +6,8 @@
 
 namespace arboretum {
 namespace {
-std::unordered_set<const clang::CXXRecordDecl *> TransitiveClosure(InheritanceHierarchy &ih,
-                                                                   const clang::CXXRecordDecl *D) {
+std::unordered_set<const clang::CXXRecordDecl *> TransitiveClosure(
+    InheritanceHierarchy &ih, const clang::CXXRecordDecl *D) {
   std::unordered_set<const clang::CXXRecordDecl *> result;
 
   std::stack<const clang::CXXRecordDecl *> decls;
@@ -46,7 +46,8 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData &tmp, Index &data) {
         base_name = base_name.substr(0, base_name.size() - 4);
       }
 
-      auto find_itr = tmp.typeclass_enum_by_name.find(std::string(base_name.data(), base_name.size()));
+      auto find_itr = tmp.typeclass_enum_by_name.find(
+          std::string(base_name.data(), base_name.size()));
       if (find_itr != tmp.typeclass_enum_by_name.end()) {
         data.clang.typeclass_enum_by_decl[T] = find_itr->second;
       }
@@ -56,7 +57,8 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData &tmp, Index &data) {
     data.clang.all_decls.insert(T);
   }
 
-  for (auto *TL : TransitiveClosure(data.inheritance, data.clang.typeloc_decl)) {
+  for (auto *TL :
+       TransitiveClosure(data.inheritance, data.clang.typeloc_decl)) {
     llvm::StringRef name = TL->getName();
     if (name == "ConcreteTypeLoc") continue;
     if (name == "InheritingConcreteTypeLoc") continue;
@@ -70,7 +72,8 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData &tmp, Index &data) {
         base_name = base_name.substr(0, base_name.size() - 7);
       }
 
-      auto find_itr = tmp.typelocclass_enum_by_name.find(std::string(base_name.data(), base_name.size()));
+      auto find_itr = tmp.typelocclass_enum_by_name.find(
+          std::string(base_name.data(), base_name.size()));
       if (find_itr != tmp.typelocclass_enum_by_name.end()) {
         data.clang.typelocclass_enum_by_decl[TL] = find_itr->second;
       }
@@ -91,7 +94,8 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData &tmp, Index &data) {
         base_name = base_name.substr(0, base_name.size() - 4);
       }
 
-      auto find_itr = tmp.declkind_enum_by_name.find(std::string(base_name.data(), base_name.size()));
+      auto find_itr = tmp.declkind_enum_by_name.find(
+          std::string(base_name.data(), base_name.size()));
       if (find_itr != tmp.declkind_enum_by_name.end()) {
         data.clang.declkind_enum_by_decl[D] = find_itr->second;
       }
@@ -105,7 +109,8 @@ void PopulateDerivedIndexFields(IndexBuilder::TempData &tmp, Index &data) {
     {
       llvm::StringRef name = S->getName();
 
-      auto find_itr = tmp.stmtclass_enum_by_name.find(std::string(name.data(), name.size()) + "Class");
+      auto find_itr = tmp.stmtclass_enum_by_name.find(
+          std::string(name.data(), name.size()) + "Class");
       if (find_itr != tmp.stmtclass_enum_by_name.end()) {
         data.clang.stmtclass_enum_by_decl[S] = find_itr->second;
       }
@@ -162,6 +167,8 @@ bool IndexBuilder::VisitEnumDecl(clang::EnumDecl *D) {
     }
   } else if (name == "clang::CFGTerminator::Kind") {
     data.clang.cfg_terminator_kind = D;
+  } else if (name == "clang::CFGElement::Kind") {
+    data.clang.cfg_element_kind = D;
   }
   return true;
 }
@@ -253,7 +260,9 @@ bool IndexBuilder::VisitCXXRecordDecl(clang::CXXRecordDecl *D) {
   }
 
   for (auto &base_specifier : D->bases()) {
-    if (clang::CXXRecordDecl *base = base_specifier.getType()->getCanonicalTypeInternal()->getAsCXXRecordDecl()) {
+    if (clang::CXXRecordDecl *base = base_specifier.getType()
+                                         ->getCanonicalTypeInternal()
+                                         ->getAsCXXRecordDecl()) {
       data.inheritance.subs[base].push_back(D);
       data.inheritance.supers[D].push_back(base);
     }
@@ -286,9 +295,12 @@ Index IndexBuilder::Build() && {
   return std::move(data);
 }
 
-std::unordered_map<const clang::CXXRecordDecl *, std::vector<const clang::CXXRecordDecl *>>
+std::unordered_map<const clang::CXXRecordDecl *,
+                   std::vector<const clang::CXXRecordDecl *>>
 InheritanceHierarchy::supers_star() const {
-  std::unordered_map<const clang::CXXRecordDecl *, std::vector<const clang::CXXRecordDecl *>> result;
+  std::unordered_map<const clang::CXXRecordDecl *,
+                     std::vector<const clang::CXXRecordDecl *>>
+      result;
 
   std::stack<const clang::CXXRecordDecl *> stack;
   for (const auto &[cur, _] : this->supers) {
@@ -312,7 +324,8 @@ InheritanceHierarchy::supers_star() const {
       continue;
     }
 
-    // Make sure that the result for all the direct supers have been calculcated already.
+    // Make sure that the result for all the direct supers have been calculcated
+    // already.
     bool found_missing = false;
     for (auto super : top_supers_itr->second) {
       if (!result.contains(super)) {
@@ -321,7 +334,8 @@ InheritanceHierarchy::supers_star() const {
       }
     }
 
-    // If we found at least one element which wasn't previously calculcated, then we need to come back to this later.
+    // If we found at least one element which wasn't previously calculcated,
+    // then we need to come back to this later.
     if (found_missing) continue;
 
     // Build the result for this element since all supers are calculcated.
@@ -334,16 +348,20 @@ InheritanceHierarchy::supers_star() const {
     }
 
     // Record the results and move on.
-    result.emplace(top, std::vector<const clang::CXXRecordDecl *>(supers.begin(), supers.end()));
+    result.emplace(top, std::vector<const clang::CXXRecordDecl *>(
+                            supers.begin(), supers.end()));
     stack.pop();
   }
 
   return result;
 }
 
-std::unordered_map<const clang::CXXRecordDecl *, std::vector<const clang::CXXRecordDecl *>>
+std::unordered_map<const clang::CXXRecordDecl *,
+                   std::vector<const clang::CXXRecordDecl *>>
 InheritanceHierarchy::subs_star() const {
-  std::unordered_map<const clang::CXXRecordDecl *, std::vector<const clang::CXXRecordDecl *>> result;
+  std::unordered_map<const clang::CXXRecordDecl *,
+                     std::vector<const clang::CXXRecordDecl *>>
+      result;
 
   std::stack<const clang::CXXRecordDecl *> stack;
   for (const auto &[cur, _] : this->subs) {
@@ -367,7 +385,8 @@ InheritanceHierarchy::subs_star() const {
       continue;
     }
 
-    // Make sure that the result for all the direct subs have been calculcated already.
+    // Make sure that the result for all the direct subs have been calculcated
+    // already.
     bool found_missing = false;
     for (auto super : top_subs_itr->second) {
       if (!result.contains(super)) {
@@ -376,7 +395,8 @@ InheritanceHierarchy::subs_star() const {
       }
     }
 
-    // If we found at least one element which wasn't previously calculcated, then we need to come back to this later.
+    // If we found at least one element which wasn't previously calculcated,
+    // then we need to come back to this later.
     if (found_missing) continue;
 
     // Build the result for this element since all subs are calculcated.
@@ -389,7 +409,8 @@ InheritanceHierarchy::subs_star() const {
     }
 
     // Record the results and move on.
-    result.emplace(top, std::vector<const clang::CXXRecordDecl *>(subs.begin(), subs.end()));
+    result.emplace(top, std::vector<const clang::CXXRecordDecl *>(subs.begin(),
+                                                                  subs.end()));
     stack.pop();
   }
 
@@ -397,7 +418,9 @@ InheritanceHierarchy::subs_star() const {
 }
 
 InheritanceTree InheritanceHierarchy::as_tree() {
-  std::unordered_map<const clang::CXXRecordDecl *, std::unique_ptr<InheritanceNode>> nodes;
+  std::unordered_map<const clang::CXXRecordDecl *,
+                     std::unique_ptr<InheritanceNode>>
+      nodes;
 
   auto get_node = [&](const clang::CXXRecordDecl *decl) -> InheritanceNode * {
     auto find_itr = nodes.find(decl);
@@ -450,7 +473,8 @@ std::vector<InheritanceNode *> InheritanceTree::leaves() const {
   return result;
 }
 
-void InheritanceTree::filter(std::function<bool(const clang::CXXRecordDecl *)> f) {
+void InheritanceTree::filter(
+    std::function<bool(const clang::CXXRecordDecl *)> f) {
   std::unordered_set<InheritanceNode *> pruned_nodes;
 
   // Walk backwards through the vector pruning as we go.

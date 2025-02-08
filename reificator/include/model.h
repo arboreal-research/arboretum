@@ -5,49 +5,50 @@
 #include <clang/AST/DeclCXX.h>
 
 #include <memory>
-#include <unordered_map>
+#include <optional>
 #include <unordered_set>
 
+#include "decl_handler.h"
 #include "index.h"
+#include "table.h"
+
+namespace clang {
+class CXXRecordDecl;
+}
 
 namespace arboretum {
 
-template <typename T>
-struct EntityNameMap {
-  std::unordered_map<std::string, size_t> name_count;
-  std::unordered_map<T, std::string> entity_map;
-};
-
 struct Model {
-  explicit Model(clang::ASTContext &ctx_, Index &&index_);
+  explicit Model(clang::ASTContext &ctx_, Index &index_);
+
+  void PopulateMetaTables();
+
+  void PopulateClangTables(
+      const std::map<std::string, bool> &allowed_properties);
 
   clang::ASTContext &ast_ctx;
 
-  /////////////////////////////////////////////////////////////////////////////
+  Index &index;
 
-  Index index;
+  std::vector<std::shared_ptr<Table>> tables;
+  std::unordered_map<const clang::CXXRecordDecl *, DeclHandler> handler_by_decl;
 
-  /////////////////////////////////////////////////////////////////////////////
+  std::map<std::string, const clang::EnumDecl *> enums;
+  std::map<std::string, const clang::EnumConstantDecl *> enum_constants;
 
-  size_t name_idx = 0;
+  std::unordered_map<const clang::EnumDecl *, uint64_t> GetEnumToIndex();
+  std::unordered_map<const clang::EnumConstantDecl *, uint64_t>
+  GetEnumConstantToIndex();
 
-  EntityNameMap<const clang::CXXMethodDecl *> method_entity_map;
-  std::string entity_name(const clang::CXXMethodDecl *method);
-
-  EntityNameMap<const clang::CXXRecordDecl *> class_entity_map;
-  std::string entity_name(const clang::CXXRecordDecl *cls);
-
-  EntityNameMap<const clang::EnumDecl *> enum_entity_map;
-  std::string entity_name(const clang::EnumDecl *cls);
-
-  EntityNameMap<const clang::EnumConstantDecl *> enum_constant_entity_map;
-  std::string entity_name(const clang::EnumConstantDecl *cls);
-
-  /////////////////////////////////////////////////////////////////////////////
-
-  ///
-
-  std::vector<std::pair<std::string, std::string>> meta_data_model;
+ private:
+  bool MarkEnumUsed(const clang::EnumDecl *decl);
+  std::unique_ptr<MethodHandler> HandlerForType(
+      clang::QualType return_type, const clang::CXXMethodDecl *method_decl);
+  std::unique_ptr<MethodHandler> HandlerForMethod(
+      const clang::CXXRecordDecl *record_decl,
+      const clang::CXXMethodDecl *method_decl);
+  void PopulateClangTable(const std::map<std::string, bool> &allowed_properties,
+                          const clang::CXXRecordDecl *decl);
 };
 
 }  // namespace arboretum

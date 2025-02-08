@@ -1,30 +1,12 @@
+use cozo::NamedRows;
 use std::{thread::sleep, time::Duration};
 use tokio::{io::AsyncWriteExt, net::TcpStream, sync::mpsc::Receiver};
-
-use serde::{Deserialize, Serialize};
 use tracing::{error, trace};
 
 static CLIENT_MAX_RETRY_COUNT: usize = 10;
 
-#[derive(Serialize, Deserialize)]
-pub enum FfiValue {
-    Unsigned(u64),
-    Signed(i64),
-    Double(f64),
-    String(String),
-}
-
-#[derive(Serialize, Deserialize)]
-pub enum ClangPluginClientMessage {
-    NewNodeWithProps(u64, FfiValue),
-    NewNamedNode(String, u64),
-    NewNamedNodeWithProps(String, u64, FfiValue),
-    NewEdge(u64, u64, u64),
-    NewEdgeWithProps(u64, u64, u64, FfiValue),
-}
-
 pub enum TcpClientWorkItem {
-    Message(ClangPluginClientMessage),
+    SendData(String, NamedRows),
     Shutdown,
 }
 
@@ -55,7 +37,7 @@ async fn tcp_client_handler(
             }
         }
         let message = match item.as_ref().unwrap() {
-            TcpClientWorkItem::Message(message) => message,
+            TcpClientWorkItem::SendData(relation, rows) => (relation, rows),
             TcpClientWorkItem::Shutdown => {
                 tracing::info!("TCP Worker recieved shutdown signal");
 
@@ -66,7 +48,7 @@ async fn tcp_client_handler(
             }
         };
 
-        let serialized_data = bincode::serialize(message).expect("Failed to serialize object");
+        let serialized_data = bincode::serialize(&message).expect("Failed to serialize object");
 
         // Get the length of the serialized data
         let length = serialized_data.len() as u64;
