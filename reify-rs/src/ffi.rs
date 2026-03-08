@@ -367,6451 +367,6771 @@ pub enum Record {
   Record354(Record354),
 }
 
-pub static mut RECORD_SINK: Option<Box<dyn Fn(FfiMessage)>> = None;
-
-// file
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record0 {
-  pub c0: u64, // id
-  pub c1: String, // filename
-  pub c2: String, // content
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_file(c0: u64, c1: *const c_char, c2: *const c_char) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c1 = unsafe { CStr::from_ptr(c1) }.to_string_lossy().to_string();
-  let c2 = unsafe { CStr::from_ptr(c2) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record0(Record0{c0, c1, c2, })));
-}
-
-// source_loc
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record1 {
-  pub c0: u64, // id
-  pub c1: u64, // file_id
-  pub c2: u64, // line
-  pub c3: u64, // col
-  pub c4: u64, // expansion_loc
-  pub c5: u64, // spelling_loc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_source_loc(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record1(Record1{c0, c1, c2, c3, c4, c5, })));
-}
-
-// source_range
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record2 {
-  pub c0: u64, // id
-  pub c1: u64, // begin
-  pub c2: u64, // end
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_source_range(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record2(Record2{c0, c1, c2, })));
-}
-
-// enum
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record3 {
-  pub c0: u64, // id
-  pub c1: String, // name
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_enum(c0: u64, c1: *const c_char) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c1 = unsafe { CStr::from_ptr(c1) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record3(Record3{c0, c1, })));
-}
-
-// enum_value
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record4 {
-  pub c0: u64, // id
-  pub c1: u64, // enum_id
-  pub c2: String, // name
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_enum_value(c0: u64, c1: u64, c2: *const c_char) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c2 = unsafe { CStr::from_ptr(c2) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record4(Record4{c0, c1, c2, })));
-}
-
-// QualType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record5 {
-  pub c0: u64, // id
-  pub c1: u64, // Type_id
-  pub c2: bool, // is_const
-  pub c3: bool, // is_volatile
-  pub c4: bool, // is_restrict
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_QualType(c0: u64, c1: u64, c2: bool, c3: bool, c4: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record5(Record5{c0, c1, c2, c3, c4, })));
-}
-
-// CFG
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record6 {
-  pub c0: u64, // id
-  pub c1: u64, // entry_block_id
-  pub c2: u64, // exit_block_id
-  pub c3: bool, // is_linear
-  pub c4: u64, // indirect_goto
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFG(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record6(Record6{c0, c1, c2, c3, c4, })));
-}
-
-// CFG_blocks
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record7 {
-  pub c0: u64, // CFG_id
-  pub c1: u64, // CFGBlock_id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFG_blocks(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record7(Record7{c0, c1, })));
-}
-
-// CFG_try_blocks
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record8 {
-  pub c0: u64, // CFG_id
-  pub c1: u64, // CFGBlock_id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFG_try_blocks(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record8(Record8{c0, c1, })));
-}
-
-// CFG_edges
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record9 {
-  pub c0: u64, // CFGBlock_src
-  pub c1: u64, // CFGBlock_dst
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFG_edges(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record9(Record9{c0, c1, })));
-}
-
-// CFGBlock
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record10 {
-  pub c0: u64, // id
-  pub c1: u64, // terminator_stmt
-  pub c2: u64, // terminator_kind
-  pub c3: u64, // terminator_cond
-  pub c4: u64, // label_stmt
-  pub c5: u64, // loop_target
-  pub c6: bool, // has_no_return_element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGBlock(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record10(Record10{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// CFGBlock_elements
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record11 {
-  pub c0: u64, // CFGBlock_id
-  pub c1: u64, // CFGElement_id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGBlock_elements(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record11(Record11{c0, c1, })));
-}
-
-// CFGElement
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record12 {
-  pub c0: u64, // id
-  pub c1: u64, // kind
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGElement(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record12(Record12{c0, c1, })));
-}
-
-// CFGInitializer
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record13 {
-  pub c0: u64, // id
-  pub c1: u64, // getInitializer
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGInitializer(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record13(Record13{c0, c1, })));
-}
-
-// CFGScopeBegin
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record14 {
-  pub c0: u64, // id
-  pub c1: u64, // getTriggerStmt
-  pub c2: u64, // getVarDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGScopeBegin(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record14(Record14{c0, c1, c2, })));
-}
-
-// CFGScopeEnd
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record15 {
-  pub c0: u64, // id
-  pub c1: u64, // getTriggerStmt
-  pub c2: u64, // getVarDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGScopeEnd(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record15(Record15{c0, c1, c2, })));
-}
-
-// CFGNewAllocator
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record16 {
-  pub c0: u64, // id
-  pub c1: u64, // getAllocatorExpr
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGNewAllocator(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record16(Record16{c0, c1, })));
-}
-
-// CFGLifetimeEnds
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record17 {
-  pub c0: u64, // id
-  pub c1: u64, // getTriggerStmt
-  pub c2: u64, // getVarDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGLifetimeEnds(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record17(Record17{c0, c1, c2, })));
-}
-
-// CFGLoopExit
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record18 {
-  pub c0: u64, // id
-  pub c1: u64, // getLoopStmt
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGLoopExit(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record18(Record18{c0, c1, })));
-}
-
-// CFGStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record19 {
-  pub c0: u64, // id
-  pub c1: u64, // getStmt
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGStmt(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record19(Record19{c0, c1, })));
-}
-
-// CFGConstructor
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record20 {
-  pub c0: u64, // id
-  pub c1: u64, // getStmt
-  pub c2: u64, // getConstructionContext
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGConstructor(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record20(Record20{c0, c1, c2, })));
-}
-
-// CFGCXXRecordTypedCall
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record21 {
-  pub c0: u64, // id
-  pub c1: u64, // getStmt
-  pub c2: u64, // getConstructionContext
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGCXXRecordTypedCall(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record21(Record21{c0, c1, c2, })));
-}
-
-// CFGAutomaticObjDtor
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record22 {
-  pub c0: u64, // id
-  pub c1: u64, // getDestructorDecl
-  pub c2: u64, // getTriggerStmt
-  pub c3: u64, // getVarDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGAutomaticObjDtor(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record22(Record22{c0, c1, c2, c3, })));
-}
-
-// CFGDeleteDtor
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record23 {
-  pub c0: u64, // id
-  pub c1: u64, // getDestructorDecl
-  pub c2: u64, // getCXXRecordDecl
-  pub c3: u64, // getDeleteExpr
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGDeleteDtor(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record23(Record23{c0, c1, c2, c3, })));
-}
-
-// CFGBaseDtor
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record24 {
-  pub c0: u64, // id
-  pub c1: u64, // getDestructorDecl
-  pub c2: u64, // getBaseSpecifier
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGBaseDtor(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record24(Record24{c0, c1, c2, })));
-}
-
-// CFGMemberDtor
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record25 {
-  pub c0: u64, // id
-  pub c1: u64, // getDestructorDecl
-  pub c2: u64, // getFieldDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGMemberDtor(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record25(Record25{c0, c1, c2, })));
-}
-
-// CFGTemporaryDtor
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record26 {
-  pub c0: u64, // id
-  pub c1: u64, // getDestructorDecl
-  pub c2: u64, // getBindTemporaryExpr
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGTemporaryDtor(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record26(Record26{c0, c1, c2, })));
-}
-
-// CFGCleanupFunction
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record27 {
-  pub c0: u64, // id
-  pub c1: u64, // getVarDecl
-  pub c2: u64, // getFunctionDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CFGCleanupFunction(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record27(Record27{c0, c1, c2, })));
-}
-
-// Decl_usr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record28 {
-  pub c0: u64, // id
-  pub c1: String, // usr
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_Decl_usr(c0: u64, c1: *const c_char) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c1 = unsafe { CStr::from_ptr(c1) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record28(Record28{c0, c1, })));
-}
-
-// QualType_usr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record29 {
-  pub c0: u64, // id
-  pub c1: String, // usr
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_QualType_usr(c0: u64, c1: *const c_char) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c1 = unsafe { CStr::from_ptr(c1) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record29(Record29{c0, c1, })));
-}
-
-// FunctionDecl_cfg
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record30 {
-  pub c0: u64, // id
-  pub c1: u64, // cfg
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FunctionDecl_cfg(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record30(Record30{c0, c1, })));
-}
-
-// RValueReferenceType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record31 {
-  pub c0: u64, // id
-  pub c1: bool, // isSugared
-  pub c2: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_RValueReferenceType(c0: u64, c1: bool, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record31(Record31{c0, c1, c2, })));
-}
-
-// IncompleteArrayType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record32 {
-  pub c0: u64, // id
-  pub c1: bool, // isSugared
-  pub c2: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_IncompleteArrayType(c0: u64, c1: bool, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record32(Record32{c0, c1, c2, })));
-}
-
-// DependentAddressSpaceType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record33 {
-  pub c0: u64, // id
-  pub c1: u64, // getAddrSpaceExpr
-  pub c2: u64, // getPointeeType
-  pub c3: u64, // getAttributeLoc
-  pub c4: bool, // isSugared
-  pub c5: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DependentAddressSpaceType(c0: u64, c1: u64, c2: u64, c3: u64, c4: bool, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record33(Record33{c0, c1, c2, c3, c4, c5, })));
-}
-
-// DependentSizedExtVectorType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record34 {
-  pub c0: u64, // id
-  pub c1: u64, // getSizeExpr
-  pub c2: u64, // getElementType
-  pub c3: u64, // getAttributeLoc
-  pub c4: bool, // isSugared
-  pub c5: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DependentSizedExtVectorType(c0: u64, c1: u64, c2: u64, c3: u64, c4: bool, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record34(Record34{c0, c1, c2, c3, c4, c5, })));
-}
-
-// DependentBitIntType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record35 {
-  pub c0: u64, // id
-  pub c1: bool, // isUnsigned
-  pub c2: bool, // isSigned
-  pub c3: u64, // getNumBitsExpr
-  pub c4: bool, // isSugared
-  pub c5: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DependentBitIntType(c0: u64, c1: bool, c2: bool, c3: u64, c4: bool, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record35(Record35{c0, c1, c2, c3, c4, c5, })));
-}
-
-// SubstTemplateTypeParmType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record36 {
-  pub c0: u64, // id
-  pub c1: u64, // getReplacementType
-  pub c2: u64, // getAssociatedDecl
-  pub c3: u64, // getReplacedParameter
-  pub c4: u32, // getIndex
-  pub c5: bool, // isSugared
-  pub c6: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_SubstTemplateTypeParmType(c0: u64, c1: u64, c2: u64, c3: u64, c4: u32, c5: bool, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record36(Record36{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// VectorType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record37 {
-  pub c0: u64, // id
-  pub c1: u64, // getElementType
-  pub c2: u32, // getNumElements
-  pub c3: bool, // isSugared
-  pub c4: u64, // desugar
-  pub c5: u64, // getVectorKind
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_VectorType(c0: u64, c1: u64, c2: u32, c3: bool, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record37(Record37{c0, c1, c2, c3, c4, c5, })));
-}
-
-// MacroQualifiedType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record38 {
-  pub c0: u64, // id
-  pub c1: u64, // getUnderlyingType
-  pub c2: u64, // getModifiedType
-  pub c3: bool, // isSugared
-  pub c4: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MacroQualifiedType(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record38(Record38{c0, c1, c2, c3, c4, })));
-}
-
-// TypeOfType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record39 {
-  pub c0: u64, // id
-  pub c1: u64, // getUnmodifiedType
-  pub c2: u64, // desugar
-  pub c3: bool, // isSugared
-  pub c4: u64, // getKind
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TypeOfType(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record39(Record39{c0, c1, c2, c3, c4, })));
-}
-
-// TagType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record40 {
-  pub c0: u64, // id
-  pub c1: u64, // getDecl
-  pub c2: bool, // isBeingDefined
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TagType(c0: u64, c1: u64, c2: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record40(Record40{c0, c1, c2, })));
-}
-
-// ConstantArrayType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record41 {
-  pub c0: u64, // id
-  pub c1: u64, // getSizeExpr
-  pub c2: bool, // isSugared
-  pub c3: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ConstantArrayType(c0: u64, c1: u64, c2: bool, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record41(Record41{c0, c1, c2, c3, })));
-}
-
-// RecordType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record42 {
-  pub c0: u64, // id
-  pub c1: u64, // getDecl
-  pub c2: bool, // hasConstFields
-  pub c3: bool, // isSugared
-  pub c4: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_RecordType(c0: u64, c1: u64, c2: bool, c3: bool, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record42(Record42{c0, c1, c2, c3, c4, })));
-}
-
-// PipeType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record43 {
-  pub c0: u64, // id
-  pub c1: u64, // getElementType
-  pub c2: bool, // isSugared
-  pub c3: u64, // desugar
-  pub c4: bool, // isReadOnly
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_PipeType(c0: u64, c1: u64, c2: bool, c3: u64, c4: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record43(Record43{c0, c1, c2, c3, c4, })));
-}
-
-// ConstantMatrixType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record44 {
-  pub c0: u64, // id
-  pub c1: u32, // getNumRows
-  pub c2: u32, // getNumColumns
-  pub c3: u32, // getNumElementsFlattened
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ConstantMatrixType(c0: u64, c1: u32, c2: u32, c3: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record44(Record44{c0, c1, c2, c3, })));
-}
-
-// UsingType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record45 {
-  pub c0: u64, // id
-  pub c1: u64, // getFoundDecl
-  pub c2: u64, // getUnderlyingType
-  pub c3: bool, // isSugared
-  pub c4: u64, // desugar
-  pub c5: bool, // typeMatchesDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UsingType(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64, c5: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record45(Record45{c0, c1, c2, c3, c4, c5, })));
-}
-
-// TypeWithKeyword
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record46 {
-  pub c0: u64, // id
-  pub c1: u64, // getKeyword
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TypeWithKeyword(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record46(Record46{c0, c1, })));
-}
-
-// DeducedTemplateSpecializationType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record47 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DeducedTemplateSpecializationType(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record47(Record47{c0, })));
-}
-
-// DependentSizedMatrixType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record48 {
-  pub c0: u64, // id
-  pub c1: u64, // getRowExpr
-  pub c2: u64, // getColumnExpr
-  pub c3: u64, // getAttributeLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DependentSizedMatrixType(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record48(Record48{c0, c1, c2, c3, })));
-}
-
-// AttributedType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record49 {
-  pub c0: u64, // id
-  pub c1: u64, // getAttrKind
-  pub c2: u64, // getModifiedType
-  pub c3: u64, // getEquivalentType
-  pub c4: bool, // isSugared
-  pub c5: u64, // desugar
-  pub c6: bool, // isQualifier
-  pub c7: bool, // isMSTypeSpec
-  pub c8: bool, // isWebAssemblyFuncrefSpec
-  pub c9: bool, // isCallingConv
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_AttributedType(c0: u64, c1: u64, c2: u64, c3: u64, c4: bool, c5: u64, c6: bool, c7: bool, c8: bool, c9: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record49(Record49{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, })));
-}
-
-// DependentTemplateSpecializationType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record50 {
-  pub c0: u64, // id
-  pub c1: bool, // isSugared
-  pub c2: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DependentTemplateSpecializationType(c0: u64, c1: bool, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record50(Record50{c0, c1, c2, })));
-}
-
-// TemplateTypeParmType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record51 {
-  pub c0: u64, // id
-  pub c1: u32, // getDepth
-  pub c2: u32, // getIndex
-  pub c3: bool, // isParameterPack
-  pub c4: u64, // getDecl
-  pub c5: bool, // isSugared
-  pub c6: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TemplateTypeParmType(c0: u64, c1: u32, c2: u32, c3: bool, c4: u64, c5: bool, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record51(Record51{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// BlockPointerType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record52 {
-  pub c0: u64, // id
-  pub c1: u64, // getPointeeType
-  pub c2: bool, // isSugared
-  pub c3: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BlockPointerType(c0: u64, c1: u64, c2: bool, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record52(Record52{c0, c1, c2, c3, })));
-}
-
-// InjectedClassNameType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record53 {
-  pub c0: u64, // id
-  pub c1: u64, // getInjectedSpecializationType
-  pub c2: u64, // getInjectedTST
-  pub c3: u64, // getDecl
-  pub c4: bool, // isSugared
-  pub c5: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_InjectedClassNameType(c0: u64, c1: u64, c2: u64, c3: u64, c4: bool, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record53(Record53{c0, c1, c2, c3, c4, c5, })));
-}
-
-// SubstTemplateTypeParmPackType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record54 {
-  pub c0: u64, // id
-  pub c1: u64, // getAssociatedDecl
-  pub c2: u64, // getReplacedParameter
-  pub c3: u32, // getIndex
-  pub c4: bool, // getFinal
-  pub c5: u32, // getNumArgs
-  pub c6: bool, // isSugared
-  pub c7: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_SubstTemplateTypeParmPackType(c0: u64, c1: u64, c2: u64, c3: u32, c4: bool, c5: u32, c6: bool, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record54(Record54{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// BuiltinType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record55 {
-  pub c0: u64, // id
-  pub c1: u64, // getKind
-  pub c2: bool, // isSugared
-  pub c3: u64, // desugar
-  pub c4: bool, // isInteger
-  pub c5: bool, // isSignedInteger
-  pub c6: bool, // isUnsignedInteger
-  pub c7: bool, // isFloatingPoint
-  pub c8: bool, // isSVEBool
-  pub c9: bool, // isSVECount
-  pub c10: bool, // isPlaceholderType
-  pub c11: bool, // isNonOverloadPlaceholderType
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BuiltinType(c0: u64, c1: u64, c2: bool, c3: u64, c4: bool, c5: bool, c6: bool, c7: bool, c8: bool, c9: bool, c10: bool, c11: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record55(Record55{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, })));
-}
-
-// DependentVectorType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record56 {
-  pub c0: u64, // id
-  pub c1: u64, // getSizeExpr
-  pub c2: u64, // getElementType
-  pub c3: u64, // getAttributeLoc
-  pub c4: u64, // getVectorKind
-  pub c5: bool, // isSugared
-  pub c6: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DependentVectorType(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: bool, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record56(Record56{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// ExtVectorType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record57 {
-  pub c0: u64, // id
-  pub c1: bool, // isSugared
-  pub c2: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ExtVectorType(c0: u64, c1: bool, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record57(Record57{c0, c1, c2, })));
-}
-
-// ParenType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record58 {
-  pub c0: u64, // id
-  pub c1: u64, // getInnerType
-  pub c2: bool, // isSugared
-  pub c3: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ParenType(c0: u64, c1: u64, c2: bool, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record58(Record58{c0, c1, c2, c3, })));
-}
-
-// UnaryTransformType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record59 {
-  pub c0: u64, // id
-  pub c1: bool, // isSugared
-  pub c2: u64, // desugar
-  pub c3: u64, // getUnderlyingType
-  pub c4: u64, // getBaseType
-  pub c5: u64, // getUTTKind
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UnaryTransformType(c0: u64, c1: bool, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record59(Record59{c0, c1, c2, c3, c4, c5, })));
-}
-
-// UnresolvedUsingType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record60 {
-  pub c0: u64, // id
-  pub c1: u64, // getDecl
-  pub c2: bool, // isSugared
-  pub c3: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UnresolvedUsingType(c0: u64, c1: u64, c2: bool, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record60(Record60{c0, c1, c2, c3, })));
-}
-
-// ComplexType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record61 {
-  pub c0: u64, // id
-  pub c1: u64, // getElementType
-  pub c2: bool, // isSugared
-  pub c3: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ComplexType(c0: u64, c1: u64, c2: bool, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record61(Record61{c0, c1, c2, c3, })));
-}
-
-// PointerType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record62 {
-  pub c0: u64, // id
-  pub c1: u64, // getPointeeType
-  pub c2: bool, // isSugared
-  pub c3: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_PointerType(c0: u64, c1: u64, c2: bool, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record62(Record62{c0, c1, c2, c3, })));
-}
-
-// BTFTagAttributedType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record63 {
-  pub c0: u64, // id
-  pub c1: u64, // getWrappedType
-  pub c2: u64, // getAttr
-  pub c3: bool, // isSugared
-  pub c4: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BTFTagAttributedType(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record63(Record63{c0, c1, c2, c3, c4, })));
-}
-
-// DependentNameType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record64 {
-  pub c0: u64, // id
-  pub c1: bool, // isSugared
-  pub c2: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DependentNameType(c0: u64, c1: bool, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record64(Record64{c0, c1, c2, })));
-}
-
-// Type
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record65 {
-  pub c0: u64, // id
-  pub c1: bool, // containsUnexpandedParameterPack
-  pub c2: u64, // getLocallyUnqualifiedSingleStepDesugaredType
-  pub c3: u64, // getAsPlaceholderType
-  pub c4: u64, // getObjCARCImplicitLifetime
-  pub c5: u64, // getDependence
-  pub c6: bool, // containsErrors
-  pub c7: bool, // hasSizedVLAType
-  pub c8: bool, // hasUnnamedOrLocalType
-  pub c9: bool, // canDecayToPointerType
-  pub c10: bool, // hasPointerRepresentation
-  pub c11: bool, // hasObjCPointerRepresentation
-  pub c12: bool, // hasIntegerRepresentation
-  pub c13: bool, // hasSignedIntegerRepresentation
-  pub c14: bool, // hasUnsignedIntegerRepresentation
-  pub c15: bool, // hasFloatingRepresentation
-  pub c16: u64, // getAsStructureType
-  pub c17: u64, // getAsUnionType
-  pub c18: u64, // getAsComplexIntegerType
-  pub c19: u64, // getAsObjCInterfaceType
-  pub c20: u64, // getAsObjCInterfacePointerType
-  pub c21: u64, // getAsObjCQualifiedIdType
-  pub c22: u64, // getAsObjCQualifiedClassType
-  pub c23: u64, // getAsObjCQualifiedInterfaceType
-  pub c24: u64, // getAsCXXRecordDecl
-  pub c25: u64, // getAsRecordDecl
-  pub c26: u64, // getAsTagDecl
-  pub c27: u64, // getPointeeCXXRecordDecl
-  pub c28: u64, // getBaseElementTypeUnsafe
-  pub c29: u64, // getArrayElementTypeNoTypeQual
-  pub c30: u64, // getPointeeOrArrayElementType
-  pub c31: u64, // getLinkage
-  pub c32: u64, // getVisibility
-  pub c33: bool, // acceptsObjCTypeParams
-  pub c34: u64, // getCanonicalTypeInternal
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_Type(c0: u64, c1: bool, c2: u64, c3: u64, c4: u64, c5: u64, c6: bool, c7: bool, c8: bool, c9: bool, c10: bool, c11: bool, c12: bool, c13: bool, c14: bool, c15: bool, c16: u64, c17: u64, c18: u64, c19: u64, c20: u64, c21: u64, c22: u64, c23: u64, c24: u64, c25: u64, c26: u64, c27: u64, c28: u64, c29: u64, c30: u64, c31: u64, c32: u64, c33: bool, c34: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record65(Record65{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32, c33, c34, })));
-}
-
-// DependentUnaryTransformType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record66 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DependentUnaryTransformType(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record66(Record66{c0, })));
-}
-
-// AtomicType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record67 {
-  pub c0: u64, // id
-  pub c1: u64, // getValueType
-  pub c2: bool, // isSugared
-  pub c3: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_AtomicType(c0: u64, c1: u64, c2: bool, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record67(Record67{c0, c1, c2, c3, })));
-}
-
-// AutoType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record68 {
-  pub c0: u64, // id
-  pub c1: u64, // getTypeConstraintConcept
-  pub c2: bool, // isConstrained
-  pub c3: bool, // isDecltypeAuto
-  pub c4: bool, // isGNUAutoType
-  pub c5: u64, // getKeyword
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_AutoType(c0: u64, c1: u64, c2: bool, c3: bool, c4: bool, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record68(Record68{c0, c1, c2, c3, c4, c5, })));
-}
-
-// TemplateSpecializationType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record69 {
-  pub c0: u64, // id
-  pub c1: bool, // isCurrentInstantiation
-  pub c2: bool, // isTypeAlias
-  pub c3: bool, // isSugared
-  pub c4: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TemplateSpecializationType(c0: u64, c1: bool, c2: bool, c3: bool, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record69(Record69{c0, c1, c2, c3, c4, })));
-}
-
-// ReferenceType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record70 {
-  pub c0: u64, // id
-  pub c1: bool, // isSpelledAsLValue
-  pub c2: bool, // isInnerRef
-  pub c3: u64, // getPointeeTypeAsWritten
-  pub c4: u64, // getPointeeType
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ReferenceType(c0: u64, c1: bool, c2: bool, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record70(Record70{c0, c1, c2, c3, c4, })));
-}
-
-// DeducedType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record71 {
-  pub c0: u64, // id
-  pub c1: bool, // isSugared
-  pub c2: u64, // desugar
-  pub c3: u64, // getDeducedType
-  pub c4: bool, // isDeduced
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DeducedType(c0: u64, c1: bool, c2: u64, c3: u64, c4: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record71(Record71{c0, c1, c2, c3, c4, })));
-}
-
-// PackExpansionType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record72 {
-  pub c0: u64, // id
-  pub c1: u64, // getPattern
-  pub c2: bool, // isSugared
-  pub c3: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_PackExpansionType(c0: u64, c1: u64, c2: bool, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record72(Record72{c0, c1, c2, c3, })));
-}
-
-// DependentSizedArrayType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record73 {
-  pub c0: u64, // id
-  pub c1: u64, // getSizeExpr
-  pub c2: u64, // getBracketsRange
-  pub c3: u64, // getLBracketLoc
-  pub c4: u64, // getRBracketLoc
-  pub c5: bool, // isSugared
-  pub c6: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DependentSizedArrayType(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: bool, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record73(Record73{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// DecltypeType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record74 {
-  pub c0: u64, // id
-  pub c1: u64, // getUnderlyingExpr
-  pub c2: u64, // getUnderlyingType
-  pub c3: u64, // desugar
-  pub c4: bool, // isSugared
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DecltypeType(c0: u64, c1: u64, c2: u64, c3: u64, c4: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record74(Record74{c0, c1, c2, c3, c4, })));
-}
-
-// LValueReferenceType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record75 {
-  pub c0: u64, // id
-  pub c1: bool, // isSugared
-  pub c2: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_LValueReferenceType(c0: u64, c1: bool, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record75(Record75{c0, c1, c2, })));
-}
-
-// DependentDecltypeType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record76 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DependentDecltypeType(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record76(Record76{c0, })));
-}
-
-// TypeOfExprType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record77 {
-  pub c0: u64, // id
-  pub c1: u64, // getUnderlyingExpr
-  pub c2: u64, // getKind
-  pub c3: u64, // desugar
-  pub c4: bool, // isSugared
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TypeOfExprType(c0: u64, c1: u64, c2: u64, c3: u64, c4: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record77(Record77{c0, c1, c2, c3, c4, })));
-}
-
-// FunctionProtoType_getParamTypes
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record78 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FunctionProtoType_getParamTypes(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record78(Record78{c0, c1, c2, })));
-}
-
-// FunctionProtoType_param_types
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record79 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FunctionProtoType_param_types(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record79(Record79{c0, c1, c2, })));
-}
-
-// FunctionProtoType_exceptions
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record80 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FunctionProtoType_exceptions(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record80(Record80{c0, c1, c2, })));
-}
-
-// FunctionProtoType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record81 {
-  pub c0: u64, // id
-  pub c1: u32, // getNumParams
-  pub c2: u64, // getExceptionSpecType
-  pub c3: bool, // hasExceptionSpec
-  pub c4: bool, // hasDynamicExceptionSpec
-  pub c5: bool, // hasNoexceptExceptionSpec
-  pub c6: bool, // hasDependentExceptionSpec
-  pub c7: bool, // hasInstantiationDependentExceptionSpec
-  pub c8: u32, // getNumExceptions
-  pub c9: u64, // getNoexceptExpr
-  pub c10: u64, // getExceptionSpecDecl
-  pub c11: u64, // getExceptionSpecTemplate
-  pub c12: u64, // canThrow
-  pub c13: bool, // isVariadic
-  pub c14: u64, // getEllipsisLoc
-  pub c15: bool, // isTemplateVariadic
-  pub c16: bool, // hasTrailingReturn
-  pub c17: u64, // getRefQualifier
-  pub c18: bool, // hasExtParameterInfos
-  pub c19: u32, // getAArch64SMEAttributes
-  pub c20: bool, // isSugared
-  pub c21: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FunctionProtoType(c0: u64, c1: u32, c2: u64, c3: bool, c4: bool, c5: bool, c6: bool, c7: bool, c8: u32, c9: u64, c10: u64, c11: u64, c12: u64, c13: bool, c14: u64, c15: bool, c16: bool, c17: u64, c18: bool, c19: u32, c20: bool, c21: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record81(Record81{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, })));
-}
-
-// AdjustedType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record82 {
-  pub c0: u64, // id
-  pub c1: u64, // getOriginalType
-  pub c2: u64, // getAdjustedType
-  pub c3: bool, // isSugared
-  pub c4: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_AdjustedType(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record82(Record82{c0, c1, c2, c3, c4, })));
-}
-
-// ArrayType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record83 {
-  pub c0: u64, // id
-  pub c1: u64, // getElementType
-  pub c2: u64, // getSizeModifier
-  pub c3: u32, // getIndexTypeCVRQualifiers
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ArrayType(c0: u64, c1: u64, c2: u64, c3: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record83(Record83{c0, c1, c2, c3, })));
-}
-
-// VariableArrayType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record84 {
-  pub c0: u64, // id
-  pub c1: u64, // getSizeExpr
-  pub c2: u64, // getBracketsRange
-  pub c3: u64, // getLBracketLoc
-  pub c4: u64, // getRBracketLoc
-  pub c5: bool, // isSugared
-  pub c6: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_VariableArrayType(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: bool, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record84(Record84{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// EnumType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record85 {
-  pub c0: u64, // id
-  pub c1: u64, // getDecl
-  pub c2: bool, // isSugared
-  pub c3: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_EnumType(c0: u64, c1: u64, c2: bool, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record85(Record85{c0, c1, c2, c3, })));
-}
-
-// DependentTypeOfExprType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record86 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DependentTypeOfExprType(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record86(Record86{c0, })));
-}
-
-// DecayedType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record87 {
-  pub c0: u64, // id
-  pub c1: u64, // getDecayedType
-  pub c2: u64, // getPointeeType
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DecayedType(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record87(Record87{c0, c1, c2, })));
-}
-
-// MemberPointerType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record88 {
-  pub c0: u64, // id
-  pub c1: u64, // getPointeeType
-  pub c2: bool, // isMemberFunctionPointer
-  pub c3: bool, // isMemberDataPointer
-  pub c4: u64, // getClass
-  pub c5: bool, // isSugared
-  pub c6: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MemberPointerType(c0: u64, c1: u64, c2: bool, c3: bool, c4: u64, c5: bool, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record88(Record88{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// BitIntType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record89 {
-  pub c0: u64, // id
-  pub c1: bool, // isUnsigned
-  pub c2: bool, // isSigned
-  pub c3: u32, // getNumBits
-  pub c4: bool, // isSugared
-  pub c5: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BitIntType(c0: u64, c1: bool, c2: bool, c3: u32, c4: bool, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record89(Record89{c0, c1, c2, c3, c4, c5, })));
-}
-
-// TypedefType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record90 {
-  pub c0: u64, // id
-  pub c1: u64, // getDecl
-  pub c2: bool, // isSugared
-  pub c3: u64, // desugar
-  pub c4: bool, // typeMatchesDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TypedefType(c0: u64, c1: u64, c2: bool, c3: u64, c4: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record90(Record90{c0, c1, c2, c3, c4, })));
-}
-
-// FunctionType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record91 {
-  pub c0: u64, // id
-  pub c1: u64, // getReturnType
-  pub c2: bool, // getHasRegParm
-  pub c3: u32, // getRegParmType
-  pub c4: bool, // getNoReturnAttr
-  pub c5: bool, // getCmseNSCallAttr
-  pub c6: u64, // getCallConv
-  pub c7: bool, // isConst
-  pub c8: bool, // isVolatile
-  pub c9: bool, // isRestrict
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FunctionType(c0: u64, c1: u64, c2: bool, c3: u32, c4: bool, c5: bool, c6: u64, c7: bool, c8: bool, c9: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record91(Record91{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, })));
-}
-
-// FunctionNoProtoType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record92 {
-  pub c0: u64, // id
-  pub c1: bool, // isSugared
-  pub c2: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FunctionNoProtoType(c0: u64, c1: bool, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record92(Record92{c0, c1, c2, })));
-}
-
-// ElaboratedType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record93 {
-  pub c0: u64, // id
-  pub c1: u64, // getNamedType
-  pub c2: u64, // desugar
-  pub c3: bool, // isSugared
-  pub c4: u64, // getOwnedTagDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ElaboratedType(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record93(Record93{c0, c1, c2, c3, c4, })));
-}
-
-// MatrixType
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record94 {
-  pub c0: u64, // id
-  pub c1: u64, // getElementType
-  pub c2: bool, // isSugared
-  pub c3: u64, // desugar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MatrixType(c0: u64, c1: u64, c2: bool, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record94(Record94{c0, c1, c2, c3, })));
-}
-
-// ClassTemplatePartialSpecializationDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record95 {
-  pub c0: u64, // id
-  pub c1: bool, // hasAssociatedConstraints
-  pub c2: u64, // getInstantiatedFromMember
-  pub c3: u64, // getInstantiatedFromMemberTemplate
-  pub c4: u64, // getInjectedSpecializationType
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ClassTemplatePartialSpecializationDecl(c0: u64, c1: bool, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record95(Record95{c0, c1, c2, c3, c4, })));
-}
-
-// TemplateParamObjectDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record96 {
-  pub c0: u64, // id
-  pub c1: u64, // getCanonicalDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TemplateParamObjectDecl(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record96(Record96{c0, c1, })));
-}
-
-// CXXRecordDecl_methods
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record97 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXRecordDecl_methods(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record97(Record97{c0, c1, c2, })));
-}
-
-// CXXRecordDecl_ctors
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record98 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXRecordDecl_ctors(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record98(Record98{c0, c1, c2, })));
-}
-
-// CXXRecordDecl_friends
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record99 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXRecordDecl_friends(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record99(Record99{c0, c1, c2, })));
-}
-
-// CXXRecordDecl_getLambdaExplicitTemplateParameters
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record100 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXRecordDecl_getLambdaExplicitTemplateParameters(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record100(Record100{c0, c1, c2, })));
-}
-
-// CXXRecordDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record101 {
-  pub c0: u64, // id
-  pub c1: u64, // getCanonicalDecl
-  pub c2: u64, // getPreviousDecl
-  pub c3: u64, // getMostRecentDecl
-  pub c4: u64, // getDefinition
-  pub c5: bool, // hasDefinition
-  pub c6: bool, // isDynamicClass
-  pub c7: bool, // mayBeDynamicClass
-  pub c8: bool, // mayBeNonDynamicClass
-  pub c9: bool, // isParsingBaseSpecifiers
-  pub c10: u32, // getODRHash
-  pub c11: u32, // getNumBases
-  pub c12: u32, // getNumVBases
-  pub c13: bool, // hasAnyDependentBases
-  pub c14: bool, // hasFriends
-  pub c15: bool, // hasSimpleCopyConstructor
-  pub c16: bool, // hasSimpleMoveConstructor
-  pub c17: bool, // hasSimpleCopyAssignment
-  pub c18: bool, // hasSimpleMoveAssignment
-  pub c19: bool, // hasSimpleDestructor
-  pub c20: bool, // hasDefaultConstructor
-  pub c21: bool, // needsImplicitDefaultConstructor
-  pub c22: bool, // hasUserDeclaredConstructor
-  pub c23: bool, // hasUserProvidedDefaultConstructor
-  pub c24: bool, // hasUserDeclaredCopyConstructor
-  pub c25: bool, // needsImplicitCopyConstructor
-  pub c26: bool, // needsOverloadResolutionForCopyConstructor
-  pub c27: bool, // implicitCopyConstructorHasConstParam
-  pub c28: bool, // hasCopyConstructorWithConstParam
-  pub c29: bool, // hasUserDeclaredMoveOperation
-  pub c30: bool, // hasUserDeclaredMoveConstructor
-  pub c31: bool, // hasMoveConstructor
-  pub c32: bool, // needsImplicitMoveConstructor
-  pub c33: bool, // needsOverloadResolutionForMoveConstructor
-  pub c34: bool, // hasUserDeclaredCopyAssignment
-  pub c35: bool, // needsImplicitCopyAssignment
-  pub c36: bool, // needsOverloadResolutionForCopyAssignment
-  pub c37: bool, // implicitCopyAssignmentHasConstParam
-  pub c38: bool, // hasCopyAssignmentWithConstParam
-  pub c39: bool, // hasUserDeclaredMoveAssignment
-  pub c40: bool, // hasMoveAssignment
-  pub c41: bool, // needsImplicitMoveAssignment
-  pub c42: bool, // needsOverloadResolutionForMoveAssignment
-  pub c43: bool, // hasUserDeclaredDestructor
-  pub c44: bool, // needsImplicitDestructor
-  pub c45: bool, // needsOverloadResolutionForDestructor
-  pub c46: bool, // isLambda
-  pub c47: bool, // isGenericLambda
-  pub c48: bool, // lambdaIsDefaultConstructibleAndAssignable
-  pub c49: u64, // getLambdaCallOperator
-  pub c50: u64, // getDependentLambdaCallOperator
-  pub c51: bool, // isCapturelessLambda
-  pub c52: bool, // isAggregate
-  pub c53: bool, // hasInClassInitializer
-  pub c54: bool, // hasUninitializedReferenceMember
-  pub c55: bool, // isPOD
-  pub c56: bool, // isCLike
-  pub c57: bool, // isEmpty
-  pub c58: bool, // hasInitMethod
-  pub c59: bool, // hasPrivateFields
-  pub c60: bool, // hasProtectedFields
-  pub c61: bool, // hasDirectFields
-  pub c62: bool, // isPolymorphic
-  pub c63: bool, // isAbstract
-  pub c64: bool, // isStandardLayout
-  pub c65: bool, // isCXX11StandardLayout
-  pub c66: bool, // hasMutableFields
-  pub c67: bool, // hasVariantMembers
-  pub c68: bool, // hasTrivialDefaultConstructor
-  pub c69: bool, // hasNonTrivialDefaultConstructor
-  pub c70: bool, // hasConstexprNonCopyMoveConstructor
-  pub c71: bool, // defaultedDefaultConstructorIsConstexpr
-  pub c72: bool, // hasConstexprDefaultConstructor
-  pub c73: bool, // hasTrivialCopyConstructor
-  pub c74: bool, // hasTrivialCopyConstructorForCall
-  pub c75: bool, // hasNonTrivialCopyConstructor
-  pub c76: bool, // hasNonTrivialCopyConstructorForCall
-  pub c77: bool, // hasTrivialMoveConstructor
-  pub c78: bool, // hasTrivialMoveConstructorForCall
-  pub c79: bool, // hasNonTrivialMoveConstructor
-  pub c80: bool, // hasNonTrivialMoveConstructorForCall
-  pub c81: bool, // hasTrivialCopyAssignment
-  pub c82: bool, // hasNonTrivialCopyAssignment
-  pub c83: bool, // hasTrivialMoveAssignment
-  pub c84: bool, // hasNonTrivialMoveAssignment
-  pub c85: bool, // defaultedDestructorIsConstexpr
-  pub c86: bool, // hasConstexprDestructor
-  pub c87: bool, // hasTrivialDestructor
-  pub c88: bool, // hasTrivialDestructorForCall
-  pub c89: bool, // hasNonTrivialDestructor
-  pub c90: bool, // hasNonTrivialDestructorForCall
-  pub c91: bool, // allowConstDefaultInit
-  pub c92: bool, // hasIrrelevantDestructor
-  pub c93: bool, // hasNonLiteralTypeFieldsOrBases
-  pub c94: bool, // hasInheritedConstructor
-  pub c95: bool, // hasInheritedAssignment
-  pub c96: bool, // isTriviallyCopyable
-  pub c97: bool, // isTriviallyCopyConstructible
-  pub c98: bool, // isTrivial
-  pub c99: bool, // isLiteral
-  pub c100: bool, // isStructural
-  pub c101: u64, // getInstantiatedFromMemberClass
-  pub c102: u64, // getDescribedClassTemplate
-  pub c103: u64, // getTemplateSpecializationKind
-  pub c104: u64, // getTemplateInstantiationPattern
-  pub c105: u64, // getDestructor
-  pub c106: bool, // isAnyDestructorNoReturn
-  pub c107: u64, // isLocalClass
-  pub c108: bool, // mayBeAbstract
-  pub c109: bool, // isEffectivelyFinal
-  pub c110: u32, // getDeviceLambdaManglingNumber
-  pub c111: u64, // getMSVtorDispMode
-  pub c112: bool, // isDependentLambda
-  pub c113: bool, // isNeverDependentLambda
-  pub c114: u32, // getLambdaDependencyKind
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXRecordDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: bool, c6: bool, c7: bool, c8: bool, c9: bool, c10: u32, c11: u32, c12: u32, c13: bool, c14: bool, c15: bool, c16: bool, c17: bool, c18: bool, c19: bool, c20: bool, c21: bool, c22: bool, c23: bool, c24: bool, c25: bool, c26: bool, c27: bool, c28: bool, c29: bool, c30: bool, c31: bool, c32: bool, c33: bool, c34: bool, c35: bool, c36: bool, c37: bool, c38: bool, c39: bool, c40: bool, c41: bool, c42: bool, c43: bool, c44: bool, c45: bool, c46: bool, c47: bool, c48: bool, c49: u64, c50: u64, c51: bool, c52: bool, c53: bool, c54: bool, c55: bool, c56: bool, c57: bool, c58: bool, c59: bool, c60: bool, c61: bool, c62: bool, c63: bool, c64: bool, c65: bool, c66: bool, c67: bool, c68: bool, c69: bool, c70: bool, c71: bool, c72: bool, c73: bool, c74: bool, c75: bool, c76: bool, c77: bool, c78: bool, c79: bool, c80: bool, c81: bool, c82: bool, c83: bool, c84: bool, c85: bool, c86: bool, c87: bool, c88: bool, c89: bool, c90: bool, c91: bool, c92: bool, c93: bool, c94: bool, c95: bool, c96: bool, c97: bool, c98: bool, c99: bool, c100: bool, c101: u64, c102: u64, c103: u64, c104: u64, c105: u64, c106: bool, c107: u64, c108: bool, c109: bool, c110: u32, c111: u64, c112: bool, c113: bool, c114: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record101(Record101{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32, c33, c34, c35, c36, c37, c38, c39, c40, c41, c42, c43, c44, c45, c46, c47, c48, c49, c50, c51, c52, c53, c54, c55, c56, c57, c58, c59, c60, c61, c62, c63, c64, c65, c66, c67, c68, c69, c70, c71, c72, c73, c74, c75, c76, c77, c78, c79, c80, c81, c82, c83, c84, c85, c86, c87, c88, c89, c90, c91, c92, c93, c94, c95, c96, c97, c98, c99, c100, c101, c102, c103, c104, c105, c106, c107, c108, c109, c110, c111, c112, c113, c114, })));
-}
-
-// TagDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record102 {
-  pub c0: u64, // id
-  pub c1: u64, // getBraceRange
-  pub c2: u64, // getInnerLocStart
-  pub c3: u64, // getOuterLocStart
-  pub c4: u64, // getSourceRange
-  pub c5: u64, // getCanonicalDecl
-  pub c6: bool, // isThisDeclarationADefinition
-  pub c7: bool, // isCompleteDefinition
-  pub c8: bool, // isCompleteDefinitionRequired
-  pub c9: bool, // isBeingDefined
-  pub c10: bool, // isEmbeddedInDeclarator
-  pub c11: bool, // isFreeStanding
-  pub c12: bool, // mayHaveOutOfDateDef
-  pub c13: bool, // isDependentType
-  pub c14: bool, // isThisDeclarationADemotedDefinition
-  pub c15: u64, // getDefinition
-  pub c16: String, // getKindName
-  pub c17: u64, // getTagKind
-  pub c18: bool, // isStruct
-  pub c19: bool, // isInterface
-  pub c20: bool, // isClass
-  pub c21: bool, // isUnion
-  pub c22: bool, // isEnum
-  pub c23: bool, // hasNameForLinkage
-  pub c24: u64, // getTypedefNameForAnonDecl
-  pub c25: u32, // getNumTemplateParameterLists
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TagDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: bool, c7: bool, c8: bool, c9: bool, c10: bool, c11: bool, c12: bool, c13: bool, c14: bool, c15: u64, c16: *const c_char, c17: u64, c18: bool, c19: bool, c20: bool, c21: bool, c22: bool, c23: bool, c24: u64, c25: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c16 = unsafe { CStr::from_ptr(c16) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record102(Record102{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, })));
-}
-
-// HLSLBufferDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record103 {
-  pub c0: u64, // id
-  pub c1: u64, // getSourceRange
-  pub c2: u64, // getLocStart
-  pub c3: u64, // getLBraceLoc
-  pub c4: u64, // getRBraceLoc
-  pub c5: bool, // isCBuffer
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_HLSLBufferDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record103(Record103{c0, c1, c2, c3, c4, c5, })));
-}
-
-// UsingDirectiveDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record104 {
-  pub c0: u64, // id
-  pub c1: u64, // getNominatedNamespaceAsWritten
-  pub c2: u64, // getNominatedNamespace
-  pub c3: u64, // getUsingLoc
-  pub c4: u64, // getNamespaceKeyLocation
-  pub c5: u64, // getIdentLocation
-  pub c6: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UsingDirectiveDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record104(Record104{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// NamespaceAliasDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record105 {
-  pub c0: u64, // id
-  pub c1: u64, // getCanonicalDecl
-  pub c2: u64, // getNamespace
-  pub c3: u64, // getAliasLoc
-  pub c4: u64, // getNamespaceLoc
-  pub c5: u64, // getTargetNameLoc
-  pub c6: u64, // getAliasedNamespace
-  pub c7: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_NamespaceAliasDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record105(Record105{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// TypeDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record106 {
-  pub c0: u64, // id
-  pub c1: u64, // getTypeForDecl
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TypeDecl(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record106(Record106{c0, c1, c2, c3, })));
-}
-
-// RedeclarableTemplateDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record107 {
-  pub c0: u64, // id
-  pub c1: u64, // getCanonicalDecl
-  pub c2: bool, // isMemberSpecialization
-  pub c3: u64, // getInstantiatedFromMemberTemplate
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_RedeclarableTemplateDecl(c0: u64, c1: u64, c2: bool, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record107(Record107{c0, c1, c2, c3, })));
-}
-
-// ImplicitConceptSpecializationDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record108 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ImplicitConceptSpecializationDecl(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record108(Record108{c0, })));
-}
-
-// ConstructorUsingShadowDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record109 {
-  pub c0: u64, // id
-  pub c1: u64, // getIntroducer
-  pub c2: u64, // getParent
-  pub c3: u64, // getNominatedBaseClassShadowDecl
-  pub c4: u64, // getConstructedBaseClassShadowDecl
-  pub c5: u64, // getNominatedBaseClass
-  pub c6: u64, // getConstructedBaseClass
-  pub c7: bool, // constructsVirtualBase
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ConstructorUsingShadowDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record109(Record109{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// BuiltinTemplateDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record110 {
-  pub c0: u64, // id
-  pub c1: u64, // getSourceRange
-  pub c2: u64, // getBuiltinTemplateKind
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BuiltinTemplateDecl(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record110(Record110{c0, c1, c2, })));
-}
-
-// UsingShadowDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record111 {
-  pub c0: u64, // id
-  pub c1: u64, // getCanonicalDecl
-  pub c2: u64, // getTargetDecl
-  pub c3: u64, // getIntroducer
-  pub c4: u64, // getNextUsingShadowDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UsingShadowDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record111(Record111{c0, c1, c2, c3, c4, })));
-}
-
-// BindingDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record112 {
-  pub c0: u64, // id
-  pub c1: u64, // getBinding
-  pub c2: u64, // getDecomposedDecl
-  pub c3: u64, // getHoldingVar
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BindingDecl(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record112(Record112{c0, c1, c2, c3, })));
-}
-
-// UsingDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record113 {
-  pub c0: u64, // id
-  pub c1: u64, // getUsingLoc
-  pub c2: bool, // isAccessDeclaration
-  pub c3: bool, // hasTypename
-  pub c4: u64, // getSourceRange
-  pub c5: u64, // getCanonicalDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UsingDecl(c0: u64, c1: u64, c2: bool, c3: bool, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record113(Record113{c0, c1, c2, c3, c4, c5, })));
-}
-
-// UnresolvedUsingTypenameDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record114 {
-  pub c0: u64, // id
-  pub c1: u64, // getUsingLoc
-  pub c2: u64, // getTypenameLoc
-  pub c3: bool, // isPackExpansion
-  pub c4: u64, // getEllipsisLoc
-  pub c5: u64, // getCanonicalDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UnresolvedUsingTypenameDecl(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record114(Record114{c0, c1, c2, c3, c4, c5, })));
-}
-
-// LabelDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record115 {
-  pub c0: u64, // id
-  pub c1: u64, // getStmt
-  pub c2: bool, // isGnuLocal
-  pub c3: u64, // getSourceRange
-  pub c4: bool, // isMSAsmLabel
-  pub c5: bool, // isResolvedMSAsmLabel
-  pub c6: String, // getMSAsmLabel
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_LabelDecl(c0: u64, c1: u64, c2: bool, c3: u64, c4: bool, c5: bool, c6: *const c_char) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c6 = unsafe { CStr::from_ptr(c6) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record115(Record115{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// BaseUsingDecl_shadows
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record116 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BaseUsingDecl_shadows(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record116(Record116{c0, c1, c2, })));
-}
-
-// BaseUsingDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record117 {
-  pub c0: u64, // id
-  pub c1: u32, // shadow_size
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BaseUsingDecl(c0: u64, c1: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record117(Record117{c0, c1, })));
-}
-
-// UsingPackDecl_expansions
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record118 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UsingPackDecl_expansions(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record118(Record118{c0, c1, c2, })));
-}
-
-// UsingPackDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record119 {
-  pub c0: u64, // id
-  pub c1: u64, // getInstantiatedFromUsingDecl
-  pub c2: u64, // getSourceRange
-  pub c3: u64, // getCanonicalDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UsingPackDecl(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record119(Record119{c0, c1, c2, c3, })));
-}
-
-// CXXMethodDecl_overridden_methods
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record120 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXMethodDecl_overridden_methods(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record120(Record120{c0, c1, c2, })));
-}
-
-// CXXMethodDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record121 {
-  pub c0: u64, // id
-  pub c1: bool, // isStatic
-  pub c2: bool, // isInstance
-  pub c3: bool, // isExplicitObjectMemberFunction
-  pub c4: bool, // isImplicitObjectMemberFunction
-  pub c5: bool, // isConst
-  pub c6: bool, // isVolatile
-  pub c7: bool, // isVirtual
-  pub c8: bool, // isCopyAssignmentOperator
-  pub c9: bool, // isMoveAssignmentOperator
-  pub c10: u64, // getCanonicalDecl
-  pub c11: u64, // getMostRecentDecl
-  pub c12: u32, // size_overridden_methods
-  pub c13: u64, // getParent
-  pub c14: u64, // getThisType
-  pub c15: u64, // getFunctionObjectParameterReferenceType
-  pub c16: u64, // getFunctionObjectParameterType
-  pub c17: u32, // getNumExplicitParams
-  pub c18: u64, // getRefQualifier
-  pub c19: bool, // hasInlineBody
-  pub c20: bool, // isLambdaStaticInvoker
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXMethodDecl(c0: u64, c1: bool, c2: bool, c3: bool, c4: bool, c5: bool, c6: bool, c7: bool, c8: bool, c9: bool, c10: u64, c11: u64, c12: u32, c13: u64, c14: u64, c15: u64, c16: u64, c17: u32, c18: u64, c19: bool, c20: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record121(Record121{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, })));
-}
-
-// TemplateTypeParmDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record122 {
-  pub c0: u64, // id
-  pub c1: bool, // wasDeclaredWithTypename
-  pub c2: bool, // hasDefaultArgument
-  pub c3: u64, // getDefaultArgumentLoc
-  pub c4: bool, // defaultArgumentWasInherited
-  pub c5: u32, // getDepth
-  pub c6: u32, // getIndex
-  pub c7: bool, // isParameterPack
-  pub c8: bool, // isPackExpansion
-  pub c9: bool, // isExpandedParameterPack
-  pub c10: bool, // hasTypeConstraint
-  pub c11: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TemplateTypeParmDecl(c0: u64, c1: bool, c2: bool, c3: u64, c4: bool, c5: u32, c6: u32, c7: bool, c8: bool, c9: bool, c10: bool, c11: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record122(Record122{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, })));
-}
-
-// UnresolvedUsingIfExistsDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record123 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UnresolvedUsingIfExistsDecl(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record123(Record123{c0, })));
-}
-
-// VarDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record124 {
-  pub c0: u64, // id
-  pub c1: u64, // getSourceRange
-  pub c2: u64, // getStorageClass
-  pub c3: u64, // getTSCSpec
-  pub c4: u64, // getTLSKind
-  pub c5: bool, // hasLocalStorage
-  pub c6: bool, // isStaticLocal
-  pub c7: bool, // hasExternalStorage
-  pub c8: bool, // hasGlobalStorage
-  pub c9: u64, // getStorageDuration
-  pub c10: u64, // getLanguageLinkage
-  pub c11: bool, // isExternC
-  pub c12: bool, // isInExternCContext
-  pub c13: bool, // isInExternCXXContext
-  pub c14: bool, // isLocalVarDecl
-  pub c15: bool, // isLocalVarDeclOrParm
-  pub c16: bool, // isFunctionOrMethodVarDecl
-  pub c17: bool, // isStaticDataMember
-  pub c18: u64, // getCanonicalDecl
-  pub c19: u64, // isThisDeclarationADefinition
-  pub c20: u64, // hasDefinition
-  pub c21: u64, // getActingDefinition
-  pub c22: u64, // getDefinition
-  pub c23: bool, // isOutOfLine
-  pub c24: bool, // isFileVarDecl
-  pub c25: u64, // getAnyInitializer
-  pub c26: bool, // hasInit
-  pub c27: u64, // getInit
-  pub c28: u64, // getInitializingDeclaration
-  pub c29: bool, // hasConstantInitialization
-  pub c30: u64, // getInitStyle
-  pub c31: bool, // isDirectInit
-  pub c32: bool, // isThisDeclarationADemotedDefinition
-  pub c33: bool, // isExceptionVariable
-  pub c34: bool, // isNRVOVariable
-  pub c35: bool, // isCXXForRangeDecl
-  pub c36: bool, // isObjCForDecl
-  pub c37: bool, // isARCPseudoStrong
-  pub c38: bool, // isInline
-  pub c39: bool, // isInlineSpecified
-  pub c40: bool, // isConstexpr
-  pub c41: bool, // isInitCapture
-  pub c42: bool, // isParameterPack
-  pub c43: bool, // isPreviousDeclInSameBlockScope
-  pub c44: bool, // isEscapingByref
-  pub c45: bool, // isNonEscapingByref
-  pub c46: bool, // hasDependentAlignment
-  pub c47: u64, // getTemplateInstantiationPattern
-  pub c48: u64, // getInstantiatedFromStaticDataMember
-  pub c49: u64, // getTemplateSpecializationKind
-  pub c50: u64, // getTemplateSpecializationKindForInstantiation
-  pub c51: u64, // getPointOfInstantiation
-  pub c52: u64, // getDescribedVarTemplate
-  pub c53: bool, // isKnownToBeDefined
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_VarDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: bool, c6: bool, c7: bool, c8: bool, c9: u64, c10: u64, c11: bool, c12: bool, c13: bool, c14: bool, c15: bool, c16: bool, c17: bool, c18: u64, c19: u64, c20: u64, c21: u64, c22: u64, c23: bool, c24: bool, c25: u64, c26: bool, c27: u64, c28: u64, c29: bool, c30: u64, c31: bool, c32: bool, c33: bool, c34: bool, c35: bool, c36: bool, c37: bool, c38: bool, c39: bool, c40: bool, c41: bool, c42: bool, c43: bool, c44: bool, c45: bool, c46: bool, c47: u64, c48: u64, c49: u64, c50: u64, c51: u64, c52: u64, c53: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record124(Record124{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32, c33, c34, c35, c36, c37, c38, c39, c40, c41, c42, c43, c44, c45, c46, c47, c48, c49, c50, c51, c52, c53, })));
-}
-
-// FunctionTemplateDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record125 {
-  pub c0: u64, // id
-  pub c1: u64, // getTemplatedDecl
-  pub c2: bool, // isThisDeclarationADefinition
-  pub c3: u64, // getCanonicalDecl
-  pub c4: u64, // getPreviousDecl
-  pub c5: u64, // getMostRecentDecl
-  pub c6: u64, // getInstantiatedFromMemberTemplate
-  pub c7: bool, // isAbbreviated
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FunctionTemplateDecl(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: u64, c6: u64, c7: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record125(Record125{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// ClassTemplateDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record126 {
-  pub c0: u64, // id
-  pub c1: u64, // getTemplatedDecl
-  pub c2: bool, // isThisDeclarationADefinition
-  pub c3: u64, // getCanonicalDecl
-  pub c4: u64, // getPreviousDecl
-  pub c5: u64, // getMostRecentDecl
-  pub c6: u64, // getInstantiatedFromMemberTemplate
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ClassTemplateDecl(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record126(Record126{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// TypedefNameDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record127 {
-  pub c0: u64, // id
-  pub c1: bool, // isModed
-  pub c2: u64, // getUnderlyingType
-  pub c3: u64, // getCanonicalDecl
-  pub c4: bool, // isTransparentTag
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TypedefNameDecl(c0: u64, c1: bool, c2: u64, c3: u64, c4: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record127(Record127{c0, c1, c2, c3, c4, })));
-}
-
-// TypeAliasTemplateDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record128 {
-  pub c0: u64, // id
-  pub c1: u64, // getTemplatedDecl
-  pub c2: u64, // getCanonicalDecl
-  pub c3: u64, // getPreviousDecl
-  pub c4: u64, // getInstantiatedFromMemberTemplate
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TypeAliasTemplateDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record128(Record128{c0, c1, c2, c3, c4, })));
-}
-
-// RecordDecl_fields
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record129 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_RecordDecl_fields(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record129(Record129{c0, c1, c2, })));
-}
-
-// RecordDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record130 {
-  pub c0: u64, // id
-  pub c1: u64, // getPreviousDecl
-  pub c2: u64, // getMostRecentDecl
-  pub c3: bool, // hasFlexibleArrayMember
-  pub c4: bool, // isAnonymousStructOrUnion
-  pub c5: bool, // hasObjectMember
-  pub c6: bool, // hasVolatileMember
-  pub c7: bool, // hasLoadedFieldsFromExternalStorage
-  pub c8: bool, // isNonTrivialToPrimitiveDefaultInitialize
-  pub c9: bool, // isNonTrivialToPrimitiveCopy
-  pub c10: bool, // isNonTrivialToPrimitiveDestroy
-  pub c11: bool, // hasNonTrivialToPrimitiveDefaultInitializeCUnion
-  pub c12: bool, // hasNonTrivialToPrimitiveDestructCUnion
-  pub c13: bool, // hasNonTrivialToPrimitiveCopyCUnion
-  pub c14: bool, // canPassInRegisters
-  pub c15: u64, // getArgPassingRestrictions
-  pub c16: bool, // isParamDestroyedInCallee
-  pub c17: bool, // isRandomized
-  pub c18: bool, // isInjectedClassName
-  pub c19: bool, // isLambda
-  pub c20: bool, // isCapturedRecord
-  pub c21: u64, // getDefinition
-  pub c22: bool, // isOrContainsUnion
-  pub c23: bool, // field_empty
-  pub c24: u64, // findFirstNamedDataMember
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_RecordDecl(c0: u64, c1: u64, c2: u64, c3: bool, c4: bool, c5: bool, c6: bool, c7: bool, c8: bool, c9: bool, c10: bool, c11: bool, c12: bool, c13: bool, c14: bool, c15: u64, c16: bool, c17: bool, c18: bool, c19: bool, c20: bool, c21: u64, c22: bool, c23: bool, c24: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record130(Record130{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, })));
-}
-
-// TemplateTemplateParmDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record131 {
-  pub c0: u64, // id
-  pub c1: bool, // isParameterPack
-  pub c2: bool, // isPackExpansion
-  pub c3: bool, // isExpandedParameterPack
-  pub c4: bool, // hasDefaultArgument
-  pub c5: u64, // getDefaultArgumentLoc
-  pub c6: bool, // defaultArgumentWasInherited
-  pub c7: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TemplateTemplateParmDecl(c0: u64, c1: bool, c2: bool, c3: bool, c4: bool, c5: u64, c6: bool, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record131(Record131{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// ExportDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record132 {
-  pub c0: u64, // id
-  pub c1: u64, // getExportLoc
-  pub c2: u64, // getRBraceLoc
-  pub c3: bool, // hasBraces
-  pub c4: u64, // getEndLoc
-  pub c5: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ExportDecl(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record132(Record132{c0, c1, c2, c3, c4, c5, })));
-}
-
-// UsingEnumDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record133 {
-  pub c0: u64, // id
-  pub c1: u64, // getUsingLoc
-  pub c2: u64, // getEnumLoc
-  pub c3: u64, // getEnumDecl
-  pub c4: u64, // getSourceRange
-  pub c5: u64, // getCanonicalDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UsingEnumDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record133(Record133{c0, c1, c2, c3, c4, c5, })));
-}
-
-// PragmaDetectMismatchDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record134 {
-  pub c0: u64, // id
-  pub c1: String, // getName
-  pub c2: String, // getValue
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_PragmaDetectMismatchDecl(c0: u64, c1: *const c_char, c2: *const c_char) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c1 = unsafe { CStr::from_ptr(c1) }.to_string_lossy().to_string();
-  let c2 = unsafe { CStr::from_ptr(c2) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record134(Record134{c0, c1, c2, })));
-}
-
-// VarTemplateDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record135 {
-  pub c0: u64, // id
-  pub c1: u64, // getTemplatedDecl
-  pub c2: bool, // isThisDeclarationADefinition
-  pub c3: u64, // getCanonicalDecl
-  pub c4: u64, // getPreviousDecl
-  pub c5: u64, // getMostRecentDecl
-  pub c6: u64, // getInstantiatedFromMemberTemplate
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_VarTemplateDecl(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record135(Record135{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// Decl_attrs
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record136 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_Decl_attrs(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record136(Record136{c0, c1, c2, })));
-}
-
-// Decl_redecls
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record137 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_Decl_redecls(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record137(Record137{c0, c1, c2, })));
-}
-
-// Decl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record138 {
-  pub c0: u64, // id
-  pub c1: u64, // getSourceRange
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-  pub c4: u64, // getLocation
-  pub c5: u64, // getNextDeclInContext
-  pub c6: u64, // getNonClosureContext
-  pub c7: u64, // getTranslationUnitDecl
-  pub c8: bool, // isInAnonymousNamespace
-  pub c9: bool, // isInStdNamespace
-  pub c10: bool, // isFileContextDecl
-  pub c11: u64, // getAccess
-  pub c12: u64, // getAccessUnsafe
-  pub c13: bool, // hasAttrs
-  pub c14: bool, // isInvalidDecl
-  pub c15: bool, // isImplicit
-  pub c16: bool, // isReferenced
-  pub c17: bool, // isThisDeclarationReferenced
-  pub c18: bool, // isTopLevelDeclInObjCContainer
-  pub c19: bool, // isModulePrivate
-  pub c20: bool, // isInExportDeclContext
-  pub c21: bool, // isInvisibleOutsideTheOwningModule
-  pub c22: bool, // isInAnotherModuleUnit
-  pub c23: bool, // isDiscardedInGlobalModuleFragment
-  pub c24: bool, // shouldSkipCheckingODR
-  pub c25: bool, // hasDefiningAttr
-  pub c26: u64, // getDefiningAttr
-  pub c27: bool, // isWeakImported
-  pub c28: bool, // isFromASTFile
-  pub c29: u32, // getGlobalID
-  pub c30: u32, // getOwningModuleID
-  pub c31: bool, // hasOwningModule
-  pub c32: bool, // isUnconditionallyVisible
-  pub c33: bool, // isReachable
-  pub c34: u64, // getModuleOwnershipKind
-  pub c35: u32, // getIdentifierNamespace
-  pub c36: bool, // hasTagIdentifierNamespace
-  pub c37: bool, // isOutOfLine
-  pub c38: bool, // isTemplated
-  pub c39: u32, // getTemplateDepth
-  pub c40: bool, // isDefinedOutsideFunctionOrMethod
-  pub c41: u64, // getCanonicalDecl
-  pub c42: bool, // isCanonicalDecl
-  pub c43: u64, // getPreviousDecl
-  pub c44: bool, // isFirstDecl
-  pub c45: u64, // getMostRecentDecl
-  pub c46: u64, // getBody
-  pub c47: bool, // hasBody
-  pub c48: u64, // getBodyRBrace
-  pub c49: bool, // isTemplateParameter
-  pub c50: bool, // isTemplateParameterPack
-  pub c51: bool, // isParameterPack
-  pub c52: bool, // isTemplateDecl
-  pub c53: bool, // isFunctionOrFunctionTemplate
-  pub c54: u64, // getDescribedTemplate
-  pub c55: u64, // getAsFunction
-  pub c56: bool, // isLocalExternDecl
-  pub c57: u64, // getFriendObjectKind
-  pub c58: i64, // getID
-  pub c59: bool, // isFunctionPointerType
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_Decl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: bool, c9: bool, c10: bool, c11: u64, c12: u64, c13: bool, c14: bool, c15: bool, c16: bool, c17: bool, c18: bool, c19: bool, c20: bool, c21: bool, c22: bool, c23: bool, c24: bool, c25: bool, c26: u64, c27: bool, c28: bool, c29: u32, c30: u32, c31: bool, c32: bool, c33: bool, c34: u64, c35: u32, c36: bool, c37: bool, c38: bool, c39: u32, c40: bool, c41: u64, c42: bool, c43: u64, c44: bool, c45: u64, c46: u64, c47: bool, c48: u64, c49: bool, c50: bool, c51: bool, c52: bool, c53: bool, c54: u64, c55: u64, c56: bool, c57: u64, c58: i64, c59: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record138(Record138{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32, c33, c34, c35, c36, c37, c38, c39, c40, c41, c42, c43, c44, c45, c46, c47, c48, c49, c50, c51, c52, c53, c54, c55, c56, c57, c58, c59, })));
-}
-
-// EmptyDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record139 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_EmptyDecl(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record139(Record139{c0, })));
-}
-
-// MSGuidDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record140 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MSGuidDecl(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record140(Record140{c0, })));
-}
-
-// CXXConstructorDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record141 {
-  pub c0: u64, // id
-  pub c1: bool, // isExplicit
-  pub c2: u32, // getNumCtorInitializers
-  pub c3: bool, // isDelegatingConstructor
-  pub c4: bool, // isDefaultConstructor
-  pub c5: bool, // isCopyConstructor
-  pub c6: bool, // isMoveConstructor
-  pub c7: bool, // isCopyOrMoveConstructor
-  pub c8: bool, // isSpecializationCopyingObject
-  pub c9: bool, // isInheritingConstructor
-  pub c10: u64, // getCanonicalDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXConstructorDecl(c0: u64, c1: bool, c2: u32, c3: bool, c4: bool, c5: bool, c6: bool, c7: bool, c8: bool, c9: bool, c10: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record141(Record141{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, })));
-}
-
-// UnnamedGlobalConstantDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record142 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UnnamedGlobalConstantDecl(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record142(Record142{c0, })));
-}
-
-// FieldDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record143 {
-  pub c0: u64, // id
-  pub c1: u32, // getFieldIndex
-  pub c2: bool, // isMutable
-  pub c3: bool, // isBitField
-  pub c4: bool, // isUnnamedBitfield
-  pub c5: bool, // isAnonymousStructOrUnion
-  pub c6: u64, // getBitWidth
-  pub c7: bool, // isPotentiallyOverlapping
-  pub c8: u64, // getInClassInitStyle
-  pub c9: bool, // hasInClassInitializer
-  pub c10: bool, // hasNonNullInClassInitializer
-  pub c11: u64, // getInClassInitializer
-  pub c12: bool, // hasCapturedVLAType
-  pub c13: u64, // getCapturedVLAType
-  pub c14: u64, // getParent
-  pub c15: u64, // getSourceRange
-  pub c16: u64, // getCanonicalDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FieldDecl(c0: u64, c1: u32, c2: bool, c3: bool, c4: bool, c5: bool, c6: u64, c7: bool, c8: u64, c9: bool, c10: bool, c11: u64, c12: bool, c13: u64, c14: u64, c15: u64, c16: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record143(Record143{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, })));
-}
-
-// RequiresExprBodyDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record144 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_RequiresExprBodyDecl(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record144(Record144{c0, })));
-}
-
-// TypedefDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record145 {
-  pub c0: u64, // id
-  pub c1: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TypedefDecl(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record145(Record145{c0, c1, })));
-}
-
-// VarTemplateSpecializationDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record146 {
-  pub c0: u64, // id
-  pub c1: u64, // getSpecializedTemplate
-  pub c2: u64, // getSpecializationKind
-  pub c3: bool, // isExplicitSpecialization
-  pub c4: bool, // isClassScopeExplicitSpecialization
-  pub c5: bool, // isExplicitInstantiationOrSpecialization
-  pub c6: u64, // getPointOfInstantiation
-  pub c7: u64, // getExternLoc
-  pub c8: u64, // getTemplateKeywordLoc
-  pub c9: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_VarTemplateSpecializationDecl(c0: u64, c1: u64, c2: u64, c3: bool, c4: bool, c5: bool, c6: u64, c7: u64, c8: u64, c9: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record146(Record146{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, })));
-}
-
-// LifetimeExtendedTemporaryDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record147 {
-  pub c0: u64, // id
-  pub c1: u64, // getExtendingDecl
-  pub c2: u64, // getStorageDuration
-  pub c3: u64, // getTemporaryExpr
-  pub c4: u32, // getManglingNumber
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_LifetimeExtendedTemporaryDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record147(Record147{c0, c1, c2, c3, c4, })));
-}
-
-// DecompositionDecl_bindings
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record148 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DecompositionDecl_bindings(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record148(Record148{c0, c1, c2, })));
-}
-
-// DecompositionDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record149 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DecompositionDecl(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record149(Record149{c0, })));
-}
-
-// PragmaCommentDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record150 {
-  pub c0: u64, // id
-  pub c1: u64, // getCommentKind
-  pub c2: String, // getArg
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_PragmaCommentDecl(c0: u64, c1: u64, c2: *const c_char) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c2 = unsafe { CStr::from_ptr(c2) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record150(Record150{c0, c1, c2, })));
-}
-
-// VarTemplatePartialSpecializationDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record151 {
-  pub c0: u64, // id
-  pub c1: bool, // hasAssociatedConstraints
-  pub c2: u64, // getInstantiatedFromMember
-  pub c3: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_VarTemplatePartialSpecializationDecl(c0: u64, c1: bool, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record151(Record151{c0, c1, c2, c3, })));
-}
-
-// FunctionDecl_parameters
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record152 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FunctionDecl_parameters(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record152(Record152{c0, c1, c2, })));
-}
-
-// FunctionDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record153 {
-  pub c0: u64, // id
-  pub c1: u64, // getEllipsisLoc
-  pub c2: u64, // getSourceRange
-  pub c3: bool, // hasBody
-  pub c4: bool, // hasTrivialBody
-  pub c5: bool, // isDefined
-  pub c6: u64, // getDefinition
-  pub c7: u64, // getBody
-  pub c8: bool, // isThisDeclarationADefinition
-  pub c9: bool, // isThisDeclarationInstantiatedFromAFriendDefinition
-  pub c10: bool, // doesThisDeclarationHaveABody
-  pub c11: bool, // isVariadic
-  pub c12: bool, // isVirtualAsWritten
-  pub c13: bool, // isPureVirtual
-  pub c14: bool, // isLateTemplateParsed
-  pub c15: bool, // isTrivial
-  pub c16: bool, // isTrivialForCall
-  pub c17: bool, // isDefaulted
-  pub c18: bool, // isExplicitlyDefaulted
-  pub c19: u64, // getDefaultLoc
-  pub c20: bool, // isUserProvided
-  pub c21: bool, // isIneligibleOrNotSelected
-  pub c22: bool, // hasImplicitReturnZero
-  pub c23: bool, // hasPrototype
-  pub c24: bool, // hasWrittenPrototype
-  pub c25: bool, // hasInheritedPrototype
-  pub c26: bool, // isConstexpr
-  pub c27: u64, // getConstexprKind
-  pub c28: bool, // isConstexprSpecified
-  pub c29: bool, // isConsteval
-  pub c30: bool, // BodyContainsImmediateEscalatingExpressions
-  pub c31: bool, // isImmediateEscalating
-  pub c32: bool, // isImmediateFunction
-  pub c33: bool, // instantiationIsPending
-  pub c34: bool, // usesSEHTry
-  pub c35: bool, // isDeleted
-  pub c36: bool, // isDeletedAsWritten
-  pub c37: bool, // isMain
-  pub c38: bool, // isMSVCRTEntryPoint
-  pub c39: bool, // isReservedGlobalPlacementOperator
-  pub c40: bool, // isInlineBuiltinDeclaration
-  pub c41: bool, // isDestroyingOperatorDelete
-  pub c42: u64, // getLanguageLinkage
-  pub c43: bool, // isExternC
-  pub c44: bool, // isInExternCContext
-  pub c45: bool, // isInExternCXXContext
-  pub c46: bool, // isGlobal
-  pub c47: bool, // isNoReturn
-  pub c48: bool, // hasSkippedBody
-  pub c49: bool, // willHaveBody
-  pub c50: bool, // isMultiVersion
-  pub c51: bool, // FriendConstraintRefersToEnclosingTemplate
-  pub c52: bool, // isMemberLikeConstrainedFriend
-  pub c53: u64, // getMultiVersionKind
-  pub c54: bool, // isCPUDispatchMultiVersion
-  pub c55: bool, // isCPUSpecificMultiVersion
-  pub c56: bool, // isTargetMultiVersion
-  pub c57: bool, // isTargetClonesMultiVersion
-  pub c58: u64, // getCanonicalDecl
-  pub c59: bool, // param_empty
-  pub c60: u64, // param_size
-  pub c61: u32, // getNumParams
-  pub c62: u32, // getMinRequiredArguments
-  pub c63: u32, // getMinRequiredExplicitArguments
-  pub c64: bool, // hasCXXExplicitFunctionObjectParameter
-  pub c65: u32, // getNumNonObjectParams
-  pub c66: bool, // hasOneParamOrDefaultArgs
-  pub c67: u64, // getReturnType
-  pub c68: u64, // getReturnTypeSourceRange
-  pub c69: u64, // getParametersSourceRange
-  pub c70: u64, // getDeclaredReturnType
-  pub c71: u64, // getExceptionSpecType
-  pub c72: u64, // getExceptionSpecSourceRange
-  pub c73: u64, // getCallResultType
-  pub c74: u64, // getStorageClass
-  pub c75: bool, // isInlineSpecified
-  pub c76: bool, // UsesFPIntrin
-  pub c77: bool, // isInlined
-  pub c78: bool, // isInlineDefinitionExternallyVisible
-  pub c79: bool, // isMSExternInline
-  pub c80: bool, // doesDeclarationForceExternallyVisibleDefinition
-  pub c81: bool, // isStatic
-  pub c82: bool, // isOverloadedOperator
-  pub c83: u64, // getOverloadedOperator
-  pub c84: u64, // getInstantiatedFromMemberFunction
-  pub c85: u64, // getTemplatedKind
-  pub c86: u64, // getInstantiatedFromDecl
-  pub c87: u64, // getDescribedFunctionTemplate
-  pub c88: bool, // isFunctionTemplateSpecialization
-  pub c89: bool, // isImplicitlyInstantiable
-  pub c90: bool, // isTemplateInstantiation
-  pub c91: u64, // getPrimaryTemplate
-  pub c92: u64, // getTemplateSpecializationKind
-  pub c93: u64, // getTemplateSpecializationKindForInstantiation
-  pub c94: u64, // getPointOfInstantiation
-  pub c95: bool, // isOutOfLine
-  pub c96: u32, // getMemoryFunctionKind
-  pub c97: u32, // getODRHash
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FunctionDecl(c0: u64, c1: u64, c2: u64, c3: bool, c4: bool, c5: bool, c6: u64, c7: u64, c8: bool, c9: bool, c10: bool, c11: bool, c12: bool, c13: bool, c14: bool, c15: bool, c16: bool, c17: bool, c18: bool, c19: u64, c20: bool, c21: bool, c22: bool, c23: bool, c24: bool, c25: bool, c26: bool, c27: u64, c28: bool, c29: bool, c30: bool, c31: bool, c32: bool, c33: bool, c34: bool, c35: bool, c36: bool, c37: bool, c38: bool, c39: bool, c40: bool, c41: bool, c42: u64, c43: bool, c44: bool, c45: bool, c46: bool, c47: bool, c48: bool, c49: bool, c50: bool, c51: bool, c52: bool, c53: u64, c54: bool, c55: bool, c56: bool, c57: bool, c58: u64, c59: bool, c60: u64, c61: u32, c62: u32, c63: u32, c64: bool, c65: u32, c66: bool, c67: u64, c68: u64, c69: u64, c70: u64, c71: u64, c72: u64, c73: u64, c74: u64, c75: bool, c76: bool, c77: bool, c78: bool, c79: bool, c80: bool, c81: bool, c82: bool, c83: u64, c84: u64, c85: u64, c86: u64, c87: u64, c88: bool, c89: bool, c90: bool, c91: u64, c92: u64, c93: u64, c94: u64, c95: bool, c96: u32, c97: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record153(Record153{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32, c33, c34, c35, c36, c37, c38, c39, c40, c41, c42, c43, c44, c45, c46, c47, c48, c49, c50, c51, c52, c53, c54, c55, c56, c57, c58, c59, c60, c61, c62, c63, c64, c65, c66, c67, c68, c69, c70, c71, c72, c73, c74, c75, c76, c77, c78, c79, c80, c81, c82, c83, c84, c85, c86, c87, c88, c89, c90, c91, c92, c93, c94, c95, c96, c97, })));
-}
-
-// NonTypeTemplateParmDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record154 {
-  pub c0: u64, // id
-  pub c1: u64, // getSourceRange
-  pub c2: bool, // hasDefaultArgument
-  pub c3: u64, // getDefaultArgument
-  pub c4: u64, // getDefaultArgumentLoc
-  pub c5: bool, // defaultArgumentWasInherited
-  pub c6: bool, // isParameterPack
-  pub c7: bool, // isPackExpansion
-  pub c8: bool, // isExpandedParameterPack
-  pub c9: u64, // getPlaceholderTypeConstraint
-  pub c10: bool, // hasPlaceholderTypeConstraint
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_NonTypeTemplateParmDecl(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: bool, c6: bool, c7: bool, c8: bool, c9: u64, c10: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record154(Record154{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, })));
-}
-
-// MSPropertyDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record155 {
-  pub c0: u64, // id
-  pub c1: bool, // hasGetter
-  pub c2: bool, // hasSetter
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MSPropertyDecl(c0: u64, c1: bool, c2: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record155(Record155{c0, c1, c2, })));
-}
-
-// ImplicitParamDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record156 {
-  pub c0: u64, // id
-  pub c1: u64, // getParameterKind
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ImplicitParamDecl(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record156(Record156{c0, c1, })));
-}
-
-// NamedDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record157 {
-  pub c0: u64, // id
-  pub c1: String, // getNameAsString
-  pub c2: String, // getQualifiedNameAsString
-  pub c3: bool, // hasLinkage
-  pub c4: bool, // isCXXClassMember
-  pub c5: bool, // isCXXInstanceMember
-  pub c6: u64, // getLinkageInternal
-  pub c7: u64, // getFormalLinkage
-  pub c8: bool, // hasExternalFormalLinkage
-  pub c9: bool, // isExternallyVisible
-  pub c10: bool, // isExternallyDeclarable
-  pub c11: bool, // isLinkageValid
-  pub c12: bool, // hasLinkageBeenComputed
-  pub c13: u64, // getUnderlyingDecl
-  pub c14: u64, // getMostRecentDecl
-  pub c15: u64, // getObjCFStringFormattingFamily
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_NamedDecl(c0: u64, c1: *const c_char, c2: *const c_char, c3: bool, c4: bool, c5: bool, c6: u64, c7: u64, c8: bool, c9: bool, c10: bool, c11: bool, c12: bool, c13: u64, c14: u64, c15: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c1 = unsafe { CStr::from_ptr(c1) }.to_string_lossy().to_string();
-  let c2 = unsafe { CStr::from_ptr(c2) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record157(Record157{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, })));
-}
-
-// CXXDestructorDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record158 {
-  pub c0: u64, // id
-  pub c1: u64, // getOperatorDelete
-  pub c2: u64, // getOperatorDeleteThisArg
-  pub c3: u64, // getCanonicalDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXDestructorDecl(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record158(Record158{c0, c1, c2, c3, })));
-}
-
-// ValueDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record159 {
-  pub c0: u64, // id
-  pub c1: u64, // getType
-  pub c2: bool, // isWeak
-  pub c3: bool, // isInitCapture
-  pub c4: u64, // getPotentiallyDecomposedVarDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ValueDecl(c0: u64, c1: u64, c2: bool, c3: bool, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record159(Record159{c0, c1, c2, c3, c4, })));
-}
-
-// CapturedDecl_parameters
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record160 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CapturedDecl_parameters(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record160(Record160{c0, c1, c2, })));
-}
-
-// CapturedDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record161 {
-  pub c0: u64, // id
-  pub c1: u64, // getBody
-  pub c2: bool, // isNothrow
-  pub c3: u32, // getNumParams
-  pub c4: u64, // getContextParam
-  pub c5: u32, // getContextParamPosition
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CapturedDecl(c0: u64, c1: u64, c2: bool, c3: u32, c4: u64, c5: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record161(Record161{c0, c1, c2, c3, c4, c5, })));
-}
-
-// FriendTemplateDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record162 {
-  pub c0: u64, // id
-  pub c1: u64, // getFriendDecl
-  pub c2: u64, // getFriendLoc
-  pub c3: u32, // getNumTemplateParameters
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FriendTemplateDecl(c0: u64, c1: u64, c2: u64, c3: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record162(Record162{c0, c1, c2, c3, })));
-}
-
-// IndirectFieldDecl_chain
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record163 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_IndirectFieldDecl_chain(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record163(Record163{c0, c1, c2, })));
-}
-
-// IndirectFieldDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record164 {
-  pub c0: u64, // id
-  pub c1: u32, // getChainingSize
-  pub c2: u64, // getAnonField
-  pub c3: u64, // getVarDecl
-  pub c4: u64, // getCanonicalDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_IndirectFieldDecl(c0: u64, c1: u32, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record164(Record164{c0, c1, c2, c3, c4, })));
-}
-
-// EnumConstantDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record165 {
-  pub c0: u64, // id
-  pub c1: u64, // getInitExpr
-  pub c2: u64, // getSourceRange
-  pub c3: u64, // getCanonicalDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_EnumConstantDecl(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record165(Record165{c0, c1, c2, c3, })));
-}
-
-// CXXConversionDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record166 {
-  pub c0: u64, // id
-  pub c1: bool, // isExplicit
-  pub c2: u64, // getConversionType
-  pub c3: bool, // isLambdaToBlockPointerConversion
-  pub c4: u64, // getCanonicalDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXConversionDecl(c0: u64, c1: bool, c2: u64, c3: bool, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record166(Record166{c0, c1, c2, c3, c4, })));
-}
-
-// EnumDecl_enumerators
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record167 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_EnumDecl_enumerators(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record167(Record167{c0, c1, c2, })));
-}
-
-// EnumDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record168 {
-  pub c0: u64, // id
-  pub c1: u64, // getCanonicalDecl
-  pub c2: u64, // getPreviousDecl
-  pub c3: u64, // getMostRecentDecl
-  pub c4: u64, // getDefinition
-  pub c5: u64, // getSourceRange
-  pub c6: u64, // getPromotionType
-  pub c7: u64, // getIntegerType
-  pub c8: u64, // getIntegerTypeRange
-  pub c9: u32, // getNumPositiveBits
-  pub c10: u32, // getNumNegativeBits
-  pub c11: bool, // isScoped
-  pub c12: bool, // isScopedUsingClassTag
-  pub c13: bool, // isFixed
-  pub c14: bool, // isComplete
-  pub c15: bool, // isClosed
-  pub c16: bool, // isClosedFlag
-  pub c17: bool, // isClosedNonFlag
-  pub c18: u64, // getTemplateInstantiationPattern
-  pub c19: u64, // getInstantiatedFromMemberEnum
-  pub c20: u64, // getTemplateSpecializationKind
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_EnumDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u32, c10: u32, c11: bool, c12: bool, c13: bool, c14: bool, c15: bool, c16: bool, c17: bool, c18: u64, c19: u64, c20: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record168(Record168{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, })));
-}
-
-// UnresolvedUsingValueDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record169 {
-  pub c0: u64, // id
-  pub c1: u64, // getUsingLoc
-  pub c2: bool, // isAccessDeclaration
-  pub c3: bool, // isPackExpansion
-  pub c4: u64, // getEllipsisLoc
-  pub c5: u64, // getSourceRange
-  pub c6: u64, // getCanonicalDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UnresolvedUsingValueDecl(c0: u64, c1: u64, c2: bool, c3: bool, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record169(Record169{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// BlockDecl_parameters
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record170 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BlockDecl_parameters(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record170(Record170{c0, c1, c2, })));
-}
-
-// BlockDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record171 {
-  pub c0: u64, // id
-  pub c1: u64, // getCaretLocation
-  pub c2: bool, // isVariadic
-  pub c3: u64, // getCompoundBody
-  pub c4: u64, // getBody
-  pub c5: bool, // param_empty
-  pub c6: u64, // param_size
-  pub c7: u32, // getNumParams
-  pub c8: bool, // hasCaptures
-  pub c9: u32, // getNumCaptures
-  pub c10: bool, // capturesCXXThis
-  pub c11: bool, // blockMissingReturnType
-  pub c12: bool, // isConversionFromLambda
-  pub c13: bool, // doesNotEscape
-  pub c14: bool, // canAvoidCopyToHeap
-  pub c15: u32, // getBlockManglingNumber
-  pub c16: u64, // getBlockManglingContextDecl
-  pub c17: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BlockDecl(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: bool, c6: u64, c7: u32, c8: bool, c9: u32, c10: bool, c11: bool, c12: bool, c13: bool, c14: bool, c15: u32, c16: u64, c17: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record171(Record171{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, })));
-}
-
-// DeclaratorDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record172 {
-  pub c0: u64, // id
-  pub c1: u64, // getInnerLocStart
-  pub c2: u64, // getOuterLocStart
-  pub c3: u64, // getSourceRange
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getTrailingRequiresClause
-  pub c6: u32, // getNumTemplateParameterLists
-  pub c7: u64, // getTypeSpecStartLoc
-  pub c8: u64, // getTypeSpecEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DeclaratorDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u32, c7: u64, c8: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record172(Record172{c0, c1, c2, c3, c4, c5, c6, c7, c8, })));
-}
-
-// TypeAliasDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record173 {
-  pub c0: u64, // id
-  pub c1: u64, // getSourceRange
-  pub c2: u64, // getDescribedAliasTemplate
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TypeAliasDecl(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record173(Record173{c0, c1, c2, })));
-}
-
-// CXXDeductionGuideDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record174 {
-  pub c0: u64, // id
-  pub c1: bool, // isExplicit
-  pub c2: u64, // getDeducedTemplate
-  pub c3: u64, // getCorrespondingConstructor
-  pub c4: u64, // getDeductionCandidateKind
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXDeductionGuideDecl(c0: u64, c1: bool, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record174(Record174{c0, c1, c2, c3, c4, })));
-}
-
-// ImportDecl_getIdentifierLocs
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record175 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ImportDecl_getIdentifierLocs(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record175(Record175{c0, c1, c2, })));
-}
-
-// ImportDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record176 {
-  pub c0: u64, // id
-  pub c1: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ImportDecl(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record176(Record176{c0, c1, })));
-}
-
-// AccessSpecDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record177 {
-  pub c0: u64, // id
-  pub c1: u64, // getAccessSpecifierLoc
-  pub c2: u64, // getColonLoc
-  pub c3: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_AccessSpecDecl(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record177(Record177{c0, c1, c2, c3, })));
-}
-
-// ParmVarDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record178 {
-  pub c0: u64, // id
-  pub c1: u64, // getSourceRange
-  pub c2: bool, // isObjCMethodParameter
-  pub c3: bool, // isDestroyedInCallee
-  pub c4: u32, // getFunctionScopeDepth
-  pub c5: u32, // getFunctionScopeIndex
-  pub c6: u64, // getObjCDeclQualifier
-  pub c7: bool, // isKNRPromoted
-  pub c8: bool, // isExplicitObjectParameter
-  pub c9: u64, // getExplicitObjectParamThisLoc
-  pub c10: u64, // getDefaultArg
-  pub c11: u64, // getDefaultArgRange
-  pub c12: u64, // getUninstantiatedDefaultArg
-  pub c13: bool, // hasDefaultArg
-  pub c14: bool, // hasUnparsedDefaultArg
-  pub c15: bool, // hasUninstantiatedDefaultArg
-  pub c16: bool, // hasInheritedDefaultArg
-  pub c17: u64, // getOriginalType
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ParmVarDecl(c0: u64, c1: u64, c2: bool, c3: bool, c4: u32, c5: u32, c6: u64, c7: bool, c8: bool, c9: u64, c10: u64, c11: u64, c12: u64, c13: bool, c14: bool, c15: bool, c16: bool, c17: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record178(Record178{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, })));
-}
-
-// FriendDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record179 {
-  pub c0: u64, // id
-  pub c1: u32, // getFriendTypeNumTemplateParameterLists
-  pub c2: u64, // getFriendDecl
-  pub c3: u64, // getFriendLoc
-  pub c4: u64, // getSourceRange
-  pub c5: bool, // isUnsupportedFriend
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FriendDecl(c0: u64, c1: u32, c2: u64, c3: u64, c4: u64, c5: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record179(Record179{c0, c1, c2, c3, c4, c5, })));
-}
-
-// FileScopeAsmDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record180 {
-  pub c0: u64, // id
-  pub c1: u64, // getAsmLoc
-  pub c2: u64, // getRParenLoc
-  pub c3: u64, // getSourceRange
-  pub c4: u64, // getAsmString
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FileScopeAsmDecl(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record180(Record180{c0, c1, c2, c3, c4, })));
-}
-
-// StaticAssertDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record181 {
-  pub c0: u64, // id
-  pub c1: u64, // getAssertExpr
-  pub c2: u64, // getMessage
-  pub c3: bool, // isFailed
-  pub c4: u64, // getRParenLoc
-  pub c5: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_StaticAssertDecl(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record181(Record181{c0, c1, c2, c3, c4, c5, })));
-}
-
-// TranslationUnitDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record182 {
-  pub c0: u64, // id
-  pub c1: u64, // getAnonymousNamespace
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TranslationUnitDecl(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record182(Record182{c0, c1, })));
-}
-
-// LinkageSpecDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record183 {
-  pub c0: u64, // id
-  pub c1: u64, // getLanguage
-  pub c2: bool, // hasBraces
-  pub c3: u64, // getExternLoc
-  pub c4: u64, // getRBraceLoc
-  pub c5: u64, // getEndLoc
-  pub c6: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_LinkageSpecDecl(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record183(Record183{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// ExternCContextDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record184 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ExternCContextDecl(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record184(Record184{c0, })));
-}
-
-// TopLevelStmtDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record185 {
-  pub c0: u64, // id
-  pub c1: u64, // getSourceRange
-  pub c2: u64, // getStmt
-  pub c3: bool, // isSemiMissing
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TopLevelStmtDecl(c0: u64, c1: u64, c2: u64, c3: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record185(Record185{c0, c1, c2, c3, })));
-}
-
-// TemplateDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record186 {
-  pub c0: u64, // id
-  pub c1: bool, // hasAssociatedConstraints
-  pub c2: u64, // getTemplatedDecl
-  pub c3: bool, // isTypeAlias
-  pub c4: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TemplateDecl(c0: u64, c1: bool, c2: u64, c3: bool, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record186(Record186{c0, c1, c2, c3, c4, })));
-}
-
-// ClassTemplateSpecializationDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record187 {
-  pub c0: u64, // id
-  pub c1: u64, // getSpecializedTemplate
-  pub c2: u64, // getSpecializationKind
-  pub c3: bool, // isExplicitSpecialization
-  pub c4: bool, // isClassScopeExplicitSpecialization
-  pub c5: bool, // isExplicitInstantiationOrSpecialization
-  pub c6: u64, // getPointOfInstantiation
-  pub c7: u64, // getExternLoc
-  pub c8: u64, // getTemplateKeywordLoc
-  pub c9: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ClassTemplateSpecializationDecl(c0: u64, c1: u64, c2: u64, c3: bool, c4: bool, c5: bool, c6: u64, c7: u64, c8: u64, c9: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record187(Record187{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, })));
-}
-
-// ConceptDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record188 {
-  pub c0: u64, // id
-  pub c1: u64, // getConstraintExpr
-  pub c2: u64, // getSourceRange
-  pub c3: bool, // isTypeConcept
-  pub c4: u64, // getCanonicalDecl
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ConceptDecl(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record188(Record188{c0, c1, c2, c3, c4, })));
-}
-
-// NamespaceDecl
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record189 {
-  pub c0: u64, // id
-  pub c1: bool, // isAnonymousNamespace
-  pub c2: bool, // isInline
-  pub c3: bool, // isNested
-  pub c4: u64, // getOriginalNamespace
-  pub c5: bool, // isOriginalNamespace
-  pub c6: u64, // getAnonymousNamespace
-  pub c7: u64, // getCanonicalDecl
-  pub c8: u64, // getSourceRange
-  pub c9: u64, // getBeginLoc
-  pub c10: u64, // getRBraceLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_NamespaceDecl(c0: u64, c1: bool, c2: bool, c3: bool, c4: u64, c5: bool, c6: u64, c7: u64, c8: u64, c9: u64, c10: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record189(Record189{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, })));
-}
-
-// AsmStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record190 {
-  pub c0: u64, // id
-  pub c1: u64, // getAsmLoc
-  pub c2: bool, // isSimple
-  pub c3: bool, // isVolatile
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-  pub c6: u32, // getNumOutputs
-  pub c7: u32, // getNumPlusOperands
-  pub c8: u32, // getNumInputs
-  pub c9: u32, // getNumClobbers
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_AsmStmt(c0: u64, c1: u64, c2: bool, c3: bool, c4: u64, c5: u64, c6: u32, c7: u32, c8: u32, c9: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record190(Record190{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, })));
-}
-
-// FullExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record191 {
-  pub c0: u64, // id
-  pub c1: u64, // getSubExpr
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FullExpr(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record191(Record191{c0, c1, })));
-}
-
-// CXXTemporaryObjectExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record192 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXTemporaryObjectExpr(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record192(Record192{c0, c1, c2, })));
-}
-
-// CXXDefaultInitExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record193 {
-  pub c0: u64, // id
-  pub c1: bool, // hasRewrittenInit
-  pub c2: u64, // getField
-  pub c3: u64, // getExpr
-  pub c4: u64, // getRewrittenExpr
-  pub c5: u64, // getUsedLocation
-  pub c6: u64, // getBeginLoc
-  pub c7: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXDefaultInitExpr(c0: u64, c1: bool, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record193(Record193{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// CXXConstructExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record194 {
-  pub c0: u64, // id
-  pub c1: u64, // getConstructor
-  pub c2: u64, // getLocation
-  pub c3: bool, // isElidable
-  pub c4: bool, // hadMultipleCandidates
-  pub c5: bool, // isListInitialization
-  pub c6: bool, // isStdInitListInitialization
-  pub c7: bool, // requiresZeroInitialization
-  pub c8: u64, // getConstructionKind
-  pub c9: u32, // getNumArgs
-  pub c10: bool, // isImmediateEscalating
-  pub c11: u64, // getBeginLoc
-  pub c12: u64, // getEndLoc
-  pub c13: u64, // getParenOrBraceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXConstructExpr(c0: u64, c1: u64, c2: u64, c3: bool, c4: bool, c5: bool, c6: bool, c7: bool, c8: u64, c9: u32, c10: bool, c11: u64, c12: u64, c13: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record194(Record194{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, })));
-}
-
-// Expr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record195 {
-  pub c0: u64, // id
-  pub c1: u64, // getType
-  pub c2: u64, // getDependence
-  pub c3: bool, // isValueDependent
-  pub c4: bool, // isTypeDependent
-  pub c5: bool, // isInstantiationDependent
-  pub c6: bool, // containsUnexpandedParameterPack
-  pub c7: bool, // containsErrors
-  pub c8: bool, // isLValue
-  pub c9: bool, // isPRValue
-  pub c10: bool, // isXValue
-  pub c11: bool, // isGLValue
-  pub c12: u64, // getValueKind
-  pub c13: u64, // getObjectKind
-  pub c14: bool, // isOrdinaryOrBitFieldObject
-  pub c15: bool, // refersToBitField
-  pub c16: u64, // getSourceBitField
-  pub c17: u64, // getReferencedDeclOfCallee
-  pub c18: u64, // getObjCProperty
-  pub c19: bool, // isObjCSelfExpr
-  pub c20: bool, // refersToVectorElement
-  pub c21: bool, // refersToMatrixElement
-  pub c22: bool, // refersToGlobalRegisterVar
-  pub c23: u64, // IgnoreImpCasts
-  pub c24: u64, // IgnoreCasts
-  pub c25: u64, // IgnoreImplicit
-  pub c26: u64, // IgnoreImplicitAsWritten
-  pub c27: u64, // IgnoreParens
-  pub c28: u64, // IgnoreParenImpCasts
-  pub c29: u64, // IgnoreParenCasts
-  pub c30: u64, // IgnoreConversionOperatorSingleStep
-  pub c31: u64, // IgnoreParenLValueCasts
-  pub c32: u64, // IgnoreParenBaseCasts
-  pub c33: bool, // isDefaultArgument
-  pub c34: bool, // isImplicitCXXThis
-  pub c35: u64, // skipRValueSubobjectAdjustments
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_Expr(c0: u64, c1: u64, c2: u64, c3: bool, c4: bool, c5: bool, c6: bool, c7: bool, c8: bool, c9: bool, c10: bool, c11: bool, c12: u64, c13: u64, c14: bool, c15: bool, c16: u64, c17: u64, c18: u64, c19: bool, c20: bool, c21: bool, c22: bool, c23: u64, c24: u64, c25: u64, c26: u64, c27: u64, c28: u64, c29: u64, c30: u64, c31: u64, c32: u64, c33: bool, c34: bool, c35: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record195(Record195{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32, c33, c34, c35, })));
-}
-
-// WhileStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record196 {
-  pub c0: u64, // id
-  pub c1: bool, // hasVarStorage
-  pub c2: u64, // getCond
-  pub c3: u64, // getBody
-  pub c4: u64, // getConditionVariable
-  pub c5: u64, // getConditionVariableDeclStmt
-  pub c6: u64, // getWhileLoc
-  pub c7: u64, // getLParenLoc
-  pub c8: u64, // getRParenLoc
-  pub c9: u64, // getBeginLoc
-  pub c10: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_WhileStmt(c0: u64, c1: bool, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64, c10: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record196(Record196{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, })));
-}
-
-// ValueStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record197 {
-  pub c0: u64, // id
-  pub c1: u64, // getExprStmt
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ValueStmt(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record197(Record197{c0, c1, })));
-}
-
-// DoStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record198 {
-  pub c0: u64, // id
-  pub c1: u64, // getCond
-  pub c2: u64, // getBody
-  pub c3: u64, // getDoLoc
-  pub c4: u64, // getWhileLoc
-  pub c5: u64, // getRParenLoc
-  pub c6: u64, // getBeginLoc
-  pub c7: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DoStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record198(Record198{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// DependentScopeDeclRefExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record199 {
-  pub c0: u64, // id
-  pub c1: u64, // getLocation
-  pub c2: u64, // getTemplateKeywordLoc
-  pub c3: u64, // getLAngleLoc
-  pub c4: u64, // getRAngleLoc
-  pub c5: bool, // hasTemplateKeyword
-  pub c6: bool, // hasExplicitTemplateArgs
-  pub c7: u32, // getNumTemplateArgs
-  pub c8: u64, // getBeginLoc
-  pub c9: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DependentScopeDeclRefExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: bool, c6: bool, c7: u32, c8: u64, c9: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record199(Record199{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, })));
-}
-
-// IndirectGotoStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record200 {
-  pub c0: u64, // id
-  pub c1: u64, // getGotoLoc
-  pub c2: u64, // getStarLoc
-  pub c3: u64, // getTarget
-  pub c4: u64, // getConstantTarget
-  pub c5: u64, // getBeginLoc
-  pub c6: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_IndirectGotoStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record200(Record200{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// ContinueStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record201 {
-  pub c0: u64, // id
-  pub c1: u64, // getContinueLoc
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ContinueStmt(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record201(Record201{c0, c1, c2, c3, })));
-}
-
-// ConceptSpecializationExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record202 {
-  pub c0: u64, // id
-  pub c1: u64, // getNamedConcept
-  pub c2: bool, // hasExplicitTemplateArgs
-  pub c3: u64, // getConceptNameLoc
-  pub c4: u64, // getTemplateKWLoc
-  pub c5: u64, // getFoundDecl
-  pub c6: u64, // getSpecializationDecl
-  pub c7: u64, // getBeginLoc
-  pub c8: u64, // getEndLoc
-  pub c9: u64, // getExprLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ConceptSpecializationExpr(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record202(Record202{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, })));
-}
-
-// ReturnStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record203 {
-  pub c0: u64, // id
-  pub c1: u64, // getRetValue
-  pub c2: u64, // getNRVOCandidate
-  pub c3: u64, // getReturnLoc
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ReturnStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record203(Record203{c0, c1, c2, c3, c4, c5, })));
-}
-
-// GCCAsmStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record204 {
-  pub c0: u64, // id
-  pub c1: u64, // getRParenLoc
-  pub c2: u64, // getAsmString
-  pub c3: bool, // isAsmGoto
-  pub c4: u32, // getNumLabels
-  pub c5: u64, // getBeginLoc
-  pub c6: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_GCCAsmStmt(c0: u64, c1: u64, c2: u64, c3: bool, c4: u32, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record204(Record204{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// MSAsmStmt_getAllConstraints
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record205 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: String, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MSAsmStmt_getAllConstraints(c0: u64, c1: u64, c2: *const c_char) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c2 = unsafe { CStr::from_ptr(c2) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record205(Record205{c0, c1, c2, })));
-}
-
-// MSAsmStmt_getClobbers
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record206 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: String, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MSAsmStmt_getClobbers(c0: u64, c1: u64, c2: *const c_char) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c2 = unsafe { CStr::from_ptr(c2) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record206(Record206{c0, c1, c2, })));
-}
-
-// MSAsmStmt_getAllExprs
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record207 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MSAsmStmt_getAllExprs(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record207(Record207{c0, c1, c2, })));
-}
-
-// MSAsmStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record208 {
-  pub c0: u64, // id
-  pub c1: u64, // getLBraceLoc
-  pub c2: u64, // getEndLoc
-  pub c3: bool, // hasBraces
-  pub c4: String, // getAsmString
-  pub c5: u64, // getBeginLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MSAsmStmt(c0: u64, c1: u64, c2: u64, c3: bool, c4: *const c_char, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c4 = unsafe { CStr::from_ptr(c4) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record208(Record208{c0, c1, c2, c3, c4, c5, })));
-}
-
-// SEHExceptStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record209 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getExceptLoc
-  pub c3: u64, // getEndLoc
-  pub c4: u64, // getFilterExpr
-  pub c5: u64, // getBlock
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_SEHExceptStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record209(Record209{c0, c1, c2, c3, c4, c5, })));
-}
-
-// SEHTryStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record210 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getTryLoc
-  pub c3: u64, // getEndLoc
-  pub c4: bool, // getIsCXXTry
-  pub c5: u64, // getTryBlock
-  pub c6: u64, // getHandler
-  pub c7: u64, // getExceptHandler
-  pub c8: u64, // getFinallyHandler
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_SEHTryStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: bool, c5: u64, c6: u64, c7: u64, c8: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record210(Record210{c0, c1, c2, c3, c4, c5, c6, c7, c8, })));
-}
-
-// InitListExpr_inits
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record211 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_InitListExpr_inits(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record211(Record211{c0, c1, c2, })));
-}
-
-// InitListExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record212 {
-  pub c0: u64, // id
-  pub c1: u32, // getNumInits
-  pub c2: u64, // getArrayFiller
-  pub c3: bool, // hasArrayFiller
-  pub c4: bool, // hasDesignatedInit
-  pub c5: u64, // getInitializedFieldInUnion
-  pub c6: bool, // isExplicit
-  pub c7: bool, // isStringLiteralInit
-  pub c8: bool, // isTransparent
-  pub c9: u64, // getLBraceLoc
-  pub c10: u64, // getRBraceLoc
-  pub c11: bool, // isSemanticForm
-  pub c12: u64, // getSemanticForm
-  pub c13: bool, // isSyntacticForm
-  pub c14: u64, // getSyntacticForm
-  pub c15: bool, // hadArrayRangeDesignator
-  pub c16: u64, // getBeginLoc
-  pub c17: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_InitListExpr(c0: u64, c1: u32, c2: u64, c3: bool, c4: bool, c5: u64, c6: bool, c7: bool, c8: bool, c9: u64, c10: u64, c11: bool, c12: u64, c13: bool, c14: u64, c15: bool, c16: u64, c17: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record212(Record212{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, })));
-}
-
-// SEHLeaveStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record213 {
-  pub c0: u64, // id
-  pub c1: u64, // getLeaveLoc
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_SEHLeaveStmt(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record213(Record213{c0, c1, c2, c3, })));
-}
-
-// CapturedStmt_capture_inits
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record214 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CapturedStmt_capture_inits(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record214(Record214{c0, c1, c2, })));
-}
-
-// CapturedStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record215 {
-  pub c0: u64, // id
-  pub c1: u64, // getCapturedStmt
-  pub c2: u64, // getCapturedDecl
-  pub c3: u64, // getCapturedRegionKind
-  pub c4: u64, // getCapturedRecordDecl
-  pub c5: u32, // capture_size
-  pub c6: u64, // getBeginLoc
-  pub c7: u64, // getEndLoc
-  pub c8: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CapturedStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u32, c6: u64, c7: u64, c8: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record215(Record215{c0, c1, c2, c3, c4, c5, c6, c7, c8, })));
-}
-
-// CXXCatchStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record216 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-  pub c3: u64, // getCatchLoc
-  pub c4: u64, // getExceptionDecl
-  pub c5: u64, // getCaughtType
-  pub c6: u64, // getHandlerBlock
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXCatchStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record216(Record216{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// CXXForRangeStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record217 {
-  pub c0: u64, // id
-  pub c1: u64, // getInit
-  pub c2: u64, // getLoopVariable
-  pub c3: u64, // getRangeInit
-  pub c4: u64, // getRangeStmt
-  pub c5: u64, // getBeginStmt
-  pub c6: u64, // getEndStmt
-  pub c7: u64, // getCond
-  pub c8: u64, // getInc
-  pub c9: u64, // getLoopVarStmt
-  pub c10: u64, // getBody
-  pub c11: u64, // getForLoc
-  pub c12: u64, // getCoawaitLoc
-  pub c13: u64, // getColonLoc
-  pub c14: u64, // getRParenLoc
-  pub c15: u64, // getBeginLoc
-  pub c16: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXForRangeStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64, c10: u64, c11: u64, c12: u64, c13: u64, c14: u64, c15: u64, c16: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record217(Record217{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, })));
-}
-
-// CXXNewExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record218 {
-  pub c0: u64, // id
-  pub c1: u64, // getAllocatedType
-  pub c2: u64, // getOperatorNew
-  pub c3: u64, // getOperatorDelete
-  pub c4: bool, // isArray
-  pub c5: u32, // getNumPlacementArgs
-  pub c6: bool, // isParenTypeId
-  pub c7: u64, // getTypeIdParens
-  pub c8: bool, // isGlobalNew
-  pub c9: bool, // hasInitializer
-  pub c10: u64, // getInitializationStyle
-  pub c11: u64, // getInitializer
-  pub c12: u64, // getConstructExpr
-  pub c13: bool, // passAlignment
-  pub c14: bool, // doesUsualArrayDeleteWantSize
-  pub c15: u64, // getBeginLoc
-  pub c16: u64, // getEndLoc
-  pub c17: u64, // getDirectInitRange
-  pub c18: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXNewExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: bool, c5: u32, c6: bool, c7: u64, c8: bool, c9: bool, c10: u64, c11: u64, c12: u64, c13: bool, c14: bool, c15: u64, c16: u64, c17: u64, c18: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record218(Record218{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, })));
-}
-
-// CoroutineBodyStmt_getParamMoves
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record219 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CoroutineBodyStmt_getParamMoves(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record219(Record219{c0, c1, c2, })));
-}
-
-// CoroutineBodyStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record220 {
-  pub c0: u64, // id
-  pub c1: bool, // hasDependentPromiseType
-  pub c2: u64, // getBody
-  pub c3: u64, // getPromiseDeclStmt
-  pub c4: u64, // getPromiseDecl
-  pub c5: u64, // getInitSuspendStmt
-  pub c6: u64, // getFinalSuspendStmt
-  pub c7: u64, // getExceptionHandler
-  pub c8: u64, // getFallthroughHandler
-  pub c9: u64, // getAllocate
-  pub c10: u64, // getDeallocate
-  pub c11: u64, // getResultDecl
-  pub c12: u64, // getReturnValueInit
-  pub c13: u64, // getReturnValue
-  pub c14: u64, // getReturnStmt
-  pub c15: u64, // getReturnStmtOnAllocFailure
-  pub c16: u64, // getBeginLoc
-  pub c17: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CoroutineBodyStmt(c0: u64, c1: bool, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64, c10: u64, c11: u64, c12: u64, c13: u64, c14: u64, c15: u64, c16: u64, c17: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record220(Record220{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, })));
-}
-
-// ParenListExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record221 {
-  pub c0: u64, // id
-  pub c1: u32, // getNumExprs
-  pub c2: u64, // getLParenLoc
-  pub c3: u64, // getRParenLoc
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ParenListExpr(c0: u64, c1: u32, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record221(Record221{c0, c1, c2, c3, c4, c5, })));
-}
-
-// CXXScalarValueInitExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record222 {
-  pub c0: u64, // id
-  pub c1: u64, // getRParenLoc
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXScalarValueInitExpr(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record222(Record222{c0, c1, c2, c3, })));
-}
-
-// MSPropertyRefExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record223 {
-  pub c0: u64, // id
-  pub c1: u64, // getSourceRange
-  pub c2: bool, // isImplicitAccess
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-  pub c5: u64, // getBaseExpr
-  pub c6: u64, // getPropertyDecl
-  pub c7: bool, // isArrow
-  pub c8: u64, // getMemberLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MSPropertyRefExpr(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: u64, c6: u64, c7: bool, c8: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record223(Record223{c0, c1, c2, c3, c4, c5, c6, c7, c8, })));
-}
-
-// SEHFinallyStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record224 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getFinallyLoc
-  pub c3: u64, // getEndLoc
-  pub c4: u64, // getBlock
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_SEHFinallyStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record224(Record224{c0, c1, c2, c3, c4, })));
-}
-
-// DeclRefExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record225 {
-  pub c0: u64, // id
-  pub c1: u64, // getDecl
-  pub c2: u64, // getLocation
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-  pub c5: bool, // hasQualifier
-  pub c6: u64, // getFoundDecl
-  pub c7: bool, // hasTemplateKWAndArgsInfo
-  pub c8: u64, // getTemplateKeywordLoc
-  pub c9: u64, // getLAngleLoc
-  pub c10: u64, // getRAngleLoc
-  pub c11: bool, // hasTemplateKeyword
-  pub c12: bool, // hasExplicitTemplateArgs
-  pub c13: u32, // getNumTemplateArgs
-  pub c14: bool, // hadMultipleCandidates
-  pub c15: u64, // isNonOdrUse
-  pub c16: bool, // refersToEnclosingVariableOrCapture
-  pub c17: bool, // isImmediateEscalating
-  pub c18: bool, // isCapturedByCopyInLambdaWithExplicitObjectParameter
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DeclRefExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: bool, c6: u64, c7: bool, c8: u64, c9: u64, c10: u64, c11: bool, c12: bool, c13: u32, c14: bool, c15: u64, c16: bool, c17: bool, c18: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record225(Record225{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, })));
-}
-
-// CStyleCastExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record226 {
-  pub c0: u64, // id
-  pub c1: u64, // getLParenLoc
-  pub c2: u64, // getRParenLoc
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CStyleCastExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record226(Record226{c0, c1, c2, c3, c4, })));
-}
-
-// CXXNullPtrLiteralExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record227 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-  pub c3: u64, // getLocation
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXNullPtrLiteralExpr(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record227(Record227{c0, c1, c2, c3, })));
-}
-
-// ForStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record228 {
-  pub c0: u64, // id
-  pub c1: u64, // getConditionVariable
-  pub c2: u64, // getConditionVariableDeclStmt
-  pub c3: u64, // getInit
-  pub c4: u64, // getCond
-  pub c5: u64, // getInc
-  pub c6: u64, // getBody
-  pub c7: u64, // getForLoc
-  pub c8: u64, // getLParenLoc
-  pub c9: u64, // getRParenLoc
-  pub c10: u64, // getBeginLoc
-  pub c11: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ForStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64, c10: u64, c11: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record228(Record228{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, })));
-}
-
-// AsTypeExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record229 {
-  pub c0: u64, // id
-  pub c1: u64, // getSrcExpr
-  pub c2: u64, // getBuiltinLoc
-  pub c3: u64, // getRParenLoc
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_AsTypeExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record229(Record229{c0, c1, c2, c3, c4, c5, })));
-}
-
-// MatrixSubscriptExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record230 {
-  pub c0: u64, // id
-  pub c1: bool, // isIncomplete
-  pub c2: u64, // getBase
-  pub c3: u64, // getRowIdx
-  pub c4: u64, // getColumnIdx
-  pub c5: u64, // getBeginLoc
-  pub c6: u64, // getEndLoc
-  pub c7: u64, // getExprLoc
-  pub c8: u64, // getRBracketLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MatrixSubscriptExpr(c0: u64, c1: bool, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record230(Record230{c0, c1, c2, c3, c4, c5, c6, c7, c8, })));
-}
-
-// BuiltinBitCastExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record231 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BuiltinBitCastExpr(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record231(Record231{c0, c1, c2, })));
-}
-
-// CXXNamedCastExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record232 {
-  pub c0: u64, // id
-  pub c1: u64, // getOperatorLoc
-  pub c2: u64, // getRParenLoc
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-  pub c5: u64, // getAngleBrackets
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXNamedCastExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record232(Record232{c0, c1, c2, c3, c4, c5, })));
-}
-
-// MemberExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record233 {
-  pub c0: u64, // id
-  pub c1: u64, // getBase
-  pub c2: u64, // getMemberDecl
-  pub c3: bool, // hasQualifier
-  pub c4: u64, // getTemplateKeywordLoc
-  pub c5: u64, // getLAngleLoc
-  pub c6: u64, // getRAngleLoc
-  pub c7: bool, // hasTemplateKeyword
-  pub c8: bool, // hasExplicitTemplateArgs
-  pub c9: u32, // getNumTemplateArgs
-  pub c10: u64, // getOperatorLoc
-  pub c11: bool, // isArrow
-  pub c12: u64, // getMemberLoc
-  pub c13: u64, // getBeginLoc
-  pub c14: u64, // getEndLoc
-  pub c15: u64, // getExprLoc
-  pub c16: bool, // isImplicitAccess
-  pub c17: bool, // hadMultipleCandidates
-  pub c18: u64, // isNonOdrUse
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MemberExpr(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64, c5: u64, c6: u64, c7: bool, c8: bool, c9: u32, c10: u64, c11: bool, c12: u64, c13: u64, c14: u64, c15: u64, c16: bool, c17: bool, c18: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record233(Record233{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, })));
-}
-
-// CXXNoexceptExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record234 {
-  pub c0: u64, // id
-  pub c1: u64, // getOperand
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-  pub c4: u64, // getSourceRange
-  pub c5: bool, // getValue
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXNoexceptExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record234(Record234{c0, c1, c2, c3, c4, c5, })));
-}
-
-// BlockExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record235 {
-  pub c0: u64, // id
-  pub c1: u64, // getBlockDecl
-  pub c2: u64, // getCaretLocation
-  pub c3: u64, // getBody
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-  pub c6: u64, // getFunctionType
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BlockExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record235(Record235{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// BreakStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record236 {
-  pub c0: u64, // id
-  pub c1: u64, // getBreakLoc
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BreakStmt(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record236(Record236{c0, c1, c2, c3, })));
-}
-
-// CXXTryStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record237 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getTryLoc
-  pub c3: u64, // getEndLoc
-  pub c4: u64, // getTryBlock
-  pub c5: u32, // getNumHandlers
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXTryStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record237(Record237{c0, c1, c2, c3, c4, c5, })));
-}
-
-// Stmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record238 {
-  pub c0: u64, // id
-  pub c1: u64, // stripLabelLikeStatements
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_Stmt(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record238(Record238{c0, c1, })));
-}
-
-// BinaryOperator
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record239 {
-  pub c0: u64, // id
-  pub c1: u64, // getExprLoc
-  pub c2: u64, // getOperatorLoc
-  pub c3: u64, // getOpcode
-  pub c4: u64, // getLHS
-  pub c5: u64, // getRHS
-  pub c6: u64, // getBeginLoc
-  pub c7: u64, // getEndLoc
-  pub c8: String, // getOpcodeStr
-  pub c9: bool, // isPtrMemOp
-  pub c10: bool, // isMultiplicativeOp
-  pub c11: bool, // isAdditiveOp
-  pub c12: bool, // isShiftOp
-  pub c13: bool, // isBitwiseOp
-  pub c14: bool, // isRelationalOp
-  pub c15: bool, // isEqualityOp
-  pub c16: bool, // isComparisonOp
-  pub c17: bool, // isCommaOp
-  pub c18: bool, // isLogicalOp
-  pub c19: bool, // isAssignmentOp
-  pub c20: bool, // isCompoundAssignmentOp
-  pub c21: bool, // isShiftAssignOp
-  pub c22: bool, // hasStoredFPFeatures
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BinaryOperator(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: *const c_char, c9: bool, c10: bool, c11: bool, c12: bool, c13: bool, c14: bool, c15: bool, c16: bool, c17: bool, c18: bool, c19: bool, c20: bool, c21: bool, c22: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c8 = unsafe { CStr::from_ptr(c8) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record239(Record239{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, })));
-}
-
-// OpaqueValueExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record240 {
-  pub c0: u64, // id
-  pub c1: u64, // getLocation
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-  pub c4: u64, // getExprLoc
-  pub c5: u64, // getSourceExpr
-  pub c6: bool, // isUnique
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_OpaqueValueExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record240(Record240{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// UnresolvedMemberExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record241 {
-  pub c0: u64, // id
-  pub c1: bool, // isImplicitAccess
-  pub c2: u64, // getBaseType
-  pub c3: bool, // hasUnresolvedUsing
-  pub c4: bool, // isArrow
-  pub c5: u64, // getOperatorLoc
-  pub c6: u64, // getNamingClass
-  pub c7: u64, // getMemberLoc
-  pub c8: u64, // getExprLoc
-  pub c9: u64, // getBeginLoc
-  pub c10: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UnresolvedMemberExpr(c0: u64, c1: bool, c2: u64, c3: bool, c4: bool, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64, c10: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record241(Record241{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, })));
-}
-
-// StmtExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record242 {
-  pub c0: u64, // id
-  pub c1: u64, // getSubStmt
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-  pub c4: u64, // getLParenLoc
-  pub c5: u64, // getRParenLoc
-  pub c6: u32, // getTemplateDepth
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_StmtExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record242(Record242{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// FunctionParmPackExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record243 {
-  pub c0: u64, // id
-  pub c1: u64, // getParameterPack
-  pub c2: u64, // getParameterPackLocation
-  pub c3: u32, // getNumExpansions
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FunctionParmPackExpr(c0: u64, c1: u64, c2: u64, c3: u32, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record243(Record243{c0, c1, c2, c3, c4, c5, })));
-}
-
-// ImplicitCastExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record244 {
-  pub c0: u64, // id
-  pub c1: bool, // isPartOfExplicitCast
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ImplicitCastExpr(c0: u64, c1: bool, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record244(Record244{c0, c1, c2, c3, })));
-}
-
-// UserDefinedLiteral
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record245 {
-  pub c0: u64, // id
-  pub c1: u64, // getLiteralOperatorKind
-  pub c2: u64, // getCookedLiteral
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-  pub c5: u64, // getUDSuffixLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UserDefinedLiteral(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record245(Record245{c0, c1, c2, c3, c4, c5, })));
-}
-
-// CXXDynamicCastExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record246 {
-  pub c0: u64, // id
-  pub c1: bool, // isAlwaysNull
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXDynamicCastExpr(c0: u64, c1: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record246(Record246{c0, c1, })));
-}
-
-// ArrayTypeTraitExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record247 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-  pub c3: u64, // getTrait
-  pub c4: u64, // getQueriedType
-  pub c5: u64, // getDimensionExpression
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ArrayTypeTraitExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record247(Record247{c0, c1, c2, c3, c4, c5, })));
-}
-
-// CompoundStmt_body
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record248 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CompoundStmt_body(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record248(Record248{c0, c1, c2, })));
-}
-
-// CompoundStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record249 {
-  pub c0: u64, // id
-  pub c1: bool, // body_empty
-  pub c2: u32, // size
-  pub c3: bool, // hasStoredFPFeatures
-  pub c4: u64, // body_front
-  pub c5: u64, // body_back
-  pub c6: u64, // getStmtExprResult
-  pub c7: u64, // getBeginLoc
-  pub c8: u64, // getEndLoc
-  pub c9: u64, // getLBracLoc
-  pub c10: u64, // getRBracLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CompoundStmt(c0: u64, c1: bool, c2: u32, c3: bool, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64, c10: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record249(Record249{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, })));
-}
-
-// CXXPseudoDestructorExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record250 {
-  pub c0: u64, // id
-  pub c1: u64, // getBase
-  pub c2: bool, // hasQualifier
-  pub c3: bool, // isArrow
-  pub c4: u64, // getOperatorLoc
-  pub c5: u64, // getColonColonLoc
-  pub c6: u64, // getTildeLoc
-  pub c7: u64, // getDestroyedType
-  pub c8: u64, // getDestroyedTypeLoc
-  pub c9: u64, // getBeginLoc
-  pub c10: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXPseudoDestructorExpr(c0: u64, c1: u64, c2: bool, c3: bool, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64, c10: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record250(Record250{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, })));
-}
-
-// StringLiteral
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record251 {
-  pub c0: u64, // id
-  pub c1: String, // getString
-  pub c2: String, // getBytes
-  pub c3: u32, // getByteLength
-  pub c4: u32, // getLength
-  pub c5: u32, // getCharByteWidth
-  pub c6: u64, // getKind
-  pub c7: bool, // isOrdinary
-  pub c8: bool, // isWide
-  pub c9: bool, // isUTF8
-  pub c10: bool, // isUTF16
-  pub c11: bool, // isUTF32
-  pub c12: bool, // isUnevaluated
-  pub c13: bool, // isPascal
-  pub c14: bool, // containsNonAscii
-  pub c15: bool, // containsNonAsciiOrNull
-  pub c16: u32, // getNumConcatenated
-  pub c17: u64, // getBeginLoc
-  pub c18: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_StringLiteral(c0: u64, c1: *const c_char, c2: *const c_char, c3: u32, c4: u32, c5: u32, c6: u64, c7: bool, c8: bool, c9: bool, c10: bool, c11: bool, c12: bool, c13: bool, c14: bool, c15: bool, c16: u32, c17: u64, c18: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c1 = unsafe { CStr::from_ptr(c1) }.to_string_lossy().to_string();
-  let c2 = unsafe { CStr::from_ptr(c2) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record251(Record251{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, })));
-}
-
-// CXXDefaultArgExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record252 {
-  pub c0: u64, // id
-  pub c1: u64, // getParam
-  pub c2: bool, // hasRewrittenInit
-  pub c3: u64, // getExpr
-  pub c4: u64, // getRewrittenExpr
-  pub c5: u64, // getAdjustedRewrittenExpr
-  pub c6: u64, // getUsedLocation
-  pub c7: u64, // getBeginLoc
-  pub c8: u64, // getEndLoc
-  pub c9: u64, // getExprLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXDefaultArgExpr(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record252(Record252{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, })));
-}
-
-// CXXThisExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record253 {
-  pub c0: u64, // id
-  pub c1: u64, // getLocation
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-  pub c4: bool, // isImplicit
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXThisExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record253(Record253{c0, c1, c2, c3, c4, })));
-}
-
-// CXXUuidofExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record254 {
-  pub c0: u64, // id
-  pub c1: bool, // isTypeOperand
-  pub c2: u64, // getExprOperand
-  pub c3: u64, // getGuidDecl
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-  pub c6: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXUuidofExpr(c0: u64, c1: bool, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record254(Record254{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// ShuffleVectorExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record255 {
-  pub c0: u64, // id
-  pub c1: u64, // getBuiltinLoc
-  pub c2: u64, // getRParenLoc
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-  pub c5: u32, // getNumSubExprs
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ShuffleVectorExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record255(Record255{c0, c1, c2, c3, c4, c5, })));
-}
-
-// CXXStdInitializerListExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record256 {
-  pub c0: u64, // id
-  pub c1: u64, // getSubExpr
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-  pub c4: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXStdInitializerListExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record256(Record256{c0, c1, c2, c3, c4, })));
-}
-
-// DeclStmt_decls
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record257 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DeclStmt_decls(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record257(Record257{c0, c1, c2, })));
-}
-
-// DeclStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record258 {
-  pub c0: u64, // id
-  pub c1: bool, // isSingleDecl
-  pub c2: u64, // getEndLoc
-  pub c3: u64, // getBeginLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DeclStmt(c0: u64, c1: bool, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record258(Record258{c0, c1, c2, c3, })));
-}
-
-// CoyieldExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record259 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CoyieldExpr(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record259(Record259{c0, })));
-}
-
-// AtomicExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record260 {
-  pub c0: u64, // id
-  pub c1: u64, // getPtr
-  pub c2: u64, // getOrder
-  pub c3: u64, // getScope
-  pub c4: u64, // getVal1
-  pub c5: u64, // getOrderFail
-  pub c6: u64, // getVal2
-  pub c7: u64, // getWeak
-  pub c8: u64, // getValueType
-  pub c9: u64, // getOp
-  pub c10: String, // getOpAsString
-  pub c11: u32, // getNumSubExprs
-  pub c12: bool, // isVolatile
-  pub c13: bool, // isCmpXChg
-  pub c14: bool, // isOpenCL
-  pub c15: u64, // getBuiltinLoc
-  pub c16: u64, // getRParenLoc
-  pub c17: u64, // getBeginLoc
-  pub c18: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_AtomicExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64, c10: *const c_char, c11: u32, c12: bool, c13: bool, c14: bool, c15: u64, c16: u64, c17: u64, c18: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c10 = unsafe { CStr::from_ptr(c10) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record260(Record260{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, })));
-}
-
-// ImplicitValueInitExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record261 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ImplicitValueInitExpr(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record261(Record261{c0, c1, c2, })));
-}
-
-// NoInitExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record262 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_NoInitExpr(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record262(Record262{c0, c1, c2, })));
-}
-
-// CXXThrowExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record263 {
-  pub c0: u64, // id
-  pub c1: u64, // getSubExpr
-  pub c2: u64, // getThrowLoc
-  pub c3: bool, // isThrownVariableInScope
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXThrowExpr(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record263(Record263{c0, c1, c2, c3, c4, c5, })));
-}
-
-// AbstractConditionalOperator
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record264 {
-  pub c0: u64, // id
-  pub c1: u64, // getCond
-  pub c2: u64, // getTrueExpr
-  pub c3: u64, // getFalseExpr
-  pub c4: u64, // getQuestionLoc
-  pub c5: u64, // getColonLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_AbstractConditionalOperator(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record264(Record264{c0, c1, c2, c3, c4, c5, })));
-}
-
-// RecoveryExpr_subExpressions
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record265 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_RecoveryExpr_subExpressions(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record265(Record265{c0, c1, c2, })));
-}
-
-// RecoveryExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record266 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_RecoveryExpr(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record266(Record266{c0, c1, c2, })));
-}
-
-// BinaryConditionalOperator
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record267 {
-  pub c0: u64, // id
-  pub c1: u64, // getCommon
-  pub c2: u64, // getOpaqueValue
-  pub c3: u64, // getCond
-  pub c4: u64, // getTrueExpr
-  pub c5: u64, // getFalseExpr
-  pub c6: u64, // getBeginLoc
-  pub c7: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_BinaryConditionalOperator(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record267(Record267{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// ExtVectorElementExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record268 {
-  pub c0: u64, // id
-  pub c1: u64, // getBase
-  pub c2: u64, // getAccessorLoc
-  pub c3: u32, // getNumElements
-  pub c4: bool, // containsDuplicateElements
-  pub c5: u64, // getBeginLoc
-  pub c6: u64, // getEndLoc
-  pub c7: bool, // isArrow
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ExtVectorElementExpr(c0: u64, c1: u64, c2: u64, c3: u32, c4: bool, c5: u64, c6: u64, c7: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record268(Record268{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// CXXTypeidExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record269 {
-  pub c0: u64, // id
-  pub c1: bool, // isPotentiallyEvaluated
-  pub c2: bool, // isTypeOperand
-  pub c3: u64, // getExprOperand
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-  pub c6: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXTypeidExpr(c0: u64, c1: bool, c2: bool, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record269(Record269{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// GenericSelectionExpr_getAssocExprs
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record270 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_GenericSelectionExpr_getAssocExprs(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record270(Record270{c0, c1, c2, })));
-}
-
-// GenericSelectionExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record271 {
-  pub c0: u64, // id
-  pub c1: u32, // getNumAssocs
-  pub c2: u32, // getResultIndex
-  pub c3: bool, // isResultDependent
-  pub c4: bool, // isExprPredicate
-  pub c5: bool, // isTypePredicate
-  pub c6: u64, // getControllingExpr
-  pub c7: u64, // getResultExpr
-  pub c8: u64, // getGenericLoc
-  pub c9: u64, // getDefaultLoc
-  pub c10: u64, // getRParenLoc
-  pub c11: u64, // getBeginLoc
-  pub c12: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_GenericSelectionExpr(c0: u64, c1: u32, c2: u32, c3: bool, c4: bool, c5: bool, c6: u64, c7: u64, c8: u64, c9: u64, c10: u64, c11: u64, c12: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record271(Record271{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, })));
-}
-
-// ExpressionTraitExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record272 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-  pub c3: u64, // getTrait
-  pub c4: u64, // getQueriedExpression
-  pub c5: bool, // getValue
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ExpressionTraitExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record272(Record272{c0, c1, c2, c3, c4, c5, })));
-}
-
-// CXXMemberCallExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record273 {
-  pub c0: u64, // id
-  pub c1: u64, // getImplicitObjectArgument
-  pub c2: u64, // getObjectType
-  pub c3: u64, // getMethodDecl
-  pub c4: u64, // getRecordDecl
-  pub c5: u64, // getExprLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXMemberCallExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record273(Record273{c0, c1, c2, c3, c4, c5, })));
-}
-
-// ArraySubscriptExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record274 {
-  pub c0: u64, // id
-  pub c1: u64, // getLHS
-  pub c2: u64, // getRHS
-  pub c3: u64, // getBase
-  pub c4: u64, // getIdx
-  pub c5: u64, // getBeginLoc
-  pub c6: u64, // getEndLoc
-  pub c7: u64, // getRBracketLoc
-  pub c8: u64, // getExprLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ArraySubscriptExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record274(Record274{c0, c1, c2, c3, c4, c5, c6, c7, c8, })));
-}
-
-// RequiresExpr_getLocalParameters
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record275 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_RequiresExpr_getLocalParameters(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record275(Record275{c0, c1, c2, })));
-}
-
-// RequiresExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record276 {
-  pub c0: u64, // id
-  pub c1: u64, // getBody
-  pub c2: u64, // getRequiresKWLoc
-  pub c3: u64, // getLParenLoc
-  pub c4: u64, // getRParenLoc
-  pub c5: u64, // getRBraceLoc
-  pub c6: u64, // getBeginLoc
-  pub c7: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_RequiresExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record276(Record276{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// ImaginaryLiteral
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record277 {
-  pub c0: u64, // id
-  pub c1: u64, // getSubExpr
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ImaginaryLiteral(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record277(Record277{c0, c1, c2, c3, })));
-}
-
-// CastExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record278 {
-  pub c0: u64, // id
-  pub c1: u64, // getCastKind
-  pub c2: u64, // getSubExpr
-  pub c3: u64, // getSubExprAsWritten
-  pub c4: u64, // getConversionFunction
-  pub c5: bool, // path_empty
-  pub c6: u32, // path_size
-  pub c7: bool, // hasStoredFPFeatures
-  pub c8: bool, // changesVolatileQualification
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CastExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: bool, c6: u32, c7: bool, c8: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record278(Record278{c0, c1, c2, c3, c4, c5, c6, c7, c8, })));
-}
-
-// PackExpansionExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record279 {
-  pub c0: u64, // id
-  pub c1: u64, // getPattern
-  pub c2: u64, // getEllipsisLoc
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_PackExpansionExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record279(Record279{c0, c1, c2, c3, c4, })));
-}
-
-// CXXStaticCastExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record280 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXStaticCastExpr(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record280(Record280{c0, })));
-}
-
-// OffsetOfExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record281 {
-  pub c0: u64, // id
-  pub c1: u64, // getOperatorLoc
-  pub c2: u64, // getRParenLoc
-  pub c3: u32, // getNumComponents
-  pub c4: u32, // getNumExpressions
-  pub c5: u64, // getBeginLoc
-  pub c6: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_OffsetOfExpr(c0: u64, c1: u64, c2: u64, c3: u32, c4: u32, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record281(Record281{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// UnaryExprOrTypeTraitExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record282 {
-  pub c0: u64, // id
-  pub c1: u64, // getKind
-  pub c2: bool, // isArgumentType
-  pub c3: u64, // getTypeOfArgument
-  pub c4: u64, // getOperatorLoc
-  pub c5: u64, // getRParenLoc
-  pub c6: u64, // getBeginLoc
-  pub c7: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UnaryExprOrTypeTraitExpr(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record282(Record282{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// LabelStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record283 {
-  pub c0: u64, // id
-  pub c1: u64, // getIdentLoc
-  pub c2: u64, // getDecl
-  pub c3: u64, // getSubStmt
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-  pub c6: bool, // isSideEntry
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_LabelStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record283(Record283{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// CXXBoolLiteralExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record284 {
-  pub c0: u64, // id
-  pub c1: bool, // getValue
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-  pub c4: u64, // getLocation
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXBoolLiteralExpr(c0: u64, c1: bool, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record284(Record284{c0, c1, c2, c3, c4, })));
-}
-
-// CharacterLiteral
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record285 {
-  pub c0: u64, // id
-  pub c1: u64, // getLocation
-  pub c2: u64, // getKind
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-  pub c5: u32, // getValue
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CharacterLiteral(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record285(Record285{c0, c1, c2, c3, c4, c5, })));
-}
-
-// AttributedStmt_getAttrs
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record286 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_AttributedStmt_getAttrs(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record286(Record286{c0, c1, c2, })));
-}
-
-// AttributedStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record287 {
-  pub c0: u64, // id
-  pub c1: u64, // getAttrLoc
-  pub c2: u64, // getSubStmt
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_AttributedStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record287(Record287{c0, c1, c2, c3, c4, })));
-}
-
-// SwitchStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record288 {
-  pub c0: u64, // id
-  pub c1: bool, // hasInitStorage
-  pub c2: bool, // hasVarStorage
-  pub c3: u64, // getCond
-  pub c4: u64, // getBody
-  pub c5: u64, // getInit
-  pub c6: u64, // getConditionVariable
-  pub c7: u64, // getConditionVariableDeclStmt
-  pub c8: u64, // getSwitchCaseList
-  pub c9: u64, // getSwitchLoc
-  pub c10: u64, // getLParenLoc
-  pub c11: u64, // getRParenLoc
-  pub c12: bool, // isAllEnumCasesCovered
-  pub c13: u64, // getBeginLoc
-  pub c14: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_SwitchStmt(c0: u64, c1: bool, c2: bool, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64, c10: u64, c11: u64, c12: bool, c13: u64, c14: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record288(Record288{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, })));
-}
-
-// ConstantExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record289 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-  pub c3: u64, // getResultAPValueKind
-  pub c4: u64, // getResultStorageKind
-  pub c5: bool, // isImmediateInvocation
-  pub c6: bool, // hasAPValueResult
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ConstantExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: bool, c6: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record289(Record289{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// ConvertVectorExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record290 {
-  pub c0: u64, // id
-  pub c1: u64, // getSrcExpr
-  pub c2: u64, // getBuiltinLoc
-  pub c3: u64, // getRParenLoc
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ConvertVectorExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record290(Record290{c0, c1, c2, c3, c4, c5, })));
-}
-
-// IntegerLiteral
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record291 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-  pub c3: u64, // getLocation
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_IntegerLiteral(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record291(Record291{c0, c1, c2, c3, })));
-}
-
-// CXXReinterpretCastExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record292 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXReinterpretCastExpr(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record292(Record292{c0, })));
-}
-
-// MSPropertySubscriptExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record293 {
-  pub c0: u64, // id
-  pub c1: u64, // getBase
-  pub c2: u64, // getIdx
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-  pub c5: u64, // getRBracketLoc
-  pub c6: u64, // getExprLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MSPropertySubscriptExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record293(Record293{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// NullStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record294 {
-  pub c0: u64, // id
-  pub c1: u64, // getSemiLoc
-  pub c2: bool, // hasLeadingEmptyMacro
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_NullStmt(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record294(Record294{c0, c1, c2, c3, c4, })));
-}
-
-// CXXAddrspaceCastExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record295 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXAddrspaceCastExpr(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record295(Record295{c0, })));
-}
-
-// CXXFunctionalCastExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record296 {
-  pub c0: u64, // id
-  pub c1: u64, // getLParenLoc
-  pub c2: u64, // getRParenLoc
-  pub c3: bool, // isListInitialization
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXFunctionalCastExpr(c0: u64, c1: u64, c2: u64, c3: bool, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record296(Record296{c0, c1, c2, c3, c4, c5, })));
-}
-
-// CXXOperatorCallExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record297 {
-  pub c0: u64, // id
-  pub c1: u64, // getOperator
-  pub c2: bool, // isAssignmentOp
-  pub c3: bool, // isComparisonOp
-  pub c4: bool, // isInfixBinaryOp
-  pub c5: u64, // getOperatorLoc
-  pub c6: u64, // getExprLoc
-  pub c7: u64, // getBeginLoc
-  pub c8: u64, // getEndLoc
-  pub c9: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXOperatorCallExpr(c0: u64, c1: u64, c2: bool, c3: bool, c4: bool, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record297(Record297{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, })));
-}
-
-// CXXBindTemporaryExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record298 {
-  pub c0: u64, // id
-  pub c1: u64, // getSubExpr
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXBindTemporaryExpr(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record298(Record298{c0, c1, c2, c3, })));
-}
-
-// CXXRewrittenBinaryOperator
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record299 {
-  pub c0: u64, // id
-  pub c1: u64, // getSemanticForm
-  pub c2: bool, // isReversed
-  pub c3: u64, // getOperator
-  pub c4: u64, // getOpcode
-  pub c5: String, // getOpcodeStr
-  pub c6: bool, // isComparisonOp
-  pub c7: bool, // isAssignmentOp
-  pub c8: u64, // getLHS
-  pub c9: u64, // getRHS
-  pub c10: u64, // getOperatorLoc
-  pub c11: u64, // getExprLoc
-  pub c12: u64, // getBeginLoc
-  pub c13: u64, // getEndLoc
-  pub c14: u64, // getSourceRange
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXRewrittenBinaryOperator(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: *const c_char, c6: bool, c7: bool, c8: u64, c9: u64, c10: u64, c11: u64, c12: u64, c13: u64, c14: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c5 = unsafe { CStr::from_ptr(c5) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record299(Record299{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, })));
-}
-
-// OverloadExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record300 {
-  pub c0: u64, // id
-  pub c1: u64, // getNamingClass
-  pub c2: u32, // getNumDecls
-  pub c3: u64, // getNameLoc
-  pub c4: u64, // getTemplateKeywordLoc
-  pub c5: u64, // getLAngleLoc
-  pub c6: u64, // getRAngleLoc
-  pub c7: bool, // hasTemplateKeyword
-  pub c8: bool, // hasExplicitTemplateArgs
-  pub c9: u32, // getNumTemplateArgs
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_OverloadExpr(c0: u64, c1: u64, c2: u32, c3: u64, c4: u64, c5: u64, c6: u64, c7: bool, c8: bool, c9: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record300(Record300{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, })));
-}
-
-// DesignatedInitUpdateExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record301 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-  pub c3: u64, // getBase
-  pub c4: u64, // getUpdater
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DesignatedInitUpdateExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record301(Record301{c0, c1, c2, c3, c4, })));
-}
-
-// ConditionalOperator
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record302 {
-  pub c0: u64, // id
-  pub c1: u64, // getCond
-  pub c2: u64, // getTrueExpr
-  pub c3: u64, // getFalseExpr
-  pub c4: u64, // getLHS
-  pub c5: u64, // getRHS
-  pub c6: u64, // getBeginLoc
-  pub c7: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ConditionalOperator(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record302(Record302{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// TypeTraitExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record303 {
-  pub c0: u64, // id
-  pub c1: u64, // getTrait
-  pub c2: u32, // getNumArgs
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TypeTraitExpr(c0: u64, c1: u64, c2: u32, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record303(Record303{c0, c1, c2, c3, c4, })));
-}
-
-// CXXInheritedCtorInitExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record304 {
-  pub c0: u64, // id
-  pub c1: u64, // getConstructor
-  pub c2: bool, // constructsVBase
-  pub c3: u64, // getConstructionKind
-  pub c4: bool, // inheritedFromVBase
-  pub c5: u64, // getLocation
-  pub c6: u64, // getBeginLoc
-  pub c7: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXInheritedCtorInitExpr(c0: u64, c1: u64, c2: bool, c3: u64, c4: bool, c5: u64, c6: u64, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record304(Record304{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// DefaultStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record305 {
-  pub c0: u64, // id
-  pub c1: u64, // getSubStmt
-  pub c2: u64, // getDefaultLoc
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DefaultStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record305(Record305{c0, c1, c2, c3, c4, })));
-}
-
-// CompoundAssignOperator
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record306 {
-  pub c0: u64, // id
-  pub c1: u64, // getComputationLHSType
-  pub c2: u64, // getComputationResultType
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CompoundAssignOperator(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record306(Record306{c0, c1, c2, })));
-}
-
-// ParenExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record307 {
-  pub c0: u64, // id
-  pub c1: u64, // getSubExpr
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-  pub c4: u64, // getLParen
-  pub c5: u64, // getRParen
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ParenExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record307(Record307{c0, c1, c2, c3, c4, c5, })));
-}
-
-// PseudoObjectExpr_semantics
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record308 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_PseudoObjectExpr_semantics(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record308(Record308{c0, c1, c2, })));
-}
-
-// PseudoObjectExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record309 {
-  pub c0: u64, // id
-  pub c1: u64, // getSyntacticForm
-  pub c2: u32, // getResultExprIndex
-  pub c3: u64, // getResultExpr
-  pub c4: u32, // getNumSemanticExprs
-  pub c5: u64, // getExprLoc
-  pub c6: u64, // getBeginLoc
-  pub c7: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_PseudoObjectExpr(c0: u64, c1: u64, c2: u32, c3: u64, c4: u32, c5: u64, c6: u64, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record309(Record309{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// FixedPointLiteral
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record310 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-  pub c3: u64, // getLocation
-  pub c4: u32, // getScale
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FixedPointLiteral(c0: u64, c1: u64, c2: u64, c3: u64, c4: u32) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record310(Record310{c0, c1, c2, c3, c4, })));
-}
-
-// SwitchCase
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record311 {
-  pub c0: u64, // id
-  pub c1: u64, // getNextSwitchCase
-  pub c2: u64, // getKeywordLoc
-  pub c3: u64, // getColonLoc
-  pub c4: u64, // getSubStmt
-  pub c5: u64, // getBeginLoc
-  pub c6: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_SwitchCase(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record311(Record311{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// GotoStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record312 {
-  pub c0: u64, // id
-  pub c1: u64, // getLabel
-  pub c2: u64, // getGotoLoc
-  pub c3: u64, // getLabelLoc
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_GotoStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record312(Record312{c0, c1, c2, c3, c4, c5, })));
-}
-
-// CompoundLiteralExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record313 {
-  pub c0: u64, // id
-  pub c1: u64, // getInitializer
-  pub c2: bool, // isFileScope
-  pub c3: u64, // getLParenLoc
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CompoundLiteralExpr(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record313(Record313{c0, c1, c2, c3, c4, c5, })));
-}
-
-// VAArgExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record314 {
-  pub c0: u64, // id
-  pub c1: u64, // getSubExpr
-  pub c2: bool, // isMicrosoftABI
-  pub c3: u64, // getBuiltinLoc
-  pub c4: u64, // getRParenLoc
-  pub c5: u64, // getBeginLoc
-  pub c6: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_VAArgExpr(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record314(Record314{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// AddrLabelExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record315 {
-  pub c0: u64, // id
-  pub c1: u64, // getAmpAmpLoc
-  pub c2: u64, // getLabelLoc
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-  pub c5: u64, // getLabel
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_AddrLabelExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record315(Record315{c0, c1, c2, c3, c4, c5, })));
-}
-
-// GNUNullExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record316 {
-  pub c0: u64, // id
-  pub c1: u64, // getTokenLocation
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_GNUNullExpr(c0: u64, c1: u64, c2: u64, c3: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record316(Record316{c0, c1, c2, c3, })));
-}
-
-// UnresolvedLookupExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record317 {
-  pub c0: u64, // id
-  pub c1: bool, // requiresADL
-  pub c2: bool, // isOverloaded
-  pub c3: u64, // getNamingClass
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UnresolvedLookupExpr(c0: u64, c1: bool, c2: bool, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record317(Record317{c0, c1, c2, c3, c4, c5, })));
-}
-
-// ArrayInitIndexExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record318 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ArrayInitIndexExpr(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record318(Record318{c0, c1, c2, })));
-}
-
-// CXXUnresolvedConstructExpr_arguments
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record319 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXUnresolvedConstructExpr_arguments(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record319(Record319{c0, c1, c2, })));
-}
-
-// CXXUnresolvedConstructExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record320 {
-  pub c0: u64, // id
-  pub c1: u64, // getTypeAsWritten
-  pub c2: u64, // getLParenLoc
-  pub c3: u64, // getRParenLoc
-  pub c4: bool, // isListInitialization
-  pub c5: u32, // getNumArgs
-  pub c6: u64, // getBeginLoc
-  pub c7: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXUnresolvedConstructExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: bool, c5: u32, c6: u64, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record320(Record320{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// ExplicitCastExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record321 {
-  pub c0: u64, // id
-  pub c1: u64, // getTypeAsWritten
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ExplicitCastExpr(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record321(Record321{c0, c1, })));
-}
-
-// ChooseExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record322 {
-  pub c0: u64, // id
-  pub c1: bool, // isConditionTrue
-  pub c2: bool, // isConditionDependent
-  pub c3: u64, // getChosenSubExpr
-  pub c4: u64, // getCond
-  pub c5: u64, // getLHS
-  pub c6: u64, // getRHS
-  pub c7: u64, // getBuiltinLoc
-  pub c8: u64, // getRParenLoc
-  pub c9: u64, // getBeginLoc
-  pub c10: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ChooseExpr(c0: u64, c1: bool, c2: bool, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64, c10: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record322(Record322{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, })));
-}
-
-// CXXDependentScopeMemberExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record323 {
-  pub c0: u64, // id
-  pub c1: bool, // isImplicitAccess
-  pub c2: u64, // getBaseType
-  pub c3: bool, // isArrow
-  pub c4: u64, // getOperatorLoc
-  pub c5: u64, // getFirstQualifierFoundInScope
-  pub c6: u64, // getMemberLoc
-  pub c7: u64, // getTemplateKeywordLoc
-  pub c8: u64, // getLAngleLoc
-  pub c9: u64, // getRAngleLoc
-  pub c10: bool, // hasTemplateKeyword
-  pub c11: bool, // hasExplicitTemplateArgs
-  pub c12: u32, // getNumTemplateArgs
-  pub c13: u64, // getBeginLoc
-  pub c14: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXDependentScopeMemberExpr(c0: u64, c1: bool, c2: u64, c3: bool, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64, c10: bool, c11: bool, c12: u32, c13: u64, c14: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record323(Record323{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, })));
-}
-
-// CaseStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record324 {
-  pub c0: u64, // id
-  pub c1: bool, // caseStmtIsGNURange
-  pub c2: u64, // getCaseLoc
-  pub c3: u64, // getEllipsisLoc
-  pub c4: u64, // getLHS
-  pub c5: u64, // getRHS
-  pub c6: u64, // getSubStmt
-  pub c7: u64, // getBeginLoc
-  pub c8: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CaseStmt(c0: u64, c1: bool, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record324(Record324{c0, c1, c2, c3, c4, c5, c6, c7, c8, })));
-}
-
-// DesignatedInitExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record325 {
-  pub c0: u64, // id
-  pub c1: u32, // size
-  pub c2: u64, // getEqualOrColonLoc
-  pub c3: bool, // isDirectInit
-  pub c4: bool, // usesGNUSyntax
-  pub c5: u64, // getInit
-  pub c6: u32, // getNumSubExprs
-  pub c7: u64, // getDesignatorsSourceRange
-  pub c8: u64, // getBeginLoc
-  pub c9: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DesignatedInitExpr(c0: u64, c1: u32, c2: u64, c3: bool, c4: bool, c5: u64, c6: u32, c7: u64, c8: u64, c9: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record325(Record325{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, })));
-}
-
-// TypoExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record326 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_TypoExpr(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record326(Record326{c0, c1, c2, })));
-}
-
-// SizeOfPackExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record327 {
-  pub c0: u64, // id
-  pub c1: u64, // getOperatorLoc
-  pub c2: u64, // getPackLoc
-  pub c3: u64, // getRParenLoc
-  pub c4: u64, // getPack
-  pub c5: bool, // isPartiallySubstituted
-  pub c6: u64, // getBeginLoc
-  pub c7: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_SizeOfPackExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: bool, c6: u64, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record327(Record327{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// PredefinedExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record328 {
-  pub c0: u64, // id
-  pub c1: u64, // getIdentKind
-  pub c2: bool, // isTransparent
-  pub c3: u64, // getLocation
-  pub c4: u64, // getFunctionName
-  pub c5: String, // getIdentKindName
-  pub c6: u64, // getBeginLoc
-  pub c7: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_PredefinedExpr(c0: u64, c1: u64, c2: bool, c3: u64, c4: u64, c5: *const c_char, c6: u64, c7: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c5 = unsafe { CStr::from_ptr(c5) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record328(Record328{c0, c1, c2, c3, c4, c5, c6, c7, })));
-}
-
-// SubstNonTypeTemplateParmExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record329 {
-  pub c0: u64, // id
-  pub c1: u64, // getNameLoc
-  pub c2: u64, // getBeginLoc
-  pub c3: u64, // getEndLoc
-  pub c4: u64, // getReplacement
-  pub c5: u64, // getAssociatedDecl
-  pub c6: u32, // getIndex
-  pub c7: u64, // getParameter
-  pub c8: bool, // isReferenceParameter
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_SubstNonTypeTemplateParmExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u32, c7: u64, c8: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record329(Record329{c0, c1, c2, c3, c4, c5, c6, c7, c8, })));
-}
-
-// SubstNonTypeTemplateParmPackExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record330 {
-  pub c0: u64, // id
-  pub c1: u64, // getAssociatedDecl
-  pub c2: u32, // getIndex
-  pub c3: u64, // getParameterPack
-  pub c4: u64, // getParameterPackLocation
-  pub c5: u64, // getBeginLoc
-  pub c6: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_SubstNonTypeTemplateParmPackExpr(c0: u64, c1: u64, c2: u32, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record330(Record330{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// CXXParenListInitExpr_getInitExprs
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record331 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXParenListInitExpr_getInitExprs(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record331(Record331{c0, c1, c2, })));
-}
-
-// CXXParenListInitExpr_getUserSpecifiedInitExprs
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record332 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXParenListInitExpr_getUserSpecifiedInitExprs(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record332(Record332{c0, c1, c2, })));
-}
-
-// CXXParenListInitExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record333 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-  pub c3: u64, // getInitLoc
-  pub c4: u64, // getSourceRange
-  pub c5: u64, // getArrayFiller
-  pub c6: u64, // getInitializedFieldInUnion
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXParenListInitExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record333(Record333{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// CUDAKernelCallExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record334 {
-  pub c0: u64, // id
-  pub c1: u64, // getConfig
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CUDAKernelCallExpr(c0: u64, c1: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record334(Record334{c0, c1, })));
-}
-
-// CoroutineSuspendExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record335 {
-  pub c0: u64, // id
-  pub c1: u64, // getCommonExpr
-  pub c2: u64, // getOpaqueValue
-  pub c3: u64, // getReadyExpr
-  pub c4: u64, // getSuspendExpr
-  pub c5: u64, // getResumeExpr
-  pub c6: u64, // getOperand
-  pub c7: u64, // getKeywordLoc
-  pub c8: u64, // getBeginLoc
-  pub c9: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CoroutineSuspendExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record335(Record335{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, })));
-}
-
-// UnaryOperator
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record336 {
-  pub c0: u64, // id
-  pub c1: u64, // getOpcode
-  pub c2: u64, // getSubExpr
-  pub c3: u64, // getOperatorLoc
-  pub c4: bool, // canOverflow
-  pub c5: bool, // isPrefix
-  pub c6: bool, // isPostfix
-  pub c7: bool, // isIncrementOp
-  pub c8: bool, // isDecrementOp
-  pub c9: bool, // isIncrementDecrementOp
-  pub c10: bool, // isArithmeticOp
-  pub c11: u64, // getBeginLoc
-  pub c12: u64, // getEndLoc
-  pub c13: u64, // getExprLoc
-  pub c14: bool, // hasStoredFPFeatures
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_UnaryOperator(c0: u64, c1: u64, c2: u64, c3: u64, c4: bool, c5: bool, c6: bool, c7: bool, c8: bool, c9: bool, c10: bool, c11: u64, c12: u64, c13: u64, c14: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record336(Record336{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, })));
-}
-
-// DependentCoawaitExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record337 {
-  pub c0: u64, // id
-  pub c1: u64, // getOperand
-  pub c2: u64, // getOperatorCoawaitLookup
-  pub c3: u64, // getKeywordLoc
-  pub c4: u64, // getBeginLoc
-  pub c5: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_DependentCoawaitExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record337(Record337{c0, c1, c2, c3, c4, c5, })));
-}
-
-// LambdaExpr_capture_inits
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record338 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_LambdaExpr_capture_inits(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record338(Record338{c0, c1, c2, })));
-}
-
-// LambdaExpr_getExplicitTemplateParameters
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record339 {
-  pub c0: u64, // id
-  pub c1: u64, // idx
-  pub c2: u64, // element
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_LambdaExpr_getExplicitTemplateParameters(c0: u64, c1: u64, c2: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record339(Record339{c0, c1, c2, })));
-}
-
-// LambdaExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record340 {
-  pub c0: u64, // id
-  pub c1: u64, // getCaptureDefault
-  pub c2: u64, // getCaptureDefaultLoc
-  pub c3: u32, // capture_size
-  pub c4: u64, // getIntroducerRange
-  pub c5: u64, // getLambdaClass
-  pub c6: u64, // getCallOperator
-  pub c7: u64, // getDependentCallOperator
-  pub c8: u64, // getTrailingRequiresClause
-  pub c9: bool, // isGenericLambda
-  pub c10: u64, // getBody
-  pub c11: u64, // getCompoundStmtBody
-  pub c12: bool, // isMutable
-  pub c13: bool, // hasExplicitParameters
-  pub c14: bool, // hasExplicitResultType
-  pub c15: u64, // getBeginLoc
-  pub c16: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_LambdaExpr(c0: u64, c1: u64, c2: u64, c3: u32, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: bool, c10: u64, c11: u64, c12: bool, c13: bool, c14: bool, c15: u64, c16: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record340(Record340{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, })));
-}
-
-// ExprWithCleanups
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record341 {
-  pub c0: u64, // id
-  pub c1: u32, // getNumObjects
-  pub c2: bool, // cleanupsHaveSideEffects
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ExprWithCleanups(c0: u64, c1: u32, c2: bool, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record341(Record341{c0, c1, c2, c3, c4, })));
-}
-
-// SYCLUniqueStableNameExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record342 {
-  pub c0: u64, // id
-  pub c1: u64, // getBeginLoc
-  pub c2: u64, // getEndLoc
-  pub c3: u64, // getLocation
-  pub c4: u64, // getLParenLocation
-  pub c5: u64, // getRParenLocation
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_SYCLUniqueStableNameExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record342(Record342{c0, c1, c2, c3, c4, c5, })));
-}
-
-// CXXDeleteExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record343 {
-  pub c0: u64, // id
-  pub c1: bool, // isGlobalDelete
-  pub c2: bool, // isArrayForm
-  pub c3: bool, // isArrayFormAsWritten
-  pub c4: bool, // doesUsualArrayDeleteWantSize
-  pub c5: u64, // getOperatorDelete
-  pub c6: u64, // getArgument
-  pub c7: u64, // getDestroyedType
-  pub c8: u64, // getBeginLoc
-  pub c9: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXDeleteExpr(c0: u64, c1: bool, c2: bool, c3: bool, c4: bool, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record343(Record343{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, })));
-}
-
-// CallExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record344 {
-  pub c0: u64, // id
-  pub c1: u64, // getCallee
-  pub c2: u64, // getADLCallKind
-  pub c3: bool, // usesADL
-  pub c4: bool, // hasStoredFPFeatures
-  pub c5: u64, // getCalleeDecl
-  pub c6: u64, // getDirectCallee
-  pub c7: u32, // getNumArgs
-  pub c8: u32, // getBuiltinCallee
-  pub c9: u64, // getRParenLoc
-  pub c10: u64, // getBeginLoc
-  pub c11: u64, // getEndLoc
-  pub c12: bool, // isCallToStdMove
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CallExpr(c0: u64, c1: u64, c2: u64, c3: bool, c4: bool, c5: u64, c6: u64, c7: u32, c8: u32, c9: u64, c10: u64, c11: u64, c12: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record344(Record344{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, })));
-}
-
-// MaterializeTemporaryExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record345 {
-  pub c0: u64, // id
-  pub c1: u64, // getSubExpr
-  pub c2: u64, // getStorageDuration
-  pub c3: u64, // getLifetimeExtendedTemporaryDecl
-  pub c4: u64, // getExtendingDecl
-  pub c5: u32, // getManglingNumber
-  pub c6: bool, // isBoundToLvalueReference
-  pub c7: u64, // getBeginLoc
-  pub c8: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MaterializeTemporaryExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64, c5: u32, c6: bool, c7: u64, c8: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record345(Record345{c0, c1, c2, c3, c4, c5, c6, c7, c8, })));
-}
-
-// SourceLocExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record346 {
-  pub c0: u64, // id
-  pub c1: String, // getBuiltinStr
-  pub c2: u64, // getIdentKind
-  pub c3: bool, // isIntType
-  pub c4: u64, // getLocation
-  pub c5: u64, // getBeginLoc
-  pub c6: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_SourceLocExpr(c0: u64, c1: *const c_char, c2: u64, c3: bool, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  let c1 = unsafe { CStr::from_ptr(c1) }.to_string_lossy().to_string();
-  sink(FfiMessage::Record(Record::Record346(Record346{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// CoawaitExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record347 {
-  pub c0: u64, // id
-  pub c1: bool, // isImplicit
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CoawaitExpr(c0: u64, c1: bool) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record347(Record347{c0, c1, })));
-}
-
-// CXXConstCastExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record348 {
-  pub c0: u64, // id
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXConstCastExpr(c0: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record348(Record348{c0, })));
-}
-
-// CoreturnStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record349 {
-  pub c0: u64, // id
-  pub c1: u64, // getKeywordLoc
-  pub c2: u64, // getOperand
-  pub c3: u64, // getPromiseCall
-  pub c4: bool, // isImplicit
-  pub c5: u64, // getBeginLoc
-  pub c6: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CoreturnStmt(c0: u64, c1: u64, c2: u64, c3: u64, c4: bool, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record349(Record349{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// ArrayInitLoopExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record350 {
-  pub c0: u64, // id
-  pub c1: u64, // getCommonExpr
-  pub c2: u64, // getSubExpr
-  pub c3: u64, // getBeginLoc
-  pub c4: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_ArrayInitLoopExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record350(Record350{c0, c1, c2, c3, c4, })));
-}
-
-// MSDependentExistsStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record351 {
-  pub c0: u64, // id
-  pub c1: u64, // getKeywordLoc
-  pub c2: bool, // isIfExists
-  pub c3: bool, // isIfNotExists
-  pub c4: u64, // getSubStmt
-  pub c5: u64, // getBeginLoc
-  pub c6: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_MSDependentExistsStmt(c0: u64, c1: u64, c2: bool, c3: bool, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record351(Record351{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
-// IfStmt
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record352 {
-  pub c0: u64, // id
-  pub c1: bool, // hasInitStorage
-  pub c2: bool, // hasVarStorage
-  pub c3: bool, // hasElseStorage
-  pub c4: u64, // getCond
-  pub c5: u64, // getThen
-  pub c6: u64, // getElse
-  pub c7: u64, // getConditionVariable
-  pub c8: u64, // getConditionVariableDeclStmt
-  pub c9: u64, // getInit
-  pub c10: u64, // getIfLoc
-  pub c11: u64, // getElseLoc
-  pub c12: bool, // isConsteval
-  pub c13: bool, // isNonNegatedConsteval
-  pub c14: bool, // isNegatedConsteval
-  pub c15: bool, // isConstexpr
-  pub c16: u64, // getStatementKind
-  pub c17: bool, // isObjCAvailabilityCheck
-  pub c18: u64, // getBeginLoc
-  pub c19: u64, // getEndLoc
-  pub c20: u64, // getLParenLoc
-  pub c21: u64, // getRParenLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_IfStmt(c0: u64, c1: bool, c2: bool, c3: bool, c4: u64, c5: u64, c6: u64, c7: u64, c8: u64, c9: u64, c10: u64, c11: u64, c12: bool, c13: bool, c14: bool, c15: bool, c16: u64, c17: bool, c18: u64, c19: u64, c20: u64, c21: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record352(Record352{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, })));
-}
-
-// CXXFoldExpr
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record353 {
-  pub c0: u64, // id
-  pub c1: u64, // getCallee
-  pub c2: u64, // getLHS
-  pub c3: u64, // getRHS
-  pub c4: bool, // isRightFold
-  pub c5: bool, // isLeftFold
-  pub c6: u64, // getPattern
-  pub c7: u64, // getInit
-  pub c8: u64, // getLParenLoc
-  pub c9: u64, // getRParenLoc
-  pub c10: u64, // getEllipsisLoc
-  pub c11: u64, // getOperator
-  pub c12: u64, // getBeginLoc
-  pub c13: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_CXXFoldExpr(c0: u64, c1: u64, c2: u64, c3: u64, c4: bool, c5: bool, c6: u64, c7: u64, c8: u64, c9: u64, c10: u64, c11: u64, c12: u64, c13: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record353(Record353{c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, })));
-}
-
-// FloatingLiteral
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Record354 {
-  pub c0: u64, // id
-  pub c1: u64, // getRawSemantics
-  pub c2: bool, // isExact
-  pub c3: f64, // getValueAsApproximateDouble
-  pub c4: u64, // getLocation
-  pub c5: u64, // getBeginLoc
-  pub c6: u64, // getEndLoc
-}
-
-#[no_mangle]
-pub extern "C" fn arboretum_emit_FloatingLiteral(c0: u64, c1: u64, c2: bool, c3: f64, c4: u64, c5: u64, c6: u64) {
-  let sink = unsafe { RECORD_SINK.as_ref() }.unwrap();
-  sink(FfiMessage::Record(Record::Record354(Record354{c0, c1, c2, c3, c4, c5, c6, })));
-}
-
+// Using thread-local storage for FFI compatibility
+use std::cell::RefCell;
+
+thread_local!(static RECORD_QUEUE_0: RefCell<Vec<Record0>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_1: RefCell<Vec<Record1>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_2: RefCell<Vec<Record2>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_3: RefCell<Vec<Record3>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_4: RefCell<Vec<Record4>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_5: RefCell<Vec<Record5>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_6: RefCell<Vec<Record6>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_7: RefCell<Vec<Record7>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_8: RefCell<Vec<Record8>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_9: RefCell<Vec<Record9>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_10: RefCell<Vec<Record10>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_11: RefCell<Vec<Record11>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_12: RefCell<Vec<Record12>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_13: RefCell<Vec<Record13>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_14: RefCell<Vec<Record14>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_15: RefCell<Vec<Record15>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_16: RefCell<Vec<Record16>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_17: RefCell<Vec<Record17>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_18: RefCell<Vec<Record18>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_19: RefCell<Vec<Record19>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_20: RefCell<Vec<Record20>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_21: RefCell<Vec<Record21>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_22: RefCell<Vec<Record22>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_23: RefCell<Vec<Record23>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_24: RefCell<Vec<Record24>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_25: RefCell<Vec<Record25>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_26: RefCell<Vec<Record26>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_27: RefCell<Vec<Record27>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_28: RefCell<Vec<Record28>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_29: RefCell<Vec<Record29>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_30: RefCell<Vec<Record30>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_31: RefCell<Vec<Record31>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_32: RefCell<Vec<Record32>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_33: RefCell<Vec<Record33>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_34: RefCell<Vec<Record34>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_35: RefCell<Vec<Record35>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_36: RefCell<Vec<Record36>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_37: RefCell<Vec<Record37>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_38: RefCell<Vec<Record38>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_39: RefCell<Vec<Record39>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_40: RefCell<Vec<Record40>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_41: RefCell<Vec<Record41>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_42: RefCell<Vec<Record42>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_43: RefCell<Vec<Record43>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_44: RefCell<Vec<Record44>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_45: RefCell<Vec<Record45>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_46: RefCell<Vec<Record46>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_47: RefCell<Vec<Record47>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_48: RefCell<Vec<Record48>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_49: RefCell<Vec<Record49>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_50: RefCell<Vec<Record50>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_51: RefCell<Vec<Record51>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_52: RefCell<Vec<Record52>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_53: RefCell<Vec<Record53>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_54: RefCell<Vec<Record54>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_55: RefCell<Vec<Record55>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_56: RefCell<Vec<Record56>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_57: RefCell<Vec<Record57>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_58: RefCell<Vec<Record58>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_59: RefCell<Vec<Record59>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_60: RefCell<Vec<Record60>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_61: RefCell<Vec<Record61>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_62: RefCell<Vec<Record62>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_63: RefCell<Vec<Record63>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_64: RefCell<Vec<Record64>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_65: RefCell<Vec<Record65>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_66: RefCell<Vec<Record66>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_67: RefCell<Vec<Record67>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_68: RefCell<Vec<Record68>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_69: RefCell<Vec<Record69>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_70: RefCell<Vec<Record70>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_71: RefCell<Vec<Record71>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_72: RefCell<Vec<Record72>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_73: RefCell<Vec<Record73>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_74: RefCell<Vec<Record74>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_75: RefCell<Vec<Record75>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_76: RefCell<Vec<Record76>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_77: RefCell<Vec<Record77>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_78: RefCell<Vec<Record78>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_79: RefCell<Vec<Record79>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_80: RefCell<Vec<Record80>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_81: RefCell<Vec<Record81>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_82: RefCell<Vec<Record82>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_83: RefCell<Vec<Record83>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_84: RefCell<Vec<Record84>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_85: RefCell<Vec<Record85>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_86: RefCell<Vec<Record86>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_87: RefCell<Vec<Record87>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_88: RefCell<Vec<Record88>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_89: RefCell<Vec<Record89>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_90: RefCell<Vec<Record90>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_91: RefCell<Vec<Record91>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_92: RefCell<Vec<Record92>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_93: RefCell<Vec<Record93>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_94: RefCell<Vec<Record94>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_95: RefCell<Vec<Record95>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_96: RefCell<Vec<Record96>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_97: RefCell<Vec<Record97>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_98: RefCell<Vec<Record98>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_99: RefCell<Vec<Record99>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_100: RefCell<Vec<Record100>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_101: RefCell<Vec<Record101>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_102: RefCell<Vec<Record102>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_103: RefCell<Vec<Record103>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_104: RefCell<Vec<Record104>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_105: RefCell<Vec<Record105>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_106: RefCell<Vec<Record106>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_107: RefCell<Vec<Record107>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_108: RefCell<Vec<Record108>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_109: RefCell<Vec<Record109>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_110: RefCell<Vec<Record110>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_111: RefCell<Vec<Record111>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_112: RefCell<Vec<Record112>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_113: RefCell<Vec<Record113>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_114: RefCell<Vec<Record114>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_115: RefCell<Vec<Record115>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_116: RefCell<Vec<Record116>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_117: RefCell<Vec<Record117>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_118: RefCell<Vec<Record118>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_119: RefCell<Vec<Record119>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_120: RefCell<Vec<Record120>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_121: RefCell<Vec<Record121>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_122: RefCell<Vec<Record122>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_123: RefCell<Vec<Record123>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_124: RefCell<Vec<Record124>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_125: RefCell<Vec<Record125>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_126: RefCell<Vec<Record126>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_127: RefCell<Vec<Record127>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_128: RefCell<Vec<Record128>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_129: RefCell<Vec<Record129>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_130: RefCell<Vec<Record130>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_131: RefCell<Vec<Record131>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_132: RefCell<Vec<Record132>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_133: RefCell<Vec<Record133>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_134: RefCell<Vec<Record134>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_135: RefCell<Vec<Record135>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_136: RefCell<Vec<Record136>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_137: RefCell<Vec<Record137>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_138: RefCell<Vec<Record138>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_139: RefCell<Vec<Record139>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_140: RefCell<Vec<Record140>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_141: RefCell<Vec<Record141>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_142: RefCell<Vec<Record142>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_143: RefCell<Vec<Record143>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_144: RefCell<Vec<Record144>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_145: RefCell<Vec<Record145>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_146: RefCell<Vec<Record146>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_147: RefCell<Vec<Record147>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_148: RefCell<Vec<Record148>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_149: RefCell<Vec<Record149>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_150: RefCell<Vec<Record150>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_151: RefCell<Vec<Record151>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_152: RefCell<Vec<Record152>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_153: RefCell<Vec<Record153>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_154: RefCell<Vec<Record154>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_155: RefCell<Vec<Record155>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_156: RefCell<Vec<Record156>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_157: RefCell<Vec<Record157>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_158: RefCell<Vec<Record158>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_159: RefCell<Vec<Record159>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_160: RefCell<Vec<Record160>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_161: RefCell<Vec<Record161>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_162: RefCell<Vec<Record162>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_163: RefCell<Vec<Record163>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_164: RefCell<Vec<Record164>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_165: RefCell<Vec<Record165>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_166: RefCell<Vec<Record166>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_167: RefCell<Vec<Record167>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_168: RefCell<Vec<Record168>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_169: RefCell<Vec<Record169>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_170: RefCell<Vec<Record170>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_171: RefCell<Vec<Record171>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_172: RefCell<Vec<Record172>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_173: RefCell<Vec<Record173>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_174: RefCell<Vec<Record174>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_175: RefCell<Vec<Record175>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_176: RefCell<Vec<Record176>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_177: RefCell<Vec<Record177>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_178: RefCell<Vec<Record178>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_179: RefCell<Vec<Record179>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_180: RefCell<Vec<Record180>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_181: RefCell<Vec<Record181>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_182: RefCell<Vec<Record182>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_183: RefCell<Vec<Record183>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_184: RefCell<Vec<Record184>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_185: RefCell<Vec<Record185>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_186: RefCell<Vec<Record186>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_187: RefCell<Vec<Record187>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_188: RefCell<Vec<Record188>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_189: RefCell<Vec<Record189>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_190: RefCell<Vec<Record190>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_191: RefCell<Vec<Record191>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_192: RefCell<Vec<Record192>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_193: RefCell<Vec<Record193>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_194: RefCell<Vec<Record194>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_195: RefCell<Vec<Record195>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_196: RefCell<Vec<Record196>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_197: RefCell<Vec<Record197>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_198: RefCell<Vec<Record198>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_199: RefCell<Vec<Record199>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_200: RefCell<Vec<Record200>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_201: RefCell<Vec<Record201>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_202: RefCell<Vec<Record202>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_203: RefCell<Vec<Record203>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_204: RefCell<Vec<Record204>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_205: RefCell<Vec<Record205>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_206: RefCell<Vec<Record206>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_207: RefCell<Vec<Record207>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_208: RefCell<Vec<Record208>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_209: RefCell<Vec<Record209>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_210: RefCell<Vec<Record210>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_211: RefCell<Vec<Record211>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_212: RefCell<Vec<Record212>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_213: RefCell<Vec<Record213>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_214: RefCell<Vec<Record214>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_215: RefCell<Vec<Record215>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_216: RefCell<Vec<Record216>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_217: RefCell<Vec<Record217>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_218: RefCell<Vec<Record218>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_219: RefCell<Vec<Record219>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_220: RefCell<Vec<Record220>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_221: RefCell<Vec<Record221>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_222: RefCell<Vec<Record222>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_223: RefCell<Vec<Record223>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_224: RefCell<Vec<Record224>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_225: RefCell<Vec<Record225>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_226: RefCell<Vec<Record226>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_227: RefCell<Vec<Record227>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_228: RefCell<Vec<Record228>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_229: RefCell<Vec<Record229>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_230: RefCell<Vec<Record230>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_231: RefCell<Vec<Record231>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_232: RefCell<Vec<Record232>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_233: RefCell<Vec<Record233>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_234: RefCell<Vec<Record234>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_235: RefCell<Vec<Record235>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_236: RefCell<Vec<Record236>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_237: RefCell<Vec<Record237>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_238: RefCell<Vec<Record238>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_239: RefCell<Vec<Record239>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_240: RefCell<Vec<Record240>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_241: RefCell<Vec<Record241>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_242: RefCell<Vec<Record242>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_243: RefCell<Vec<Record243>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_244: RefCell<Vec<Record244>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_245: RefCell<Vec<Record245>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_246: RefCell<Vec<Record246>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_247: RefCell<Vec<Record247>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_248: RefCell<Vec<Record248>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_249: RefCell<Vec<Record249>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_250: RefCell<Vec<Record250>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_251: RefCell<Vec<Record251>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_252: RefCell<Vec<Record252>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_253: RefCell<Vec<Record253>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_254: RefCell<Vec<Record254>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_255: RefCell<Vec<Record255>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_256: RefCell<Vec<Record256>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_257: RefCell<Vec<Record257>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_258: RefCell<Vec<Record258>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_259: RefCell<Vec<Record259>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_260: RefCell<Vec<Record260>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_261: RefCell<Vec<Record261>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_262: RefCell<Vec<Record262>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_263: RefCell<Vec<Record263>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_264: RefCell<Vec<Record264>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_265: RefCell<Vec<Record265>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_266: RefCell<Vec<Record266>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_267: RefCell<Vec<Record267>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_268: RefCell<Vec<Record268>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_269: RefCell<Vec<Record269>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_270: RefCell<Vec<Record270>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_271: RefCell<Vec<Record271>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_272: RefCell<Vec<Record272>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_273: RefCell<Vec<Record273>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_274: RefCell<Vec<Record274>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_275: RefCell<Vec<Record275>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_276: RefCell<Vec<Record276>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_277: RefCell<Vec<Record277>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_278: RefCell<Vec<Record278>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_279: RefCell<Vec<Record279>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_280: RefCell<Vec<Record280>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_281: RefCell<Vec<Record281>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_282: RefCell<Vec<Record282>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_283: RefCell<Vec<Record283>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_284: RefCell<Vec<Record284>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_285: RefCell<Vec<Record285>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_286: RefCell<Vec<Record286>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_287: RefCell<Vec<Record287>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_288: RefCell<Vec<Record288>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_289: RefCell<Vec<Record289>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_290: RefCell<Vec<Record290>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_291: RefCell<Vec<Record291>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_292: RefCell<Vec<Record292>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_293: RefCell<Vec<Record293>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_294: RefCell<Vec<Record294>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_295: RefCell<Vec<Record295>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_296: RefCell<Vec<Record296>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_297: RefCell<Vec<Record297>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_298: RefCell<Vec<Record298>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_299: RefCell<Vec<Record299>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_300: RefCell<Vec<Record300>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_301: RefCell<Vec<Record301>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_302: RefCell<Vec<Record302>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_303: RefCell<Vec<Record303>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_304: RefCell<Vec<Record304>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_305: RefCell<Vec<Record305>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_306: RefCell<Vec<Record306>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_307: RefCell<Vec<Record307>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_308: RefCell<Vec<Record308>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_309: RefCell<Vec<Record309>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_310: RefCell<Vec<Record310>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_311: RefCell<Vec<Record311>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_312: RefCell<Vec<Record312>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_313: RefCell<Vec<Record313>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_314: RefCell<Vec<Record314>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_315: RefCell<Vec<Record315>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_316: RefCell<Vec<Record316>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_317: RefCell<Vec<Record317>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_318: RefCell<Vec<Record318>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_319: RefCell<Vec<Record319>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_320: RefCell<Vec<Record320>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_321: RefCell<Vec<Record321>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_322: RefCell<Vec<Record322>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_323: RefCell<Vec<Record323>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_324: RefCell<Vec<Record324>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_325: RefCell<Vec<Record325>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_326: RefCell<Vec<Record326>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_327: RefCell<Vec<Record327>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_328: RefCell<Vec<Record328>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_329: RefCell<Vec<Record329>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_330: RefCell<Vec<Record330>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_331: RefCell<Vec<Record331>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_332: RefCell<Vec<Record332>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_333: RefCell<Vec<Record333>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_334: RefCell<Vec<Record334>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_335: RefCell<Vec<Record335>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_336: RefCell<Vec<Record336>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_337: RefCell<Vec<Record337>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_338: RefCell<Vec<Record338>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_339: RefCell<Vec<Record339>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_340: RefCell<Vec<Record340>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_341: RefCell<Vec<Record341>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_342: RefCell<Vec<Record342>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_343: RefCell<Vec<Record343>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_344: RefCell<Vec<Record344>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_345: RefCell<Vec<Record345>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_346: RefCell<Vec<Record346>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_347: RefCell<Vec<Record347>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_348: RefCell<Vec<Record348>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_349: RefCell<Vec<Record349>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_350: RefCell<Vec<Record350>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_351: RefCell<Vec<Record351>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_352: RefCell<Vec<Record352>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_353: RefCell<Vec<Record353>> = RefCell::new(Vec::new()));
+thread_local!(static RECORD_QUEUE_354: RefCell<Vec<Record354>> = RefCell::new(Vec::new()));
+
+#[no_mangle]
+pub extern "C" fn queue_record(record: Record) {
+  match record {
+    Record::Record0(r) => {
+      RECORD_QUEUE_0.with(|tb: &RefCell<Vec<Record0>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record1(r) => {
+      RECORD_QUEUE_1.with(|tb: &RefCell<Vec<Record1>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record2(r) => {
+      RECORD_QUEUE_2.with(|tb: &RefCell<Vec<Record2>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record3(r) => {
+      RECORD_QUEUE_3.with(|tb: &RefCell<Vec<Record3>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record4(r) => {
+      RECORD_QUEUE_4.with(|tb: &RefCell<Vec<Record4>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record5(r) => {
+      RECORD_QUEUE_5.with(|tb: &RefCell<Vec<Record5>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record6(r) => {
+      RECORD_QUEUE_6.with(|tb: &RefCell<Vec<Record6>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record7(r) => {
+      RECORD_QUEUE_7.with(|tb: &RefCell<Vec<Record7>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record8(r) => {
+      RECORD_QUEUE_8.with(|tb: &RefCell<Vec<Record8>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record9(r) => {
+      RECORD_QUEUE_9.with(|tb: &RefCell<Vec<Record9>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record10(r) => {
+      RECORD_QUEUE_10.with(|tb: &RefCell<Vec<Record10>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record11(r) => {
+      RECORD_QUEUE_11.with(|tb: &RefCell<Vec<Record11>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record12(r) => {
+      RECORD_QUEUE_12.with(|tb: &RefCell<Vec<Record12>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record13(r) => {
+      RECORD_QUEUE_13.with(|tb: &RefCell<Vec<Record13>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record14(r) => {
+      RECORD_QUEUE_14.with(|tb: &RefCell<Vec<Record14>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record15(r) => {
+      RECORD_QUEUE_15.with(|tb: &RefCell<Vec<Record15>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record16(r) => {
+      RECORD_QUEUE_16.with(|tb: &RefCell<Vec<Record16>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record17(r) => {
+      RECORD_QUEUE_17.with(|tb: &RefCell<Vec<Record17>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record18(r) => {
+      RECORD_QUEUE_18.with(|tb: &RefCell<Vec<Record18>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record19(r) => {
+      RECORD_QUEUE_19.with(|tb: &RefCell<Vec<Record19>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record20(r) => {
+      RECORD_QUEUE_20.with(|tb: &RefCell<Vec<Record20>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record21(r) => {
+      RECORD_QUEUE_21.with(|tb: &RefCell<Vec<Record21>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record22(r) => {
+      RECORD_QUEUE_22.with(|tb: &RefCell<Vec<Record22>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record23(r) => {
+      RECORD_QUEUE_23.with(|tb: &RefCell<Vec<Record23>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record24(r) => {
+      RECORD_QUEUE_24.with(|tb: &RefCell<Vec<Record24>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record25(r) => {
+      RECORD_QUEUE_25.with(|tb: &RefCell<Vec<Record25>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record26(r) => {
+      RECORD_QUEUE_26.with(|tb: &RefCell<Vec<Record26>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record27(r) => {
+      RECORD_QUEUE_27.with(|tb: &RefCell<Vec<Record27>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record28(r) => {
+      RECORD_QUEUE_28.with(|tb: &RefCell<Vec<Record28>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record29(r) => {
+      RECORD_QUEUE_29.with(|tb: &RefCell<Vec<Record29>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record30(r) => {
+      RECORD_QUEUE_30.with(|tb: &RefCell<Vec<Record30>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record31(r) => {
+      RECORD_QUEUE_31.with(|tb: &RefCell<Vec<Record31>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record32(r) => {
+      RECORD_QUEUE_32.with(|tb: &RefCell<Vec<Record32>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record33(r) => {
+      RECORD_QUEUE_33.with(|tb: &RefCell<Vec<Record33>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record34(r) => {
+      RECORD_QUEUE_34.with(|tb: &RefCell<Vec<Record34>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record35(r) => {
+      RECORD_QUEUE_35.with(|tb: &RefCell<Vec<Record35>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record36(r) => {
+      RECORD_QUEUE_36.with(|tb: &RefCell<Vec<Record36>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record37(r) => {
+      RECORD_QUEUE_37.with(|tb: &RefCell<Vec<Record37>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record38(r) => {
+      RECORD_QUEUE_38.with(|tb: &RefCell<Vec<Record38>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record39(r) => {
+      RECORD_QUEUE_39.with(|tb: &RefCell<Vec<Record39>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record40(r) => {
+      RECORD_QUEUE_40.with(|tb: &RefCell<Vec<Record40>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record41(r) => {
+      RECORD_QUEUE_41.with(|tb: &RefCell<Vec<Record41>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record42(r) => {
+      RECORD_QUEUE_42.with(|tb: &RefCell<Vec<Record42>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record43(r) => {
+      RECORD_QUEUE_43.with(|tb: &RefCell<Vec<Record43>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record44(r) => {
+      RECORD_QUEUE_44.with(|tb: &RefCell<Vec<Record44>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record45(r) => {
+      RECORD_QUEUE_45.with(|tb: &RefCell<Vec<Record45>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record46(r) => {
+      RECORD_QUEUE_46.with(|tb: &RefCell<Vec<Record46>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record47(r) => {
+      RECORD_QUEUE_47.with(|tb: &RefCell<Vec<Record47>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record48(r) => {
+      RECORD_QUEUE_48.with(|tb: &RefCell<Vec<Record48>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record49(r) => {
+      RECORD_QUEUE_49.with(|tb: &RefCell<Vec<Record49>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record50(r) => {
+      RECORD_QUEUE_50.with(|tb: &RefCell<Vec<Record50>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record51(r) => {
+      RECORD_QUEUE_51.with(|tb: &RefCell<Vec<Record51>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record52(r) => {
+      RECORD_QUEUE_52.with(|tb: &RefCell<Vec<Record52>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record53(r) => {
+      RECORD_QUEUE_53.with(|tb: &RefCell<Vec<Record53>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record54(r) => {
+      RECORD_QUEUE_54.with(|tb: &RefCell<Vec<Record54>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record55(r) => {
+      RECORD_QUEUE_55.with(|tb: &RefCell<Vec<Record55>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record56(r) => {
+      RECORD_QUEUE_56.with(|tb: &RefCell<Vec<Record56>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record57(r) => {
+      RECORD_QUEUE_57.with(|tb: &RefCell<Vec<Record57>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record58(r) => {
+      RECORD_QUEUE_58.with(|tb: &RefCell<Vec<Record58>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record59(r) => {
+      RECORD_QUEUE_59.with(|tb: &RefCell<Vec<Record59>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record60(r) => {
+      RECORD_QUEUE_60.with(|tb: &RefCell<Vec<Record60>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record61(r) => {
+      RECORD_QUEUE_61.with(|tb: &RefCell<Vec<Record61>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record62(r) => {
+      RECORD_QUEUE_62.with(|tb: &RefCell<Vec<Record62>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record63(r) => {
+      RECORD_QUEUE_63.with(|tb: &RefCell<Vec<Record63>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record64(r) => {
+      RECORD_QUEUE_64.with(|tb: &RefCell<Vec<Record64>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record65(r) => {
+      RECORD_QUEUE_65.with(|tb: &RefCell<Vec<Record65>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record66(r) => {
+      RECORD_QUEUE_66.with(|tb: &RefCell<Vec<Record66>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record67(r) => {
+      RECORD_QUEUE_67.with(|tb: &RefCell<Vec<Record67>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record68(r) => {
+      RECORD_QUEUE_68.with(|tb: &RefCell<Vec<Record68>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record69(r) => {
+      RECORD_QUEUE_69.with(|tb: &RefCell<Vec<Record69>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record70(r) => {
+      RECORD_QUEUE_70.with(|tb: &RefCell<Vec<Record70>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record71(r) => {
+      RECORD_QUEUE_71.with(|tb: &RefCell<Vec<Record71>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record72(r) => {
+      RECORD_QUEUE_72.with(|tb: &RefCell<Vec<Record72>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record73(r) => {
+      RECORD_QUEUE_73.with(|tb: &RefCell<Vec<Record73>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record74(r) => {
+      RECORD_QUEUE_74.with(|tb: &RefCell<Vec<Record74>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record75(r) => {
+      RECORD_QUEUE_75.with(|tb: &RefCell<Vec<Record75>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record76(r) => {
+      RECORD_QUEUE_76.with(|tb: &RefCell<Vec<Record76>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record77(r) => {
+      RECORD_QUEUE_77.with(|tb: &RefCell<Vec<Record77>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record78(r) => {
+      RECORD_QUEUE_78.with(|tb: &RefCell<Vec<Record78>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record79(r) => {
+      RECORD_QUEUE_79.with(|tb: &RefCell<Vec<Record79>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record80(r) => {
+      RECORD_QUEUE_80.with(|tb: &RefCell<Vec<Record80>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record81(r) => {
+      RECORD_QUEUE_81.with(|tb: &RefCell<Vec<Record81>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record82(r) => {
+      RECORD_QUEUE_82.with(|tb: &RefCell<Vec<Record82>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record83(r) => {
+      RECORD_QUEUE_83.with(|tb: &RefCell<Vec<Record83>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record84(r) => {
+      RECORD_QUEUE_84.with(|tb: &RefCell<Vec<Record84>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record85(r) => {
+      RECORD_QUEUE_85.with(|tb: &RefCell<Vec<Record85>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record86(r) => {
+      RECORD_QUEUE_86.with(|tb: &RefCell<Vec<Record86>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record87(r) => {
+      RECORD_QUEUE_87.with(|tb: &RefCell<Vec<Record87>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record88(r) => {
+      RECORD_QUEUE_88.with(|tb: &RefCell<Vec<Record88>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record89(r) => {
+      RECORD_QUEUE_89.with(|tb: &RefCell<Vec<Record89>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record90(r) => {
+      RECORD_QUEUE_90.with(|tb: &RefCell<Vec<Record90>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record91(r) => {
+      RECORD_QUEUE_91.with(|tb: &RefCell<Vec<Record91>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record92(r) => {
+      RECORD_QUEUE_92.with(|tb: &RefCell<Vec<Record92>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record93(r) => {
+      RECORD_QUEUE_93.with(|tb: &RefCell<Vec<Record93>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record94(r) => {
+      RECORD_QUEUE_94.with(|tb: &RefCell<Vec<Record94>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record95(r) => {
+      RECORD_QUEUE_95.with(|tb: &RefCell<Vec<Record95>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record96(r) => {
+      RECORD_QUEUE_96.with(|tb: &RefCell<Vec<Record96>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record97(r) => {
+      RECORD_QUEUE_97.with(|tb: &RefCell<Vec<Record97>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record98(r) => {
+      RECORD_QUEUE_98.with(|tb: &RefCell<Vec<Record98>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record99(r) => {
+      RECORD_QUEUE_99.with(|tb: &RefCell<Vec<Record99>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record100(r) => {
+      RECORD_QUEUE_100.with(|tb: &RefCell<Vec<Record100>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record101(r) => {
+      RECORD_QUEUE_101.with(|tb: &RefCell<Vec<Record101>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record102(r) => {
+      RECORD_QUEUE_102.with(|tb: &RefCell<Vec<Record102>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record103(r) => {
+      RECORD_QUEUE_103.with(|tb: &RefCell<Vec<Record103>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record104(r) => {
+      RECORD_QUEUE_104.with(|tb: &RefCell<Vec<Record104>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record105(r) => {
+      RECORD_QUEUE_105.with(|tb: &RefCell<Vec<Record105>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record106(r) => {
+      RECORD_QUEUE_106.with(|tb: &RefCell<Vec<Record106>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record107(r) => {
+      RECORD_QUEUE_107.with(|tb: &RefCell<Vec<Record107>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record108(r) => {
+      RECORD_QUEUE_108.with(|tb: &RefCell<Vec<Record108>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record109(r) => {
+      RECORD_QUEUE_109.with(|tb: &RefCell<Vec<Record109>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record110(r) => {
+      RECORD_QUEUE_110.with(|tb: &RefCell<Vec<Record110>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record111(r) => {
+      RECORD_QUEUE_111.with(|tb: &RefCell<Vec<Record111>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record112(r) => {
+      RECORD_QUEUE_112.with(|tb: &RefCell<Vec<Record112>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record113(r) => {
+      RECORD_QUEUE_113.with(|tb: &RefCell<Vec<Record113>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record114(r) => {
+      RECORD_QUEUE_114.with(|tb: &RefCell<Vec<Record114>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record115(r) => {
+      RECORD_QUEUE_115.with(|tb: &RefCell<Vec<Record115>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record116(r) => {
+      RECORD_QUEUE_116.with(|tb: &RefCell<Vec<Record116>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record117(r) => {
+      RECORD_QUEUE_117.with(|tb: &RefCell<Vec<Record117>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record118(r) => {
+      RECORD_QUEUE_118.with(|tb: &RefCell<Vec<Record118>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record119(r) => {
+      RECORD_QUEUE_119.with(|tb: &RefCell<Vec<Record119>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record120(r) => {
+      RECORD_QUEUE_120.with(|tb: &RefCell<Vec<Record120>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record121(r) => {
+      RECORD_QUEUE_121.with(|tb: &RefCell<Vec<Record121>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record122(r) => {
+      RECORD_QUEUE_122.with(|tb: &RefCell<Vec<Record122>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record123(r) => {
+      RECORD_QUEUE_123.with(|tb: &RefCell<Vec<Record123>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record124(r) => {
+      RECORD_QUEUE_124.with(|tb: &RefCell<Vec<Record124>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record125(r) => {
+      RECORD_QUEUE_125.with(|tb: &RefCell<Vec<Record125>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record126(r) => {
+      RECORD_QUEUE_126.with(|tb: &RefCell<Vec<Record126>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record127(r) => {
+      RECORD_QUEUE_127.with(|tb: &RefCell<Vec<Record127>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record128(r) => {
+      RECORD_QUEUE_128.with(|tb: &RefCell<Vec<Record128>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record129(r) => {
+      RECORD_QUEUE_129.with(|tb: &RefCell<Vec<Record129>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record130(r) => {
+      RECORD_QUEUE_130.with(|tb: &RefCell<Vec<Record130>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record131(r) => {
+      RECORD_QUEUE_131.with(|tb: &RefCell<Vec<Record131>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record132(r) => {
+      RECORD_QUEUE_132.with(|tb: &RefCell<Vec<Record132>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record133(r) => {
+      RECORD_QUEUE_133.with(|tb: &RefCell<Vec<Record133>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record134(r) => {
+      RECORD_QUEUE_134.with(|tb: &RefCell<Vec<Record134>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record135(r) => {
+      RECORD_QUEUE_135.with(|tb: &RefCell<Vec<Record135>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record136(r) => {
+      RECORD_QUEUE_136.with(|tb: &RefCell<Vec<Record136>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record137(r) => {
+      RECORD_QUEUE_137.with(|tb: &RefCell<Vec<Record137>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record138(r) => {
+      RECORD_QUEUE_138.with(|tb: &RefCell<Vec<Record138>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record139(r) => {
+      RECORD_QUEUE_139.with(|tb: &RefCell<Vec<Record139>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record140(r) => {
+      RECORD_QUEUE_140.with(|tb: &RefCell<Vec<Record140>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record141(r) => {
+      RECORD_QUEUE_141.with(|tb: &RefCell<Vec<Record141>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record142(r) => {
+      RECORD_QUEUE_142.with(|tb: &RefCell<Vec<Record142>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record143(r) => {
+      RECORD_QUEUE_143.with(|tb: &RefCell<Vec<Record143>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record144(r) => {
+      RECORD_QUEUE_144.with(|tb: &RefCell<Vec<Record144>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record145(r) => {
+      RECORD_QUEUE_145.with(|tb: &RefCell<Vec<Record145>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record146(r) => {
+      RECORD_QUEUE_146.with(|tb: &RefCell<Vec<Record146>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record147(r) => {
+      RECORD_QUEUE_147.with(|tb: &RefCell<Vec<Record147>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record148(r) => {
+      RECORD_QUEUE_148.with(|tb: &RefCell<Vec<Record148>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record149(r) => {
+      RECORD_QUEUE_149.with(|tb: &RefCell<Vec<Record149>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record150(r) => {
+      RECORD_QUEUE_150.with(|tb: &RefCell<Vec<Record150>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record151(r) => {
+      RECORD_QUEUE_151.with(|tb: &RefCell<Vec<Record151>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record152(r) => {
+      RECORD_QUEUE_152.with(|tb: &RefCell<Vec<Record152>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record153(r) => {
+      RECORD_QUEUE_153.with(|tb: &RefCell<Vec<Record153>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record154(r) => {
+      RECORD_QUEUE_154.with(|tb: &RefCell<Vec<Record154>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record155(r) => {
+      RECORD_QUEUE_155.with(|tb: &RefCell<Vec<Record155>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record156(r) => {
+      RECORD_QUEUE_156.with(|tb: &RefCell<Vec<Record156>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record157(r) => {
+      RECORD_QUEUE_157.with(|tb: &RefCell<Vec<Record157>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record158(r) => {
+      RECORD_QUEUE_158.with(|tb: &RefCell<Vec<Record158>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record159(r) => {
+      RECORD_QUEUE_159.with(|tb: &RefCell<Vec<Record159>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record160(r) => {
+      RECORD_QUEUE_160.with(|tb: &RefCell<Vec<Record160>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record161(r) => {
+      RECORD_QUEUE_161.with(|tb: &RefCell<Vec<Record161>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record162(r) => {
+      RECORD_QUEUE_162.with(|tb: &RefCell<Vec<Record162>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record163(r) => {
+      RECORD_QUEUE_163.with(|tb: &RefCell<Vec<Record163>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record164(r) => {
+      RECORD_QUEUE_164.with(|tb: &RefCell<Vec<Record164>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record165(r) => {
+      RECORD_QUEUE_165.with(|tb: &RefCell<Vec<Record165>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record166(r) => {
+      RECORD_QUEUE_166.with(|tb: &RefCell<Vec<Record166>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record167(r) => {
+      RECORD_QUEUE_167.with(|tb: &RefCell<Vec<Record167>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record168(r) => {
+      RECORD_QUEUE_168.with(|tb: &RefCell<Vec<Record168>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record169(r) => {
+      RECORD_QUEUE_169.with(|tb: &RefCell<Vec<Record169>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record170(r) => {
+      RECORD_QUEUE_170.with(|tb: &RefCell<Vec<Record170>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record171(r) => {
+      RECORD_QUEUE_171.with(|tb: &RefCell<Vec<Record171>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record172(r) => {
+      RECORD_QUEUE_172.with(|tb: &RefCell<Vec<Record172>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record173(r) => {
+      RECORD_QUEUE_173.with(|tb: &RefCell<Vec<Record173>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record174(r) => {
+      RECORD_QUEUE_174.with(|tb: &RefCell<Vec<Record174>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record175(r) => {
+      RECORD_QUEUE_175.with(|tb: &RefCell<Vec<Record175>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record176(r) => {
+      RECORD_QUEUE_176.with(|tb: &RefCell<Vec<Record176>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record177(r) => {
+      RECORD_QUEUE_177.with(|tb: &RefCell<Vec<Record177>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record178(r) => {
+      RECORD_QUEUE_178.with(|tb: &RefCell<Vec<Record178>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record179(r) => {
+      RECORD_QUEUE_179.with(|tb: &RefCell<Vec<Record179>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record180(r) => {
+      RECORD_QUEUE_180.with(|tb: &RefCell<Vec<Record180>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record181(r) => {
+      RECORD_QUEUE_181.with(|tb: &RefCell<Vec<Record181>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record182(r) => {
+      RECORD_QUEUE_182.with(|tb: &RefCell<Vec<Record182>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record183(r) => {
+      RECORD_QUEUE_183.with(|tb: &RefCell<Vec<Record183>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record184(r) => {
+      RECORD_QUEUE_184.with(|tb: &RefCell<Vec<Record184>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record185(r) => {
+      RECORD_QUEUE_185.with(|tb: &RefCell<Vec<Record185>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record186(r) => {
+      RECORD_QUEUE_186.with(|tb: &RefCell<Vec<Record186>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record187(r) => {
+      RECORD_QUEUE_187.with(|tb: &RefCell<Vec<Record187>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record188(r) => {
+      RECORD_QUEUE_188.with(|tb: &RefCell<Vec<Record188>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record189(r) => {
+      RECORD_QUEUE_189.with(|tb: &RefCell<Vec<Record189>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record190(r) => {
+      RECORD_QUEUE_190.with(|tb: &RefCell<Vec<Record190>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record191(r) => {
+      RECORD_QUEUE_191.with(|tb: &RefCell<Vec<Record191>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record192(r) => {
+      RECORD_QUEUE_192.with(|tb: &RefCell<Vec<Record192>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record193(r) => {
+      RECORD_QUEUE_193.with(|tb: &RefCell<Vec<Record193>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record194(r) => {
+      RECORD_QUEUE_194.with(|tb: &RefCell<Vec<Record194>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record195(r) => {
+      RECORD_QUEUE_195.with(|tb: &RefCell<Vec<Record195>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record196(r) => {
+      RECORD_QUEUE_196.with(|tb: &RefCell<Vec<Record196>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record197(r) => {
+      RECORD_QUEUE_197.with(|tb: &RefCell<Vec<Record197>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record198(r) => {
+      RECORD_QUEUE_198.with(|tb: &RefCell<Vec<Record198>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record199(r) => {
+      RECORD_QUEUE_199.with(|tb: &RefCell<Vec<Record199>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record200(r) => {
+      RECORD_QUEUE_200.with(|tb: &RefCell<Vec<Record200>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record201(r) => {
+      RECORD_QUEUE_201.with(|tb: &RefCell<Vec<Record201>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record202(r) => {
+      RECORD_QUEUE_202.with(|tb: &RefCell<Vec<Record202>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record203(r) => {
+      RECORD_QUEUE_203.with(|tb: &RefCell<Vec<Record203>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record204(r) => {
+      RECORD_QUEUE_204.with(|tb: &RefCell<Vec<Record204>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record205(r) => {
+      RECORD_QUEUE_205.with(|tb: &RefCell<Vec<Record205>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record206(r) => {
+      RECORD_QUEUE_206.with(|tb: &RefCell<Vec<Record206>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record207(r) => {
+      RECORD_QUEUE_207.with(|tb: &RefCell<Vec<Record207>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record208(r) => {
+      RECORD_QUEUE_208.with(|tb: &RefCell<Vec<Record208>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record209(r) => {
+      RECORD_QUEUE_209.with(|tb: &RefCell<Vec<Record209>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record210(r) => {
+      RECORD_QUEUE_210.with(|tb: &RefCell<Vec<Record210>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record211(r) => {
+      RECORD_QUEUE_211.with(|tb: &RefCell<Vec<Record211>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record212(r) => {
+      RECORD_QUEUE_212.with(|tb: &RefCell<Vec<Record212>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record213(r) => {
+      RECORD_QUEUE_213.with(|tb: &RefCell<Vec<Record213>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record214(r) => {
+      RECORD_QUEUE_214.with(|tb: &RefCell<Vec<Record214>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record215(r) => {
+      RECORD_QUEUE_215.with(|tb: &RefCell<Vec<Record215>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record216(r) => {
+      RECORD_QUEUE_216.with(|tb: &RefCell<Vec<Record216>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record217(r) => {
+      RECORD_QUEUE_217.with(|tb: &RefCell<Vec<Record217>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record218(r) => {
+      RECORD_QUEUE_218.with(|tb: &RefCell<Vec<Record218>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record219(r) => {
+      RECORD_QUEUE_219.with(|tb: &RefCell<Vec<Record219>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record220(r) => {
+      RECORD_QUEUE_220.with(|tb: &RefCell<Vec<Record220>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record221(r) => {
+      RECORD_QUEUE_221.with(|tb: &RefCell<Vec<Record221>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record222(r) => {
+      RECORD_QUEUE_222.with(|tb: &RefCell<Vec<Record222>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record223(r) => {
+      RECORD_QUEUE_223.with(|tb: &RefCell<Vec<Record223>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record224(r) => {
+      RECORD_QUEUE_224.with(|tb: &RefCell<Vec<Record224>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record225(r) => {
+      RECORD_QUEUE_225.with(|tb: &RefCell<Vec<Record225>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record226(r) => {
+      RECORD_QUEUE_226.with(|tb: &RefCell<Vec<Record226>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record227(r) => {
+      RECORD_QUEUE_227.with(|tb: &RefCell<Vec<Record227>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record228(r) => {
+      RECORD_QUEUE_228.with(|tb: &RefCell<Vec<Record228>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record229(r) => {
+      RECORD_QUEUE_229.with(|tb: &RefCell<Vec<Record229>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record230(r) => {
+      RECORD_QUEUE_230.with(|tb: &RefCell<Vec<Record230>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record231(r) => {
+      RECORD_QUEUE_231.with(|tb: &RefCell<Vec<Record231>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record232(r) => {
+      RECORD_QUEUE_232.with(|tb: &RefCell<Vec<Record232>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record233(r) => {
+      RECORD_QUEUE_233.with(|tb: &RefCell<Vec<Record233>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record234(r) => {
+      RECORD_QUEUE_234.with(|tb: &RefCell<Vec<Record234>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record235(r) => {
+      RECORD_QUEUE_235.with(|tb: &RefCell<Vec<Record235>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record236(r) => {
+      RECORD_QUEUE_236.with(|tb: &RefCell<Vec<Record236>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record237(r) => {
+      RECORD_QUEUE_237.with(|tb: &RefCell<Vec<Record237>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record238(r) => {
+      RECORD_QUEUE_238.with(|tb: &RefCell<Vec<Record238>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record239(r) => {
+      RECORD_QUEUE_239.with(|tb: &RefCell<Vec<Record239>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record240(r) => {
+      RECORD_QUEUE_240.with(|tb: &RefCell<Vec<Record240>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record241(r) => {
+      RECORD_QUEUE_241.with(|tb: &RefCell<Vec<Record241>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record242(r) => {
+      RECORD_QUEUE_242.with(|tb: &RefCell<Vec<Record242>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record243(r) => {
+      RECORD_QUEUE_243.with(|tb: &RefCell<Vec<Record243>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record244(r) => {
+      RECORD_QUEUE_244.with(|tb: &RefCell<Vec<Record244>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record245(r) => {
+      RECORD_QUEUE_245.with(|tb: &RefCell<Vec<Record245>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record246(r) => {
+      RECORD_QUEUE_246.with(|tb: &RefCell<Vec<Record246>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record247(r) => {
+      RECORD_QUEUE_247.with(|tb: &RefCell<Vec<Record247>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record248(r) => {
+      RECORD_QUEUE_248.with(|tb: &RefCell<Vec<Record248>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record249(r) => {
+      RECORD_QUEUE_249.with(|tb: &RefCell<Vec<Record249>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record250(r) => {
+      RECORD_QUEUE_250.with(|tb: &RefCell<Vec<Record250>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record251(r) => {
+      RECORD_QUEUE_251.with(|tb: &RefCell<Vec<Record251>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record252(r) => {
+      RECORD_QUEUE_252.with(|tb: &RefCell<Vec<Record252>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record253(r) => {
+      RECORD_QUEUE_253.with(|tb: &RefCell<Vec<Record253>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record254(r) => {
+      RECORD_QUEUE_254.with(|tb: &RefCell<Vec<Record254>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record255(r) => {
+      RECORD_QUEUE_255.with(|tb: &RefCell<Vec<Record255>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record256(r) => {
+      RECORD_QUEUE_256.with(|tb: &RefCell<Vec<Record256>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record257(r) => {
+      RECORD_QUEUE_257.with(|tb: &RefCell<Vec<Record257>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record258(r) => {
+      RECORD_QUEUE_258.with(|tb: &RefCell<Vec<Record258>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record259(r) => {
+      RECORD_QUEUE_259.with(|tb: &RefCell<Vec<Record259>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record260(r) => {
+      RECORD_QUEUE_260.with(|tb: &RefCell<Vec<Record260>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record261(r) => {
+      RECORD_QUEUE_261.with(|tb: &RefCell<Vec<Record261>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record262(r) => {
+      RECORD_QUEUE_262.with(|tb: &RefCell<Vec<Record262>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record263(r) => {
+      RECORD_QUEUE_263.with(|tb: &RefCell<Vec<Record263>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record264(r) => {
+      RECORD_QUEUE_264.with(|tb: &RefCell<Vec<Record264>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record265(r) => {
+      RECORD_QUEUE_265.with(|tb: &RefCell<Vec<Record265>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record266(r) => {
+      RECORD_QUEUE_266.with(|tb: &RefCell<Vec<Record266>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record267(r) => {
+      RECORD_QUEUE_267.with(|tb: &RefCell<Vec<Record267>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record268(r) => {
+      RECORD_QUEUE_268.with(|tb: &RefCell<Vec<Record268>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record269(r) => {
+      RECORD_QUEUE_269.with(|tb: &RefCell<Vec<Record269>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record270(r) => {
+      RECORD_QUEUE_270.with(|tb: &RefCell<Vec<Record270>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record271(r) => {
+      RECORD_QUEUE_271.with(|tb: &RefCell<Vec<Record271>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record272(r) => {
+      RECORD_QUEUE_272.with(|tb: &RefCell<Vec<Record272>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record273(r) => {
+      RECORD_QUEUE_273.with(|tb: &RefCell<Vec<Record273>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record274(r) => {
+      RECORD_QUEUE_274.with(|tb: &RefCell<Vec<Record274>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record275(r) => {
+      RECORD_QUEUE_275.with(|tb: &RefCell<Vec<Record275>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record276(r) => {
+      RECORD_QUEUE_276.with(|tb: &RefCell<Vec<Record276>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record277(r) => {
+      RECORD_QUEUE_277.with(|tb: &RefCell<Vec<Record277>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record278(r) => {
+      RECORD_QUEUE_278.with(|tb: &RefCell<Vec<Record278>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record279(r) => {
+      RECORD_QUEUE_279.with(|tb: &RefCell<Vec<Record279>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record280(r) => {
+      RECORD_QUEUE_280.with(|tb: &RefCell<Vec<Record280>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record281(r) => {
+      RECORD_QUEUE_281.with(|tb: &RefCell<Vec<Record281>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record282(r) => {
+      RECORD_QUEUE_282.with(|tb: &RefCell<Vec<Record282>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record283(r) => {
+      RECORD_QUEUE_283.with(|tb: &RefCell<Vec<Record283>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record284(r) => {
+      RECORD_QUEUE_284.with(|tb: &RefCell<Vec<Record284>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record285(r) => {
+      RECORD_QUEUE_285.with(|tb: &RefCell<Vec<Record285>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record286(r) => {
+      RECORD_QUEUE_286.with(|tb: &RefCell<Vec<Record286>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record287(r) => {
+      RECORD_QUEUE_287.with(|tb: &RefCell<Vec<Record287>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record288(r) => {
+      RECORD_QUEUE_288.with(|tb: &RefCell<Vec<Record288>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record289(r) => {
+      RECORD_QUEUE_289.with(|tb: &RefCell<Vec<Record289>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record290(r) => {
+      RECORD_QUEUE_290.with(|tb: &RefCell<Vec<Record290>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record291(r) => {
+      RECORD_QUEUE_291.with(|tb: &RefCell<Vec<Record291>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record292(r) => {
+      RECORD_QUEUE_292.with(|tb: &RefCell<Vec<Record292>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record293(r) => {
+      RECORD_QUEUE_293.with(|tb: &RefCell<Vec<Record293>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record294(r) => {
+      RECORD_QUEUE_294.with(|tb: &RefCell<Vec<Record294>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record295(r) => {
+      RECORD_QUEUE_295.with(|tb: &RefCell<Vec<Record295>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record296(r) => {
+      RECORD_QUEUE_296.with(|tb: &RefCell<Vec<Record296>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record297(r) => {
+      RECORD_QUEUE_297.with(|tb: &RefCell<Vec<Record297>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record298(r) => {
+      RECORD_QUEUE_298.with(|tb: &RefCell<Vec<Record298>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record299(r) => {
+      RECORD_QUEUE_299.with(|tb: &RefCell<Vec<Record299>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record300(r) => {
+      RECORD_QUEUE_300.with(|tb: &RefCell<Vec<Record300>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record301(r) => {
+      RECORD_QUEUE_301.with(|tb: &RefCell<Vec<Record301>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record302(r) => {
+      RECORD_QUEUE_302.with(|tb: &RefCell<Vec<Record302>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record303(r) => {
+      RECORD_QUEUE_303.with(|tb: &RefCell<Vec<Record303>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record304(r) => {
+      RECORD_QUEUE_304.with(|tb: &RefCell<Vec<Record304>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record305(r) => {
+      RECORD_QUEUE_305.with(|tb: &RefCell<Vec<Record305>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record306(r) => {
+      RECORD_QUEUE_306.with(|tb: &RefCell<Vec<Record306>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record307(r) => {
+      RECORD_QUEUE_307.with(|tb: &RefCell<Vec<Record307>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record308(r) => {
+      RECORD_QUEUE_308.with(|tb: &RefCell<Vec<Record308>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record309(r) => {
+      RECORD_QUEUE_309.with(|tb: &RefCell<Vec<Record309>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record310(r) => {
+      RECORD_QUEUE_310.with(|tb: &RefCell<Vec<Record310>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record311(r) => {
+      RECORD_QUEUE_311.with(|tb: &RefCell<Vec<Record311>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record312(r) => {
+      RECORD_QUEUE_312.with(|tb: &RefCell<Vec<Record312>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record313(r) => {
+      RECORD_QUEUE_313.with(|tb: &RefCell<Vec<Record313>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record314(r) => {
+      RECORD_QUEUE_314.with(|tb: &RefCell<Vec<Record314>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record315(r) => {
+      RECORD_QUEUE_315.with(|tb: &RefCell<Vec<Record315>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record316(r) => {
+      RECORD_QUEUE_316.with(|tb: &RefCell<Vec<Record316>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record317(r) => {
+      RECORD_QUEUE_317.with(|tb: &RefCell<Vec<Record317>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record318(r) => {
+      RECORD_QUEUE_318.with(|tb: &RefCell<Vec<Record318>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record319(r) => {
+      RECORD_QUEUE_319.with(|tb: &RefCell<Vec<Record319>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record320(r) => {
+      RECORD_QUEUE_320.with(|tb: &RefCell<Vec<Record320>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record321(r) => {
+      RECORD_QUEUE_321.with(|tb: &RefCell<Vec<Record321>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record322(r) => {
+      RECORD_QUEUE_322.with(|tb: &RefCell<Vec<Record322>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record323(r) => {
+      RECORD_QUEUE_323.with(|tb: &RefCell<Vec<Record323>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record324(r) => {
+      RECORD_QUEUE_324.with(|tb: &RefCell<Vec<Record324>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record325(r) => {
+      RECORD_QUEUE_325.with(|tb: &RefCell<Vec<Record325>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record326(r) => {
+      RECORD_QUEUE_326.with(|tb: &RefCell<Vec<Record326>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record327(r) => {
+      RECORD_QUEUE_327.with(|tb: &RefCell<Vec<Record327>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record328(r) => {
+      RECORD_QUEUE_328.with(|tb: &RefCell<Vec<Record328>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record329(r) => {
+      RECORD_QUEUE_329.with(|tb: &RefCell<Vec<Record329>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record330(r) => {
+      RECORD_QUEUE_330.with(|tb: &RefCell<Vec<Record330>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record331(r) => {
+      RECORD_QUEUE_331.with(|tb: &RefCell<Vec<Record331>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record332(r) => {
+      RECORD_QUEUE_332.with(|tb: &RefCell<Vec<Record332>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record333(r) => {
+      RECORD_QUEUE_333.with(|tb: &RefCell<Vec<Record333>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record334(r) => {
+      RECORD_QUEUE_334.with(|tb: &RefCell<Vec<Record334>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record335(r) => {
+      RECORD_QUEUE_335.with(|tb: &RefCell<Vec<Record335>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record336(r) => {
+      RECORD_QUEUE_336.with(|tb: &RefCell<Vec<Record336>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record337(r) => {
+      RECORD_QUEUE_337.with(|tb: &RefCell<Vec<Record337>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record338(r) => {
+      RECORD_QUEUE_338.with(|tb: &RefCell<Vec<Record338>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record339(r) => {
+      RECORD_QUEUE_339.with(|tb: &RefCell<Vec<Record339>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record340(r) => {
+      RECORD_QUEUE_340.with(|tb: &RefCell<Vec<Record340>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record341(r) => {
+      RECORD_QUEUE_341.with(|tb: &RefCell<Vec<Record341>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record342(r) => {
+      RECORD_QUEUE_342.with(|tb: &RefCell<Vec<Record342>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record343(r) => {
+      RECORD_QUEUE_343.with(|tb: &RefCell<Vec<Record343>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record344(r) => {
+      RECORD_QUEUE_344.with(|tb: &RefCell<Vec<Record344>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record345(r) => {
+      RECORD_QUEUE_345.with(|tb: &RefCell<Vec<Record345>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record346(r) => {
+      RECORD_QUEUE_346.with(|tb: &RefCell<Vec<Record346>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record347(r) => {
+      RECORD_QUEUE_347.with(|tb: &RefCell<Vec<Record347>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record348(r) => {
+      RECORD_QUEUE_348.with(|tb: &RefCell<Vec<Record348>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record349(r) => {
+      RECORD_QUEUE_349.with(|tb: &RefCell<Vec<Record349>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record350(r) => {
+      RECORD_QUEUE_350.with(|tb: &RefCell<Vec<Record350>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record351(r) => {
+      RECORD_QUEUE_351.with(|tb: &RefCell<Vec<Record351>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record352(r) => {
+      RECORD_QUEUE_352.with(|tb: &RefCell<Vec<Record352>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record353(r) => {
+      RECORD_QUEUE_353.with(|tb: &RefCell<Vec<Record353>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+    Record::Record354(r) => {
+      RECORD_QUEUE_354.with(|tb: &RefCell<Vec<Record354>>| {
+        tb.borrow_mut().push(r);
+      });
+    }
+  }
+}
+
+#[no_mangle]
+pub extern "C" fn flush_records(db_url: *const c_char) -> bool {
+  let db_url = match unsafe { std::ffi::CStr::from_ptr(db_url).to_str() } {
+    Ok(s) => s.to_owned(),
+    Err(_) => return false,
+  };
+
+  let runtime = tokio::runtime::Runtime::new().expect("Failed to create Tokio runtime");
+
+  {
+    let records_0 = RECORD_QUEUE_0.take();
+    if !records_0.is_empty() {
+      let mut tb_0 = TableBuilder0::new(&db_url, 1);
+      for record in records_0.into_iter() {
+        tb_0.push(record);
+      }
+      let _ = runtime.block_on(tb_0.flush());
+    }
+  }
+
+  {
+    let records_1 = RECORD_QUEUE_1.take();
+    if !records_1.is_empty() {
+      let mut tb_1 = TableBuilder1::new(&db_url, 1);
+      for record in records_1.into_iter() {
+        tb_1.push(record);
+      }
+      let _ = runtime.block_on(tb_1.flush());
+    }
+  }
+
+  {
+    let records_2 = RECORD_QUEUE_2.take();
+    if !records_2.is_empty() {
+      let mut tb_2 = TableBuilder2::new(&db_url, 1);
+      for record in records_2.into_iter() {
+        tb_2.push(record);
+      }
+      let _ = runtime.block_on(tb_2.flush());
+    }
+  }
+
+  {
+    let records_3 = RECORD_QUEUE_3.take();
+    if !records_3.is_empty() {
+      let mut tb_3 = TableBuilder3::new(&db_url, 1);
+      for record in records_3.into_iter() {
+        tb_3.push(record);
+      }
+      let _ = runtime.block_on(tb_3.flush());
+    }
+  }
+
+  {
+    let records_4 = RECORD_QUEUE_4.take();
+    if !records_4.is_empty() {
+      let mut tb_4 = TableBuilder4::new(&db_url, 1);
+      for record in records_4.into_iter() {
+        tb_4.push(record);
+      }
+      let _ = runtime.block_on(tb_4.flush());
+    }
+  }
+
+  {
+    let records_5 = RECORD_QUEUE_5.take();
+    if !records_5.is_empty() {
+      let mut tb_5 = TableBuilder5::new(&db_url, 1);
+      for record in records_5.into_iter() {
+        tb_5.push(record);
+      }
+      let _ = runtime.block_on(tb_5.flush());
+    }
+  }
+
+  {
+    let records_6 = RECORD_QUEUE_6.take();
+    if !records_6.is_empty() {
+      let mut tb_6 = TableBuilder6::new(&db_url, 1);
+      for record in records_6.into_iter() {
+        tb_6.push(record);
+      }
+      let _ = runtime.block_on(tb_6.flush());
+    }
+  }
+
+  {
+    let records_7 = RECORD_QUEUE_7.take();
+    if !records_7.is_empty() {
+      let mut tb_7 = TableBuilder7::new(&db_url, 1);
+      for record in records_7.into_iter() {
+        tb_7.push(record);
+      }
+      let _ = runtime.block_on(tb_7.flush());
+    }
+  }
+
+  {
+    let records_8 = RECORD_QUEUE_8.take();
+    if !records_8.is_empty() {
+      let mut tb_8 = TableBuilder8::new(&db_url, 1);
+      for record in records_8.into_iter() {
+        tb_8.push(record);
+      }
+      let _ = runtime.block_on(tb_8.flush());
+    }
+  }
+
+  {
+    let records_9 = RECORD_QUEUE_9.take();
+    if !records_9.is_empty() {
+      let mut tb_9 = TableBuilder9::new(&db_url, 1);
+      for record in records_9.into_iter() {
+        tb_9.push(record);
+      }
+      let _ = runtime.block_on(tb_9.flush());
+    }
+  }
+
+  {
+    let records_10 = RECORD_QUEUE_10.take();
+    if !records_10.is_empty() {
+      let mut tb_10 = TableBuilder10::new(&db_url, 1);
+      for record in records_10.into_iter() {
+        tb_10.push(record);
+      }
+      let _ = runtime.block_on(tb_10.flush());
+    }
+  }
+
+  {
+    let records_11 = RECORD_QUEUE_11.take();
+    if !records_11.is_empty() {
+      let mut tb_11 = TableBuilder11::new(&db_url, 1);
+      for record in records_11.into_iter() {
+        tb_11.push(record);
+      }
+      let _ = runtime.block_on(tb_11.flush());
+    }
+  }
+
+  {
+    let records_12 = RECORD_QUEUE_12.take();
+    if !records_12.is_empty() {
+      let mut tb_12 = TableBuilder12::new(&db_url, 1);
+      for record in records_12.into_iter() {
+        tb_12.push(record);
+      }
+      let _ = runtime.block_on(tb_12.flush());
+    }
+  }
+
+  {
+    let records_13 = RECORD_QUEUE_13.take();
+    if !records_13.is_empty() {
+      let mut tb_13 = TableBuilder13::new(&db_url, 1);
+      for record in records_13.into_iter() {
+        tb_13.push(record);
+      }
+      let _ = runtime.block_on(tb_13.flush());
+    }
+  }
+
+  {
+    let records_14 = RECORD_QUEUE_14.take();
+    if !records_14.is_empty() {
+      let mut tb_14 = TableBuilder14::new(&db_url, 1);
+      for record in records_14.into_iter() {
+        tb_14.push(record);
+      }
+      let _ = runtime.block_on(tb_14.flush());
+    }
+  }
+
+  {
+    let records_15 = RECORD_QUEUE_15.take();
+    if !records_15.is_empty() {
+      let mut tb_15 = TableBuilder15::new(&db_url, 1);
+      for record in records_15.into_iter() {
+        tb_15.push(record);
+      }
+      let _ = runtime.block_on(tb_15.flush());
+    }
+  }
+
+  {
+    let records_16 = RECORD_QUEUE_16.take();
+    if !records_16.is_empty() {
+      let mut tb_16 = TableBuilder16::new(&db_url, 1);
+      for record in records_16.into_iter() {
+        tb_16.push(record);
+      }
+      let _ = runtime.block_on(tb_16.flush());
+    }
+  }
+
+  {
+    let records_17 = RECORD_QUEUE_17.take();
+    if !records_17.is_empty() {
+      let mut tb_17 = TableBuilder17::new(&db_url, 1);
+      for record in records_17.into_iter() {
+        tb_17.push(record);
+      }
+      let _ = runtime.block_on(tb_17.flush());
+    }
+  }
+
+  {
+    let records_18 = RECORD_QUEUE_18.take();
+    if !records_18.is_empty() {
+      let mut tb_18 = TableBuilder18::new(&db_url, 1);
+      for record in records_18.into_iter() {
+        tb_18.push(record);
+      }
+      let _ = runtime.block_on(tb_18.flush());
+    }
+  }
+
+  {
+    let records_19 = RECORD_QUEUE_19.take();
+    if !records_19.is_empty() {
+      let mut tb_19 = TableBuilder19::new(&db_url, 1);
+      for record in records_19.into_iter() {
+        tb_19.push(record);
+      }
+      let _ = runtime.block_on(tb_19.flush());
+    }
+  }
+
+  {
+    let records_20 = RECORD_QUEUE_20.take();
+    if !records_20.is_empty() {
+      let mut tb_20 = TableBuilder20::new(&db_url, 1);
+      for record in records_20.into_iter() {
+        tb_20.push(record);
+      }
+      let _ = runtime.block_on(tb_20.flush());
+    }
+  }
+
+  {
+    let records_21 = RECORD_QUEUE_21.take();
+    if !records_21.is_empty() {
+      let mut tb_21 = TableBuilder21::new(&db_url, 1);
+      for record in records_21.into_iter() {
+        tb_21.push(record);
+      }
+      let _ = runtime.block_on(tb_21.flush());
+    }
+  }
+
+  {
+    let records_22 = RECORD_QUEUE_22.take();
+    if !records_22.is_empty() {
+      let mut tb_22 = TableBuilder22::new(&db_url, 1);
+      for record in records_22.into_iter() {
+        tb_22.push(record);
+      }
+      let _ = runtime.block_on(tb_22.flush());
+    }
+  }
+
+  {
+    let records_23 = RECORD_QUEUE_23.take();
+    if !records_23.is_empty() {
+      let mut tb_23 = TableBuilder23::new(&db_url, 1);
+      for record in records_23.into_iter() {
+        tb_23.push(record);
+      }
+      let _ = runtime.block_on(tb_23.flush());
+    }
+  }
+
+  {
+    let records_24 = RECORD_QUEUE_24.take();
+    if !records_24.is_empty() {
+      let mut tb_24 = TableBuilder24::new(&db_url, 1);
+      for record in records_24.into_iter() {
+        tb_24.push(record);
+      }
+      let _ = runtime.block_on(tb_24.flush());
+    }
+  }
+
+  {
+    let records_25 = RECORD_QUEUE_25.take();
+    if !records_25.is_empty() {
+      let mut tb_25 = TableBuilder25::new(&db_url, 1);
+      for record in records_25.into_iter() {
+        tb_25.push(record);
+      }
+      let _ = runtime.block_on(tb_25.flush());
+    }
+  }
+
+  {
+    let records_26 = RECORD_QUEUE_26.take();
+    if !records_26.is_empty() {
+      let mut tb_26 = TableBuilder26::new(&db_url, 1);
+      for record in records_26.into_iter() {
+        tb_26.push(record);
+      }
+      let _ = runtime.block_on(tb_26.flush());
+    }
+  }
+
+  {
+    let records_27 = RECORD_QUEUE_27.take();
+    if !records_27.is_empty() {
+      let mut tb_27 = TableBuilder27::new(&db_url, 1);
+      for record in records_27.into_iter() {
+        tb_27.push(record);
+      }
+      let _ = runtime.block_on(tb_27.flush());
+    }
+  }
+
+  {
+    let records_28 = RECORD_QUEUE_28.take();
+    if !records_28.is_empty() {
+      let mut tb_28 = TableBuilder28::new(&db_url, 1);
+      for record in records_28.into_iter() {
+        tb_28.push(record);
+      }
+      let _ = runtime.block_on(tb_28.flush());
+    }
+  }
+
+  {
+    let records_29 = RECORD_QUEUE_29.take();
+    if !records_29.is_empty() {
+      let mut tb_29 = TableBuilder29::new(&db_url, 1);
+      for record in records_29.into_iter() {
+        tb_29.push(record);
+      }
+      let _ = runtime.block_on(tb_29.flush());
+    }
+  }
+
+  {
+    let records_30 = RECORD_QUEUE_30.take();
+    if !records_30.is_empty() {
+      let mut tb_30 = TableBuilder30::new(&db_url, 1);
+      for record in records_30.into_iter() {
+        tb_30.push(record);
+      }
+      let _ = runtime.block_on(tb_30.flush());
+    }
+  }
+
+  {
+    let records_31 = RECORD_QUEUE_31.take();
+    if !records_31.is_empty() {
+      let mut tb_31 = TableBuilder31::new(&db_url, 1);
+      for record in records_31.into_iter() {
+        tb_31.push(record);
+      }
+      let _ = runtime.block_on(tb_31.flush());
+    }
+  }
+
+  {
+    let records_32 = RECORD_QUEUE_32.take();
+    if !records_32.is_empty() {
+      let mut tb_32 = TableBuilder32::new(&db_url, 1);
+      for record in records_32.into_iter() {
+        tb_32.push(record);
+      }
+      let _ = runtime.block_on(tb_32.flush());
+    }
+  }
+
+  {
+    let records_33 = RECORD_QUEUE_33.take();
+    if !records_33.is_empty() {
+      let mut tb_33 = TableBuilder33::new(&db_url, 1);
+      for record in records_33.into_iter() {
+        tb_33.push(record);
+      }
+      let _ = runtime.block_on(tb_33.flush());
+    }
+  }
+
+  {
+    let records_34 = RECORD_QUEUE_34.take();
+    if !records_34.is_empty() {
+      let mut tb_34 = TableBuilder34::new(&db_url, 1);
+      for record in records_34.into_iter() {
+        tb_34.push(record);
+      }
+      let _ = runtime.block_on(tb_34.flush());
+    }
+  }
+
+  {
+    let records_35 = RECORD_QUEUE_35.take();
+    if !records_35.is_empty() {
+      let mut tb_35 = TableBuilder35::new(&db_url, 1);
+      for record in records_35.into_iter() {
+        tb_35.push(record);
+      }
+      let _ = runtime.block_on(tb_35.flush());
+    }
+  }
+
+  {
+    let records_36 = RECORD_QUEUE_36.take();
+    if !records_36.is_empty() {
+      let mut tb_36 = TableBuilder36::new(&db_url, 1);
+      for record in records_36.into_iter() {
+        tb_36.push(record);
+      }
+      let _ = runtime.block_on(tb_36.flush());
+    }
+  }
+
+  {
+    let records_37 = RECORD_QUEUE_37.take();
+    if !records_37.is_empty() {
+      let mut tb_37 = TableBuilder37::new(&db_url, 1);
+      for record in records_37.into_iter() {
+        tb_37.push(record);
+      }
+      let _ = runtime.block_on(tb_37.flush());
+    }
+  }
+
+  {
+    let records_38 = RECORD_QUEUE_38.take();
+    if !records_38.is_empty() {
+      let mut tb_38 = TableBuilder38::new(&db_url, 1);
+      for record in records_38.into_iter() {
+        tb_38.push(record);
+      }
+      let _ = runtime.block_on(tb_38.flush());
+    }
+  }
+
+  {
+    let records_39 = RECORD_QUEUE_39.take();
+    if !records_39.is_empty() {
+      let mut tb_39 = TableBuilder39::new(&db_url, 1);
+      for record in records_39.into_iter() {
+        tb_39.push(record);
+      }
+      let _ = runtime.block_on(tb_39.flush());
+    }
+  }
+
+  {
+    let records_40 = RECORD_QUEUE_40.take();
+    if !records_40.is_empty() {
+      let mut tb_40 = TableBuilder40::new(&db_url, 1);
+      for record in records_40.into_iter() {
+        tb_40.push(record);
+      }
+      let _ = runtime.block_on(tb_40.flush());
+    }
+  }
+
+  {
+    let records_41 = RECORD_QUEUE_41.take();
+    if !records_41.is_empty() {
+      let mut tb_41 = TableBuilder41::new(&db_url, 1);
+      for record in records_41.into_iter() {
+        tb_41.push(record);
+      }
+      let _ = runtime.block_on(tb_41.flush());
+    }
+  }
+
+  {
+    let records_42 = RECORD_QUEUE_42.take();
+    if !records_42.is_empty() {
+      let mut tb_42 = TableBuilder42::new(&db_url, 1);
+      for record in records_42.into_iter() {
+        tb_42.push(record);
+      }
+      let _ = runtime.block_on(tb_42.flush());
+    }
+  }
+
+  {
+    let records_43 = RECORD_QUEUE_43.take();
+    if !records_43.is_empty() {
+      let mut tb_43 = TableBuilder43::new(&db_url, 1);
+      for record in records_43.into_iter() {
+        tb_43.push(record);
+      }
+      let _ = runtime.block_on(tb_43.flush());
+    }
+  }
+
+  {
+    let records_44 = RECORD_QUEUE_44.take();
+    if !records_44.is_empty() {
+      let mut tb_44 = TableBuilder44::new(&db_url, 1);
+      for record in records_44.into_iter() {
+        tb_44.push(record);
+      }
+      let _ = runtime.block_on(tb_44.flush());
+    }
+  }
+
+  {
+    let records_45 = RECORD_QUEUE_45.take();
+    if !records_45.is_empty() {
+      let mut tb_45 = TableBuilder45::new(&db_url, 1);
+      for record in records_45.into_iter() {
+        tb_45.push(record);
+      }
+      let _ = runtime.block_on(tb_45.flush());
+    }
+  }
+
+  {
+    let records_46 = RECORD_QUEUE_46.take();
+    if !records_46.is_empty() {
+      let mut tb_46 = TableBuilder46::new(&db_url, 1);
+      for record in records_46.into_iter() {
+        tb_46.push(record);
+      }
+      let _ = runtime.block_on(tb_46.flush());
+    }
+  }
+
+  {
+    let records_47 = RECORD_QUEUE_47.take();
+    if !records_47.is_empty() {
+      let mut tb_47 = TableBuilder47::new(&db_url, 1);
+      for record in records_47.into_iter() {
+        tb_47.push(record);
+      }
+      let _ = runtime.block_on(tb_47.flush());
+    }
+  }
+
+  {
+    let records_48 = RECORD_QUEUE_48.take();
+    if !records_48.is_empty() {
+      let mut tb_48 = TableBuilder48::new(&db_url, 1);
+      for record in records_48.into_iter() {
+        tb_48.push(record);
+      }
+      let _ = runtime.block_on(tb_48.flush());
+    }
+  }
+
+  {
+    let records_49 = RECORD_QUEUE_49.take();
+    if !records_49.is_empty() {
+      let mut tb_49 = TableBuilder49::new(&db_url, 1);
+      for record in records_49.into_iter() {
+        tb_49.push(record);
+      }
+      let _ = runtime.block_on(tb_49.flush());
+    }
+  }
+
+  {
+    let records_50 = RECORD_QUEUE_50.take();
+    if !records_50.is_empty() {
+      let mut tb_50 = TableBuilder50::new(&db_url, 1);
+      for record in records_50.into_iter() {
+        tb_50.push(record);
+      }
+      let _ = runtime.block_on(tb_50.flush());
+    }
+  }
+
+  {
+    let records_51 = RECORD_QUEUE_51.take();
+    if !records_51.is_empty() {
+      let mut tb_51 = TableBuilder51::new(&db_url, 1);
+      for record in records_51.into_iter() {
+        tb_51.push(record);
+      }
+      let _ = runtime.block_on(tb_51.flush());
+    }
+  }
+
+  {
+    let records_52 = RECORD_QUEUE_52.take();
+    if !records_52.is_empty() {
+      let mut tb_52 = TableBuilder52::new(&db_url, 1);
+      for record in records_52.into_iter() {
+        tb_52.push(record);
+      }
+      let _ = runtime.block_on(tb_52.flush());
+    }
+  }
+
+  {
+    let records_53 = RECORD_QUEUE_53.take();
+    if !records_53.is_empty() {
+      let mut tb_53 = TableBuilder53::new(&db_url, 1);
+      for record in records_53.into_iter() {
+        tb_53.push(record);
+      }
+      let _ = runtime.block_on(tb_53.flush());
+    }
+  }
+
+  {
+    let records_54 = RECORD_QUEUE_54.take();
+    if !records_54.is_empty() {
+      let mut tb_54 = TableBuilder54::new(&db_url, 1);
+      for record in records_54.into_iter() {
+        tb_54.push(record);
+      }
+      let _ = runtime.block_on(tb_54.flush());
+    }
+  }
+
+  {
+    let records_55 = RECORD_QUEUE_55.take();
+    if !records_55.is_empty() {
+      let mut tb_55 = TableBuilder55::new(&db_url, 1);
+      for record in records_55.into_iter() {
+        tb_55.push(record);
+      }
+      let _ = runtime.block_on(tb_55.flush());
+    }
+  }
+
+  {
+    let records_56 = RECORD_QUEUE_56.take();
+    if !records_56.is_empty() {
+      let mut tb_56 = TableBuilder56::new(&db_url, 1);
+      for record in records_56.into_iter() {
+        tb_56.push(record);
+      }
+      let _ = runtime.block_on(tb_56.flush());
+    }
+  }
+
+  {
+    let records_57 = RECORD_QUEUE_57.take();
+    if !records_57.is_empty() {
+      let mut tb_57 = TableBuilder57::new(&db_url, 1);
+      for record in records_57.into_iter() {
+        tb_57.push(record);
+      }
+      let _ = runtime.block_on(tb_57.flush());
+    }
+  }
+
+  {
+    let records_58 = RECORD_QUEUE_58.take();
+    if !records_58.is_empty() {
+      let mut tb_58 = TableBuilder58::new(&db_url, 1);
+      for record in records_58.into_iter() {
+        tb_58.push(record);
+      }
+      let _ = runtime.block_on(tb_58.flush());
+    }
+  }
+
+  {
+    let records_59 = RECORD_QUEUE_59.take();
+    if !records_59.is_empty() {
+      let mut tb_59 = TableBuilder59::new(&db_url, 1);
+      for record in records_59.into_iter() {
+        tb_59.push(record);
+      }
+      let _ = runtime.block_on(tb_59.flush());
+    }
+  }
+
+  {
+    let records_60 = RECORD_QUEUE_60.take();
+    if !records_60.is_empty() {
+      let mut tb_60 = TableBuilder60::new(&db_url, 1);
+      for record in records_60.into_iter() {
+        tb_60.push(record);
+      }
+      let _ = runtime.block_on(tb_60.flush());
+    }
+  }
+
+  {
+    let records_61 = RECORD_QUEUE_61.take();
+    if !records_61.is_empty() {
+      let mut tb_61 = TableBuilder61::new(&db_url, 1);
+      for record in records_61.into_iter() {
+        tb_61.push(record);
+      }
+      let _ = runtime.block_on(tb_61.flush());
+    }
+  }
+
+  {
+    let records_62 = RECORD_QUEUE_62.take();
+    if !records_62.is_empty() {
+      let mut tb_62 = TableBuilder62::new(&db_url, 1);
+      for record in records_62.into_iter() {
+        tb_62.push(record);
+      }
+      let _ = runtime.block_on(tb_62.flush());
+    }
+  }
+
+  {
+    let records_63 = RECORD_QUEUE_63.take();
+    if !records_63.is_empty() {
+      let mut tb_63 = TableBuilder63::new(&db_url, 1);
+      for record in records_63.into_iter() {
+        tb_63.push(record);
+      }
+      let _ = runtime.block_on(tb_63.flush());
+    }
+  }
+
+  {
+    let records_64 = RECORD_QUEUE_64.take();
+    if !records_64.is_empty() {
+      let mut tb_64 = TableBuilder64::new(&db_url, 1);
+      for record in records_64.into_iter() {
+        tb_64.push(record);
+      }
+      let _ = runtime.block_on(tb_64.flush());
+    }
+  }
+
+  {
+    let records_65 = RECORD_QUEUE_65.take();
+    if !records_65.is_empty() {
+      let mut tb_65 = TableBuilder65::new(&db_url, 1);
+      for record in records_65.into_iter() {
+        tb_65.push(record);
+      }
+      let _ = runtime.block_on(tb_65.flush());
+    }
+  }
+
+  {
+    let records_66 = RECORD_QUEUE_66.take();
+    if !records_66.is_empty() {
+      let mut tb_66 = TableBuilder66::new(&db_url, 1);
+      for record in records_66.into_iter() {
+        tb_66.push(record);
+      }
+      let _ = runtime.block_on(tb_66.flush());
+    }
+  }
+
+  {
+    let records_67 = RECORD_QUEUE_67.take();
+    if !records_67.is_empty() {
+      let mut tb_67 = TableBuilder67::new(&db_url, 1);
+      for record in records_67.into_iter() {
+        tb_67.push(record);
+      }
+      let _ = runtime.block_on(tb_67.flush());
+    }
+  }
+
+  {
+    let records_68 = RECORD_QUEUE_68.take();
+    if !records_68.is_empty() {
+      let mut tb_68 = TableBuilder68::new(&db_url, 1);
+      for record in records_68.into_iter() {
+        tb_68.push(record);
+      }
+      let _ = runtime.block_on(tb_68.flush());
+    }
+  }
+
+  {
+    let records_69 = RECORD_QUEUE_69.take();
+    if !records_69.is_empty() {
+      let mut tb_69 = TableBuilder69::new(&db_url, 1);
+      for record in records_69.into_iter() {
+        tb_69.push(record);
+      }
+      let _ = runtime.block_on(tb_69.flush());
+    }
+  }
+
+  {
+    let records_70 = RECORD_QUEUE_70.take();
+    if !records_70.is_empty() {
+      let mut tb_70 = TableBuilder70::new(&db_url, 1);
+      for record in records_70.into_iter() {
+        tb_70.push(record);
+      }
+      let _ = runtime.block_on(tb_70.flush());
+    }
+  }
+
+  {
+    let records_71 = RECORD_QUEUE_71.take();
+    if !records_71.is_empty() {
+      let mut tb_71 = TableBuilder71::new(&db_url, 1);
+      for record in records_71.into_iter() {
+        tb_71.push(record);
+      }
+      let _ = runtime.block_on(tb_71.flush());
+    }
+  }
+
+  {
+    let records_72 = RECORD_QUEUE_72.take();
+    if !records_72.is_empty() {
+      let mut tb_72 = TableBuilder72::new(&db_url, 1);
+      for record in records_72.into_iter() {
+        tb_72.push(record);
+      }
+      let _ = runtime.block_on(tb_72.flush());
+    }
+  }
+
+  {
+    let records_73 = RECORD_QUEUE_73.take();
+    if !records_73.is_empty() {
+      let mut tb_73 = TableBuilder73::new(&db_url, 1);
+      for record in records_73.into_iter() {
+        tb_73.push(record);
+      }
+      let _ = runtime.block_on(tb_73.flush());
+    }
+  }
+
+  {
+    let records_74 = RECORD_QUEUE_74.take();
+    if !records_74.is_empty() {
+      let mut tb_74 = TableBuilder74::new(&db_url, 1);
+      for record in records_74.into_iter() {
+        tb_74.push(record);
+      }
+      let _ = runtime.block_on(tb_74.flush());
+    }
+  }
+
+  {
+    let records_75 = RECORD_QUEUE_75.take();
+    if !records_75.is_empty() {
+      let mut tb_75 = TableBuilder75::new(&db_url, 1);
+      for record in records_75.into_iter() {
+        tb_75.push(record);
+      }
+      let _ = runtime.block_on(tb_75.flush());
+    }
+  }
+
+  {
+    let records_76 = RECORD_QUEUE_76.take();
+    if !records_76.is_empty() {
+      let mut tb_76 = TableBuilder76::new(&db_url, 1);
+      for record in records_76.into_iter() {
+        tb_76.push(record);
+      }
+      let _ = runtime.block_on(tb_76.flush());
+    }
+  }
+
+  {
+    let records_77 = RECORD_QUEUE_77.take();
+    if !records_77.is_empty() {
+      let mut tb_77 = TableBuilder77::new(&db_url, 1);
+      for record in records_77.into_iter() {
+        tb_77.push(record);
+      }
+      let _ = runtime.block_on(tb_77.flush());
+    }
+  }
+
+  {
+    let records_78 = RECORD_QUEUE_78.take();
+    if !records_78.is_empty() {
+      let mut tb_78 = TableBuilder78::new(&db_url, 1);
+      for record in records_78.into_iter() {
+        tb_78.push(record);
+      }
+      let _ = runtime.block_on(tb_78.flush());
+    }
+  }
+
+  {
+    let records_79 = RECORD_QUEUE_79.take();
+    if !records_79.is_empty() {
+      let mut tb_79 = TableBuilder79::new(&db_url, 1);
+      for record in records_79.into_iter() {
+        tb_79.push(record);
+      }
+      let _ = runtime.block_on(tb_79.flush());
+    }
+  }
+
+  {
+    let records_80 = RECORD_QUEUE_80.take();
+    if !records_80.is_empty() {
+      let mut tb_80 = TableBuilder80::new(&db_url, 1);
+      for record in records_80.into_iter() {
+        tb_80.push(record);
+      }
+      let _ = runtime.block_on(tb_80.flush());
+    }
+  }
+
+  {
+    let records_81 = RECORD_QUEUE_81.take();
+    if !records_81.is_empty() {
+      let mut tb_81 = TableBuilder81::new(&db_url, 1);
+      for record in records_81.into_iter() {
+        tb_81.push(record);
+      }
+      let _ = runtime.block_on(tb_81.flush());
+    }
+  }
+
+  {
+    let records_82 = RECORD_QUEUE_82.take();
+    if !records_82.is_empty() {
+      let mut tb_82 = TableBuilder82::new(&db_url, 1);
+      for record in records_82.into_iter() {
+        tb_82.push(record);
+      }
+      let _ = runtime.block_on(tb_82.flush());
+    }
+  }
+
+  {
+    let records_83 = RECORD_QUEUE_83.take();
+    if !records_83.is_empty() {
+      let mut tb_83 = TableBuilder83::new(&db_url, 1);
+      for record in records_83.into_iter() {
+        tb_83.push(record);
+      }
+      let _ = runtime.block_on(tb_83.flush());
+    }
+  }
+
+  {
+    let records_84 = RECORD_QUEUE_84.take();
+    if !records_84.is_empty() {
+      let mut tb_84 = TableBuilder84::new(&db_url, 1);
+      for record in records_84.into_iter() {
+        tb_84.push(record);
+      }
+      let _ = runtime.block_on(tb_84.flush());
+    }
+  }
+
+  {
+    let records_85 = RECORD_QUEUE_85.take();
+    if !records_85.is_empty() {
+      let mut tb_85 = TableBuilder85::new(&db_url, 1);
+      for record in records_85.into_iter() {
+        tb_85.push(record);
+      }
+      let _ = runtime.block_on(tb_85.flush());
+    }
+  }
+
+  {
+    let records_86 = RECORD_QUEUE_86.take();
+    if !records_86.is_empty() {
+      let mut tb_86 = TableBuilder86::new(&db_url, 1);
+      for record in records_86.into_iter() {
+        tb_86.push(record);
+      }
+      let _ = runtime.block_on(tb_86.flush());
+    }
+  }
+
+  {
+    let records_87 = RECORD_QUEUE_87.take();
+    if !records_87.is_empty() {
+      let mut tb_87 = TableBuilder87::new(&db_url, 1);
+      for record in records_87.into_iter() {
+        tb_87.push(record);
+      }
+      let _ = runtime.block_on(tb_87.flush());
+    }
+  }
+
+  {
+    let records_88 = RECORD_QUEUE_88.take();
+    if !records_88.is_empty() {
+      let mut tb_88 = TableBuilder88::new(&db_url, 1);
+      for record in records_88.into_iter() {
+        tb_88.push(record);
+      }
+      let _ = runtime.block_on(tb_88.flush());
+    }
+  }
+
+  {
+    let records_89 = RECORD_QUEUE_89.take();
+    if !records_89.is_empty() {
+      let mut tb_89 = TableBuilder89::new(&db_url, 1);
+      for record in records_89.into_iter() {
+        tb_89.push(record);
+      }
+      let _ = runtime.block_on(tb_89.flush());
+    }
+  }
+
+  {
+    let records_90 = RECORD_QUEUE_90.take();
+    if !records_90.is_empty() {
+      let mut tb_90 = TableBuilder90::new(&db_url, 1);
+      for record in records_90.into_iter() {
+        tb_90.push(record);
+      }
+      let _ = runtime.block_on(tb_90.flush());
+    }
+  }
+
+  {
+    let records_91 = RECORD_QUEUE_91.take();
+    if !records_91.is_empty() {
+      let mut tb_91 = TableBuilder91::new(&db_url, 1);
+      for record in records_91.into_iter() {
+        tb_91.push(record);
+      }
+      let _ = runtime.block_on(tb_91.flush());
+    }
+  }
+
+  {
+    let records_92 = RECORD_QUEUE_92.take();
+    if !records_92.is_empty() {
+      let mut tb_92 = TableBuilder92::new(&db_url, 1);
+      for record in records_92.into_iter() {
+        tb_92.push(record);
+      }
+      let _ = runtime.block_on(tb_92.flush());
+    }
+  }
+
+  {
+    let records_93 = RECORD_QUEUE_93.take();
+    if !records_93.is_empty() {
+      let mut tb_93 = TableBuilder93::new(&db_url, 1);
+      for record in records_93.into_iter() {
+        tb_93.push(record);
+      }
+      let _ = runtime.block_on(tb_93.flush());
+    }
+  }
+
+  {
+    let records_94 = RECORD_QUEUE_94.take();
+    if !records_94.is_empty() {
+      let mut tb_94 = TableBuilder94::new(&db_url, 1);
+      for record in records_94.into_iter() {
+        tb_94.push(record);
+      }
+      let _ = runtime.block_on(tb_94.flush());
+    }
+  }
+
+  {
+    let records_95 = RECORD_QUEUE_95.take();
+    if !records_95.is_empty() {
+      let mut tb_95 = TableBuilder95::new(&db_url, 1);
+      for record in records_95.into_iter() {
+        tb_95.push(record);
+      }
+      let _ = runtime.block_on(tb_95.flush());
+    }
+  }
+
+  {
+    let records_96 = RECORD_QUEUE_96.take();
+    if !records_96.is_empty() {
+      let mut tb_96 = TableBuilder96::new(&db_url, 1);
+      for record in records_96.into_iter() {
+        tb_96.push(record);
+      }
+      let _ = runtime.block_on(tb_96.flush());
+    }
+  }
+
+  {
+    let records_97 = RECORD_QUEUE_97.take();
+    if !records_97.is_empty() {
+      let mut tb_97 = TableBuilder97::new(&db_url, 1);
+      for record in records_97.into_iter() {
+        tb_97.push(record);
+      }
+      let _ = runtime.block_on(tb_97.flush());
+    }
+  }
+
+  {
+    let records_98 = RECORD_QUEUE_98.take();
+    if !records_98.is_empty() {
+      let mut tb_98 = TableBuilder98::new(&db_url, 1);
+      for record in records_98.into_iter() {
+        tb_98.push(record);
+      }
+      let _ = runtime.block_on(tb_98.flush());
+    }
+  }
+
+  {
+    let records_99 = RECORD_QUEUE_99.take();
+    if !records_99.is_empty() {
+      let mut tb_99 = TableBuilder99::new(&db_url, 1);
+      for record in records_99.into_iter() {
+        tb_99.push(record);
+      }
+      let _ = runtime.block_on(tb_99.flush());
+    }
+  }
+
+  {
+    let records_100 = RECORD_QUEUE_100.take();
+    if !records_100.is_empty() {
+      let mut tb_100 = TableBuilder100::new(&db_url, 1);
+      for record in records_100.into_iter() {
+        tb_100.push(record);
+      }
+      let _ = runtime.block_on(tb_100.flush());
+    }
+  }
+
+  {
+    let records_101 = RECORD_QUEUE_101.take();
+    if !records_101.is_empty() {
+      let mut tb_101 = TableBuilder101::new(&db_url, 1);
+      for record in records_101.into_iter() {
+        tb_101.push(record);
+      }
+      let _ = runtime.block_on(tb_101.flush());
+    }
+  }
+
+  {
+    let records_102 = RECORD_QUEUE_102.take();
+    if !records_102.is_empty() {
+      let mut tb_102 = TableBuilder102::new(&db_url, 1);
+      for record in records_102.into_iter() {
+        tb_102.push(record);
+      }
+      let _ = runtime.block_on(tb_102.flush());
+    }
+  }
+
+  {
+    let records_103 = RECORD_QUEUE_103.take();
+    if !records_103.is_empty() {
+      let mut tb_103 = TableBuilder103::new(&db_url, 1);
+      for record in records_103.into_iter() {
+        tb_103.push(record);
+      }
+      let _ = runtime.block_on(tb_103.flush());
+    }
+  }
+
+  {
+    let records_104 = RECORD_QUEUE_104.take();
+    if !records_104.is_empty() {
+      let mut tb_104 = TableBuilder104::new(&db_url, 1);
+      for record in records_104.into_iter() {
+        tb_104.push(record);
+      }
+      let _ = runtime.block_on(tb_104.flush());
+    }
+  }
+
+  {
+    let records_105 = RECORD_QUEUE_105.take();
+    if !records_105.is_empty() {
+      let mut tb_105 = TableBuilder105::new(&db_url, 1);
+      for record in records_105.into_iter() {
+        tb_105.push(record);
+      }
+      let _ = runtime.block_on(tb_105.flush());
+    }
+  }
+
+  {
+    let records_106 = RECORD_QUEUE_106.take();
+    if !records_106.is_empty() {
+      let mut tb_106 = TableBuilder106::new(&db_url, 1);
+      for record in records_106.into_iter() {
+        tb_106.push(record);
+      }
+      let _ = runtime.block_on(tb_106.flush());
+    }
+  }
+
+  {
+    let records_107 = RECORD_QUEUE_107.take();
+    if !records_107.is_empty() {
+      let mut tb_107 = TableBuilder107::new(&db_url, 1);
+      for record in records_107.into_iter() {
+        tb_107.push(record);
+      }
+      let _ = runtime.block_on(tb_107.flush());
+    }
+  }
+
+  {
+    let records_108 = RECORD_QUEUE_108.take();
+    if !records_108.is_empty() {
+      let mut tb_108 = TableBuilder108::new(&db_url, 1);
+      for record in records_108.into_iter() {
+        tb_108.push(record);
+      }
+      let _ = runtime.block_on(tb_108.flush());
+    }
+  }
+
+  {
+    let records_109 = RECORD_QUEUE_109.take();
+    if !records_109.is_empty() {
+      let mut tb_109 = TableBuilder109::new(&db_url, 1);
+      for record in records_109.into_iter() {
+        tb_109.push(record);
+      }
+      let _ = runtime.block_on(tb_109.flush());
+    }
+  }
+
+  {
+    let records_110 = RECORD_QUEUE_110.take();
+    if !records_110.is_empty() {
+      let mut tb_110 = TableBuilder110::new(&db_url, 1);
+      for record in records_110.into_iter() {
+        tb_110.push(record);
+      }
+      let _ = runtime.block_on(tb_110.flush());
+    }
+  }
+
+  {
+    let records_111 = RECORD_QUEUE_111.take();
+    if !records_111.is_empty() {
+      let mut tb_111 = TableBuilder111::new(&db_url, 1);
+      for record in records_111.into_iter() {
+        tb_111.push(record);
+      }
+      let _ = runtime.block_on(tb_111.flush());
+    }
+  }
+
+  {
+    let records_112 = RECORD_QUEUE_112.take();
+    if !records_112.is_empty() {
+      let mut tb_112 = TableBuilder112::new(&db_url, 1);
+      for record in records_112.into_iter() {
+        tb_112.push(record);
+      }
+      let _ = runtime.block_on(tb_112.flush());
+    }
+  }
+
+  {
+    let records_113 = RECORD_QUEUE_113.take();
+    if !records_113.is_empty() {
+      let mut tb_113 = TableBuilder113::new(&db_url, 1);
+      for record in records_113.into_iter() {
+        tb_113.push(record);
+      }
+      let _ = runtime.block_on(tb_113.flush());
+    }
+  }
+
+  {
+    let records_114 = RECORD_QUEUE_114.take();
+    if !records_114.is_empty() {
+      let mut tb_114 = TableBuilder114::new(&db_url, 1);
+      for record in records_114.into_iter() {
+        tb_114.push(record);
+      }
+      let _ = runtime.block_on(tb_114.flush());
+    }
+  }
+
+  {
+    let records_115 = RECORD_QUEUE_115.take();
+    if !records_115.is_empty() {
+      let mut tb_115 = TableBuilder115::new(&db_url, 1);
+      for record in records_115.into_iter() {
+        tb_115.push(record);
+      }
+      let _ = runtime.block_on(tb_115.flush());
+    }
+  }
+
+  {
+    let records_116 = RECORD_QUEUE_116.take();
+    if !records_116.is_empty() {
+      let mut tb_116 = TableBuilder116::new(&db_url, 1);
+      for record in records_116.into_iter() {
+        tb_116.push(record);
+      }
+      let _ = runtime.block_on(tb_116.flush());
+    }
+  }
+
+  {
+    let records_117 = RECORD_QUEUE_117.take();
+    if !records_117.is_empty() {
+      let mut tb_117 = TableBuilder117::new(&db_url, 1);
+      for record in records_117.into_iter() {
+        tb_117.push(record);
+      }
+      let _ = runtime.block_on(tb_117.flush());
+    }
+  }
+
+  {
+    let records_118 = RECORD_QUEUE_118.take();
+    if !records_118.is_empty() {
+      let mut tb_118 = TableBuilder118::new(&db_url, 1);
+      for record in records_118.into_iter() {
+        tb_118.push(record);
+      }
+      let _ = runtime.block_on(tb_118.flush());
+    }
+  }
+
+  {
+    let records_119 = RECORD_QUEUE_119.take();
+    if !records_119.is_empty() {
+      let mut tb_119 = TableBuilder119::new(&db_url, 1);
+      for record in records_119.into_iter() {
+        tb_119.push(record);
+      }
+      let _ = runtime.block_on(tb_119.flush());
+    }
+  }
+
+  {
+    let records_120 = RECORD_QUEUE_120.take();
+    if !records_120.is_empty() {
+      let mut tb_120 = TableBuilder120::new(&db_url, 1);
+      for record in records_120.into_iter() {
+        tb_120.push(record);
+      }
+      let _ = runtime.block_on(tb_120.flush());
+    }
+  }
+
+  {
+    let records_121 = RECORD_QUEUE_121.take();
+    if !records_121.is_empty() {
+      let mut tb_121 = TableBuilder121::new(&db_url, 1);
+      for record in records_121.into_iter() {
+        tb_121.push(record);
+      }
+      let _ = runtime.block_on(tb_121.flush());
+    }
+  }
+
+  {
+    let records_122 = RECORD_QUEUE_122.take();
+    if !records_122.is_empty() {
+      let mut tb_122 = TableBuilder122::new(&db_url, 1);
+      for record in records_122.into_iter() {
+        tb_122.push(record);
+      }
+      let _ = runtime.block_on(tb_122.flush());
+    }
+  }
+
+  {
+    let records_123 = RECORD_QUEUE_123.take();
+    if !records_123.is_empty() {
+      let mut tb_123 = TableBuilder123::new(&db_url, 1);
+      for record in records_123.into_iter() {
+        tb_123.push(record);
+      }
+      let _ = runtime.block_on(tb_123.flush());
+    }
+  }
+
+  {
+    let records_124 = RECORD_QUEUE_124.take();
+    if !records_124.is_empty() {
+      let mut tb_124 = TableBuilder124::new(&db_url, 1);
+      for record in records_124.into_iter() {
+        tb_124.push(record);
+      }
+      let _ = runtime.block_on(tb_124.flush());
+    }
+  }
+
+  {
+    let records_125 = RECORD_QUEUE_125.take();
+    if !records_125.is_empty() {
+      let mut tb_125 = TableBuilder125::new(&db_url, 1);
+      for record in records_125.into_iter() {
+        tb_125.push(record);
+      }
+      let _ = runtime.block_on(tb_125.flush());
+    }
+  }
+
+  {
+    let records_126 = RECORD_QUEUE_126.take();
+    if !records_126.is_empty() {
+      let mut tb_126 = TableBuilder126::new(&db_url, 1);
+      for record in records_126.into_iter() {
+        tb_126.push(record);
+      }
+      let _ = runtime.block_on(tb_126.flush());
+    }
+  }
+
+  {
+    let records_127 = RECORD_QUEUE_127.take();
+    if !records_127.is_empty() {
+      let mut tb_127 = TableBuilder127::new(&db_url, 1);
+      for record in records_127.into_iter() {
+        tb_127.push(record);
+      }
+      let _ = runtime.block_on(tb_127.flush());
+    }
+  }
+
+  {
+    let records_128 = RECORD_QUEUE_128.take();
+    if !records_128.is_empty() {
+      let mut tb_128 = TableBuilder128::new(&db_url, 1);
+      for record in records_128.into_iter() {
+        tb_128.push(record);
+      }
+      let _ = runtime.block_on(tb_128.flush());
+    }
+  }
+
+  {
+    let records_129 = RECORD_QUEUE_129.take();
+    if !records_129.is_empty() {
+      let mut tb_129 = TableBuilder129::new(&db_url, 1);
+      for record in records_129.into_iter() {
+        tb_129.push(record);
+      }
+      let _ = runtime.block_on(tb_129.flush());
+    }
+  }
+
+  {
+    let records_130 = RECORD_QUEUE_130.take();
+    if !records_130.is_empty() {
+      let mut tb_130 = TableBuilder130::new(&db_url, 1);
+      for record in records_130.into_iter() {
+        tb_130.push(record);
+      }
+      let _ = runtime.block_on(tb_130.flush());
+    }
+  }
+
+  {
+    let records_131 = RECORD_QUEUE_131.take();
+    if !records_131.is_empty() {
+      let mut tb_131 = TableBuilder131::new(&db_url, 1);
+      for record in records_131.into_iter() {
+        tb_131.push(record);
+      }
+      let _ = runtime.block_on(tb_131.flush());
+    }
+  }
+
+  {
+    let records_132 = RECORD_QUEUE_132.take();
+    if !records_132.is_empty() {
+      let mut tb_132 = TableBuilder132::new(&db_url, 1);
+      for record in records_132.into_iter() {
+        tb_132.push(record);
+      }
+      let _ = runtime.block_on(tb_132.flush());
+    }
+  }
+
+  {
+    let records_133 = RECORD_QUEUE_133.take();
+    if !records_133.is_empty() {
+      let mut tb_133 = TableBuilder133::new(&db_url, 1);
+      for record in records_133.into_iter() {
+        tb_133.push(record);
+      }
+      let _ = runtime.block_on(tb_133.flush());
+    }
+  }
+
+  {
+    let records_134 = RECORD_QUEUE_134.take();
+    if !records_134.is_empty() {
+      let mut tb_134 = TableBuilder134::new(&db_url, 1);
+      for record in records_134.into_iter() {
+        tb_134.push(record);
+      }
+      let _ = runtime.block_on(tb_134.flush());
+    }
+  }
+
+  {
+    let records_135 = RECORD_QUEUE_135.take();
+    if !records_135.is_empty() {
+      let mut tb_135 = TableBuilder135::new(&db_url, 1);
+      for record in records_135.into_iter() {
+        tb_135.push(record);
+      }
+      let _ = runtime.block_on(tb_135.flush());
+    }
+  }
+
+  {
+    let records_136 = RECORD_QUEUE_136.take();
+    if !records_136.is_empty() {
+      let mut tb_136 = TableBuilder136::new(&db_url, 1);
+      for record in records_136.into_iter() {
+        tb_136.push(record);
+      }
+      let _ = runtime.block_on(tb_136.flush());
+    }
+  }
+
+  {
+    let records_137 = RECORD_QUEUE_137.take();
+    if !records_137.is_empty() {
+      let mut tb_137 = TableBuilder137::new(&db_url, 1);
+      for record in records_137.into_iter() {
+        tb_137.push(record);
+      }
+      let _ = runtime.block_on(tb_137.flush());
+    }
+  }
+
+  {
+    let records_138 = RECORD_QUEUE_138.take();
+    if !records_138.is_empty() {
+      let mut tb_138 = TableBuilder138::new(&db_url, 1);
+      for record in records_138.into_iter() {
+        tb_138.push(record);
+      }
+      let _ = runtime.block_on(tb_138.flush());
+    }
+  }
+
+  {
+    let records_139 = RECORD_QUEUE_139.take();
+    if !records_139.is_empty() {
+      let mut tb_139 = TableBuilder139::new(&db_url, 1);
+      for record in records_139.into_iter() {
+        tb_139.push(record);
+      }
+      let _ = runtime.block_on(tb_139.flush());
+    }
+  }
+
+  {
+    let records_140 = RECORD_QUEUE_140.take();
+    if !records_140.is_empty() {
+      let mut tb_140 = TableBuilder140::new(&db_url, 1);
+      for record in records_140.into_iter() {
+        tb_140.push(record);
+      }
+      let _ = runtime.block_on(tb_140.flush());
+    }
+  }
+
+  {
+    let records_141 = RECORD_QUEUE_141.take();
+    if !records_141.is_empty() {
+      let mut tb_141 = TableBuilder141::new(&db_url, 1);
+      for record in records_141.into_iter() {
+        tb_141.push(record);
+      }
+      let _ = runtime.block_on(tb_141.flush());
+    }
+  }
+
+  {
+    let records_142 = RECORD_QUEUE_142.take();
+    if !records_142.is_empty() {
+      let mut tb_142 = TableBuilder142::new(&db_url, 1);
+      for record in records_142.into_iter() {
+        tb_142.push(record);
+      }
+      let _ = runtime.block_on(tb_142.flush());
+    }
+  }
+
+  {
+    let records_143 = RECORD_QUEUE_143.take();
+    if !records_143.is_empty() {
+      let mut tb_143 = TableBuilder143::new(&db_url, 1);
+      for record in records_143.into_iter() {
+        tb_143.push(record);
+      }
+      let _ = runtime.block_on(tb_143.flush());
+    }
+  }
+
+  {
+    let records_144 = RECORD_QUEUE_144.take();
+    if !records_144.is_empty() {
+      let mut tb_144 = TableBuilder144::new(&db_url, 1);
+      for record in records_144.into_iter() {
+        tb_144.push(record);
+      }
+      let _ = runtime.block_on(tb_144.flush());
+    }
+  }
+
+  {
+    let records_145 = RECORD_QUEUE_145.take();
+    if !records_145.is_empty() {
+      let mut tb_145 = TableBuilder145::new(&db_url, 1);
+      for record in records_145.into_iter() {
+        tb_145.push(record);
+      }
+      let _ = runtime.block_on(tb_145.flush());
+    }
+  }
+
+  {
+    let records_146 = RECORD_QUEUE_146.take();
+    if !records_146.is_empty() {
+      let mut tb_146 = TableBuilder146::new(&db_url, 1);
+      for record in records_146.into_iter() {
+        tb_146.push(record);
+      }
+      let _ = runtime.block_on(tb_146.flush());
+    }
+  }
+
+  {
+    let records_147 = RECORD_QUEUE_147.take();
+    if !records_147.is_empty() {
+      let mut tb_147 = TableBuilder147::new(&db_url, 1);
+      for record in records_147.into_iter() {
+        tb_147.push(record);
+      }
+      let _ = runtime.block_on(tb_147.flush());
+    }
+  }
+
+  {
+    let records_148 = RECORD_QUEUE_148.take();
+    if !records_148.is_empty() {
+      let mut tb_148 = TableBuilder148::new(&db_url, 1);
+      for record in records_148.into_iter() {
+        tb_148.push(record);
+      }
+      let _ = runtime.block_on(tb_148.flush());
+    }
+  }
+
+  {
+    let records_149 = RECORD_QUEUE_149.take();
+    if !records_149.is_empty() {
+      let mut tb_149 = TableBuilder149::new(&db_url, 1);
+      for record in records_149.into_iter() {
+        tb_149.push(record);
+      }
+      let _ = runtime.block_on(tb_149.flush());
+    }
+  }
+
+  {
+    let records_150 = RECORD_QUEUE_150.take();
+    if !records_150.is_empty() {
+      let mut tb_150 = TableBuilder150::new(&db_url, 1);
+      for record in records_150.into_iter() {
+        tb_150.push(record);
+      }
+      let _ = runtime.block_on(tb_150.flush());
+    }
+  }
+
+  {
+    let records_151 = RECORD_QUEUE_151.take();
+    if !records_151.is_empty() {
+      let mut tb_151 = TableBuilder151::new(&db_url, 1);
+      for record in records_151.into_iter() {
+        tb_151.push(record);
+      }
+      let _ = runtime.block_on(tb_151.flush());
+    }
+  }
+
+  {
+    let records_152 = RECORD_QUEUE_152.take();
+    if !records_152.is_empty() {
+      let mut tb_152 = TableBuilder152::new(&db_url, 1);
+      for record in records_152.into_iter() {
+        tb_152.push(record);
+      }
+      let _ = runtime.block_on(tb_152.flush());
+    }
+  }
+
+  {
+    let records_153 = RECORD_QUEUE_153.take();
+    if !records_153.is_empty() {
+      let mut tb_153 = TableBuilder153::new(&db_url, 1);
+      for record in records_153.into_iter() {
+        tb_153.push(record);
+      }
+      let _ = runtime.block_on(tb_153.flush());
+    }
+  }
+
+  {
+    let records_154 = RECORD_QUEUE_154.take();
+    if !records_154.is_empty() {
+      let mut tb_154 = TableBuilder154::new(&db_url, 1);
+      for record in records_154.into_iter() {
+        tb_154.push(record);
+      }
+      let _ = runtime.block_on(tb_154.flush());
+    }
+  }
+
+  {
+    let records_155 = RECORD_QUEUE_155.take();
+    if !records_155.is_empty() {
+      let mut tb_155 = TableBuilder155::new(&db_url, 1);
+      for record in records_155.into_iter() {
+        tb_155.push(record);
+      }
+      let _ = runtime.block_on(tb_155.flush());
+    }
+  }
+
+  {
+    let records_156 = RECORD_QUEUE_156.take();
+    if !records_156.is_empty() {
+      let mut tb_156 = TableBuilder156::new(&db_url, 1);
+      for record in records_156.into_iter() {
+        tb_156.push(record);
+      }
+      let _ = runtime.block_on(tb_156.flush());
+    }
+  }
+
+  {
+    let records_157 = RECORD_QUEUE_157.take();
+    if !records_157.is_empty() {
+      let mut tb_157 = TableBuilder157::new(&db_url, 1);
+      for record in records_157.into_iter() {
+        tb_157.push(record);
+      }
+      let _ = runtime.block_on(tb_157.flush());
+    }
+  }
+
+  {
+    let records_158 = RECORD_QUEUE_158.take();
+    if !records_158.is_empty() {
+      let mut tb_158 = TableBuilder158::new(&db_url, 1);
+      for record in records_158.into_iter() {
+        tb_158.push(record);
+      }
+      let _ = runtime.block_on(tb_158.flush());
+    }
+  }
+
+  {
+    let records_159 = RECORD_QUEUE_159.take();
+    if !records_159.is_empty() {
+      let mut tb_159 = TableBuilder159::new(&db_url, 1);
+      for record in records_159.into_iter() {
+        tb_159.push(record);
+      }
+      let _ = runtime.block_on(tb_159.flush());
+    }
+  }
+
+  {
+    let records_160 = RECORD_QUEUE_160.take();
+    if !records_160.is_empty() {
+      let mut tb_160 = TableBuilder160::new(&db_url, 1);
+      for record in records_160.into_iter() {
+        tb_160.push(record);
+      }
+      let _ = runtime.block_on(tb_160.flush());
+    }
+  }
+
+  {
+    let records_161 = RECORD_QUEUE_161.take();
+    if !records_161.is_empty() {
+      let mut tb_161 = TableBuilder161::new(&db_url, 1);
+      for record in records_161.into_iter() {
+        tb_161.push(record);
+      }
+      let _ = runtime.block_on(tb_161.flush());
+    }
+  }
+
+  {
+    let records_162 = RECORD_QUEUE_162.take();
+    if !records_162.is_empty() {
+      let mut tb_162 = TableBuilder162::new(&db_url, 1);
+      for record in records_162.into_iter() {
+        tb_162.push(record);
+      }
+      let _ = runtime.block_on(tb_162.flush());
+    }
+  }
+
+  {
+    let records_163 = RECORD_QUEUE_163.take();
+    if !records_163.is_empty() {
+      let mut tb_163 = TableBuilder163::new(&db_url, 1);
+      for record in records_163.into_iter() {
+        tb_163.push(record);
+      }
+      let _ = runtime.block_on(tb_163.flush());
+    }
+  }
+
+  {
+    let records_164 = RECORD_QUEUE_164.take();
+    if !records_164.is_empty() {
+      let mut tb_164 = TableBuilder164::new(&db_url, 1);
+      for record in records_164.into_iter() {
+        tb_164.push(record);
+      }
+      let _ = runtime.block_on(tb_164.flush());
+    }
+  }
+
+  {
+    let records_165 = RECORD_QUEUE_165.take();
+    if !records_165.is_empty() {
+      let mut tb_165 = TableBuilder165::new(&db_url, 1);
+      for record in records_165.into_iter() {
+        tb_165.push(record);
+      }
+      let _ = runtime.block_on(tb_165.flush());
+    }
+  }
+
+  {
+    let records_166 = RECORD_QUEUE_166.take();
+    if !records_166.is_empty() {
+      let mut tb_166 = TableBuilder166::new(&db_url, 1);
+      for record in records_166.into_iter() {
+        tb_166.push(record);
+      }
+      let _ = runtime.block_on(tb_166.flush());
+    }
+  }
+
+  {
+    let records_167 = RECORD_QUEUE_167.take();
+    if !records_167.is_empty() {
+      let mut tb_167 = TableBuilder167::new(&db_url, 1);
+      for record in records_167.into_iter() {
+        tb_167.push(record);
+      }
+      let _ = runtime.block_on(tb_167.flush());
+    }
+  }
+
+  {
+    let records_168 = RECORD_QUEUE_168.take();
+    if !records_168.is_empty() {
+      let mut tb_168 = TableBuilder168::new(&db_url, 1);
+      for record in records_168.into_iter() {
+        tb_168.push(record);
+      }
+      let _ = runtime.block_on(tb_168.flush());
+    }
+  }
+
+  {
+    let records_169 = RECORD_QUEUE_169.take();
+    if !records_169.is_empty() {
+      let mut tb_169 = TableBuilder169::new(&db_url, 1);
+      for record in records_169.into_iter() {
+        tb_169.push(record);
+      }
+      let _ = runtime.block_on(tb_169.flush());
+    }
+  }
+
+  {
+    let records_170 = RECORD_QUEUE_170.take();
+    if !records_170.is_empty() {
+      let mut tb_170 = TableBuilder170::new(&db_url, 1);
+      for record in records_170.into_iter() {
+        tb_170.push(record);
+      }
+      let _ = runtime.block_on(tb_170.flush());
+    }
+  }
+
+  {
+    let records_171 = RECORD_QUEUE_171.take();
+    if !records_171.is_empty() {
+      let mut tb_171 = TableBuilder171::new(&db_url, 1);
+      for record in records_171.into_iter() {
+        tb_171.push(record);
+      }
+      let _ = runtime.block_on(tb_171.flush());
+    }
+  }
+
+  {
+    let records_172 = RECORD_QUEUE_172.take();
+    if !records_172.is_empty() {
+      let mut tb_172 = TableBuilder172::new(&db_url, 1);
+      for record in records_172.into_iter() {
+        tb_172.push(record);
+      }
+      let _ = runtime.block_on(tb_172.flush());
+    }
+  }
+
+  {
+    let records_173 = RECORD_QUEUE_173.take();
+    if !records_173.is_empty() {
+      let mut tb_173 = TableBuilder173::new(&db_url, 1);
+      for record in records_173.into_iter() {
+        tb_173.push(record);
+      }
+      let _ = runtime.block_on(tb_173.flush());
+    }
+  }
+
+  {
+    let records_174 = RECORD_QUEUE_174.take();
+    if !records_174.is_empty() {
+      let mut tb_174 = TableBuilder174::new(&db_url, 1);
+      for record in records_174.into_iter() {
+        tb_174.push(record);
+      }
+      let _ = runtime.block_on(tb_174.flush());
+    }
+  }
+
+  {
+    let records_175 = RECORD_QUEUE_175.take();
+    if !records_175.is_empty() {
+      let mut tb_175 = TableBuilder175::new(&db_url, 1);
+      for record in records_175.into_iter() {
+        tb_175.push(record);
+      }
+      let _ = runtime.block_on(tb_175.flush());
+    }
+  }
+
+  {
+    let records_176 = RECORD_QUEUE_176.take();
+    if !records_176.is_empty() {
+      let mut tb_176 = TableBuilder176::new(&db_url, 1);
+      for record in records_176.into_iter() {
+        tb_176.push(record);
+      }
+      let _ = runtime.block_on(tb_176.flush());
+    }
+  }
+
+  {
+    let records_177 = RECORD_QUEUE_177.take();
+    if !records_177.is_empty() {
+      let mut tb_177 = TableBuilder177::new(&db_url, 1);
+      for record in records_177.into_iter() {
+        tb_177.push(record);
+      }
+      let _ = runtime.block_on(tb_177.flush());
+    }
+  }
+
+  {
+    let records_178 = RECORD_QUEUE_178.take();
+    if !records_178.is_empty() {
+      let mut tb_178 = TableBuilder178::new(&db_url, 1);
+      for record in records_178.into_iter() {
+        tb_178.push(record);
+      }
+      let _ = runtime.block_on(tb_178.flush());
+    }
+  }
+
+  {
+    let records_179 = RECORD_QUEUE_179.take();
+    if !records_179.is_empty() {
+      let mut tb_179 = TableBuilder179::new(&db_url, 1);
+      for record in records_179.into_iter() {
+        tb_179.push(record);
+      }
+      let _ = runtime.block_on(tb_179.flush());
+    }
+  }
+
+  {
+    let records_180 = RECORD_QUEUE_180.take();
+    if !records_180.is_empty() {
+      let mut tb_180 = TableBuilder180::new(&db_url, 1);
+      for record in records_180.into_iter() {
+        tb_180.push(record);
+      }
+      let _ = runtime.block_on(tb_180.flush());
+    }
+  }
+
+  {
+    let records_181 = RECORD_QUEUE_181.take();
+    if !records_181.is_empty() {
+      let mut tb_181 = TableBuilder181::new(&db_url, 1);
+      for record in records_181.into_iter() {
+        tb_181.push(record);
+      }
+      let _ = runtime.block_on(tb_181.flush());
+    }
+  }
+
+  {
+    let records_182 = RECORD_QUEUE_182.take();
+    if !records_182.is_empty() {
+      let mut tb_182 = TableBuilder182::new(&db_url, 1);
+      for record in records_182.into_iter() {
+        tb_182.push(record);
+      }
+      let _ = runtime.block_on(tb_182.flush());
+    }
+  }
+
+  {
+    let records_183 = RECORD_QUEUE_183.take();
+    if !records_183.is_empty() {
+      let mut tb_183 = TableBuilder183::new(&db_url, 1);
+      for record in records_183.into_iter() {
+        tb_183.push(record);
+      }
+      let _ = runtime.block_on(tb_183.flush());
+    }
+  }
+
+  {
+    let records_184 = RECORD_QUEUE_184.take();
+    if !records_184.is_empty() {
+      let mut tb_184 = TableBuilder184::new(&db_url, 1);
+      for record in records_184.into_iter() {
+        tb_184.push(record);
+      }
+      let _ = runtime.block_on(tb_184.flush());
+    }
+  }
+
+  {
+    let records_185 = RECORD_QUEUE_185.take();
+    if !records_185.is_empty() {
+      let mut tb_185 = TableBuilder185::new(&db_url, 1);
+      for record in records_185.into_iter() {
+        tb_185.push(record);
+      }
+      let _ = runtime.block_on(tb_185.flush());
+    }
+  }
+
+  {
+    let records_186 = RECORD_QUEUE_186.take();
+    if !records_186.is_empty() {
+      let mut tb_186 = TableBuilder186::new(&db_url, 1);
+      for record in records_186.into_iter() {
+        tb_186.push(record);
+      }
+      let _ = runtime.block_on(tb_186.flush());
+    }
+  }
+
+  {
+    let records_187 = RECORD_QUEUE_187.take();
+    if !records_187.is_empty() {
+      let mut tb_187 = TableBuilder187::new(&db_url, 1);
+      for record in records_187.into_iter() {
+        tb_187.push(record);
+      }
+      let _ = runtime.block_on(tb_187.flush());
+    }
+  }
+
+  {
+    let records_188 = RECORD_QUEUE_188.take();
+    if !records_188.is_empty() {
+      let mut tb_188 = TableBuilder188::new(&db_url, 1);
+      for record in records_188.into_iter() {
+        tb_188.push(record);
+      }
+      let _ = runtime.block_on(tb_188.flush());
+    }
+  }
+
+  {
+    let records_189 = RECORD_QUEUE_189.take();
+    if !records_189.is_empty() {
+      let mut tb_189 = TableBuilder189::new(&db_url, 1);
+      for record in records_189.into_iter() {
+        tb_189.push(record);
+      }
+      let _ = runtime.block_on(tb_189.flush());
+    }
+  }
+
+  {
+    let records_190 = RECORD_QUEUE_190.take();
+    if !records_190.is_empty() {
+      let mut tb_190 = TableBuilder190::new(&db_url, 1);
+      for record in records_190.into_iter() {
+        tb_190.push(record);
+      }
+      let _ = runtime.block_on(tb_190.flush());
+    }
+  }
+
+  {
+    let records_191 = RECORD_QUEUE_191.take();
+    if !records_191.is_empty() {
+      let mut tb_191 = TableBuilder191::new(&db_url, 1);
+      for record in records_191.into_iter() {
+        tb_191.push(record);
+      }
+      let _ = runtime.block_on(tb_191.flush());
+    }
+  }
+
+  {
+    let records_192 = RECORD_QUEUE_192.take();
+    if !records_192.is_empty() {
+      let mut tb_192 = TableBuilder192::new(&db_url, 1);
+      for record in records_192.into_iter() {
+        tb_192.push(record);
+      }
+      let _ = runtime.block_on(tb_192.flush());
+    }
+  }
+
+  {
+    let records_193 = RECORD_QUEUE_193.take();
+    if !records_193.is_empty() {
+      let mut tb_193 = TableBuilder193::new(&db_url, 1);
+      for record in records_193.into_iter() {
+        tb_193.push(record);
+      }
+      let _ = runtime.block_on(tb_193.flush());
+    }
+  }
+
+  {
+    let records_194 = RECORD_QUEUE_194.take();
+    if !records_194.is_empty() {
+      let mut tb_194 = TableBuilder194::new(&db_url, 1);
+      for record in records_194.into_iter() {
+        tb_194.push(record);
+      }
+      let _ = runtime.block_on(tb_194.flush());
+    }
+  }
+
+  {
+    let records_195 = RECORD_QUEUE_195.take();
+    if !records_195.is_empty() {
+      let mut tb_195 = TableBuilder195::new(&db_url, 1);
+      for record in records_195.into_iter() {
+        tb_195.push(record);
+      }
+      let _ = runtime.block_on(tb_195.flush());
+    }
+  }
+
+  {
+    let records_196 = RECORD_QUEUE_196.take();
+    if !records_196.is_empty() {
+      let mut tb_196 = TableBuilder196::new(&db_url, 1);
+      for record in records_196.into_iter() {
+        tb_196.push(record);
+      }
+      let _ = runtime.block_on(tb_196.flush());
+    }
+  }
+
+  {
+    let records_197 = RECORD_QUEUE_197.take();
+    if !records_197.is_empty() {
+      let mut tb_197 = TableBuilder197::new(&db_url, 1);
+      for record in records_197.into_iter() {
+        tb_197.push(record);
+      }
+      let _ = runtime.block_on(tb_197.flush());
+    }
+  }
+
+  {
+    let records_198 = RECORD_QUEUE_198.take();
+    if !records_198.is_empty() {
+      let mut tb_198 = TableBuilder198::new(&db_url, 1);
+      for record in records_198.into_iter() {
+        tb_198.push(record);
+      }
+      let _ = runtime.block_on(tb_198.flush());
+    }
+  }
+
+  {
+    let records_199 = RECORD_QUEUE_199.take();
+    if !records_199.is_empty() {
+      let mut tb_199 = TableBuilder199::new(&db_url, 1);
+      for record in records_199.into_iter() {
+        tb_199.push(record);
+      }
+      let _ = runtime.block_on(tb_199.flush());
+    }
+  }
+
+  {
+    let records_200 = RECORD_QUEUE_200.take();
+    if !records_200.is_empty() {
+      let mut tb_200 = TableBuilder200::new(&db_url, 1);
+      for record in records_200.into_iter() {
+        tb_200.push(record);
+      }
+      let _ = runtime.block_on(tb_200.flush());
+    }
+  }
+
+  {
+    let records_201 = RECORD_QUEUE_201.take();
+    if !records_201.is_empty() {
+      let mut tb_201 = TableBuilder201::new(&db_url, 1);
+      for record in records_201.into_iter() {
+        tb_201.push(record);
+      }
+      let _ = runtime.block_on(tb_201.flush());
+    }
+  }
+
+  {
+    let records_202 = RECORD_QUEUE_202.take();
+    if !records_202.is_empty() {
+      let mut tb_202 = TableBuilder202::new(&db_url, 1);
+      for record in records_202.into_iter() {
+        tb_202.push(record);
+      }
+      let _ = runtime.block_on(tb_202.flush());
+    }
+  }
+
+  {
+    let records_203 = RECORD_QUEUE_203.take();
+    if !records_203.is_empty() {
+      let mut tb_203 = TableBuilder203::new(&db_url, 1);
+      for record in records_203.into_iter() {
+        tb_203.push(record);
+      }
+      let _ = runtime.block_on(tb_203.flush());
+    }
+  }
+
+  {
+    let records_204 = RECORD_QUEUE_204.take();
+    if !records_204.is_empty() {
+      let mut tb_204 = TableBuilder204::new(&db_url, 1);
+      for record in records_204.into_iter() {
+        tb_204.push(record);
+      }
+      let _ = runtime.block_on(tb_204.flush());
+    }
+  }
+
+  {
+    let records_205 = RECORD_QUEUE_205.take();
+    if !records_205.is_empty() {
+      let mut tb_205 = TableBuilder205::new(&db_url, 1);
+      for record in records_205.into_iter() {
+        tb_205.push(record);
+      }
+      let _ = runtime.block_on(tb_205.flush());
+    }
+  }
+
+  {
+    let records_206 = RECORD_QUEUE_206.take();
+    if !records_206.is_empty() {
+      let mut tb_206 = TableBuilder206::new(&db_url, 1);
+      for record in records_206.into_iter() {
+        tb_206.push(record);
+      }
+      let _ = runtime.block_on(tb_206.flush());
+    }
+  }
+
+  {
+    let records_207 = RECORD_QUEUE_207.take();
+    if !records_207.is_empty() {
+      let mut tb_207 = TableBuilder207::new(&db_url, 1);
+      for record in records_207.into_iter() {
+        tb_207.push(record);
+      }
+      let _ = runtime.block_on(tb_207.flush());
+    }
+  }
+
+  {
+    let records_208 = RECORD_QUEUE_208.take();
+    if !records_208.is_empty() {
+      let mut tb_208 = TableBuilder208::new(&db_url, 1);
+      for record in records_208.into_iter() {
+        tb_208.push(record);
+      }
+      let _ = runtime.block_on(tb_208.flush());
+    }
+  }
+
+  {
+    let records_209 = RECORD_QUEUE_209.take();
+    if !records_209.is_empty() {
+      let mut tb_209 = TableBuilder209::new(&db_url, 1);
+      for record in records_209.into_iter() {
+        tb_209.push(record);
+      }
+      let _ = runtime.block_on(tb_209.flush());
+    }
+  }
+
+  {
+    let records_210 = RECORD_QUEUE_210.take();
+    if !records_210.is_empty() {
+      let mut tb_210 = TableBuilder210::new(&db_url, 1);
+      for record in records_210.into_iter() {
+        tb_210.push(record);
+      }
+      let _ = runtime.block_on(tb_210.flush());
+    }
+  }
+
+  {
+    let records_211 = RECORD_QUEUE_211.take();
+    if !records_211.is_empty() {
+      let mut tb_211 = TableBuilder211::new(&db_url, 1);
+      for record in records_211.into_iter() {
+        tb_211.push(record);
+      }
+      let _ = runtime.block_on(tb_211.flush());
+    }
+  }
+
+  {
+    let records_212 = RECORD_QUEUE_212.take();
+    if !records_212.is_empty() {
+      let mut tb_212 = TableBuilder212::new(&db_url, 1);
+      for record in records_212.into_iter() {
+        tb_212.push(record);
+      }
+      let _ = runtime.block_on(tb_212.flush());
+    }
+  }
+
+  {
+    let records_213 = RECORD_QUEUE_213.take();
+    if !records_213.is_empty() {
+      let mut tb_213 = TableBuilder213::new(&db_url, 1);
+      for record in records_213.into_iter() {
+        tb_213.push(record);
+      }
+      let _ = runtime.block_on(tb_213.flush());
+    }
+  }
+
+  {
+    let records_214 = RECORD_QUEUE_214.take();
+    if !records_214.is_empty() {
+      let mut tb_214 = TableBuilder214::new(&db_url, 1);
+      for record in records_214.into_iter() {
+        tb_214.push(record);
+      }
+      let _ = runtime.block_on(tb_214.flush());
+    }
+  }
+
+  {
+    let records_215 = RECORD_QUEUE_215.take();
+    if !records_215.is_empty() {
+      let mut tb_215 = TableBuilder215::new(&db_url, 1);
+      for record in records_215.into_iter() {
+        tb_215.push(record);
+      }
+      let _ = runtime.block_on(tb_215.flush());
+    }
+  }
+
+  {
+    let records_216 = RECORD_QUEUE_216.take();
+    if !records_216.is_empty() {
+      let mut tb_216 = TableBuilder216::new(&db_url, 1);
+      for record in records_216.into_iter() {
+        tb_216.push(record);
+      }
+      let _ = runtime.block_on(tb_216.flush());
+    }
+  }
+
+  {
+    let records_217 = RECORD_QUEUE_217.take();
+    if !records_217.is_empty() {
+      let mut tb_217 = TableBuilder217::new(&db_url, 1);
+      for record in records_217.into_iter() {
+        tb_217.push(record);
+      }
+      let _ = runtime.block_on(tb_217.flush());
+    }
+  }
+
+  {
+    let records_218 = RECORD_QUEUE_218.take();
+    if !records_218.is_empty() {
+      let mut tb_218 = TableBuilder218::new(&db_url, 1);
+      for record in records_218.into_iter() {
+        tb_218.push(record);
+      }
+      let _ = runtime.block_on(tb_218.flush());
+    }
+  }
+
+  {
+    let records_219 = RECORD_QUEUE_219.take();
+    if !records_219.is_empty() {
+      let mut tb_219 = TableBuilder219::new(&db_url, 1);
+      for record in records_219.into_iter() {
+        tb_219.push(record);
+      }
+      let _ = runtime.block_on(tb_219.flush());
+    }
+  }
+
+  {
+    let records_220 = RECORD_QUEUE_220.take();
+    if !records_220.is_empty() {
+      let mut tb_220 = TableBuilder220::new(&db_url, 1);
+      for record in records_220.into_iter() {
+        tb_220.push(record);
+      }
+      let _ = runtime.block_on(tb_220.flush());
+    }
+  }
+
+  {
+    let records_221 = RECORD_QUEUE_221.take();
+    if !records_221.is_empty() {
+      let mut tb_221 = TableBuilder221::new(&db_url, 1);
+      for record in records_221.into_iter() {
+        tb_221.push(record);
+      }
+      let _ = runtime.block_on(tb_221.flush());
+    }
+  }
+
+  {
+    let records_222 = RECORD_QUEUE_222.take();
+    if !records_222.is_empty() {
+      let mut tb_222 = TableBuilder222::new(&db_url, 1);
+      for record in records_222.into_iter() {
+        tb_222.push(record);
+      }
+      let _ = runtime.block_on(tb_222.flush());
+    }
+  }
+
+  {
+    let records_223 = RECORD_QUEUE_223.take();
+    if !records_223.is_empty() {
+      let mut tb_223 = TableBuilder223::new(&db_url, 1);
+      for record in records_223.into_iter() {
+        tb_223.push(record);
+      }
+      let _ = runtime.block_on(tb_223.flush());
+    }
+  }
+
+  {
+    let records_224 = RECORD_QUEUE_224.take();
+    if !records_224.is_empty() {
+      let mut tb_224 = TableBuilder224::new(&db_url, 1);
+      for record in records_224.into_iter() {
+        tb_224.push(record);
+      }
+      let _ = runtime.block_on(tb_224.flush());
+    }
+  }
+
+  {
+    let records_225 = RECORD_QUEUE_225.take();
+    if !records_225.is_empty() {
+      let mut tb_225 = TableBuilder225::new(&db_url, 1);
+      for record in records_225.into_iter() {
+        tb_225.push(record);
+      }
+      let _ = runtime.block_on(tb_225.flush());
+    }
+  }
+
+  {
+    let records_226 = RECORD_QUEUE_226.take();
+    if !records_226.is_empty() {
+      let mut tb_226 = TableBuilder226::new(&db_url, 1);
+      for record in records_226.into_iter() {
+        tb_226.push(record);
+      }
+      let _ = runtime.block_on(tb_226.flush());
+    }
+  }
+
+  {
+    let records_227 = RECORD_QUEUE_227.take();
+    if !records_227.is_empty() {
+      let mut tb_227 = TableBuilder227::new(&db_url, 1);
+      for record in records_227.into_iter() {
+        tb_227.push(record);
+      }
+      let _ = runtime.block_on(tb_227.flush());
+    }
+  }
+
+  {
+    let records_228 = RECORD_QUEUE_228.take();
+    if !records_228.is_empty() {
+      let mut tb_228 = TableBuilder228::new(&db_url, 1);
+      for record in records_228.into_iter() {
+        tb_228.push(record);
+      }
+      let _ = runtime.block_on(tb_228.flush());
+    }
+  }
+
+  {
+    let records_229 = RECORD_QUEUE_229.take();
+    if !records_229.is_empty() {
+      let mut tb_229 = TableBuilder229::new(&db_url, 1);
+      for record in records_229.into_iter() {
+        tb_229.push(record);
+      }
+      let _ = runtime.block_on(tb_229.flush());
+    }
+  }
+
+  {
+    let records_230 = RECORD_QUEUE_230.take();
+    if !records_230.is_empty() {
+      let mut tb_230 = TableBuilder230::new(&db_url, 1);
+      for record in records_230.into_iter() {
+        tb_230.push(record);
+      }
+      let _ = runtime.block_on(tb_230.flush());
+    }
+  }
+
+  {
+    let records_231 = RECORD_QUEUE_231.take();
+    if !records_231.is_empty() {
+      let mut tb_231 = TableBuilder231::new(&db_url, 1);
+      for record in records_231.into_iter() {
+        tb_231.push(record);
+      }
+      let _ = runtime.block_on(tb_231.flush());
+    }
+  }
+
+  {
+    let records_232 = RECORD_QUEUE_232.take();
+    if !records_232.is_empty() {
+      let mut tb_232 = TableBuilder232::new(&db_url, 1);
+      for record in records_232.into_iter() {
+        tb_232.push(record);
+      }
+      let _ = runtime.block_on(tb_232.flush());
+    }
+  }
+
+  {
+    let records_233 = RECORD_QUEUE_233.take();
+    if !records_233.is_empty() {
+      let mut tb_233 = TableBuilder233::new(&db_url, 1);
+      for record in records_233.into_iter() {
+        tb_233.push(record);
+      }
+      let _ = runtime.block_on(tb_233.flush());
+    }
+  }
+
+  {
+    let records_234 = RECORD_QUEUE_234.take();
+    if !records_234.is_empty() {
+      let mut tb_234 = TableBuilder234::new(&db_url, 1);
+      for record in records_234.into_iter() {
+        tb_234.push(record);
+      }
+      let _ = runtime.block_on(tb_234.flush());
+    }
+  }
+
+  {
+    let records_235 = RECORD_QUEUE_235.take();
+    if !records_235.is_empty() {
+      let mut tb_235 = TableBuilder235::new(&db_url, 1);
+      for record in records_235.into_iter() {
+        tb_235.push(record);
+      }
+      let _ = runtime.block_on(tb_235.flush());
+    }
+  }
+
+  {
+    let records_236 = RECORD_QUEUE_236.take();
+    if !records_236.is_empty() {
+      let mut tb_236 = TableBuilder236::new(&db_url, 1);
+      for record in records_236.into_iter() {
+        tb_236.push(record);
+      }
+      let _ = runtime.block_on(tb_236.flush());
+    }
+  }
+
+  {
+    let records_237 = RECORD_QUEUE_237.take();
+    if !records_237.is_empty() {
+      let mut tb_237 = TableBuilder237::new(&db_url, 1);
+      for record in records_237.into_iter() {
+        tb_237.push(record);
+      }
+      let _ = runtime.block_on(tb_237.flush());
+    }
+  }
+
+  {
+    let records_238 = RECORD_QUEUE_238.take();
+    if !records_238.is_empty() {
+      let mut tb_238 = TableBuilder238::new(&db_url, 1);
+      for record in records_238.into_iter() {
+        tb_238.push(record);
+      }
+      let _ = runtime.block_on(tb_238.flush());
+    }
+  }
+
+  {
+    let records_239 = RECORD_QUEUE_239.take();
+    if !records_239.is_empty() {
+      let mut tb_239 = TableBuilder239::new(&db_url, 1);
+      for record in records_239.into_iter() {
+        tb_239.push(record);
+      }
+      let _ = runtime.block_on(tb_239.flush());
+    }
+  }
+
+  {
+    let records_240 = RECORD_QUEUE_240.take();
+    if !records_240.is_empty() {
+      let mut tb_240 = TableBuilder240::new(&db_url, 1);
+      for record in records_240.into_iter() {
+        tb_240.push(record);
+      }
+      let _ = runtime.block_on(tb_240.flush());
+    }
+  }
+
+  {
+    let records_241 = RECORD_QUEUE_241.take();
+    if !records_241.is_empty() {
+      let mut tb_241 = TableBuilder241::new(&db_url, 1);
+      for record in records_241.into_iter() {
+        tb_241.push(record);
+      }
+      let _ = runtime.block_on(tb_241.flush());
+    }
+  }
+
+  {
+    let records_242 = RECORD_QUEUE_242.take();
+    if !records_242.is_empty() {
+      let mut tb_242 = TableBuilder242::new(&db_url, 1);
+      for record in records_242.into_iter() {
+        tb_242.push(record);
+      }
+      let _ = runtime.block_on(tb_242.flush());
+    }
+  }
+
+  {
+    let records_243 = RECORD_QUEUE_243.take();
+    if !records_243.is_empty() {
+      let mut tb_243 = TableBuilder243::new(&db_url, 1);
+      for record in records_243.into_iter() {
+        tb_243.push(record);
+      }
+      let _ = runtime.block_on(tb_243.flush());
+    }
+  }
+
+  {
+    let records_244 = RECORD_QUEUE_244.take();
+    if !records_244.is_empty() {
+      let mut tb_244 = TableBuilder244::new(&db_url, 1);
+      for record in records_244.into_iter() {
+        tb_244.push(record);
+      }
+      let _ = runtime.block_on(tb_244.flush());
+    }
+  }
+
+  {
+    let records_245 = RECORD_QUEUE_245.take();
+    if !records_245.is_empty() {
+      let mut tb_245 = TableBuilder245::new(&db_url, 1);
+      for record in records_245.into_iter() {
+        tb_245.push(record);
+      }
+      let _ = runtime.block_on(tb_245.flush());
+    }
+  }
+
+  {
+    let records_246 = RECORD_QUEUE_246.take();
+    if !records_246.is_empty() {
+      let mut tb_246 = TableBuilder246::new(&db_url, 1);
+      for record in records_246.into_iter() {
+        tb_246.push(record);
+      }
+      let _ = runtime.block_on(tb_246.flush());
+    }
+  }
+
+  {
+    let records_247 = RECORD_QUEUE_247.take();
+    if !records_247.is_empty() {
+      let mut tb_247 = TableBuilder247::new(&db_url, 1);
+      for record in records_247.into_iter() {
+        tb_247.push(record);
+      }
+      let _ = runtime.block_on(tb_247.flush());
+    }
+  }
+
+  {
+    let records_248 = RECORD_QUEUE_248.take();
+    if !records_248.is_empty() {
+      let mut tb_248 = TableBuilder248::new(&db_url, 1);
+      for record in records_248.into_iter() {
+        tb_248.push(record);
+      }
+      let _ = runtime.block_on(tb_248.flush());
+    }
+  }
+
+  {
+    let records_249 = RECORD_QUEUE_249.take();
+    if !records_249.is_empty() {
+      let mut tb_249 = TableBuilder249::new(&db_url, 1);
+      for record in records_249.into_iter() {
+        tb_249.push(record);
+      }
+      let _ = runtime.block_on(tb_249.flush());
+    }
+  }
+
+  {
+    let records_250 = RECORD_QUEUE_250.take();
+    if !records_250.is_empty() {
+      let mut tb_250 = TableBuilder250::new(&db_url, 1);
+      for record in records_250.into_iter() {
+        tb_250.push(record);
+      }
+      let _ = runtime.block_on(tb_250.flush());
+    }
+  }
+
+  {
+    let records_251 = RECORD_QUEUE_251.take();
+    if !records_251.is_empty() {
+      let mut tb_251 = TableBuilder251::new(&db_url, 1);
+      for record in records_251.into_iter() {
+        tb_251.push(record);
+      }
+      let _ = runtime.block_on(tb_251.flush());
+    }
+  }
+
+  {
+    let records_252 = RECORD_QUEUE_252.take();
+    if !records_252.is_empty() {
+      let mut tb_252 = TableBuilder252::new(&db_url, 1);
+      for record in records_252.into_iter() {
+        tb_252.push(record);
+      }
+      let _ = runtime.block_on(tb_252.flush());
+    }
+  }
+
+  {
+    let records_253 = RECORD_QUEUE_253.take();
+    if !records_253.is_empty() {
+      let mut tb_253 = TableBuilder253::new(&db_url, 1);
+      for record in records_253.into_iter() {
+        tb_253.push(record);
+      }
+      let _ = runtime.block_on(tb_253.flush());
+    }
+  }
+
+  {
+    let records_254 = RECORD_QUEUE_254.take();
+    if !records_254.is_empty() {
+      let mut tb_254 = TableBuilder254::new(&db_url, 1);
+      for record in records_254.into_iter() {
+        tb_254.push(record);
+      }
+      let _ = runtime.block_on(tb_254.flush());
+    }
+  }
+
+  {
+    let records_255 = RECORD_QUEUE_255.take();
+    if !records_255.is_empty() {
+      let mut tb_255 = TableBuilder255::new(&db_url, 1);
+      for record in records_255.into_iter() {
+        tb_255.push(record);
+      }
+      let _ = runtime.block_on(tb_255.flush());
+    }
+  }
+
+  {
+    let records_256 = RECORD_QUEUE_256.take();
+    if !records_256.is_empty() {
+      let mut tb_256 = TableBuilder256::new(&db_url, 1);
+      for record in records_256.into_iter() {
+        tb_256.push(record);
+      }
+      let _ = runtime.block_on(tb_256.flush());
+    }
+  }
+
+  {
+    let records_257 = RECORD_QUEUE_257.take();
+    if !records_257.is_empty() {
+      let mut tb_257 = TableBuilder257::new(&db_url, 1);
+      for record in records_257.into_iter() {
+        tb_257.push(record);
+      }
+      let _ = runtime.block_on(tb_257.flush());
+    }
+  }
+
+  {
+    let records_258 = RECORD_QUEUE_258.take();
+    if !records_258.is_empty() {
+      let mut tb_258 = TableBuilder258::new(&db_url, 1);
+      for record in records_258.into_iter() {
+        tb_258.push(record);
+      }
+      let _ = runtime.block_on(tb_258.flush());
+    }
+  }
+
+  {
+    let records_259 = RECORD_QUEUE_259.take();
+    if !records_259.is_empty() {
+      let mut tb_259 = TableBuilder259::new(&db_url, 1);
+      for record in records_259.into_iter() {
+        tb_259.push(record);
+      }
+      let _ = runtime.block_on(tb_259.flush());
+    }
+  }
+
+  {
+    let records_260 = RECORD_QUEUE_260.take();
+    if !records_260.is_empty() {
+      let mut tb_260 = TableBuilder260::new(&db_url, 1);
+      for record in records_260.into_iter() {
+        tb_260.push(record);
+      }
+      let _ = runtime.block_on(tb_260.flush());
+    }
+  }
+
+  {
+    let records_261 = RECORD_QUEUE_261.take();
+    if !records_261.is_empty() {
+      let mut tb_261 = TableBuilder261::new(&db_url, 1);
+      for record in records_261.into_iter() {
+        tb_261.push(record);
+      }
+      let _ = runtime.block_on(tb_261.flush());
+    }
+  }
+
+  {
+    let records_262 = RECORD_QUEUE_262.take();
+    if !records_262.is_empty() {
+      let mut tb_262 = TableBuilder262::new(&db_url, 1);
+      for record in records_262.into_iter() {
+        tb_262.push(record);
+      }
+      let _ = runtime.block_on(tb_262.flush());
+    }
+  }
+
+  {
+    let records_263 = RECORD_QUEUE_263.take();
+    if !records_263.is_empty() {
+      let mut tb_263 = TableBuilder263::new(&db_url, 1);
+      for record in records_263.into_iter() {
+        tb_263.push(record);
+      }
+      let _ = runtime.block_on(tb_263.flush());
+    }
+  }
+
+  {
+    let records_264 = RECORD_QUEUE_264.take();
+    if !records_264.is_empty() {
+      let mut tb_264 = TableBuilder264::new(&db_url, 1);
+      for record in records_264.into_iter() {
+        tb_264.push(record);
+      }
+      let _ = runtime.block_on(tb_264.flush());
+    }
+  }
+
+  {
+    let records_265 = RECORD_QUEUE_265.take();
+    if !records_265.is_empty() {
+      let mut tb_265 = TableBuilder265::new(&db_url, 1);
+      for record in records_265.into_iter() {
+        tb_265.push(record);
+      }
+      let _ = runtime.block_on(tb_265.flush());
+    }
+  }
+
+  {
+    let records_266 = RECORD_QUEUE_266.take();
+    if !records_266.is_empty() {
+      let mut tb_266 = TableBuilder266::new(&db_url, 1);
+      for record in records_266.into_iter() {
+        tb_266.push(record);
+      }
+      let _ = runtime.block_on(tb_266.flush());
+    }
+  }
+
+  {
+    let records_267 = RECORD_QUEUE_267.take();
+    if !records_267.is_empty() {
+      let mut tb_267 = TableBuilder267::new(&db_url, 1);
+      for record in records_267.into_iter() {
+        tb_267.push(record);
+      }
+      let _ = runtime.block_on(tb_267.flush());
+    }
+  }
+
+  {
+    let records_268 = RECORD_QUEUE_268.take();
+    if !records_268.is_empty() {
+      let mut tb_268 = TableBuilder268::new(&db_url, 1);
+      for record in records_268.into_iter() {
+        tb_268.push(record);
+      }
+      let _ = runtime.block_on(tb_268.flush());
+    }
+  }
+
+  {
+    let records_269 = RECORD_QUEUE_269.take();
+    if !records_269.is_empty() {
+      let mut tb_269 = TableBuilder269::new(&db_url, 1);
+      for record in records_269.into_iter() {
+        tb_269.push(record);
+      }
+      let _ = runtime.block_on(tb_269.flush());
+    }
+  }
+
+  {
+    let records_270 = RECORD_QUEUE_270.take();
+    if !records_270.is_empty() {
+      let mut tb_270 = TableBuilder270::new(&db_url, 1);
+      for record in records_270.into_iter() {
+        tb_270.push(record);
+      }
+      let _ = runtime.block_on(tb_270.flush());
+    }
+  }
+
+  {
+    let records_271 = RECORD_QUEUE_271.take();
+    if !records_271.is_empty() {
+      let mut tb_271 = TableBuilder271::new(&db_url, 1);
+      for record in records_271.into_iter() {
+        tb_271.push(record);
+      }
+      let _ = runtime.block_on(tb_271.flush());
+    }
+  }
+
+  {
+    let records_272 = RECORD_QUEUE_272.take();
+    if !records_272.is_empty() {
+      let mut tb_272 = TableBuilder272::new(&db_url, 1);
+      for record in records_272.into_iter() {
+        tb_272.push(record);
+      }
+      let _ = runtime.block_on(tb_272.flush());
+    }
+  }
+
+  {
+    let records_273 = RECORD_QUEUE_273.take();
+    if !records_273.is_empty() {
+      let mut tb_273 = TableBuilder273::new(&db_url, 1);
+      for record in records_273.into_iter() {
+        tb_273.push(record);
+      }
+      let _ = runtime.block_on(tb_273.flush());
+    }
+  }
+
+  {
+    let records_274 = RECORD_QUEUE_274.take();
+    if !records_274.is_empty() {
+      let mut tb_274 = TableBuilder274::new(&db_url, 1);
+      for record in records_274.into_iter() {
+        tb_274.push(record);
+      }
+      let _ = runtime.block_on(tb_274.flush());
+    }
+  }
+
+  {
+    let records_275 = RECORD_QUEUE_275.take();
+    if !records_275.is_empty() {
+      let mut tb_275 = TableBuilder275::new(&db_url, 1);
+      for record in records_275.into_iter() {
+        tb_275.push(record);
+      }
+      let _ = runtime.block_on(tb_275.flush());
+    }
+  }
+
+  {
+    let records_276 = RECORD_QUEUE_276.take();
+    if !records_276.is_empty() {
+      let mut tb_276 = TableBuilder276::new(&db_url, 1);
+      for record in records_276.into_iter() {
+        tb_276.push(record);
+      }
+      let _ = runtime.block_on(tb_276.flush());
+    }
+  }
+
+  {
+    let records_277 = RECORD_QUEUE_277.take();
+    if !records_277.is_empty() {
+      let mut tb_277 = TableBuilder277::new(&db_url, 1);
+      for record in records_277.into_iter() {
+        tb_277.push(record);
+      }
+      let _ = runtime.block_on(tb_277.flush());
+    }
+  }
+
+  {
+    let records_278 = RECORD_QUEUE_278.take();
+    if !records_278.is_empty() {
+      let mut tb_278 = TableBuilder278::new(&db_url, 1);
+      for record in records_278.into_iter() {
+        tb_278.push(record);
+      }
+      let _ = runtime.block_on(tb_278.flush());
+    }
+  }
+
+  {
+    let records_279 = RECORD_QUEUE_279.take();
+    if !records_279.is_empty() {
+      let mut tb_279 = TableBuilder279::new(&db_url, 1);
+      for record in records_279.into_iter() {
+        tb_279.push(record);
+      }
+      let _ = runtime.block_on(tb_279.flush());
+    }
+  }
+
+  {
+    let records_280 = RECORD_QUEUE_280.take();
+    if !records_280.is_empty() {
+      let mut tb_280 = TableBuilder280::new(&db_url, 1);
+      for record in records_280.into_iter() {
+        tb_280.push(record);
+      }
+      let _ = runtime.block_on(tb_280.flush());
+    }
+  }
+
+  {
+    let records_281 = RECORD_QUEUE_281.take();
+    if !records_281.is_empty() {
+      let mut tb_281 = TableBuilder281::new(&db_url, 1);
+      for record in records_281.into_iter() {
+        tb_281.push(record);
+      }
+      let _ = runtime.block_on(tb_281.flush());
+    }
+  }
+
+  {
+    let records_282 = RECORD_QUEUE_282.take();
+    if !records_282.is_empty() {
+      let mut tb_282 = TableBuilder282::new(&db_url, 1);
+      for record in records_282.into_iter() {
+        tb_282.push(record);
+      }
+      let _ = runtime.block_on(tb_282.flush());
+    }
+  }
+
+  {
+    let records_283 = RECORD_QUEUE_283.take();
+    if !records_283.is_empty() {
+      let mut tb_283 = TableBuilder283::new(&db_url, 1);
+      for record in records_283.into_iter() {
+        tb_283.push(record);
+      }
+      let _ = runtime.block_on(tb_283.flush());
+    }
+  }
+
+  {
+    let records_284 = RECORD_QUEUE_284.take();
+    if !records_284.is_empty() {
+      let mut tb_284 = TableBuilder284::new(&db_url, 1);
+      for record in records_284.into_iter() {
+        tb_284.push(record);
+      }
+      let _ = runtime.block_on(tb_284.flush());
+    }
+  }
+
+  {
+    let records_285 = RECORD_QUEUE_285.take();
+    if !records_285.is_empty() {
+      let mut tb_285 = TableBuilder285::new(&db_url, 1);
+      for record in records_285.into_iter() {
+        tb_285.push(record);
+      }
+      let _ = runtime.block_on(tb_285.flush());
+    }
+  }
+
+  {
+    let records_286 = RECORD_QUEUE_286.take();
+    if !records_286.is_empty() {
+      let mut tb_286 = TableBuilder286::new(&db_url, 1);
+      for record in records_286.into_iter() {
+        tb_286.push(record);
+      }
+      let _ = runtime.block_on(tb_286.flush());
+    }
+  }
+
+  {
+    let records_287 = RECORD_QUEUE_287.take();
+    if !records_287.is_empty() {
+      let mut tb_287 = TableBuilder287::new(&db_url, 1);
+      for record in records_287.into_iter() {
+        tb_287.push(record);
+      }
+      let _ = runtime.block_on(tb_287.flush());
+    }
+  }
+
+  {
+    let records_288 = RECORD_QUEUE_288.take();
+    if !records_288.is_empty() {
+      let mut tb_288 = TableBuilder288::new(&db_url, 1);
+      for record in records_288.into_iter() {
+        tb_288.push(record);
+      }
+      let _ = runtime.block_on(tb_288.flush());
+    }
+  }
+
+  {
+    let records_289 = RECORD_QUEUE_289.take();
+    if !records_289.is_empty() {
+      let mut tb_289 = TableBuilder289::new(&db_url, 1);
+      for record in records_289.into_iter() {
+        tb_289.push(record);
+      }
+      let _ = runtime.block_on(tb_289.flush());
+    }
+  }
+
+  {
+    let records_290 = RECORD_QUEUE_290.take();
+    if !records_290.is_empty() {
+      let mut tb_290 = TableBuilder290::new(&db_url, 1);
+      for record in records_290.into_iter() {
+        tb_290.push(record);
+      }
+      let _ = runtime.block_on(tb_290.flush());
+    }
+  }
+
+  {
+    let records_291 = RECORD_QUEUE_291.take();
+    if !records_291.is_empty() {
+      let mut tb_291 = TableBuilder291::new(&db_url, 1);
+      for record in records_291.into_iter() {
+        tb_291.push(record);
+      }
+      let _ = runtime.block_on(tb_291.flush());
+    }
+  }
+
+  {
+    let records_292 = RECORD_QUEUE_292.take();
+    if !records_292.is_empty() {
+      let mut tb_292 = TableBuilder292::new(&db_url, 1);
+      for record in records_292.into_iter() {
+        tb_292.push(record);
+      }
+      let _ = runtime.block_on(tb_292.flush());
+    }
+  }
+
+  {
+    let records_293 = RECORD_QUEUE_293.take();
+    if !records_293.is_empty() {
+      let mut tb_293 = TableBuilder293::new(&db_url, 1);
+      for record in records_293.into_iter() {
+        tb_293.push(record);
+      }
+      let _ = runtime.block_on(tb_293.flush());
+    }
+  }
+
+  {
+    let records_294 = RECORD_QUEUE_294.take();
+    if !records_294.is_empty() {
+      let mut tb_294 = TableBuilder294::new(&db_url, 1);
+      for record in records_294.into_iter() {
+        tb_294.push(record);
+      }
+      let _ = runtime.block_on(tb_294.flush());
+    }
+  }
+
+  {
+    let records_295 = RECORD_QUEUE_295.take();
+    if !records_295.is_empty() {
+      let mut tb_295 = TableBuilder295::new(&db_url, 1);
+      for record in records_295.into_iter() {
+        tb_295.push(record);
+      }
+      let _ = runtime.block_on(tb_295.flush());
+    }
+  }
+
+  {
+    let records_296 = RECORD_QUEUE_296.take();
+    if !records_296.is_empty() {
+      let mut tb_296 = TableBuilder296::new(&db_url, 1);
+      for record in records_296.into_iter() {
+        tb_296.push(record);
+      }
+      let _ = runtime.block_on(tb_296.flush());
+    }
+  }
+
+  {
+    let records_297 = RECORD_QUEUE_297.take();
+    if !records_297.is_empty() {
+      let mut tb_297 = TableBuilder297::new(&db_url, 1);
+      for record in records_297.into_iter() {
+        tb_297.push(record);
+      }
+      let _ = runtime.block_on(tb_297.flush());
+    }
+  }
+
+  {
+    let records_298 = RECORD_QUEUE_298.take();
+    if !records_298.is_empty() {
+      let mut tb_298 = TableBuilder298::new(&db_url, 1);
+      for record in records_298.into_iter() {
+        tb_298.push(record);
+      }
+      let _ = runtime.block_on(tb_298.flush());
+    }
+  }
+
+  {
+    let records_299 = RECORD_QUEUE_299.take();
+    if !records_299.is_empty() {
+      let mut tb_299 = TableBuilder299::new(&db_url, 1);
+      for record in records_299.into_iter() {
+        tb_299.push(record);
+      }
+      let _ = runtime.block_on(tb_299.flush());
+    }
+  }
+
+  {
+    let records_300 = RECORD_QUEUE_300.take();
+    if !records_300.is_empty() {
+      let mut tb_300 = TableBuilder300::new(&db_url, 1);
+      for record in records_300.into_iter() {
+        tb_300.push(record);
+      }
+      let _ = runtime.block_on(tb_300.flush());
+    }
+  }
+
+  {
+    let records_301 = RECORD_QUEUE_301.take();
+    if !records_301.is_empty() {
+      let mut tb_301 = TableBuilder301::new(&db_url, 1);
+      for record in records_301.into_iter() {
+        tb_301.push(record);
+      }
+      let _ = runtime.block_on(tb_301.flush());
+    }
+  }
+
+  {
+    let records_302 = RECORD_QUEUE_302.take();
+    if !records_302.is_empty() {
+      let mut tb_302 = TableBuilder302::new(&db_url, 1);
+      for record in records_302.into_iter() {
+        tb_302.push(record);
+      }
+      let _ = runtime.block_on(tb_302.flush());
+    }
+  }
+
+  {
+    let records_303 = RECORD_QUEUE_303.take();
+    if !records_303.is_empty() {
+      let mut tb_303 = TableBuilder303::new(&db_url, 1);
+      for record in records_303.into_iter() {
+        tb_303.push(record);
+      }
+      let _ = runtime.block_on(tb_303.flush());
+    }
+  }
+
+  {
+    let records_304 = RECORD_QUEUE_304.take();
+    if !records_304.is_empty() {
+      let mut tb_304 = TableBuilder304::new(&db_url, 1);
+      for record in records_304.into_iter() {
+        tb_304.push(record);
+      }
+      let _ = runtime.block_on(tb_304.flush());
+    }
+  }
+
+  {
+    let records_305 = RECORD_QUEUE_305.take();
+    if !records_305.is_empty() {
+      let mut tb_305 = TableBuilder305::new(&db_url, 1);
+      for record in records_305.into_iter() {
+        tb_305.push(record);
+      }
+      let _ = runtime.block_on(tb_305.flush());
+    }
+  }
+
+  {
+    let records_306 = RECORD_QUEUE_306.take();
+    if !records_306.is_empty() {
+      let mut tb_306 = TableBuilder306::new(&db_url, 1);
+      for record in records_306.into_iter() {
+        tb_306.push(record);
+      }
+      let _ = runtime.block_on(tb_306.flush());
+    }
+  }
+
+  {
+    let records_307 = RECORD_QUEUE_307.take();
+    if !records_307.is_empty() {
+      let mut tb_307 = TableBuilder307::new(&db_url, 1);
+      for record in records_307.into_iter() {
+        tb_307.push(record);
+      }
+      let _ = runtime.block_on(tb_307.flush());
+    }
+  }
+
+  {
+    let records_308 = RECORD_QUEUE_308.take();
+    if !records_308.is_empty() {
+      let mut tb_308 = TableBuilder308::new(&db_url, 1);
+      for record in records_308.into_iter() {
+        tb_308.push(record);
+      }
+      let _ = runtime.block_on(tb_308.flush());
+    }
+  }
+
+  {
+    let records_309 = RECORD_QUEUE_309.take();
+    if !records_309.is_empty() {
+      let mut tb_309 = TableBuilder309::new(&db_url, 1);
+      for record in records_309.into_iter() {
+        tb_309.push(record);
+      }
+      let _ = runtime.block_on(tb_309.flush());
+    }
+  }
+
+  {
+    let records_310 = RECORD_QUEUE_310.take();
+    if !records_310.is_empty() {
+      let mut tb_310 = TableBuilder310::new(&db_url, 1);
+      for record in records_310.into_iter() {
+        tb_310.push(record);
+      }
+      let _ = runtime.block_on(tb_310.flush());
+    }
+  }
+
+  {
+    let records_311 = RECORD_QUEUE_311.take();
+    if !records_311.is_empty() {
+      let mut tb_311 = TableBuilder311::new(&db_url, 1);
+      for record in records_311.into_iter() {
+        tb_311.push(record);
+      }
+      let _ = runtime.block_on(tb_311.flush());
+    }
+  }
+
+  {
+    let records_312 = RECORD_QUEUE_312.take();
+    if !records_312.is_empty() {
+      let mut tb_312 = TableBuilder312::new(&db_url, 1);
+      for record in records_312.into_iter() {
+        tb_312.push(record);
+      }
+      let _ = runtime.block_on(tb_312.flush());
+    }
+  }
+
+  {
+    let records_313 = RECORD_QUEUE_313.take();
+    if !records_313.is_empty() {
+      let mut tb_313 = TableBuilder313::new(&db_url, 1);
+      for record in records_313.into_iter() {
+        tb_313.push(record);
+      }
+      let _ = runtime.block_on(tb_313.flush());
+    }
+  }
+
+  {
+    let records_314 = RECORD_QUEUE_314.take();
+    if !records_314.is_empty() {
+      let mut tb_314 = TableBuilder314::new(&db_url, 1);
+      for record in records_314.into_iter() {
+        tb_314.push(record);
+      }
+      let _ = runtime.block_on(tb_314.flush());
+    }
+  }
+
+  {
+    let records_315 = RECORD_QUEUE_315.take();
+    if !records_315.is_empty() {
+      let mut tb_315 = TableBuilder315::new(&db_url, 1);
+      for record in records_315.into_iter() {
+        tb_315.push(record);
+      }
+      let _ = runtime.block_on(tb_315.flush());
+    }
+  }
+
+  {
+    let records_316 = RECORD_QUEUE_316.take();
+    if !records_316.is_empty() {
+      let mut tb_316 = TableBuilder316::new(&db_url, 1);
+      for record in records_316.into_iter() {
+        tb_316.push(record);
+      }
+      let _ = runtime.block_on(tb_316.flush());
+    }
+  }
+
+  {
+    let records_317 = RECORD_QUEUE_317.take();
+    if !records_317.is_empty() {
+      let mut tb_317 = TableBuilder317::new(&db_url, 1);
+      for record in records_317.into_iter() {
+        tb_317.push(record);
+      }
+      let _ = runtime.block_on(tb_317.flush());
+    }
+  }
+
+  {
+    let records_318 = RECORD_QUEUE_318.take();
+    if !records_318.is_empty() {
+      let mut tb_318 = TableBuilder318::new(&db_url, 1);
+      for record in records_318.into_iter() {
+        tb_318.push(record);
+      }
+      let _ = runtime.block_on(tb_318.flush());
+    }
+  }
+
+  {
+    let records_319 = RECORD_QUEUE_319.take();
+    if !records_319.is_empty() {
+      let mut tb_319 = TableBuilder319::new(&db_url, 1);
+      for record in records_319.into_iter() {
+        tb_319.push(record);
+      }
+      let _ = runtime.block_on(tb_319.flush());
+    }
+  }
+
+  {
+    let records_320 = RECORD_QUEUE_320.take();
+    if !records_320.is_empty() {
+      let mut tb_320 = TableBuilder320::new(&db_url, 1);
+      for record in records_320.into_iter() {
+        tb_320.push(record);
+      }
+      let _ = runtime.block_on(tb_320.flush());
+    }
+  }
+
+  {
+    let records_321 = RECORD_QUEUE_321.take();
+    if !records_321.is_empty() {
+      let mut tb_321 = TableBuilder321::new(&db_url, 1);
+      for record in records_321.into_iter() {
+        tb_321.push(record);
+      }
+      let _ = runtime.block_on(tb_321.flush());
+    }
+  }
+
+  {
+    let records_322 = RECORD_QUEUE_322.take();
+    if !records_322.is_empty() {
+      let mut tb_322 = TableBuilder322::new(&db_url, 1);
+      for record in records_322.into_iter() {
+        tb_322.push(record);
+      }
+      let _ = runtime.block_on(tb_322.flush());
+    }
+  }
+
+  {
+    let records_323 = RECORD_QUEUE_323.take();
+    if !records_323.is_empty() {
+      let mut tb_323 = TableBuilder323::new(&db_url, 1);
+      for record in records_323.into_iter() {
+        tb_323.push(record);
+      }
+      let _ = runtime.block_on(tb_323.flush());
+    }
+  }
+
+  {
+    let records_324 = RECORD_QUEUE_324.take();
+    if !records_324.is_empty() {
+      let mut tb_324 = TableBuilder324::new(&db_url, 1);
+      for record in records_324.into_iter() {
+        tb_324.push(record);
+      }
+      let _ = runtime.block_on(tb_324.flush());
+    }
+  }
+
+  {
+    let records_325 = RECORD_QUEUE_325.take();
+    if !records_325.is_empty() {
+      let mut tb_325 = TableBuilder325::new(&db_url, 1);
+      for record in records_325.into_iter() {
+        tb_325.push(record);
+      }
+      let _ = runtime.block_on(tb_325.flush());
+    }
+  }
+
+  {
+    let records_326 = RECORD_QUEUE_326.take();
+    if !records_326.is_empty() {
+      let mut tb_326 = TableBuilder326::new(&db_url, 1);
+      for record in records_326.into_iter() {
+        tb_326.push(record);
+      }
+      let _ = runtime.block_on(tb_326.flush());
+    }
+  }
+
+  {
+    let records_327 = RECORD_QUEUE_327.take();
+    if !records_327.is_empty() {
+      let mut tb_327 = TableBuilder327::new(&db_url, 1);
+      for record in records_327.into_iter() {
+        tb_327.push(record);
+      }
+      let _ = runtime.block_on(tb_327.flush());
+    }
+  }
+
+  {
+    let records_328 = RECORD_QUEUE_328.take();
+    if !records_328.is_empty() {
+      let mut tb_328 = TableBuilder328::new(&db_url, 1);
+      for record in records_328.into_iter() {
+        tb_328.push(record);
+      }
+      let _ = runtime.block_on(tb_328.flush());
+    }
+  }
+
+  {
+    let records_329 = RECORD_QUEUE_329.take();
+    if !records_329.is_empty() {
+      let mut tb_329 = TableBuilder329::new(&db_url, 1);
+      for record in records_329.into_iter() {
+        tb_329.push(record);
+      }
+      let _ = runtime.block_on(tb_329.flush());
+    }
+  }
+
+  {
+    let records_330 = RECORD_QUEUE_330.take();
+    if !records_330.is_empty() {
+      let mut tb_330 = TableBuilder330::new(&db_url, 1);
+      for record in records_330.into_iter() {
+        tb_330.push(record);
+      }
+      let _ = runtime.block_on(tb_330.flush());
+    }
+  }
+
+  {
+    let records_331 = RECORD_QUEUE_331.take();
+    if !records_331.is_empty() {
+      let mut tb_331 = TableBuilder331::new(&db_url, 1);
+      for record in records_331.into_iter() {
+        tb_331.push(record);
+      }
+      let _ = runtime.block_on(tb_331.flush());
+    }
+  }
+
+  {
+    let records_332 = RECORD_QUEUE_332.take();
+    if !records_332.is_empty() {
+      let mut tb_332 = TableBuilder332::new(&db_url, 1);
+      for record in records_332.into_iter() {
+        tb_332.push(record);
+      }
+      let _ = runtime.block_on(tb_332.flush());
+    }
+  }
+
+  {
+    let records_333 = RECORD_QUEUE_333.take();
+    if !records_333.is_empty() {
+      let mut tb_333 = TableBuilder333::new(&db_url, 1);
+      for record in records_333.into_iter() {
+        tb_333.push(record);
+      }
+      let _ = runtime.block_on(tb_333.flush());
+    }
+  }
+
+  {
+    let records_334 = RECORD_QUEUE_334.take();
+    if !records_334.is_empty() {
+      let mut tb_334 = TableBuilder334::new(&db_url, 1);
+      for record in records_334.into_iter() {
+        tb_334.push(record);
+      }
+      let _ = runtime.block_on(tb_334.flush());
+    }
+  }
+
+  {
+    let records_335 = RECORD_QUEUE_335.take();
+    if !records_335.is_empty() {
+      let mut tb_335 = TableBuilder335::new(&db_url, 1);
+      for record in records_335.into_iter() {
+        tb_335.push(record);
+      }
+      let _ = runtime.block_on(tb_335.flush());
+    }
+  }
+
+  {
+    let records_336 = RECORD_QUEUE_336.take();
+    if !records_336.is_empty() {
+      let mut tb_336 = TableBuilder336::new(&db_url, 1);
+      for record in records_336.into_iter() {
+        tb_336.push(record);
+      }
+      let _ = runtime.block_on(tb_336.flush());
+    }
+  }
+
+  {
+    let records_337 = RECORD_QUEUE_337.take();
+    if !records_337.is_empty() {
+      let mut tb_337 = TableBuilder337::new(&db_url, 1);
+      for record in records_337.into_iter() {
+        tb_337.push(record);
+      }
+      let _ = runtime.block_on(tb_337.flush());
+    }
+  }
+
+  {
+    let records_338 = RECORD_QUEUE_338.take();
+    if !records_338.is_empty() {
+      let mut tb_338 = TableBuilder338::new(&db_url, 1);
+      for record in records_338.into_iter() {
+        tb_338.push(record);
+      }
+      let _ = runtime.block_on(tb_338.flush());
+    }
+  }
+
+  {
+    let records_339 = RECORD_QUEUE_339.take();
+    if !records_339.is_empty() {
+      let mut tb_339 = TableBuilder339::new(&db_url, 1);
+      for record in records_339.into_iter() {
+        tb_339.push(record);
+      }
+      let _ = runtime.block_on(tb_339.flush());
+    }
+  }
+
+  {
+    let records_340 = RECORD_QUEUE_340.take();
+    if !records_340.is_empty() {
+      let mut tb_340 = TableBuilder340::new(&db_url, 1);
+      for record in records_340.into_iter() {
+        tb_340.push(record);
+      }
+      let _ = runtime.block_on(tb_340.flush());
+    }
+  }
+
+  {
+    let records_341 = RECORD_QUEUE_341.take();
+    if !records_341.is_empty() {
+      let mut tb_341 = TableBuilder341::new(&db_url, 1);
+      for record in records_341.into_iter() {
+        tb_341.push(record);
+      }
+      let _ = runtime.block_on(tb_341.flush());
+    }
+  }
+
+  {
+    let records_342 = RECORD_QUEUE_342.take();
+    if !records_342.is_empty() {
+      let mut tb_342 = TableBuilder342::new(&db_url, 1);
+      for record in records_342.into_iter() {
+        tb_342.push(record);
+      }
+      let _ = runtime.block_on(tb_342.flush());
+    }
+  }
+
+  {
+    let records_343 = RECORD_QUEUE_343.take();
+    if !records_343.is_empty() {
+      let mut tb_343 = TableBuilder343::new(&db_url, 1);
+      for record in records_343.into_iter() {
+        tb_343.push(record);
+      }
+      let _ = runtime.block_on(tb_343.flush());
+    }
+  }
+
+  {
+    let records_344 = RECORD_QUEUE_344.take();
+    if !records_344.is_empty() {
+      let mut tb_344 = TableBuilder344::new(&db_url, 1);
+      for record in records_344.into_iter() {
+        tb_344.push(record);
+      }
+      let _ = runtime.block_on(tb_344.flush());
+    }
+  }
+
+  {
+    let records_345 = RECORD_QUEUE_345.take();
+    if !records_345.is_empty() {
+      let mut tb_345 = TableBuilder345::new(&db_url, 1);
+      for record in records_345.into_iter() {
+        tb_345.push(record);
+      }
+      let _ = runtime.block_on(tb_345.flush());
+    }
+  }
+
+  {
+    let records_346 = RECORD_QUEUE_346.take();
+    if !records_346.is_empty() {
+      let mut tb_346 = TableBuilder346::new(&db_url, 1);
+      for record in records_346.into_iter() {
+        tb_346.push(record);
+      }
+      let _ = runtime.block_on(tb_346.flush());
+    }
+  }
+
+  {
+    let records_347 = RECORD_QUEUE_347.take();
+    if !records_347.is_empty() {
+      let mut tb_347 = TableBuilder347::new(&db_url, 1);
+      for record in records_347.into_iter() {
+        tb_347.push(record);
+      }
+      let _ = runtime.block_on(tb_347.flush());
+    }
+  }
+
+  {
+    let records_348 = RECORD_QUEUE_348.take();
+    if !records_348.is_empty() {
+      let mut tb_348 = TableBuilder348::new(&db_url, 1);
+      for record in records_348.into_iter() {
+        tb_348.push(record);
+      }
+      let _ = runtime.block_on(tb_348.flush());
+    }
+  }
+
+  {
+    let records_349 = RECORD_QUEUE_349.take();
+    if !records_349.is_empty() {
+      let mut tb_349 = TableBuilder349::new(&db_url, 1);
+      for record in records_349.into_iter() {
+        tb_349.push(record);
+      }
+      let _ = runtime.block_on(tb_349.flush());
+    }
+  }
+
+  {
+    let records_350 = RECORD_QUEUE_350.take();
+    if !records_350.is_empty() {
+      let mut tb_350 = TableBuilder350::new(&db_url, 1);
+      for record in records_350.into_iter() {
+        tb_350.push(record);
+      }
+      let _ = runtime.block_on(tb_350.flush());
+    }
+  }
+
+  {
+    let records_351 = RECORD_QUEUE_351.take();
+    if !records_351.is_empty() {
+      let mut tb_351 = TableBuilder351::new(&db_url, 1);
+      for record in records_351.into_iter() {
+        tb_351.push(record);
+      }
+      let _ = runtime.block_on(tb_351.flush());
+    }
+  }
+
+  {
+    let records_352 = RECORD_QUEUE_352.take();
+    if !records_352.is_empty() {
+      let mut tb_352 = TableBuilder352::new(&db_url, 1);
+      for record in records_352.into_iter() {
+        tb_352.push(record);
+      }
+      let _ = runtime.block_on(tb_352.flush());
+    }
+  }
+
+  {
+    let records_353 = RECORD_QUEUE_353.take();
+    if !records_353.is_empty() {
+      let mut tb_353 = TableBuilder353::new(&db_url, 1);
+      for record in records_353.into_iter() {
+        tb_353.push(record);
+      }
+      let _ = runtime.block_on(tb_353.flush());
+    }
+  }
+
+  {
+    let records_354 = RECORD_QUEUE_354.take();
+    if !records_354.is_empty() {
+      let mut tb_354 = TableBuilder354::new(&db_url, 1);
+      for record in records_354.into_iter() {
+        tb_354.push(record);
+      }
+      let _ = runtime.block_on(tb_354.flush());
+    }
+  }
+
+  true
+}
+
+use crate::io::Record0;
+use crate::io::TableBuilder0;
+use crate::io::Record1;
+use crate::io::TableBuilder1;
+use crate::io::Record2;
+use crate::io::TableBuilder2;
+use crate::io::Record3;
+use crate::io::TableBuilder3;
+use crate::io::Record4;
+use crate::io::TableBuilder4;
+use crate::io::Record5;
+use crate::io::TableBuilder5;
+use crate::io::Record6;
+use crate::io::TableBuilder6;
+use crate::io::Record7;
+use crate::io::TableBuilder7;
+use crate::io::Record8;
+use crate::io::TableBuilder8;
+use crate::io::Record9;
+use crate::io::TableBuilder9;
+use crate::io::Record10;
+use crate::io::TableBuilder10;
+use crate::io::Record11;
+use crate::io::TableBuilder11;
+use crate::io::Record12;
+use crate::io::TableBuilder12;
+use crate::io::Record13;
+use crate::io::TableBuilder13;
+use crate::io::Record14;
+use crate::io::TableBuilder14;
+use crate::io::Record15;
+use crate::io::TableBuilder15;
+use crate::io::Record16;
+use crate::io::TableBuilder16;
+use crate::io::Record17;
+use crate::io::TableBuilder17;
+use crate::io::Record18;
+use crate::io::TableBuilder18;
+use crate::io::Record19;
+use crate::io::TableBuilder19;
+use crate::io::Record20;
+use crate::io::TableBuilder20;
+use crate::io::Record21;
+use crate::io::TableBuilder21;
+use crate::io::Record22;
+use crate::io::TableBuilder22;
+use crate::io::Record23;
+use crate::io::TableBuilder23;
+use crate::io::Record24;
+use crate::io::TableBuilder24;
+use crate::io::Record25;
+use crate::io::TableBuilder25;
+use crate::io::Record26;
+use crate::io::TableBuilder26;
+use crate::io::Record27;
+use crate::io::TableBuilder27;
+use crate::io::Record28;
+use crate::io::TableBuilder28;
+use crate::io::Record29;
+use crate::io::TableBuilder29;
+use crate::io::Record30;
+use crate::io::TableBuilder30;
+use crate::io::Record31;
+use crate::io::TableBuilder31;
+use crate::io::Record32;
+use crate::io::TableBuilder32;
+use crate::io::Record33;
+use crate::io::TableBuilder33;
+use crate::io::Record34;
+use crate::io::TableBuilder34;
+use crate::io::Record35;
+use crate::io::TableBuilder35;
+use crate::io::Record36;
+use crate::io::TableBuilder36;
+use crate::io::Record37;
+use crate::io::TableBuilder37;
+use crate::io::Record38;
+use crate::io::TableBuilder38;
+use crate::io::Record39;
+use crate::io::TableBuilder39;
+use crate::io::Record40;
+use crate::io::TableBuilder40;
+use crate::io::Record41;
+use crate::io::TableBuilder41;
+use crate::io::Record42;
+use crate::io::TableBuilder42;
+use crate::io::Record43;
+use crate::io::TableBuilder43;
+use crate::io::Record44;
+use crate::io::TableBuilder44;
+use crate::io::Record45;
+use crate::io::TableBuilder45;
+use crate::io::Record46;
+use crate::io::TableBuilder46;
+use crate::io::Record47;
+use crate::io::TableBuilder47;
+use crate::io::Record48;
+use crate::io::TableBuilder48;
+use crate::io::Record49;
+use crate::io::TableBuilder49;
+use crate::io::Record50;
+use crate::io::TableBuilder50;
+use crate::io::Record51;
+use crate::io::TableBuilder51;
+use crate::io::Record52;
+use crate::io::TableBuilder52;
+use crate::io::Record53;
+use crate::io::TableBuilder53;
+use crate::io::Record54;
+use crate::io::TableBuilder54;
+use crate::io::Record55;
+use crate::io::TableBuilder55;
+use crate::io::Record56;
+use crate::io::TableBuilder56;
+use crate::io::Record57;
+use crate::io::TableBuilder57;
+use crate::io::Record58;
+use crate::io::TableBuilder58;
+use crate::io::Record59;
+use crate::io::TableBuilder59;
+use crate::io::Record60;
+use crate::io::TableBuilder60;
+use crate::io::Record61;
+use crate::io::TableBuilder61;
+use crate::io::Record62;
+use crate::io::TableBuilder62;
+use crate::io::Record63;
+use crate::io::TableBuilder63;
+use crate::io::Record64;
+use crate::io::TableBuilder64;
+use crate::io::Record65;
+use crate::io::TableBuilder65;
+use crate::io::Record66;
+use crate::io::TableBuilder66;
+use crate::io::Record67;
+use crate::io::TableBuilder67;
+use crate::io::Record68;
+use crate::io::TableBuilder68;
+use crate::io::Record69;
+use crate::io::TableBuilder69;
+use crate::io::Record70;
+use crate::io::TableBuilder70;
+use crate::io::Record71;
+use crate::io::TableBuilder71;
+use crate::io::Record72;
+use crate::io::TableBuilder72;
+use crate::io::Record73;
+use crate::io::TableBuilder73;
+use crate::io::Record74;
+use crate::io::TableBuilder74;
+use crate::io::Record75;
+use crate::io::TableBuilder75;
+use crate::io::Record76;
+use crate::io::TableBuilder76;
+use crate::io::Record77;
+use crate::io::TableBuilder77;
+use crate::io::Record78;
+use crate::io::TableBuilder78;
+use crate::io::Record79;
+use crate::io::TableBuilder79;
+use crate::io::Record80;
+use crate::io::TableBuilder80;
+use crate::io::Record81;
+use crate::io::TableBuilder81;
+use crate::io::Record82;
+use crate::io::TableBuilder82;
+use crate::io::Record83;
+use crate::io::TableBuilder83;
+use crate::io::Record84;
+use crate::io::TableBuilder84;
+use crate::io::Record85;
+use crate::io::TableBuilder85;
+use crate::io::Record86;
+use crate::io::TableBuilder86;
+use crate::io::Record87;
+use crate::io::TableBuilder87;
+use crate::io::Record88;
+use crate::io::TableBuilder88;
+use crate::io::Record89;
+use crate::io::TableBuilder89;
+use crate::io::Record90;
+use crate::io::TableBuilder90;
+use crate::io::Record91;
+use crate::io::TableBuilder91;
+use crate::io::Record92;
+use crate::io::TableBuilder92;
+use crate::io::Record93;
+use crate::io::TableBuilder93;
+use crate::io::Record94;
+use crate::io::TableBuilder94;
+use crate::io::Record95;
+use crate::io::TableBuilder95;
+use crate::io::Record96;
+use crate::io::TableBuilder96;
+use crate::io::Record97;
+use crate::io::TableBuilder97;
+use crate::io::Record98;
+use crate::io::TableBuilder98;
+use crate::io::Record99;
+use crate::io::TableBuilder99;
+use crate::io::Record100;
+use crate::io::TableBuilder100;
+use crate::io::Record101;
+use crate::io::TableBuilder101;
+use crate::io::Record102;
+use crate::io::TableBuilder102;
+use crate::io::Record103;
+use crate::io::TableBuilder103;
+use crate::io::Record104;
+use crate::io::TableBuilder104;
+use crate::io::Record105;
+use crate::io::TableBuilder105;
+use crate::io::Record106;
+use crate::io::TableBuilder106;
+use crate::io::Record107;
+use crate::io::TableBuilder107;
+use crate::io::Record108;
+use crate::io::TableBuilder108;
+use crate::io::Record109;
+use crate::io::TableBuilder109;
+use crate::io::Record110;
+use crate::io::TableBuilder110;
+use crate::io::Record111;
+use crate::io::TableBuilder111;
+use crate::io::Record112;
+use crate::io::TableBuilder112;
+use crate::io::Record113;
+use crate::io::TableBuilder113;
+use crate::io::Record114;
+use crate::io::TableBuilder114;
+use crate::io::Record115;
+use crate::io::TableBuilder115;
+use crate::io::Record116;
+use crate::io::TableBuilder116;
+use crate::io::Record117;
+use crate::io::TableBuilder117;
+use crate::io::Record118;
+use crate::io::TableBuilder118;
+use crate::io::Record119;
+use crate::io::TableBuilder119;
+use crate::io::Record120;
+use crate::io::TableBuilder120;
+use crate::io::Record121;
+use crate::io::TableBuilder121;
+use crate::io::Record122;
+use crate::io::TableBuilder122;
+use crate::io::Record123;
+use crate::io::TableBuilder123;
+use crate::io::Record124;
+use crate::io::TableBuilder124;
+use crate::io::Record125;
+use crate::io::TableBuilder125;
+use crate::io::Record126;
+use crate::io::TableBuilder126;
+use crate::io::Record127;
+use crate::io::TableBuilder127;
+use crate::io::Record128;
+use crate::io::TableBuilder128;
+use crate::io::Record129;
+use crate::io::TableBuilder129;
+use crate::io::Record130;
+use crate::io::TableBuilder130;
+use crate::io::Record131;
+use crate::io::TableBuilder131;
+use crate::io::Record132;
+use crate::io::TableBuilder132;
+use crate::io::Record133;
+use crate::io::TableBuilder133;
+use crate::io::Record134;
+use crate::io::TableBuilder134;
+use crate::io::Record135;
+use crate::io::TableBuilder135;
+use crate::io::Record136;
+use crate::io::TableBuilder136;
+use crate::io::Record137;
+use crate::io::TableBuilder137;
+use crate::io::Record138;
+use crate::io::TableBuilder138;
+use crate::io::Record139;
+use crate::io::TableBuilder139;
+use crate::io::Record140;
+use crate::io::TableBuilder140;
+use crate::io::Record141;
+use crate::io::TableBuilder141;
+use crate::io::Record142;
+use crate::io::TableBuilder142;
+use crate::io::Record143;
+use crate::io::TableBuilder143;
+use crate::io::Record144;
+use crate::io::TableBuilder144;
+use crate::io::Record145;
+use crate::io::TableBuilder145;
+use crate::io::Record146;
+use crate::io::TableBuilder146;
+use crate::io::Record147;
+use crate::io::TableBuilder147;
+use crate::io::Record148;
+use crate::io::TableBuilder148;
+use crate::io::Record149;
+use crate::io::TableBuilder149;
+use crate::io::Record150;
+use crate::io::TableBuilder150;
+use crate::io::Record151;
+use crate::io::TableBuilder151;
+use crate::io::Record152;
+use crate::io::TableBuilder152;
+use crate::io::Record153;
+use crate::io::TableBuilder153;
+use crate::io::Record154;
+use crate::io::TableBuilder154;
+use crate::io::Record155;
+use crate::io::TableBuilder155;
+use crate::io::Record156;
+use crate::io::TableBuilder156;
+use crate::io::Record157;
+use crate::io::TableBuilder157;
+use crate::io::Record158;
+use crate::io::TableBuilder158;
+use crate::io::Record159;
+use crate::io::TableBuilder159;
+use crate::io::Record160;
+use crate::io::TableBuilder160;
+use crate::io::Record161;
+use crate::io::TableBuilder161;
+use crate::io::Record162;
+use crate::io::TableBuilder162;
+use crate::io::Record163;
+use crate::io::TableBuilder163;
+use crate::io::Record164;
+use crate::io::TableBuilder164;
+use crate::io::Record165;
+use crate::io::TableBuilder165;
+use crate::io::Record166;
+use crate::io::TableBuilder166;
+use crate::io::Record167;
+use crate::io::TableBuilder167;
+use crate::io::Record168;
+use crate::io::TableBuilder168;
+use crate::io::Record169;
+use crate::io::TableBuilder169;
+use crate::io::Record170;
+use crate::io::TableBuilder170;
+use crate::io::Record171;
+use crate::io::TableBuilder171;
+use crate::io::Record172;
+use crate::io::TableBuilder172;
+use crate::io::Record173;
+use crate::io::TableBuilder173;
+use crate::io::Record174;
+use crate::io::TableBuilder174;
+use crate::io::Record175;
+use crate::io::TableBuilder175;
+use crate::io::Record176;
+use crate::io::TableBuilder176;
+use crate::io::Record177;
+use crate::io::TableBuilder177;
+use crate::io::Record178;
+use crate::io::TableBuilder178;
+use crate::io::Record179;
+use crate::io::TableBuilder179;
+use crate::io::Record180;
+use crate::io::TableBuilder180;
+use crate::io::Record181;
+use crate::io::TableBuilder181;
+use crate::io::Record182;
+use crate::io::TableBuilder182;
+use crate::io::Record183;
+use crate::io::TableBuilder183;
+use crate::io::Record184;
+use crate::io::TableBuilder184;
+use crate::io::Record185;
+use crate::io::TableBuilder185;
+use crate::io::Record186;
+use crate::io::TableBuilder186;
+use crate::io::Record187;
+use crate::io::TableBuilder187;
+use crate::io::Record188;
+use crate::io::TableBuilder188;
+use crate::io::Record189;
+use crate::io::TableBuilder189;
+use crate::io::Record190;
+use crate::io::TableBuilder190;
+use crate::io::Record191;
+use crate::io::TableBuilder191;
+use crate::io::Record192;
+use crate::io::TableBuilder192;
+use crate::io::Record193;
+use crate::io::TableBuilder193;
+use crate::io::Record194;
+use crate::io::TableBuilder194;
+use crate::io::Record195;
+use crate::io::TableBuilder195;
+use crate::io::Record196;
+use crate::io::TableBuilder196;
+use crate::io::Record197;
+use crate::io::TableBuilder197;
+use crate::io::Record198;
+use crate::io::TableBuilder198;
+use crate::io::Record199;
+use crate::io::TableBuilder199;
+use crate::io::Record200;
+use crate::io::TableBuilder200;
+use crate::io::Record201;
+use crate::io::TableBuilder201;
+use crate::io::Record202;
+use crate::io::TableBuilder202;
+use crate::io::Record203;
+use crate::io::TableBuilder203;
+use crate::io::Record204;
+use crate::io::TableBuilder204;
+use crate::io::Record205;
+use crate::io::TableBuilder205;
+use crate::io::Record206;
+use crate::io::TableBuilder206;
+use crate::io::Record207;
+use crate::io::TableBuilder207;
+use crate::io::Record208;
+use crate::io::TableBuilder208;
+use crate::io::Record209;
+use crate::io::TableBuilder209;
+use crate::io::Record210;
+use crate::io::TableBuilder210;
+use crate::io::Record211;
+use crate::io::TableBuilder211;
+use crate::io::Record212;
+use crate::io::TableBuilder212;
+use crate::io::Record213;
+use crate::io::TableBuilder213;
+use crate::io::Record214;
+use crate::io::TableBuilder214;
+use crate::io::Record215;
+use crate::io::TableBuilder215;
+use crate::io::Record216;
+use crate::io::TableBuilder216;
+use crate::io::Record217;
+use crate::io::TableBuilder217;
+use crate::io::Record218;
+use crate::io::TableBuilder218;
+use crate::io::Record219;
+use crate::io::TableBuilder219;
+use crate::io::Record220;
+use crate::io::TableBuilder220;
+use crate::io::Record221;
+use crate::io::TableBuilder221;
+use crate::io::Record222;
+use crate::io::TableBuilder222;
+use crate::io::Record223;
+use crate::io::TableBuilder223;
+use crate::io::Record224;
+use crate::io::TableBuilder224;
+use crate::io::Record225;
+use crate::io::TableBuilder225;
+use crate::io::Record226;
+use crate::io::TableBuilder226;
+use crate::io::Record227;
+use crate::io::TableBuilder227;
+use crate::io::Record228;
+use crate::io::TableBuilder228;
+use crate::io::Record229;
+use crate::io::TableBuilder229;
+use crate::io::Record230;
+use crate::io::TableBuilder230;
+use crate::io::Record231;
+use crate::io::TableBuilder231;
+use crate::io::Record232;
+use crate::io::TableBuilder232;
+use crate::io::Record233;
+use crate::io::TableBuilder233;
+use crate::io::Record234;
+use crate::io::TableBuilder234;
+use crate::io::Record235;
+use crate::io::TableBuilder235;
+use crate::io::Record236;
+use crate::io::TableBuilder236;
+use crate::io::Record237;
+use crate::io::TableBuilder237;
+use crate::io::Record238;
+use crate::io::TableBuilder238;
+use crate::io::Record239;
+use crate::io::TableBuilder239;
+use crate::io::Record240;
+use crate::io::TableBuilder240;
+use crate::io::Record241;
+use crate::io::TableBuilder241;
+use crate::io::Record242;
+use crate::io::TableBuilder242;
+use crate::io::Record243;
+use crate::io::TableBuilder243;
+use crate::io::Record244;
+use crate::io::TableBuilder244;
+use crate::io::Record245;
+use crate::io::TableBuilder245;
+use crate::io::Record246;
+use crate::io::TableBuilder246;
+use crate::io::Record247;
+use crate::io::TableBuilder247;
+use crate::io::Record248;
+use crate::io::TableBuilder248;
+use crate::io::Record249;
+use crate::io::TableBuilder249;
+use crate::io::Record250;
+use crate::io::TableBuilder250;
+use crate::io::Record251;
+use crate::io::TableBuilder251;
+use crate::io::Record252;
+use crate::io::TableBuilder252;
+use crate::io::Record253;
+use crate::io::TableBuilder253;
+use crate::io::Record254;
+use crate::io::TableBuilder254;
+use crate::io::Record255;
+use crate::io::TableBuilder255;
+use crate::io::Record256;
+use crate::io::TableBuilder256;
+use crate::io::Record257;
+use crate::io::TableBuilder257;
+use crate::io::Record258;
+use crate::io::TableBuilder258;
+use crate::io::Record259;
+use crate::io::TableBuilder259;
+use crate::io::Record260;
+use crate::io::TableBuilder260;
+use crate::io::Record261;
+use crate::io::TableBuilder261;
+use crate::io::Record262;
+use crate::io::TableBuilder262;
+use crate::io::Record263;
+use crate::io::TableBuilder263;
+use crate::io::Record264;
+use crate::io::TableBuilder264;
+use crate::io::Record265;
+use crate::io::TableBuilder265;
+use crate::io::Record266;
+use crate::io::TableBuilder266;
+use crate::io::Record267;
+use crate::io::TableBuilder267;
+use crate::io::Record268;
+use crate::io::TableBuilder268;
+use crate::io::Record269;
+use crate::io::TableBuilder269;
+use crate::io::Record270;
+use crate::io::TableBuilder270;
+use crate::io::Record271;
+use crate::io::TableBuilder271;
+use crate::io::Record272;
+use crate::io::TableBuilder272;
+use crate::io::Record273;
+use crate::io::TableBuilder273;
+use crate::io::Record274;
+use crate::io::TableBuilder274;
+use crate::io::Record275;
+use crate::io::TableBuilder275;
+use crate::io::Record276;
+use crate::io::TableBuilder276;
+use crate::io::Record277;
+use crate::io::TableBuilder277;
+use crate::io::Record278;
+use crate::io::TableBuilder278;
+use crate::io::Record279;
+use crate::io::TableBuilder279;
+use crate::io::Record280;
+use crate::io::TableBuilder280;
+use crate::io::Record281;
+use crate::io::TableBuilder281;
+use crate::io::Record282;
+use crate::io::TableBuilder282;
+use crate::io::Record283;
+use crate::io::TableBuilder283;
+use crate::io::Record284;
+use crate::io::TableBuilder284;
+use crate::io::Record285;
+use crate::io::TableBuilder285;
+use crate::io::Record286;
+use crate::io::TableBuilder286;
+use crate::io::Record287;
+use crate::io::TableBuilder287;
+use crate::io::Record288;
+use crate::io::TableBuilder288;
+use crate::io::Record289;
+use crate::io::TableBuilder289;
+use crate::io::Record290;
+use crate::io::TableBuilder290;
+use crate::io::Record291;
+use crate::io::TableBuilder291;
+use crate::io::Record292;
+use crate::io::TableBuilder292;
+use crate::io::Record293;
+use crate::io::TableBuilder293;
+use crate::io::Record294;
+use crate::io::TableBuilder294;
+use crate::io::Record295;
+use crate::io::TableBuilder295;
+use crate::io::Record296;
+use crate::io::TableBuilder296;
+use crate::io::Record297;
+use crate::io::TableBuilder297;
+use crate::io::Record298;
+use crate::io::TableBuilder298;
+use crate::io::Record299;
+use crate::io::TableBuilder299;
+use crate::io::Record300;
+use crate::io::TableBuilder300;
+use crate::io::Record301;
+use crate::io::TableBuilder301;
+use crate::io::Record302;
+use crate::io::TableBuilder302;
+use crate::io::Record303;
+use crate::io::TableBuilder303;
+use crate::io::Record304;
+use crate::io::TableBuilder304;
+use crate::io::Record305;
+use crate::io::TableBuilder305;
+use crate::io::Record306;
+use crate::io::TableBuilder306;
+use crate::io::Record307;
+use crate::io::TableBuilder307;
+use crate::io::Record308;
+use crate::io::TableBuilder308;
+use crate::io::Record309;
+use crate::io::TableBuilder309;
+use crate::io::Record310;
+use crate::io::TableBuilder310;
+use crate::io::Record311;
+use crate::io::TableBuilder311;
+use crate::io::Record312;
+use crate::io::TableBuilder312;
+use crate::io::Record313;
+use crate::io::TableBuilder313;
+use crate::io::Record314;
+use crate::io::TableBuilder314;
+use crate::io::Record315;
+use crate::io::TableBuilder315;
+use crate::io::Record316;
+use crate::io::TableBuilder316;
+use crate::io::Record317;
+use crate::io::TableBuilder317;
+use crate::io::Record318;
+use crate::io::TableBuilder318;
+use crate::io::Record319;
+use crate::io::TableBuilder319;
+use crate::io::Record320;
+use crate::io::TableBuilder320;
+use crate::io::Record321;
+use crate::io::TableBuilder321;
+use crate::io::Record322;
+use crate::io::TableBuilder322;
+use crate::io::Record323;
+use crate::io::TableBuilder323;
+use crate::io::Record324;
+use crate::io::TableBuilder324;
+use crate::io::Record325;
+use crate::io::TableBuilder325;
+use crate::io::Record326;
+use crate::io::TableBuilder326;
+use crate::io::Record327;
+use crate::io::TableBuilder327;
+use crate::io::Record328;
+use crate::io::TableBuilder328;
+use crate::io::Record329;
+use crate::io::TableBuilder329;
+use crate::io::Record330;
+use crate::io::TableBuilder330;
+use crate::io::Record331;
+use crate::io::TableBuilder331;
+use crate::io::Record332;
+use crate::io::TableBuilder332;
+use crate::io::Record333;
+use crate::io::TableBuilder333;
+use crate::io::Record334;
+use crate::io::TableBuilder334;
+use crate::io::Record335;
+use crate::io::TableBuilder335;
+use crate::io::Record336;
+use crate::io::TableBuilder336;
+use crate::io::Record337;
+use crate::io::TableBuilder337;
+use crate::io::Record338;
+use crate::io::TableBuilder338;
+use crate::io::Record339;
+use crate::io::TableBuilder339;
+use crate::io::Record340;
+use crate::io::TableBuilder340;
+use crate::io::Record341;
+use crate::io::TableBuilder341;
+use crate::io::Record342;
+use crate::io::TableBuilder342;
+use crate::io::Record343;
+use crate::io::TableBuilder343;
+use crate::io::Record344;
+use crate::io::TableBuilder344;
+use crate::io::Record345;
+use crate::io::TableBuilder345;
+use crate::io::Record346;
+use crate::io::TableBuilder346;
+use crate::io::Record347;
+use crate::io::TableBuilder347;
+use crate::io::Record348;
+use crate::io::TableBuilder348;
+use crate::io::Record349;
+use crate::io::TableBuilder349;
+use crate::io::Record350;
+use crate::io::TableBuilder350;
+use crate::io::Record351;
+use crate::io::TableBuilder351;
+use crate::io::Record352;
+use crate::io::TableBuilder352;
+use crate::io::Record353;
+use crate::io::TableBuilder353;
+use crate::io::Record354;
+use crate::io::TableBuilder354;
 ////   END ARBORETUM GENERATED CODE ////

@@ -1,37 +1,8232 @@
-use std::sync::Arc;
 use arrow::array::*;
 use arrow::datatypes::*;
+use std::ffi::c_char;
+use std::sync::Arc;
 
 pub mod ffi;
 pub mod io;
 
+// Re-export FFI functions
+pub use ffi::{queue_record, flush_records};
+
 //// BEGIN ARBORETUM GENERATED CODE ////
-pub fn get_enum_table() -> arrow::record_batch::RecordBatch {
-    RecordBatch::try_new(
-        Arc::new(Schema::new(vec![
-        Field::new("id", DataType::UInt64, false),
-        Field::new("name", DataType::Utf8, false),
-    ])),
-        vec![
-            Arc::new(UInt64Array::from_iter([68, 67, 65, 62, 61, 59, 25, 23, 12, 18, 8, 22, 5, 37, 17, 21, 48, 14, 45, 16, 27, 64, 0, 52, 1, 66, 63, 60, 32, 33, 28, 26, 7, 3, 9, 4, 24, 36, 6, 56, 35, 15, 46, 55, 13, 2, 44, 20, 51, 49, 29, 11, 30, 31, 10, 34, 38, 69, 53, 40, 39, 41, 42, 43, 19, 47, 50, 54, 57, 58, ])),
-            Arc::new(StringArray::from_iter_values(["TLSKind", "InitializationStyle", "LiteralOperatorKind", "ObjCLifetime", "TemplatedKind", "ObjCDeclQualifier", "LanguageLinkage", "InClassInitStyle", "CharacterLiteralKind", "ExprObjectKind", "CallingConv", "ImplicitParamKind", "BuiltinTemplateKind", "SourceLocIdentKind", "ExceptionSpecificationType", "IfStatementKind", "VectorKind", "ConstexprSpecKind", "TypeTrait", "ElaboratedTypeKeyword", "LinkageSpecLanguageIDs", "UTTKind", "AccessSpecifier", "AtomicOp", "ArraySizeModifier", "DefinitionKind", "TypeDependence", "ExprDependence", "OverloadedOperatorKind", "PragmaMSCommentKind", "MSVtorDispMode", "Linkage", "CXXNewInitializationStyle", "AutoTypeKeyword", "CanThrowResult", "BinaryOperatorKind", "LambdaCaptureDefault", "RefQualifierKind", "CXXConstructionKind", "ADLCallKind", "RecordArgPassingKind", "DeductionCandidate", "UnaryExprOrTypeTrait", "Kind", "ConstantResultStorageKind", "ArrayTypeTrait", "TypeOfKind", "ExpressionTrait", "ValueKind", "Visibility", "MultiVersionKind", "CastKind", "NonOdrUseReason", "ObjCStringFormatFamily", "CapturedRegionKind", "PredefinedIdentKind", "StorageClass", "Semantics", "Kind", "StringLiteralKind", "StorageDuration", "TagTypeKind", "TemplateSpecializationKind", "ThreadStorageClassSpecifier", "ExprValueKind", "UnaryOperatorKind", "Kind", "Kind", "FriendObjectKind", "ModuleOwnershipKind", ])),
-        ],
-    ).unwrap()
+// Thread-local storage for enum queues
+thread_local!(static ENUM_QUEUE: std::cell::RefCell<Vec<(u64, String)>> = std::cell::RefCell::new(Vec::new()));
+thread_local!(static ENUM_VALUE_QUEUE: std::cell::RefCell<Vec<(u64, u64)>> = std::cell::RefCell::new(Vec::new()));
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__VarDecl__TLSKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
 }
 
-pub fn get_enum_constant_table() -> arrow::record_batch::RecordBatch {
-    RecordBatch::try_new(
-        Arc::new(
-          Schema::new(vec![
-            Field::new("id", DataType::UInt64, false),
-            Field::new("enum_id", DataType::UInt64, false),
-            Field::new("name", DataType::Utf8, false),
-          ])),
-          vec![
-            Arc::new(UInt64Array::from_iter([1544, 1545, 1543, 1539, 1540, 1541, 1542, 1533, 1535, 1532, 1531, 1534, 1530, 1503, 1502, 1504, 1505, 1501, 1500, 1497, 1499, 1498, 1495, 1496, 1480, 1478, 1479, 1482, 1475, 1476, 1481, 1477, 209, 210, 211, 205, 203, 204, 147, 151, 150, 148, 149, 185, 181, 186, 183, 184, 182, 59, 72, 69, 73, 74, 70, 68, 75, 71, 54, 55, 60, 65, 62, 66, 67, 64, 63, 57, 56, 58, 61, 200, 199, 196, 197, 198, 202, 201, 45, 46, 308, 307, 305, 306, 309, 304, 310, 177, 172, 171, 173, 174, 169, 170, 175, 176, 178, 179, 180, 195, 194, 193, 192, 441, 440, 439, 438, 442, 443, 446, 447, 444, 445, 158, 156, 155, 157, 387, 404, 379, 409, 393, 361, 366, 367, 358, 360, 359, 362, 363, 364, 365, 369, 370, 371, 375, 380, 381, 382, 388, 396, 398, 406, 407, 408, 413, 368, 411, 410, 374, 412, 394, 403, 400, 357, 372, 383, 386, 376, 415, 373, 384, 399, 389, 401, 385, 395, 402, 377, 397, 391, 390, 392, 378, 416, 405, 414, 353, 348, 344, 345, 347, 350, 351, 352, 349, 346, 354, 355, 356, 166, 164, 168, 162, 163, 167, 165, 219, 220, 1514, 1515, 1516, 1517, 1519, 1520, 1521, 1524, 1522, 1523, 1525, 1526, 1527, 1528, 1529, 1518, 3, 2, 1, 0, 896, 897, 898, 887, 885, 886, 888, 894, 889, 893, 895, 892, 890, 891, 875, 876, 881, 882, 865, 866, 863, 864, 867, 873, 868, 872, 874, 871, 861, 883, 862, 880, 884, 877, 878, 879, 938, 939, 944, 945, 928, 929, 926, 927, 930, 936, 931, 935, 937, 934, 924, 946, 925, 943, 947, 940, 941, 942, 933, 932, 921, 922, 923, 913, 911, 912, 914, 919, 915, 918, 920, 917, 916, 870, 869, 909, 910, 900, 899, 901, 902, 907, 903, 906, 908, 905, 904, 4, 6, 5, 1536, 1538, 1537, 1512, 1510, 1507, 1513, 1509, 1511, 1506, 1508, 1492, 1486, 1488, 1493, 1484, 1487, 1483, 1490, 1489, 1494, 1491, 1485, 268, 267, 251, 242, 241, 274, 264, 280, 277, 269, 246, 238, 271, 283, 254, 252, 260, 256, 275, 265, 281, 278, 270, 247, 240, 272, 262, 258, 263, 259, 253, 255, 261, 257, 279, 239, 273, 276, 266, 249, 244, 243, 245, 282, 250, 248, 237, 288, 287, 286, 284, 285, 289, 223, 221, 222, 214, 216, 213, 217, 218, 215, 212, 52, 53, 51, 9, 10, 11, 77, 78, 76, 33, 34, 28, 19, 35, 12, 41, 37, 39, 17, 27, 23, 25, 22, 21, 30, 14, 43, 31, 24, 26, 16, 29, 20, 36, 13, 42, 38, 40, 15, 44, 32, 18, 208, 206, 207, 302, 301, 303, 47, 49, 50, 48, 1465, 1466, 299, 300, 298, 161, 160, 159, 421, 418, 417, 420, 422, 419, 423, 1462, 1463, 1464, 154, 153, 152, 8, 7, 342, 343, 190, 191, 857, 853, 854, 852, 851, 850, 849, 855, 860, 848, 858, 859, 856, 847, 449, 450, 448, 226, 227, 225, 224, 228, 229, 99, 92, 128, 130, 129, 133, 90, 100, 143, 102, 141, 88, 116, 136, 135, 91, 101, 132, 140, 144, 97, 127, 139, 138, 142, 131, 145, 118, 124, 126, 114, 105, 103, 106, 125, 104, 115, 113, 94, 107, 96, 93, 87, 137, 112, 111, 109, 108, 110, 123, 122, 120, 119, 121, 84, 82, 85, 83, 89, 134, 98, 95, 146, 86, 117, 232, 233, 230, 231, 236, 235, 234, 79, 80, 81, 290, 293, 295, 291, 292, 294, 296, 297, 313, 312, 316, 314, 311, 315, 1554, 1546, 1556, 1553, 1555, 1557, 1550, 1551, 1548, 1549, 1547, 1552, 1558, 984, 978, 981, 1008, 996, 999, 987, 1005, 993, 1002, 990, 1011, 986, 980, 983, 1010, 998, 1001, 989, 1007, 995, 1004, 992, 1013, 985, 979, 982, 1009, 997, 1000, 988, 1006, 994, 1003, 991, 1012, 1020, 1015, 1022, 1024, 1021, 1016, 1023, 1025, 1018, 1017, 1019, 1014, 1408, 1396, 1400, 1404, 1424, 1412, 1416, 1420, 1384, 1388, 1392, 1376, 1409, 1397, 1401, 1405, 1425, 1413, 1417, 1421, 1385, 1389, 1393, 1377, 1410, 1398, 1402, 1406, 1426, 1414, 1418, 1422, 1386, 1390, 1394, 1378, 1411, 1399, 1403, 1407, 1427, 1415, 1419, 1423, 1387, 1391, 1395, 1379, 1380, 1381, 1382, 1383, 1442, 1441, 1244, 1236, 1228, 1213, 1221, 1225, 1227, 1352, 1344, 1336, 1321, 1329, 1333, 1335, 1167, 1159, 1144, 1152, 1156, 1158, 1275, 1267, 1252, 1260, 1264, 1266, 1190, 1175, 1183, 1187, 1189, 1298, 1283, 1291, 1295, 1297, 1198, 1206, 1210, 1212, 1306, 1314, 1318, 1320, 1098, 1090, 1075, 1083, 1087, 1089, 1060, 1052, 1037, 1045, 1049, 1051, 1121, 1106, 1114, 1118, 1120, 1129, 1137, 1141, 1143, 1068, 1070, 1072, 1074, 1069, 1071, 1073, 1245, 1246, 1247, 1248, 1249, 1250, 1251, 1237, 1238, 1239, 1240, 1241, 1242, 1243, 1229, 1230, 1231, 1232, 1233, 1234, 1235, 1214, 1215, 1216, 1217, 1218, 1219, 1220, 1222, 1223, 1224, 1226, 1353, 1354, 1355, 1356, 1357, 1358, 1359, 1345, 1346, 1347, 1348, 1349, 1350, 1351, 1337, 1338, 1339, 1340, 1341, 1342, 1343, 1322, 1323, 1324, 1325, 1326, 1327, 1328, 1330, 1331, 1332, 1334, 1168, 1169, 1170, 1171, 1172, 1173, 1174, 1160, 1161, 1162, 1163, 1164, 1165, 1166, 1145, 1146, 1147, 1148, 1149, 1150, 1151, 1153, 1154, 1155, 1157, 1276, 1277, 1278, 1279, 1280, 1281, 1282, 1268, 1269, 1270, 1271, 1272, 1273, 1274, 1253, 1254, 1255, 1256, 1257, 1258, 1259, 1261, 1262, 1263, 1265, 1191, 1192, 1193, 1194, 1195, 1196, 1197, 1176, 1177, 1178, 1179, 1180, 1181, 1182, 1184, 1185, 1186, 1188, 1299, 1300, 1301, 1302, 1303, 1304, 1305, 1284, 1285, 1286, 1287, 1288, 1289, 1290, 1292, 1293, 1294, 1296, 1199, 1200, 1201, 1202, 1203, 1204, 1205, 1207, 1208, 1209, 1211, 1307, 1308, 1309, 1310, 1311, 1312, 1313, 1315, 1316, 1317, 1319, 1099, 1100, 1101, 1102, 1103, 1104, 1105, 1091, 1092, 1093, 1094, 1095, 1096, 1097, 1076, 1077, 1078, 1079, 1080, 1081, 1082, 1084, 1085, 1086, 1088, 1122, 1123, 1124, 1125, 1126, 1127, 1128, 1107, 1108, 1109, 1110, 1111, 1112, 1113, 1115, 1116, 1117, 1119, 1130, 1131, 1132, 1133, 1134, 1135, 1136, 1138, 1139, 1140, 1142, 1061, 1062, 1063, 1064, 1065, 1066, 1067, 1053, 1054, 1055, 1056, 1057, 1058, 1059, 1038, 1039, 1040, 1041, 1042, 1043, 1044, 1046, 1047, 1048, 1050, 1446, 1443, 951, 958, 1429, 1445, 956, 954, 955, 1437, 1431, 1433, 1436, 1432, 957, 1360, 1444, 1373, 968, 970, 974, 969, 1374, 949, 971, 1438, 1428, 1434, 1375, 964, 973, 1439, 1430, 1435, 1365, 1361, 1363, 1371, 1367, 1369, 1366, 1362, 1364, 1372, 1368, 1370, 965, 961, 960, 972, 963, 950, 962, 966, 975, 1033, 1032, 1034, 1028, 977, 976, 1026, 1027, 959, 1035, 952, 1036, 1440, 953, 948, 967, 1029, 1030, 1031, 322, 327, 325, 323, 324, 326, 319, 317, 321, 320, 318, 331, 330, 332, 328, 329, 337, 336, 335, 333, 334, 341, 339, 340, 338, 188, 187, 189, 434, 433, 436, 435, 424, 426, 432, 430, 431, 429, 437, 428, 427, 425, 466, 478, 485, 486, 488, 490, 491, 492, 493, 506, 538, 589, 591, 650, 697, 699, 700, 715, 716, 717, 718, 719, 722, 723, 748, 749, 766, 813, 814, 815, 816, 819, 839, 540, 577, 610, 637, 724, 822, 475, 654, 656, 780, 451, 452, 454, 463, 481, 511, 578, 604, 609, 616, 618, 643, 705, 732, 735, 744, 745, 754, 777, 782, 789, 802, 808, 831, 783, 790, 792, 795, 477, 513, 536, 638, 670, 680, 733, 757, 825, 594, 595, 453, 455, 456, 457, 458, 459, 460, 462, 464, 465, 468, 469, 471, 472, 473, 474, 476, 479, 480, 482, 483, 484, 487, 489, 494, 495, 496, 497, 498, 499, 500, 501, 502, 503, 504, 505, 507, 508, 510, 512, 514, 515, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 534, 535, 537, 539, 541, 542, 543, 544, 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564, 565, 566, 567, 568, 569, 570, 571, 572, 573, 574, 575, 576, 579, 580, 581, 582, 583, 584, 585, 586, 587, 588, 590, 592, 593, 596, 597, 598, 599, 600, 602, 605, 606, 607, 608, 612, 613, 615, 617, 619, 620, 621, 622, 623, 624, 625, 626, 627, 628, 629, 630, 631, 632, 633, 634, 635, 639, 640, 641, 642, 644, 645, 646, 648, 649, 651, 652, 655, 657, 658, 659, 660, 661, 662, 663, 664, 665, 666, 667, 668, 669, 671, 672, 674, 676, 677, 679, 681, 682, 683, 684, 685, 687, 688, 689, 694, 695, 696, 698, 701, 702, 706, 707, 708, 709, 710, 713, 720, 721, 725, 727, 728, 729, 730, 731, 734, 736, 737, 738, 739, 740, 741, 742, 743, 746, 747, 750, 751, 752, 753, 755, 756, 759, 760, 761, 762, 763, 764, 765, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 778, 779, 781, 784, 785, 786, 787, 788, 791, 793, 794, 796, 797, 799, 803, 804, 805, 806, 807, 810, 811, 812, 817, 818, 820, 821, 823, 824, 826, 827, 828, 829, 830, 832, 833, 834, 835, 836, 837, 838, 840, 841, 842, 843, 844, 845, 846, 461, 467, 470, 509, 533, 601, 603, 611, 614, 636, 647, 653, 673, 675, 678, 686, 690, 691, 692, 693, 703, 704, 711, 712, 714, 726, 758, 798, 800, 801, 809, 1453, 1458, 1459, 1457, 1454, 1455, 1460, 1451, 1449, 1447, 1452, 1448, 1456, 1461, 1450, 1468, 1467, 1469, 1472, 1473, 1474, 1471, 1470, ])),
-            Arc::new(UInt64Array::from_iter([68, 68, 68, 67, 67, 67, 67, 65, 65, 65, 65, 65, 65, 62, 62, 62, 62, 62, 61, 61, 61, 61, 61, 61, 59, 59, 59, 59, 59, 59, 59, 59, 25, 25, 25, 23, 23, 23, 12, 12, 12, 12, 12, 18, 18, 18, 18, 18, 18, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 22, 22, 22, 22, 22, 22, 22, 5, 5, 37, 37, 37, 37, 37, 37, 37, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 21, 21, 21, 21, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 14, 14, 14, 14, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 16, 16, 16, 16, 16, 16, 16, 27, 27, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 0, 0, 0, 0, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 1, 1, 1, 66, 66, 66, 63, 63, 63, 63, 63, 63, 63, 63, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 33, 33, 33, 33, 33, 33, 28, 28, 28, 26, 26, 26, 26, 26, 26, 26, 7, 7, 7, 3, 3, 3, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 24, 24, 24, 36, 36, 36, 6, 6, 6, 6, 56, 56, 35, 35, 35, 15, 15, 15, 46, 46, 46, 46, 46, 46, 46, 55, 55, 55, 13, 13, 13, 2, 2, 44, 44, 20, 20, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 49, 49, 49, 29, 29, 29, 29, 29, 29, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 30, 30, 30, 30, 31, 31, 31, 10, 10, 10, 34, 34, 34, 34, 34, 34, 34, 34, 38, 38, 38, 38, 38, 38, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 40, 40, 40, 40, 40, 40, 39, 39, 39, 39, 39, 41, 41, 41, 41, 41, 42, 42, 42, 42, 42, 43, 43, 43, 43, 19, 19, 19, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 57, 57, 57, 58, 58, 58, 58, 58, ])),
-            Arc::new(StringArray::from_iter_values(["TLS_None", "TLS_Static", "TLS_Dynamic", "CInit", "CallInit", "ListInit", "ParenListInit", "LOK_Raw", "LOK_Template", "LOK_Integer", "LOK_Floating", "LOK_String", "LOK_Character", "OCL_None", "OCL_ExplicitNone", "OCL_Strong", "OCL_Weak", "OCL_Autoreleasing", "TK_NonTemplate", "TK_FunctionTemplate", "TK_MemberSpecialization", "TK_FunctionTemplateSpecialization", "TK_DependentFunctionTemplateSpecialization", "TK_DependentNonTemplate", "OBJC_TQ_None", "OBJC_TQ_In", "OBJC_TQ_Inout", "OBJC_TQ_Out", "OBJC_TQ_Bycopy", "OBJC_TQ_Byref", "OBJC_TQ_Oneway", "OBJC_TQ_CSNullability", "CLanguageLinkage", "CXXLanguageLinkage", "NoLanguageLinkage", "ICIS_NoInit", "ICIS_CopyInit", "ICIS_ListInit", "Ascii", "Wide", "UTF8", "UTF16", "UTF32", "OK_Ordinary", "OK_BitField", "OK_VectorComponent", "OK_ObjCProperty", "OK_ObjCSubscript", "OK_MatrixComponent", "CC_C", "CC_X86StdCall", "CC_X86FastCall", "CC_X86ThisCall", "CC_X86VectorCall", "CC_X86Pascal", "CC_Win64", "CC_X86_64SysV", "CC_X86RegCall", "CC_AAPCS", "CC_AAPCS_VFP", "CC_IntelOclBicc", "CC_SpirFunction", "CC_OpenCLKernel", "CC_Swift", "CC_SwiftAsync", "CC_PreserveMost", "CC_PreserveAll", "CC_AArch64VectorCall", "CC_AArch64SVEPCS", "CC_AMDGPUKernelCall", "CC_M68kRTD", "ObjCSelf", "ObjCCmd", "CXXThis", "CXXVTT", "CapturedContext", "ThreadPrivateVar", "Other", "BTK__make_integer_seq", "BTK__type_pack_element", "Function", "FuncSig", "File", "FileName", "Line", "Column", "SourceLocStruct", "EST_None", "EST_DynamicNone", "EST_Dynamic", "EST_MSAny", "EST_NoThrow", "EST_BasicNoexcept", "EST_DependentNoexcept", "EST_NoexceptFalse", "EST_NoexceptTrue", "EST_Unevaluated", "EST_Uninstantiated", "EST_Unparsed", "Ordinary", "Constexpr", "ConstevalNonNegated", "ConstevalNegated", "Generic", "AltiVecVector", "AltiVecPixel", "AltiVecBool", "Neon", "NeonPoly", "SveFixedLengthData", "SveFixedLengthPredicate", "RVVFixedLengthData", "RVVFixedLengthMask", "Unspecified", "Constexpr", "Consteval", "Constinit", "UTT_IsInterfaceClass", "UTT_IsSealed", "UTT_IsDestructible", "UTT_IsTriviallyDestructible", "UTT_IsNothrowDestructible", "UTT_HasNothrowMoveAssign", "UTT_HasTrivialMoveAssign", "UTT_HasTrivialMoveConstructor", "UTT_HasNothrowAssign", "UTT_HasNothrowCopy", "UTT_HasNothrowConstructor", "UTT_HasTrivialAssign", "UTT_HasTrivialCopy", "UTT_HasTrivialDefaultConstructor", "UTT_HasTrivialDestructor", "UTT_HasVirtualDestructor", "UTT_IsAbstract", "UTT_IsAggregate", "UTT_IsClass", "UTT_IsEmpty", "UTT_IsEnum", "UTT_IsFinal", "UTT_IsLiteral", "UTT_IsPOD", "UTT_IsPolymorphic", "UTT_IsStandardLayout", "UTT_IsTrivial", "UTT_IsTriviallyCopyable", "UTT_IsUnion", "UTT_HasUniqueObjectRepresentations", "UTT_IsTriviallyRelocatable", "UTT_IsTriviallyEqualityComparable", "UTT_IsBoundedArray", "UTT_IsUnboundedArray", "UTT_IsNullPointer", "UTT_IsScopedEnum", "UTT_IsReferenceable", "UTT_CanPassInRegs", "UTT_IsArithmetic", "UTT_IsFloatingPoint", "UTT_IsIntegral", "UTT_IsCompleteType", "UTT_IsVoid", "UTT_IsArray", "UTT_IsFunction", "UTT_IsReference", "UTT_IsLvalueReference", "UTT_IsRvalueReference", "UTT_IsFundamental", "UTT_IsObject", "UTT_IsScalar", "UTT_IsCompound", "UTT_IsPointer", "UTT_IsMemberObjectPointer", "UTT_IsMemberFunctionPointer", "UTT_IsMemberPointer", "UTT_IsConst", "UTT_IsVolatile", "UTT_IsSigned", "UTT_IsUnsigned", "BTT_TypeCompatible", "BTT_IsNothrowAssignable", "BTT_IsAssignable", "BTT_IsBaseOf", "BTT_IsConvertibleTo", "BTT_IsTriviallyAssignable", "BTT_ReferenceBindsToTemporary", "BTT_ReferenceConstructsFromTemporary", "BTT_IsSame", "BTT_IsConvertible", "TT_IsConstructible", "TT_IsNothrowConstructible", "TT_IsTriviallyConstructible", "Struct", "Interface", "Union", "Class", "Enum", "Typename", "None", "C", "CXX", "AddLvalueReference", "AddPointer", "AddRvalueReference", "Decay", "MakeSigned", "MakeUnsigned", "RemoveAllExtents", "RemoveConst", "RemoveCV", "RemoveCVRef", "RemoveExtent", "RemovePointer", "RemoveReference", "RemoveRestrict", "RemoveVolatile", "EnumUnderlyingType", "AS_public", "AS_protected", "AS_private", "AS_none", "AO__c11_atomic_init", "AO__c11_atomic_load", "AO__c11_atomic_store", "AO__c11_atomic_exchange", "AO__c11_atomic_compare_exchange_strong", "AO__c11_atomic_compare_exchange_weak", "AO__c11_atomic_fetch_add", "AO__c11_atomic_fetch_sub", "AO__c11_atomic_fetch_and", "AO__c11_atomic_fetch_or", "AO__c11_atomic_fetch_xor", "AO__c11_atomic_fetch_nand", "AO__c11_atomic_fetch_max", "AO__c11_atomic_fetch_min", "AO__atomic_load", "AO__atomic_load_n", "AO__atomic_store", "AO__atomic_store_n", "AO__atomic_exchange", "AO__atomic_exchange_n", "AO__atomic_compare_exchange", "AO__atomic_compare_exchange_n", "AO__atomic_fetch_add", "AO__atomic_fetch_sub", "AO__atomic_fetch_and", "AO__atomic_fetch_or", "AO__atomic_fetch_xor", "AO__atomic_fetch_nand", "AO__atomic_add_fetch", "AO__atomic_sub_fetch", "AO__atomic_and_fetch", "AO__atomic_or_fetch", "AO__atomic_xor_fetch", "AO__atomic_max_fetch", "AO__atomic_min_fetch", "AO__atomic_nand_fetch", "AO__scoped_atomic_load", "AO__scoped_atomic_load_n", "AO__scoped_atomic_store", "AO__scoped_atomic_store_n", "AO__scoped_atomic_exchange", "AO__scoped_atomic_exchange_n", "AO__scoped_atomic_compare_exchange", "AO__scoped_atomic_compare_exchange_n", "AO__scoped_atomic_fetch_add", "AO__scoped_atomic_fetch_sub", "AO__scoped_atomic_fetch_and", "AO__scoped_atomic_fetch_or", "AO__scoped_atomic_fetch_xor", "AO__scoped_atomic_fetch_nand", "AO__scoped_atomic_add_fetch", "AO__scoped_atomic_sub_fetch", "AO__scoped_atomic_and_fetch", "AO__scoped_atomic_or_fetch", "AO__scoped_atomic_xor_fetch", "AO__scoped_atomic_max_fetch", "AO__scoped_atomic_min_fetch", "AO__scoped_atomic_nand_fetch", "AO__scoped_atomic_fetch_min", "AO__scoped_atomic_fetch_max", "AO__opencl_atomic_init", "AO__opencl_atomic_load", "AO__opencl_atomic_store", "AO__opencl_atomic_exchange", "AO__opencl_atomic_compare_exchange_strong", "AO__opencl_atomic_compare_exchange_weak", "AO__opencl_atomic_fetch_add", "AO__opencl_atomic_fetch_sub", "AO__opencl_atomic_fetch_and", "AO__opencl_atomic_fetch_or", "AO__opencl_atomic_fetch_xor", "AO__opencl_atomic_fetch_min", "AO__opencl_atomic_fetch_max", "AO__atomic_fetch_min", "AO__atomic_fetch_max", "AO__hip_atomic_load", "AO__hip_atomic_store", "AO__hip_atomic_compare_exchange_weak", "AO__hip_atomic_compare_exchange_strong", "AO__hip_atomic_exchange", "AO__hip_atomic_fetch_add", "AO__hip_atomic_fetch_sub", "AO__hip_atomic_fetch_and", "AO__hip_atomic_fetch_or", "AO__hip_atomic_fetch_xor", "AO__hip_atomic_fetch_min", "AO__hip_atomic_fetch_max", "Normal", "Static", "Star", "DeclarationOnly", "TentativeDefinition", "Definition", "UnexpandedPack", "Instantiation", "Dependent", "VariablyModified", "Error", "None", "All", "DependentInstantiation", "UnexpandedPack", "Instantiation", "Type", "Value", "Error", "None", "All", "TypeValue", "TypeInstantiation", "ValueInstantiation", "TypeValueInstantiation", "ErrorDependent", "OO_None", "OO_New", "OO_Delete", "OO_Array_New", "OO_Array_Delete", "OO_Plus", "OO_Minus", "OO_Star", "OO_Slash", "OO_Percent", "OO_Caret", "OO_Amp", "OO_Pipe", "OO_Tilde", "OO_Exclaim", "OO_Equal", "OO_Less", "OO_Greater", "OO_PlusEqual", "OO_MinusEqual", "OO_StarEqual", "OO_SlashEqual", "OO_PercentEqual", "OO_CaretEqual", "OO_AmpEqual", "OO_PipeEqual", "OO_LessLess", "OO_GreaterGreater", "OO_LessLessEqual", "OO_GreaterGreaterEqual", "OO_EqualEqual", "OO_ExclaimEqual", "OO_LessEqual", "OO_GreaterEqual", "OO_Spaceship", "OO_AmpAmp", "OO_PipePipe", "OO_PlusPlus", "OO_MinusMinus", "OO_Comma", "OO_ArrowStar", "OO_Arrow", "OO_Call", "OO_Subscript", "OO_Conditional", "OO_Coawait", "NUM_OVERLOADED_OPERATORS", "PCK_Unknown", "PCK_Linker", "PCK_Lib", "PCK_Compiler", "PCK_ExeStr", "PCK_User", "Never", "ForVBaseOverride", "ForVFTable", "Invalid", "None", "Internal", "UniqueExternal", "VisibleNone", "Module", "External", "None", "Parens", "Braces", "Auto", "DecltypeAuto", "GNUAutoType", "CT_Cannot", "CT_Dependent", "CT_Can", "BO_PtrMemD", "BO_PtrMemI", "BO_Mul", "BO_Div", "BO_Rem", "BO_Add", "BO_Sub", "BO_Shl", "BO_Shr", "BO_Cmp", "BO_LT", "BO_GT", "BO_LE", "BO_GE", "BO_EQ", "BO_NE", "BO_And", "BO_Xor", "BO_Or", "BO_LAnd", "BO_LOr", "BO_Assign", "BO_MulAssign", "BO_DivAssign", "BO_RemAssign", "BO_AddAssign", "BO_SubAssign", "BO_ShlAssign", "BO_ShrAssign", "BO_AndAssign", "BO_XorAssign", "BO_OrAssign", "BO_Comma", "LCD_None", "LCD_ByCopy", "LCD_ByRef", "RQ_None", "RQ_LValue", "RQ_RValue", "Complete", "NonVirtualBase", "VirtualBase", "Delegating", "NotADL", "UsesADL", "CanPassInRegs", "CannotPassInRegs", "CanNeverPassInRegs", "Normal", "Copy", "Aggregate", "UETT_SizeOf", "UETT_DataSizeOf", "UETT_AlignOf", "UETT_PreferredAlignOf", "UETT_VecStep", "UETT_OpenMPRequiredSimdAlign", "UETT_VectorElements", "StmtBranch", "TemporaryDtorsBranch", "VirtualBaseBranch", "None", "Int64", "APValue", "ATT_ArrayRank", "ATT_ArrayExtent", "Qualified", "Unqualified", "ET_IsLValueExpr", "ET_IsRValueExpr", "None", "Indeterminate", "Int", "Float", "FixedPoint", "ComplexInt", "ComplexFloat", "LValue", "Vector", "Array", "Struct", "Union", "MemberPointer", "AddrLabelDiff", "HiddenVisibility", "ProtectedVisibility", "DefaultVisibility", "None", "Target", "CPUSpecific", "CPUDispatch", "TargetClones", "TargetVersion", "CK_Dependent", "CK_BitCast", "CK_LValueBitCast", "CK_LValueToRValueBitCast", "CK_LValueToRValue", "CK_NoOp", "CK_BaseToDerived", "CK_DerivedToBase", "CK_UncheckedDerivedToBase", "CK_Dynamic", "CK_ToUnion", "CK_ArrayToPointerDecay", "CK_FunctionToPointerDecay", "CK_NullToPointer", "CK_NullToMemberPointer", "CK_BaseToDerivedMemberPointer", "CK_DerivedToBaseMemberPointer", "CK_MemberPointerToBoolean", "CK_ReinterpretMemberPointer", "CK_UserDefinedConversion", "CK_ConstructorConversion", "CK_IntegralToPointer", "CK_PointerToIntegral", "CK_PointerToBoolean", "CK_ToVoid", "CK_MatrixCast", "CK_VectorSplat", "CK_IntegralCast", "CK_IntegralToBoolean", "CK_IntegralToFloating", "CK_FloatingToFixedPoint", "CK_FixedPointToFloating", "CK_FixedPointCast", "CK_FixedPointToIntegral", "CK_IntegralToFixedPoint", "CK_FixedPointToBoolean", "CK_FloatingToIntegral", "CK_FloatingToBoolean", "CK_BooleanToSignedIntegral", "CK_FloatingCast", "CK_CPointerToObjCPointerCast", "CK_BlockPointerToObjCPointerCast", "CK_AnyPointerToBlockPointerCast", "CK_ObjCObjectLValueCast", "CK_FloatingRealToComplex", "CK_FloatingComplexToReal", "CK_FloatingComplexToBoolean", "CK_FloatingComplexCast", "CK_FloatingComplexToIntegralComplex", "CK_IntegralRealToComplex", "CK_IntegralComplexToReal", "CK_IntegralComplexToBoolean", "CK_IntegralComplexCast", "CK_IntegralComplexToFloatingComplex", "CK_ARCProduceObject", "CK_ARCConsumeObject", "CK_ARCReclaimReturnedObject", "CK_ARCExtendBlockObject", "CK_AtomicToNonAtomic", "CK_NonAtomicToAtomic", "CK_CopyAndAutoreleaseBlockObject", "CK_BuiltinFnToFnPtr", "CK_ZeroToOCLOpaqueType", "CK_AddressSpaceConversion", "CK_IntToOCLSampler", "NOUR_None", "NOUR_Unevaluated", "NOUR_Constant", "NOUR_Discarded", "SFF_None", "SFF_NSString", "SFF_CFString", "CR_Default", "CR_ObjCAtFinally", "CR_OpenMP", "Func", "Function", "LFunction", "FuncDName", "FuncSig", "LFuncSig", "PrettyFunction", "PrettyFunctionNoVirtual", "SC_None", "SC_Extern", "SC_Static", "SC_PrivateExtern", "SC_Auto", "SC_Register", "S_IEEEhalf", "S_BFloat", "S_IEEEsingle", "S_IEEEdouble", "S_IEEEquad", "S_PPCDoubleDouble", "S_Float8E5M2", "S_Float8E5M2FNUZ", "S_Float8E4M3FN", "S_Float8E4M3FNUZ", "S_Float8E4M3B11FNUZ", "S_FloatTF32", "S_x87DoubleExtended", "OCLImage1dRO", "OCLImage1dArrayRO", "OCLImage1dBufferRO", "OCLImage2dRO", "OCLImage2dArrayRO", "OCLImage2dDepthRO", "OCLImage2dArrayDepthRO", "OCLImage2dMSAARO", "OCLImage2dArrayMSAARO", "OCLImage2dMSAADepthRO", "OCLImage2dArrayMSAADepthRO", "OCLImage3dRO", "OCLImage1dWO", "OCLImage1dArrayWO", "OCLImage1dBufferWO", "OCLImage2dWO", "OCLImage2dArrayWO", "OCLImage2dDepthWO", "OCLImage2dArrayDepthWO", "OCLImage2dMSAAWO", "OCLImage2dArrayMSAAWO", "OCLImage2dMSAADepthWO", "OCLImage2dArrayMSAADepthWO", "OCLImage3dWO", "OCLImage1dRW", "OCLImage1dArrayRW", "OCLImage1dBufferRW", "OCLImage2dRW", "OCLImage2dArrayRW", "OCLImage2dDepthRW", "OCLImage2dArrayDepthRW", "OCLImage2dMSAARW", "OCLImage2dArrayMSAARW", "OCLImage2dMSAADepthRW", "OCLImage2dArrayMSAADepthRW", "OCLImage3dRW", "OCLIntelSubgroupAVCMcePayload", "OCLIntelSubgroupAVCImePayload", "OCLIntelSubgroupAVCRefPayload", "OCLIntelSubgroupAVCSicPayload", "OCLIntelSubgroupAVCMceResult", "OCLIntelSubgroupAVCImeResult", "OCLIntelSubgroupAVCRefResult", "OCLIntelSubgroupAVCSicResult", "OCLIntelSubgroupAVCImeResultSingleReferenceStreamout", "OCLIntelSubgroupAVCImeResultDualReferenceStreamout", "OCLIntelSubgroupAVCImeSingleReferenceStreamin", "OCLIntelSubgroupAVCImeDualReferenceStreamin", "SveInt8", "SveInt16", "SveInt32", "SveInt64", "SveUint8", "SveUint16", "SveUint32", "SveUint64", "SveFloat16", "SveFloat32", "SveFloat64", "SveBFloat16", "SveInt8x2", "SveInt16x2", "SveInt32x2", "SveInt64x2", "SveUint8x2", "SveUint16x2", "SveUint32x2", "SveUint64x2", "SveFloat16x2", "SveFloat32x2", "SveFloat64x2", "SveBFloat16x2", "SveInt8x3", "SveInt16x3", "SveInt32x3", "SveInt64x3", "SveUint8x3", "SveUint16x3", "SveUint32x3", "SveUint64x3", "SveFloat16x3", "SveFloat32x3", "SveFloat64x3", "SveBFloat16x3", "SveInt8x4", "SveInt16x4", "SveInt32x4", "SveInt64x4", "SveUint8x4", "SveUint16x4", "SveUint32x4", "SveUint64x4", "SveFloat16x4", "SveFloat32x4", "SveFloat64x4", "SveBFloat16x4", "SveBool", "SveBoolx2", "SveBoolx4", "SveCount", "VectorQuad", "VectorPair", "RvvInt8mf8", "RvvInt8mf4", "RvvInt8mf2", "RvvInt8m1", "RvvInt8m2", "RvvInt8m4", "RvvInt8m8", "RvvUint8mf8", "RvvUint8mf4", "RvvUint8mf2", "RvvUint8m1", "RvvUint8m2", "RvvUint8m4", "RvvUint8m8", "RvvInt16mf4", "RvvInt16mf2", "RvvInt16m1", "RvvInt16m2", "RvvInt16m4", "RvvInt16m8", "RvvUint16mf4", "RvvUint16mf2", "RvvUint16m1", "RvvUint16m2", "RvvUint16m4", "RvvUint16m8", "RvvInt32mf2", "RvvInt32m1", "RvvInt32m2", "RvvInt32m4", "RvvInt32m8", "RvvUint32mf2", "RvvUint32m1", "RvvUint32m2", "RvvUint32m4", "RvvUint32m8", "RvvInt64m1", "RvvInt64m2", "RvvInt64m4", "RvvInt64m8", "RvvUint64m1", "RvvUint64m2", "RvvUint64m4", "RvvUint64m8", "RvvFloat16mf4", "RvvFloat16mf2", "RvvFloat16m1", "RvvFloat16m2", "RvvFloat16m4", "RvvFloat16m8", "RvvBFloat16mf4", "RvvBFloat16mf2", "RvvBFloat16m1", "RvvBFloat16m2", "RvvBFloat16m4", "RvvBFloat16m8", "RvvFloat32mf2", "RvvFloat32m1", "RvvFloat32m2", "RvvFloat32m4", "RvvFloat32m8", "RvvFloat64m1", "RvvFloat64m2", "RvvFloat64m4", "RvvFloat64m8", "RvvBool1", "RvvBool2", "RvvBool4", "RvvBool8", "RvvBool16", "RvvBool32", "RvvBool64", "RvvInt8mf8x2", "RvvInt8mf8x3", "RvvInt8mf8x4", "RvvInt8mf8x5", "RvvInt8mf8x6", "RvvInt8mf8x7", "RvvInt8mf8x8", "RvvInt8mf4x2", "RvvInt8mf4x3", "RvvInt8mf4x4", "RvvInt8mf4x5", "RvvInt8mf4x6", "RvvInt8mf4x7", "RvvInt8mf4x8", "RvvInt8mf2x2", "RvvInt8mf2x3", "RvvInt8mf2x4", "RvvInt8mf2x5", "RvvInt8mf2x6", "RvvInt8mf2x7", "RvvInt8mf2x8", "RvvInt8m1x2", "RvvInt8m1x3", "RvvInt8m1x4", "RvvInt8m1x5", "RvvInt8m1x6", "RvvInt8m1x7", "RvvInt8m1x8", "RvvInt8m2x2", "RvvInt8m2x3", "RvvInt8m2x4", "RvvInt8m4x2", "RvvUint8mf8x2", "RvvUint8mf8x3", "RvvUint8mf8x4", "RvvUint8mf8x5", "RvvUint8mf8x6", "RvvUint8mf8x7", "RvvUint8mf8x8", "RvvUint8mf4x2", "RvvUint8mf4x3", "RvvUint8mf4x4", "RvvUint8mf4x5", "RvvUint8mf4x6", "RvvUint8mf4x7", "RvvUint8mf4x8", "RvvUint8mf2x2", "RvvUint8mf2x3", "RvvUint8mf2x4", "RvvUint8mf2x5", "RvvUint8mf2x6", "RvvUint8mf2x7", "RvvUint8mf2x8", "RvvUint8m1x2", "RvvUint8m1x3", "RvvUint8m1x4", "RvvUint8m1x5", "RvvUint8m1x6", "RvvUint8m1x7", "RvvUint8m1x8", "RvvUint8m2x2", "RvvUint8m2x3", "RvvUint8m2x4", "RvvUint8m4x2", "RvvInt16mf4x2", "RvvInt16mf4x3", "RvvInt16mf4x4", "RvvInt16mf4x5", "RvvInt16mf4x6", "RvvInt16mf4x7", "RvvInt16mf4x8", "RvvInt16mf2x2", "RvvInt16mf2x3", "RvvInt16mf2x4", "RvvInt16mf2x5", "RvvInt16mf2x6", "RvvInt16mf2x7", "RvvInt16mf2x8", "RvvInt16m1x2", "RvvInt16m1x3", "RvvInt16m1x4", "RvvInt16m1x5", "RvvInt16m1x6", "RvvInt16m1x7", "RvvInt16m1x8", "RvvInt16m2x2", "RvvInt16m2x3", "RvvInt16m2x4", "RvvInt16m4x2", "RvvUint16mf4x2", "RvvUint16mf4x3", "RvvUint16mf4x4", "RvvUint16mf4x5", "RvvUint16mf4x6", "RvvUint16mf4x7", "RvvUint16mf4x8", "RvvUint16mf2x2", "RvvUint16mf2x3", "RvvUint16mf2x4", "RvvUint16mf2x5", "RvvUint16mf2x6", "RvvUint16mf2x7", "RvvUint16mf2x8", "RvvUint16m1x2", "RvvUint16m1x3", "RvvUint16m1x4", "RvvUint16m1x5", "RvvUint16m1x6", "RvvUint16m1x7", "RvvUint16m1x8", "RvvUint16m2x2", "RvvUint16m2x3", "RvvUint16m2x4", "RvvUint16m4x2", "RvvInt32mf2x2", "RvvInt32mf2x3", "RvvInt32mf2x4", "RvvInt32mf2x5", "RvvInt32mf2x6", "RvvInt32mf2x7", "RvvInt32mf2x8", "RvvInt32m1x2", "RvvInt32m1x3", "RvvInt32m1x4", "RvvInt32m1x5", "RvvInt32m1x6", "RvvInt32m1x7", "RvvInt32m1x8", "RvvInt32m2x2", "RvvInt32m2x3", "RvvInt32m2x4", "RvvInt32m4x2", "RvvUint32mf2x2", "RvvUint32mf2x3", "RvvUint32mf2x4", "RvvUint32mf2x5", "RvvUint32mf2x6", "RvvUint32mf2x7", "RvvUint32mf2x8", "RvvUint32m1x2", "RvvUint32m1x3", "RvvUint32m1x4", "RvvUint32m1x5", "RvvUint32m1x6", "RvvUint32m1x7", "RvvUint32m1x8", "RvvUint32m2x2", "RvvUint32m2x3", "RvvUint32m2x4", "RvvUint32m4x2", "RvvInt64m1x2", "RvvInt64m1x3", "RvvInt64m1x4", "RvvInt64m1x5", "RvvInt64m1x6", "RvvInt64m1x7", "RvvInt64m1x8", "RvvInt64m2x2", "RvvInt64m2x3", "RvvInt64m2x4", "RvvInt64m4x2", "RvvUint64m1x2", "RvvUint64m1x3", "RvvUint64m1x4", "RvvUint64m1x5", "RvvUint64m1x6", "RvvUint64m1x7", "RvvUint64m1x8", "RvvUint64m2x2", "RvvUint64m2x3", "RvvUint64m2x4", "RvvUint64m4x2", "RvvFloat16mf4x2", "RvvFloat16mf4x3", "RvvFloat16mf4x4", "RvvFloat16mf4x5", "RvvFloat16mf4x6", "RvvFloat16mf4x7", "RvvFloat16mf4x8", "RvvFloat16mf2x2", "RvvFloat16mf2x3", "RvvFloat16mf2x4", "RvvFloat16mf2x5", "RvvFloat16mf2x6", "RvvFloat16mf2x7", "RvvFloat16mf2x8", "RvvFloat16m1x2", "RvvFloat16m1x3", "RvvFloat16m1x4", "RvvFloat16m1x5", "RvvFloat16m1x6", "RvvFloat16m1x7", "RvvFloat16m1x8", "RvvFloat16m2x2", "RvvFloat16m2x3", "RvvFloat16m2x4", "RvvFloat16m4x2", "RvvFloat32mf2x2", "RvvFloat32mf2x3", "RvvFloat32mf2x4", "RvvFloat32mf2x5", "RvvFloat32mf2x6", "RvvFloat32mf2x7", "RvvFloat32mf2x8", "RvvFloat32m1x2", "RvvFloat32m1x3", "RvvFloat32m1x4", "RvvFloat32m1x5", "RvvFloat32m1x6", "RvvFloat32m1x7", "RvvFloat32m1x8", "RvvFloat32m2x2", "RvvFloat32m2x3", "RvvFloat32m2x4", "RvvFloat32m4x2", "RvvFloat64m1x2", "RvvFloat64m1x3", "RvvFloat64m1x4", "RvvFloat64m1x5", "RvvFloat64m1x6", "RvvFloat64m1x7", "RvvFloat64m1x8", "RvvFloat64m2x2", "RvvFloat64m2x3", "RvvFloat64m2x4", "RvvFloat64m4x2", "RvvBFloat16mf4x2", "RvvBFloat16mf4x3", "RvvBFloat16mf4x4", "RvvBFloat16mf4x5", "RvvBFloat16mf4x6", "RvvBFloat16mf4x7", "RvvBFloat16mf4x8", "RvvBFloat16mf2x2", "RvvBFloat16mf2x3", "RvvBFloat16mf2x4", "RvvBFloat16mf2x5", "RvvBFloat16mf2x6", "RvvBFloat16mf2x7", "RvvBFloat16mf2x8", "RvvBFloat16m1x2", "RvvBFloat16m1x3", "RvvBFloat16m1x4", "RvvBFloat16m1x5", "RvvBFloat16m1x6", "RvvBFloat16m1x7", "RvvBFloat16m1x8", "RvvBFloat16m2x2", "RvvBFloat16m2x3", "RvvBFloat16m2x4", "RvvBFloat16m4x2", "WasmExternRef", "Void", "Bool", "Char_U", "UChar", "WChar_U", "Char8", "Char16", "Char32", "UShort", "UInt", "ULong", "ULongLong", "UInt128", "Char_S", "SChar", "WChar_S", "Short", "Int", "Long", "LongLong", "Int128", "ShortAccum", "Accum", "LongAccum", "UShortAccum", "UAccum", "ULongAccum", "ShortFract", "Fract", "LongFract", "UShortFract", "UFract", "ULongFract", "SatShortAccum", "SatAccum", "SatLongAccum", "SatUShortAccum", "SatUAccum", "SatULongAccum", "SatShortFract", "SatFract", "SatLongFract", "SatUShortFract", "SatUFract", "SatULongFract", "Half", "Float", "Double", "LongDouble", "Float16", "BFloat16", "Float128", "Ibm128", "NullPtr", "ObjCId", "ObjCClass", "ObjCSel", "OCLSampler", "OCLEvent", "OCLClkEvent", "OCLQueue", "OCLReserveID", "Dependent", "Overload", "BoundMember", "PseudoObject", "UnknownAny", "BuiltinFn", "ARCUnbridgedCast", "IncompleteMatrixIdx", "OMPArraySection", "OMPArrayShaping", "OMPIterator", "Ordinary", "Wide", "UTF8", "UTF16", "UTF32", "Unevaluated", "SD_FullExpression", "SD_Automatic", "SD_Thread", "SD_Static", "SD_Dynamic", "Struct", "Interface", "Union", "Class", "Enum", "TSK_Undeclared", "TSK_ImplicitInstantiation", "TSK_ExplicitSpecialization", "TSK_ExplicitInstantiationDeclaration", "TSK_ExplicitInstantiationDefinition", "TSCS_unspecified", "TSCS___thread", "TSCS_thread_local", "TSCS__Thread_local", "VK_PRValue", "VK_LValue", "VK_XValue", "UO_PostInc", "UO_PostDec", "UO_PreInc", "UO_PreDec", "UO_AddrOf", "UO_Deref", "UO_Plus", "UO_Minus", "UO_Not", "UO_LNot", "UO_Real", "UO_Imag", "UO_Extension", "UO_Coawait", "AddressSpace", "AnnotateType", "ArmIn", "ArmInOut", "ArmMveStrictPolymorphism", "ArmOut", "ArmPreserves", "ArmStreaming", "ArmStreamingCompatible", "BTFTypeTag", "CmseNSCall", "HLSLGroupSharedAddressSpace", "HLSLParamModifier", "NoDeref", "ObjCGC", "ObjCInertUnsafeUnretained", "ObjCKindOf", "OpenCLConstantAddressSpace", "OpenCLGenericAddressSpace", "OpenCLGlobalAddressSpace", "OpenCLGlobalDeviceAddressSpace", "OpenCLGlobalHostAddressSpace", "OpenCLLocalAddressSpace", "OpenCLPrivateAddressSpace", "Ptr32", "Ptr64", "SPtr", "TypeNonNull", "TypeNullUnspecified", "TypeNullable", "TypeNullableResult", "UPtr", "WebAssemblyFuncref", "CodeAlign", "FallThrough", "Likely", "MustTail", "OpenCLUnrollHint", "Unlikely", "AlwaysInline", "NoInline", "NoMerge", "Suppress", "AArch64SVEPcs", "AArch64VectorPcs", "AMDGPUKernelCall", "AcquireHandle", "AnyX86NoCfCheck", "CDecl", "FastCall", "IntelOclBicc", "LifetimeBound", "M68kRTD", "MSABI", "NSReturnsRetained", "ObjCOwnership", "Pascal", "Pcs", "PreserveAll", "PreserveMost", "RegCall", "StdCall", "SwiftAsyncCall", "SwiftCall", "SysVABI", "ThisCall", "VectorCall", "SwiftAsyncContext", "SwiftContext", "SwiftErrorResult", "SwiftIndirectResult", "Annotate", "CFConsumed", "CarriesDependency", "NSConsumed", "NonNull", "OSConsumed", "PassObjectSize", "ReleaseHandle", "UseHandle", "HLSLSV_DispatchThreadID", "HLSLSV_GroupIndex", "AMDGPUFlatWorkGroupSize", "AMDGPUNumSGPR", "AMDGPUNumVGPR", "AMDGPUWavesPerEU", "ARMInterrupt", "AVRInterrupt", "AVRSignal", "AcquireCapability", "AcquiredAfter", "AcquiredBefore", "AlignMac68k", "AlignNatural", "Aligned", "AllocAlign", "AllocSize", "AlwaysDestroy", "AnalyzerNoReturn", "AnyX86Interrupt", "AnyX86NoCallerSavedRegisters", "ArcWeakrefUnavailable", "ArgumentWithTypeTag", "ArmBuiltinAlias", "ArmLocallyStreaming", "ArmNew", "Artificial", "AsmLabel", "AssertCapability", "AssertExclusiveLock", "AssertSharedLock", "AssumeAligned", "Assumption", "Availability", "AvailableOnlyInDefaultEvalMethod", "BPFPreserveAccessIndex", "BPFPreserveStaticOffset", "BTFDeclTag", "Blocks", "Builtin", "C11NoReturn", "CFAuditedTransfer", "CFGuard", "CFICanonicalJumpTable", "CFReturnsNotRetained", "CFReturnsRetained", "CFUnknownTransfer", "CPUDispatch", "CPUSpecific", "CUDAConstant", "CUDADevice", "CUDADeviceBuiltinSurfaceType", "CUDADeviceBuiltinTextureType", "CUDAGlobal", "CUDAHost", "CUDAInvalidTarget", "CUDALaunchBounds", "CUDAShared", "CXX11NoReturn", "CallableWhen", "Callback", "Capability", "CapturedRecord", "Cleanup", "CmseNSEntry", "CodeModel", "CodeSeg", "Cold", "Common", "Const", "ConstInit", "Constructor", "Consumable", "ConsumableAutoCast", "ConsumableSetOnRead", "Convergent", "CoroDisableLifetimeBound", "CoroLifetimeBound", "CoroOnlyDestroyWhenComplete", "CoroReturnType", "CoroWrapper", "CountedBy", "DLLExport", "DLLExportStaticLocal", "DLLImport", "DLLImportStaticLocal", "Deprecated", "Destructor", "DiagnoseAsBuiltin", "DiagnoseIf", "DisableSanitizerInstrumentation", "DisableTailCalls", "EmptyBases", "EnableIf", "EnforceTCB", "EnforceTCBLeaf", "EnumExtensibility", "Error", "ExcludeFromExplicitInstantiation", "ExclusiveTrylockFunction", "ExternalSourceSymbol", "Final", "FlagEnum", "Flatten", "Format", "FormatArg", "FunctionReturnThunks", "GNUInline", "GuardedBy", "GuardedVar", "HIPManaged", "HLSLNumThreads", "HLSLResource", "HLSLResourceBinding", "HLSLShader", "Hot", "IBAction", "IBOutlet", "IBOutletCollection", "InitPriority", "InternalLinkage", "LTOVisibilityPublic", "LayoutVersion", "Leaf", "LockReturned", "LocksExcluded", "M68kInterrupt", "MIGServerRoutine", "MSAllocator", "MSConstexpr", "MSInheritance", "MSNoVTable", "MSP430Interrupt", "MSStruct", "MSVtorDisp", "MaxFieldAlignment", "MayAlias", "MaybeUndef", "MicroMips", "MinSize", "MinVectorWidth", "Mips16", "MipsInterrupt", "MipsLongCall", "MipsShortCall", "NSConsumesSelf", "NSErrorDomain", "NSReturnsAutoreleased", "NSReturnsNotRetained", "NVPTXKernel", "Naked", "NoAlias", "NoCommon", "NoDebug", "NoDestroy", "NoDuplicate", "NoInstrumentFunction", "NoMicroMips", "NoMips16", "NoProfileFunction", "NoRandomizeLayout", "NoReturn", "NoSanitize", "NoSpeculativeLoadHardening", "NoSplitStack", "NoStackProtector", "NoThreadSafetyAnalysis", "NoThrow", "NoUniqueAddress", "NoUwtable", "NotTailCalled", "OMPAllocateDecl", "OMPCaptureNoInit", "OMPDeclareTargetDecl", "OMPDeclareVariant", "OMPThreadPrivateDecl", "OSConsumesThis", "OSReturnsNotRetained", "OSReturnsRetained", "OSReturnsRetainedOnNonZero", "OSReturnsRetainedOnZero", "ObjCBridge", "ObjCBridgeMutable", "ObjCBridgeRelated", "ObjCException", "ObjCExplicitProtocolImpl", "ObjCExternallyRetained", "ObjCIndependentClass", "ObjCMethodFamily", "ObjCNSObject", "ObjCPreciseLifetime", "ObjCRequiresPropertyDefs", "ObjCRequiresSuper", "ObjCReturnsInnerPointer", "ObjCRootClass", "ObjCSubclassingRestricted", "OpenCLIntelReqdSubGroupSize", "OpenCLKernel", "OptimizeNone", "Override", "Owner", "Ownership", "Packed", "ParamTypestate", "PatchableFunctionEntry", "Pointer", "PragmaClangBSSSection", "PragmaClangDataSection", "PragmaClangRelroSection", "PragmaClangRodataSection", "PragmaClangTextSection", "PreferredName", "PreferredType", "PtGuardedBy", "PtGuardedVar", "Pure", "RISCVInterrupt", "RandomizeLayout", "ReadOnlyPlacement", "Reinitializes", "ReleaseCapability", "ReqdWorkGroupSize", "RequiresCapability", "Restrict", "Retain", "ReturnTypestate", "ReturnsNonNull", "ReturnsTwice", "SYCLKernel", "SYCLSpecialClass", "ScopedLockable", "Section", "SelectAny", "Sentinel", "SetTypestate", "SharedTrylockFunction", "SpeculativeLoadHardening", "StandaloneDebug", "StrictFP", "StrictGuardStackCheck", "SwiftAsync", "SwiftAsyncError", "SwiftAsyncName", "SwiftAttr", "SwiftBridge", "SwiftBridgedTypedef", "SwiftError", "SwiftImportAsNonGeneric", "SwiftImportPropertyAsAccessors", "SwiftName", "SwiftNewType", "SwiftPrivate", "TLSModel", "Target", "TargetClones", "TargetVersion", "TestTypestate", "TransparentUnion", "TrivialABI", "TryAcquireCapability", "TypeTagForDatatype", "TypeVisibility", "Unavailable", "Uninitialized", "UnsafeBufferUsage", "Unused", "Used", "UsingIfExists", "Uuid", "VecReturn", "VecTypeHint", "Visibility", "WarnUnused", "WarnUnusedResult", "Weak", "WeakImport", "WeakRef", "WebAssemblyExportName", "WebAssemblyImportModule", "WebAssemblyImportName", "WorkGroupSizeHint", "X86ForceAlignArgPointer", "XRayInstrument", "XRayLogArgs", "ZeroCallUsedRegs", "AbiTag", "Alias", "AlignValue", "BuiltinAlias", "CalledOnce", "IFunc", "InitSeg", "LoaderUninitialized", "LoopHint", "Mode", "NoBuiltin", "NoEscape", "OMPCaptureKind", "OMPDeclareSimdDecl", "OMPReferencedVar", "ObjCBoxable", "ObjCClassStub", "ObjCDesignatedInitializer", "ObjCDirect", "ObjCDirectMembers", "ObjCNonLazyClass", "ObjCNonRuntimeProtocol", "ObjCRuntimeName", "ObjCRuntimeVisible", "OpenCLAccess", "Overloadable", "RenderScriptKernel", "SwiftObjCMembers", "SwiftVersionedAddition", "SwiftVersionedRemoval", "Thread", "Initializer", "ScopeBegin", "ScopeEnd", "NewAllocator", "LifetimeEnds", "LoopExit", "Statement", "Constructor", "CXXRecordTypedCall", "AutomaticObjectDtor", "DeleteDtor", "BaseDtor", "MemberDtor", "TemporaryDtor", "CleanupFunction", "FOK_None", "FOK_Declared", "FOK_Undeclared", "Unowned", "Visible", "VisibleWhenImported", "ReachableWhenImported", "ModulePrivate", ])),
-        ],
-    ).unwrap()
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__VarDecl__InitializationStyle(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
 }
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__Qualifiers__ObjCLifetime(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__FunctionDecl__TemplatedKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__TypeDependenceScope__TypeDependence(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__ExprDependenceScope__ExprDependence(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__MSVtorDispMode(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__LinkageSpecLanguageIDs(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__LanguageLinkage(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__ExprValueKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__PredefinedIdentKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__BuiltinType__Kind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__InClassInitStyle(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__ArrayTypeTrait(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__ExprObjectKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__CallingConv(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__UserDefinedLiteral__LiteralOperatorKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__LambdaCaptureDefault(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__attr__Kind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__Decl__ModuleOwnershipKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__ConstantResultStorageKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__Linkage(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__ArraySizeModifier(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__AutoTypeKeyword(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__ExceptionSpecificationType(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__CXXConstructionKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__ImplicitParamKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__CapturedRegionKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__CFGElement__Kind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__UnaryOperatorKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__CXXNewInitializationStyle(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__CastKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__ElaboratedTypeKeyword(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__VectorKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__TagTypeKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__CanThrowResult(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__BuiltinTemplateKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__IfStatementKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__CharacterLiteralKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__StorageDuration(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__ExpressionTrait(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__MultiVersionKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__UnaryTransformType__UTTKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__NonOdrUseReason(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__Visibility(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__ObjCStringFormatFamily(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__VarDecl__DefinitionKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__ConstexprSpecKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__CallExpr__ADLCallKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_llvm__APFloatBase__Semantics(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__Decl__ObjCDeclQualifier(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__OverloadedOperatorKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__BinaryOperatorKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__StorageClass(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__RecordArgPassingKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__RefQualifierKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__SourceLocIdentKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__StringLiteralKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__TemplateSpecializationKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__DeductionCandidate(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__ThreadStorageClassSpecifier(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__TypeOfKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__PragmaMSCommentKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__TypeTrait(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__UnaryExprOrTypeTrait(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__APValue__ValueKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__AccessSpecifier(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__AtomicExpr__AtomicOp(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__CFGTerminator__Kind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_clang__Decl__FriendObjectKind(id: u64, name: *const c_char) {
+  let name_str = unsafe { std::ffi::CStr::from_ptr(name).to_string_lossy().into_owned() };
+  ENUM_QUEUE.with(|q| q.borrow_mut().push((id, name_str)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VarDecl__TLS_None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VarDecl__TLS_Static(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VarDecl__TLS_Dynamic(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VarDecl__CInit(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VarDecl__CallInit(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VarDecl__ListInit(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VarDecl__ParenListInit(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Qualifiers__OCL_None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Qualifiers__OCL_ExplicitNone(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Qualifiers__OCL_Strong(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Qualifiers__OCL_Weak(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Qualifiers__OCL_Autoreleasing(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__FunctionDecl__TK_NonTemplate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__FunctionDecl__TK_FunctionTemplate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__FunctionDecl__TK_MemberSpecialization(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__FunctionDecl__TK_FunctionTemplateSpecialization(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__FunctionDecl__TK_DependentFunctionTemplateSpecialization(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__FunctionDecl__TK_DependentNonTemplate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TypeDependenceScope__UnexpandedPack(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TypeDependenceScope__Instantiation(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TypeDependenceScope__Dependent(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TypeDependenceScope__VariablyModified(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TypeDependenceScope__Error(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TypeDependenceScope__None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TypeDependenceScope__All(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TypeDependenceScope__DependentInstantiation(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ExprDependenceScope__UnexpandedPack(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ExprDependenceScope__Instantiation(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ExprDependenceScope__Type(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ExprDependenceScope__Value(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ExprDependenceScope__Error(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ExprDependenceScope__None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ExprDependenceScope__All(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ExprDependenceScope__TypeValue(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ExprDependenceScope__TypeInstantiation(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ExprDependenceScope__ValueInstantiation(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ExprDependenceScope__TypeValueInstantiation(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ExprDependenceScope__ErrorDependent(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__MSVtorDispMode__Never(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__MSVtorDispMode__ForVBaseOverride(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__MSVtorDispMode__ForVFTable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__LinkageSpecLanguageIDs__C(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__LinkageSpecLanguageIDs__CXX(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CLanguageLinkage(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CXXLanguageLinkage(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__NoLanguageLinkage(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VK_PRValue(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VK_LValue(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VK_XValue(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PredefinedIdentKind__Func(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PredefinedIdentKind__Function(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PredefinedIdentKind__LFunction(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PredefinedIdentKind__FuncDName(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PredefinedIdentKind__FuncSig(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PredefinedIdentKind__LFuncSig(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PredefinedIdentKind__PrettyFunction(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PredefinedIdentKind__PrettyFunctionNoVirtual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage1dRO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage1dArrayRO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage1dBufferRO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dRO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dArrayRO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dDepthRO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dArrayDepthRO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dMSAARO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dArrayMSAARO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dMSAADepthRO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dArrayMSAADepthRO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage3dRO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage1dWO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage1dArrayWO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage1dBufferWO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dWO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dArrayWO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dDepthWO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dArrayDepthWO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dMSAAWO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dArrayMSAAWO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dMSAADepthWO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dArrayMSAADepthWO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage3dWO(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage1dRW(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage1dArrayRW(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage1dBufferRW(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dRW(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dArrayRW(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dDepthRW(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dArrayDepthRW(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dMSAARW(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dArrayMSAARW(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dMSAADepthRW(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage2dArrayMSAADepthRW(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLImage3dRW(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLIntelSubgroupAVCMcePayload(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLIntelSubgroupAVCImePayload(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLIntelSubgroupAVCRefPayload(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLIntelSubgroupAVCSicPayload(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLIntelSubgroupAVCMceResult(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLIntelSubgroupAVCImeResult(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLIntelSubgroupAVCRefResult(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLIntelSubgroupAVCSicResult(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLIntelSubgroupAVCImeResultSingleReferenceStreamout(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLIntelSubgroupAVCImeResultDualReferenceStreamout(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLIntelSubgroupAVCImeSingleReferenceStreamin(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLIntelSubgroupAVCImeDualReferenceStreamin(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt16(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt32(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt64(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint16(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint32(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint64(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveFloat16(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveFloat32(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveFloat64(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveBFloat16(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt8x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt16x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt32x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt64x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint8x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint16x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint32x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint64x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveFloat16x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveFloat32x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveFloat64x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveBFloat16x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt8x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt16x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt32x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt64x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint8x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint16x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint32x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint64x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveFloat16x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveFloat32x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveFloat64x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveBFloat16x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt8x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt16x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt32x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveInt64x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint8x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint16x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint32x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveUint64x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveFloat16x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveFloat32x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveFloat64x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveBFloat16x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveBool(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveBoolx2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveBoolx4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SveCount(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__VectorQuad(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__VectorPair(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m1(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m1(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m1(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m1(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32mf2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m1(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32mf2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m1(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m1(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m1(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m1(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m1(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32mf2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m1(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m1(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBool1(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBool2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBool4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBool8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBool16(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBool32(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBool64(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf8x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf8x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf8x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf8x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf8x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf8x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf8x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf4x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf4x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf4x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf4x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf4x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf4x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf2x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf2x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf2x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8mf2x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m1x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m1x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m1x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m1x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m1x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m1x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m1x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt8m4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf8x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf8x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf8x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf8x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf8x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf8x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf8x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf4x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf4x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf4x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf4x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf4x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf4x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf2x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf2x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf2x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8mf2x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m1x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m1x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m1x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m1x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m1x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m1x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m1x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint8m4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf4x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf4x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf4x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf4x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf4x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf4x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf2x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf2x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf2x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16mf2x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m1x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m1x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m1x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m1x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m1x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m1x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m1x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt16m4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf4x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf4x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf4x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf4x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf4x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf4x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf2x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf2x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf2x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16mf2x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m1x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m1x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m1x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m1x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m1x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m1x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m1x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint16m4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32mf2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32mf2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32mf2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32mf2x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32mf2x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32mf2x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32mf2x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m1x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m1x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m1x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m1x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m1x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m1x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m1x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt32m4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32mf2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32mf2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32mf2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32mf2x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32mf2x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32mf2x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32mf2x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m1x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m1x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m1x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m1x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m1x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m1x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m1x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint32m4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m1x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m1x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m1x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m1x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m1x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m1x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m1x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvInt64m4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m1x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m1x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m1x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m1x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m1x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m1x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m1x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvUint64m4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf4x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf4x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf4x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf4x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf4x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf4x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf2x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf2x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf2x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16mf2x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m1x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m1x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m1x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m1x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m1x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m1x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m1x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat16m4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32mf2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32mf2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32mf2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32mf2x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32mf2x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32mf2x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32mf2x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m1x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m1x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m1x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m1x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m1x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m1x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m1x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat32m4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m1x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m1x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m1x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m1x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m1x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m1x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m1x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvFloat64m4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf4x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf4x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf4x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf4x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf4x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf4x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf2x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf2x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf2x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16mf2x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m1x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m1x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m1x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m1x5(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m1x6(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m1x7(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m1x8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m2x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m2x3(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m2x4(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__RvvBFloat16m4x2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__WasmExternRef(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Void(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Bool(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Char_U(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__UChar(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__WChar_U(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Char8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Char16(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Char32(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__UShort(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__UInt(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__ULong(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__ULongLong(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__UInt128(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Char_S(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SChar(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__WChar_S(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Short(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Int(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Long(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__LongLong(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Int128(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__ShortAccum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Accum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__LongAccum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__UShortAccum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__UAccum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__ULongAccum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__ShortFract(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Fract(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__LongFract(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__UShortFract(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__UFract(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__ULongFract(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SatShortAccum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SatAccum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SatLongAccum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SatUShortAccum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SatUAccum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SatULongAccum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SatShortFract(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SatFract(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SatLongFract(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SatUShortFract(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SatUFract(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__SatULongFract(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Half(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Float(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Double(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__LongDouble(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Float16(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__BFloat16(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Float128(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Ibm128(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__NullPtr(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__ObjCId(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__ObjCClass(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__ObjCSel(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLSampler(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLEvent(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLClkEvent(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLQueue(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OCLReserveID(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Dependent(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__Overload(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__BoundMember(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__PseudoObject(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__UnknownAny(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__BuiltinFn(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__ARCUnbridgedCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__IncompleteMatrixIdx(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OMPArraySection(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OMPArrayShaping(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BuiltinType__OMPIterator(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ICIS_NoInit(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ICIS_CopyInit(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ICIS_ListInit(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ATT_ArrayRank(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ATT_ArrayExtent(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OK_Ordinary(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OK_BitField(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OK_VectorComponent(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OK_ObjCProperty(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OK_ObjCSubscript(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OK_MatrixComponent(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_C(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_X86StdCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_X86FastCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_X86ThisCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_X86VectorCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_X86Pascal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_Win64(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_X86_64SysV(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_X86RegCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_AAPCS(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_AAPCS_VFP(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_IntelOclBicc(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_SpirFunction(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_OpenCLKernel(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_Swift(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_SwiftAsync(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_PreserveMost(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_PreserveAll(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_AArch64VectorCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_AArch64SVEPCS(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_AMDGPUKernelCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CC_M68kRTD(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UserDefinedLiteral__LOK_Raw(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UserDefinedLiteral__LOK_Template(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UserDefinedLiteral__LOK_Integer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UserDefinedLiteral__LOK_Floating(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UserDefinedLiteral__LOK_String(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UserDefinedLiteral__LOK_Character(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__LCD_None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__LCD_ByCopy(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__LCD_ByRef(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AddressSpace(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AnnotateType(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ArmIn(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ArmInOut(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ArmMveStrictPolymorphism(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ArmOut(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ArmPreserves(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ArmStreaming(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ArmStreamingCompatible(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__BTFTypeTag(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CmseNSCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__HLSLGroupSharedAddressSpace(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__HLSLParamModifier(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoDeref(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCGC(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCInertUnsafeUnretained(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCKindOf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OpenCLConstantAddressSpace(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OpenCLGenericAddressSpace(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OpenCLGlobalAddressSpace(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OpenCLGlobalDeviceAddressSpace(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OpenCLGlobalHostAddressSpace(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OpenCLLocalAddressSpace(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OpenCLPrivateAddressSpace(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Ptr32(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Ptr64(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SPtr(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__TypeNonNull(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__TypeNullUnspecified(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__TypeNullable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__TypeNullableResult(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__UPtr(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__WebAssemblyFuncref(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CodeAlign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__FallThrough(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Likely(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MustTail(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OpenCLUnrollHint(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Unlikely(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AlwaysInline(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoInline(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoMerge(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Suppress(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AArch64SVEPcs(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AArch64VectorPcs(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AMDGPUKernelCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AcquireHandle(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AnyX86NoCfCheck(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CDecl(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__FastCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__IntelOclBicc(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__LifetimeBound(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__M68kRTD(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MSABI(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NSReturnsRetained(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCOwnership(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Pascal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Pcs(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__PreserveAll(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__PreserveMost(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__RegCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__StdCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftAsyncCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SysVABI(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ThisCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__VectorCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftAsyncContext(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftContext(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftErrorResult(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftIndirectResult(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Annotate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CFConsumed(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CarriesDependency(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NSConsumed(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NonNull(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OSConsumed(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__PassObjectSize(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ReleaseHandle(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__UseHandle(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__HLSLSV_DispatchThreadID(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__HLSLSV_GroupIndex(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AMDGPUFlatWorkGroupSize(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AMDGPUNumSGPR(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AMDGPUNumVGPR(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AMDGPUWavesPerEU(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ARMInterrupt(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AVRInterrupt(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AVRSignal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AcquireCapability(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AcquiredAfter(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AcquiredBefore(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AlignMac68k(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AlignNatural(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Aligned(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AllocAlign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AllocSize(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AlwaysDestroy(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AnalyzerNoReturn(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AnyX86Interrupt(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AnyX86NoCallerSavedRegisters(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ArcWeakrefUnavailable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ArgumentWithTypeTag(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ArmBuiltinAlias(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ArmLocallyStreaming(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ArmNew(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Artificial(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AsmLabel(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AssertCapability(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AssertExclusiveLock(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AssertSharedLock(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AssumeAligned(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Assumption(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Availability(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AvailableOnlyInDefaultEvalMethod(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__BPFPreserveAccessIndex(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__BPFPreserveStaticOffset(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__BTFDeclTag(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Blocks(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Builtin(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__C11NoReturn(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CFAuditedTransfer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CFGuard(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CFICanonicalJumpTable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CFReturnsNotRetained(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CFReturnsRetained(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CFUnknownTransfer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CPUDispatch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CPUSpecific(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CUDAConstant(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CUDADevice(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CUDADeviceBuiltinSurfaceType(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CUDADeviceBuiltinTextureType(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CUDAGlobal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CUDAHost(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CUDAInvalidTarget(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CUDALaunchBounds(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CUDAShared(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CXX11NoReturn(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CallableWhen(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Callback(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Capability(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CapturedRecord(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Cleanup(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CmseNSEntry(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CodeModel(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CodeSeg(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Cold(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Common(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Const(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ConstInit(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Constructor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Consumable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ConsumableAutoCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ConsumableSetOnRead(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Convergent(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CoroDisableLifetimeBound(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CoroLifetimeBound(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CoroOnlyDestroyWhenComplete(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CoroReturnType(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CoroWrapper(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CountedBy(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__DLLExport(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__DLLExportStaticLocal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__DLLImport(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__DLLImportStaticLocal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Deprecated(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Destructor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__DiagnoseAsBuiltin(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__DiagnoseIf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__DisableSanitizerInstrumentation(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__DisableTailCalls(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__EmptyBases(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__EnableIf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__EnforceTCB(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__EnforceTCBLeaf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__EnumExtensibility(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Error(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ExcludeFromExplicitInstantiation(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ExclusiveTrylockFunction(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ExternalSourceSymbol(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Final(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__FlagEnum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Flatten(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Format(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__FormatArg(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__FunctionReturnThunks(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__GNUInline(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__GuardedBy(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__GuardedVar(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__HIPManaged(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__HLSLNumThreads(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__HLSLResource(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__HLSLResourceBinding(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__HLSLShader(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Hot(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__IBAction(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__IBOutlet(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__IBOutletCollection(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__InitPriority(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__InternalLinkage(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__LTOVisibilityPublic(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__LayoutVersion(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Leaf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__LockReturned(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__LocksExcluded(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__M68kInterrupt(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MIGServerRoutine(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MSAllocator(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MSConstexpr(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MSInheritance(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MSNoVTable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MSP430Interrupt(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MSStruct(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MSVtorDisp(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MaxFieldAlignment(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MayAlias(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MaybeUndef(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MicroMips(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MinSize(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MinVectorWidth(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Mips16(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MipsInterrupt(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MipsLongCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__MipsShortCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NSConsumesSelf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NSErrorDomain(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NSReturnsAutoreleased(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NSReturnsNotRetained(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NVPTXKernel(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Naked(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoAlias(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoCommon(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoDebug(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoDestroy(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoDuplicate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoInstrumentFunction(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoMicroMips(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoMips16(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoProfileFunction(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoRandomizeLayout(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoReturn(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoSanitize(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoSpeculativeLoadHardening(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoSplitStack(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoStackProtector(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoThreadSafetyAnalysis(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoThrow(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoUniqueAddress(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoUwtable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NotTailCalled(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OMPAllocateDecl(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OMPCaptureNoInit(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OMPDeclareTargetDecl(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OMPDeclareVariant(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OMPThreadPrivateDecl(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OSConsumesThis(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OSReturnsNotRetained(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OSReturnsRetained(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OSReturnsRetainedOnNonZero(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OSReturnsRetainedOnZero(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCBridge(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCBridgeMutable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCBridgeRelated(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCException(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCExplicitProtocolImpl(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCExternallyRetained(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCIndependentClass(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCMethodFamily(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCNSObject(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCPreciseLifetime(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCRequiresPropertyDefs(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCRequiresSuper(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCReturnsInnerPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCRootClass(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCSubclassingRestricted(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OpenCLIntelReqdSubGroupSize(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OpenCLKernel(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OptimizeNone(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Override(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Owner(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Ownership(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Packed(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ParamTypestate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__PatchableFunctionEntry(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Pointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__PragmaClangBSSSection(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__PragmaClangDataSection(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__PragmaClangRelroSection(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__PragmaClangRodataSection(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__PragmaClangTextSection(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__PreferredName(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__PreferredType(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__PtGuardedBy(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__PtGuardedVar(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Pure(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__RISCVInterrupt(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__RandomizeLayout(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ReadOnlyPlacement(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Reinitializes(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ReleaseCapability(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ReqdWorkGroupSize(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__RequiresCapability(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Restrict(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Retain(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ReturnTypestate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ReturnsNonNull(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ReturnsTwice(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SYCLKernel(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SYCLSpecialClass(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ScopedLockable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Section(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SelectAny(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Sentinel(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SetTypestate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SharedTrylockFunction(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SpeculativeLoadHardening(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__StandaloneDebug(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__StrictFP(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__StrictGuardStackCheck(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftAsync(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftAsyncError(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftAsyncName(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftAttr(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftBridge(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftBridgedTypedef(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftError(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftImportAsNonGeneric(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftImportPropertyAsAccessors(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftName(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftNewType(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftPrivate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__TLSModel(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Target(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__TargetClones(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__TargetVersion(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__TestTypestate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__TransparentUnion(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__TrivialABI(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__TryAcquireCapability(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__TypeTagForDatatype(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__TypeVisibility(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Unavailable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Uninitialized(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__UnsafeBufferUsage(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Unused(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Used(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__UsingIfExists(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Uuid(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__VecReturn(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__VecTypeHint(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Visibility(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__WarnUnused(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__WarnUnusedResult(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Weak(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__WeakImport(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__WeakRef(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__WebAssemblyExportName(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__WebAssemblyImportModule(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__WebAssemblyImportName(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__WorkGroupSizeHint(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__X86ForceAlignArgPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__XRayInstrument(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__XRayLogArgs(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ZeroCallUsedRegs(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AbiTag(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Alias(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__AlignValue(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__BuiltinAlias(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__CalledOnce(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__IFunc(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__InitSeg(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__LoaderUninitialized(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__LoopHint(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Mode(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoBuiltin(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__NoEscape(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OMPCaptureKind(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OMPDeclareSimdDecl(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OMPReferencedVar(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCBoxable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCClassStub(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCDesignatedInitializer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCDirect(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCDirectMembers(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCNonLazyClass(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCNonRuntimeProtocol(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCRuntimeName(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__ObjCRuntimeVisible(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__OpenCLAccess(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Overloadable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__RenderScriptKernel(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftObjCMembers(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftVersionedAddition(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__SwiftVersionedRemoval(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__attr__Thread(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__ModuleOwnershipKind__Unowned(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__ModuleOwnershipKind__Visible(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__ModuleOwnershipKind__VisibleWhenImported(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__ModuleOwnershipKind__ReachableWhenImported(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__ModuleOwnershipKind__ModulePrivate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ConstantResultStorageKind__None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ConstantResultStorageKind__Int64(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ConstantResultStorageKind__APValue(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Linkage__Invalid(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Linkage__None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Linkage__Internal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Linkage__UniqueExternal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Linkage__VisibleNone(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Linkage__Module(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Linkage__External(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ArraySizeModifier__Normal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ArraySizeModifier__Static(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ArraySizeModifier__Star(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AutoTypeKeyword__Auto(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AutoTypeKeyword__DecltypeAuto(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AutoTypeKeyword__GNUAutoType(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__EST_None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__EST_DynamicNone(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__EST_Dynamic(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__EST_MSAny(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__EST_NoThrow(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__EST_BasicNoexcept(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__EST_DependentNoexcept(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__EST_NoexceptFalse(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__EST_NoexceptTrue(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__EST_Unevaluated(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__EST_Uninstantiated(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__EST_Unparsed(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CXXConstructionKind__Complete(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CXXConstructionKind__NonVirtualBase(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CXXConstructionKind__VirtualBase(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CXXConstructionKind__Delegating(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ImplicitParamKind__ObjCSelf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ImplicitParamKind__ObjCCmd(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ImplicitParamKind__CXXThis(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ImplicitParamKind__CXXVTT(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ImplicitParamKind__CapturedContext(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ImplicitParamKind__ThreadPrivateVar(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ImplicitParamKind__Other(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CR_Default(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CR_ObjCAtFinally(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CR_OpenMP(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__Initializer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__ScopeBegin(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__ScopeEnd(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__NewAllocator(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__LifetimeEnds(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__LoopExit(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__Statement(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__Constructor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__CXXRecordTypedCall(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__AutomaticObjectDtor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__DeleteDtor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__BaseDtor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__MemberDtor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__TemporaryDtor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGElement__CleanupFunction(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_PostInc(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_PostDec(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_PreInc(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_PreDec(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_AddrOf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_Deref(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_Plus(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_Minus(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_Not(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_LNot(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_Real(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_Imag(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_Extension(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UO_Coawait(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CXXNewInitializationStyle__None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CXXNewInitializationStyle__Parens(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CXXNewInitializationStyle__Braces(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_Dependent(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_BitCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_LValueBitCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_LValueToRValueBitCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_LValueToRValue(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_NoOp(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_BaseToDerived(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_DerivedToBase(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_UncheckedDerivedToBase(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_Dynamic(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_ToUnion(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_ArrayToPointerDecay(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FunctionToPointerDecay(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_NullToPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_NullToMemberPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_BaseToDerivedMemberPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_DerivedToBaseMemberPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_MemberPointerToBoolean(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_ReinterpretMemberPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_UserDefinedConversion(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_ConstructorConversion(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_IntegralToPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_PointerToIntegral(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_PointerToBoolean(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_ToVoid(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_MatrixCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_VectorSplat(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_IntegralCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_IntegralToBoolean(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_IntegralToFloating(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FloatingToFixedPoint(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FixedPointToFloating(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FixedPointCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FixedPointToIntegral(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_IntegralToFixedPoint(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FixedPointToBoolean(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FloatingToIntegral(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FloatingToBoolean(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_BooleanToSignedIntegral(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FloatingCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_CPointerToObjCPointerCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_BlockPointerToObjCPointerCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_AnyPointerToBlockPointerCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_ObjCObjectLValueCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FloatingRealToComplex(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FloatingComplexToReal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FloatingComplexToBoolean(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FloatingComplexCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_FloatingComplexToIntegralComplex(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_IntegralRealToComplex(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_IntegralComplexToReal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_IntegralComplexToBoolean(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_IntegralComplexCast(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_IntegralComplexToFloatingComplex(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_ARCProduceObject(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_ARCConsumeObject(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_ARCReclaimReturnedObject(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_ARCExtendBlockObject(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_AtomicToNonAtomic(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_NonAtomicToAtomic(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_CopyAndAutoreleaseBlockObject(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_BuiltinFnToFnPtr(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_ZeroToOCLOpaqueType(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_AddressSpaceConversion(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CK_IntToOCLSampler(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ElaboratedTypeKeyword__Struct(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ElaboratedTypeKeyword__Interface(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ElaboratedTypeKeyword__Union(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ElaboratedTypeKeyword__Class(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ElaboratedTypeKeyword__Enum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ElaboratedTypeKeyword__Typename(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ElaboratedTypeKeyword__None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VectorKind__Generic(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VectorKind__AltiVecVector(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VectorKind__AltiVecPixel(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VectorKind__AltiVecBool(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VectorKind__Neon(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VectorKind__NeonPoly(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VectorKind__SveFixedLengthData(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VectorKind__SveFixedLengthPredicate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VectorKind__RVVFixedLengthData(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VectorKind__RVVFixedLengthMask(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TagTypeKind__Struct(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TagTypeKind__Interface(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TagTypeKind__Union(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TagTypeKind__Class(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TagTypeKind__Enum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CT_Cannot(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CT_Dependent(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CT_Can(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BTK__make_integer_seq(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BTK__type_pack_element(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__IfStatementKind__Ordinary(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__IfStatementKind__Constexpr(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__IfStatementKind__ConstevalNonNegated(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__IfStatementKind__ConstevalNegated(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CharacterLiteralKind__Ascii(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CharacterLiteralKind__Wide(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CharacterLiteralKind__UTF8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CharacterLiteralKind__UTF16(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CharacterLiteralKind__UTF32(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SD_FullExpression(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SD_Automatic(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SD_Thread(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SD_Static(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SD_Dynamic(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ET_IsLValueExpr(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ET_IsRValueExpr(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__MultiVersionKind__None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__MultiVersionKind__Target(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__MultiVersionKind__CPUSpecific(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__MultiVersionKind__CPUDispatch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__MultiVersionKind__TargetClones(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__MultiVersionKind__TargetVersion(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__AddLvalueReference(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__AddPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__AddRvalueReference(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__Decay(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__MakeSigned(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__MakeUnsigned(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__RemoveAllExtents(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__RemoveConst(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__RemoveCV(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__RemoveCVRef(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__RemoveExtent(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__RemovePointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__RemoveReference(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__RemoveRestrict(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__RemoveVolatile(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UnaryTransformType__EnumUnderlyingType(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__NOUR_None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__NOUR_Unevaluated(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__NOUR_Constant(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__NOUR_Discarded(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__HiddenVisibility(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ProtectedVisibility(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__DefaultVisibility(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SFF_None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SFF_NSString(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SFF_CFString(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VarDecl__DeclarationOnly(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VarDecl__TentativeDefinition(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__VarDecl__Definition(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ConstexprSpecKind__Unspecified(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ConstexprSpecKind__Constexpr(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ConstexprSpecKind__Consteval(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__ConstexprSpecKind__Constinit(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CallExpr__ADLCallKind__NotADL(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CallExpr__ADLCallKind__UsesADL(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_llvm__APFloatBase__S_IEEEhalf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_llvm__APFloatBase__S_BFloat(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_llvm__APFloatBase__S_IEEEsingle(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_llvm__APFloatBase__S_IEEEdouble(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_llvm__APFloatBase__S_IEEEquad(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_llvm__APFloatBase__S_PPCDoubleDouble(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_llvm__APFloatBase__S_Float8E5M2(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_llvm__APFloatBase__S_Float8E5M2FNUZ(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_llvm__APFloatBase__S_Float8E4M3FN(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_llvm__APFloatBase__S_Float8E4M3FNUZ(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_llvm__APFloatBase__S_Float8E4M3B11FNUZ(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_llvm__APFloatBase__S_FloatTF32(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_llvm__APFloatBase__S_x87DoubleExtended(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__OBJC_TQ_None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__OBJC_TQ_In(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__OBJC_TQ_Inout(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__OBJC_TQ_Out(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__OBJC_TQ_Bycopy(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__OBJC_TQ_Byref(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__OBJC_TQ_Oneway(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__OBJC_TQ_CSNullability(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_New(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Delete(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Array_New(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Array_Delete(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Plus(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Minus(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Star(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Slash(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Percent(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Caret(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Amp(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Pipe(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Tilde(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Exclaim(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Equal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Less(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Greater(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_PlusEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_MinusEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_StarEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_SlashEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_PercentEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_CaretEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_AmpEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_PipeEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_LessLess(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_GreaterGreater(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_LessLessEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_GreaterGreaterEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_EqualEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_ExclaimEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_LessEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_GreaterEqual(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Spaceship(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_AmpAmp(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_PipePipe(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_PlusPlus(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_MinusMinus(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Comma(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_ArrowStar(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Arrow(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Call(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Subscript(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Conditional(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__OO_Coawait(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__NUM_OVERLOADED_OPERATORS(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_PtrMemD(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_PtrMemI(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_Mul(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_Div(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_Rem(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_Add(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_Sub(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_Shl(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_Shr(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_Cmp(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_LT(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_GT(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_LE(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_GE(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_EQ(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_NE(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_And(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_Xor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_Or(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_LAnd(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_LOr(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_Assign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_MulAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_DivAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_RemAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_AddAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_SubAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_ShlAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_ShrAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_AndAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_XorAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_OrAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BO_Comma(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SC_None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SC_Extern(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SC_Static(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SC_PrivateExtern(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SC_Auto(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SC_Register(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__RecordArgPassingKind__CanPassInRegs(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__RecordArgPassingKind__CannotPassInRegs(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__RecordArgPassingKind__CanNeverPassInRegs(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__RQ_None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__RQ_LValue(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__RQ_RValue(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SourceLocIdentKind__Function(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SourceLocIdentKind__FuncSig(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SourceLocIdentKind__File(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SourceLocIdentKind__FileName(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SourceLocIdentKind__Line(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SourceLocIdentKind__Column(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__SourceLocIdentKind__SourceLocStruct(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__StringLiteralKind__Ordinary(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__StringLiteralKind__Wide(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__StringLiteralKind__UTF8(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__StringLiteralKind__UTF16(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__StringLiteralKind__UTF32(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__StringLiteralKind__Unevaluated(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TSK_Undeclared(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TSK_ImplicitInstantiation(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TSK_ExplicitSpecialization(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TSK_ExplicitInstantiationDeclaration(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TSK_ExplicitInstantiationDefinition(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__DeductionCandidate__Normal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__DeductionCandidate__Copy(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__DeductionCandidate__Aggregate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TSCS_unspecified(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TSCS___thread(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TSCS_thread_local(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TSCS__Thread_local(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TypeOfKind__Qualified(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TypeOfKind__Unqualified(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PCK_Unknown(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PCK_Linker(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PCK_Lib(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PCK_Compiler(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PCK_ExeStr(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__PCK_User(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsInterfaceClass(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsSealed(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsDestructible(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsTriviallyDestructible(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsNothrowDestructible(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_HasNothrowMoveAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_HasTrivialMoveAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_HasTrivialMoveConstructor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_HasNothrowAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_HasNothrowCopy(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_HasNothrowConstructor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_HasTrivialAssign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_HasTrivialCopy(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_HasTrivialDefaultConstructor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_HasTrivialDestructor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_HasVirtualDestructor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsAbstract(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsAggregate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsClass(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsEmpty(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsEnum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsFinal(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsLiteral(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsPOD(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsPolymorphic(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsStandardLayout(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsTrivial(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsTriviallyCopyable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsUnion(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_HasUniqueObjectRepresentations(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsTriviallyRelocatable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsTriviallyEqualityComparable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsBoundedArray(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsUnboundedArray(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsNullPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsScopedEnum(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsReferenceable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_CanPassInRegs(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsArithmetic(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsFloatingPoint(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsIntegral(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsCompleteType(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsVoid(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsArray(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsFunction(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsReference(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsLvalueReference(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsRvalueReference(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsFundamental(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsObject(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsScalar(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsCompound(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsMemberObjectPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsMemberFunctionPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsMemberPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsConst(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsVolatile(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsSigned(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UTT_IsUnsigned(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BTT_TypeCompatible(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BTT_IsNothrowAssignable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BTT_IsAssignable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BTT_IsBaseOf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BTT_IsConvertibleTo(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BTT_IsTriviallyAssignable(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BTT_ReferenceBindsToTemporary(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BTT_ReferenceConstructsFromTemporary(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BTT_IsSame(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__BTT_IsConvertible(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TT_IsConstructible(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TT_IsNothrowConstructible(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__TT_IsTriviallyConstructible(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UETT_SizeOf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UETT_DataSizeOf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UETT_AlignOf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UETT_PreferredAlignOf(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UETT_VecStep(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UETT_OpenMPRequiredSimdAlign(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__UETT_VectorElements(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__Indeterminate(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__Int(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__Float(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__FixedPoint(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__ComplexInt(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__ComplexFloat(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__LValue(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__Vector(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__Array(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__Struct(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__Union(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__MemberPointer(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__APValue__AddrLabelDiff(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AS_public(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AS_protected(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AS_private(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AS_none(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_init(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_load(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_store(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_exchange(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_compare_exchange_strong(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_compare_exchange_weak(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_fetch_add(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_fetch_sub(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_fetch_and(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_fetch_or(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_fetch_xor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_fetch_nand(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_fetch_max(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__c11_atomic_fetch_min(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_load(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_load_n(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_store(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_store_n(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_exchange(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_exchange_n(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_compare_exchange(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_compare_exchange_n(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_fetch_add(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_fetch_sub(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_fetch_and(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_fetch_or(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_fetch_xor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_fetch_nand(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_add_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_sub_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_and_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_or_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_xor_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_max_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_min_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_nand_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_load(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_load_n(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_store(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_store_n(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_exchange(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_exchange_n(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_compare_exchange(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_compare_exchange_n(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_fetch_add(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_fetch_sub(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_fetch_and(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_fetch_or(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_fetch_xor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_fetch_nand(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_add_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_sub_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_and_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_or_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_xor_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_max_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_min_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_nand_fetch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_fetch_min(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__scoped_atomic_fetch_max(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__opencl_atomic_init(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__opencl_atomic_load(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__opencl_atomic_store(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__opencl_atomic_exchange(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__opencl_atomic_compare_exchange_strong(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__opencl_atomic_compare_exchange_weak(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__opencl_atomic_fetch_add(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__opencl_atomic_fetch_sub(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__opencl_atomic_fetch_and(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__opencl_atomic_fetch_or(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__opencl_atomic_fetch_xor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__opencl_atomic_fetch_min(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__opencl_atomic_fetch_max(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_fetch_min(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__atomic_fetch_max(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__hip_atomic_load(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__hip_atomic_store(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__hip_atomic_compare_exchange_weak(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__hip_atomic_compare_exchange_strong(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__hip_atomic_exchange(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__hip_atomic_fetch_add(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__hip_atomic_fetch_sub(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__hip_atomic_fetch_and(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__hip_atomic_fetch_or(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__hip_atomic_fetch_xor(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__hip_atomic_fetch_min(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__AtomicExpr__AO__hip_atomic_fetch_max(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGTerminator__StmtBranch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGTerminator__TemporaryDtorsBranch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__CFGTerminator__VirtualBaseBranch(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__FOK_None(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__FOK_Declared(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
+#[no_mangle]
+pub extern "C" fn arboretum_emit_enum_value_clang__Decl__FOK_Undeclared(id: u64, enum_id: u64) {
+  ENUM_VALUE_QUEUE.with(|q| q.borrow_mut().push((id, enum_id)));
+}
+
 ////   END ARBORETUM GENERATED CODE ////

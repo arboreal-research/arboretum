@@ -3,6 +3,7 @@
 #include <cassert>
 #include <fstream>
 #include <optional>
+#include <llvm/Support/raw_ostream.h>
 
 #include "util.h"
 
@@ -66,6 +67,12 @@ PartiallyGeneratedFile PartiallyGeneratedFile::Read(std::filesystem::path p) {
   assert(input_file.has_value());
 
   std::vector<GeneratedBlock> generated_blocks = find_generated_blocks(input_file.value());
+  // Debug: Print the number of blocks found
+  if (generated_blocks.empty()) {
+    llvm::errs() << "No generated blocks found in file: " << p << "\n";
+  } else if (generated_blocks.size() > 1) {
+    llvm::errs() << "Found " << generated_blocks.size() << " generated blocks, expected 1\n";
+  }
   assert(generated_blocks.size() == 1);
 
   return {.filepath = p,

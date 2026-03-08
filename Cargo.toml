@@ -1,4 +1,4 @@
 [workspace]
 resolver = "2"
 
-members = [ "arboretumd", "arboretum-ffi", "reify-rs" ]
+members = [ "arboretum-ffi", "reify-rs" ]

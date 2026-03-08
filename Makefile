@@ -21,7 +21,7 @@ $(LLVM_STAMP):
 			-DLLVM_ENABLE_PROJECTS=clang \
 			-DCMAKE_BUILD_TYPE=Release \
 			-DLLVM_PARALLEL_LINK_JOBS=1 \
-		&& cmake --build build -j12 \
+		&& cmake --build build -j20 \
 		&& cmake --install build --prefix ${LLVM_DIR} \
 		&& touch build/llvm-stamp
 
@@ -45,12 +45,9 @@ $(BUILD_DIR)/reify-cpp.a: $(REIFY_CPP_OBJS) | $(BUILD_DIR)/reificator-stamp
 $(BUILD_DIR)/reify-cpp/%.o: reify-cpp/src/%.cc | $(BUILD_DIR) $(LLVM_STAMP) $(BUILD_DIR)/reificator-stamp
 	./llvm/bin/clang++ -g -c $(CXXFLAGS) -fPIC -Ireify-cpp/include/ -Iarboretum-ffi/src/ -MMD -MF $(BUILD_DIR)/reify-cpp/$*.d -o $@ $< 
 
-# ARBORETUM FFI
-arboretum-ffi/src/lib.rs: arboretum-ffi/src/tcp_client.rs 
-arboretum-ffi/src/tcp_client.rs: 
-
-target/release/libarboretum_ffi.a: arboretum-ffi/src/lib.rs arboretum-ffi/src/tcp_client.rs
-	cd arboretum-ffi && cargo build --release
+# ARBORETUM FFI (PostgreSQL)
+target/release/libarboretum_ffi.a: arboretum-ffi/src/lib.rs
+	HOME=/home/node PATH=$(PATH):/home/node/.cargo/bin cargo build --release
 
 # # ARBORETUM CLANG PLUGIN
 $(BUILD_DIR)/libarboretum.so: target/release/libarboretum_ffi.a $(BUILD_DIR)/reify-cpp.a $(ARBORETUM_OBJS)
@@ -71,4 +68,4 @@ $(BUILD_DIR):
 -include $(ARBORETUM_OBJS:.o=.d)
 
 clean:
-	rm -rf $(BUILD_DIR) target/release/libarboretum_ffi.a
+	rm -rf $(BUILD_DIR) target/release/*.a target/debug/*.a

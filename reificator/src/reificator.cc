@@ -1,8 +1,10 @@
 #include <clang/AST/ASTConsumer.h>
 #include <clang/Frontend/FrontendPluginRegistry.h>
 
+#include <algorithm>
 #include <fstream>
 #include <regex>
+#include <vector>
 
 #include "emit_ffi.h"
 #include "emit_reify_cpp.h"
@@ -75,6 +77,8 @@ class ReificatorASTConsumer : public clang::ASTConsumer {
 
     out << "Type\tPredicate\tEnabled\n";
 
+    std::vector<std::string> lines;
+
     for (auto &decl : index.clang.all_decls) {
       std::string decl_name = decl->getNameAsString();
 
@@ -98,9 +102,15 @@ class ReificatorASTConsumer : public clang::ASTConsumer {
         if (find_itr != original_property_table.end())
           enabled = find_itr->second;
 
-        out << method_decl->getReturnType().getCanonicalType().getAsString()
-            << "\t" << *method_usr << "\t" << (enabled ? "1" : "0") << "\n";
+        lines.push_back(method_decl->getReturnType().getCanonicalType().getAsString() + "\t" +
+                        *method_usr + "\t" + (enabled ? "1" : "0"));
       }
+    }
+
+    std::sort(lines.begin(), lines.end());
+
+    for (const auto &line : lines) {
+      out << line << "\n";
     }
   }
 

@@ -1,47 +1,168 @@
+# Arboretum
 
-<p align="center">
-  <img src="./media/arboretum2.webp" width="700" alt="An arboretum in decopunk style">
-</p>
-<p align="center">
-  Analysis of C/C++ Abstract Syntax Trees at Scale
-</p>
+**Analysis of C/C++ Abstract Syntax Trees at Scale**
 
 ---
 
-Arboretum is a framework designed for analyzing C/C++ syntax trees at scale. It is composed of several key components that work together to create, store, and query code property graphs efficiently. Below is an overview of the primary components.
+Arboretum is a framework designed for analyzing C/C++ syntax trees at scale. It extracts code properties from C/C++ source files using Clang's AST and stores them directly in PostgreSQL for efficient querying.
 
-### [**reificator**](./reificator/)
+## Overview
 
-The `reificator` is a Clang plugin that serves two primary functions:
+### What Changed?
 
-- **Schema Generation**: It analyzes Clang itself to generate a comprehensive knowledge graph schema. This schema is tailored to simplify the extraction of code properties from C/C++ projects.
-  
-- **Extractor Plugin**: This plugin simplifies the process of creating code property graphs by providing streamlined access to the properties of C/C++ code. The extractor plugin is highly configurable and designed to work seamlessly with various Clang-based workflows.
+Arboretum has been migrated from Parquet file storage with a daemon-based architecture to direct PostgreSQL table storage:
 
-### [**arboretumd**](./arboretumd/)
+| Before | After |
+|--------|-------|
+| `arboretumd` daemon | Direct PostgreSQL writes |
+| Parquet files on disk | PostgreSQL tables |
+| TCP communication (arboretum-ffi → arboretumd) | FFI calls directly to PostgreSQL |
+| Buffered I/O | Immediate INSERT statements |
 
-The `arboretumd` is a daemon process that acts as the central server for the Arboretum framework. It provides two main functions:
+### Key Components
 
-- **Graph Storage**: It accepts connections from extractor processes (like those created with `reificator`) and stores the resulting graph data. 
+| Component | Location | Description |
+|-----------|----------|-------------|
+| **reificator** | `reificator/` | Clang plugin for schema generation and AST extraction |
+| **arboretum-plugin** | `arboretum-plugin/` | Clang plugin integration |
+| **reify-cpp** | `reify-cpp/` | C++ AST visitor library |
+| **reify-rs** | `reify-rs/` | Rust AST reification with PostgreSQL I/O |
+| **arboretum-ffi** | `arboretum-ffi/` | Rust FFI bindings for C++ integration |
 
-- **Query API**: `arboretumd` implements an HTTP/JSON API, enabling remote clients to query the stored graph data efficiently. This API is designed to support both simple and complex queries, making it easy to integrate Arboretum into various analysis pipelines.
+## Quick Start
 
-### [**arboretum-graph**](./arboretum-graph/)
+### Prerequisites
 
-The `arboretum-graph` component provides the underlying storage layer for graph data within Arboretum. It supports two formats optimized for different use cases:
+1. **LLVM/Clang**: Build LLVM (~15-20 minutes)
+   ```bash
+   make llvm-project/build/llvm-stamp
+   ```
 
-- **rkyv Serialized Memory Mapped Files**: This format is used for read-only subgraphs, enabling highly efficient querying and access to static graph data. The memory-mapped approach ensures that even large datasets can be queried quickly without the overhead of traditional deserialization.
+2. **PostgreSQL**: Install and configure PostgreSQL
+   ```bash
+   # Ubuntu/Debian
+   sudo apt install postgresql postgresql-contrib
+   
+   # Create database
+   sudo -u postgres createdb arboretum
+   sudo -u postgres createuser -s $(whoami)
+   ```
 
-- **sled Backend**: The sled backend is used for read-write subgraphs, providing a flexible and high-performance storage solution for dynamic graph data that may need to be updated or modified over time.
+### Build
 
-### [**arboretum-query**](./arboretum-query/)
+```bash
+make arboretum
+```
 
-`arboretum-query` provides an abstract query interface which supports local, http/json with reqwest and http/json with reqwasm. 
+### Extract Code Properties
 
-### [**arboretum-py**](./arboretum-py/)
+```bash
+clang++ -fplugin=./build/libarboretum.so \
+    -c your_code.cpp
+```
 
-`arboretum-py` is a Python module that exposes the core functionality of Arboretum, making it accessible to Python developers. It can operate in two modes:
+The plugin automatically creates PostgreSQL tables and inserts records for each AST node.
 
-- **Client Mode**: In this mode, `arboretum-py` acts as a client for a remote `arboretumd` server, allowing users to perform queries and analyze graph data stored on the server.
+## Architecture
 
-- **Local Mode**: Alternatively, `arboretum-py` can interact directly with a local directory using the `arboretum-graph` storage engine. This mode is ideal for cases where data needs to be analyzed locally or when working offline.
+```
+┌─────────────────┐     FFI      ┌──────────────────┐
+│  Clang Plugin   │ ──────────►  │   Rust FFI       │
+│ (reificator)    │              │ (arboretum-ffi)  │
+└─────────────────┘              └────────┬─────────┘
+                                         │
+                                         │ Direct INSERT
+                                         ▼
+                                 ┌──────────────────┐
+                                 │   PostgreSQL     │
+                                 │  (arboretum db)  │
+                                 └──────────────────┘
+```
+
+### Key Differences from Original Architecture
+
+1. **No Daemon**: Eliminated `arboretumd` - writes go directly to PostgreSQL
+2. **No TCP**: Removed network communication layer
+3. **No Parquet**: Replaced file-based storage with database tables
+4. **Simplified**: Direct FFI → PostgreSQL pipeline
+
+## Storage Schema
+
+Tables are dynamically generated from `reificator/properties.csv`. Each C++ class becomes a table, and each method becomes a column:
+
+```sql
+-- Example generated table
+CREATE TABLE FunctionDecl (
+    id BIGINT PRIMARY KEY,
+    name TEXT,
+    is_defined BOOL,
+    is_virtual BOOL,
+    -- ... more columns based on properties.csv
+);
+
+-- Insert example
+INSERT INTO FunctionDecl (id, name, is_defined, is_virtual)
+VALUES (1, 'main', true, false);
+```
+
+## Querying Data
+
+```sql
+-- List all tables
+\dt
+
+-- Query function declarations
+SELECT id, name FROM FunctionDecl WHERE is_virtual = true;
+
+-- Query type relationships
+SELECT t.id, t.name, c.name 
+FROM Type t 
+JOIN Class c ON t.parent_id = c.id;
+```
+
+## Project Structure
+
+```
+/workspace/
+├── reificator/             # Schema generation and AST extraction plugin
+├── arboretum-plugin/       # Clang plugin integration
+├── reify-cpp/              # C++ AST visitor library
+├── reify-rs/               # Rust with PostgreSQL I/O (replaces Parquet)
+├── arboretum-ffi/          # FFI bindings for C++ → Rust communication
+├── llvm-project/           # LLVM/Clang dependency
+└── tests/                  # Integration tests
+```
+
+## Migration Notes
+
+### For Existing Users
+
+If you were using the old architecture:
+
+| Old | New |
+|-----|-----|
+| `./build/arboretumd --db-path ./graphs &` | Not needed! |
+| Parquet files in `./graphs/*` | PostgreSQL tables |
+| `tcp_client.rs` | `lib.rs` with direct PostgreSQL writes |
+
+### Code Changes
+
+```rust
+// Old (with arboretumd):
+let client = CollectorClient::new("localhost:3232");
+
+// New (direct PostgreSQL):
+let builders = TableBuilders::new("postgresql://user@localhost/arboretum");
+```
+
+## Dependencies
+
+| Project | Purpose |
+|---------|---------|
+| clang/llvm-project | AST parsing and analysis |
+| deadpool_postgres | Connection pooling for PostgreSQL |
+| arrow | Record batch processing (optional) |
+
+## License
+
+See LICENSE file for details.
