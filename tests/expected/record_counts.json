@@ -1,0 +1,56 @@
+{
+  "expressions/literals.cc": {
+    "CXXBoolLiteralExpr": 2,
+    "IntegerLiteral": 4,
+    "FloatingLiteral": 2,
+    "StringLiteral": 1,
+    "GNUNullExpr": 1
+  },
+  "expressions/arithmetic.cc": {
+    "BinaryOperator": 15,
+    "FunctionDecl": 13
+  },
+  "expressions/conditional.cc": {
+    "ConditionalOperator": 3,
+    "FunctionDecl": 3
+  },
+  "statements/if_stmt.cc": {
+    "IfStmt": 4,
+    "BinaryOperator": 4
+  },
+  "statements/loop_stmts.cc": {
+    "ForStmt": 1,
+    "WhileStmt": 1,
+    "DoStmt": 1,
+    "CXXForRangeStmt": 1
+  },
+  "statements/switch_stmt.cc": {
+    "SwitchStmt": 2,
+    "CaseStmt": 3
+  },
+  "statements/try_catch.cc": {
+    "CXXTryStmt": 2
+  },
+  "declarations/functions.cc": {
+    "FunctionDecl": 7
+  },
+  "declarations/variables.cc": {
+    "VarDecl": 6
+  },
+  "declarations/classes.cc": {
+    "CXXRecordDecl": 4
+  },
+  "declarations/enums.cc": {
+    "EnumDecl": 3,
+    "EnumConstantDecl": 10
+  },
+  "declarations/namespaces.cc": {
+    "NamespaceDecl": 2,
+    "UsingDirectiveDecl": 1
+  },
+  "declarations/templates.cc": {
+    "ClassTemplateDecl": 2,
+    "FunctionTemplateDecl": 1,
+    "VarDecl": 1
+  }
+}
