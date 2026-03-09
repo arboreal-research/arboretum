@@ -427,6 +427,107 @@ Before marking a task complete:
 
 ---
 
+## 🛠️ Git Workflow for Agents
+
+This is a **critical workflow requirement** for all agents working on this project.
+
+### Before Starting Work
+
+```bash
+# Ensure you're on main and up to date
+git checkout main
+git pull origin main
+
+# Create a branch for your task
+git checkout -b task/<task-number>-<short-description>
+# Example: git checkout -b task/1-fix-ffi-connection
+```
+
+### While Working
+
+```bash
+# Commit frequently with descriptive messages
+git add -A
+git commit -m "feat: implement structural hash computation"
+git commit -m "test: add unit tests for unification"
+
+# Keep commits focused and atomic
+# One logical change per commit
+```
+
+### When Finished
+
+```bash
+# Run tests to verify changes
+make test
+
+# Check code quality
+make analyze-cpp
+make analyze-rust
+
+# Reformat code if needed
+cargo fmt
+clang-format -i path/to/file.cc
+
+# Commit all changes
+git add -A
+git commit -m "feat: implement unification with structural hash
+
+- Compute bottom-up structural hash via Postgres CTE
+- Verify candidate matches with AST comparison
+- Create unified graph tables
+- Handle declaration/definition linking
+
+Closes: #<task-number>"
+```
+
+### Submitting for Review
+
+```bash
+# Push your branch
+git push origin task/<task-number>-<short-description>
+
+# Create a Pull Request with:
+# - Clear title: "feat: implement structural hash computation (#<task-number>)"
+# - Description explaining what changed and why
+# - References to any relevant issues or tasks
+```
+
+### After Merge
+
+```bash
+# Pull latest changes to main
+git checkout main
+git pull origin main
+
+# Delete your branch (optional but recommended)
+git branch -d task/<task-number>-<description>
+```
+
+### Common Commands Reference
+
+```bash
+# View your changes before commit
+git status
+git diff
+
+# View commit history
+git log --oneline
+git log --graph --oneline --all
+
+# Reset to clean state (be careful!)
+git reset --hard HEAD
+git clean -fd
+
+# Rebase onto latest main (if needed)
+git checkout main
+git pull origin main
+git checkout task/<task-number>-<description>
+git rebase main
+```
+
+---
+
 ## Quick Reference
 
 | Priority | Label | Example Tasks |
