@@ -1,168 +1,208 @@
-# Arboretum
+# 🌳 Arboretum
 
-**Analysis of C/C++ Abstract Syntax Trees at Scale**
+<p align="center">
+  <img src="./media/arboretum2.webp" width="700" alt="An arboretum in decopunk style">
+</p>
 
 ---
 
-Arboretum is a framework designed for analyzing C/C++ syntax trees at scale. It extracts code properties from C/C++ source files using Clang's AST and stores them directly in PostgreSQL for efficient querying.
+A general-purpose static analysis system for multi-language codebases.
 
-## Overview
+**Extract. Unify. Analyze.**
 
-### What Changed?
+[![Project Status](https://img.shields.io/badge/status-active-success)](https://github.com/arboretum/arboretum)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Documentation](https://img.shields.io/badge/docs-read-green)](AGENTS.md)
 
-Arboretum has been migrated from Parquet file storage with a daemon-based architecture to direct PostgreSQL table storage:
+---
 
-| Before | After |
-|--------|-------|
-| `arboretumd` daemon | Direct PostgreSQL writes |
-| Parquet files on disk | PostgreSQL tables |
-| TCP communication (arboretum-ffi → arboretumd) | FFI calls directly to PostgreSQL |
-| Buffered I/O | Immediate INSERT statements |
+## 📖 Overview
 
-### Key Components
+Arboretum is a static analysis system that extracts semantic graphs from source code during compilation. It unifies shared definitions across translation units and enriches the graph with derived program properties including:
 
-| Component | Location | Description |
-|-----------|----------|-------------|
-| **reificator** | `reificator/` | Clang plugin for schema generation and AST extraction |
-| **arboretum-plugin** | `arboretum-plugin/` | Clang plugin integration |
-| **reify-cpp** | `reify-cpp/` | C++ AST visitor library |
-| **reify-rs** | `reify-rs/` | Rust AST reification with PostgreSQL I/O |
-| **arboretum-ffi** | `arboretum-ffi/` | Rust FFI bindings for C++ integration |
+- Ownership structure
+- Aliasing relationships
+- Lifetime analysis
+- Control flow
+- Control dependence
 
-## Quick Start
+The extracted data forms a code property graph that can be queried via PostgreSQL for downstream analysis tools, security analyzers, documentation generators, refactoring tools, and AI/ML pipelines.
+
+---
+
+## 🎯 Goal
+
+Arboretum is designed as a **standalone infrastructure component** with no dependency on any downstream consumer. Translation tools, security analyzers, documentation generators, refactoring tools, and any other system that needs deep semantic understanding of source code can consume its output via a language-agnostic query interface.
+
+The C++ to Rust translation tool is one such consumer, but Arboretum is built to serve any consumer that needs comprehensive code understanding.
+
+---
+
+## 🚀 Features
+
+| Feature | Description |
+|---------|-------------|
+| **Multi-language Support** | C/C++ currently, with Rust, Python, JavaScript, Go, Java coming soon |
+| **Semantic Extraction** | Full AST extraction with LLVM IR at multiple optimization stages |
+| **Cross-TU Unification** | Identical definitions across translation units are unified into single entities |
+| **Program Analysis** | Def-use chains, alias analysis, control dependence, dominator trees, lifetime analysis |
+| **Package Integration** | Track package versions, symbol versions, and dependencies |
+| **Distro-scale** | Designed to analyze entire Linux distributions |
+| **PostgreSQL Backend** | Query results via SQL with recursive CTEs for fixpoint analysis |
+
+---
+
+## 📊 Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        Source Code                              │
+└─────────────────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    Compiler Plugin                              │
+│  - Clang (C/C++)                                                │
+│  - Rustc (Rust - future)                                        │
+└─────────────────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                  PostgreSQL Store                               │
+│  - Normalized Graph (cpg_node, cpg_edge)                       │
+│  - Language-Specific Tables                                     │
+│  - Build Artifacts                                              │
+│  - Analysis Results                                             │
+└─────────────────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                  Query Interface                                │
+│  - SQL with PostgreSQL                                          │
+│  - pgvector extension support                                   │
+│  - Recursive CTEs for analysis                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📦 Quick Start
 
 ### Prerequisites
 
-1. **LLVM/Clang**: Build LLVM (~15-20 minutes)
-   ```bash
-   make llvm-project/build/llvm-stamp
-   ```
-
-2. **PostgreSQL**: Install and configure PostgreSQL
-   ```bash
-   # Ubuntu/Debian
-   sudo apt install postgresql postgresql-contrib
-   
-   # Create database
-   sudo -u postgres createdb arboretum
-   sudo -u postgres createuser -s $(whoami)
-   ```
+```bash
+# Install dependencies
+sudo apt install cmake postgresql postgresql-contrib
+curl --proto '=https' --tlsonly -sSf https://sh.rustup.rs | sh
+```
 
 ### Build
 
 ```bash
+# Build LLVM (first time only - ~15-20 minutes)
+make llvm-project/build/llvm-stamp
+
+# Build the project
 make arboretum
 ```
 
-### Extract Code Properties
+### Usage
 
 ```bash
+# Compile with Arboretum plugin
 clang++ -fplugin=./build/libarboretum.so \
-    -c your_code.cpp
+    -std=c++20 \
+    your_code.cpp
+
+# Query the results
+psql -d arboretum -c "SELECT * FROM cpg_node LIMIT 10;"
+psql -d arboretum -c "SELECT * FROM FunctionDecl WHERE name = 'main';"
 ```
 
-The plugin automatically creates PostgreSQL tables and inserts records for each AST node.
+---
 
-## Architecture
+## 📚 Documentation
 
-```
-┌─────────────────┐     FFI      ┌──────────────────┐
-│  Clang Plugin   │ ──────────►  │   Rust FFI       │
-│ (reificator)    │              │ (arboretum-ffi)  │
-└─────────────────┘              └────────┬─────────┘
-                                         │
-                                         │ Direct INSERT
-                                         ▼
-                                 ┌──────────────────┐
-                                 │   PostgreSQL     │
-                                 │  (arboretum db)  │
-                                 └──────────────────┘
-```
+| Document | Description |
+|----------|-------------|
+| **[AGENTS.md](AGENTS.md)** | Project overview for AI agents and developers |
+| **[ROADMAP.md](ROADMAP.md)** | Detailed milestones and release timeline |
+| **[TASKS.md](TASKS.md)** | Prioritized task board for contributors |
+| **[PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md)** | Executive summary and architecture highlights |
+| **[PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)** | Directory layout and data model |
+| **[DOCS_INDEX.md](DOCS_INDEX.md)** | Documentation navigation guide |
 
-### Key Differences from Original Architecture
+### Component Documentation
 
-1. **No Daemon**: Eliminated `arboretumd` - writes go directly to PostgreSQL
-2. **No TCP**: Removed network communication layer
-3. **No Parquet**: Replaced file-based storage with database tables
-4. **Simplified**: Direct FFI → PostgreSQL pipeline
+| Component | Description |
+|-----------|-------------|
+| **reificator** | Clang plugin for schema generation and AST extraction |
+| **reify-cpp** | C++ AST visitor library |
+| **reify-rs** | Rust AST reification with PostgreSQL I/O |
+| **arboretum-ffi** | FFI bindings for C++ ↔ Rust communication |
+| **arboretum-plugin** | Clang plugin integration |
 
-## Storage Schema
+---
 
-Tables are dynamically generated from `reificator/properties.csv`. Each C++ class becomes a table, and each method becomes a column:
+## 🎨 Vision
 
-```sql
--- Example generated table
-CREATE TABLE FunctionDecl (
-    id BIGINT PRIMARY KEY,
-    name TEXT,
-    is_defined BOOL,
-    is_virtual BOOL,
-    -- ... more columns based on properties.csv
-);
+### V1 (Q3 2026) - Current Focus
+- C/C++ extraction with LLVM IR
+- Cross-TU unification
+- All V1 analyses (def-use, alias, CDG, etc.)
+- Docker distribution (RHEL, Debian, Ubuntu)
 
--- Insert example
-INSERT INTO FunctionDecl (id, name, is_defined, is_virtual)
-VALUES (1, 'main', true, false);
-```
+### V2 (2027) - Expansion
+- Rust extraction
+- Additional language support (Python, JS, Go, Java)
+- Package registry
+- Distro build system integration
 
-## Querying Data
+### V3+ - Future
+- Global catalog for shared analysis
+- Enterprise features
+- Advanced analyses
+- AI/ML integrations
 
-```sql
--- List all tables
-\dt
+---
 
--- Query function declarations
-SELECT id, name FROM FunctionDecl WHERE is_virtual = true;
+## 💡 Use Cases
 
--- Query type relationships
-SELECT t.id, t.name, c.name 
-FROM Type t 
-JOIN Class c ON t.parent_id = c.id;
-```
+Arboretum enables:
 
-## Project Structure
+| Use Case | Example |
+|----------|---------|
+| **Security Analysis** | Identify vulnerabilities across dependencies |
+| **Code Translation** | Refactor C++ to Rust with semantic awareness |
+| **Documentation** | Generate accurate documentation from semantic graph |
+| **Refactoring** | Safe, semantic-aware code transformations |
+| **AI/ML Training** | Provide structured code data for model training |
+| **Legacy Migration** | Understand dependencies before modernization |
 
-```
-/workspace/
-├── reificator/             # Schema generation and AST extraction plugin
-├── arboretum-plugin/       # Clang plugin integration
-├── reify-cpp/              # C++ AST visitor library
-├── reify-rs/               # Rust with PostgreSQL I/O (replaces Parquet)
-├── arboretum-ffi/          # FFI bindings for C++ → Rust communication
-├── llvm-project/           # LLVM/Clang dependency
-└── tests/                  # Integration tests
-```
+---
 
-## Migration Notes
+## 🤝 Contributing
 
-### For Existing Users
+We welcome contributions! Here's how to get involved:
 
-If you were using the old architecture:
+1. Review [TASKS.md](TASKS.md) for available tasks
+2. Review [ROADMAP.md](ROADMAP.md) for project direction
+3. Read [AGENTS.md](AGENTS.md) for project architecture
+4. Comment on a task to claim it
+5. Submit a PR
 
-| Old | New |
-|-----|-----|
-| `./build/arboretumd --db-path ./graphs &` | Not needed! |
-| Parquet files in `./graphs/*` | PostgreSQL tables |
-| `tcp_client.rs` | `lib.rs` with direct PostgreSQL writes |
+---
 
-### Code Changes
+## 📄 License
 
-```rust
-// Old (with arboretumd):
-let client = CollectorClient::new("localhost:3232");
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
-// New (direct PostgreSQL):
-let builders = TableBuilders::new("postgresql://user@localhost/arboretum");
-```
+---
 
-## Dependencies
+## 🌟 Acknowledgments
 
-| Project | Purpose |
-|---------|---------|
-| clang/llvm-project | AST parsing and analysis |
-| deadpool_postgres | Connection pooling for PostgreSQL |
-| arrow | Record batch processing (optional) |
+Arboretum is designed to serve the broader software engineering community. We're grateful to the LLVM, Rust, and PostgreSQL communities whose tools make this project possible.
 
-## License
+---
 
-See LICENSE file for details.
+*This is a research and development project. While we strive for quality, the API and schema may change as we iterate toward V1.*

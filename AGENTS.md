@@ -92,12 +92,45 @@ make arboretum
 ```bash
 # Compile with Arboretum plugin - writes directly to PostgreSQL
 clang++ -fplugin=./build/libarboretum.so \
-    -fplugin-arg=arboretum-connect=localhost:3232 \
     -std=c++20 \
     your_code.cpp
 ```
 
-Note: The plugin connection argument is now optional since we write directly to PostgreSQL tables.
+Note: The FFI layer now writes directly to PostgreSQL without requiring a TCP connection.
+
+---
+
+## Documentation
+
+| File | Description |
+|------|-------------|
+| [LONG_TERM_PLAN_DRAFT.md](LONG_TERM_PLAN_DRAFT.md) | Long-term strategic plan and architecture |
+| [ROADMAP.md](ROADMAP.md) | Detailed roadmap with milestones and timelines |
+| [TASKS.md](TASKS.md) | Task board with prioritized work items |
+
+### Roadmap Overview
+
+| Version | Status | Timeline | Focus |
+|---------|--------|----------|-------|
+| V1 | In Progress | Q2-Q3 2026 | C/C++ extraction, unification, analyses |
+| V2 | Planned | Q4 2026 - Q1 2027 | Rust, additional languages, distro integration |
+| V3 | Planned | Q2-Q3 2027 | Global catalog, enterprise features |
+| V4+ | Future | Q4 2027+ | Advanced analyses, AI/ML integrations |
+
+### Current Status
+
+- ✅ C++ Clang plugin extraction (in progress)
+- ⏳ Cross-TU unification (not started - see ROADMAP.md)
+- ⏳ All V1 analyses (not started - see ROADMAP.md)
+- ⏳ Docker distribution (not started)
+
+### How to Contribute
+
+1. Review [TASKS.md](TASKS.md) for available tasks
+2. Review [ROADMAP.md](ROADMAP.md) for context and milestones
+3. Comment on a task to claim it
+4. Create a branch: `git checkout -b task/<task-number>-<description>`
+5. Submit a PR with the task number in the title
 
 ## Project Structure
 
@@ -276,6 +309,7 @@ RUST_LOG=trace clang++ -fplugin=./build/libarboretum.so ...
 | [BUILD_SYSTEM.md](BUILD_SYSTEM.md) | Makefile-based build instructions |
 | [QUICK_REFERENCE.md](QUICK_REFERENCE.md) | Quick command reference |
 | [README.md](README.md) | User-facing overview |
+| [CODE_QUALITY.md](CODE_QUALITY.md) | Code quality tools, linting, testing, and maintenance |
 
 ## 📖 Component Documentation
 
@@ -288,6 +322,15 @@ RUST_LOG=trace clang++ -fplugin=./build/libarboretum.so ...
 | [arboretum-plugin](arboretum-plugin/AGENTS.md) | Clang plugin integration |
 | [llvm-project](llvm-project/AGENTS.md) | Submodule setup |
 | [tests](tests/AGENTS.md) | Integration tests |
+
+## 🛠️ Development Guidelines
+
+| Task | Guide |
+|------|-------|
+| Code quality & linting | [CODE_QUALITY.md](CODE_QUALITY.md) |
+| Running static analysis | `make analyze-cpp`, `make analyze-rust` |
+| Code formatting | `clang-format`, `cargo fmt` |
+| Testing | `make test`, `tests/integration/run.sh` |
 
 ## Notes
 
